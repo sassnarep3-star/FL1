@@ -130,9 +130,9 @@
 <section class="flag" id="F17">
   <h2><span class="sid">F17</span> Player-prop correlations are computed estimates from a third-party mirror</h2>
   <p><span class="pill">Data provenance</span> Severity <span class="pill warn">Medium</span></p>
-  <p>data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts.</p>
+  <p>data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts. The source parquet is not committed and its prior workspace-only path is absent from this checkout; therefore the prop-correlation rebuild check V9 is BLOCKED here. The existing coefficients remain third-party-derived and were not independently regenerated in this run.</p>
   <p class="evidence">Sources consulted: <a class="src" href="sources.html#S47" title="nflverse/nfldata combined games feed (schedule, results, market lines)">S47</a> <a class="src" href="sources.html#S48" title="nflverse player_stats weekly archive 1999-2024 (mirror)">S48</a></p>
-  <div class="callout"><p><strong>What was done instead.</strong> </p></div>
+  <div class="callout"><p><strong>What was done instead.</strong> Retain the third-party label; for reproducible refreshes, fetch a pinned source artifact and record its content hash. Until that input and QA run are available, treat V9 as BLOCKED and do not claim this checkout independently reproduced the estimates.</p></div>
 </section></section>
 </main>
 <footer class="foot">

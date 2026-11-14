@@ -35,7 +35,7 @@
   {
     "id": "F04",
     "kind": "Cross-source contradiction",
-    "item": "Myles Garrett \u2014 club attribution",
+    "item": "Myles Garrett — club attribution",
     "detail": "NFL.com's Week 10 injury report lists Myles Garrett as an LB on the Los Angeles Rams with a knee designation and a 'resting player' note. NFL.com's Next Gen Stats front page carries a 2026 Rams article titled 'Rams' Sean McVay: No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article is headlined 'How does Myles Garrett fit into Rams defense?'. These agree on the Rams but the injury-row note mixes a real knee injury with a rest designation, which the site will not attempt to untangle. No resolution applied.",
     "sourceIds": [
       "S01",
@@ -47,7 +47,7 @@
   {
     "id": "F05",
     "kind": "Cross-source contradiction",
-    "item": "Aaron Donald \u2014 listed as a non-participant while shown as active",
+    "item": "Aaron Donald — listed as a non-participant while shown as active",
     "detail": "The Week 10 Rams injury table lists Aaron Donald (DT) as 'Did Not Participate In Practice' with no injury and no game status. NFL.com's own player profile for Aaron Donald shows him as an active Los Angeles Rams DE with 11 years of experience, and an NFL.com article states he unretired on Aug. 30 and planned a season debut. Both are official NFL.com pages and they cannot both be read at face value. No resolution applied.",
     "sourceIds": [
       "S01",
@@ -185,13 +185,13 @@
     "id": "F17",
     "kind": "Data provenance",
     "item": "Player-prop correlations are computed estimates from a third-party mirror",
-    "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts.",
+    "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts. The source parquet is not committed and its prior workspace-only path is absent from this checkout; therefore the prop-correlation rebuild check V9 is BLOCKED here. The existing coefficients remain third-party-derived and were not independently regenerated in this run.",
     "source": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
     "severity": "Medium",
     "sourceIds": [
       "S47",
       "S48"
     ],
-    "action": null
+    "action": "Retain the third-party label; for reproducible refreshes, fetch a pinned source artifact and record its content hash. Until that input and QA run are available, treat V9 as BLOCKED and do not claim this checkout independently reproduced the estimates."
   }
 ]
