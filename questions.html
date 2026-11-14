@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decisions &amp; Questions — FL1</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">FL1</div>
+  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
+  <a class="item" href="index.html">Dashboard</a>
+  <a class="item" href="executive-summary.html">Executive Summary</a>
+  <a class="item active" href="questions.html">Decisions &amp; Questions</a>
+  <a class="item" href="suggestions.html">Suggestions</a>
+  <a class="item" href="strategies.html">Strategies &amp; Leaderboard</a>
+  <a class="item" href="injury-report.html">Injury Report</a>
+  <a class="item" href="standings.html">Standings</a>
+  <a class="item" href="lines.html">Lines &amp; Market</a>
+  <a class="item" href="flagged-review.html">Flagged for Review</a>
+  <a class="item" href="sources.html">Sources</a>
+</nav>
+<main>
+  <h1>Decision Gate — Questions, Information, Answers</h1>
+  <p class="lead">A clear list of the questions that must be answered before any decision can reasonably be made, what information each requires, and the current answer. Answered items link to an official source; open items are flagged.</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>Question</th><th>Information needed</th><th>Status</th><th>Answer / Source</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Q1</td><td>What is the current league standing?</td><td>W-L-T and points for/against for all 32 teams.</td><td><span class="badge b-answered">Answered</span></td><td>Full 32-team table published on the Standings page. <span class="src"><a href="https://www.nfl.com/standings/league/2026/reg">NFL.com standings</a></span></td></tr>
+      <tr><td>Q2</td><td>What games are played this week and when?</td><td>Week 10 slate, kickoff times, networks.</td><td><span class="badge b-answered">Answered</span></td><td>16 games, Nov 12–16, 2026; Munich game NE at DET; bye CHI/DEN/PHI/TB. <span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10">NFL.com schedule</a></span></td></tr>
+      <tr><td>Q3</td><td>Which players are injured/out for Week 10, and who replaces them?</td><td>Per-player designation, practice status, game status.</td><td><span class="badge b-answered">Answered</span></td><td>Complete official Week 10 injury report on the Injury Report page. <span class="src"><a href="https://www.nfl.com/injuries/">NFL.com injury report</a></span></td></tr>
+      <tr><td>Q4</td><td>Are team records current after the Thursday game?</td><td>Whether WAS–NYG (FINAL, 24–21) is reflected in standings.</td><td><span class="badge b-needsreview">Open — irregularity IR-1</span></td><td>Standings still show WAS 3-5-1 / NYG 5-3-1 after the completed Thursday game. Published as-is and flagged. <span class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10">Game center</a> · <a href="https://www.nfl.com/standings/league/2026/reg">Standings</a></span></td></tr>
+      <tr><td>Q5</td><td>What are the current betting lines (spread/total/moneyline)?</td><td>Live Week 10 lines from an official sportsbook.</td><td><span class="badge b-unverified">Open — unverified UNV-1</span></td><td>No official source reachable; all line cells blank and flagged until manually verified. <span class="src"><a href="https://sportsbook.draftkings.com/">DraftKings</a> · <a href="https://sports.fanduel.com/">FanDuel</a> · <a href="https://sports.betmgm.com/">BetMGM</a> · <a href="https://sports.caesars.com/">Caesars</a></span></td></tr>
+      <tr><td>Q6</td><td>What are the player prop lines?</td><td>Player props (yards, TDs) from an official sportsbook.</td><td><span class="badge b-unverified">Open — unverified UNV-2</span></td><td>No official source reachable in this session. <span class="src">Official sportsbook player-props markets</span></td></tr>
+      <tr><td>Q7</td><td>Which teams have offense/defense deficiencies from lineup absences?</td><td>Starter-level absences per positional unit.</td><td><span class="badge b-answered">Answered</span></td><td>Offense: Vikings (QB Murray out), Seahawks (QB Darnold out), Ravens (QB Jackson 6–10 wks), Dolphins (QB Willis IR), Cardinals (QB Beck starting). Defense: Packers (LB Parsons out), Texans (DE Hunter out, OTs hit), Rams (WR Nacua likely IR). <span class="src"><a href="https://www.nfl.com/injuries/">NFL.com injury report</a></span></td></tr>
+      <tr><td>Q8</td><td>How much bankroll is allocated, and what is the unit-sizing policy?</td><td>Total bankroll, unit size, max exposure per game/slate.</td><td><span class="badge b-open">Open</span></td><td>No official public source; must be defined by the operator. See suggestion S-01. <span class="src"><a href="suggestions.html">Suggestions</a></span></td></tr>
+      <tr><td>Q9</td><td>Is betting on NFL lines legally permitted in the operator's jurisdiction?</td><td>Jurisdiction and local licensing/legal status.</td><td><span class="badge b-open">Open</span></td><td>Must be confirmed by the operator. See suggestion S-02. <span class="src"><a href="suggestions.html">Suggestions</a></span></td></tr>
+      <tr><td>Q10</td><td>Where will verified historical odds and results data come from?</td><td>Historical closing lines and settlements for backtesting.</td><td><span class="badge b-open">Open</span></td><td>No official league source exists for historical betting lines. See suggestion S-03. <span class="src"><a href="suggestions.html">Suggestions</a></span></td></tr>
+      <tr><td>Q11</td><td>What defines a "pass" through the validation gates?</td><td>Thresholds for sample size, edge, significance, correlation.</td><td><span class="badge b-proposed">Proposed</span></td><td>Gate specification published on the Strategies page; pending operator approval. <span class="src"><a href="strategies.html">Strategies page</a></span></td></tr>
+      <tr><td>Q12</td><td>How is the leaderboard competition ranked and rewarded?</td><td>Ranking metric, eligibility rules, reward tiers.</td><td><span class="badge b-proposed">Proposed</span></td><td>Verified-ROI ranking with minimum bet-count eligibility and z-score tie-breakers; pending approval. <span class="src"><a href="strategies.html">Strategies page</a></span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Summary</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li><span class="badge b-answered">Answered</span> from official sources: Q1, Q2, Q3, Q7. <span class="badge b-proposed">Proposed methodology:</span> Q11, Q12.</li>
+      <li><span class="badge b-open">Open</span> (needs operator input or manual verification): Q4 (irregularity IR-1), Q5 (UNV-1), Q6 (UNV-2), Q8, Q9, Q10.</li>
+    </ul>
+    <p class="note">Suggestions to close each open item are on the <a href="suggestions.html">Suggestions</a> page (section B — information discovery).</p>
+  </div>
+
+  <div class="footer"><a href="index.html">Back to dashboard</a></div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sources — FL1</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">FL1</div>
+  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
+  <a class="item" href="index.html">Dashboard</a>
+  <a class="item" href="executive-summary.html">Executive Summary</a>
+  <a class="item" href="questions.html">Decisions &amp; Questions</a>
+  <a class="item" href="suggestions.html">Suggestions</a>
+  <a class="item" href="strategies.html">Strategies &amp; Leaderboard</a>
+  <a class="item" href="injury-report.html">Injury Report</a>
+  <a class="item" href="standings.html">Standings</a>
+  <a class="item" href="lines.html">Lines &amp; Market</a>
+  <a class="item" href="flagged-review.html">Flagged for Review</a>
+  <a class="item active" href="sources.html">Sources</a>
+</nav>
+<main>
+  <h1>Sources</h1>
+  <p class="lead">All data on this site was verified line-by-line against these sources on 2026-11-14. Official sources were preferred; sportsbooks are the only authoritative source for betting lines and were attempted for every line value (none could be verified automatically — see <a href="flagged-review.html">Flagged for Review</a>).</p>
+
+  <h2>Official sources used</h2>
+  <table>
+    <thead><tr><th>Source</th><th>Type</th><th>Used for</th><th>Link</th></tr></thead>
+    <tbody>
+      <tr><td>NFL.com — League standings</td><td>Official league site</td><td>Standings page, PPG/PPA computations</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">nfl.com/standings/league/2026/reg</a></td></tr>
+      <tr><td>NFL.com — Week 10 schedule</td><td>Official league site</td><td>Week 10 slate, times, networks, bye teams</td><td class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10">nfl.com/schedules/2026/by-week/week-10</a></td></tr>
+      <tr><td>NFL.com — Official injury report</td><td>Official league site</td><td>Injury Report page (all Week 10 rows)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com/injuries/</a></td></tr>
+      <tr><td>NFL.com — Game center (WAS at NYG)</td><td>Official league site</td><td>Final score verification, IR-1 irregularity</td><td class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10">Game center</a></td></tr>
+      <tr><td>NFL.com — Team stats hub</td><td>Official league site</td><td>Stats access (referenced; scoring context)</td><td class="src"><a href="https://www.nfl.com/stats/team-stats/">nfl.com/stats/team-stats</a></td></tr>
+      <tr><td>NFL.com — News (injury/availability updates)</td><td>Official league site</td><td>Starter-level deficiency watchlist</td><td class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11">Roundup Nov 11</a> · <a href="https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders">Drew Lock</a> · <a href="https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season">Lamar Jackson</a> · <a href="https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury">Huntley</a> · <a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start">Willis IR</a> · <a href="https://www.nfl.com/news/rams-wr-puka-nacua-likely-to-be-placed-on-injured-reserve-with-turf-toe-sprained-mcl-and-pcl">Nacua IR</a> · <a href="https://www.nfl.com/news/packers-rb-josh-jacobs-to-undergo-surgery-on-finger-this-week">Jacobs surgery</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Designated sportsbook sources (line verification — pending manual review)</h2>
+  <table>
+    <thead><tr><th>Source</th><th>Type</th><th>Role</th><th>Link</th></tr></thead>
+    <tbody>
+      <tr><td>DraftKings Sportsbook</td><td>Official sportsbook</td><td>Designated source for spread/total/moneyline + player props (attempted; values not extractable)</td><td class="src"><a href="https://sportsbook.draftkings.com/">sportsbook.draftkings.com</a></td></tr>
+      <tr><td>FanDuel Sportsbook</td><td>Official sportsbook</td><td>Designated source (HTTP 500 on automated fetch)</td><td class="src"><a href="https://sports.fanduel.com/">sports.fanduel.com</a></td></tr>
+      <tr><td>BetMGM Sportsbook</td><td>Official sportsbook</td><td>Designated source for manual verification</td><td class="src"><a href="https://sports.betmgm.com/">sports.betmgm.com</a></td></tr>
+      <tr><td>Caesars Sportsbook</td><td>Official sportsbook</td><td>Designated source for manual verification</td><td class="src"><a href="https://sports.caesars.com/">sports.caesars.com</a></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Verification policy</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li>Every table row on this site carries a link to an official source.</li>
+      <li>If a value cannot be confirmed from an official source, it is left blank and flagged as unverified — never inferred or filled in.</li>
+      <li>Derived values (PPG/PPA) are arithmetic on official PF/PA figures and are labeled as computed.</li>
+      <li>Proposed methodology pages (Strategies, Suggestions) are clearly marked "Proposed — Pending Review."</li>
+    </ul>
+  </div>
+
+  <div class="footer"><a href="index.html">Back to dashboard</a></div>
+</main>
+</div>
+</body>
+</html>
