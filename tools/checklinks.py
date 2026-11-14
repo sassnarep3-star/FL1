@@ -107,6 +107,13 @@ def main():
             if h.endswith(".html") and not os.path.exists(os.path.join(ROOT, h)):
                 errors.append("navigation lists missing page %s" % h)
 
+    # escaped-markup guard: a rendered anchor must never appear as literal text
+    for p in pages:
+        escaped = text[p].count("&lt;a ") + text[p].count("&lt;td") + text[p].count("&lt;span")
+        if escaped:
+            errors.append("%s: %d escaped markup fragment(s) — an HTML string was "
+                          "passed through cell() instead of raw_src()" % (p, escaped))
+
     print("pages checked: %d" % len(pages))
     print("external links: %d (not fetched here; see tools/verify_sources.py)" % len(external))
     for w in warnings:

@@ -76,6 +76,15 @@ def cell_notlisted():
             'report for this week">not listed</td>')
 
 
+def raw_src(html_fragment):
+    """Pass an already-rendered HTML fragment through as a table cell.
+
+    Needed because src_link() returns markup, and wrapping it in cell() would
+    escape it and print the anchor tag as literal text.
+    """
+    return "<td>%s</td>" % html_fragment
+
+
 def src_link(sid, sources_by_id):
     """Small link chip to a source record."""
     s = sources_by_id.get(sid)
@@ -225,25 +234,25 @@ def main():
         ["Metric", "Value", "Basis", "Source"],
         [
             [cell("Injury rows captured"), cell(lg["rows"], "n"),
-             cell("Official Week 10 2026 report, one snapshot"), cell(src_link("S01", sources_by_id))],
+             cell("Official Week 10 2026 report, one snapshot"), raw_src(src_link("S01", sources_by_id))],
             [cell("Clubs present in that report"), cell("%d of %d" % (lg["clubs"], lg["clubsTotal"]), "n"),
-             cell("Four clubs absent — see Flagged F06"), cell(src_link("S01", sources_by_id))],
+             cell("Four clubs absent — see Flagged F06"), raw_src(src_link("S01", sources_by_id))],
             [cell("Players designated Out"), cell(lg["out"], "n"),
-             cell("Game status column reads Out"), cell(src_link("S01", sources_by_id))],
+             cell("Game status column reads Out"), raw_src(src_link("S01", sources_by_id))],
             [cell("Players designated Doubtful"), cell(lg["doubtful"], "n"),
-             cell("Game status column reads Doubtful"), cell(src_link("S01", sources_by_id))],
+             cell("Game status column reads Doubtful"), raw_src(src_link("S01", sources_by_id))],
             [cell("Players designated Questionable"), cell(lg["questionable"], "n"),
-             cell("Game status column reads Questionable"), cell(src_link("S01", sources_by_id))],
+             cell("Game status column reads Questionable"), raw_src(src_link("S01", sources_by_id))],
             [cell("Did-not-participate practice rows"), cell(lg["dnp"], "n"),
-             cell("Practice status column reads Did Not Participate"), cell(src_link("S01", sources_by_id))],
+             cell("Practice status column reads Did Not Participate"), raw_src(src_link("S01", sources_by_id))],
             [cell("Rows marked not injury related"), cell(lg["nonInjury"], "n"),
-             cell("Injury text begins 'Not injury related'"), cell(src_link("S01", sources_by_id))],
+             cell("Injury text begins 'Not injury related'"), raw_src(src_link("S01", sources_by_id))],
             [cell("Sources verified"), cell("%d of %d" % (n_verified, len(sources)), "n"),
-             cell("Page loaded successfully in this session"), cell('<a href="sources.html">registry</a>')],
+             cell("Page loaded successfully in this session"), raw_src('<a href="sources.html">registry</a>')],
             [cell("Sources that failed to load"), cell(n_404, "n"),
-             cell("Recorded as NOT VERIFIED, never cited as fact"), cell('<a href="flagged.html">flagged</a>')],
+             cell("Recorded as NOT VERIFIED, never cited as fact"), raw_src('<a href="flagged.html">flagged</a>')],
             [cell("Strategies with a result"), cell("0 of %d" % len(strategies), "n"),
-             cell("No backtest executed; no numeric result claimed"), cell('<a href="strategies.html">board</a>')],
+             cell("No backtest executed; no numeric result claimed"), raw_src('<a href="strategies.html">board</a>')],
         ],
         cls="kpi",
         caption="Headline figures. Each is computed by <code>tools/build.py</code> from the data files, not typed in by hand.",

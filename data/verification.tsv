@@ -11,3 +11,4 @@ Injury club validity	python3 tools/build.py	every club abbrev in injuries.tsv	PA
 Name-collision guard	python3 tools/build.py	depth joins	PASS - explicit alias table, no fuzzy match	2026-11-14
 Source reachability	Sessions page loads	15 URLs, one request each	12 loaded, 3 returned HTTP 404	2026-11-14
 Independent cross-transcription	manual row-by-row diff vs a parallel session's data/injuries.csv	161 shared player rows	PASS - 156/161 identical; the 5 differences are a comma-shift bug in their CSV, this capture is correct	2026-11-14
+Escaped-markup guard	python3 tools/checklinks.py	all anchor and cell fragments on 14 pages	PASS - 0 escaped fragments; guard verified by injecting the bug (exit 1) then restoring (exit 0)	2026-11-14
