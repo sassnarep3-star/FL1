@@ -736,3 +736,28 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Measured, from committed in-repo data (labelled third-party, not promoted to the registers):** C-01 rho **+0.00696** [-0.03324, +0.04831], n=6,813; parlay price penalty **-2.07 pp** (joint hit 24.35% vs 26.42% break-even at the legs' own closing prices); SIG-01 refuted (45.8% over 1,302 bets, ROI −11.6%, gate G-2b fails).
 - **Checks to re-run anything:** `python3 -m unittest discover -s tests -q` (75) · `python3 engine/demo_run.py --check` · `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 - **Left for the owner (deliberately undecided):** F-11 — whether third-party-derived values may be published as sourced (promoting C-01's rho is then a one-line change); the licence confirmation for the added MIT LICENSE; and the two-layer structure decision (F-10: `data/specs/` research registers vs `data/*.json` published registers, and `docs/pages/` beside the root site).
+
+---
+
+## Session `arena/685f958d-fl1` — task claims (brief: price store, results feed, origination, leaderboard split, demotion gate, official-only correlations)
+
+**Session ID:** `arena-685f958d-fl1` · **Branch:** `arena/685f958d-fl1` (from `main` @ `9d7ca32`, PR #21 merged) · **Status:** active
+**Protocol note:** this session works only on `arena/685f958d-fl1` (Arena single-branch policy), so file-scope isolation is used, as in earlier sessions. Other sessions on the board are merged and closed.
+
+| ID | Task | Status | Owner | File scope (claimed) |
+|---|---|---|---|---|
+| B1 | Price-snapshot store: opening and closing numbers for each market we originate (side, total, moneyline) | in progress | `arena-685f958d-fl1` | `data/price_snapshots.tsv`, `tools/brief.py` |
+| B2 | Origination order (side → total → moneyline); fair line, market line and difference as separate columns | in progress | `arena-685f958d-fl1` | `data/model_lines.tsv`, `tools/brief.py`, `engine/originate.py` |
+| B3 | Verified results feed + walk-forward calibration backtest (ROI stays blank until prices exist) | in progress | `arena-685f958d-fl1` | `data/results.tsv` (read only), `data/backtest_calibration.tsv`, `tools/brief.py` |
+| B4 | Leaderboard: separate signal score from staking score; staking cannot mask a bad signal | in progress | `arena-685f958d-fl1` | `engine/leaderboard.py`, `tests/test_engine.py` |
+| B5 | Demotion gate G-14: live strategy returns to paper on defined triggers | in progress | `arena-685f958d-fl1` | `engine/gates.py`, `data/validation_gates.json`, `tests/test_engine.py` |
+| B6 | Correlations from officially sourced numbers only, with n published; third-party rho withdrawn from publication and flagged | in progress | `arena-685f958d-fl1` | `data/correlations.json` (read), `tools/brief.py`, `data/flags.json` (append only) |
+| B7 | Verification of every new row (official source links, fetch-checked), verifier script | in progress | `arena-685f958d-fl1` | `tools/verify_brief.py`, `data/verification-brief.tsv` |
+| B8 | Integration: site nav + new pages, executive summary, suggestions, requirements status, PR, merge, Pages check | in progress | `arena-685f958d-fl1` | `tools/site.py` (NAV + page calls only), `README.md` (append), `COORDINATION.md` |
+
+**Official sources used this session (fetched and read 2026-11-14):**
+- https://www.nfl.com/schedules/2026/REG10/ — Week 10 slate (1 final, 13 upcoming; 14 games = 28 clubs playing).
+- https://www.nfl.com/schedules/2026/by-week/week-11 — Week 11 begins Thursday 19 Nov 2026 (not in the current slate).
+- Existing verified sources in `data/sources.tsv` (S01–S04, S49) remain the anchors for injuries, standings and schedule.
+
+**Known limits, recorded up front:** no official NFL source publishes betting prices (GAP-01 / Q-02 remain open), so every market line, closing price and ROI cell stays blank, and no correlation coefficient can be computed from official joint observations yet.
