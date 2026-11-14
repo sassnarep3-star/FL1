@@ -736,3 +736,11 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Measured, from committed in-repo data (labelled third-party, not promoted to the registers):** C-01 rho **+0.00696** [-0.03324, +0.04831], n=6,813; parlay price penalty **-2.07 pp** (joint hit 24.35% vs 26.42% break-even at the legs' own closing prices); SIG-01 refuted (45.8% over 1,302 bets, ROI −11.6%, gate G-2b fails).
 - **Checks to re-run anything:** `python3 -m unittest discover -s tests -q` (75) · `python3 engine/demo_run.py --check` · `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 - **Left for the owner (deliberately undecided):** F-11 — whether third-party-derived values may be published as sourced (promoting C-01's rho is then a one-line change); the licence confirmation for the added MIT LICENSE; and the two-layer structure decision (F-10: `data/specs/` research registers vs `data/*.json` published registers, and `docs/pages/` beside the root site).
+
+## Current Arena session claim — `arena/0669d4cf-fl1` (2026-11-14)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T21 | Add append-only market opening/closing snapshot persistence and a fail-closed verified final-results import interface; do not populate unverified facts or change shared site/data/navigation | in progress | `arena/0669d4cf-fl1` | `engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`, this claim/verification record only |
+
+Existing price/results datasets remain third-party or capture-specific; this task adds a persistence and provenance boundary, not a claim that those inputs are official NFL data. The existing active claim at T03–T16 is not touched.
