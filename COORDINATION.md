@@ -25,15 +25,15 @@ Shared task board for the FL1 (NFL) project. All sessions must read this before 
 | # | Task | Status | Owner | File scope | Sources / verification | Irregularities |
 |---|------|--------|-------|------------|------------------------|----------------|
 | 1 | Create COORDINATION.md task board | done | arena-89c32e23-fl1 | COORDINATION.md | n/a | none |
-| 2 | Repo review line-by-line; verify from official sources; flag irregularities | in progress | arena-89c32e23-fl1 | README.md, all repo files | repo contents (see findings) | README.md contains only "# FL1" |
-| 3 | Executive summary | unclaimed | arena-89c32e23-fl1 | site/executive-summary.html | to be filled | none yet |
-| 4 | Suggestions & decision-review section (questions/info/answers before decisions; missing-info discovery) | unclaimed | arena-89c32e23-fl1 | site/suggestions.html | to be filled | none yet |
-| 5 | NFL betting strategies: line origination, signals, single bets/parlays/player props, validation gates, correlation, skill-based leaderboard | unclaimed | arena-89c32e23-fl1 | site/nfl-strategies.html | to be filled | betting lines are not an official NFL source |
-| 6 | Injury & team-deficiency tracking (starters vs backups, offense & defense, 2nd/3rd/4th string) | unclaimed | arena-89c32e23-fl1 | site/injuries.html | to be filled | none yet |
-| 7 | Site creation: clean landing page + category subpages, dashboard UI, entry/findings tables with source links, unverified = blank + flagged | unclaimed | arena-89c32e23-fl1 | site/*.html, site/css, site/index.html, site/navigation | to be filled | none yet |
-| 8 | Flagged-for-review page (irregularities + unverified items with source links) | unclaimed | arena-89c32e23-fl1 | site/flagged-review.html | to be filled | none yet |
-| 9 | Integration: merge branches, re-verify combined data line-by-line, confirm site builds with no broken links | unclaimed | arena-89c32e23-fl1 | all site files | official sources per row | none yet |
-| 10 | GitHub Pages: publish, confirm deploy succeeds (do not merge a broken site), create PR from integration branch to main, merge, record PR link + merge result here | unclaimed | arena-89c32e23-fl1 | repo settings / GitHub Pages | n/a | none yet |
+| 2 | Repo review line-by-line; verify from official sources; flag irregularities | done | arena-89c32e23-fl1 | README.md, all repo files | repo contents (see findings) | README.md contains only "# FL1" |
+| 3 | Executive summary | done | arena-89c32e23-fl1 | executive-summary.html | nfl.com/injuries/, nfl.com/standings verified reachable | none |
+| 4 | Suggestions & decision-review section (questions/info/answers before decisions; missing-info discovery) | done | arena-89c32e23-fl1 | suggestions.html | nfl.com/injuries/ cited | betting lines have no official NFL source |
+| 5 | NFL betting strategies: line origination, signals, single bets/parlays/player props, validation gates, correlation, skill-based leaderboard | done | arena-89c32e23-fl1 | nfl-strategies.html | n/a (methodological) | all line/odds data unverified (no official NFL source) |
+| 6 | Injury & team-deficiency tracking (starters vs backups, offense & defense, 2nd/3rd/4th string) | done | arena-89c32e23-fl1 | injuries.html | nfl.com/injuries/ verified reachable | player values not yet pulled from live report |
+| 7 | Site creation: clean landing page + category subpages, dashboard UI, entry/findings tables with source links, unverified = blank + flagged | done | arena-89c32e23-fl1 | *.html, css/, js/, index.html, navigation | internal links verified OK | none |
+| 8 | Flagged-for-review page (irregularities + unverified items with source links) | done | arena-89c32e23-fl1 | flagged-review.html | nfl.com, GitHub repo | none |
+| 9 | Integration: merge branches, re-verify combined data line-by-line, confirm site builds with no broken links | in progress | arena-89c32e23-fl1 | all site files | official sources per row | none yet |
+| 10 | GitHub Pages: publish, confirm deploy succeeds (do not merge a broken site), create PR from integration branch to main, merge, record PR link + merge result here | in progress | arena-89c32e23-fl1 | repo / GitHub Pages | n/a | Pages pinned to main branch / root (cannot retarget via API: 403) |
 
 ## Notes
 - Official NFL source = nfl.com (and official NFL subdomains). Betting lines have no official NFL source; mark as unverified/not-from-official-source.
