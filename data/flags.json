@@ -168,5 +168,16 @@
   ],
   "severity": "Low",
   "action": "This repo keeps its own capture, which was verified line by line against the raw page. The other session's files are preserved in archive/v2/ for reference. Any future CSV export must quote every field containing a comma."
+ },
+ {
+  "id": "F16",
+  "kind": "Source not machine-readable",
+  "item": "Houston Texans depth chart published as an image",
+  "detail": "https://www.houstontexans.com/team/depth-chart loads, but the chart itself is rendered as an image inside a photo-gallery widget rather than as a position table. No player names are machine-readable. Houston is therefore the only club of 32 with no depth chart on this site. The Texans roster page does publish a readable table, but it is ordered alphabetically, not by depth, so it cannot be substituted without inventing the string ordering. Depth is an ordering, and the ordering is the fact being reported.",
+  "sourceIds": [
+   "S46"
+  ],
+  "severity": "Medium",
+  "action": "Houston is absent from the Backup Depth page and counted as uncovered. Nothing inferred in its place."
  }
 ]

@@ -171,6 +171,7 @@ def main():
     injuries = build.load("injuries.tsv")
     sources = build.load("sources.tsv")
     schedule = build.load("schedule.tsv")
+    results = build.load("results.tsv")
     depth = build.load("depth-kc.tsv")
     aliases = build.load("depth-aliases.tsv")
 
@@ -187,6 +188,13 @@ def main():
     lg = build.analyse_league(injuries, teams)
     by_team = build.analyse_injuries(injuries, teams)
     depth_rows = build.analyse_depth(depth, injuries, aliases)
+    # League-wide depth join is computed here because the executive summary
+    # quotes its totals as well as the Backup Depth page.
+    depth_league = build.analyse_depth_league(
+        build.load("depth.tsv"), build.load("depth-sources.tsv"),
+        injuries, teams, aliases, extra=[("KC", depth_rows)])
+    depth_cov = depth_league["coverage"]
+    depth_tot = depth_league["totals"]
     flagged_depth = [r for r in depth_rows if r["flagged"]]
 
     written = []
@@ -217,8 +225,9 @@ def main():
     <p><strong>%d</strong> player rows across <strong>%d of %d</strong> clubs, straight from the official
     Week 10 report. Practice status and game status preserved exactly.</p></a>
   <a class="card" href="depth.html"><h3>Backup Depth</h3>
-    <p>Which listed starters and backups carry an official designation. Kept strictly separate from
-    any inferred depth ranking.</p></a>
+    <p><strong>%d of %d</strong> club charts captured — <strong>%d</strong> charted slots.
+    <strong>%d</strong> first-string players carry an official Out / Doubtful / Questionable status,
+    each with the next player the club itself lists at that slot. No inferred ranking.</p></a>
   <a class="card" href="questions.html"><h3>Open Questions</h3>
     <p><strong>%d</strong> questions, <strong>%d</strong> of them blocking, each stating what we know,
     what we do not, and what data is missing.</p></a>
@@ -228,7 +237,9 @@ def main():
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
 </section>
-""" % (lg["rows"], lg["clubs"], lg["clubsTotal"], n_q, n_block, n_sugg)
+""" % (depth_cov["covered"], depth_cov["total"], depth_tot["rows"],
+       depth_tot["startersWithStatus"],
+       lg["rows"], lg["clubs"], lg["clubsTotal"], n_q, n_block, n_sugg)
 
     kpis = table(
         ["Metric", "Value", "Basis", "Source"],
@@ -293,9 +304,11 @@ league calendar through Super Bowl LXI on 2027-02-14.</p>
 prices. Without a price there is no edge, no expected value and no closing-line value. Every such field on this
 site is blank. This is blocker #1 and it gates the entire leaderboard.</li>
 <li><strong>No official snap counts and no league-wide official depth chart.</strong>
-<code>nfl.com/depth-charts/</code> returns 404, and the one club depth chart captured in full is titled
-<em>Unofficial Depth Chart</em> by the club itself. So &ldquo;which backup replaced which starter&rdquo; cannot be
-measured, only alleged. The site shows official absence instead, and labels the depth layer as derived.</li>
+<code>nfl.com/depth-charts/</code> returns 404. Depth therefore has to be captured club by club, and each club
+titles its own chart <em>Unofficial Depth Chart</em>. %d of the 32 clubs publish one as a readable table; Houston
+publishes its as an image (<a href="flagged.html#F16">F16</a>). So &ldquo;which backup replaced which
+starter&rdquo; cannot be measured, only alleged. The site shows official absence and the club&rsquo;s own
+published ordering instead, and labels the depth layer as derived.</li>
 <li><strong>One snapshot, one season.</strong> Everything here is a single capture on a single day. No backtest,
 no persistence claim and no multi-season holdout is possible from this data.</li>
 </ol>
@@ -306,10 +319,13 @@ no persistence claim and no multi-season holdout is possible from this data.</li
 <p>Among the clubs captured, %d players are designated Out, split <strong>%d on offense, %d on defense and %d on
 special teams</strong>. Defensive line and secondary depth is the most exposed area, which is the part of the
 brief about 2nd and 3rd string defenders being forced in.</p>
-<p>On the one club worked end to end, the pattern is concrete and checkable: the starting right tackle is Out
-(ankle) and the starting running back is Questionable after not practising (groin), while the second-string
-defensive tackle is Out (neck). Those are observed facts with a source link. The claim that a specific backup
-took the snaps is <em>not</em> made, because no snap-count source was verified.</p>
+<p>The pattern is concrete and checkable across the league: of the %d first-string slots charted, <strong>%d
+carry an official Out / Doubtful / Questionable status</strong> this week, and for each one the club&rsquo;s own
+chart names the next player at that same slot. Kansas City is worked end to end on
+<a href="depth.html">Backup Depth</a> — starting right tackle Out (ankle), starting running back Questionable
+after not practising (groin), second-string defensive tackle Out (neck). Those are observed facts with a source
+link. The claim that a specific backup took the snaps is <em>not</em> made, because no snap-count source was
+verified.</p>
 </section>
 
 <section>
@@ -349,7 +365,9 @@ pages contradict each other. It does not print a single performance number. Each
 <a href="flagged.html">Flagged for Review</a>.</p>
 </section>
 """ % (n_verified, n_404, lg["rows"], lg["clubs"], lg["withGameStatus"], lg["dnp"],
-       lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team))
+       depth_cov["covered"],
+       lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
+       depth_tot["starters"], depth_tot["startersWithStatus"])
     written.append(page("executive-summary.html", "Executive Summary", es))
 
     # ------------------------------------------------------------ requirements
@@ -450,6 +468,74 @@ for that field — they are not blank because a value was unknown to us.</p>
     written.append(page("injuries.html", "Injury Report", inj_html, wide=True))
 
     # ------------------------------------------------------------------- depth
+    # The KC chart stays as the worked example below; the league view is built
+    # from every club chart that could be captured and joined to that club's own
+    # injury report.
+    cov = depth_cov
+    tot = depth_tot
+
+    cov_rows = []
+    for c in depth_league["clubs"]:
+        cov_rows.append([
+            cell(c["abbr"]),
+            cell(c["team"]),
+            raw_src(src_link(c["source"], sources_by_id)),
+            cell(c["chartDate"] or ""),
+            cell(c["slots"], "n"),
+            cell(c["named"], "n"),
+            cell(c["matched"], "n"),
+            cell(c["withGameStatus"], "n"),
+            cell(c["blankSlots"], "n"),
+        ])
+
+    nu_rows = []
+    for r in depth_league["nextUp"]:
+        nu_rows.append([
+            cell(r["club"]),
+            cell(r["unit"]),
+            cell(r["slot"]),
+            cell(r["starter"]),
+            cell_pub(r["starterStatus"]),
+            cell_pub(r["starterInjury"]),
+            cell_pub(r["starterPractice"]),
+            cell(r["nextPlayer"]) if r["nextPlayer"] else
+            '<td class="blank" title="This club publishes no deeper string at this slot">—</td>',
+            cell(r["nextString"], "n") if r["nextString"] != "" else
+            '<td class="blank" title="This club publishes no deeper string at this slot">—</td>',
+            raw_src(src_link(r["source"], sources_by_id) + " " + src_link("S01", sources_by_id)),
+        ])
+
+    da_rows = []
+    for r in depth_league["rows"]:
+        status_cells = ([cell_pub(r["practice"]), cell_pub(r["injury"]),
+                         cell_pub(r["gameStatus"])] if r["matched"]
+                        else [cell_notlisted(), cell_notlisted(), cell_notlisted()])
+        da_rows.append([
+            cell(r["team"]),
+            cell(r["unit"]),
+            cell(r["slot"]),
+            cell(r["rank"], "n"),
+            cell(r["player"]) if r["player"] else
+            '<td class="blank" title="The club publishes no name at this string">—</td>',
+            cell(r["note"]),
+        ] + status_cells + [
+            raw_src(src_link(r["source"], sources_by_id) +
+                    (" " + src_link("S01", sources_by_id) if r["matched"] else "")),
+        ])
+
+    nc_rows = []
+    for r in depth_league["notOnChart"]:
+        nc_rows.append([
+            cell(r["club"]),
+            cell(r["player"]),
+            cell(r["position"]),
+            cell_pub(r["practice"]),
+            cell_pub(r["injury"]),
+            cell_pub(r["gameStatus"]),
+            raw_src(src_link("S01", sources_by_id) + " " +
+                    src_link(r["source"], sources_by_id)),
+        ])
+
     d_rows = []
     for r in depth_rows:
         d_rows.append([
@@ -485,8 +571,8 @@ halves, and only one of them can be answered from official sources today. This p
 <div class="cols">
   <div class="callout ok">
     <h3>Half 1 — Observed absence <span class="pill ok">OFFICIAL</span></h3>
-    <p>Who is officially unavailable, and at which depth slot they are listed. Read straight from the injury
-    report and the club depth chart. No inference.</p>
+    <p>Who is officially unavailable, and at which depth slot the club lists them. Read straight from the
+    injury report and the club depth chart. No inference.</p>
   </div>
   <div class="callout warn">
     <h3>Half 2 — Replacement measured <span class="pill warn">NOT AVAILABLE</span></h3>
@@ -496,44 +582,116 @@ halves, and only one of them can be answered from official sources today. This p
 </div>
 
 <div class="callout">
-  <p><strong>Why only one club.</strong> <code>nfl.com/depth-charts/</code> returns 404, so there is no
-  league-wide official depth chart. Depth has to come club by club, and the one club chart captured in full is
-  titled &ldquo;Unofficial Depth Chart&rdquo; by the club itself. One club is therefore worked end to end as a
-  verified demonstration rather than 32 half-checked tables. See <a href="flagged.html#F02">F02</a>,
-  <a href="flagged.html#F10">F10</a> and suggestion SG13.</p>
+  <p><strong>Coverage: %(covered)d of %(total)d clubs.</strong> <code>nfl.com/depth-charts/</code> returns 404, so
+  there is no league-wide official depth chart and each club&rsquo;s own chart has to be captured one at a time.
+  %(covered)d clubs publish a chart as a readable table and are on this page. The one club that does not is
+  <strong>Houston</strong> — its chart is published as an image, so it is left out rather than guessed
+  (flag <a href="flagged.html#F16">F16</a>, source <a href="sources.html#S46">S46</a>). Every club page calls its
+  own chart <em>unofficial</em>.</p>
 </div>
 </section>
 
 <section>
-<h2>Worked example: Kansas City, Week 10</h2>
-<p>Every depth slot on the club's published chart, matched against that club's official injury designations.
-<strong>%d of %d slots</strong> carry an official practice or game designation.
-<strong>%d of those carry a game status</strong> — meaning the club has told us the player may not play.</p>
-%s
+<h2>Depth coverage by club</h2>
+<p>One row per club whose chart was captured. <em>Players charted</em> counts names the club published.
+<em>On own injury report</em> counts how many of those names also appear on that same club&rsquo;s Week 10 injury
+report, matched by exact name — no fuzzy matching, so a spelling difference shows up as a non-match rather than
+as a wrong merge. <em>Blank slots</em> are slots where the club published a string with no name in it.</p>
+%(cov_table)s
 </section>
 
 <section>
-<h2>Players at a depth slot with an official game status</h2>
-<p>These are observed facts: the club lists this player at this depth slot, and the league's injury report gives
-this game status. The elevation of a specific backup is <em>not</em> stated.</p>
-%s
+<h2>First-string players carrying an official game status</h2>
+<p>These are the slots where a club&rsquo;s own chart puts a player at <strong>first string</strong> and the
+league&rsquo;s injury report gives that player an <strong>Out / Doubtful / Questionable</strong> status for
+Week 10. The <em>next listed</em> column is the next name <strong>the same club</strong> publishes at that same
+slot and string number.</p>
+<div class="callout warn">
+  <p><strong>Read the next-listed column for what it is.</strong> It is a statement about two published
+  documents, not a prediction of who plays. A club&rsquo;s chart is self-described as unofficial, a starter
+  listed Questionable usually still plays, and snap counts are not available to confirm anything. Nothing here
+  says a backup <em>is</em> the starter this week.</p>
+</div>
+%(nu_table)s
+</section>
+
+<section>
+<h2>Every charted slot, every club</h2>
+<p>%(rows)d published slots across %(covered)d clubs. String 1 = first team. Use the filter box to narrow by club
+or player. Players not on their club&rsquo;s Week 10 injury report are marked <em>not listed</em> — an absence
+that is itself an official fact, not a gap in this page.</p>
+%(da_table)s
+</section>
+
+<section>
+<h2>On a club&rsquo;s injury report but not on that club&rsquo;s own chart</h2>
+<p>%(notcharted)d players. This is a discrepancy between two official documents, so it is published rather than
+reconciled. The usual innocent reason is that an injured player was removed from the chart; the interesting
+reason is a name spelled differently in the two places. This page does not decide which, because deciding would
+be a guess. Where the two documents clearly disagree about who is on the team, that is recorded on
+<a href="flagged.html">Flagged for Review</a> instead.</p>
+%(nc_table)s
+</section>
+
+<section>
+<h2>Worked example: Kansas City, Week 10</h2>
+<p>Kept as the reference implementation because it is the one club where a name difference between the chart and
+the league roster was resolved explicitly, with the evidence written down in
+<code>data/depth-aliases.tsv</code>, rather than by fuzzy matching. Every depth slot on the club&rsquo;s published
+chart, matched against that club&rsquo;s official injury designations.
+<strong>%(kcmatched)d of %(kctotal)d slots</strong> carry an official practice or game designation.
+<strong>%(kcflag)d of those carry a game status</strong> — meaning the club has told us the player may not play.</p>
+%(d_table)s
 </section>
 
 <section>
 <h2>What this page will not do</h2>
 <ul class="tight">
 <li>It will not call a backup &ldquo;the starter this week&rdquo; without a snap-count source.</li>
-<li>It will not rank depth beyond the club's own published ordering, and that ordering is labelled unofficial.</li>
+<li>It will not rank depth beyond the club&rsquo;s own published ordering, and that ordering is labelled unofficial.</li>
+<li>It will not match two names by similarity. Equivalence is asserted only in
+<code>data/depth-aliases.tsv</code>, with the evidence recorded next to it.</li>
 <li>It will not treat an absent player as injured. <em>Absent</em> and <em>injured</em> are different facts.</li>
+<li>It will not fill Houston in from another source, because a depth chart is an ordering and no other official
+source publishes that ordering.</li>
 </ul>
 </section>
-""" % (len([r for r in depth_rows if r["matched"]]), len(depth_rows), len(flagged_depth),
-       table(["Unit", "Slot", "String", "Player (as charted)", "Official roster spelling",
-              "Practice", "Injury", "Game status", "Sources"],
-             d_rows, cls="dense searchable",
-             caption="String 1 = first team, 2 = second, 3 = third. Ordering copied from the club chart."),
-       table(["Unit", "Slot", "String", "Player", "Injury", "Practice", "Game status", "Source"],
-             fd_rows, cls="dense"))
+""" % {
+        "covered": cov["covered"],
+        "total": cov["total"],
+        "rows": tot["rows"],
+        "notcharted": len(depth_league["notOnChart"]),
+        "kcmatched": len([r for r in depth_rows if r["matched"]]),
+        "kctotal": len(depth_rows),
+        "kcflag": len(flagged_depth),
+        "cov_table": table(
+            ["Club", "Team", "Chart source", "Chart date", "Published slots",
+             "Players charted", "On own injury report", "With a game status", "Blank slots"],
+            cov_rows, cls="dense searchable",
+            caption="Chart date is the date the club printed on its own chart. A blank means the club "
+                    "printed no date; it is not assumed to be the capture date."),
+        "nu_table": table(
+            ["Club", "Unit", "Slot", "First string", "Game status", "Injury as published",
+             "Practice", "Next listed at that slot", "String", "Sources"],
+            nu_rows, cls="dense searchable",
+            caption="%d of %d charted first-string slots carry an official Week 10 game status. "
+                    "Sorted by club." % (tot["startersWithStatus"], tot["starters"])),
+        "da_table": table(
+            ["Club", "Unit", "Slot", "String", "Player", "Note", "Practice", "Injury",
+             "Game status", "Source"],
+            da_rows, cls="dense searchable",
+            caption="Ordering copied from each club chart. Rows shown as 'not listed' are players the "
+                    "club charts but who do not appear on its Week 10 injury report."),
+        "nc_table": table(
+            ["Club", "Player", "Pos", "Practice", "Injury as published", "Game status", "Sources"],
+            nc_rows, cls="dense searchable",
+            caption="Cross-check of the club chart against the club's own injury report (S01)."),
+        "d_table": table(
+            ["Unit", "Slot", "String", "Player (as charted)", "Official roster spelling",
+             "Practice", "Injury", "Game status", "Sources"],
+            d_rows, cls="dense searchable",
+            caption="String 1 = first team, 2 = second, 3 = third. Ordering copied from the club chart."),
+    }
     written.append(page("depth.html", "Backup Depth", depth_html, wide=True))
 
     # --------------------------------------------------------------- standings
@@ -581,6 +739,52 @@ this game status. The elevation of a specific backup is <em>not</em> stated.</p>
             cell(g["note"]),
             '<td>%s</td>' % src_link("S04", sources_by_id),
         ])
+    res_rows = []
+    for r in results:
+        ap, hp = int(r["awayPts"]), int(r["homePts"])
+        res_rows.append([
+            cell(r["week"], "n"),
+            cell(r["date"]),
+            cell(r["away"]),
+            cell(ap, "n"),
+            cell(r["home"]),
+            cell(hp, "n"),
+            cell("%+d" % (hp - ap), "n"),
+            '<td>%s</td>' % src_link("S04", sources_by_id),
+        ])
+    # Derived scoring rates. Every figure here is arithmetic on results.tsv, and
+    # tools/verify_results.py proves that adding results.tsv up reproduces the
+    # official standings, so these rates rest on a verified base.
+    rate = {a: {"g": 0, "pf": 0, "pa": 0, "hw": 0, "hl": 0, "ht": 0,
+                "rw": 0, "rl": 0, "rt": 0} for a in team_name}
+    for r in results:
+        ap, hp = int(r["awayPts"]), int(r["homePts"])
+        for side, pts, opp in (("home", hp, ap), ("away", ap, hp)):
+            ab = r[side]
+            rate[ab]["g"] += 1
+            rate[ab]["pf"] += pts
+            rate[ab]["pa"] += opp
+            k = ("h" if side == "home" else "r") + ("w" if pts > opp else "l" if pts < opp else "t")
+            rate[ab][k] += 1
+    rate_rows = []
+    for ab in sorted(rate, key=lambda a: -(rate[a]["pf"] - rate[a]["pa"]) / max(rate[a]["g"], 1)):
+        d = rate[ab]
+        g = d["g"]
+        if not g:
+            continue
+        rate_rows.append([
+            cell(ab),
+            cell(team_name.get(ab, ab)),
+            cell(g, "n"),
+            cell(d["pf"], "n"),
+            cell(d["pa"], "n"),
+            cell("%+.1f" % ((d["pf"] - d["pa"]) / g), "n"),
+            cell("%.1f" % (d["pf"] / g), "n"),
+            cell("%.1f" % (d["pa"] / g), "n"),
+            cell("%d-%d-%d" % (d["hw"], d["hl"], d["ht"])),
+            cell("%d-%d-%d" % (d["rw"], d["rl"], d["rt"])),
+            '<td>%s</td>' % src_link("S04", sources_by_id),
+        ])
     st_html = """
 <section>
 <h1>Standings &amp; Schedule</h1>
@@ -603,6 +807,23 @@ This is the input layer for the baseline model, not a prediction.</p>
 </section>
 
 <section>
+<h2>Scoring rates, derived from every game played</h2>
+<p>Points for and against per game, worked out by <code>tools/site.py</code> from the %d games below. These are
+<em>derived</em>, not published: the league publishes totals, not rates. They are safe to use as a baseline
+because <code>tools/verify_results.py</code> first proves that adding the same games up reproduces the official
+standings exactly, for all 32 clubs. Margin is points for minus points against per game.</p>
+%s
+</section>
+
+<section>
+<h2>Every game played so far</h2>
+<p>%d games: all of Weeks 1&ndash;9 plus the Week 10 Thursday game. The remaining %d Week 10 games had not kicked
+off when this was captured, so their rows do not exist yet rather than appearing blank. Home team is listed
+second, as the league lists it. Use the filter box to narrow by club.</p>
+%s
+</section>
+
+<section>
 <h2>Week 10 schedule as published</h2>
 %s
 </section>
@@ -620,6 +841,17 @@ paraphrased here, so nothing is lost in translation.</p>
              caption="Column meanings are the league's own: PCT winning percentage, PF points for, PA points "
                      "against, Net net points."),
        table(["Division", "Clubs (record)"], div_rows, cls="dense"),
+       len(results),
+       table(["Abbr", "Club", "G", "PF", "PA", "Margin/g", "PF/g", "PA/g",
+              "Home", "Road", "Source"],
+             rate_rows, cls="dense searchable",
+             caption="Sorted by margin per game. Home and Road are records in those games, "
+                     "counted from the results table."),
+       len(results), len(schedule) - 1,
+       table(["Wk", "Date", "Away", "Pts", "Home", "Pts", "Margin (home)", "Source"],
+             res_rows, cls="dense searchable",
+             caption="Margin is home points minus away points. Every row resolves to the same "
+                     "official schedule page."),
        table(["Date", "Kickoff ET", "Away", "Home", "Broadcast", "Venue", "Note", "Source"],
              sched_rows, cls="dense searchable"),
        src_link("S06", sources_by_id), src_link("S05", sources_by_id))
@@ -1072,7 +1304,8 @@ verification note for each one.</p>
            [cell("Injury-designation definitions"), cell("The 2017 policy PDF at operations.nfl.com"),
             cell("No definition text quoted; only observed categories shown")],
            [cell("League-wide depth chart"), cell("nfl.com/depth-charts/ (404)"),
-            cell("Depth is derived and labelled unofficial; one club worked")],
+            cell("Depth captured club by club (%d of 32); ordering labelled unofficial"
+                 % depth_cov["covered"])],
            [cell("Snap counts"), cell("No official feed located"),
             cell("No claim that any backup played")],
            [cell("Market prices"), cell("League does not publish prices"),
