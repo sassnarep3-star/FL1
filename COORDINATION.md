@@ -818,3 +818,48 @@ Two sessions are active in parallel, so the claim above is narrowed to what they
 | `arena/725adbd2-fl1` (PR #27 merged, #28 open) | `scripts/verify_d.py`, `schedule.html`, `prop-correlations.html`, `validation.html`, `tools/site.py` D1–D3 emitter | Touch `scripts/*_d.py`, `schedule.html`, `prop-correlations.html`, or the D1–D3 emitter block |
 
 **This session's scope after re-scope (F01–F10, updated):** ingestion + published exports into `data/market/*` (a deterministic TSV/JSON export *of* the store, so a reviewer can read the ledger without opening SQLite); `engine/price_snapshot_pipeline.py`, `engine/backtest.py`, `engine/signal_staking.py`, `engine/replacement_depth.py`, `engine/correlation_gate.py`, `engine/demotion_eval.py`; new pages `price-store.html`, `results-feed.html`, `origination.html`, `signal-vs-staking.html`, `replacement-depth.html`, `correlation-gate.html`, `demotion-gate.html`, `decision-desk.html`; `tools/pages_market.py`; two additive edits inside `tools/site.py` (NAV entries + one index card block); `tests/test_market_pipeline.py`; append-only additions to `data/sources.tsv` (S50+) and `data/flags.json`; `README.md` / `EXECUTIVE_SUMMARY.md` append-only addenda; integration PR.
+
+### Follow-up — unit tests, four engine bugs, and the eight pages actually built
+
+| When (UTC) | Entry |
+|---|---|
+| 2026-11-14T23:45Z | Added `tests/test_market_pipeline.py` (74 tests). Deliberately split: unit tests on synthetic fixtures, plus one class that cross-checks the committed files in `data/market/` against **each other** — never by re-running the function that wrote them, which would only prove the code agrees with itself. |
+| 2026-11-14T23:58Z | First run was red: 15 failures, 6 errors. Four were defects in **published numbers**, not test bugs. Fixed in `engine/` and the spine rebuilt (committed `5eea570`). |
+| 2026-11-15T00:05Z | Built the eight pages for real (`tools/pages_market.py`, wired into `tools/site.py`), removed the stale "Not built yet" stamp and reworded the four `data/verification.tsv` rows that asserted the pages were unbuilt. Regenerated the six session-D artefacts with the CI toolchain so `verify.yml`'s final `git diff --exit-code -- data docs` cannot fail on the refreshed capture. |
+
+**The four bugs, in the order they were found.** Anyone reading `main` after this merge should know these were live before the tests existed:
+
+1. `results_ledger.settle_side` / `settle_total` took no side argument. An away bet was graded on the **home** margin and an **under** on the over's difference. Both now take `side_key`; the away margin is the negated home margin, the under flips the total difference, and an NFL tie is a push on a two-way moneyline.
+2. `backtest` mapped a TOTAL bet's side onto `home`/`away`. `settle_total` reads any side that is not `over` as an under, so every published over bet was graded as an under while being priced at the over. Each market now names its own side, with the derivation written out per market.
+3. `signal_staking._points_beat` ignored the side on a spread bet, so the stake-free measure could carry the opposite sign to the settled outcome. It now reads the number the bet was actually struck at, and a test requires the two to agree.
+4. `replacement_depth.load_aliases()` read the headerless positional `data/depth-aliases.tsv` with `csv.DictReader`. The first alias was consumed as the header, no `depthName` field was found, and the map came back **empty** — the page advertised "an exact join after alias mapping" while no alias had ever applied.
+
+A fifth, smaller one: `backtest` counted a game as `eligible` only when a bet was written, so "games meeting the condition" and "bets placed" could never differ. The counters are separate now, and selectivity is stated as a share of eligible games.
+
+**Numbers that moved.** The spine is deterministic and `--check` is byte-identical, but the published figures are **not** the ones earlier rows of this log quoted: 23,219 trades, 13,310 published, and every ROI now sits between −1.6% and −6.9% with hit rates 48–51% against a 52.38% break-even. Five rules grade `INVERTED` (mean points beat below zero) and four `POSITIVE MEAN, NOT PROVABLE`. That is the finding: on this capture no rule beats the recorded market number, and the model's 67%-ROI-shaped story does not survive its own settlement arithmetic. Demotion triggers: 28 (D1-SUBSTITUTE 9, D2 7, D3 3, D4 9).
+
+**Files this session touched that another session also owns — please read before rebasing.**
+
+* `tools/site.py` — three additive edits (8 NAV tuples with `flagged.html` last, 8 index cards fed from `pages_market.summary_counts()`, and `import pages_market` inside `main()`). PR #28 (`arena/725adbd2-fl1`) edits the same file's D1–D3 emitter; expect a conflict and keep **both** halves. Nothing in the D1–D3 table was changed here.
+* `data/verification.tsv`, `data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/sources.tsv` — appended only, deduped on the `check`/`id` key. Row counts now: sources 56, questions 25, suggestions 19, flags 27, verification 250.
+* `docs/computed/week10.html` and `data/week10_signal_board.csv` — regenerated by the **session-D scripts** (`build_week10_board.py` etc.), not by this session's code, because those scripts read `data/raw/games.csv`, whose sha256 changed when the capture was refreshed (`6766de0`). Row counts unchanged at 7,548; the 26 changed fields are moneylines of unplayed games. Run with pandas 3.1.1/numpy/scipy to match `verify.yml`.
+* `engine/price_snapshots.py` — **not edited**, as claimed.
+
+### Request against `engine/price_snapshots.py` (F22, restated for the storage owner)
+
+The store's `phase` CHECK accepts `OPEN`, `CLOSE`, `LIVE`. It has no legal value for "a price whose vintage the publisher never stated", which is the true state of 56,624 of the 78,410 ledger rows this session loaded (`vintage_counts` in `data/market/summary.json`): 20,490 were accepted as `CLOSE` on a filename's word, and 1,088 were quarantined. Two shapes, storage owner's choice:
+
+* add a fourth value (`UNDOCUMENTED`) to the CHECK and keep the strict provenance columns (`source_url`, `source_record_id`, `line_origin_version`) mandatory, so widening the enum does not widen the trust boundary; or
+* leave the store close-only and treat the exported ledger under `data/market/` as the record of undated prices, which is what ships today.
+
+This session took the second option and published the refusals rather than hiding them. Q21 is the open question for the board; SG17 is the suggestion. Nothing here was patched into that file, and no test in this session asserts its current behaviour — the tests assert this session's loader and ledger only.
+
+### Build / check commands (this follow-up)
+
+```
+python3 -m unittest discover -s tests                    # 152 tests, no network, no pandas
+python3 scripts/build_market_spine.py                    # ~78 s
+python3 scripts/build_market_spine.py --check            # "rebuild is byte-identical"
+python3 tools/build.py && python3 tools/site.py && python3 tools/checklinks.py
+/home/user/.ci-venv/bin/python scripts/verify_site.py    # errors 0, warnings 0
+```
