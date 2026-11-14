@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Injuries &amp; Team Deficiencies — FL1 NFL Dashboard</title>
+<meta name="description" content="NFL injury tracking and starter vs. backup (2nd/3rd/4th string) deficiencies for offense and defense, sourced from nfl.com.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a href="#content" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><div class="mark">FL1</div><div>NFL Decision Support</div></div>
+    <nav class="nav">
+      <a href="index.html">Dashboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="suggestions.html">Suggestions &amp; Review</a>
+      <a href="nfl-strategies.html">NFL Strategies</a>
+      <a href="injuries.html" class="active">Injuries &amp; Deficiencies</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container" id="content">
+  <header class="page-header">
+    <div>
+      <h1>Injuries &amp; Team Deficiencies</h1>
+      <div class="subtitle">Track injuries and identify offensive/defensive deficiencies, including 2nd, 3rd, and 4th string backups replacing starters. Official source: nfl.com.</div>
+    </div>
+    <a href="index.html" class="btn secondary" style="margin-left:auto;">&larr; Back to Dashboard</a>
+  </header>
+
+  <div class="alert info">
+    <span class="icon">&#9432;</span>
+    <div>
+      <strong>Source.</strong> Injury data comes from the official NFL injury report: <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a>. Specific player values are flagged unverified until re-confirmed against the live report; nothing is inferred or filled in.
+    </div>
+  </div>
+
+  <section>
+    <h2>Official Injury Source</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Source</th><th>Content</th><th>Verified</th><th>Link</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NFL.com — Injury Report</td>
+            <td>Player, position, injury, practice status, game status by week</td>
+            <td><span class="status verified">Source reachable (official)</span></td>
+            <td class="source"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Starter vs. Backup Deficiency Tracking</h2>
+    <p>When a starter is out, the system notes which string (2nd / 3rd / 4th) replaces them and flags the resulting deficiency for that unit (offense or defense). Specific values are blank/unverified until pulled from the official injury report and depth charts.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Team</th><th>Unit</th><th>Starter (position)</th><th>Status</th><th>Replacement string</th><th>Deficiency flag</th><th>Source</th><th>Value status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="source"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td>
+            <td><span class="status unverified">Unverified — not yet pulled</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cite">Columns: starter name/position, injury/game status (out/doubtful/questionable), replacement string (2nd/3rd/4th), and a deficiency flag (e.g., "key starter out — limited NFL snaps for backup"). All values left blank until confirmed from nfl.com.</p>
+  </section>
+
+  <section>
+    <h2>Deficiency Rules</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Starter out (Offense)</h3>
+        <p>Flag when a starting offensive player (QB, RB, WR, TE, OL) is out and replaced by a 2nd/3rd/4th string backup.</p>
+        <p class="cite">Replacement string: <span class="blank">blank</span></p>
+      </div>
+      <div class="card">
+        <h3>Starter out (Defense)</h3>
+        <p>Flag when a starting defensive player (DL, LB, CB, S) is out and replaced by a 2nd/3rd/4th string backup.</p>
+        <p class="cite">Replacement string: <span class="blank">blank</span></p>
+      </div>
+      <div class="card">
+        <h3>2nd / 3rd / 4th string</h3>
+        <p>Record which string depth replaces the starter; deeper replacements = larger deficiency flag.</p>
+        <p class="cite">Depth source: <span class="blank">blank — depth chart not yet added</span></p>
+      </div>
+      <div class="card">
+        <h3>Offense &amp; Defense both</h3>
+        <p>Deficiencies are tracked separately for offense and defense so each side of the ball is evaluated independently.</p>
+        <p class="cite">Source: <span class="blank">blank</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Data Refresh</h2>
+    <p>The injury table should be refreshed each week from the official NFL injury report so starter/backup status stays current. No manual entry: values are pulled from nfl.com and any value that cannot be confirmed is left blank and flagged unverified.</p>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><strong>FL1 — NFL Decision Support &amp; Strategy Dashboard</strong></div>
+    <div class="muted">Injury data from the official NFL source (nfl.com/injuries/). Specific player values flagged unverified until re-confirmed.</div>
+    <div class="muted">Branch: arena/89c32e23-fl1 &middot; See <a href="flagged-review.html">Flagged for Review</a> for unverified items.</div>
+  </div>
+</footer>
+
+</body>
+</html>
