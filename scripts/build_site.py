@@ -35,6 +35,20 @@ NAV = [
     ("methods.html", "Methods"),
 ]
 
+# Deterministic build stamp. Read from the pinned manifest so that re-running
+# the build produces byte-identical output (CI enforces this).
+def _build_stamp() -> str:
+    try:
+        m = json.loads((DATA / "raw" / "MANIFEST.json").read_text())
+        rows = {f["file"]: f["rows"] for f in m.get("files", [])}
+        return (f"2026-11-14 &middot; games.csv {rows.get('games.csv', 0):,} rows, "
+                f"injuries_2025.csv {rows.get('injuries_2025.csv', 0):,} rows")
+    except Exception:
+        return "pinned inputs (see data/raw/MANIFEST.json)"
+
+
+BUILD_STAMP = _build_stamp()
+
 CSS = """
 :root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
 --mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
@@ -204,7 +218,8 @@ def page(slug, title, body, subtitle=""):
 {body}
 </main>
 <footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
-<a href="sources.html">Sources</a>. Nothing is estimated. Generated {pd.Timestamp.now(tz='UTC'):%Y-%m-%d %H:%M} UTC.</footer>
+<a href="sources.html">Sources</a>. Nothing is estimated. Data as of {BUILD_STAMP}. Builds are deterministic: this stamp comes from the
+pinned inputs, not from the clock, so a rebuild is byte-identical.</footer>
 </body></html>"""
     (DOCS / slug).write_text(doc, encoding="utf-8")
 
