@@ -1,3 +1,14 @@
+# RAW CAPTURE — NFL.com official 2026 division standings
+#
+# URL: https://www.nfl.com/standings/
+# Retrieved: 2026-11-14 (UTC)
+# Format: team<TAB>abbr<TAB>W<TAB>L<TAB>T<TAB>PCT<TAB>PF<TAB>PA<TAB>net<TAB>
+#         home<TAB>road<TAB>div<TAB>conf<TAB>strk
+# Snapshot date: includes the Week 10 Thursday game (2026-11-12, WAS 24 @ NYG 21).
+#   Proven, not assumed: recomputing W/L/T and PF/PA from raw/schedule-results-2026-week1-10.tsv
+#   reproduces all 32 rows exactly; excluding that Thursday game leaves NYG and WAS short.
+#
+# Verification reference for data/standings.tsv.
 # Source: https://www.nfl.com/standings/ (Official NFL standings, 2026 regular season)
 # Retrieved: 2026-11-14 UTC. Snapshot includes Thursday, Nov 12 2026 (Week 10 TNF) result.
 # Columns: team\tabbr\tw\tl\tt\tpct\tpf\tpa\tnet\thome\troad\tdiv\tconf\tstrk
@@ -32,4 +43,4 @@ Atlanta Falcons	ATL	3	6	0	0.333	188	223	-35	1-4-0	2-2-0	1-2-0	3-3-0	2L
 San Francisco 49ers	SF	7	1	0	0.875	235	156	79	5-0-0	2-1-0	3-0-0	4-1-0	1W
 Seattle Seahawks	SEA	5	4	0	0.556	202	162	40	4-2-0	1-2-0	2-1-0	2-3-0	1W
 Los Angeles Rams	LAR	5	4	0	0.556	214	181	33	2-3-0	3-1-0	0-2-0	3-2-0	3W
-Arizona Cardinals	AZ	3	6	0	0.333	178	255	-77	0-3-0	3-3-0	1-3-0	2-5-0	1L
+Arizona Cardinals	ARI	3	6	0	0.333	178	255	-77	0-3-0	3-3-0	1-3-0	2-5-0	1L

@@ -1,3 +1,31 @@
+# RAW CAPTURE — Official club depth charts, 2026 Week 10
+#
+# Method: each club's own official depth-chart page was loaded and the position
+#         tables transcribed in the order the club published them. No value was
+#         inferred; where a club published no name at a slot, the field is left
+#         empty or marked UNVERIFIED_BLANK (see below).
+# Retrieved: 2026-11-14 (UTC)
+# Format:    TEAM|SIDE|POSITION|P1|P2|P3|P4
+#            SIDE = O (offense) / D (defense) / S (special teams)
+#            P1 = first string (starter), P2..P4 = second/third/fourth string
+#            Two names joined by " & " = the club published them as co-starters
+#            at the same string (e.g. "Chase Young & Carl Granderson").
+#            UNVERIFIED_BLANK = the club published an empty first-string slot.
+#
+# Clubs captured (31 of 32): ARI ATL BAL BUF CAR CHI CIN CLE DAL DEN DET GB IND
+#   JAX KC LAC LAR LV MIA MIN NE NO NYG NYJ PHI PIT SEA SF TB TEN WAS
+# Club NOT captured (1): HOU — https://www.houstontexans.com/team/depth-chart
+#   renders its depth chart as an image inside a photo-gallery widget. Nothing
+#   machine-readable is published, so nothing was transcribed rather than guessed.
+#
+# Dating as published by the clubs that dated their charts:
+#   SF  "Updated as of 11/10/26"      CHI  "(As of 10/31/2026)"
+#   TEN "11/10/26"                    LV   "Nov 10 2026"
+#   GB  "Unofficial Depth Chart, Nov. 10, 2026"
+#   The remaining clubs published no date on the chart; those are left blank
+#   in data/depth-sources.tsv rather than assumed.
+#
+# This file is the verification reference for data/depth.tsv.
 # Official team depth charts, retrieved 2026-11-14 from each club's official site (domains verified via https://www.nfl.com/teams/)
 # Format: TEAM|SIDE|POSITION|P1|P2|P3|P4   (P1=starter/"1st string", P2=2nd string, ...)
 # NOTE: clubs publish these as "unofficial" depth charts; see data/sources.json tier notes.
@@ -549,30 +577,30 @@ ATL|D|S|Xavier Watts|Sydney Brown||
 ATL|D|CB|C.J. Henderson|Mike Hughes|Mike Ford Jr.|
 ATL|D|NB|Avieon Terrell|Billy Bowman Jr.||
 ATL|S|K|Jake Moody|||
-AZ|O|WR|Reggie Virgil|Harrison Wallace III||
-AZ|O|LT|Jayden Williams|Jedrick Wills||
-AZ|O|LG|Isaac Seumalo|Hayden Conner||
-AZ|O|C|Hjalte Froholdt|Kingsley Eguakun||
-AZ|O|RG|Isaiah Adams|Jon Gaines II||
-AZ|O|RT|Elijah Wilkinson|Josh Fryar|Albert Reese|
-AZ|O|TE|Trey McBride|||
-AZ|O|TE|Elijah Higgins|Teagan Quitoriano||
-AZ|O|WR|Simi Fehoko|Devin Duvernay||
-AZ|O|QB|Carson Beck|Josh Johnson|Joey Aguilar|
-AZ|O|RB|Tyler Allgeier|Bam Knight|Evan Hull|
-AZ|D|DT|Dante Stills|Darius Robinson||
-AZ|D|NT|Roy Lopez|Andrew Billings||
-AZ|D|DT|Walter Nolen III|L.J. Collier||
-AZ|D|OLB|Josh Sweat|Jordan Burch|Eku Leota|
-AZ|D|ILB|Jack Gibbens|Karson Sharar||
-AZ|D|ILB|Mack Wilson Sr.|Cody Simon||
-AZ|D|OLB|Zaven Collins & Baron Browning|||
-AZ|D|CB|Denzel Burke|Starling Thomas V||
-AZ|D|CB|Max Melton|Kei'Trel Clark||
-AZ|D|CB|Kalen King|Garrett Williams||
-AZ|D|S|Andrew Wingard|Kitan Crawford||
-AZ|D|S|Budda Baker|Dadrion Taylor-Demerson||
-AZ|S|K|Chad Ryland|||
+ARI|O|WR|Reggie Virgil|Harrison Wallace III||
+ARI|O|LT|Jayden Williams|Jedrick Wills||
+ARI|O|LG|Isaac Seumalo|Hayden Conner||
+ARI|O|C|Hjalte Froholdt|Kingsley Eguakun||
+ARI|O|RG|Isaiah Adams|Jon Gaines II||
+ARI|O|RT|Elijah Wilkinson|Josh Fryar|Albert Reese|
+ARI|O|TE|Trey McBride|||
+ARI|O|TE|Elijah Higgins|Teagan Quitoriano||
+ARI|O|WR|Simi Fehoko|Devin Duvernay||
+ARI|O|QB|Carson Beck|Josh Johnson|Joey Aguilar|
+ARI|O|RB|Tyler Allgeier|Bam Knight|Evan Hull|
+ARI|D|DT|Dante Stills|Darius Robinson||
+ARI|D|NT|Roy Lopez|Andrew Billings||
+ARI|D|DT|Walter Nolen III|L.J. Collier||
+ARI|D|OLB|Josh Sweat|Jordan Burch|Eku Leota|
+ARI|D|ILB|Jack Gibbens|Karson Sharar||
+ARI|D|ILB|Mack Wilson Sr.|Cody Simon||
+ARI|D|OLB|Zaven Collins & Baron Browning|||
+ARI|D|CB|Denzel Burke|Starling Thomas V||
+ARI|D|CB|Max Melton|Kei'Trel Clark||
+ARI|D|CB|Kalen King|Garrett Williams||
+ARI|D|S|Andrew Wingard|Kitan Crawford||
+ARI|D|S|Budda Baker|Dadrion Taylor-Demerson||
+ARI|S|K|Chad Ryland|||
 LAR|O|WR|Konata Mumpfield|CJ Daniels||
 LAR|O|TE|Davis Allen & Tyler Higbee|||
 LAR|O|LT|Alaric Jackson|David Quessenberry||

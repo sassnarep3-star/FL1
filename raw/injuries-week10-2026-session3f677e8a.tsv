@@ -1,5 +1,24 @@
-# Source: https://www.nfl.com/injuries/ (Official NFL Injury Report, Week 10, 2026 season)
-# Retrieved: 2026-11-14 UTC. Columns: team\tplayer\tpos\tinjury\tpractice\tgame_status
+# RAW CAPTURE (second, independent) — NFL.com official injury report, Week 10 2026
+#
+# URL: https://www.nfl.com/injuries/
+# Retrieved: 2026-11-14 (UTC) by session arena/3f677e8a-fl1
+# Format: team<TAB>player<TAB>pos<TAB>injury<TAB>practice_status<TAB>game_status
+#
+# Why this file exists: a second session transcribed the same official page
+# independently of the first capture in raw/injuries-week10-2026.md. Comparing
+# the two is a real check on both, because a transcription error made twice
+# independently is far less likely than the same error made once.
+#
+# Result of that comparison (see data/verification.tsv):
+#   345 rows on both sides; the set of rows is byte-identical after normalising
+#   two cosmetic differences —
+#     * this capture writes practice status in full ("Did Not Participate In
+#       Practice") where data/injuries.tsv writes the abbreviation "DNP";
+#     * this capture wrote Arizona as "AZ", the site uses the official "ARI".
+#   Two Houston rows (Tommy Togiai / Wyatt Teller) appear in a different order.
+#   No player, position, injury or game status differs anywhere.
+#
+# This file is a verification reference only; the site reads data/injuries.tsv.
 WAS	John Bates	TE		Full Participation in Practice	
 WAS	Treylon Burks	WR		Did Not Participate In Practice	
 WAS	Jayden Daniels	QB		Full Participation in Practice	
@@ -235,21 +254,21 @@ LAR	Puka Nacua	WR		Did Not Participate In Practice
 LAR	Colby Parkinson	TE		Full Participation in Practice	
 LAR	Matthew Stafford	QB		Full Participation in Practice	
 LAR	Byron Young	LB		Did Not Participate In Practice	
-AZ	Budda Baker	S		Full Participation in Practice	
-AZ	Zachary Carter	DT	Knee	Limited Participation in Practice	Out
-AZ	Hjalte Froholdt	C	Concussion	Did Not Participate In Practice	Out
-AZ	Jon Gaines II	G	Ankle	Did Not Participate In Practice	Out
-AZ	Bam Knight	RB		Full Participation in Practice	
-AZ	Hunter Long	TE	Knee	Limited Participation in Practice	Questionable
-AZ	Roy Lopez	DT	Toe, Ankle	Limited Participation in Practice	Questionable
-AZ	Max Melton	CB	Knee, Hand	Limited Participation in Practice	Questionable
-AZ	Darius Robinson	DT	Wrist	Limited Participation in Practice	Questionable
-AZ	Isaac Seumalo	G		Full Participation in Practice	
-AZ	Dante Stills	DT		Full Participation in Practice	
-AZ	Josh Sweat	LB		Full Participation in Practice	
-AZ	Jayden Williams	T	Knee	Limited Participation in Practice	Questionable
-AZ	Mack Wilson	LB		Full Participation in Practice	
-AZ	Andrew Wingard	S	Groin	Did Not Participate In Practice	Questionable
+ARI	Budda Baker	S		Full Participation in Practice	
+ARI	Zachary Carter	DT	Knee	Limited Participation in Practice	Out
+ARI	Hjalte Froholdt	C	Concussion	Did Not Participate In Practice	Out
+ARI	Jon Gaines II	G	Ankle	Did Not Participate In Practice	Out
+ARI	Bam Knight	RB		Full Participation in Practice	
+ARI	Hunter Long	TE	Knee	Limited Participation in Practice	Questionable
+ARI	Roy Lopez	DT	Toe, Ankle	Limited Participation in Practice	Questionable
+ARI	Max Melton	CB	Knee, Hand	Limited Participation in Practice	Questionable
+ARI	Darius Robinson	DT	Wrist	Limited Participation in Practice	Questionable
+ARI	Isaac Seumalo	G		Full Participation in Practice	
+ARI	Dante Stills	DT		Full Participation in Practice	
+ARI	Josh Sweat	LB		Full Participation in Practice	
+ARI	Jayden Williams	T	Knee	Limited Participation in Practice	Questionable
+ARI	Mack Wilson	LB		Full Participation in Practice	
+ARI	Andrew Wingard	S	Groin	Did Not Participate In Practice	Questionable
 SEA	AJ Barner	TE		Full Participation in Practice	
 SEA	Anthony Bradford	G		Full Participation in Practice	
 SEA	Charles Cross	T	Ankle	Did Not Participate In Practice	Out
