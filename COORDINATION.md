@@ -769,9 +769,37 @@ Existing price/results datasets remain third-party or capture-specific; this tas
 
 ## Additive follow-up — price snapshot storage
 
-- **Session/branch:** `arena/f1e4deb7-fl1` (active current branch; repository branch is Arena-managed, so no alternate session branch was created).
+- **Session/branch:** `arena/f1e4deb7-fl1` (Arena-managed session branch).
 - **Scope:** `engine/price_snapshots.py`, `tests/test_price_snapshots.py`, README documentation, this log.
 - **Status:** done; implementation is a local append-only SQLite schema/API, not a populated feed.
 - **Verification:** run `python3 -m unittest discover -s tests -q`, `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, and `python3 site/build.py && python3 site/verify.py`. Tests cover open/close persistence, model-version capture, idempotency, and fail-closed validation of missing source / unsupported market and phase.
 - **Sources / irregularities:** no provider was selected and no quote was inserted. NFL official sources do not publish sportsbook prices; price values stay unverified/blank until an authorized source is acquired. The store requires explicit source URL, source record identifier, phase, timestamp and originating model version, and deliberately performs no inference.
 - **Integration record:** PR https://github.com/sassnarep3-star/FL1/pull/22 merged on 2026-11-14T22:06:18Z. CI run 43646254061 passed; GitHub Pages deployment run 43646303860 passed. Pages source remains `main` / `/`.
+
+---
+
+## Session `arena/df95fa1c-fl1` — verified results, official correlation and strategy controls
+
+**Branch:** `arena/df95fa1c-fl1` (current Arena branch; active) · **Claim recorded:** 2026-11-14 UTC
+
+### Task board — claim written before implementation; push pending rebase
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| M01 | Reuse and audit the existing PR #22 price-snapshot store; do not duplicate or edit its files | in progress | `arena/df95fa1c-fl1` | read-only `engine/price_snapshots.py`, read-only `tests/test_price_snapshots.py`; completion note in `COORDINATION.md` |
+| M02 | Add an official results feed, row-level provenance verification and settlement for supported single-game markets | in progress | `arena/df95fa1c-fl1` | `engine/verified_results.py`, `data/verified_results.csv`, `scripts/verify_verified_results.py`, `tests/test_verified_results.py`, `data/specs/market_data.json`, `data/specs/sources.json` |
+| M03 | Specify fair/market/difference columns, side → total → moneyline order and replacement-depth logging; suppress non-official correlations from verified tables and flag the gaps | in progress | `arena/df95fa1c-fl1` | `data/specs/requirements.json`, `data/specs/suggestions.json`, `data/specs/flags.json`, `data/models.json`, `data/injury_model.json`, `data/measured.json`, `data/correlations.json`, `data/correlations.csv`, `data/correlation_matrix.csv`, `data/parlay_economics.csv`, `data/prop-correlations-d.csv`, `data/flags.json`, `scripts/build_correlations.py`, `scripts/build_prop_correlations_d.py`, `scripts/build_pages_d.py`, `scripts/build_site.py`, `scripts/verify_d.py`, `site/build.py`, `site/verify.py`, `docs/pages/**`, `docs/computed/correlations.html`, `prop-correlations.html`, `flagged.html` |
+| M04 | Separate signal metrics from staking outcomes and implement an executable live-to-paper demotion decision | in progress | `arena/df95fa1c-fl1` | `engine/gates.py`, `engine/leaderboard.py`, `data/leaderboard.json`, `data/validation_gates.json`, `tests/test_engine.py`, `tools/site.py`, `validation.html`, `index.html` |
+| M05 | Rebuild, independently verify, publish via PR, merge and confirm Pages deployment | in progress | `arena/df95fa1c-fl1` | `COORDINATION.md`, integration after M01–M04 pass |
+
+### Evidence gathered before implementation
+
+- `https://www.nfl.com/schedules/2026/by-week/week-10` is an official NFL page that lists “Commanders 24, Giants 21, FINAL” for Nov. 12, 2026. It supports one captured game result only; it is not a historical bulk feed.
+- The official NFL game center for Commanders at Giants links to an NFL-hosted gamebook PDF. The schedule page is used for the one score row; no player-prop settlement values are inferred from the PDF.
+- PR #22 already added an append-only SQLite price-snapshot API with explicit open/close phases. It has no quote rows or selected licensed provider. This session will reuse it, not create a duplicate store; it will document the missing fair-line/market-line/difference output separately.
+- NFL.com does not publish sportsbook opening/closing quotes. No licensed provider is selected here; no market quote values will be fabricated.
+- Current pages contain correlation estimates from third-party-in-repo data. Under the active official-only requirement, those are not eligible as official coefficients; M03 will blank/flag them in verified correlation views unless a complete official per-game sample can be verified.
+
+### Rebase/conflict note
+
+Before the claim push, `origin/main` advanced from `9d7ca32` to `d495ba8` (including the already-merged price store, a demotion-gate specification, and verifier follow-ups). The required `git pull --rebase origin main` conflicted only in this append-only board because both branches added a session record at EOF. Resolution retains the merged PR #22 record and this claim, updates the scope to avoid duplicating its files, and records the collision; no other changes were discarded.
