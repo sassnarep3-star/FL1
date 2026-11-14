@@ -215,6 +215,7 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | 2026-11-14 | `ab4e9b05` | **PR #7 merged** as `6ba143f` (review guide, deploy record, option-label tidy). Pages build: **built**. |
 | 2026-11-14 | `ab4e9b05` | Found a second rendering bug by reading the deployed page: `verification.html` printed its own TSV header line as a data row, and two page counts were stale at 13 instead of 14. **PR #8 merged** as `1c6c8ab`; Pages build **built**; live page re-fetched clean. |
 | 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values, 0 estimated values presented as sourced. |
+| 2026-11-14 | `arena/4a9893e6-fl1` | Verified official sources (nfl.com/injuries/, nfl.com/standings/, nfl.com/schedules/2026/REG10/, nfl.com/teams/kansas-city-chiefs/roster) against the live pages; injury spot-checks (8 players) and repo standings.tsv match the live official pages exactly. tools/build.py, verify_injuries.py (345/345) and checklinks.py (16 pages, 0 broken) all PASS. Added the demotion gate (D1-D3) to validation.html, defined but not active pending a benchmark price (flag F08). **PR #24 merged** into `main` as merge commit `f079743`. GitHub Pages build for `f079743`: **built**. Live validation.html re-fetched and confirmed rendering the demotion gate. |
 
 ---
 
@@ -226,6 +227,7 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | PR #5 (escaped-link fix) | **MERGED** into `main` as merge commit `d5e9cc0` |
 | PR #7 (review guide, PR/deploy record, option labels) | **MERGED** into `main` as merge commit `6ba143f` |
 | PR #8 (verification table header fix) | **MERGED** into `main` as merge commit `1c6c8ab` |
+| PR #24 (demotion gate, source verification) | **MERGED** into `main` as merge commit `f079743` |
 | GitHub Pages source | `main`, path `/`, legacy build |
 | Pages build for `eb50220` | **built** |
 | Pages build for `d5e9cc0` | **built** |
