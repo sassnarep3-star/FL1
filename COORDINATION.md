@@ -842,3 +842,15 @@ Existing price/results datasets remain third-party or capture-specific; this tas
 - **Fix:** `tools/brief.py` now emits the three missing difference cells per row and substitutes the fitted σ (13.63) into the prose. Every table on every root page was checked against its header: 53 tables, 3,407 rows, 0 mismatches. A sweep for unformatted placeholders across the root and sub-site pages found none; the one `%s` on `audit.html` is a literal `git log --format` example in a documentation cell (present on `main` before this session).
 - **Gates re-run on the fix:** unit tests OK; `tools/checklinks.py` OK; `tools/verify_brief.py` PASS 10/10; `site/build.py` + `site/verify.py` pass; CI rebuild sequence and `scripts/verify_site.py` pass; `git diff --exit-code -- data docs` clean.
 - **Process note:** the cell-count and placeholder checks are now run on the built pages before any future merge in this session.
+
+### Merge and deployment record — `arena/685f958d-fl1` (2026-11-14, final)
+
+| PR | Head | Merge commit | Merged (UTC) | CI | Pages build |
+|---|---|---|---|---|---|
+| [#30](https://github.com/sassnarep3-star/FL1/pull/30) — session integration (B1–B8) | `d89a9cb` | `cd994ed` | 2026-11-14 22:18:54 | `verify` pass (run 43647366078) | `built` for `cd994ed` (22:19:23) |
+| [#31](https://github.com/sassnarep3-star/FL1/pull/31) — post-merge correction to `model-lines.html` | `25783de` | `32e2bc9` | 2026-11-14 22:22:07 | `verify` pass (run 43647656802) | `built` for `32e2bc9` (22:22:27) |
+
+- **Live check after #31:** `https://sassnarep3-star.github.io/FL1/model-lines.html` shows σ = 13.63 and the pending-game table with 16 cells per row, each value under its own header. The first fetch returned the pre-fix copy, which was CDN caching; a cache-busting query returned the corrected page.
+- **Defect shipped in #30 and corrected in #31:** misaligned table cells and an unformatted σ placeholder on `model-lines.html` (see the post-merge correction record above).
+- **Open items carried forward (not blocking):** F18 no official price source (SG16); F19 correlations withheld (SG19); F20 model does not beat a constant benchmark; F21 Munich home-field assumption; F22 Weeks 1–9 per-game verification (SG18); G-14 thresholds (SG17).
+- **Workflow note:** `refresh.yml` step `build_prop_correlations_d.py` cannot run in the sandbox (workspace-only parquet mirror), and is tolerated by its `|| echo skipped`.
