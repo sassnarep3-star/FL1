@@ -1,67 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sources — FL1</title>
-<link rel="stylesheet" href="assets/site.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-<div class="layout">
-<nav class="side">
-  <div class="brand">FL1</div>
-  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
-  <a class="item" href="index.html">Dashboard</a>
-  <a class="item" href="executive-summary.html">Executive Summary</a>
-  <a class="item" href="questions.html">Decisions &amp; Questions</a>
-  <a class="item" href="suggestions.html">Suggestions</a>
-  <a class="item" href="strategies.html">Strategies &amp; Leaderboard</a>
-  <a class="item" href="injury-report.html">Injury Report</a>
-  <a class="item" href="standings.html">Standings</a>
-  <a class="item" href="lines.html">Lines &amp; Market</a>
-  <a class="item" href="flagged-review.html">Flagged for Review</a>
-  <a class="item active" href="sources.html">Sources</a>
-</nav>
-<main>
-  <h1>Sources</h1>
-  <p class="lead">All data on this site was verified line-by-line against these sources on 2026-11-14. Official sources were preferred; sportsbooks are the only authoritative source for betting lines and were attempted for every line value (none could be verified automatically — see <a href="flagged-review.html">Flagged for Review</a>).</p>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html" class="on">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main" class="wide">
 
-  <h2>Official sources used</h2>
-  <table>
-    <thead><tr><th>Source</th><th>Type</th><th>Used for</th><th>Link</th></tr></thead>
-    <tbody>
-      <tr><td>NFL.com — League standings</td><td>Official league site</td><td>Standings page, PPG/PPA computations</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/reg">nfl.com/standings/league/2026/reg</a></td></tr>
-      <tr><td>NFL.com — Week 10 schedule</td><td>Official league site</td><td>Week 10 slate, times, networks, bye teams</td><td class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10">nfl.com/schedules/2026/by-week/week-10</a></td></tr>
-      <tr><td>NFL.com — Official injury report</td><td>Official league site</td><td>Injury Report page (all Week 10 rows)</td><td class="src"><a href="https://www.nfl.com/injuries/">nfl.com/injuries/</a></td></tr>
-      <tr><td>NFL.com — Game center (WAS at NYG)</td><td>Official league site</td><td>Final score verification, IR-1 irregularity</td><td class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10">Game center</a></td></tr>
-      <tr><td>NFL.com — Team stats hub</td><td>Official league site</td><td>Stats access (referenced; scoring context)</td><td class="src"><a href="https://www.nfl.com/stats/team-stats/">nfl.com/stats/team-stats</a></td></tr>
-      <tr><td>NFL.com — News (injury/availability updates)</td><td>Official league site</td><td>Starter-level deficiency watchlist</td><td class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11">Roundup Nov 11</a> · <a href="https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders">Drew Lock</a> · <a href="https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season">Lamar Jackson</a> · <a href="https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury">Huntley</a> · <a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start">Willis IR</a> · <a href="https://www.nfl.com/news/rams-wr-puka-nacua-likely-to-be-placed-on-injured-reserve-with-turf-toe-sprained-mcl-and-pcl">Nacua IR</a> · <a href="https://www.nfl.com/news/packers-rb-josh-jacobs-to-undergo-surgery-on-finger-this-week">Jacobs surgery</a></td></tr>
-    </tbody>
-  </table>
-
-  <h2>Designated sportsbook sources (line verification — pending manual review)</h2>
-  <table>
-    <thead><tr><th>Source</th><th>Type</th><th>Role</th><th>Link</th></tr></thead>
-    <tbody>
-      <tr><td>DraftKings Sportsbook</td><td>Official sportsbook</td><td>Designated source for spread/total/moneyline + player props (attempted; values not extractable)</td><td class="src"><a href="https://sportsbook.draftkings.com/">sportsbook.draftkings.com</a></td></tr>
-      <tr><td>FanDuel Sportsbook</td><td>Official sportsbook</td><td>Designated source (HTTP 500 on automated fetch)</td><td class="src"><a href="https://sports.fanduel.com/">sports.fanduel.com</a></td></tr>
-      <tr><td>BetMGM Sportsbook</td><td>Official sportsbook</td><td>Designated source for manual verification</td><td class="src"><a href="https://sports.betmgm.com/">sports.betmgm.com</a></td></tr>
-      <tr><td>Caesars Sportsbook</td><td>Official sportsbook</td><td>Designated source for manual verification</td><td class="src"><a href="https://sports.caesars.com/">sports.caesars.com</a></td></tr>
-    </tbody>
-  </table>
-
-  <h2>Verification policy</h2>
-  <div class="panel">
-    <ul class="clean">
-      <li>Every table row on this site carries a link to an official source.</li>
-      <li>If a value cannot be confirmed from an official source, it is left blank and flagged as unverified — never inferred or filled in.</li>
-      <li>Derived values (PPG/PPA) are arithmetic on official PF/PA figures and are labeled as computed.</li>
-      <li>Proposed methodology pages (Strategies, Suggestions) are clearly marked "Proposed — Pending Review."</li>
-    </ul>
-  </div>
-
-  <div class="footer"><a href="index.html">Back to dashboard</a></div>
-</main>
+<section>
+<h1>Sources</h1>
+<p class="lead">Every fact on this site resolves to one of these records. A source marked
+<span class="pill ok">VERIFIED</span> was loaded in this session and its content read.
+A source marked <span class="pill bad">NOT VERIFIED</span> failed to load, and nothing on this site is asserted
+on the strength of it.</p>
+<div class="callout">
+  <p><strong>Why some sources fail.</strong> Three official NFL addresses that are widely cited returned HTTP 404
+  on 2026-11-14, including the injury-report policy PDF. Rather than quote a document we could not open, the policy
+  text is omitted and the gap is listed on <a href="flagged.html">Flagged for Review</a>.</p>
+  <p><strong>Tiers.</strong> <em>Official (league)</em> means published by the NFL. <em>Official (club)</em> means
+  published by a club, which speaks only for that club. <em>Official (government)</em> means a US federal agency.</p>
 </div>
+</section>
+
+<section>
+<h2>Registry</h2>
+<div class="twrap"><p class="caption">Open any URL to review it manually.</p><table class="dense searchable"><thead><tr><th>ID</th><th>Title</th><th>Publisher</th><th>Tier</th><th>URL</th><th>Checked</th><th>Status</th><th>Verification note</th></tr></thead><tbody><tr><td id="S01"><strong>S01</strong></td><td>Official NFL Injury Report — Week 10, 2026 season</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Page loaded successfully. Contains practice report and game status report for all 28 clubs playing in Week 10. Player-level table has columns Player / Position / Injuries / Practice Status / Game Status.</td></tr><tr><td id="S02"><strong>S02</strong></td><td>NFL Division Standings 2026 (regular season)</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded as &quot;2026 NFL Division Standings&quot;. Eight divisions, four clubs each.</td></tr><tr><td id="S03"><strong>S03</strong></td><td>NFL League Standings 2026 (regular season)</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2026/REG</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded as &quot;2026 NFL League Standings&quot;. All 32 clubs with W/L/T/PCT/PF/PA/Net/Home/Road/Div/Conf/Non-Conf/Strk/Last5.</td></tr><tr><td id="S04"><strong>S04</strong></td><td>NFL Schedules 2026 (by week)</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">https://www.nfl.com/schedules/</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. Week 10 game cards with kickoff time and broadcaster. Includes the Munich international game.</td></tr><tr><td id="S05"><strong>S05</strong></td><td>NFL Important Dates (league calendar)</td><td>NFL Football Operations</td><td>Official (league)</td><td><a href="https://operations.nfl.com/calendar-events/nfl-important-dates" target="_blank" rel="noopener">https://operations.nfl.com/calendar-events/nfl-important-dates</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. Lists Nov 15 Munich game and Nov 22 Mexico City game (Vikings vs 49ers at Estadio Banorte), Super Bowl LXI at SoFi Stadium Feb 14 2027.</td></tr><tr><td id="S06"><strong>S06</strong></td><td>NFL Tiebreaking Procedures</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/standings/tie-breaking-procedures" target="_blank" rel="noopener">https://www.nfl.com/standings/tie-breaking-procedures</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. Full 12-step division and wild-card tiebreaker sequences.</td></tr><tr><td id="S07"><strong>S07</strong></td><td>Kansas City Chiefs 2026 Roster</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">https://www.nfl.com/teams/kansas-city-chiefs/roster</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. 3 chunks. Roster rows carry a status code column: ACT / RES / CUT / DEV / PUP / TRD / INA.</td></tr><tr><td id="S08"><strong>S08</strong></td><td>Kansas City Chiefs Unofficial Depth Chart</td><td>Kansas City Chiefs (official club site)</td><td>Official (club)</td><td><a href="https://www.chiefs.com/team/depth-chart" target="_blank" rel="noopener">https://www.chiefs.com/team/depth-chart</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. Page itself is titled &quot;Unofficial Depth Chart&quot; by the club. Ordered Offense / Defense / Special Teams with 1st/2nd/3rd string columns.</td></tr><tr><td id="S09"><strong>S09</strong></td><td>NFL 2026 Team Stats — Offense (passing)</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/stats/team-stats/" target="_blank" rel="noopener">https://www.nfl.com/stats/team-stats/</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded as &quot;2026 Team Stats - Offense / Passing&quot; for all 32 clubs.</td></tr><tr><td id="S10"><strong>S10</strong></td><td>NFL Next Gen Stats</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://nextgenstats.nfl.com/" target="_blank" rel="noopener">https://nextgenstats.nfl.com/</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. Provides tracking-derived metrics (separation, completion probability, fastest ball carriers) at player level.</td></tr><tr><td id="S11"><strong>S11</strong></td><td>National Weather Service — local forecasts</td><td>NOAA / National Weather Service (US Government)</td><td>Official (government)</td><td><a href="https://www.weather.gov/" target="_blank" rel="noopener">https://www.weather.gov/</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. Point forecasts available by city/ZIP; usable for outdoor stadium weather inputs.</td></tr><tr><td id="S12"><strong>S12</strong></td><td>2017 NFL Personnel (Injury) Report Policy (PDF)</td><td>NFL Football Operations</td><td>Official (league)</td><td><a href="https://operations.nfl.com/media/2683/2017-nfl-injury-report-policy.pdf" target="_blank" rel="noopener">https://operations.nfl.com/media/2683/2017-nfl-injury-report-policy.pdf</a></td><td>2026-11-14</td><td><span class="pill bad">NOT VERIFIED</span></td><td>HTTP 404 &quot;FLAG ON THE PLAY&quot; on 2026-11-14. Widely cited by third parties but the document was not retrievable, so no policy text is quoted on this site from it.</td></tr><tr><td id="S13"><strong>S13</strong></td><td>NFL league-wide Depth Charts page</td><td>NFL.com</td><td>Official (league)</td><td><a href="https://www.nfl.com/depth-charts/" target="_blank" rel="noopener">https://www.nfl.com/depth-charts/</a></td><td>2026-11-14</td><td><span class="pill bad">NOT VERIFIED</span></td><td>HTTP 404. No league-wide depth chart exists at this URL.</td></tr><tr><td id="S14"><strong>S14</strong></td><td>NFL Football Operations — Injury Report page</td><td>NFL Football Operations</td><td>Official (league)</td><td><a href="https://operations.nfl.com/health-safety/injury-report/" target="_blank" rel="noopener">https://operations.nfl.com/health-safety/injury-report/</a></td><td>2026-11-14</td><td><span class="pill bad">NOT VERIFIED</span></td><td>HTTP 404. No policy landing page found at this path.</td></tr><tr><td id="S15"><strong>S15</strong></td><td>NFL player profile — Aaron Donald</td><td>NFL.com (National Football League)</td><td>Official (league)</td><td><a href="https://www.nfl.com/players/aaron-donald/" target="_blank" rel="noopener">https://www.nfl.com/players/aaron-donald/</a></td><td>2026-11-14</td><td><span class="pill ok">VERIFIED</span></td><td>Loaded. Profile lists team &quot;Los Angeles Rams&quot;, position &quot;DE&quot;, status &quot;active&quot;, experience 11. Used to cross-check the Rams injury table.</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Verification method</h2>
+<p>Each URL was requested once as a single page load and the returned content inspected. A source counts as
+verified only when the content that supports the claim actually appeared. Two qualified cases are recorded
+honestly rather than glossed over: the club depth chart is verified as reachable but is self-described as
+unofficial, and the weather service is verified as reachable but supplies forecast input rather than a historical
+record.</p>
+</section>
+
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

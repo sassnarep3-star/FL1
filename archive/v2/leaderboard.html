@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy Leaderboard — FL1</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
+    <div class="tagline">Strategy leaderboard competition &mdash; rewards for top performers</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="injuries.html">Injuries</a>
+      <a href="depth-charts.html">Depth &amp; Deficiencies</a>
+      <a href="standings.html">Standings</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="leaderboard.html" class="active">Leaderboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h1>Strategy Leaderboard Competition</h1>
+    <p class="lead">Treat strategy development as a leaderboard competition that rewards top-performing strategies. Strategies are ranked by verified performance, not by volume or luck.</p>
+
+    <h2>Competition design</h2>
+    <div class="callout">
+      <ul style="margin-left:20px; color:var(--muted);">
+        <li><strong>Eligibility:</strong> a strategy must pass all validation gates (see Strategies page) before entering the leaderboard.</li>
+        <li><strong>Scoring metrics:</strong> ROI (return on investment), win rate, edge realized, number of bets, and a Sharpe-like risk-adjusted score (return per unit of variance).</li>
+        <li><strong>Ranking:</strong> primary sort by risk-adjusted score; tie-break by total profit units.</li>
+        <li><strong>Rewards:</strong> top 3 strategies each period receive allocation increase / capital reward and are flagged for live review before any real deployment.</li>
+        <li><strong>Removal:</strong> any strategy that falls below its edge gate or breaches a correlation cap is removed from the leaderboard.</li>
+        <li><strong>No manual input:</strong> leaderboard entries are populated from tracked strategy results, not entered by hand.</li>
+      </ul>
+    </div>
+
+    <h2>Leaderboard (placeholder &mdash; no live strategy results yet)</h2>
+    <div class="callout warn">
+      <h4>Status</h4>
+      <p>No strategy performance data has been collected yet. This page is the framework for the leaderboard. Once strategies are tracked, each row will show: strategy ID, type, ROI, win rate, edge, bets placed, risk-adjusted score, rank, and reward status.</p>
+    </div>
+
+    <table class="sortable">
+      <thead>
+        <tr>
+          <th class="nosort">Rank</th>
+          <th class="nosort">Strategy ID</th>
+          <th class="nosort">Type</th>
+          <th class="nosort">ROI</th>
+          <th class="nosort">Win rate</th>
+          <th class="nosort">Edge realized</th>
+          <th class="nosort">Bets</th>
+          <th class="nosort">Risk-adjusted score</th>
+          <th class="nosort">Reward status</th>
+          <th class="nosort">Source</th>
+          <th class="nosort">Verified</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td class="blank">&mdash;</td><td><span class="badge badge-unverified">Unverified (no data)</span></td></tr>
+      </tbody>
+    </table>
+    <p class="count">Leaderboard table is intentionally blank until verified strategy results exist. Nothing is inferred or filled in.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>FL1 &mdash; Strategy Leaderboard. Framework only; no live results yet.</div>
+    <div>&middot; Rewards go to top performing validated strategies &middot; No manual input</div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

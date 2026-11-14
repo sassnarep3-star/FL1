@@ -1,0 +1,44 @@
+name: verify-research-build
+
+# VERIFY ONLY. This workflow deliberately does NOT deploy.
+# GitHub Pages for this repository is configured to serve from the `main`
+# branch, root path (/), built by the legacy builder. That serves the
+# root-level site owned by the integrating session. This session's build is a
+# self-contained subdirectory at /docs/ and is published by the same Pages
+# source with no workflow required.
+# Adding a deploy-pages job here would repoint the site root and replace
+# another session's work, so it is intentionally absent.
+
+on:
+  push:
+    branches: ["arena/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install deps
+        run: pip install pandas numpy scipy
+      - name: Rebuild every artefact from the pinned inputs
+        run: |
+          python3 scripts/build_availability.py
+          python3 scripts/build_correlations.py
+          python3 scripts/strategy_lab.py
+          python3 scripts/build_week10_board.py
+          python3 scripts/build_registers.py
+          python3 scripts/build_site.py
+      - name: Verify (fails on any unsourced row, broken link or malformed gate)
+        run: python3 scripts/verify_site.py
+      - name: Fail if the rebuild changed a committed artefact
+        run: git diff --exit-code -- data docs || {
+             echo "::error::Rebuild produced different data/docs than what is committed.";
+             echo "Run the scripts locally and commit the result."; exit 1; }

@@ -1,0 +1,8 @@
+leg_a,leg_b,scope,label,note,seasons,n,corr,p_value,ci_low,ci_high,observed_joint,independence_product
+home_cover,over,SAME-GAME,Home ATS cover vs over,"The classic 'good team scores, bad team scores late' mechanic; books shade this in SGP pricing.",2006-2026,5336,-0.0001,0.99664,-0.0282,0.0285,,
+home_cover,home_win,SAME-GAME,Home ATS cover vs home moneyline,Structurally positive: covering a spread almost always means winning unless the spread is tiny.,2006-2026,5336,0.7948,0.0,0.7777,0.8113,,
+home_win,over,SAME-GAME,Home moneyline vs over,Weak positive in theory (favourite scoring drives the total up).,2006-2026,5336,0.0018,0.89619,-0.024,0.0292,,
+away_cover,over,SAME-GAME,Away ATS cover vs over,Complement of the home-cover/over relationship.,2006-2026,5336,0.0017,0.90164,-0.026,0.03,,
+margin,total,SAME-GAME,Continuous: home margin vs game total,Feeds the joint distribution used for correlated SGP pricing.,2006-2026,5336,0.0201,0.14235,,,,
+home_cover(t),home_cover(t+1),ACROSS-GAMES,"Sequential games, home covers",Observed joint rate vs the product of marginal rates. Defines the independence baseline for straight parlays.,2006-2026,5335,-0.003104,,,,0.328772,0.331876
+over(t),over(t+1),ACROSS-GAMES,"Sequential games, over hits",Same test on totals.,2006-2026,5335,-0.00265,,,,0.238988,0.241638
