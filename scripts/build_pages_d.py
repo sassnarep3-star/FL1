@@ -78,7 +78,7 @@ def schedule_page(sources_by_id):
         ])
     ver_rows = []
     for v in ver:
-        status = f'<td>{pill(v[3], "ok" if v[3] == "PASS" else ("bad" if v[3] == "FAIL" else "warn"))}</td>' if v[3] in ("PASS", "FAIL", "FLAGGED") else cell(v[3])
+        status = f'<td>{pill(v[3], "ok" if v[3] == "PASS" else ("bad" if v[3] == "FAIL" else "warn"))}</td>' if v[3] in ("PASS", "FAIL", "FLAGGED", "BLOCKED", "CHECK") else cell(v[3])
         ver_rows.append([cell(v[0]), cell(v[1]), cell(v[2]), status, cell(v[4])])
     body = """
 <section>

@@ -13,6 +13,16 @@
 > **add your tasks to the top board** rather than replacing it.
 
 
+### Current task claim — `arena/725adbd2-fl1` (2026-11-14)
+
+| Task | Status | Owner | File scope | Sources / verification | Irregularities |
+|---|---|---|---|---|---|
+| Make verification results truthful when inputs/dependencies are unavailable; expose blocked prop-correlation rebuild on the review page | done | arena/725adbd2-fl1 | `scripts/verify_d.py`, `scripts/build_schedule_d.py`, `scripts/build_pages_d.py`, `tools/site.py`, `data/verification-d.tsv`, `data/flags.json`, generated `assets/js/data.js`, `schedule.html`, `prop-correlations.html`, `flagged.html`, and `validation.html`, this claim/completion note in `COORDINATION.md` | `scripts/verify_d.py` with workflow-equivalent NumPy/Pandas/SciPy installed in an ignored venv: V6 PASS and V9 BLOCKED; `scripts/verify_site.py` 0 errors/0 warnings; root and docs site verifiers pass; 78 tests pass; internal links and injury/results checks pass | Parquet mirror is not committed and is unavailable in this checkout; V9 correctly remains BLOCKED. V9 now links the actual third-party mirror, not the nflverse games feed. |
+
+**Completion note (2026-11-14):** V6 checks dependencies before attempting a fresh rebuild; V9 separately checks the external parquet input, required libraries, and parquet reader. Missing prerequisites are recorded as `BLOCKED`, never as a false pass/fail. Both status rows render visibly on `schedule.html`; F17 states the reproducibility limitation on `flagged.html`. TSV writers use LF endings for clean diffs. The root generator now also emits the D1–D3 live-to-paper demotion section, preserving the separate gate added on `main`. Verified with `.venv/bin/python -m unittest discover -s tests -q` (78 tests on rebased integration), `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, `python3 tools/checklinks.py`, `python3 tools/verify_injuries.py`, `python3 tools/verify_results.py`, `python3 site/build.py && python3 site/verify.py`, and `.venv/bin/python scripts/verify_site.py` (0 errors/0 warnings).
+
+**Integration record:** PR [#27](https://github.com/sassnarep3-star/FL1/pull/27) merged to `main` at `d495ba844414565f29f2a4d67b4afad3707d5d1e` on 2026-11-14 22:10:36 UTC. Verification workflow [43646645547](https://github.com/sassnarep3-star/FL1/actions/runs/43646645547) passed. GitHub Pages deploy [43646691589](https://github.com/sassnarep3-star/FL1/actions/runs/43646691589) passed; Pages API reports `built` from `main` `/` at https://sassnarep3-star.github.io/FL1/. V9 remains visibly BLOCKED because the uncommitted parquet input is absent; this is an explicit limitation, not a failed site build.
+
 ### Earlier board state, preserved from session C's PR #4
 
 Shared task board for the FL1 (NFL) project. All sessions must read this before starting and keep it up to date.
@@ -215,6 +225,7 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | 2026-11-14 | `ab4e9b05` | **PR #7 merged** as `6ba143f` (review guide, deploy record, option-label tidy). Pages build: **built**. |
 | 2026-11-14 | `ab4e9b05` | Found a second rendering bug by reading the deployed page: `verification.html` printed its own TSV header line as a data row, and two page counts were stale at 13 instead of 14. **PR #8 merged** as `1c6c8ab`; Pages build **built**; live page re-fetched clean. |
 | 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values, 0 estimated values presented as sourced. |
+| 2026-11-14 | `arena/4a9893e6-fl1` | Verified official sources (nfl.com/injuries/, nfl.com/standings/, nfl.com/schedules/2026/REG10/, nfl.com/teams/kansas-city-chiefs/roster) against the live pages; injury spot-checks (8 players) and repo standings.tsv match the live official pages exactly. tools/build.py, verify_injuries.py (345/345) and checklinks.py (16 pages, 0 broken) all PASS. Added the demotion gate (D1-D3) to validation.html, defined but not active pending a benchmark price (flag F08). **PR #24 merged** into `main` as merge commit `f079743`. GitHub Pages build for `f079743`: **built**. Live validation.html re-fetched and confirmed rendering the demotion gate. |
 
 ---
 
@@ -226,6 +237,7 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | PR #5 (escaped-link fix) | **MERGED** into `main` as merge commit `d5e9cc0` |
 | PR #7 (review guide, PR/deploy record, option labels) | **MERGED** into `main` as merge commit `6ba143f` |
 | PR #8 (verification table header fix) | **MERGED** into `main` as merge commit `1c6c8ab` |
+| PR #24 (demotion gate, source verification) | **MERGED** into `main` as merge commit `f079743` |
 | GitHub Pages source | `main`, path `/`, legacy build |
 | Pages build for `eb50220` | **built** |
 | Pages build for `d5e9cc0` | **built** |
@@ -736,6 +748,34 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Measured, from committed in-repo data (labelled third-party, not promoted to the registers):** C-01 rho **+0.00696** [-0.03324, +0.04831], n=6,813; parlay price penalty **-2.07 pp** (joint hit 24.35% vs 26.42% break-even at the legs' own closing prices); SIG-01 refuted (45.8% over 1,302 bets, ROI −11.6%, gate G-2b fails).
 - **Checks to re-run anything:** `python3 -m unittest discover -s tests -q` (75) · `python3 engine/demo_run.py --check` · `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 - **Left for the owner (deliberately undecided):** F-11 — whether third-party-derived values may be published as sourced (promoting C-01's rho is then a one-line change); the licence confirmation for the added MIT LICENSE; and the two-layer structure decision (F-10: `data/specs/` research registers vs `data/*.json` published registers, and `docs/pages/` beside the root site).
+
+## Current Arena session claim — `arena/0669d4cf-fl1` (2026-11-14)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T21 | Add fair-vs-market opening/closing snapshots and a fail-closed verified final-results import interface; complement the raw quote ledger; do not populate unverified facts | done — library only; no records imported | `arena/0669d4cf-fl1` | `engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`, `docs/market-results-store.md`, this claim/verification record only |
+
+Existing price/results datasets remain third-party or capture-specific; this task adds a persistence and provenance boundary, not a claim that those inputs are official NFL data. The existing active claim at T03–T16 is not touched.
+
+### T21 completion / verification record
+
+- `SnapshotStore` requires an opening event, allows one closing event, stores fair value, market value and signed difference separately, verifies the caller-supplied source digest against the exact captured bytes, and keeps numeric fields blank on unverified events. It reports markets without both verified snapshots. This is an analytical paired-value ledger complementing (not replacing) the simpler raw quote-event store `engine/price_snapshots.py`, merged to main in PR #22.
+- `ResultsFeed` accepts only explicit `FINAL` records with an HTTPS `nfl.com` host URL, timestamp and captured bytes whose SHA-256 matches. It is append-only, idempotent for the same game/payload, and retains corrections as new events. It validates provenance shape; it does not fetch pages or independently validate transcription, so callers must check every score against the cited source before setting `verified=True`. Evidence payload archival remains the collector's responsibility.
+- Official-source check: fetched [NFL 2026 Week 10 schedule](https://www.nfl.com/schedules/2026/REG10/) and observed “Commanders 24, Giants 21, FINAL”. This verifies the cited source page and an example official result only; **no result was imported**, and this is not a complete results feed or ROI dataset.
+- Checks: after integrating the concurrent main branch, `python3 -m unittest discover -s tests -q` — 90 tests passed; `python3 tools/verify_results.py` — 137 captured games reconcile to all 32 standings records (excluding Week 10 Thursday gives 2 mismatches); `python3 tools/verify_injuries.py` — 345/345 captured rows match; `python3 tools/checklinks.py` — 16 pages / 0 broken internal links; `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, `python3 site/build.py`, and `python3 site/verify.py` all passed; `git diff --check` clean.
+- Limitation: the new libraries are not yet wired to an automated bookmaker collector or linked into the published site navigation. This requires a selected/licensed quote feed and integration-scope site changes. No unverified prices or unverified results were added.
+- **Concurrent merge reconciliation:** PR #25 initially could not merge because `main` advanced (including PR #22's raw quote ledger and PR #24's demotion gate). Merged that `origin/main` into this branch; the only content conflict was this coordination log and both session records were retained. Before the next push, `git pull --rebase` tried to replay already-merged main history and conflicted in the same log; aborted that rebase, then merged the newer `origin/main` (PR #26) cleanly. README and validation-page additions from main were retained; no other session files were edited or discarded. This branch's fair-value/results extension remains separate by design.
+- **Integration record:** [PR #25](https://github.com/sassnarep3-star/FL1/pull/25) merged on 2026-11-14T22:12:08Z as `3d669fc3a0654d9b28ea1a7430524a111b054d0f`; CI verification run 43646755208 passed. GitHub Pages run 43646837225 succeeded and API reports `status: built`, source `main` `/`. Live spot checks: [dashboard](https://sassnarep3-star.github.io/FL1/) and [validation/demotion gates](https://sassnarep3-star.github.io/FL1/validation.html). A transient earlier Pages build attempt errored during overlapping deploy triggers; the latest build completed successfully. The new SQLite modules are not wired into the public site or an automated quote collector; the site records this as blocked pending a selected/licensed feed.
+---
+
+## Additive follow-up — price snapshot storage
+
+- **Session/branch:** `arena/f1e4deb7-fl1` (active current branch; repository branch is Arena-managed, so no alternate session branch was created).
+- **Scope:** `engine/price_snapshots.py`, `tests/test_price_snapshots.py`, README documentation, this log.
+- **Status:** done; implementation is a local append-only SQLite schema/API, not a populated feed.
+- **Verification:** run `python3 -m unittest discover -s tests -q`, `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, and `python3 site/build.py && python3 site/verify.py`. Tests cover open/close persistence, model-version capture, idempotency, and fail-closed validation of missing source / unsupported market and phase.
+- **Sources / irregularities:** no provider was selected and no quote was inserted. NFL official sources do not publish sportsbook prices; price values stay unverified/blank until an authorized source is acquired. The store requires explicit source URL, source record identifier, phase, timestamp and originating model version, and deliberately performs no inference.
+- **Integration record:** PR https://github.com/sassnarep3-star/FL1/pull/22 merged on 2026-11-14T22:06:18Z. CI run 43646254061 passed; GitHub Pages deployment run 43646303860 passed. Pages source remains `main` / `/`.
 
 ---
 

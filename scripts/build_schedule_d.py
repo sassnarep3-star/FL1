@@ -210,7 +210,7 @@ def main():
             ])
 
     with open(OUT_VER, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh, delimiter="\t")
+        w = csv.writer(fh, delimiter="\t", lineterminator="\n")
         w.writerow(["check", "description", "result", "status", "source", "notes"])
         w.writerows(ver_rows)
 

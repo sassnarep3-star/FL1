@@ -120,6 +120,10 @@ activity in any jurisdiction. No regulator or tax source was verified.
 
 ---
 
+## Price-snapshot store (2026-11-14)
+
+`engine/price_snapshots.py` provides an append-only SQLite store for point-in-time quotes attached to an originated model version. It records explicit `open`, `close`, or `intermediate` phase, market/side/line/odds, UTC capture time, source URL and vendor record ID; duplicate deliveries are idempotent. The store does not fetch quotes or manufacture missing values. Use only a licensed feed and preserve its terms. The repository contains no verified official NFL betting-price feed; therefore this is an implementation capability, not evidence that price history is currently populated. Run `python3 -m unittest tests.test_price_snapshots -v` for its checks.
+
 ## Session E additions (2026-11-14) — registers, engine, and a measured result
 
 Branch `arena/c80caab4-fl1`, integrated into the published site rather than replacing it. Everything here is
