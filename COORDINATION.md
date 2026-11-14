@@ -746,3 +746,27 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Status:** done; implementation is a local append-only SQLite schema/API, not a populated feed.
 - **Verification:** run `python3 -m unittest discover -s tests -q`, `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, and `python3 site/build.py && python3 site/verify.py`. Tests cover open/close persistence, model-version capture, idempotency, and fail-closed validation of missing source / unsupported market and phase.
 - **Sources / irregularities:** no provider was selected and no quote was inserted. NFL official sources do not publish sportsbook prices; price values stay unverified/blank until an authorized source is acquired. The store requires explicit source URL, source record identifier, phase, timestamp and originating model version, and deliberately performs no inference.
+
+---
+
+## Session `arena/2fa09442-fl1` — task claims (2026-11-14)
+
+**Session ID:** `arena-2fa09442-fl1` · **Branch:** `arena/2fa09442-fl1` (from `main` @ `9d7ca328`, fast-forwarded to `82555e0`) · **Status:** active
+**Protocol:** Arena single-branch policy → file-scope isolation, as in earlier sessions. Claim written and pushed before any task work began.
+
+**Pre-claim sweep (all refs fetched, open PRs checked):** active concurrent claims read first —
+`arena/0669d4cf-fl1` T21 (`engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`);
+`arena/685f958d-fl1` B1–B8 (price-snapshot store, verified results feed, origination order + fair/market/difference columns, leaderboard signal-vs-staking split, demotion gate G-14, official-only correlations, verifier, integration incl. `tools/site.py` NAV + page calls + `README.md`);
+`arena/725adbd2-fl1` V9 verifier availability (`scripts/verify_d.py`, `data/verification-d.tsv`);
+`arena/f1e4deb7-fl1` price-snapshot store — **merged as PR #22**. The bolded brief items those sessions cover are deliberately NOT claimed here.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| D1 | **Replacement-depth tracking** — the one bolded brief item ("track the depth of the replacement, not just the fact of a replacement") with no claim on the board: measure how deep each club's own published chart must be read to reach the first player the league has **not** ruled Out (stacked rule-outs included), per slot, Offense/Defense split, league depth distribution; published on `depth.html` with per-row source links; blank + reason where the chart cannot resolve it | in progress | `arena-2fa09442-fl1` | `tools/build.py` (new analysis function only), `tools/site.py` (depth page body region only), `depth.html` (generated), `tools/verify_replacement.py` (new), `data/verification-replacement.tsv` (new) |
+| D2 | Line-by-line verification of this session's output; PR → `main`; merge; GitHub Pages deploy confirmation; record here | in progress | `arena-2fa09442-fl1` | PR + this file (append only) |
+
+**Co-ownership note (logged, not edited):** `tools/site.py` is claimed by `arena/685f958d-fl1` for "NAV + page calls only". D1 edits only the depth-page body region (the `depth_html` template and its row builders) and adds no NAV entry. If a merge conflict occurs, both regions are preserved.
+
+**Why D1 was free:** `COORDINATION.md` contains no prior claim mentioning replacement depth; `data/requirements.json` R19 (2nd/3rd/4th-string deficiency) is still `partial`. Existing `nextUp` in `tools/build.py` reports the *next listed* player without skipping strings that are also ruled Out — i.e. it records the fact of a replacement but not its depth. D1 fixes exactly that gap.
+
+**Requests to the integration session (logged per rules, not edited here):** when D1 is verified, R19 in `data/requirements.json` can move `partial → done`; the dashboard/executive-summary wording can cite the new depth-distribution section on `depth.html`.
