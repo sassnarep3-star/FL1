@@ -473,6 +473,9 @@ for that field — they are not blank because a value was unknown to us.</p>
     # injury report.
     cov = depth_cov
     tot = depth_tot
+    injured_clubs = {r["team"] for r in injuries}
+    bye_clubs = ", ".join(team_name[t["abbr"]] for t in teams
+                          if t["abbr"] not in injured_clubs) or ""
 
     cov_rows = []
     for c in depth_league["clubs"]:
@@ -593,7 +596,7 @@ halves, and only one of them can be answered from official sources today. This p
 
 <section>
 <h2>Depth coverage by club</h2>
-<p>One row per club whose chart was captured. <em>Players charted</em> counts names the club published.
+<p>One row per club whose chart was captured. %(bye_note)s <em>Players charted</em> counts names the club published.
 <em>On own injury report</em> counts how many of those names also appear on that same club&rsquo;s Week 10 injury
 report, matched by exact name — no fuzzy matching, so a spelling difference shows up as a non-match rather than
 as a wrong merge. <em>Blank slots</em> are slots where the club published a string with no name in it.</p>
@@ -664,6 +667,10 @@ source publishes that ordering.</li>
         "kcmatched": len([r for r in depth_rows if r["matched"]]),
         "kctotal": len(depth_rows),
         "kcflag": len(flagged_depth),
+        "bye_note": ("<strong>%s do not play in Week 10</strong>, so they have no Week 10 injury "
+                     "report and their injury columns read 0. That is the league publishing nothing, "
+                     "not this page failing to find anything." % bye_clubs)
+                    if bye_clubs else "",
         "cov_table": table(
             ["Club", "Team", "Chart source", "Chart date", "Published slots",
              "Players charted", "On own injury report", "With a game status", "Blank slots"],
