@@ -346,3 +346,31 @@ Status values: `unclaimed` · `in progress` · `done` · `needs review` · `bloc
   Houston is **not** included — its club page renders the depth chart as an image, so there is
   nothing machine-readable to transcribe without inferring. Flagged, not filled in.
 
+### Session `arena/3f677e8a-fl1` — completion record
+
+- **Merge into main:** https://github.com/sassnarep3-star/FL1/pull/6
+- **What this session added on top of main (PRs #1–#5):**
+  - `data/depth.tsv`, `data/depth-sources.tsv`, `tools/normalize_depth.py` — depth charts for
+    30 clubs, folded in with the existing Kansas City chart for **31 of 32 clubs covered**.
+  - `data/results.tsv`, `tools/verify_results.py` — 137 game results, proven against the
+    published standings.
+  - `data/sources.tsv` S16–S46 (30 club depth-chart pages plus Houston's image-only page).
+  - `data/flags.json` F16 (Houston chart not machine-readable).
+  - `data/verification.tsv` — 5 new checks, including two independent cross-transcriptions.
+  - Depth page rebuilt league-wide; standings page gains scoring rates and full game log.
+- **Sources verified (loaded and read, 2026-11-14):** 30 `<club>.com/team/depth-chart` pages,
+  `nfl.com/schedules/2026/by-week/week-1..10`, `nfl.com/standings/`, `nfl.com/injuries/`.
+- **Verification performed:**
+  - 137 games summed → matches the official standings for all 32 clubs, 0 mismatches.
+  - Standings: 352 field comparisons against an independently captured table, 0 differences.
+  - Injuries: 345 rows, two independent transcriptions of the same page, identical content
+    (2 Houston rows in a different order; 2 cosmetic vocabulary differences).
+  - Club membership: 0 players charted by a club other than the one on whose injury report
+    they appear.
+- **Irregularity withdrawn, not published:** before the club charts were captured, several
+  injury-report names looked like they belonged to other clubs. With the charts in hand the
+  check above returns zero conflicts, so the suspicion was **not supported by the official
+  documents and is withdrawn**. It is deliberately *not* listed on Flagged for Review.
+- **Still open / flagged:** Houston depth chart (F16, image-only); no official snap counts
+  (F09); no market price source; single-season snapshot.
+
