@@ -210,8 +210,35 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | 2026-11-14 | `ab4e9b05` | Cross-checked session C's 161-row injury CSV against this repo's 345-row capture: 161/161 rows present in both, 156 identical, 5 differ only where a comma inside `Ankle, Knee`-style values shifted their CSV columns. Recorded as flag F15. |
 | 2026-11-14 | `ab4e9b05` | Re-verified on the final merged tree: `verify_injuries.py` 345/345 PASS, `checklinks.py` 14 pages PASS, `build.py` clean. |
 | 2026-11-14 | `ab4e9b05` | **R3:** `main` moved again to `557ffc3` via session C's PR #4 (documentation only). Merged; single conflict in `COORDINATION.md`, resolved by keeping this board on top and preserving session C's board and integration-completion record verbatim below. No files discarded. |
+| 2026-11-14 | `ab4e9b05` | **PR #3 merged** as `eb50220` (merge commit, 2026-11-14T03:05:45Z). GitHub Pages build for `eb50220`: **built**. Live site verified. |
+| 2026-11-14 | `ab4e9b05` | Found a rendering bug by reading the live page: the dashboard's Source column printed literal `<a class=...>` text, because `src_link()` markup was passed through `cell()` which escapes it. Fixed via `raw_src()`; added an escaped-markup guard to `checklinks.py` and proved the guard fires by injecting the bug. |
+| 2026-11-14 | `ab4e9b05` | **PR #5 merged** as `d5e9cc0`. Pages build for `d5e9cc0`: **built**. Live `index.html` re-fetched and confirmed rendering real links. |
+| 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values. |
 
 ---
+
+## PR and deploy record
+
+| Item | Result |
+|---|---|
+| PR #3 (this session's main deliverable) | **MERGED** into `main` as merge commit `eb50220` at 2026-11-14T03:05:45Z |
+| PR #5 (escaped-link fix) | **MERGED** into `main` as merge commit `d5e9cc0` |
+| GitHub Pages source | `main`, path `/`, legacy build |
+| Pages build for `eb50220` | **built** |
+| Pages build for `d5e9cc0` | **built** |
+| Live URL | https://sassnarep3-star.github.io/FL1/ |
+| Live verification | `index.html`, `injuries.html`, `flagged.html`, `suggestions.html` fetched from the live host and read; all render correctly |
+| Branches merged before this one | PR #1 (`7c7ae6a`), PR #2 (`42b06f5`), PR #4 (`557ffc3`) — all preserved in `archive/` |
+
+## Verification performed on the merged `main` tree
+
+| Check | Result |
+|---|---|
+| `tools/verify_injuries.py` | PASS — 345 of 345 rows match the raw capture, same order, field for field |
+| `tools/checklinks.py` | PASS — 14 pages, every internal link and anchor resolves, every page reachable, all source IDs registered, 0 escaped fragments |
+| `tools/build.py` | PASS — 32 teams, 32 standings rows, 345 injury rows, 15 sources (12 verified), 60 depth slots, 20 questions, 15 suggestions, 20 requirements, 6 strategies, 15 flags |
+| Independent cross-transcription | 156 of 161 shared rows identical to another session's capture; the 5 differences are that CSV's comma-shift bug, not a data dispute |
+| Live deploy | Pages build `built` for the merge commit; pages re-fetched and rendered correctly |
 
 ## Requests
 
