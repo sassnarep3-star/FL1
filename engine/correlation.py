@@ -174,11 +174,19 @@ def implied_rho_from_market(p_a: float, p_b: float, american_combined: float,
     # A price's break-even probability overstates the true probability by exactly the
     # margin the book keeps, so the margin is divided out (never multiplied).
     p_joint_market = (1.0 / dec) / (1.0 + hold_assumption)
+    # An unclipped inversion can land outside the Frechet bounds, which happens routinely
+    # because a book's combined margin is allocated arbitrarily across legs. Clip and
+    # report the clip; do not pretend the inversion produced a feasible correlation.
+    lo, hi = max(0.0, p_a + p_b - 1.0), min(p_a, p_b)
+    clipped = not (lo - 1e-12 <= p_joint_market <= hi + 1e-12)
+    p_joint_market = min(hi, max(lo, p_joint_market))
     naive = p_a * p_b
     try:
         rho = rho_from_joint(p_a, p_b, p_joint_market)
     except ValueError:
         rho = None
     return {"p_joint_implied": p_joint_market, "p_joint_naive": naive,
-            "implied_rho": rho,
-            "caveat": "single-number inversion; the operator's margin is not observable per-market and may be allocated arbitrarily across legs"}
+            "implied_rho": rho, "clipped_to_feasible_bounds": clipped,
+            "caveat": "single-number inversion; the operator's combined margin is not observable "
+                      "per-market and may be allocated arbitrarily across legs, which is exactly "
+                      "why an inversion like this can be infeasible"}

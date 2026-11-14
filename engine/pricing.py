@@ -10,7 +10,7 @@ documented as a default and is overridable by configuration.
 from __future__ import annotations
 
 import math
-from typing import Iterable, Sequence
+from typing import Sequence
 
 # ---------------------------------------------------------------------------
 # price conversions
@@ -52,20 +52,38 @@ def implied_probability(american: float) -> float:
 def break_even_probability(american: float) -> float:
     """Hit rate required to be flat at this price.
 
-    -110 -> 110 / 210 = 0.52381 (the figure the academic literature uses as the
-    standard hurdle, and the one our G-2 gate compares against). +150 -> 1.5/2.5 =
-    0.6, which is why 'we hit 55% on longshots' can still be a losing book.
+    -110 -> 110 / 210 = 0.52381, the hurdle the academic literature uses and the one
+    our G-2 gate compares against. It is `1 / decimal price`, nothing more.
+
+    Direction matters and is easy to state backwards: a longshot needs a *lower* hit
+    rate (+150 -> 1/2.5 = 40%) and a heavy favourite needs a higher one (-200 ->
+    1/1.5 = 66.7%). "We hit 55% on +150 teams" is therefore a profitable sentence,
+    while "we hit 55% on -200 teams" is a losing one -- the same 55%.
     """
     m = net_odds(american)
     return 1.0 / (1.0 + m)
 
 
 def two_way_margin(american_a: float, american_b: float) -> float:
-    """Overround (the theoretical hold) of a two-sided market, as a fraction.
+    """Overround of a two-sided market: total implied probability minus one.
 
-    Both sides at -110 -> 1/1.90909*2 - 1 = 0.04545, the familiar 4.55%.
+    Both sides at -110 -> 2 * 0.52381 - 1 = 0.047619 (4.76 points of overround).
+    This is NOT the hold on turnover; see `hold_on_handle` for that figure. Conflating
+    the two is a recurring error in this literature, and it silently understates the
+    hurdle on every parlays-vs-singles comparison.
     """
     return implied_probability(american_a) + implied_probability(american_b) - 1.0
+
+
+def hold_on_handle(american_a: float, american_b: float) -> float:
+    """Theoretical hold as a fraction of turnover: overround / (1 + overround).
+
+    -110 both sides -> 0.047619 / 1.047619 = 0.045455, the familiar 4.55%. This is the
+    number a regulator's 'win percent' is comparable to, so it is what the hold gate
+    (G-7) uses.
+    """
+    o = two_way_margin(american_a, american_b)
+    return o / (1.0 + o)
 
 
 def devig_two_way(american_a: float, american_b: float) -> tuple[float, float]:

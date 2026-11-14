@@ -1,0 +1,1167 @@
+{
+  "id": "demo_results",
+  "generated_by": "engine/demo_run.py",
+  "warning": "SYNTHETIC STRATEGY LOGS. The bet logs below are constructed to have an exact hit rate so the evaluator can be checked by hand. No figure derived from them is a backtest result, and none may be quoted as evidence that a strategy works. The only real data in this file is the injury-report capture in section 6, which is itself explicitly partial.",
+  "updated": "2026-11-14",
+  "arithmetic": {
+    "break_even_minus110": 0.5238095238095238,
+    "break_even_formula": "risk / (risk + payout) = 110 / 210",
+    "two_way_margin_minus110_both_sides": 0.04761904761904767,
+    "kelly_full_at_55pct": 0.05500000000000004,
+    "kelly_quarter_at_55pct": 0.01375000000000001,
+    "parlay_break_even_2_legs": 0.27437641723356004,
+    "parlay_break_even_3_legs": 0.1437209804556743,
+    "sample_for_55pct": 2243,
+    "sample_for_57pct": 719,
+    "sample_for_60pct": 263
+  },
+  "detectable_edge_curve": [
+    {
+      "bets": 100,
+      "min_provable_hit_rate": 0.6462,
+      "min_edge_pp": 12.239,
+      "seasons_at_this_volume": 1.0
+    },
+    {
+      "bets": 200,
+      "min_provable_hit_rate": 0.61091,
+      "min_edge_pp": 8.71,
+      "seasons_at_this_volume": 1.0
+    },
+    {
+      "bets": 400,
+      "min_provable_hit_rate": 0.58561,
+      "min_edge_pp": 6.18,
+      "seasons_at_this_volume": 1.0
+    },
+    {
+      "bets": 800,
+      "min_provable_hit_rate": 0.5676,
+      "min_edge_pp": 4.379,
+      "seasons_at_this_volume": 1.0
+    },
+    {
+      "bets": 1600,
+      "min_provable_hit_rate": 0.5548,
+      "min_edge_pp": 3.099,
+      "seasons_at_this_volume": 1.0
+    },
+    {
+      "bets": 3200,
+      "min_provable_hit_rate": 0.54574,
+      "min_edge_pp": 2.193,
+      "seasons_at_this_volume": 1.0
+    }
+  ],
+  "gate_tables": {
+    "DEMO-A": {
+      "summary": {
+        "bets_settled": 180,
+        "bets_won": 103,
+        "hit_rate": 0.5722222222222222,
+        "abstentions": 0,
+        "abstain_rate": 0.0,
+        "pnl_units": 16.6364,
+        "staked_units": 180.0
+      },
+      "gates": [
+        {
+          "gate": "G-1",
+          "name": "Sample sufficiency",
+          "value": 180.0,
+          "threshold": "n >= 300 and seasons >= 3",
+          "verdict": "FAIL",
+          "note": "z vs break-even = 1.30; n=180 settled bets"
+        },
+        {
+          "gate": "G-2",
+          "name": "Break-even hurdle",
+          "value": 0.57222,
+          "threshold": "hit rate > 0.52381 at the price paid",
+          "verdict": "PASS",
+          "note": "modal price 0.52381 break-even; observed 0.57222"
+        },
+        {
+          "gate": "G-2b",
+          "name": "Hurdle exceeded beyond noise",
+          "value": 0.09671,
+          "threshold": "one-sided p < 0.05 vs break-even",
+          "verdict": "FAIL",
+          "note": "the profit is not explainable as a lucky run at this sample size"
+        },
+        {
+          "gate": "G-3",
+          "name": "Closing-line value",
+          "value": "",
+          "threshold": "median CLV > 0 with bootstrap LCB > 0",
+          "verdict": "BLOCKED",
+          "note": "no closing-line data (GAP-01). Until this is BLOCKED, no strategy may be promoted, whatever its record."
+        },
+        {
+          "gate": "G-4",
+          "name": "Edge threshold / selectivity",
+          "value": 0.03,
+          "threshold": "mean modelled EV >= hurdle + 0.02",
+          "verdict": "PASS",
+          "note": "0.0% of bets taken below the configured threshold; abstain rate 0.0"
+        },
+        {
+          "gate": "G-5",
+          "name": "Multiple-comparison control",
+          "value": 1.0,
+          "threshold": "single candidate: correction not binding",
+          "verdict": "PASS",
+          "note": "declare `trials` honestly: understating it is the one input that makes every other gate look better"
+        },
+        {
+          "gate": "G-6",
+          "name": "Overfitting deflator",
+          "value": "",
+          "threshold": "requires per-period returns and the trial dispersion",
+          "verdict": "BLOCKED",
+          "note": "no default dispersion is supplied on purpose: DSR with an invented trial count is decoration"
+        },
+        {
+          "gate": "G-7",
+          "name": "Hold realism",
+          "value": "",
+          "threshold": "recompute at measured hold by family",
+          "verdict": "BLOCKED",
+          "note": "regulator files not parsed (GAP-08); assumption remains the theoretical -110 margin, which flatters parlays"
+        },
+        {
+          "gate": "G-8",
+          "name": "Concentration and regime stability",
+          "value": 0.25243,
+          "threshold": "max season share <= 45% and max team share <= 25%",
+          "verdict": "PASS",
+          "note": "largest season 25.2% of gains, largest team 3.9%"
+        },
+        {
+          "gate": "G-9",
+          "name": "Walk-forward only",
+          "value": 1.0,
+          "threshold": "100% out-of-sample by construction",
+          "verdict": "PASS",
+          "note": "any in-sample row in the score disqualifies the score, not the row"
+        },
+        {
+          "gate": "G-10",
+          "name": "Cost and execution realism",
+          "value": 180.0,
+          "threshold": "stakes within limits; no promo credit counted as edge",
+          "verdict": "PASS",
+          "note": "void/reprice handling must follow the filed house rule version"
+        },
+        {
+          "gate": "G-11",
+          "name": "Decay monitoring",
+          "value": "",
+          "threshold": "needs 250 bets with CLV",
+          "verdict": "BLOCKED",
+          "note": "not enough settled, priced bets to judge decay yet"
+        },
+        {
+          "gate": "G-12",
+          "name": "Compliance gate",
+          "value": "",
+          "threshold": "delegated to engine.compliance at bet emission",
+          "verdict": "PASS",
+          "note": "this gate is enforced upstream: a prohibited market never reaches the log, so a clean log here is a necessary but not sufficient claim"
+        },
+        {
+          "gate": "G-13",
+          "name": "Deduplication of entries",
+          "value": "",
+          "threshold": "Jaccard <= 0.8 across a single author's entries",
+          "verdict": "BLOCKED",
+          "note": "resolved at leaderboard scoring, which sees all entries"
+        }
+      ]
+    },
+    "DEMO-B": {
+      "summary": {
+        "bets_settled": 1400,
+        "bets_won": 756,
+        "hit_rate": 0.54,
+        "abstentions": 0,
+        "abstain_rate": 0.0,
+        "pnl_units": 43.2727,
+        "staked_units": 1400.0
+      },
+      "gates": [
+        {
+          "gate": "G-1",
+          "name": "Sample sufficiency",
+          "value": 1400.0,
+          "threshold": "n >= 300 and seasons >= 3",
+          "verdict": "PASS",
+          "note": "z vs break-even = 1.21; n=1400 settled bets"
+        },
+        {
+          "gate": "G-2",
+          "name": "Break-even hurdle",
+          "value": 0.54,
+          "threshold": "hit rate > 0.52381 at the price paid",
+          "verdict": "PASS",
+          "note": "modal price 0.52381 break-even; observed 0.54000"
+        },
+        {
+          "gate": "G-2b",
+          "name": "Hurdle exceeded beyond noise",
+          "value": 0.11257,
+          "threshold": "one-sided p < 0.05 vs break-even",
+          "verdict": "FAIL",
+          "note": "the profit is not explainable as a lucky run at this sample size"
+        },
+        {
+          "gate": "G-3",
+          "name": "Closing-line value",
+          "value": 0.004,
+          "threshold": "bootstrap LCB > 0 (observed [0.0040, 0.0040])",
+          "verdict": "PASS",
+          "note": "beating the close is the closest available proxy for being right"
+        },
+        {
+          "gate": "G-4",
+          "name": "Edge threshold / selectivity",
+          "value": 0.03,
+          "threshold": "mean modelled EV >= hurdle + 0.02",
+          "verdict": "PASS",
+          "note": "0.0% of bets taken below the configured threshold; abstain rate 0.0"
+        },
+        {
+          "gate": "G-5",
+          "name": "Multiple-comparison control",
+          "value": 1.0,
+          "threshold": "single candidate: correction not binding",
+          "verdict": "PASS",
+          "note": "declare `trials` honestly: understating it is the one input that makes every other gate look better"
+        },
+        {
+          "gate": "G-6",
+          "name": "Overfitting deflator",
+          "value": "",
+          "threshold": "requires per-period returns and the trial dispersion",
+          "verdict": "BLOCKED",
+          "note": "no default dispersion is supplied on purpose: DSR with an invented trial count is decoration"
+        },
+        {
+          "gate": "G-7",
+          "name": "Hold realism",
+          "value": "",
+          "threshold": "recompute at measured hold by family",
+          "verdict": "BLOCKED",
+          "note": "regulator files not parsed (GAP-08); assumption remains the theoretical -110 margin, which flatters parlays"
+        },
+        {
+          "gate": "G-8",
+          "name": "Concentration and regime stability",
+          "value": 0.25926,
+          "threshold": "max season share <= 45% and max team share <= 25%",
+          "verdict": "PASS",
+          "note": "largest season 25.9% of gains, largest team 3.4%"
+        },
+        {
+          "gate": "G-9",
+          "name": "Walk-forward only",
+          "value": 1.0,
+          "threshold": "100% out-of-sample by construction",
+          "verdict": "PASS",
+          "note": "any in-sample row in the score disqualifies the score, not the row"
+        },
+        {
+          "gate": "G-10",
+          "name": "Cost and execution realism",
+          "value": 1400.0,
+          "threshold": "stakes within limits; no promo credit counted as edge",
+          "verdict": "PASS",
+          "note": "void/reprice handling must follow the filed house rule version"
+        },
+        {
+          "gate": "G-11",
+          "name": "Decay monitoring",
+          "value": 0.004,
+          "threshold": "rolling CLV LCB > 0",
+          "verdict": "PASS",
+          "note": "last 250 bets; auto-demote on a negative bound"
+        },
+        {
+          "gate": "G-12",
+          "name": "Compliance gate",
+          "value": "",
+          "threshold": "delegated to engine.compliance at bet emission",
+          "verdict": "PASS",
+          "note": "this gate is enforced upstream: a prohibited market never reaches the log, so a clean log here is a necessary but not sufficient claim"
+        },
+        {
+          "gate": "G-13",
+          "name": "Deduplication of entries",
+          "value": "",
+          "threshold": "Jaccard <= 0.8 across a single author's entries",
+          "verdict": "BLOCKED",
+          "note": "resolved at leaderboard scoring, which sees all entries"
+        }
+      ]
+    },
+    "DEMO-C": {
+      "summary": {
+        "bets_settled": 60,
+        "bets_won": 37,
+        "hit_rate": 0.6166666666666667,
+        "abstentions": 0,
+        "abstain_rate": 0.0,
+        "pnl_units": 10.6364,
+        "staked_units": 60.0
+      },
+      "gates": [
+        {
+          "gate": "G-1",
+          "name": "Sample sufficiency",
+          "value": 60.0,
+          "threshold": "n >= 300 and seasons >= 3",
+          "verdict": "FAIL",
+          "note": "z vs break-even = 1.44; n=60 settled bets"
+        },
+        {
+          "gate": "G-2",
+          "name": "Break-even hurdle",
+          "value": 0.61667,
+          "threshold": "hit rate > 0.52381 at the price paid",
+          "verdict": "PASS",
+          "note": "modal price 0.52381 break-even; observed 0.61667"
+        },
+        {
+          "gate": "G-2b",
+          "name": "Hurdle exceeded beyond noise",
+          "value": 0.07491,
+          "threshold": "one-sided p < 0.05 vs break-even",
+          "verdict": "FAIL",
+          "note": "the profit is not explainable as a lucky run at this sample size"
+        },
+        {
+          "gate": "G-3",
+          "name": "Closing-line value",
+          "value": "",
+          "threshold": "median CLV > 0 with bootstrap LCB > 0",
+          "verdict": "BLOCKED",
+          "note": "no closing-line data (GAP-01). Until this is BLOCKED, no strategy may be promoted, whatever its record."
+        },
+        {
+          "gate": "G-4",
+          "name": "Edge threshold / selectivity",
+          "value": 0.03,
+          "threshold": "mean modelled EV >= hurdle + 0.02",
+          "verdict": "PASS",
+          "note": "0.0% of bets taken below the configured threshold; abstain rate 0.0"
+        },
+        {
+          "gate": "G-5",
+          "name": "Multiple-comparison control",
+          "value": 1.0,
+          "threshold": "single candidate: correction not binding",
+          "verdict": "PASS",
+          "note": "declare `trials` honestly: understating it is the one input that makes every other gate look better"
+        },
+        {
+          "gate": "G-6",
+          "name": "Overfitting deflator",
+          "value": "",
+          "threshold": "requires per-period returns and the trial dispersion",
+          "verdict": "BLOCKED",
+          "note": "no default dispersion is supplied on purpose: DSR with an invented trial count is decoration"
+        },
+        {
+          "gate": "G-7",
+          "name": "Hold realism",
+          "value": "",
+          "threshold": "recompute at measured hold by family",
+          "verdict": "BLOCKED",
+          "note": "regulator files not parsed (GAP-08); assumption remains the theoretical -110 margin, which flatters parlays"
+        },
+        {
+          "gate": "G-8",
+          "name": "Concentration and regime stability",
+          "value": 0.27027,
+          "threshold": "max season share <= 45% and max team share <= 25%",
+          "verdict": "PASS",
+          "note": "largest season 27.0% of gains, largest team 5.4%"
+        },
+        {
+          "gate": "G-9",
+          "name": "Walk-forward only",
+          "value": 1.0,
+          "threshold": "100% out-of-sample by construction",
+          "verdict": "PASS",
+          "note": "any in-sample row in the score disqualifies the score, not the row"
+        },
+        {
+          "gate": "G-10",
+          "name": "Cost and execution realism",
+          "value": 60.0,
+          "threshold": "stakes within limits; no promo credit counted as edge",
+          "verdict": "PASS",
+          "note": "void/reprice handling must follow the filed house rule version"
+        },
+        {
+          "gate": "G-11",
+          "name": "Decay monitoring",
+          "value": "",
+          "threshold": "needs 250 bets with CLV",
+          "verdict": "BLOCKED",
+          "note": "not enough settled, priced bets to judge decay yet"
+        },
+        {
+          "gate": "G-12",
+          "name": "Compliance gate",
+          "value": "",
+          "threshold": "delegated to engine.compliance at bet emission",
+          "verdict": "PASS",
+          "note": "this gate is enforced upstream: a prohibited market never reaches the log, so a clean log here is a necessary but not sufficient claim"
+        },
+        {
+          "gate": "G-13",
+          "name": "Deduplication of entries",
+          "value": "",
+          "threshold": "Jaccard <= 0.8 across a single author's entries",
+          "verdict": "BLOCKED",
+          "note": "resolved at leaderboard scoring, which sees all entries"
+        }
+      ]
+    },
+    "DEMO-D": {
+      "summary": {
+        "bets_settled": 700,
+        "bets_won": 392,
+        "hit_rate": 0.56,
+        "abstentions": 0,
+        "abstain_rate": 0.0,
+        "pnl_units": 48.3636,
+        "staked_units": 700.0
+      },
+      "gates": [
+        {
+          "gate": "G-1",
+          "name": "Sample sufficiency",
+          "value": 700.0,
+          "threshold": "n >= 300 and seasons >= 3",
+          "verdict": "PASS",
+          "note": "z vs break-even = 1.92; n=700 settled bets"
+        },
+        {
+          "gate": "G-2",
+          "name": "Break-even hurdle",
+          "value": 0.56,
+          "threshold": "hit rate > 0.52381 at the price paid",
+          "verdict": "PASS",
+          "note": "modal price 0.52381 break-even; observed 0.56000"
+        },
+        {
+          "gate": "G-2b",
+          "name": "Hurdle exceeded beyond noise",
+          "value": 0.02761,
+          "threshold": "one-sided p < 0.05 vs break-even",
+          "verdict": "PASS",
+          "note": "the profit is not explainable as a lucky run at this sample size"
+        },
+        {
+          "gate": "G-3",
+          "name": "Closing-line value",
+          "value": "",
+          "threshold": "median CLV > 0 with bootstrap LCB > 0",
+          "verdict": "BLOCKED",
+          "note": "no closing-line data (GAP-01). Until this is BLOCKED, no strategy may be promoted, whatever its record."
+        },
+        {
+          "gate": "G-4",
+          "name": "Edge threshold / selectivity",
+          "value": 0.03,
+          "threshold": "mean modelled EV >= hurdle + 0.02",
+          "verdict": "PASS",
+          "note": "0.0% of bets taken below the configured threshold; abstain rate 0.0"
+        },
+        {
+          "gate": "G-5",
+          "name": "Multiple-comparison control",
+          "value": 1.0,
+          "threshold": "single candidate: correction not binding",
+          "verdict": "PASS",
+          "note": "declare `trials` honestly: understating it is the one input that makes every other gate look better"
+        },
+        {
+          "gate": "G-6",
+          "name": "Overfitting deflator",
+          "value": "",
+          "threshold": "requires per-period returns and the trial dispersion",
+          "verdict": "BLOCKED",
+          "note": "no default dispersion is supplied on purpose: DSR with an invented trial count is decoration"
+        },
+        {
+          "gate": "G-7",
+          "name": "Hold realism",
+          "value": "",
+          "threshold": "recompute at measured hold by family",
+          "verdict": "BLOCKED",
+          "note": "regulator files not parsed (GAP-08); assumption remains the theoretical -110 margin, which flatters parlays"
+        },
+        {
+          "gate": "G-8",
+          "name": "Concentration and regime stability",
+          "value": 0.25,
+          "threshold": "max season share <= 45% and max team share <= 25%",
+          "verdict": "PASS",
+          "note": "largest season 25.0% of gains, largest team 3.6%"
+        },
+        {
+          "gate": "G-9",
+          "name": "Walk-forward only",
+          "value": 1.0,
+          "threshold": "100% out-of-sample by construction",
+          "verdict": "PASS",
+          "note": "any in-sample row in the score disqualifies the score, not the row"
+        },
+        {
+          "gate": "G-10",
+          "name": "Cost and execution realism",
+          "value": 700.0,
+          "threshold": "stakes within limits; no promo credit counted as edge",
+          "verdict": "PASS",
+          "note": "void/reprice handling must follow the filed house rule version"
+        },
+        {
+          "gate": "G-11",
+          "name": "Decay monitoring",
+          "value": "",
+          "threshold": "needs 250 bets with CLV",
+          "verdict": "BLOCKED",
+          "note": "not enough settled, priced bets to judge decay yet"
+        },
+        {
+          "gate": "G-12",
+          "name": "Compliance gate",
+          "value": "",
+          "threshold": "delegated to engine.compliance at bet emission",
+          "verdict": "PASS",
+          "note": "this gate is enforced upstream: a prohibited market never reaches the log, so a clean log here is a necessary but not sufficient claim"
+        },
+        {
+          "gate": "G-13",
+          "name": "Deduplication of entries",
+          "value": "",
+          "threshold": "Jaccard <= 0.8 across a single author's entries",
+          "verdict": "BLOCKED",
+          "note": "resolved at leaderboard scoring, which sees all entries"
+        }
+      ]
+    }
+  },
+  "leaderboard": [
+    {
+      "entry_id": "DEMO-D",
+      "author": "rival",
+      "division": "D6 — prop combos",
+      "sealed_hash": "be49a16680dbc57bcadea442eca0aa6b34928af7aaaf7761ea7a1d3eac8c7f89",
+      "bets": 700,
+      "abstain_rate": 0.0,
+      "hit_rate": 0.56,
+      "break_even_hurdle": 0.52381,
+      "t_stat": 1.917,
+      "roi_point": 0.06909,
+      "lcb": -0.00182,
+      "ucb": 0.13455,
+      "pnl_units": 48.3636,
+      "concentration_penalty": 0.0,
+      "las": -0.00182,
+      "eligible": true,
+      "failed_hard_gates": [],
+      "blocked_gates": [
+        "G-3",
+        "G-6",
+        "G-7",
+        "G-11",
+        "G-13"
+      ],
+      "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
+      "rank": 1
+    },
+    {
+      "entry_id": "DEMO-A",
+      "author": "demo",
+      "division": "D2 — game total",
+      "sealed_hash": "196e148ec0750c9e118b0b408cb396a8525ea479becfd311e27496d4399a412d",
+      "bets": 180,
+      "abstain_rate": 0.0,
+      "hit_rate": 0.57222,
+      "break_even_hurdle": 0.52381,
+      "t_stat": 1.301,
+      "roi_point": 0.09242,
+      "lcb": -0.04545,
+      "ucb": 0.2303,
+      "pnl_units": 16.6364,
+      "concentration_penalty": 0.0,
+      "las": 0.0,
+      "eligible": false,
+      "failed_hard_gates": [
+        "G-1",
+        "G-2b"
+      ],
+      "blocked_gates": [
+        "G-3",
+        "G-6",
+        "G-7",
+        "G-11",
+        "G-13"
+      ],
+      "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
+      "rank": null
+    },
+    {
+      "entry_id": "DEMO-B",
+      "author": "demo",
+      "division": "D2 — game total",
+      "sealed_hash": "2b7d07270b838fe0df16e932e3251a9b094c4a44103f524369b835c8bd665131",
+      "bets": 1400,
+      "abstain_rate": 0.0,
+      "hit_rate": 0.54,
+      "break_even_hurdle": 0.52381,
+      "t_stat": 1.213,
+      "roi_point": 0.03091,
+      "lcb": -0.01955,
+      "ucb": 0.08,
+      "pnl_units": 43.2727,
+      "concentration_penalty": 0.0,
+      "las": 0.0,
+      "eligible": false,
+      "failed_hard_gates": [
+        "G-2b"
+      ],
+      "blocked_gates": [
+        "G-6",
+        "G-7",
+        "G-13"
+      ],
+      "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
+      "rank": null
+    },
+    {
+      "entry_id": "DEMO-C",
+      "author": "demo",
+      "division": "D1 — game spread",
+      "sealed_hash": "b1e03d21fd46266b91292a7763d67d57dd52be85f52df7b1666f150789abd643",
+      "bets": 60,
+      "abstain_rate": 0.0,
+      "hit_rate": 0.61667,
+      "break_even_hurdle": 0.52381,
+      "t_stat": 1.44,
+      "roi_point": 0.17727,
+      "lcb": -0.04545,
+      "ucb": 0.4,
+      "pnl_units": 10.6364,
+      "concentration_penalty": 0.0,
+      "las": 0.0,
+      "eligible": false,
+      "failed_hard_gates": [
+        "G-1",
+        "G-2b"
+      ],
+      "blocked_gates": [
+        "G-3",
+        "G-6",
+        "G-7",
+        "G-11",
+        "G-13"
+      ],
+      "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
+      "rank": null
+    }
+  ],
+  "correlation": {
+    "two_leg_55_55": {
+      "independent": 0.30250000000000005,
+      "rho_0_15": 0.33962500000000007,
+      "rho_0_30": 0.37675000000000003,
+      "combined_decimal": 3.6446280991735542,
+      "break_even_joint_prob": 0.27437641723356004
+    },
+    "three_leg_sensitivity_at_rho_0_20": {
+      "low": {
+        "rho": 0.15000000000000002,
+        "joint_prob": 0.33962500000000007,
+        "ev_per_unit": 1.3630857438016535
+      },
+      "central": {
+        "rho": 0.2,
+        "joint_prob": 0.35200000000000004,
+        "ev_per_unit": 1.4491900826446287
+      },
+      "high": {
+        "rho": 0.25,
+        "joint_prob": 0.36437500000000006,
+        "ev_per_unit": 1.5352944214876039
+      },
+      "decision": "robust to the assumed perturbation"
+    },
+    "note": "the rho values above are inputs to demonstrate the estimator's response, not measurements of any real market pair; the measured values live in data/correlations.json, where every rho cell is blank by design"
+  },
+  "availability": {
+    "counts": {
+      "Washington": {
+        "offence::offensive_line": {
+          "out": [
+            "Lucas Patrick"
+          ],
+          "at_risk": [],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "offence::tight_end": {
+          "out": [
+            "Colson Yankoff"
+          ],
+          "at_risk": [],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "offence::receiver": {
+          "out": [],
+          "at_risk": [],
+          "certain_unlisted": [
+            "Treylon Burks"
+          ],
+          "reported": 1
+        },
+        "offence::qb": {
+          "out": [],
+          "at_risk": [],
+          "certain_unlisted": [
+            "Jayden Daniels"
+          ],
+          "reported": 1
+        },
+        "defence::outside_cb": {
+          "out": [],
+          "at_risk": [],
+          "certain_unlisted": [
+            "Amik Robertson"
+          ],
+          "reported": 1
+        }
+      },
+      "NY Giants": {
+        "defence::linebacker": {
+          "out": [],
+          "at_risk": [
+            "Malik Harrison"
+          ],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "offence::qb": {
+          "out": [],
+          "at_risk": [],
+          "certain_unlisted": [
+            "J.J. McCarthy"
+          ],
+          "reported": 1
+        },
+        "offence::receiver": {
+          "out": [],
+          "at_risk": [],
+          "certain_unlisted": [
+            "Malik Nabers"
+          ],
+          "reported": 1
+        }
+      },
+      "New England": {
+        "offence::receiver": {
+          "out": [],
+          "at_risk": [
+            "A.J. Brown"
+          ],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "defence::outside_cb": {
+          "out": [
+            "Carlton Davis III"
+          ],
+          "at_risk": [],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "offence::backfield": {
+          "out": [
+            "TreVeyon Henderson"
+          ],
+          "at_risk": [
+            "Rhamondre Stevenson"
+          ],
+          "certain_unlisted": [],
+          "reported": 2
+        },
+        "offence::offensive_line": {
+          "out": [
+            "Ben Brown"
+          ],
+          "at_risk": [
+            "Greg Van Roten",
+            "Walter Rouse"
+          ],
+          "certain_unlisted": [],
+          "reported": 3
+        }
+      },
+      "Detroit": {
+        "defence::safety": {
+          "out": [
+            "Kerby Joseph"
+          ],
+          "at_risk": [],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "defence::outside_cb": {
+          "out": [
+            "D.J. Reed"
+          ],
+          "at_risk": [],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "offence::offensive_line": {
+          "out": [
+            "Cade Mays"
+          ],
+          "at_risk": [],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "offence::receiver": {
+          "out": [],
+          "at_risk": [
+            "Amon-Ra St. Brown"
+          ],
+          "certain_unlisted": [],
+          "reported": 1
+        },
+        "offence::qb": {
+          "out": [],
+          "at_risk": [],
+          "certain_unlisted": [
+            "Jared Goff"
+          ],
+          "reported": 1
+        }
+      },
+      "Kansas City": {
+        "offence::qb": {
+          "out": [],
+          "at_risk": [],
+          "certain_unlisted": [
+            "Patrick Mahomes"
+          ],
+          "reported": 1
+        },
+        "defence::outside_cb": {
+          "out": [],
+          "at_risk": [
+            "Mansoor Delane"
+          ],
+          "certain_unlisted": [],
+          "reported": 1
+        }
+      }
+    },
+    "nmu": {
+      "mode": "COUNT_ONLY_UNWEIGHTED",
+      "counts": {
+        "Washington": {
+          "offence::offensive_line": {
+            "out": [
+              "Lucas Patrick"
+            ],
+            "at_risk": [],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "offence::tight_end": {
+            "out": [
+              "Colson Yankoff"
+            ],
+            "at_risk": [],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "offence::receiver": {
+            "out": [],
+            "at_risk": [],
+            "certain_unlisted": [
+              "Treylon Burks"
+            ],
+            "reported": 1
+          },
+          "offence::qb": {
+            "out": [],
+            "at_risk": [],
+            "certain_unlisted": [
+              "Jayden Daniels"
+            ],
+            "reported": 1
+          },
+          "defence::outside_cb": {
+            "out": [],
+            "at_risk": [],
+            "certain_unlisted": [
+              "Amik Robertson"
+            ],
+            "reported": 1
+          }
+        },
+        "NY Giants": {
+          "defence::linebacker": {
+            "out": [],
+            "at_risk": [
+              "Malik Harrison"
+            ],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "offence::qb": {
+            "out": [],
+            "at_risk": [],
+            "certain_unlisted": [
+              "J.J. McCarthy"
+            ],
+            "reported": 1
+          },
+          "offence::receiver": {
+            "out": [],
+            "at_risk": [],
+            "certain_unlisted": [
+              "Malik Nabers"
+            ],
+            "reported": 1
+          }
+        },
+        "New England": {
+          "offence::receiver": {
+            "out": [],
+            "at_risk": [
+              "A.J. Brown"
+            ],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "defence::outside_cb": {
+            "out": [
+              "Carlton Davis III"
+            ],
+            "at_risk": [],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "offence::backfield": {
+            "out": [
+              "TreVeyon Henderson"
+            ],
+            "at_risk": [
+              "Rhamondre Stevenson"
+            ],
+            "certain_unlisted": [],
+            "reported": 2
+          },
+          "offence::offensive_line": {
+            "out": [
+              "Ben Brown"
+            ],
+            "at_risk": [
+              "Greg Van Roten",
+              "Walter Rouse"
+            ],
+            "certain_unlisted": [],
+            "reported": 3
+          }
+        },
+        "Detroit": {
+          "defence::safety": {
+            "out": [
+              "Kerby Joseph"
+            ],
+            "at_risk": [],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "defence::outside_cb": {
+            "out": [
+              "D.J. Reed"
+            ],
+            "at_risk": [],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "offence::offensive_line": {
+            "out": [
+              "Cade Mays"
+            ],
+            "at_risk": [],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "offence::receiver": {
+            "out": [],
+            "at_risk": [
+              "Amon-Ra St. Brown"
+            ],
+            "certain_unlisted": [],
+            "reported": 1
+          },
+          "offence::qb": {
+            "out": [],
+            "at_risk": [],
+            "certain_unlisted": [
+              "Jared Goff"
+            ],
+            "reported": 1
+          }
+        },
+        "Kansas City": {
+          "offence::qb": {
+            "out": [],
+            "at_risk": [],
+            "certain_unlisted": [
+              "Patrick Mahomes"
+            ],
+            "reported": 1
+          },
+          "defence::outside_cb": {
+            "out": [],
+            "at_risk": [
+              "Mansoor Delane"
+            ],
+            "certain_unlisted": [],
+            "reported": 1
+          }
+        }
+      },
+      "unavailable_value": "snap_share and quality_gap are not estimated yet (GAP-04/GAP-05); any points figure here would be invented",
+      "index": null
+    },
+    "scenarios": {
+      "Washington": {
+        "confirmed_out": 2,
+        "at_risk": 0,
+        "reported_players": 5,
+        "best_case_out": 2,
+        "worst_case_out": 2,
+        "expected_case_out": 2,
+        "expected_case_note": null
+      },
+      "NY Giants": {
+        "confirmed_out": 0,
+        "at_risk": 1,
+        "reported_players": 3,
+        "best_case_out": 0,
+        "worst_case_out": 1,
+        "expected_case_out": null,
+        "expected_case_note": "requires the fitted P(play) table (Q-06 / GAP-02); refusing to assume a designation means a probability"
+      },
+      "New England": {
+        "confirmed_out": 3,
+        "at_risk": 4,
+        "reported_players": 7,
+        "best_case_out": 3,
+        "worst_case_out": 7,
+        "expected_case_out": null,
+        "expected_case_note": "requires the fitted P(play) table (Q-06 / GAP-02); refusing to assume a designation means a probability"
+      },
+      "Detroit": {
+        "confirmed_out": 3,
+        "at_risk": 1,
+        "reported_players": 5,
+        "best_case_out": 3,
+        "worst_case_out": 4,
+        "expected_case_out": null,
+        "expected_case_note": "requires the fitted P(play) table (Q-06 / GAP-02); refusing to assume a designation means a probability"
+      },
+      "Kansas City": {
+        "confirmed_out": 0,
+        "at_risk": 1,
+        "reported_players": 2,
+        "best_case_out": 0,
+        "worst_case_out": 1,
+        "expected_case_out": null,
+        "expected_case_note": "requires the fitted P(play) table (Q-06 / GAP-02); refusing to assume a designation means a probability"
+      },
+      "Atlanta": {
+        "confirmed_out": 0,
+        "at_risk": 0,
+        "reported_players": 1,
+        "best_case_out": 0,
+        "worst_case_out": 0,
+        "expected_case_out": 0,
+        "expected_case_note": null
+      },
+      "all 32": {
+        "confirmed_out": 0,
+        "at_risk": 0,
+        "reported_players": 1,
+        "best_case_out": 0,
+        "worst_case_out": 0,
+        "expected_case_out": 0,
+        "expected_case_note": null
+      }
+    },
+    "certain_to_play_by_omission": [
+      "Detroit::Jared Goff",
+      "Kansas City::Patrick Mahomes",
+      "NY Giants::J.J. McCarthy",
+      "NY Giants::Malik Nabers",
+      "Washington::Amik Robertson",
+      "Washington::Jayden Daniels",
+      "Washington::Treylon Burks"
+    ],
+    "rows_in_capture": 24,
+    "capture_is_partial": true
+  },
+  "compliance": {
+    "slate_size": 7,
+    "allowed": [
+      "Patriots -2.5",
+      "Over 43.5",
+      "Goff over 279.5 passing yards"
+    ],
+    "refused": [
+      {
+        "market": "Stevenson to be ruled Out on Sunday",
+        "classes": []
+      },
+      {
+        "market": "Most penalties by either team",
+        "classes": [
+          "OFFICIATING"
+        ]
+      },
+      {
+        "market": "Will Mahomes start this week?",
+        "classes": [
+          "PRE_DETERMINED"
+        ]
+      },
+      {
+        "market": "Baringer to miss the game-winning field goal",
+        "classes": [
+          "ONE_PERSON_ONE_PLAY"
+        ]
+      }
+    ]
+  },
+  "source_ids": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-014",
+    "SRC-015",
+    "SRC-016",
+    "SRC-019"
+  ]
+}

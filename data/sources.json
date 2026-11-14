@@ -4,13 +4,36 @@
   "description": "Every factual claim in this repository traces to a row here. Verification level is recorded honestly: FETCHED means the page was opened and read in this session; INDEX-MEANS means the text was seen only through a search index of the official document (the document itself was not opened at page level); LINKED means the URL was reached from an official page but was not opened; UNREACHABLE means we tried and it failed (kept, because a dead official path is itself a finding).",
   "updated": "2026-11-14",
   "columns": [
-    { "key": "src_id", "label": "ID" },
-    { "key": "claim", "label": "What it establishes" },
-    { "key": "publisher", "label": "Publisher / class" },
-    { "key": "url", "label": "Source URL", "render": "link" },
-    { "key": "accessed", "label": "Accessed" },
-    { "key": "verification", "label": "Level", "render": "badge" },
-    { "key": "note", "label": "Verification note / caveat" }
+    {
+      "key": "src_id",
+      "label": "ID"
+    },
+    {
+      "key": "claim",
+      "label": "What it establishes"
+    },
+    {
+      "key": "publisher",
+      "label": "Publisher / class"
+    },
+    {
+      "key": "url",
+      "label": "Source URL",
+      "render": "link"
+    },
+    {
+      "key": "accessed",
+      "label": "Accessed"
+    },
+    {
+      "key": "verification",
+      "label": "Level",
+      "render": "badge"
+    },
+    {
+      "key": "note",
+      "label": "Verification note / caveat"
+    }
   ],
   "rows": [
     {
@@ -227,7 +250,7 @@
       "url": "https://github.com/sassnix321/FL1/commit/e001e0a24c2ca5a432f6bd39cea3b5e6fcc035a2",
       "accessed": "2026-11-14",
       "verification": "FETCHED",
-      "note": "Verified with git in-sandbox: `git ls-tree -r HEAD`, `git log`, file byte count. This is the audit finding the brief asked for: there is nothing in the repo to verify, so every number in this project must be sourced from the registers above or left blank."
+      "note": "Verified twice, in two independent ways: locally with git (`git ls-tree -r HEAD`, `git log`, byte count) and against the hosted repository with `gh api repos/sassnix321/FL1/commits/e001e0a...`, which returns the same sha with message 'Initial commit' and author sassnix321-star. This is the audit finding the brief asked for: there is nothing in the repo to verify, so every number in this project must be sourced from the registers above or left blank. The URL is a permalink to the commit, not to a branch head, so it cannot drift."
     }
   ]
 }

@@ -4,50 +4,419 @@
   "description": "Verbatim rows from the league's own Injury Report file (NFL.com), captured 2026-11-14 while the Week 10 Thursday (12 Nov) and Sunday (15 Nov) reports were live. This is the only live sports data in this repository, and it exists to prove the ingestion contract, not to predict anything. Cells shown exactly as the official page presented them: an empty 'Injuries' cell is an empty cell in the source, not a value we chose to omit. Only chunk 1 of 8 of the official page was captured, so this sample is incomplete by construction — the Atlanta and later-game tables were not fetched and are recorded below as missing rather than as absent.",
   "updated": "2026-11-14",
   "source_url": "https://www.nfl.com/injuries/",
-  "source_ids": ["SRC-001", "SRC-021"],
+  "source_ids": [
+    "SRC-001",
+    "SRC-021"
+  ],
   "columns": [
-    { "key": "game", "label": "Game (as listed)" },
-    { "key": "team", "label": "Club" },
-    { "key": "player", "label": "Player" },
-    { "key": "pos", "label": "Pos" },
-    { "key": "injury", "label": "Injury (official field)" },
-    { "key": "practice", "label": "Practice status" },
-    { "key": "game_status", "label": "Game status" },
-    { "key": "unit", "label": "Unit (our classification)" },
-    { "key": "signal", "label": "Read for the model" },
-    { "key": "sources", "label": "Source", "render": "srclist" }
+    {
+      "key": "game",
+      "label": "Game (as listed)"
+    },
+    {
+      "key": "team",
+      "label": "Club"
+    },
+    {
+      "key": "player",
+      "label": "Player"
+    },
+    {
+      "key": "pos",
+      "label": "Pos"
+    },
+    {
+      "key": "injury",
+      "label": "Injury (official field)"
+    },
+    {
+      "key": "practice",
+      "label": "Practice status"
+    },
+    {
+      "key": "game_status",
+      "label": "Game status"
+    },
+    {
+      "key": "unit",
+      "label": "Unit (our classification)"
+    },
+    {
+      "key": "signal",
+      "label": "Read for the model"
+    },
+    {
+      "key": "sources",
+      "label": "Source",
+      "render": "srclist"
+    }
   ],
   "rows": [
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "Washington", "player": "Lucas Patrick", "pos": "C", "injury": "Concussion", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Offence / interior line", "signal": "Starting-centre absence with a concussion protocol already in motion: line cohesion effect, not just individual talent.", "sources": ["SRC-001"] },
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "Washington", "player": "Colson Yankoff", "pos": "TE", "injury": "Knee", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Offence / TE depth", "signal": "Depth-chart tail, third-string. Weight near zero in a totals model.", "sources": ["SRC-001"] },
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "Washington", "player": "Treylon Burks", "pos": "WR", "injury": "", "practice": "Did Not Participate In Practice", "game_status": "", "unit": "Offence / WR depth", "signal": "DNP with no listed injury and no designation — ambiguous by the league's own definitions; do not convert to a probability without practice-history context.", "sources": ["SRC-001", "SRC-002"] },
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "Washington", "player": "Jayden Daniels", "pos": "QB", "injury": "", "practice": "Full Participation in Practice", "game_status": "", "unit": "Offence / QB", "signal": "Full practice and no Game Status entry means 'certain to play' under the 2016+ policy, so the report is telling us availability by omission. Confirm against the club's final inactive list, not against our inference.", "sources": ["SRC-001", "SRC-002"] },
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "Washington", "player": "Amik Robertson", "pos": "CB", "injury": "", "practice": "Limited Participation in Practice", "game_status": "", "unit": "Defence / CB", "signal": "Cornerback limited in practice: the WR-vs-CB matchup input our prop model wants, but 'Limited' is a workload flag, not a snap-count forecast.", "sources": ["SRC-001"] },
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "NY Giants", "player": "Malik Harrison", "pos": "LB", "injury": "Groin", "practice": "Limited Participation in Practice", "game_status": "Questionable", "unit": "Defence / LB", "signal": "Linebacker Questionable on a run-first offence: raise the rush-yards and between-the-tackles exposure, expect the second-stringer to inherit the goal-line snap.", "sources": ["SRC-001"] },
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "NY Giants", "player": "J.J. McCarthy", "pos": "QB", "injury": "", "practice": "Full Participation in Practice", "game_status": "", "unit": "Offence / QB", "signal": "QB1 full practice, unlisted on Game Status: treat as confirmed unless the inactive list says otherwise. Never treat an unlisted player as 'rested'.", "sources": ["SRC-001", "SRC-002"] },
-    { "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)", "team": "NY Giants", "player": "Malik Nabers", "pos": "WR", "injury": "", "practice": "Full Participation in Practice", "game_status": "", "unit": "Offence / WR1", "signal": "WR1 full: the absence-driven re-distribution of targets is not in play, so any target-share prop signal on the second receiver should be suppressed this week.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "New England", "player": "A.J. Brown", "pos": "WR", "injury": "Ankle, Knee", "practice": "Limited Participation in Practice", "game_status": "Questionable", "unit": "Offence / WR1", "signal": "Two body parts listed with a Questionable tag on a wide receiver: the 'uncertain' definition gives no probability, so price the snap count from practice history, not from the label.", "sources": ["SRC-001", "SRC-002"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "New England", "player": "Carlton Davis III", "pos": "CB", "injury": "Knee", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Defence / CB1", "signal": "Starting outside corner OUT: the clearest coverage-deficiency input in this sample. Expect the next-man-up index to promote a slot/second outside corner into the boundary matchup.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "New England", "player": "TreVeyon Henderson", "pos": "RB", "injury": "Illness", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Offence / RB2", "signal": "Illness DNPs are the noisiest 'Out' class — return-to-play risk is high, snap share unstable. Down-weight in a totals model, keep in a rush-attorney prop model.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "New England", "player": "Walter Rouse", "pos": "T", "injury": "Concussion", "practice": "Limited Participation in Practice", "game_status": "Questionable", "unit": "Offence / tackle", "signal": "Concussion case playing through a limited practice: tackle depth becomes the weak link, an offensive-line-quality input for both sack and pressure-prop signals.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "New England", "player": "Ben Brown", "pos": "C", "injury": "Knee", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Offence / interior line", "signal": "Second interior-line absence for the same club in one week — a pattern worth a group-level (not player-level) adjustment.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "New England", "player": "Rhamondre Stevenson", "pos": "RB", "injury": "Knee", "practice": "Limited Participation in Practice", "game_status": "Questionable", "unit": "Offence / RB1", "signal": "Feature back limited-plus-Questionable is the classic 'plays on a light load' profile: rush-attempt props get compressed, team pass rate rises.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "New England", "player": "Greg Van Roten", "pos": "G", "injury": "Hamstring", "practice": "Full Participation in Practice", "game_status": "Questionable", "unit": "Offence / guard", "signal": "Full practice yet still designated Questionable — evidence that designation and true availability are separate variables. Do not read the tag as a probability.", "sources": ["SRC-001", "SRC-002"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "Detroit", "player": "Kerby Joseph", "pos": "S", "injury": "Knee", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Defence / safety", "signal": "Deep-middle safety out: raise expected completion rate and explosive plays against that coverage shell, before adjusting for the opponent.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "Detroit", "player": "D.J. Reed", "pos": "CB", "injury": "Hip", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Defence / CB1", "signal": "Opposite-side starter OUT in the same week as a safety OUT: two-man shell becomes a bracket problem — a genuine pass-game interaction, not an additive injury count.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "Detroit", "player": "Cade Mays", "pos": "C", "injury": "Ankle", "practice": "Did Not Participate In Practice", "game_status": "Out", "unit": "Offence / interior line", "signal": "Interior depth out; the effect shows up in run-blocking first, so route it to the rushing-props model rather than the spread.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "Detroit", "player": "Amon-Ra St. Brown", "pos": "WR", "injury": "Rib", "practice": "Limited Participation in Practice", "game_status": "Questionable", "unit": "Offence / WR1", "signal": "High-usage WR1 with a torso injury at Questionable: target share is the variable that moves, not the QB's availability. Prop-combo leg worth pricing.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)", "team": "Detroit", "player": "Jared Goff", "pos": "QB", "injury": "", "practice": "Full Participation in Practice", "game_status": "", "unit": "Offence / QB", "signal": "QB1 confirmed by omission from the Game Status Report — all QB-driven dependencies in the model should be pinned, not left uncertain.", "sources": ["SRC-001", "SRC-002"] },
-    { "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)", "team": "Kansas City", "player": "Patrick Mahomes", "pos": "QB", "injury": "", "practice": "Full Participation in Practice", "game_status": "", "unit": "Offence / QB", "signal": "Same as above: full practice, unlisted designation. Record it, do not interpret it as news.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)", "team": "Kansas City", "player": "Mansoor Delane", "pos": "CB", "injury": "Shoulder", "practice": "Full Participation in Practice", "game_status": "Questionable", "unit": "Defence / CB", "signal": "Rookie-scale DB with full practice and a Questionable tag: a 'will-play-but-maybe-limited' case where snap-share priors beat the designation.", "sources": ["SRC-001"] },
-    { "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)", "team": "Atlanta", "player": "(not captured)", "pos": "", "injury": "", "practice": "", "game_status": "", "unit": "—", "signal": "UNVERIFIED — NOT BLANK-BY-DATA: the Falcons' table sits beyond chunk 1 of the official page (8 chunks total) and was deliberately not invented. Ingestion must capture every table for every game, and store the chunk/page cursor it used.", "sources": ["SRC-001"] },
-    { "game": "Weeks 1-9 of 2026, and all games from Week 11 onward", "team": "all 32", "player": "(not captured)", "pos": "", "injury": "", "practice": "", "game_status": "", "unit": "—", "signal": "UNVERIFIED: the official page exposes a season selector back to 1965 and a week selector, so a historical archive appears reachable — but we have not fetched it, so we do not claim a single historical row. Building the archive is task T-08, not a footnote.", "sources": ["SRC-001"] }
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Lucas Patrick",
+      "pos": "C",
+      "injury": "Concussion",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Offence / interior line",
+      "signal": "Starting-centre absence with a concussion protocol already in motion: line cohesion effect, not just individual talent.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Colson Yankoff",
+      "pos": "TE",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Offence / TE depth",
+      "signal": "Depth-chart tail, third-string. Weight near zero in a totals model.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Treylon Burks",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "unit": "Offence / WR depth",
+      "signal": "DNP with no listed injury and no designation — ambiguous by the league's own definitions; do not convert to a probability without practice-history context.",
+      "sources": [
+        "SRC-001",
+        "SRC-002"
+      ]
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Jayden Daniels",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "unit": "Offence / QB",
+      "signal": "Full practice and no Game Status entry means 'certain to play' under the 2016+ policy, so the report is telling us availability by omission. Confirm against the club's final inactive list, not against our inference.",
+      "sources": [
+        "SRC-001",
+        "SRC-002"
+      ]
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Amik Robertson",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "unit": "Defence / CB",
+      "signal": "Cornerback limited in practice: the WR-vs-CB matchup input our prop model wants, but 'Limited' is a workload flag, not a snap-count forecast.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Malik Harrison",
+      "pos": "LB",
+      "injury": "Groin",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "unit": "Defence / LB",
+      "signal": "Linebacker Questionable on a run-first offence: raise the rush-yards and between-the-tackles exposure, expect the second-stringer to inherit the goal-line snap.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "J.J. McCarthy",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "unit": "Offence / QB",
+      "signal": "QB1 full practice, unlisted on Game Status: treat as confirmed unless the inactive list says otherwise. Never treat an unlisted player as 'rested'.",
+      "sources": [
+        "SRC-001",
+        "SRC-002"
+      ]
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Malik Nabers",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "unit": "Offence / WR1",
+      "signal": "WR1 full: the absence-driven re-distribution of targets is not in play, so any target-share prop signal on the second receiver should be suppressed this week.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "A.J. Brown",
+      "pos": "WR",
+      "injury": "Ankle, Knee",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "unit": "Offence / WR1",
+      "signal": "Two body parts listed with a Questionable tag on a wide receiver: the 'uncertain' definition gives no probability, so price the snap count from practice history, not from the label.",
+      "sources": [
+        "SRC-001",
+        "SRC-002"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Carlton Davis III",
+      "pos": "CB",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Defence / CB1",
+      "signal": "Starting outside corner OUT: the clearest coverage-deficiency input in this sample. Expect the next-man-up index to promote a slot/second outside corner into the boundary matchup.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "TreVeyon Henderson",
+      "pos": "RB",
+      "injury": "Illness",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Offence / RB2",
+      "signal": "Illness DNPs are the noisiest 'Out' class — return-to-play risk is high, snap share unstable. Down-weight in a totals model, keep in a rush-attorney prop model.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Walter Rouse",
+      "pos": "T",
+      "injury": "Concussion",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "unit": "Offence / tackle",
+      "signal": "Concussion case playing through a limited practice: tackle depth becomes the weak link, an offensive-line-quality input for both sack and pressure-prop signals.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Ben Brown",
+      "pos": "C",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Offence / interior line",
+      "signal": "Second interior-line absence for the same club in one week — a pattern worth a group-level (not player-level) adjustment.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Rhamondre Stevenson",
+      "pos": "RB",
+      "injury": "Knee",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "unit": "Offence / RB1",
+      "signal": "Feature back limited-plus-Questionable is the classic 'plays on a light load' profile: rush-attempt props get compressed, team pass rate rises.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Greg Van Roten",
+      "pos": "G",
+      "injury": "Hamstring",
+      "practice": "Full Participation in Practice",
+      "game_status": "Questionable",
+      "unit": "Offence / guard",
+      "signal": "Full practice yet still designated Questionable — evidence that designation and true availability are separate variables. Do not read the tag as a probability.",
+      "sources": [
+        "SRC-001",
+        "SRC-002"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Kerby Joseph",
+      "pos": "S",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Defence / safety",
+      "signal": "Deep-middle safety out: raise expected completion rate and explosive plays against that coverage shell, before adjusting for the opponent.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "D.J. Reed",
+      "pos": "CB",
+      "injury": "Hip",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Defence / CB1",
+      "signal": "Opposite-side starter OUT in the same week as a safety OUT: two-man shell becomes a bracket problem — a genuine pass-game interaction, not an additive injury count.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Cade Mays",
+      "pos": "C",
+      "injury": "Ankle",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "unit": "Offence / interior line",
+      "signal": "Interior depth out; the effect shows up in run-blocking first, so route it to the rushing-props model rather than the spread.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Amon-Ra St. Brown",
+      "pos": "WR",
+      "injury": "Rib",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "unit": "Offence / WR1",
+      "signal": "High-usage WR1 with a torso injury at Questionable: target share is the variable that moves, not the QB's availability. Prop-combo leg worth pricing.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Jared Goff",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "unit": "Offence / QB",
+      "signal": "QB1 confirmed by omission from the Game Status Report — all QB-driven dependencies in the model should be pinned, not left uncertain.",
+      "sources": [
+        "SRC-001",
+        "SRC-002"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Patrick Mahomes",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "unit": "Offence / QB",
+      "signal": "Same as above: full practice, unlisted designation. Record it, do not interpret it as news.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Mansoor Delane",
+      "pos": "CB",
+      "injury": "Shoulder",
+      "practice": "Full Participation in Practice",
+      "game_status": "Questionable",
+      "unit": "Defence / CB",
+      "signal": "Rookie-scale DB with full practice and a Questionable tag: a 'will-play-but-maybe-limited' case where snap-share priors beat the designation.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "(not captured)",
+      "pos": "",
+      "injury": "",
+      "practice": "",
+      "game_status": "",
+      "unit": "—",
+      "signal": "UNVERIFIED — NOT BLANK-BY-DATA: the Falcons' table sits beyond chunk 1 of the official page (8 chunks total) and was deliberately not invented. Ingestion must capture every table for every game, and store the chunk/page cursor it used.",
+      "sources": [
+        "SRC-001"
+      ]
+    },
+    {
+      "game": "Weeks 1-9 of 2026, and all games from Week 11 onward",
+      "team": "all 32",
+      "player": "(not captured)",
+      "pos": "",
+      "injury": "",
+      "practice": "",
+      "game_status": "",
+      "unit": "—",
+      "signal": "UNVERIFIED: the official page exposes a season selector back to 1965 and a week selector, so a historical archive appears reachable — but we have not fetched it, so we do not claim a single historical row. Building the archive is task T-08, not a footnote.",
+      "sources": [
+        "SRC-001"
+      ]
+    }
   ],
   "data_quality_findings": [
-    { "finding": "The 'Injuries' column is blank for most rows, including rows with a real designation (e.g. a Limited participant with no listed body part). Any pipeline that treats a blank injury as 'no injury' will silently drop the most informative cases.", "action": "Store the blank as NULL and add a 'reason: undisclosed' flag; never impute." },
-    { "finding": "Practice status and Game status are separate fields with no official numeric mapping (Questionable = 'uncertain', not 50%).", "action": "Model P(play) empirically from the archive; forbid hard-coded probabilities in code review." },
-    { "finding": "The report lists players who are 'certain to play' only by omission from the Game Status Report (per policy), and lists rest cases that are not injuries at all on club-side documents.", "action": "Distinguish injury-DNP, rest-DNP and undisclosed-DNP before any signal uses a DNP count." },
-    { "finding": "The page renders as 8 chunks with a client-side week/season selector; there is no documented bulk endpoint in this pass.", "action": "Treat the URL as an HTML scraping target with cursor capture; test for a JSON/XHR endpoint before building the archive (task T-08)." },
-    { "finding": "Kickoff times are labelled 'EST' on the page even for 9:30 AM Pacific-slot games, and one listing showed '8:15 PM EST' for a Thursday game.", "action": "Normalise all times to UTC with an explicit tz label; store the raw string as displayed for audit." }
-  ]
+    {
+      "finding": "The 'Injuries' column is blank for most rows, including rows with a real designation (e.g. a Limited participant with no listed body part). Any pipeline that treats a blank injury as 'no injury' will silently drop the most informative cases.",
+      "action": "Store the blank as NULL and add a 'reason: undisclosed' flag; never impute."
+    },
+    {
+      "finding": "Practice status and Game status are separate fields with no official numeric mapping (Questionable = 'uncertain', not 50%).",
+      "action": "Model P(play) empirically from the archive; forbid hard-coded probabilities in code review."
+    },
+    {
+      "finding": "The report lists players who are 'certain to play' only by omission from the Game Status Report (per policy), and lists rest cases that are not injuries at all on club-side documents.",
+      "action": "Distinguish injury-DNP, rest-DNP and undisclosed-DNP before any signal uses a DNP count."
+    },
+    {
+      "finding": "The page renders as 8 chunks with a client-side week/season selector; there is no documented bulk endpoint in this pass.",
+      "action": "Treat the URL as an HTML scraping target with cursor capture; test for a JSON/XHR endpoint before building the archive (task T-08)."
+    },
+    {
+      "finding": "Kickoff times are labelled 'EST' on the page even for 9:30 AM Pacific-slot games, and one listing showed '8:15 PM EST' for a Thursday game.",
+      "action": "Normalise all times to UTC with an explicit tz label; store the raw string as displayed for audit."
+    }
+  ],
+  "captured_partial": true,
+  "capture_note": "Captured from chunk 1 of 8 of https://www.nfl.com/injuries/ on 2026-11-14. Rows below are verbatim from that chunk; the remaining chunks were not fetched, so absence of a club or game here means absence from our capture, not from the report."
 }
