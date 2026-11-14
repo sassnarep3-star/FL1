@@ -32139,6 +32139,71 @@ window.DATA = {
    "source": "flag F31; COORDINATION.md reconciliation record",
    "blocking": "Yes",
    "recommended_path": "SG29 option A: review each pair (price store, results feed, line model, signal/staking, demotion), pick one per requirement, archive the other with cross-links. The Q23 and Q24 decisions settle the two substantive divergences."
+  },
+  {
+   "id": "Q30",
+   "category": "Data",
+   "priority": "Critical",
+   "question": "Which licensed source will supply OPENING prices, at what capture cadence, and under what redistribution terms?  (pairs with SG30)",
+   "why_it_matters": "The brief requires open/close snapshots for every market originated. Closes exist as labelled third-party data; opens exist nowhere. Without a decision the store stays half-empty and opening-line movement cannot be measured at all (F18).",
+   "what_we_know": "The append-only store records phase=open quotes with source URL, source record id, capture timestamp and model version (engine/price_snapshots.py, tested). The third-party snapshot holds closes/latest only.",
+   "what_we_dont_know": "Which feed we may buy or subscribe to, its cost, and whether its terms allow display on a public site.",
+   "missing_data": "A priced feed decision and its terms of use.",
+   "source": "price-snapshots.html",
+   "blocking": "Yes",
+   "recommended_path": "Choose one feed before the next slate. Capture open at market open and close at kickoff minus one minute, per market, into the existing store. If no feed is approved, say so publicly and keep the columns blank rather than backfilling from closes."
+  },
+  {
+   "id": "Q31",
+   "category": "Model",
+   "priority": "High",
+   "question": "What acceptance criteria must a fitted fair-line model meet before its numbers populate the Origination Board?  (pairs with SG34; see flag F20)",
+   "why_it_matters": "The board's fair column is blank by design until a model exists (F19). Without pre-accepted criteria, a model could be accepted because its numbers look good rather than because they beat a baseline.",
+   "what_we_know": "The three-column board and the difference convention are fixed and tested; the validation gates G1-G8 are defined; the naive baseline is specified (season points differential per game).",
+   "what_we_dont_know": "The out-of-sample bar: log-loss versus the naive baseline, calibration tolerance, and how wide the published uncertainty band must be.",
+   "missing_data": "A pre-registered acceptance threshold set.",
+   "source": "validation.html; line-board.html",
+   "blocking": "Yes",
+   "recommended_path": "Pre-register in one commit: the model must beat the naive margin baseline on out-of-sample log loss, publish an uncertainty band with every fair line, and be sealed (hashed) before kickoff. Reject otherwise."
+  },
+  {
+   "id": "Q32",
+   "category": "Trust",
+   "priority": "Critical",
+   "question": "May third-party-derived values be published as sourced on the headline registers, or must every published value resolve to an official source?  (pairs with SG19)",
+   "why_it_matters": "This decides whether correlations, market numbers and historical results can ever fill in. The strict rule keeps registers blank where no official source exists; the loose rule risks a reader trusting a number the league never published.",
+   "what_we_know": "Current policy is official-only for registers, with clearly labelled third-party appendices (F17, F20). The research layer left the same question open as its item F-11.",
+   "what_we_dont_know": "Your decision.",
+   "missing_data": "None - a policy choice.",
+   "source": "flagged.html",
+   "blocking": "Yes",
+   "recommended_path": "Keep headline registers official-only and keep labelled third-party appendices as they are. The cost of the strict rule is visible blank cells; the cost of the loose rule is invisible trust leakage. Revisit only with a licensed feed (Q21)."
+  },
+  {
+   "id": "Q33",
+   "category": "Competition",
+   "priority": "High",
+   "question": "What numeric thresholds do demotion rules D1-D3 use, and when are they frozen?  (pairs with SG17 and SG31)",
+   "why_it_matters": "The demotion gate is defined and implemented (engine/demotion.py) but its thresholds are currently documented defaults. Thresholds chosen after seeing a losing streak are as gameable as gates chosen after seeing a result.",
+   "what_we_know": "D1 rolling CLV lower bound, D2 calibration drift band, D3 concentration caps; promotion to live requires G1-G6 all PASS; too-small windows return INSUFFICIENT_DATA, never a pass.",
+   "what_we_dont_know": "Whether the proposed defaults (window 250, band 0.05, caps 45/25 percent) are the ones you want.",
+   "missing_data": "A single pre-registration commit signed off before any live stake.",
+   "source": "validation.html",
+   "blocking": "Yes",
+   "recommended_path": "Freeze the thresholds in one commit before the first live stake, review them only on the gate-review schedule, and never after a losing streak."
+  },
+  {
+   "id": "Q34",
+   "category": "Data",
+   "priority": "Medium",
+   "question": "Should the verified results feed backfill 1999-2025 from third-party rows (labelled) so backtests have history?  (pairs with SG32)",
+   "why_it_matters": "Backtests need seasons; the verified feed holds 137 games of 2026. The repo already holds 7,548 third-party game rows back to 1999 and the computed layer backtests on them with labels.",
+   "what_we_know": "Verified scope is 2026 to date (reconciled 32/32 against official standings). Older official scores are not machine-retrievable from nfl.com at season grain.",
+   "what_we_dont_know": "Whether backtest credibility requires official historical scores or accepts labelled third-party history.",
+   "missing_data": "A policy decision, same family as Q23.",
+   "source": "results-feed.html",
+   "blocking": "No",
+   "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
   }
  ],
  "suggestions": [
@@ -32742,6 +32807,110 @@ window.DATA = {
    ],
    "recommendation": "A. This is the decision the Suggestions page exists for: two real options, one owner, one pass.",
    "impact": "The site answers each requirement once, with the losing implementation preserved as evidence."
+  },
+  {
+   "id": "SG30",
+   "title": "Acquire one licensed odds feed and start open/close capture  (pairs with Q30 and SG16)",
+   "category": "Data",
+   "problem": "The price-snapshot store is built and tested, but no verified price source exists, so the brief's open/close requirement cannot be filled (F18, Q21).",
+   "proposal": "Choose one licensed feed (a commercial odds API, or a single designated book captured at fixed times), record open at market open and close at kickoff minus one minute per market, into engine/price_snapshots.py. The capture job is append-only and keyed to the model version.",
+   "evidence": "price-snapshots.html; engine/price_snapshots.py; data/price_snapshots.csv (56 rows, opens blank).",
+   "effort": "Medium",
+   "risk": "Low - the store rejects unattributed quotes, so a bad feed cannot silently pollute it.",
+   "reversibility": "Fully reversible - the store is append-only; a withdrawn feed leaves its rows attributed and quarantined.",
+   "prerequisites": [
+    "Q21 decision on source and terms"
+   ],
+   "options": [
+    "Commercial odds API subscription. (Recommended if budget exists)",
+    "Manual capture from one designated book at fixed times, documented per row.",
+    "Stay with closes only and say so on the page."
+   ],
+   "recommendation": "A if the terms allow public display; otherwise B. Option C keeps the site honest but leaves opening-line movement unmeasurable.",
+   "impact": "Fills the open columns, unlocks CLV and decay monitoring (D1), and lets validation gate G6 finally run."
+  },
+  {
+   "id": "SG31",
+   "title": "Pre-register the demotion and promotion thresholds in one commit before any live stake  (pairs with SG17 and Q33)",
+   "category": "Competition",
+   "problem": "D1-D3 are implemented with documented default thresholds; defaults chosen in advance are proposals, but defaults left unfrozen can still be edited after a losing streak.",
+   "proposal": "One commit, signed off, that freezes: the decay window, the calibration band, the concentration caps, the promotion gate list (G1-G6 all PASS) and the INSUFFICIENT_DATA floor. Review only on the gate-review schedule.",
+   "evidence": "engine/demotion.py; validation.html; tests/test_requirements_core8.py.",
+   "effort": "Low",
+   "risk": "Very low",
+   "reversibility": "Reversible only by a later pre-registered amendment, never silently.",
+   "prerequisites": [
+    "Q24",
+    "SG17 (G-14 thresholds — same decision family)"
+   ],
+   "options": [
+    "Freeze now with the documented defaults. (Recommended)",
+    "Wait for the first season's data to choose thresholds.",
+    "Leave thresholds editable per strategy."
+   ],
+   "recommendation": "A. Option B manufactures thresholds from results; option C reintroduces exactly the discretion the gates exist to remove.",
+   "impact": "Makes demotion automatic and non-negotiable, which is the only version of it worth having."
+  },
+  {
+   "id": "SG32",
+   "title": "Extend the results feed with player-level stats from an official source once one is identified  (pairs with Q34)",
+   "category": "Data",
+   "problem": "Player-prop combos cannot be backtested from team-level results; the only player-level logs in the repo are third-party, so prop correlations stay blocked on the official-correlations page (CO-07).",
+   "proposal": "Register an official player-statistics source (NFL.com gamebooks or the league's official statistics pages at season grain), capture it into an append-only feed like the results feed, and only then compute prop-pair correlations officially.",
+   "evidence": "correlations-official.html (CO-07 blocked); prop-correlations.html (third-party estimates, labelled).",
+   "effort": "High",
+   "risk": "Medium - official gamebooks are per-week documents; season-grain capture is real work.",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Q23 policy confirmation"
+   ],
+   "options": [
+    "Capture official gamebooks weekly into the feed. (Recommended)",
+    "Accept labelled third-party player logs for research, official-only for claims.",
+    "Drop player-prop combos from scope."
+   ],
+   "recommendation": "A with B as the interim. C abandons part of the brief.",
+   "impact": "Unblocks prop backtests, player-prop combos and CO-07 on official footing."
+  },
+  {
+   "id": "SG33",
+   "title": "Schedule a weekly append-only capture of the injury report and depth charts  (weekly append captures)",
+   "category": "Operations",
+   "problem": "Everything on this site is one snapshot from 2026-11-14. A single snapshot cannot show practice-trajectory effects, week-over-week availability deltas (SIG-04), or any persistence claim.",
+   "proposal": "A scheduled job (the repo already has a weekly refresh workflow) that appends the official injury report and each club's depth chart as dated, immutable snapshots, reconciling renders rather than overwriting (the report's row count varies between renders).",
+   "evidence": "EXECUTIVE_SUMMARY.md (one-snapshot blocker); data/injury_snapshot_b.json (two renders differ).",
+   "effort": "Medium",
+   "risk": "Low - append-only; a bad capture is a new dated row, not a destructive edit.",
+   "reversibility": "Fully reversible",
+   "prerequisites": [],
+   "options": [
+    "Weekly scheduled append. (Recommended)",
+    "Manual capture before each slate.",
+    "Keep single snapshot and scope claims to Week 10."
+   ],
+   "recommendation": "A. It is the cheapest way to turn a poster into a dataset.",
+   "impact": "Unlocks within-season deltas, availability trend signals, and multi-week validation."
+  },
+  {
+   "id": "SG34",
+   "title": "Decide the fair-line publication policy before the first fitted line ships  (pairs with Q31 and flag F20)",
+   "category": "Trust",
+   "problem": "The board publishes fair, market and difference as separate columns. Once a model exists, a policy is needed for whether a fair line publishes with an uncertainty band always, only after acceptance (Q22), or only alongside the naive baseline.",
+   "proposal": "Fix the policy now: every published fair line carries its uncertainty band and the naive baseline beside it; unaccepted model output never reaches the board; sealed before kickoff.",
+   "evidence": "line-board.html; line-origination.html (uncertainty section).",
+   "effort": "Low",
+   "risk": "Very low",
+   "reversibility": "Fully reversible until the first line ships; awkward afterwards.",
+   "prerequisites": [
+    "Q22"
+   ],
+   "options": [
+    "Fair line always with band + baseline. (Recommended)",
+    "Fair line only after acceptance, without band.",
+    "Publish raw model output with a caveat."
+   ],
+   "recommendation": "A. Option C is how invented numbers enter a site that promised never to publish them.",
+   "impact": "Keeps the board's blank-cell promise intact once the model exists."
   }
  ],
  "requirements": [
@@ -33509,6 +33678,71 @@ window.DATA = {
    "severity": "Low",
    "sourceIds": [],
    "action": "amend requirements.txt or add requirements-scripts.txt"
+  },
+  {
+   "id": "F37",
+   "kind": "Missing source",
+   "item": "No verified source of opening (open) prices for NFL markets",
+   "detail": "The brief requires a price-snapshot store recording OPENING and CLOSING numbers for every market originated. The store (engine/price_snapshots.py) records both phases, but no verified opener source exists in this repository: the third-party games snapshot holds closing/latest values only, and the historical closing-lines file covers 2006-2025 with closes and no 2026 rows. Every open_* cell on price-snapshots.html is therefore blank. An opener inferred from a close would be a fabrication.  Cross-reference: (overlaps F23/F25: price sources)",
+   "sourceIds": [
+    "S47"
+   ],
+   "severity": "High",
+   "action": "Open columns stay blank. Acquisition is open question Q21. The store accepts phase=open rows today; nothing else needs building."
+  },
+  {
+   "id": "F38",
+   "kind": "Model not fitted",
+   "item": "Fair-line column blank on the Origination Board",
+   "detail": "The brief requires the model's fair line, the market line and the difference published as separate columns. The three columns exist on line-board.html and the difference computes mechanically (engine/origination.py). A fitted fair-line model now exists on model-lines.html (session arena/685f958d-fl1) but has NOT passed acceptance: its own flag F20 records that it does not beat a constant benchmark out of sample. Until a model passes the acceptance criteria (Q22), the line-board fair column stays blank, and a difference computed from one arm would not be a difference.  Cross-reference: (overlaps F20: fitted model not accepted)",
+   "sourceIds": [],
+   "severity": "Medium",
+   "action": "Fair and difference columns blank on line-board.html with the reason published; model output with its failure flag lives on model-lines.html. Exactly one column changes when a model passes acceptance."
+  },
+  {
+   "id": "F39",
+   "kind": "Third-party prices: recorded in the store, withheld from display",
+   "item": "Betting prices are third-party snapshots (S47); no official NFL price source exists (their F18). The store records them with provenance; the site displays them nowhere.",
+   "detail": "The user constraint requires any value that cannot be confirmed from an official source to be left blank and flagged. The captured third-party prices are retained in the audit layer (data/price_snapshots.csv, data/line_board.csv, data/results_feed.csv) with source record and capture date on every row, and are blanked on every published table with the reason in the cell (F18). Two sessions had opposite display policies; this flag records the resolution: store records, display withholds.  Cross-reference: (merge resolution between sessions 5a8baf03 and 685f958d)",
+   "sourceIds": [
+    "S47"
+   ],
+   "severity": "High",
+   "action": "Every price-derived display cell is blank with a reason; the audit file keeps the values. No number derived from a third-party price (cover, PnL, ROI, W/L counts) is shown on the site.",
+   "url": "https://www.nfl.com/"
+  },
+  {
+   "id": "F40",
+   "kind": "Source not machine-readable",
+   "item": "Replacement depth unknown where the club publishes no further name",
+   "detail": "The replacement-depth table tracks which string replaces an affected player. It cannot do so for Houston (image-only chart, F16), and for 21 affected players whose club chart publishes no further name at that slot. Those rows carry blank replacement fields and a note instead of a guess; 91 rows do carry the club's own next name and his string (48 second-string, 17 third, 11 fourth, 13 fifth, 2 sixth).  Cross-reference: (overlaps the replacement-depth flags)",
+   "sourceIds": [
+    "S01",
+    "S46"
+   ],
+   "severity": "Medium",
+   "action": "Blank fields with a published note. The depth distribution counts only named replacements."
+  },
+  {
+   "id": "F41",
+   "kind": "Not yet computable",
+   "item": "Week-10 availability-vs-outcome correlation blocked (CO-05)",
+   "detail": "Correlation CO-05 (per-club unavailable count vs scoring margin in the same week) is exactly the officially sourced correlation the brief asks for, but at capture time only the Thursday game of Week 10 is settled: n=0 joint observations exist. The row is published with n=0 and blank value, not estimated from other weeks and presented as Week 10. It becomes computable when the week settles.  Cross-reference: (overlaps the correlation-register exclusions)",
+   "sourceIds": [
+    "S01",
+    "S04"
+   ],
+   "severity": "Low",
+   "action": "Blank value with n=0 and the reason; recompute via tools/build_correlations_official.py after the week settles."
+  },
+  {
+   "id": "F42",
+   "kind": "Build irregularity (found and fixed)",
+   "item": "Hand-edited validation.html was silently wiped by site regeneration",
+   "detail": "A prior session added the demotion-gate section directly to the validation.html artefact. tools/site.py regenerates every page at the repo root, so the section disappeared on the next build. Found in this session's line-by-line review (git diff after re-running tools/site.py). Fixed by porting the section into tools/site.py's generator and regenerating; no content was lost. The pattern is the irregularity: page content must be edited in the generator, never in the generated HTML.  Cross-reference: (process finding, unique)",
+   "sourceIds": [],
+   "severity": "Medium",
+   "action": "Demotion section now generated; full regeneration + link check re-run green. Any future page change must go through tools/site.py."
   }
  ]
 };

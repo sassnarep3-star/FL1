@@ -82,6 +82,33 @@ def _score_one(entry: Entry, cfg: gates.GateConfig) -> dict:
     raw = roi_pt
     score = 0.0 if (hard_failed or lcb is None) else max(lcb * (1.0 - penalty), -1.0)
 
+    # ---- SIGNAL vs STAKING (the brief: a lucky staking run must not mask a bad
+    # signal). Signal = stake-independent selection quality (equal-weight unit
+    # returns + hurdle test + CLV). Staking = execution/sizing (ROI on staked
+    # units, drawdown). Overall rank follows the signal; staking is reported
+    # beside it and can never promote an entry whose signal fails.
+    SIGNAL_GATES = ("G-2", "G-2b", "G-3", "G-4", "G-9")
+    signal_failed = [g for g in failed if g in SIGNAL_GATES]
+    clvs = [b.get("clv") for b in settled if b.get("clv") is not None]
+    clv_lcb = None
+    if len(clvs) >= 20:
+        _, clv_lcb, _ = stats.bootstrap_ci(clvs, n_boot=2000)
+    signal_lcb = roi_lo                     # equal-weight unit returns, LCB
+    if signal_failed or signal_lcb is None:
+        signal_score = 0.0 if signal_failed else None
+    else:
+        signal_score = max(signal_lcb, -1.0)
+    staked_units = summary.get("staked_units") or 0.0
+    pnl_units = summary.get("pnl_units") or 0.0
+    staking_roi = (pnl_units / staked_units) if staked_units else None
+    # max drawdown of the cumulative staked PnL path (sizing risk, pure staking)
+    cum = peak = 0.0
+    max_dd = 0.0
+    for b in settled:
+        cum += b.get("pnl") or 0.0
+        peak = max(peak, cum)
+        max_dd = max(max_dd, peak - cum)
+
     return {
         "entry_id": entry.entry_id,
         "author": entry.author,
@@ -98,6 +125,16 @@ def _score_one(entry: Entry, cfg: gates.GateConfig) -> dict:
         "pnl_units": summary.get("pnl_units"),
         "concentration_penalty": round(penalty, 4),
         "las": round(score, 5),
+        # --- signal block (stake-independent) ---
+        "signal_score": None if signal_score is None else round(signal_score, 5),
+        "signal_lcb": None if signal_lcb is None else round(signal_lcb, 5),
+        "signal_z_vs_hurdle": None if tstat is None else round(tstat, 3),
+        "signal_clv_lcb": None if clv_lcb is None else round(clv_lcb, 5),
+        "signal_failed_gates": signal_failed,
+        # --- staking block (sizing/execution only; never used for overall rank) ---
+        "staking_score": None if staking_roi is None else round(staking_roi, 5),
+        "staking_pnl_units": round(pnl_units, 4),
+        "staking_max_drawdown": round(max_dd, 4),
         "eligible": not hard_failed,
         "failed_hard_gates": hard_failed,
         "blocked_gates": blocked,
@@ -180,9 +217,31 @@ def rank(entries: Sequence[Entry], cfg: gates.GateConfig | None = None,
             extra["rank"] = None
             extra["excluded_reason"] = (f"over the per-author live-entry cap "
                                        f"({cfg.max_entries_per_author}); clones do not buy rank")
-    rows.sort(key=lambda r: (not r["eligible"], -(r["las"] if r["las"] is not None else -1e9)))
+    rows.sort(key=lambda r: (not r["eligible"], -(r["signal_score"] if r["signal_score"] is not None else -1e9)))
     for i, r in enumerate(rows, start=1):
         r["rank"] = i if r["eligible"] else None
+    # Separate signal ranking from staking ranking. The OVERALL rank is the
+    # signal rank: a lucky staking run (big stakes on the winners) must not
+    # lift an entry whose selection quality fails. The staking rank is
+    # published beside it, and a visible note marks any row where the two
+    # disagree — that disagreement is exactly where sizing luck is hiding.
+    sig_sorted = sorted([r for r in rows if r["eligible"] and r.get("signal_score") is not None],
+                        key=lambda r: -r["signal_score"])
+    for i, r in enumerate(sig_sorted, start=1):
+        r["signal_rank"] = i
+    stk_sorted = sorted([r for r in rows if r["eligible"] and r.get("staking_score") is not None],
+                        key=lambda r: -r["staking_score"])
+    for i, r in enumerate(stk_sorted, start=1):
+        r["staking_rank"] = i
+    for r in rows:
+        r.setdefault("signal_rank", None)
+        r.setdefault("staking_rank", None)
+        if (r.get("signal_rank") is not None and r.get("staking_rank") is not None
+                and r["staking_rank"] < r["signal_rank"]):
+            r["masking_warning"] = ("staking rank %d is better than signal rank %d — "
+                                    "the gap is sizing luck until proven otherwise; "
+                                    "overall rank follows the signal"
+                                    % (r["staking_rank"], r["signal_rank"]))
     return rows
 
 

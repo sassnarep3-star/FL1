@@ -572,6 +572,14 @@
       "pnl_units": 48.3636,
       "concentration_penalty": 0.0,
       "las": -0.00182,
+      "signal_score": -0.00182,
+      "signal_lcb": -0.00182,
+      "signal_z_vs_hurdle": 1.917,
+      "signal_clv_lcb": null,
+      "signal_failed_gates": [],
+      "staking_score": 0.06909,
+      "staking_pnl_units": 48.3636,
+      "staking_max_drawdown": 1.2727,
       "eligible": true,
       "failed_hard_gates": [],
       "blocked_gates": [
@@ -582,7 +590,9 @@
         "G-13"
       ],
       "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
-      "rank": 1
+      "rank": 1,
+      "signal_rank": 1,
+      "staking_rank": 1
     },
     {
       "entry_id": "DEMO-A",
@@ -600,6 +610,16 @@
       "pnl_units": 16.6364,
       "concentration_penalty": 0.0,
       "las": 0.0,
+      "signal_score": 0.0,
+      "signal_lcb": -0.04545,
+      "signal_z_vs_hurdle": 1.301,
+      "signal_clv_lcb": null,
+      "signal_failed_gates": [
+        "G-2b"
+      ],
+      "staking_score": 0.09242,
+      "staking_pnl_units": 16.6364,
+      "staking_max_drawdown": 1.1818,
       "eligible": false,
       "failed_hard_gates": [
         "G-1",
@@ -613,7 +633,9 @@
         "G-13"
       ],
       "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
-      "rank": null
+      "rank": null,
+      "signal_rank": null,
+      "staking_rank": null
     },
     {
       "entry_id": "DEMO-B",
@@ -631,6 +653,16 @@
       "pnl_units": 43.2727,
       "concentration_penalty": 0.0,
       "las": 0.0,
+      "signal_score": 0.0,
+      "signal_lcb": -0.01955,
+      "signal_z_vs_hurdle": 1.213,
+      "signal_clv_lcb": 0.004,
+      "signal_failed_gates": [
+        "G-2b"
+      ],
+      "staking_score": 0.03091,
+      "staking_pnl_units": 43.2727,
+      "staking_max_drawdown": 1.4545,
       "eligible": false,
       "failed_hard_gates": [
         "G-2b"
@@ -641,7 +673,9 @@
         "G-13"
       ],
       "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
-      "rank": null
+      "rank": null,
+      "signal_rank": null,
+      "staking_rank": null
     },
     {
       "entry_id": "DEMO-C",
@@ -659,6 +693,16 @@
       "pnl_units": 10.6364,
       "concentration_penalty": 0.0,
       "las": 0.0,
+      "signal_score": 0.0,
+      "signal_lcb": -0.04545,
+      "signal_z_vs_hurdle": 1.44,
+      "signal_clv_lcb": null,
+      "signal_failed_gates": [
+        "G-2b"
+      ],
+      "staking_score": 0.17727,
+      "staking_pnl_units": 10.6364,
+      "staking_max_drawdown": 1.0909,
       "eligible": false,
       "failed_hard_gates": [
         "G-1",
@@ -672,7 +716,9 @@
         "G-13"
       ],
       "note": "ranked on the 95% lower bound of per-unit return; a blocked gate means an input we do not have (typically closing-line data), which is reported, not imputed",
-      "rank": null
+      "rank": null,
+      "signal_rank": null,
+      "staking_rank": null
     }
   ],
   "correlation": {
