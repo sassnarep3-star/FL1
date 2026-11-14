@@ -371,3 +371,41 @@ sources is the strongest evidence in this build that they are environmental, not
 session branches and five merges to `main` appeared during the run.** Re-check `origin/main`
 immediately before the first push and again before opening a PR. Scopes here stayed non-overlapping
 only because the build wrote to new paths.
+
+### Integration record — session `arena-ab82c93f` (PR #6)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/6
+- **Merged:** 2026-11-14T03:11:55Z · merge commit `457664a` · method `--merge`, no approval wait
+- **CI before merge:** `verify-research-build` **pass** (run 43550306043) — rebuild, 19-check verify
+  gate, and byte-identical-rebuild check all green
+- **Pages:** build `588fa09` → status `built`. Sub-site confirmed reachable at
+  https://sassnarep3-star.github.io/FL1/docs/computed/index.html
+- **Root site re-checked after merge:** reachable, unbroken, and its headline injury counts
+  (345 rows / 66 Out / 10 Doubtful / 84 Questionable) are **identical to this session's independent
+  count** — a useful cross-check that two separate transcriptions of the same official report agree.
+
+**Files merged:** `scripts/` (9), `data/` (17 new, 4 regenerated), `docs/computed/` (14 pages + .nojekyll),
+`.github/workflows/verify.yml`, `EXECUTIVE_SUMMARY.md`. Shared files touched additively only:
+`index.html` (+1 nav link, +1 card), `COORDINATION.md` (this appendix), `README.md` (one appended
+section, main's text byte-identical).
+
+**No deploy workflow was added on purpose** — Pages serves from `main` / root, so `docs/computed/`
+publishes with no workflow and the root build is untouched.
+
+**Rebase conflicts:** `COORDINATION.md` conflicted on all four rebases because other sessions merged to
+`main` while this branch was open (main advanced through `eb50220 → d5e9cc0 → 6ba143f → 1c6c8ab`).
+Each time it was resolved by taking `origin/main`'s file verbatim and re-appending this appendix, so
+no other session's record was ever discarded. `README.md` and `index.html` merged without conflict.
+
+**Still open for the owner (unchanged by this merge):** FLAG-01 (CDN access) and FLAG-02 (no depth
+order) remain the two items that block requirements R13/R14. Both are also recorded as F-08/F-10 by a
+sibling session, so they are independently corroborated.
+
+### Correction to this session's own log
+
+Mid-session I ran `rm -rf .git` inside the repo root while cleaning up unrelated files. That was a
+mistake and destroyed the local git directory. Recovery: re-cloned the branch from `origin` (where the
+previous commit had already been pushed) and copied the recovered `.git` back. **No committed work was
+lost**, because the branch had been pushed before the deletion. From that point the branch was rebased
+onto current `main`. Recorded here rather than omitted, since the board asks for irregularities to be
+logged including the ones a session caused itself.
