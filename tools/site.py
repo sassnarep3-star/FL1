@@ -225,17 +225,17 @@ def main():
   <a class="card" href="executive-summary.html"><h3>Executive Summary</h3>
     <p>One page: what is verified, what is blocked, and the five decisions that unblock the rest.</p></a>
   <a class="card" href="injuries.html"><h3>Injury Report</h3>
-    <p><strong>%d</strong> player rows across <strong>%d of %d</strong> clubs, straight from the official
+    <p><strong>%(inj_rows)d</strong> player rows across <strong>%(inj_clubs)d of %(inj_clubs_total)d</strong> clubs, straight from the official
     Week 10 report. Practice status and game status preserved exactly.</p></a>
   <a class="card" href="depth.html"><h3>Backup Depth</h3>
-    <p><strong>%d of %d</strong> club charts captured — <strong>%d</strong> charted slots.
-    <strong>%d</strong> first-string players carry an official Out / Doubtful / Questionable status,
+    <p><strong>%(depth_covered)d of %(depth_total)d</strong> club charts captured — <strong>%(depth_rows)d</strong> charted slots.
+    <strong>%(depth_starters_status)d</strong> first-string players carry an official Out / Doubtful / Questionable status,
     each with the next player the club itself lists at that slot. No inferred ranking.</p></a>
   <a class="card" href="questions.html"><h3>Open Questions</h3>
-    <p><strong>%d</strong> questions, <strong>%d</strong> of them blocking, each stating what we know,
+    <p><strong>%(n_questions)d</strong> questions, <strong>%(n_blocking)d</strong> of them blocking, each stating what we know,
     what we do not, and what data is missing.</p></a>
   <a class="card" href="suggestions.html"><h3>Suggestions</h3>
-    <p><strong>%d</strong> proposals with options, trade-offs and one recommended path. Review before
+    <p><strong>%(n_suggestions)d</strong> proposals with options, trade-offs and one recommended path. Review before
     anything is implemented.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
@@ -245,9 +245,18 @@ def main():
     <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
     <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a></section>
-""" % (depth_cov["covered"], depth_cov["total"], depth_tot["rows"],
-       depth_tot["startersWithStatus"],
-       lg["rows"], lg["clubs"], lg["clubsTotal"], n_q, n_block, n_sugg)
+""" % {
+       "inj_rows": lg["rows"],
+       "inj_clubs": lg["clubs"],
+       "inj_clubs_total": lg["clubsTotal"],
+       "depth_covered": depth_cov["covered"],
+       "depth_total": depth_cov["total"],
+       "depth_rows": depth_tot["rows"],
+       "depth_starters_status": depth_tot["startersWithStatus"],
+       "n_questions": n_q,
+       "n_blocking": n_block,
+       "n_suggestions": n_sugg,
+   }
 
     kpis = table(
         ["Metric", "Value", "Basis", "Source"],
