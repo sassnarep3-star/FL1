@@ -12,6 +12,25 @@
 > kept verbatim further down so their records are not lost. If your session's board is not the one at the top,
 > **add your tasks to the top board** rather than replacing it.
 
+## Task board — session `arena/360ca650-fl1` (requirements sprint R21–R28)
+
+**Session ID:** `arena-360ca650-fl1` · **Branch:** `arena/360ca650-fl1` (from `9d7ca32` of `main`) ·
+**Claimed:** 2026-11-14T22:12Z · **Status:** active — this session is the only live session and performs
+its own final integration. Per the standing rule, work is **additive**: new files plus new pages added to
+`NAV` in `tools/site.py`; shared registers are appended to, never replaced.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| R21 | Price-snapshot store — records opening **and** closing numbers for every market we originate | in progress | arena-360ca650-fl1 | `engine/snapshots.py`, `data/price_snapshots.json`, `scripts/build_price_snapshots.py`, `price-snapshots.html` | data/raw/MANIFEST.json (sha256-pinned captures); week-10 board | Opening prices have no source at all → every open cell blank+flagged |
+| R22 | Verified results feed — so backtests and ROI can be computed at all | in progress | arena-360ca650-fl1 | `engine/backtest.py`, `data/results_feed.json`, `scripts/build_results_feed.py`, `results-feed.html` | nfl.com schedules capture (raw/schedule-results-2026-week1-10.tsv), standings cross-check (tools/verify_results.py) | none expected |
+| R23 | Originate the side first, then the total, then the moneyline | in progress | arena-360ca650-fl1 | `data/models.json` (append), `line-origination.html` section, `line-board.html` | requirement text | Supersedes the earlier "totals-first" design note; change logged, old text preserved in archive |
+| R24 | Publish model fair line, market line, difference as **separate columns** | in progress | arena-360ca650-fl1 | `engine/fairline.py`, `scripts/build_line_board.py`, `data/line_board.json`, `line-board.html` | fair = computed from official standings/results; market = pinned third-party capture (flagged) | No official source prices NFL lines (F-18 to log); policy: show with 3P badge + flag per the requirement, strict-blank alternative left open for review |
+| R25 | Separate signal from staking in the leaderboard (lucky staking cannot mask bad signal) | in progress | arena-360ca650-fl1 | `data/leaderboard_signal_staking.json`, `strategies.html` section | engine/leaderboard.py scoring | Root page previously claimed "no backtest anywhere in this repository" while data/leaderboard.csv holds third-party backtests — inconsistency to flag (F-19) |
+| R26 | Track the **depth of the replacement**, not just the fact of a replacement | in progress | arena-360ca650-fl1 | `scripts/build_replacement_depth.py`, `data/replacement_depth.tsv`, `replacement-depth.html` | data/depth.tsv (31 club charts), data/injuries.tsv (official), depth-sources.tsv | HOU chart image-only (already flagged); string order is club-labelled unofficial |
+| R27 | Correlations only from officially sourced numbers, publish **n** with each value | in progress | arena-360ca650-fl1 | `engine/corr_official.py`, `scripts/build_correlations_official.py`, `data/correlations_official.json`, `correlation-register.html` | official results/standings/schedule/injury captures only | Third-party correlations (measured.json, prop-correlations, correlations.csv) stay on their labelled pages, excluded from this register |
+| R28 | Demotion gate — sends a live strategy back to paper | in progress | arena-360ca650-fl1 | `engine/demotion.py`, `data/validation_gates.json` (append G-14), `validation.html` section | design decision + engine tests | Thresholds are proposed rules, not facts; left reviewable |
+| R29 | Registers + site integration: requirements/questions/suggestions/flags/sources append, NAV, rebuild, checks, exec summary | in progress | arena-360ca650-fl1 | `data/{requirements,questions,suggestions,flags}.json`, `data/sources.tsv`, `tools/site.py`, `tests/test_r21_r28.py`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | tools/checklinks.py, scripts/verify_site.py, tools/verify_injuries.py, tools/verify_results.py, unittest | — |
+| R30 | Final integration: PR → main, merge, confirm Pages deploy, record result here | unclaimed | arena-360ca650-fl1 | PR only | Pages API | — |
 
 ### Earlier board state, preserved from session C's PR #4
 
