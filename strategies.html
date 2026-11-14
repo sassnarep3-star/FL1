@@ -1,156 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Origination Strategies — FL1</title>
-<link rel="stylesheet" href="assets/css/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
-    <div class="tagline">NFL lines origination &mdash; signals, validation gates, correlation</div>
-    <nav>
-      <a href="index.html">Dashboard</a>
-      <a href="injuries.html">Injuries</a>
-      <a href="depth-charts.html">Depth &amp; Deficiencies</a>
-      <a href="standings.html">Standings</a>
-      <a href="strategies.html" class="active">Strategies</a>
-      <a href="leaderboard.html">Leaderboard</a>
-      <a href="executive-summary.html">Executive Summary</a>
-      <a href="flagged-review.html">Flagged for Review</a>
-      <a href="sources.html">Sources</a>
-    </nav>
-  </div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="line-origination.html">Line Origination</a><a href="strategies.html" class="on">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
+<main id="main" class="wide">
 
-<main class="wrap">
-  <section>
-    <h1>NFL Lines Origination &mdash; Strategies</h1>
-    <p class="lead">Research-backed approaches for originating NFL lines across single bets, parlays, and player-prop combos. Every strategy must pass all validation gates before use. Correlation values determine which multi-leg combinations are acceptable. <strong>All strategy content is analytical &mdash; it is not official NFL content and is flagged unverified against official sources.</strong></p>
+<section>
+<h1>Strategy Leaderboard</h1>
+<p class="lead">A competition with gates. A strategy is listed, then it must earn a rank by clearing every gate
+in <a href="validation.html">Validation</a>. Until then it has no score, and the board stays empty.</p>
+<div class="callout bad">
+  <p><strong>0 of 6 entries carry a result.</strong> No backtest has been executed and no performance figure is
+  claimed anywhere in this repository. The leaderboard will stay empty until a strategy clears the gates with a
+  price source supplied. That is the design, not a delay.</p>
+</div>
+</section>
 
-    <h2>How a strategy is validated</h2>
-    <div class="callout">
-      <p>No bet is placed unless a strategy passes <em>all</em> of its validation gates. Gates are designed to remove luck and keep play selectively skill-based:</p>
-      <ul style="margin-left:20px; color:var(--muted);">
-        <li><strong>Edge gate:</strong> estimated edge must exceed vig (target &gt; 2% after vig for singles; higher for multi-leg).</li>
-        <li><strong>Sample gate:</strong> minimum historical setups (n) before a strategy is live.</li>
-        <li><strong>Injury/depth gate:</strong> no key starter Out at the relevant position (cross-checked against the Injuries page).</li>
-        <li><strong>Correlation gate:</strong> multi-leg combos must stay within the correlation cap for that bet type.</li>
-        <li><strong>Out-of-sample gate:</strong> strategy must perform on data not used to build it.</li>
-      </ul>
-    </div>
+<section>
+<h2>The board</h2>
+<div class="twrap"><p class="caption">A blank Result cell means no result exists. A dash would mean the same thing; here the column is intentionally empty rather than zero.</p><table class="dense searchable"><thead><tr><th>ID</th><th>Strategy</th><th>Role</th><th>Market</th><th>Data status</th><th>What the data allows</th><th>Gates</th><th>Result</th><th>Result note</th><th>Source</th></tr></thead><tbody><tr><td>ST01</td><td>Points-differential baseline</td><td>BASELINE — not a candidate for the leaderboard</td><td>Team spread / winner</td><td><span class="pill ok">AVAILABLE</span></td><td>Official 2026 league standings give PF, PA and games played for all 32 clubs (S03).</td><td>G1, G2, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>NOT RUN. No backtest has been executed; no numeric result is claimed.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST02</td><td>Availability shock</td><td>Candidate</td><td>Team spread</td><td><span class="pill warn">PARTIAL</span></td><td>Injury status is official and captured (S01). Depth rank is derived only (S08, S07). Snap counts are absent (Q05), so replacement magnitude cannot be measured yet, only assumed — and an assumed magnitude is exactly what this project refuses to publish.</td><td>G1, G2, G3, G4, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>BLOCKED at G2 and G6.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST03</td><td>Rest and travel asymmetry</td><td>Candidate</td><td>Team spread</td><td><span class="pill warn">PARTIAL</span></td><td>Schedules give kickoff times and venues (S04) and the league calendar confirms two international games in consecutive weeks (S05). A complete prior-game date table per club is not yet captured.</td><td>G1, G2, G3, G4, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>NOT RUN.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST04</td><td>Weather-adjusted total</td><td>Candidate</td><td>Game total</td><td><span class="pill warn">PARTIAL</span></td><td>Official free forecasts exist (S11). No official stadium roof/surface registry was verified, so the outdoor determination for each venue is not yet sourced.</td><td>G1, G2, G3, G4, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>NOT RUN.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST05</td><td>Two-leg same-game combo</td><td>Candidate</td><td>Combo</td><td><span class="pill bad">BLOCKED</span></td><td>Requires the same pairing to be observed many times. That joint dataset does not exist in this repo.</td><td>G1, G2, G3, G4, G5, G6, G7</td><td class="blank" title="Not confirmed by an official source">—</td><td>BLOCKED at G7.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST06</td><td>Player-prop combo</td><td>Candidate</td><td>Prop</td><td><span class="pill bad">BLOCKED</span></td><td>No player-level historical log is captured, and no prop line source exists. Q11 applies.</td><td>G1, G2, G3, G4, G5, G6, G7</td><td class="blank" title="Not confirmed by an official source">—</td><td>BLOCKED at G1 and G7.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr></tbody></table></div>
+</section>
 
-    <h2>Strategy table</h2>
-    <div class="filter-bar">
-      <input type="text" id="strat-filter" data-filter="strategies-table" placeholder="Filter by strategy ID, name, or type&#8230;">
-      <span class="count" id="strategies-table-count"></span>
-    </div>
+<section>
+<h2>Ranking rule, fixed in advance</h2>
+<p>The ranking formula is published now, before any result exists, so it cannot be chosen to suit an outcome:</p>
+<ol class="tight">
+<li>An entry is <em>unranked</em> until it passes gates G1 to G6. Blocked or partially-gated entries are shown
+as unranked and are excluded from the ordered table.</li>
+<li>Among ranked entries, order by <strong>calibration error</strong> ascending — the mean absolute gap between
+stated probability and realised frequency, across probability buckets.</li>
+<li>Break ties by <strong>larger validated sample</strong>, then by <strong>lower model complexity</strong>.</li>
+<li>Ties are never broken by profit. Profit is reported, never ranked on, because over an 18-week season it is
+dominated by variance.</li>
+</ol>
+<p>Rewards are position and a badge. There is no money, no entry fee, no wagering and no odds on this site.
+The reason is set out as open question Q14 and suggestion SG11 rather than answered here.</p>
+</section>
 
-    <table id="strategies-table" class="sortable">
-      <thead>
-        <tr>
-          <th class="nosort">Strategy ID</th>
-          <th class="nosort">Type</th>
-          <th class="nosort">Name</th>
-          <th class="nosort">Description</th>
-          <th class="nosort">Signal source</th>
-          <th class="nosort">Validation gates (all must pass)</th>
-          <th class="nosort">Max legs</th>
-          <th class="nosort">Correlation cap</th>
-          <th class="nosort">Rec. stake (Kelly)</th>
-          <th class="nosort">Status</th>
-          <th class="nosort">Source / notes</th>
-          <th class="nosort">Verified</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>SB-01</strong></td><td>Single bet</td><td>Closing-line-value fade</td>
-          <td>Bet opposite late steam when line moves &gt;1 point with no new injury info; targets overreaction.</td>
-          <td>Opening vs closing line; injury-report delta</td>
-          <td>(1) line movement &gt;1 pt since open, (2) no starter injury announced same window, (3) n&gt;=30 setups, (4) edge &gt;2% after vig, (5) out-of-sample pass</td>
-          <td>1</td><td>n/a (single)</td><td>1&ndash;2%</td><td>Analytical</td><td>Documented validation logic</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-        <tr>
-          <td><strong>SB-02</strong></td><td>Single bet</td><td>Backup-QB starter-out fade</td>
-          <td>Fade the team whose starting QB is ruled Out; backup underperforms starter baseline.</td>
-          <td>Injury report (Game Status = Out at QB)</td>
-          <td>(1) starter QB = Out, (2) backup &lt;=8 NFL games, (3) opposing defense vs QB bottom 10 by EPA, (4) total not weather-inflated, (5) edge &gt;2%</td>
-          <td>1</td><td>n/a (single)</td><td>1&ndash;2%</td><td>Analytical</td><td>Injury status via nfl.com/injuries/</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-        <tr>
-          <td><strong>SB-03</strong></td><td>Single bet</td><td>Home underdog + depth advantage</td>
-          <td>Back home team getting points when a visiting starter at LT/Edge/CB1 is Out/Doubtful and home depth is intact.</td>
-          <td>Injury report; depth chart starters/backups</td>
-          <td>(1) visitor LT/Edge/CB1 = Out/Doubtful, (2) home depth intact at same position, (3) home dog &lt;= +3.5, (4) edge &gt;2%, (5) n&gt;=20</td>
-          <td>1</td><td>n/a (single)</td><td>1&ndash;2%</td><td>Analytical</td><td>Depth status via roster + injury report; depth order unverified</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-        <tr>
-          <td><strong>PARL-01</strong></td><td>Parlay</td><td>Game winner + total (same game)</td>
-          <td>Two-leg same-game parlay: moneyline winner paired with over/under total.</td>
-          <td>Same game; line movement; injury report</td>
-          <td>(1) each leg edge &gt;2%, (2) winner-total correlation &lt;= 0.30, (3) exactly 2 legs, (4) no key starter Out on either team, (5) combined edge &gt;2%</td>
-          <td>2</td><td>0.30</td><td>0.5&ndash;1%</td><td>Analytical</td><td>Correlation cap is analytical</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-        <tr>
-          <td><strong>PARL-02</strong></td><td>Parlay</td><td>Divisional double</td>
-          <td>Two moneyline legs across two divisional games on the same slate (independent games).</td>
-          <td>Independent games; injury reports on all 4 teams</td>
-          <td>(1) each leg edge &gt;2%, (2) cross-game correlation ~0 (independent games), (3) exactly 2 legs, (4) no starter QB Out on any of 4 teams, (5) combined edge &gt;3%</td>
-          <td>2</td><td>0.05 (independent)</td><td>0.5&ndash;1%</td><td>Analytical</td><td>Independent-game assumption is analytical</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-        <tr>
-          <td><strong>PROP-01</strong></td><td>Player-prop combo</td><td>WR1 receiving yards + team total (same game)</td>
-          <td>Same-game player prop: lead WR over receiving yards paired with team total over.</td>
-          <td>High same-game offensive correlation; validate before combining</td>
-          <td>(1) WR1 target share &gt;=20%, (2) team-total edge &gt;2%, (3) WR vs team-total correlation &lt;= 0.70, (4) starting QB active (not Out), (5) opposing CB1 not Out</td>
-          <td>2</td><td>0.70</td><td>0.25&ndash;0.75%</td><td>Analytical</td><td>Correlation cap analytical; player status via nfl.com/injuries/</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-        <tr>
-          <td><strong>PROP-02</strong></td><td>Player-prop combo</td><td>QB passing yards + WR1 receiving yards (same game)</td>
-          <td>Same-game quarterback and lead receiver passing/receiving yards combo.</td>
-          <td>QB&ndash;WR connection; target volume; injury report</td>
-          <td>(1) QB active and starting, (2) WR1 target share &gt;=18%, (3) QB&ndash;WR yardage correlation &lt;= 0.65, (4) no starting OT Out (pass protection), (5) edge &gt;2% each leg</td>
-          <td>2</td><td>0.65</td><td>0.25&ndash;0.75%</td><td>Analytical</td><td>Correlation cap analytical; injury status via nfl.com/injuries/</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-        <tr>
-          <td><strong>PROP-03</strong></td><td>Player-prop combo</td><td>RB rushing yards + team points (same game)</td>
-          <td>Same-game RB rushing yards over paired with team points over.</td>
-          <td>RB volume; game script; team total</td>
-          <td>(1) RB is starter (depth chart RB1), (2) team-total edge &gt;2%, (3) RB vs team-points correlation &lt;= 0.60, (4) opposing run defense bottom 10 by EPA, (5) edge &gt;2% each leg</td>
-          <td>2</td><td>0.60</td><td>0.25&ndash;0.75%</td><td>Analytical</td><td>Depth-chart starter unverified; correlation cap analytical</td><td><span class="badge badge-unverified">Unverified (analytical)</span></td>
-        </tr>
-      </tbody>
-    </table>
-    <p class="count"><strong>8 strategies</strong> (3 single bet, 2 parlay, 3 player-prop combos). Source: data/strategies.csv &mdash; analytical research, not an official NFL source.</p>
+<section>
+<h2>Product types and the extra gate each one carries</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>Product</th><th>Extra requirement</th><th>Status today</th></tr></thead><tbody><tr><td>Single bet</td><td>A benchmark price to define edge</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Parlay</td><td>Every leg validated independently, plus joint correlation</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop</td><td>Player-level historical logs</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop combo</td><td>Prop legs plus pairwise joint outcomes</td><td><span class="pill bad">BLOCKED</span></td></tr></tbody></table></div>
+</section>
 
-    <h2>Correlation values (risk-management reference)</h2>
-    <table class="sortable">
-      <thead>
-        <tr><th class="nosort">Bet pair</th><th class="nosort">Context</th><th class="nosort">Correlation value (estimate)</th><th class="nosort">Basis</th><th class="nosort">Source</th><th class="nosort">Verified</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Same-game moneyline winner + total</td><td>Same NFL game</td><td>0.10 &ndash; 0.15</td><td>Low positive</td><td>Analytical estimate (betting-market convention)</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>Team moneyline + same-team WR yards prop</td><td>Same team, same game</td><td>0.55 &ndash; 0.75</td><td>High</td><td>Analytical estimate</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>QB passing yards + same-team WR1 receiving yards</td><td>Same team, same game</td><td>0.50 &ndash; 0.65</td><td>High</td><td>Analytical estimate</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>RB rushing yards + team total points</td><td>Same team, same game</td><td>0.40 &ndash; 0.55</td><td>Moderate-high</td><td>Analytical estimate</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>WR1 receiving yards + team total (Over)</td><td>Same team, same game</td><td>0.60 &ndash; 0.75</td><td>High</td><td>Analytical estimate</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>Two moneyline legs on independent games</td><td>Different games</td><td>~0.00</td><td>Independent outcomes</td><td>Analytical assumption</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>Parlay same-game winner + total (cap)</td><td>Risk-management threshold</td><td>&lt;= 0.30</td><td>Max combined correlation allowed</td><td>Analytical risk rule</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-      </tbody>
-    </table>
-    <p class="count"><strong>7 correlation entries.</strong> All are analytical estimates &mdash; none can be confirmed from an official NFL source, so all are flagged unverified.</p>
-  </section>
 </main>
-
-<footer>
-  <div class="wrap">
-    <div>FL1 &mdash; NFL Lines Origination Strategies. Analytical content; not official NFL content.</div>
-    <div>Injury cross-reference: <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener" style="color:#93c5fd;">nfl.com/injuries/</a></div>
-  </div>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
 </footer>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>
