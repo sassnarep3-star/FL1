@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html" class="on">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main">
+<section><h1>Suggestions</h1><p class="lead">A review surface, not a task list. Each entry states the problem, the proposal, the evidence behind it, its cost and risk, and the options available — then recommends one. Nothing here has been implemented as a change to the analysis; these are paths for someone to choose between.</p><div class="callout"><p><strong>How to use this page.</strong> Read the options, not just the recommendation. Every recommendation is reversible, and the reversibility of each one is stated, so a wrong choice is cheap to undo.</p></div><section><h2>At a glance</h2><div class="twrap"><table class="dense"><thead><tr><th>ID</th><th>Suggestion</th><th>Category</th><th>Effort</th><th>Risk</th><th>Depends on</th></tr></thead><tbody><tr><td><a href="#SG01">SG01</a></td><td>Publish a fair value only, never a fake market price</td><td>Trust</td><td>Low</td><td>Low</td><td>Q03</td></tr><tr><td><a href="#SG02">SG02</a></td><td>Grade every strategy on calibration first, profit second</td><td>Method</td><td>Medium</td><td>Low</td><td>Q09, Q10, Q19</td></tr><tr><td><a href="#SG03">SG03</a></td><td>Freeze predictions before kickoff with a cryptographic seal</td><td>Method</td><td>Low</td><td>Very low</td><td>Q02</td></tr><tr><td><a href="#SG04">SG04</a></td><td>Split the backup-deficiency feature into &#x27;observed absence&#x27; and &#x27;derived depth&#x27;</td><td>Injuries</td><td>High</td><td>Medium</td><td>Q04, Q05</td></tr><tr><td><a href="#SG05">SG05</a></td><td>Add a Flagged for Review page as a first-class section</td><td>Trust</td><td>Low</td><td>Very low</td><td class="blank" title="Not confirmed by an official source">—</td></tr><tr><td><a href="#SG06">SG06</a></td><td>Adopt walk-forward validation with a frozen, access-logged holdout</td><td>Method</td><td>Medium</td><td>Low</td><td>Q12</td></tr><tr><td><a href="#SG07">SG07</a></td><td>Start with team totals, and defer parlays until legs are individually validated</td><td>Scope</td><td>Medium</td><td>Low</td><td>Q01, Q11</td></tr><tr><td><a href="#SG08">SG08</a></td><td>Require every strategy to beat a published naive baseline</td><td>Method</td><td>Low</td><td>Low</td><td>Q19</td></tr><tr><td><a href="#SG09">SG09</a></td><td>Timestamp and never overwrite every injury snapshot</td><td>Injuries</td><td>Low</td><td>Very low</td><td>Q06</td></tr><tr><td><a href="#SG10">SG10</a></td><td>Make the site a static dashboard with no build step</td><td>Operations</td><td>Medium</td><td>Very low</td><td class="blank" title="Not confirmed by an official source">—</td></tr><tr><td><a href="#SG11">SG11</a></td><td>Keep the leaderboard non-monetary until a legal review exists</td><td>Legal</td><td>Very low</td><td>Low if adopted; high if ignored</td><td>Q13, Q14</td></tr><tr><td><a href="#SG12">SG12</a></td><td>Separate &#x27;observed&#x27; from &#x27;derived&#x27; in every table, visibly</td><td>Trust</td><td>Low</td><td>Very low</td><td class="blank" title="Not confirmed by an official source">—</td></tr><tr><td><a href="#SG13">SG13</a></td><td>Expand depth coverage one club at a time, starting with a single worked example</td><td>Injuries</td><td>Low per club</td><td>Low</td><td>Q04</td></tr><tr><td><a href="#SG14">SG14</a></td><td>Reconcile contradictions by publishing them, never by choosing silently</td><td>Data quality</td><td>Low</td><td>Very low</td><td>Q08</td></tr><tr><td><a href="#SG15">SG15</a></td><td>Add a one-page decision brief for each open question</td><td>Operations</td><td>Low</td><td>Very low</td><td class="blank" title="Not confirmed by an official source">—</td></tr></tbody></table></div></section>
+<section class="sugg" id="SG01">
+  <h2><span class="sid">SG01</span> Publish a fair value only, never a fake market price</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>The brief asks to originate lines. There is no official source of market prices in this repo, so any displayed price that looks like a market quote would be invented.</p>
+      <h3>Evidence</h3><p class="evidence">data/sources.tsv S03 — official standings supply team scoring, but no official price feed was found.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Output one number per game: our fair-value probability, with an explicit uncertainty band and a timestamp. Display the market price column as blank until the user supplies a benchmark feed.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Fair value only, price column blank and labelled. (Recommended)</li><li>B. Fair value plus a user-supplied price feed.</li><li>C. Wait for a price feed before publishing anything.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. A blank, labelled column is honest and costs nothing. Option C delays all work on the strength of a data source that was never promised.</p></div>
+  <p class="muted">Expected impact: Protects the whole site from being built on an invented number.</p>
+</section>
+<section class="sugg" id="SG02">
+  <h2><span class="sid">SG02</span> Grade every strategy on calibration first, profit second</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>Ranking strategies by win rate or units won rewards luck. Over a few dozen bets the noise band is wider than any realistic edge.</p>
+      <h3>Evidence</h3><p class="evidence">data/questions.json Q09, Q10 — the season is 18 weeks and Week 10 is in progress (S05).</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Make calibration the primary gate: bucket predictions by stated probability and check that the realised hit rate matches. Rank on calibration error and sample size, and show profit only after the sample gate is met.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Medium</span> &nbsp; Risk <span class="pill">Low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Calibration-primary ranking. (Recommended)</li><li>B. Profit-primary ranking with a minimum sample gate.</li><li>C. Rank on both and display them side by side without combining.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A, with C as a display layer. Profit-first ranking will surface a lucky strategy in week one and destroy the credibility of the board.</p></div>
+  <p class="muted">Expected impact: Turns the leaderboard from a lottery into a measurement.</p>
+</section>
+<section class="sugg" id="SG03">
+  <h2><span class="sid">SG03</span> Freeze predictions before kickoff with a cryptographic seal</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>A strategy record is worthless if a prediction can be edited after the result is known. Without a seal, no reader can distinguish a genuine forecast from hindsight.</p>
+      <h3>Evidence</h3><p class="evidence">data/questions.json Q02, Q12.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Write each prediction to a timestamped file before kickoff and record a SHA-256 hash of the prediction set. Publish the hashes. After the game, publish the results; the hash proves the forecast did not change.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Very low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Hash-sealed prediction log committed before kickoff. (Recommended)</li><li>B. Public timestamping service.</li><li>C. No seal, trust the author.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. It is nearly free, and it is the single cheapest thing that makes the leaderboard credible.</p></div>
+  <p class="muted">Expected impact: Converts claims into an auditable record.</p>
+</section>
+<section class="sugg" id="SG04">
+  <h2><span class="sid">SG04</span> Split the backup-deficiency feature into &#x27;observed absence&#x27; and &#x27;derived depth&#x27;</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>The brief wants 2nd/3rd/4th-string replacements tracked. There is no league-wide official depth chart (S13 returns 404), no official snap-count feed in this repo, and club depth charts are self-labelled &#x27;Unofficial&#x27; (S08).</p>
+      <h3>Evidence</h3><p class="evidence">data/sources.tsv S13 (404), S08 (club page titled &#x27;Unofficial Depth Chart&#x27;), S07 (roster status codes), S01 (injury report).</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Show two clearly separated tables. (1) Observed absence: straight from the official injury report, no inference. (2) Derived depth: built from roster status codes plus each club&#x27;s own published depth chart, and labelled derived everywhere it appears.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">High</span> &nbsp; Risk <span class="pill">Medium</span><br>
+      Reversibility: Reversible — the derived layer can be removed without touching the observed layer.</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Two-layer build, observed and derived kept strictly separate. (Recommended)</li><li>B. Observed absence only; defer depth entirely.</li><li>C. Build derived depth and present it as if it were official.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. Option C is the trap: it would look like the most impressive feature on the site while being the least defensible.</p></div>
+  <p class="muted">Expected impact: Delivers the requested feature without asserting something the sources cannot support.</p>
+</section>
+<section class="sugg" id="SG05">
+  <h2><span class="sid">SG05</span> Add a Flagged for Review page as a first-class section</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>Irregularities and unverifiable values currently have nowhere to live. The alternative is quietly filling them in, which is exactly what the brief forbids.</p>
+      <h3>Evidence</h3><p class="evidence">data/sources.tsv S12-S14 (404s), data/questions.json Q08 (cross-source contradictions).</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>A permanent page listing every unverified value, every 404 source, every cross-source contradiction, and every open question, each with the source link that was attempted and the date. Nothing is hidden and nothing is guessed.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Very low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Dedicated page, always populated, never empty. (Recommended)</li><li>B. A footnote at the bottom of the home page.</li><li>C. Leave unreviewed items out of the site entirely.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. It is the mechanism that lets the rest of the site be trusted.</p></div>
+  <p class="muted">Expected impact: Makes the honesty of the dataset visible instead of asserted.</p>
+</section>
+<section class="sugg" id="SG06">
+  <h2><span class="sid">SG06</span> Adopt walk-forward validation with a frozen, access-logged holdout</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>Tuning and scoring on the same weeks produces an optimistic number that will not survive contact with future games.</p>
+      <h3>Evidence</h3><p class="evidence">data/questions.json Q12.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Train on weeks 1..k, predict week k+1, roll forward. Never shuffle. Keep the final weeks in a separate frozen file and log every single time it is read.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Medium</span> &nbsp; Risk <span class="pill">Low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Strict walk-forward with a logged holdout. (Recommended)</li><li>B. k-fold cross-validation on shuffled games.</li><li>C. Single train/test split.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. Option B leaks future information into the past in a sport with strong week-to-week drift.</p></div>
+  <p class="muted">Expected impact: Prevents the most common way an in-house model exaggerates its own accuracy.</p>
+</section>
+<section class="sugg" id="SG07">
+  <h2><span class="sid">SG07</span> Start with team totals, and defer parlays until legs are individually validated</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>The brief asks for single bets, parlays and prop combos at once. Parlays multiply variance, so a failed parlay does not reveal which leg was wrong, and props need player-level joint data this repo does not yet have.</p>
+      <h3>Evidence</h3><p class="evidence">data/questions.json Q01, Q11.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Sequence the work: team-level single market first, then player props once player data exists, then 2-leg combos only after each leg independently clears its own gate, then correlation estimation.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Medium</span> &nbsp; Risk <span class="pill">Low</span><br>
+      Reversibility: Fully reversible — it is an ordering, not a removal.</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Sequenced build. (Recommended)</li><li>B. All three product types in parallel.</li><li>C. Singles only, forever.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. Option B is how projects end up with a parlay board backed by three unvalidated legs.</p></div>
+  <p class="muted">Expected impact: Keeps every published number downstream of a validated one.</p>
+</section>
+<section class="sugg" id="SG08">
+  <h2><span class="sid">SG08</span> Require every strategy to beat a published naive baseline</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>A model that only rediscovers &#x27;the better team usually wins&#x27; looks skilful when compared to nothing.</p>
+      <h3>Evidence</h3><p class="evidence">data/sources.tsv S03 — official PF/PA for all 32 clubs.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Publish a named baseline, for example a points-differential rating from official season scoring. A strategy is only ranked if it beats that baseline out of sample.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Mandatory baseline comparison. (Recommended)</li><li>B. Baseline shown for information but not required.</li><li>C. No baseline.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. Without it the leaderboard measures effort, not edge.</p></div>
+  <p class="muted">Expected impact: Makes the leaderboard&#x27;s ranking mean something.</p>
+</section>
+<section class="sugg" id="SG09">
+  <h2><span class="sid">SG09</span> Timestamp and never overwrite every injury snapshot</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>The injury report changes several times a week. A single undated snapshot cannot support any claim about timing, and mixing snapshots introduces look-ahead bias.</p>
+      <h3>Evidence</h3><p class="evidence">data/sources.tsv S01; data/questions.json Q06.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>One immutable file per capture, named by UTC timestamp. All analysis reads a specific snapshot and records which one.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Very low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Immutable timestamped snapshots. (Recommended)</li><li>B. One file overwritten each week.</li><li>C. Capture only once, at the end of the week.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. Option C discards the entire within-week signal, which is the only part that is not already in the closing price.</p></div>
+  <p class="muted">Expected impact: Preserves the ability to ask timing questions later.</p>
+</section>
+<section class="sugg" id="SG10">
+  <h2><span class="sid">SG10</span> Make the site a static dashboard with no build step</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>A build pipeline introduces a failure mode where the live site silently lags the repository.</p>
+      <h3>Evidence</h3><p class="evidence">GitHub Pages for this repository is already configured on the main branch root and reports a built status.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Plain HTML, one stylesheet, small scripts that read the committed data files at load time. No bundler, no framework, no server. GitHub Pages serves the repository root directly.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Medium</span> &nbsp; Risk <span class="pill">Very low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Static, no build step. (Recommended)</li><li>B. Static site generator with a build action.</li><li>C. Single-page app with a bundler.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. Nothing to break, nothing to version, and Pages serves it as-is.</p></div>
+  <p class="muted">Expected impact: The published site cannot drift from the committed data.</p>
+</section>
+<section class="sugg" id="SG11">
+  <h2><span class="sid">SG11</span> Keep the leaderboard non-monetary until a legal review exists</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>The brief asks for rewards. A prize pool turns a statistics page into something a gambling regulator may take an interest in, and the rules are jurisdiction-specific.</p>
+      <h3>Evidence</h3><p class="evidence">data/questions.json Q14.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Rewards are ranking position and a badge. No money, no entry fee, no wagering, no odds. Record the legal question openly rather than answering it.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Very low</span> &nbsp; Risk <span class="pill">Low if adopted; high if ignored</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Non-monetary leaderboard, legal question flagged. (Recommended)</li><li>B. Prize pool after review.</li><li>C. No leaderboard at all.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. It delivers the requested competitive structure with none of the exposure.</p></div>
+  <p class="muted">Expected impact: Keeps the project squarely informational.</p>
+</section>
+<section class="sugg" id="SG12">
+  <h2><span class="sid">SG12</span> Separate &#x27;observed&#x27; from &#x27;derived&#x27; in every table, visibly</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>Mixing values read directly from a source with values computed from them makes the whole table unauditable.</p>
+      <h3>Evidence</h3><p class="evidence">All data files in this repo.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Tag each row with its provenance: OBSERVED (read verbatim from a linked official page) or DERIVED (computed, with the formula stated). Blanks are never filled.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Very low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Visible provenance tag per table. (Recommended)</li><li>B. Provenance documented in a separate methodology page only.</li><li>C. No provenance marking.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. A reader should never have to guess whether a number was read or computed.</p></div>
+  <p class="muted">Expected impact: Makes line-by-line verification possible, which is what the brief asks for.</p>
+</section>
+<section class="sugg" id="SG13">
+  <h2><span class="sid">SG13</span> Expand depth coverage one club at a time, starting with a single worked example</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>32 clubs times their own depth chart format is a large, error-prone surface. Attempting all of it at once would produce 32 half-checked tables.</p>
+      <h3>Evidence</h3><p class="evidence">data/sources.tsv S08, S07; data/depth-kc.tsv.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Ship one club fully worked and verified, with the matchup relevance explained, then expand club by club behind the same validation.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low per club</span> &nbsp; Risk <span class="pill">Low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. One verified club first, then expand. (Recommended)</li><li>B. All 32 clubs immediately.</li><li>C. None until all 32 are ready.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. It demonstrates the method end-to-end and keeps every published cell checkable.</p></div>
+  <p class="muted">Expected impact: Proves the approach before scaling it.</p>
+</section>
+<section class="sugg" id="SG14">
+  <h2><span class="sid">SG14</span> Reconcile contradictions by publishing them, never by choosing silently</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>Official pages disagree with each other in this dataset (a Rams defender&#x27;s team attribution, and a Rams defender who appears both as active and as a non-participant).</p>
+      <h3>Evidence</h3><p class="evidence">data/questions.json Q08; data/sources.tsv S01, S10, S15.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>Leave both values as captured, link both sources, and list the contradiction on the Flagged for Review page with a note that no resolution was applied.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Very low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Publish both, resolve nothing. (Recommended)</li><li>B. Pick the newer source.</li><li>C. Drop the player from the table.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. Any silent choice would be an unlogged inference, which is what the brief prohibits.</p></div>
+  <p class="muted">Expected impact: Keeps the dataset honest and makes the source&#x27;s own errors reviewable.</p>
+</section>
+<section class="sugg" id="SG15">
+  <h2><span class="sid">SG15</span> Add a one-page decision brief for each open question</h2>
+  <div class="cols">
+    <div>
+      <h3>The problem</h3><p>The open-questions list is long. A decision-maker reading twenty questions has no fast way to choose a path.</p>
+      <h3>Evidence</h3><p class="evidence">This file; data/questions.json.</p>
+    </div>
+    <div>
+      <h3>The proposal</h3><p>The Suggestions page groups each question with the options, the trade-off, a recommendation and the cost of being wrong, so a reviewer can approve or reject in one pass.</p>
+      <h3>Cost and risk</h3>
+      <p>Effort <span class="pill">Low</span> &nbsp; Risk <span class="pill">Very low</span><br>
+      Reversibility: Fully reversible</p>
+    </div>
+  </div>
+  <h3>Options</h3>
+  <ol class="opts"><li>A. Grouped decision brief. (Recommended)</li><li>B. Flat list of questions only.</li><li>C. Free-text memo.</li></ol>
+  <div class="callout ok"><p><strong>Recommendation.</strong> A. It is the difference between a list of worries and a set of choices.</p></div>
+  <p class="muted">Expected impact: Makes the review step actually completable.</p>
+</section></section>
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

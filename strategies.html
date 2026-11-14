@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="line-origination.html">Line Origination</a><a href="strategies.html" class="on">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main" class="wide">
+
+<section>
+<h1>Strategy Leaderboard</h1>
+<p class="lead">A competition with gates. A strategy is listed, then it must earn a rank by clearing every gate
+in <a href="validation.html">Validation</a>. Until then it has no score, and the board stays empty.</p>
+<div class="callout bad">
+  <p><strong>0 of 6 entries carry a result.</strong> No backtest has been executed and no performance figure is
+  claimed anywhere in this repository. The leaderboard will stay empty until a strategy clears the gates with a
+  price source supplied. That is the design, not a delay.</p>
+</div>
+</section>
+
+<section>
+<h2>The board</h2>
+<div class="twrap"><p class="caption">A blank Result cell means no result exists. A dash would mean the same thing; here the column is intentionally empty rather than zero.</p><table class="dense searchable"><thead><tr><th>ID</th><th>Strategy</th><th>Role</th><th>Market</th><th>Data status</th><th>What the data allows</th><th>Gates</th><th>Result</th><th>Result note</th><th>Source</th></tr></thead><tbody><tr><td>ST01</td><td>Points-differential baseline</td><td>BASELINE — not a candidate for the leaderboard</td><td>Team spread / winner</td><td><span class="pill ok">AVAILABLE</span></td><td>Official 2026 league standings give PF, PA and games played for all 32 clubs (S03).</td><td>G1, G2, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>NOT RUN. No backtest has been executed; no numeric result is claimed.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST02</td><td>Availability shock</td><td>Candidate</td><td>Team spread</td><td><span class="pill warn">PARTIAL</span></td><td>Injury status is official and captured (S01). Depth rank is derived only (S08, S07). Snap counts are absent (Q05), so replacement magnitude cannot be measured yet, only assumed — and an assumed magnitude is exactly what this project refuses to publish.</td><td>G1, G2, G3, G4, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>BLOCKED at G2 and G6.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST03</td><td>Rest and travel asymmetry</td><td>Candidate</td><td>Team spread</td><td><span class="pill warn">PARTIAL</span></td><td>Schedules give kickoff times and venues (S04) and the league calendar confirms two international games in consecutive weeks (S05). A complete prior-game date table per club is not yet captured.</td><td>G1, G2, G3, G4, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>NOT RUN.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST04</td><td>Weather-adjusted total</td><td>Candidate</td><td>Game total</td><td><span class="pill warn">PARTIAL</span></td><td>Official free forecasts exist (S11). No official stadium roof/surface registry was verified, so the outdoor determination for each venue is not yet sourced.</td><td>G1, G2, G3, G4, G5, G6</td><td class="blank" title="Not confirmed by an official source">—</td><td>NOT RUN.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST05</td><td>Two-leg same-game combo</td><td>Candidate</td><td>Combo</td><td><span class="pill bad">BLOCKED</span></td><td>Requires the same pairing to be observed many times. That joint dataset does not exist in this repo.</td><td>G1, G2, G3, G4, G5, G6, G7</td><td class="blank" title="Not confirmed by an official source">—</td><td>BLOCKED at G7.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>ST06</td><td>Player-prop combo</td><td>Candidate</td><td>Prop</td><td><span class="pill bad">BLOCKED</span></td><td>No player-level historical log is captured, and no prop line source exists. Q11 applies.</td><td>G1, G2, G3, G4, G5, G6, G7</td><td class="blank" title="Not confirmed by an official source">—</td><td>BLOCKED at G1 and G7.</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Ranking rule, fixed in advance</h2>
+<p>The ranking formula is published now, before any result exists, so it cannot be chosen to suit an outcome:</p>
+<ol class="tight">
+<li>An entry is <em>unranked</em> until it passes gates G1 to G6. Blocked or partially-gated entries are shown
+as unranked and are excluded from the ordered table.</li>
+<li>Among ranked entries, order by <strong>calibration error</strong> ascending — the mean absolute gap between
+stated probability and realised frequency, across probability buckets.</li>
+<li>Break ties by <strong>larger validated sample</strong>, then by <strong>lower model complexity</strong>.</li>
+<li>Ties are never broken by profit. Profit is reported, never ranked on, because over an 18-week season it is
+dominated by variance.</li>
+</ol>
+<p>Rewards are position and a badge. There is no money, no entry fee, no wagering and no odds on this site.
+The reason is set out as open question Q14 and suggestion SG11 rather than answered here.</p>
+</section>
+
+<section>
+<h2>Product types and the extra gate each one carries</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>Product</th><th>Extra requirement</th><th>Status today</th></tr></thead><tbody><tr><td>Single bet</td><td>A benchmark price to define edge</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Parlay</td><td>Every leg validated independently, plus joint correlation</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop</td><td>Player-level historical logs</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop combo</td><td>Prop legs plus pairwise joint outcomes</td><td><span class="pill bad">BLOCKED</span></td></tr></tbody></table></div>
+</section>
+
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html" class="on">Flagged for Review</a></nav>
+</header>
+<main id="main">
+<section><h1>Flagged for Review</h1><p class="lead">Everything that could not be confirmed, everything that contradicts something else, and everything that was deliberately left blank. None of it is hidden and none of it is guessed.</p><div class="callout warn"><p><strong>14 items.</strong> Flagged items do not block the site; they are published so they can be reviewed after the site is live. Nothing on this list has been silently resolved.</p></div><section><h2>Index</h2><div class="twrap"><table class="dense"><thead><tr><th>ID</th><th>Kind</th><th>Item</th><th>Severity</th><th>Sources</th></tr></thead><tbody><tr><td><a href="#F01">F01</a></td><td>Unreachable source</td><td>2017 NFL Personnel (Injury) Report Policy PDF</td><td>Medium</td><td>S12</td></tr><tr><td><a href="#F02">F02</a></td><td>Unreachable source</td><td>League-wide depth charts page</td><td>High</td><td>S13</td></tr><tr><td><a href="#F03">F03</a></td><td>Unreachable source</td><td>Football Operations injury-report landing page</td><td>Low</td><td>S14</td></tr><tr><td><a href="#F04">F04</a></td><td>Cross-source contradiction</td><td>Myles Garrett — club attribution</td><td>Medium</td><td>S01, S10</td></tr><tr><td><a href="#F05">F05</a></td><td>Cross-source contradiction</td><td>Aaron Donald — listed as a non-participant while shown as active</td><td>Medium</td><td>S01, S15</td></tr><tr><td><a href="#F06">F06</a></td><td>Coverage gap</td><td>Four clubs absent from the Week 10 injury snapshot</td><td>Low</td><td>S01, S04</td></tr><tr><td><a href="#F07">F07</a></td><td>Method hazard</td><td>One Week 10 game was already final at capture time</td><td>Medium</td><td>S01, S04</td></tr><tr><td><a href="#F08">F08</a></td><td>Verification limit</td><td>No benchmark price source exists in this repository</td><td>High</td><td>S03</td></tr><tr><td><a href="#F09">F09</a></td><td>Coverage gap</td><td>No official snap counts available</td><td>High</td><td>S01</td></tr><tr><td><a href="#F10">F10</a></td><td>Source qualification</td><td>Club depth charts are self-described as unofficial</td><td>Medium</td><td>S08</td></tr><tr><td><a href="#F11">F11</a></td><td>Data hazard</td><td>Player-name collisions make name joins unsafe</td><td>Medium</td><td>S01</td></tr><tr><td><a href="#F12">F12</a></td><td>Verification limit</td><td>Legal and regulatory sources not verified</td><td>Medium</td><td>—</td></tr><tr><td><a href="#F13">F13</a></td><td>Verification limit</td><td>Terms of use for automated fetching not reviewed</td><td>Medium</td><td>S01, S07, S08</td></tr><tr><td><a href="#F14">F14</a></td><td>Verification limit</td><td>Single-season, single-snapshot dataset</td><td>High</td><td>S01, S03</td></tr></tbody></table></div></section>
+<section class="flag" id="F01">
+  <h2><span class="sid">F01</span> 2017 NFL Personnel (Injury) Report Policy PDF</h2>
+  <p><span class="pill">Unreachable source</span> Severity <span class="pill warn">Medium</span></p>
+  <p>The policy document that every secondary source cites for injury-designation definitions returned HTTP 404 (&#x27;FLAG ON THE PLAY&#x27;) from operations.nfl.com on 2026-11-14. Consequently this site does not quote the policy text and does not assert what &#x27;Questionable&#x27; or &#x27;Doubtful&#x27; officially mean. Only the categories observed on the live report are recorded.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S12" title="2017 NFL Personnel (Injury) Report Policy (PDF)">S12</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> No definition text published. Category labels reproduced exactly as observed.</p></div>
+</section>
+<section class="flag" id="F02">
+  <h2><span class="sid">F02</span> League-wide depth charts page</h2>
+  <p><span class="pill">Unreachable source</span> Severity <span class="pill bad">High</span></p>
+  <p>https://www.nfl.com/depth-charts/ returns HTTP 404. There is no league-wide official depth chart at that address. All depth information on this site therefore comes from club sites or from roster status codes, and is labelled DERIVED.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S13" title="NFL league-wide Depth Charts page">S13</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Depth presented as a derived layer only, never as official.</p></div>
+</section>
+<section class="flag" id="F03">
+  <h2><span class="sid">F03</span> Football Operations injury-report landing page</h2>
+  <p><span class="pill">Unreachable source</span> Severity <span class="pill ">Low</span></p>
+  <p>https://operations.nfl.com/health-safety/injury-report/ returns HTTP 404. An official policy landing page could not be located at this path.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S14" title="NFL Football Operations — Injury Report page">S14</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> None. Recorded for completeness.</p></div>
+</section>
+<section class="flag" id="F04">
+  <h2><span class="sid">F04</span> Myles Garrett — club attribution</h2>
+  <p><span class="pill">Cross-source contradiction</span> Severity <span class="pill warn">Medium</span></p>
+  <p>NFL.com&#x27;s Week 10 injury report lists Myles Garrett as an LB on the Los Angeles Rams with a knee designation and a &#x27;resting player&#x27; note. NFL.com&#x27;s Next Gen Stats front page carries a 2026 Rams article titled &#x27;Rams&#x27; Sean McVay: No timeline on Myles Garrett&#x27;s return post knee surgery&#x27;, and a separate NFL.com article is headlined &#x27;How does Myles Garrett fit into Rams defense?&#x27;. These agree on the Rams but the injury-row note mixes a real knee injury with a rest designation, which the site will not attempt to untangle. No resolution applied.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a> <a class="src" href="sources.html#S10" title="NFL Next Gen Stats">S10</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Row published verbatim as captured. Both sources linked.</p></div>
+</section>
+<section class="flag" id="F05">
+  <h2><span class="sid">F05</span> Aaron Donald — listed as a non-participant while shown as active</h2>
+  <p><span class="pill">Cross-source contradiction</span> Severity <span class="pill warn">Medium</span></p>
+  <p>The Week 10 Rams injury table lists Aaron Donald (DT) as &#x27;Did Not Participate In Practice&#x27; with no injury and no game status. NFL.com&#x27;s own player profile for Aaron Donald shows him as an active Los Angeles Rams DE with 11 years of experience, and an NFL.com article states he unretired on Aug. 30 and planned a season debut. Both are official NFL.com pages and they cannot both be read at face value. No resolution applied.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a> <a class="src" href="sources.html#S15" title="NFL player profile — Aaron Donald">S15</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Row published verbatim. Profile linked alongside.</p></div>
+</section>
+<section class="flag" id="F06">
+  <h2><span class="sid">F06</span> Four clubs absent from the Week 10 injury snapshot</h2>
+  <p><span class="pill">Coverage gap</span> Severity <span class="pill ">Low</span></p>
+  <p>The captured Week 10 injury report covers 28 of 32 clubs. Chicago, Denver, Tampa Bay and Philadelphia are absent. All 28 clubs that do appear also appear in the 14-game Week 10 schedule capture. Whether those four clubs are on a bye or their reports were simply not posted at capture time could not be confirmed, because no official 2026 bye-week table was verified in this session.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a> <a class="src" href="sources.html#S04" title="NFL Schedules 2026 (by week)">S04</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Counts are always stated as &#x27;x of 28 captured clubs&#x27;, never as a league total.</p></div>
+</section>
+<section class="flag" id="F07">
+  <h2><span class="sid">F07</span> One Week 10 game was already final at capture time</h2>
+  <p><span class="pill">Method hazard</span> Severity <span class="pill warn">Medium</span></p>
+  <p>Washington at New York Giants kicked off Thursday 2026-11-12 and finished 24-21. Their injury tables are still shown in the Week 10 report. Using those rows as a pre-game signal would be look-ahead bias. They are the completed game&#x27;s report, not a forecast input.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a> <a class="src" href="sources.html#S04" title="NFL Schedules 2026 (by week)">S04</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Flagged so no analysis treats the completed game&#x27;s rows as forward-looking.</p></div>
+</section>
+<section class="flag" id="F08">
+  <h2><span class="sid">F08</span> No benchmark price source exists in this repository</h2>
+  <p><span class="pill">Verification limit</span> Severity <span class="pill bad">High</span></p>
+  <p>The league publishes results, statistics and schedules but not betting prices. No odds feed, historical closing line, or graded result set is present or was licensed for this session. Every edge, expected-value and closing-line-value field on this site is therefore blank. Nothing has been estimated or imputed to fill them.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> All price, edge and EV fields left blank and labelled. See question Q03 and suggestion SG01.</p></div>
+</section>
+<section class="flag" id="F09">
+  <h2><span class="sid">F09</span> No official snap counts available</h2>
+  <p><span class="pill">Coverage gap</span> Severity <span class="pill bad">High</span></p>
+  <p>Determining that a second- or third-string player actually replaced a starter requires snap share. No snap-count feed was located or verified. The deficiency model therefore reports official absence designations only, and does not claim that any specific backup played.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Deficiency magnitude left blank. See question Q05 and suggestion SG04.</p></div>
+</section>
+<section class="flag" id="F10">
+  <h2><span class="sid">F10</span> Club depth charts are self-described as unofficial</h2>
+  <p><span class="pill">Source qualification</span> Severity <span class="pill warn">Medium</span></p>
+  <p>The one club depth chart captured in full is headed &#x27;Kansas City Chiefs Unofficial Depth Chart&#x27; by the club itself. Its ordering is reproduced exactly, but it is not an official league ranking and must not be presented as one.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S08" title="Kansas City Chiefs Unofficial Depth Chart">S08</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Labelled DERIVED / UNOFFICIAL wherever it appears.</p></div>
+</section>
+<section class="flag" id="F11">
+  <h2><span class="sid">F11</span> Player-name collisions make name joins unsafe</h2>
+  <p><span class="pill">Data hazard</span> Severity <span class="pill warn">Medium</span></p>
+  <p>Two different players named Marcus Harris appear in the captured data: a Tennessee cornerback and a Kansas City defensive tackle. NFL player URLs disambiguate them with numeric suffixes, but plain names do not. Any join performed on player name alone will silently merge distinct people.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Rows kept separate. Any future join must key on the player URL, not the display name.</p></div>
+</section>
+<section class="flag" id="F12">
+  <h2><span class="sid">F12</span> Legal and regulatory sources not verified</h2>
+  <p><span class="pill">Verification limit</span> Severity <span class="pill warn">Medium</span></p>
+  <p>No gambling-regulator, tax or gaming-commission source was loaded or verified during this session. The site therefore makes no statement about legality, licensing or tax treatment in any jurisdiction, including the user&#x27;s location. Nothing on this site is a bet, an offer to wager, or bookmaking.</p>
+  <p class="evidence">Sources consulted: <span class="muted">no source — stated as a limitation</span></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Legal question recorded as open (Q14) and left unanswered. Leaderboard rewards kept non-monetary (SG11).</p></div>
+</section>
+<section class="flag" id="F13">
+  <h2><span class="sid">F13</span> Terms of use for automated fetching not reviewed</h2>
+  <p><span class="pill">Verification limit</span> Severity <span class="pill warn">Medium</span></p>
+  <p>Every capture in this session was a single page load. The terms of use and robots policy of nfl.com and of the 32 club sites were not reviewed, so no statement is made about whether scheduled automated collection would be permitted.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a> <a class="src" href="sources.html#S07" title="Kansas City Chiefs 2026 Roster">S07</a> <a class="src" href="sources.html#S08" title="Kansas City Chiefs Unofficial Depth Chart">S08</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> No scheduled collector was built. See question Q18.</p></div>
+</section>
+<section class="flag" id="F14">
+  <h2><span class="sid">F14</span> Single-season, single-snapshot dataset</h2>
+  <p><span class="pill">Verification limit</span> Severity <span class="pill bad">High</span></p>
+  <p>All data here comes from one 2026 season and, for injuries, one capture on one day. Nothing on this site has a multi-season history, so no claim of persistence over time can be made and no backtest has been run.</p>
+  <p class="evidence">Sources consulted: <a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a> <a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></p>
+  <div class="callout"><p><strong>What was done instead.</strong> Every strategy is marked NOT RUN or BLOCKED. No performance figure is displayed.</p></div>
+</section></section>
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
