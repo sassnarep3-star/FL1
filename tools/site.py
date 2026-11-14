@@ -236,6 +236,10 @@ def main():
     anything is implemented.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
+  <a class="card" href="docs/computed/index.html"><h3>Computed Lab</h3>
+    <p>A second, independently built sub-site: backtested strategy lab, correlation estimates and the
+    Week 10 board. Built by another session from its own <code>scripts/</code>; linked from here so it is
+    reachable from the root rather than only by URL.</p></a>
 </section>
 """ % (depth_cov["covered"], depth_cov["total"], depth_tot["rows"],
        depth_tot["startersWithStatus"],
