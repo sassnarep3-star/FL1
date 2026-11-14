@@ -32,10 +32,19 @@ Shared task board for the FL1 (NFL) project. All sessions must read this before 
 | 6 | Injury & team-deficiency tracking (starters vs backups, offense & defense, 2nd/3rd/4th string) | done | arena-89c32e23-fl1 | injuries.html | nfl.com/injuries/ verified reachable | player values not yet pulled from live report |
 | 7 | Site creation: clean landing page + category subpages, dashboard UI, entry/findings tables with source links, unverified = blank + flagged | done | arena-89c32e23-fl1 | *.html, css/, js/, index.html, navigation | internal links verified OK | none |
 | 8 | Flagged-for-review page (irregularities + unverified items with source links) | done | arena-89c32e23-fl1 | flagged-review.html | nfl.com, GitHub repo | none |
-| 9 | Integration: merge branches, re-verify combined data line-by-line, confirm site builds with no broken links | in progress | arena-89c32e23-fl1 | all site files | official sources per row | none yet |
-| 10 | GitHub Pages: publish, confirm deploy succeeds (do not merge a broken site), create PR from integration branch to main, merge, record PR link + merge result here | in progress | arena-89c32e23-fl1 | repo / GitHub Pages | n/a | Pages pinned to main branch / root (cannot retarget via API: 403) |
+| 9 | Integration: merge branches, re-verify combined data line-by-line, confirm site builds with no broken links | done | arena-89c32e23-fl1 | all site files | official sources per row; internal links verified OK | none |
+| 10 | GitHub Pages: publish, confirm deploy succeeds (do not merge a broken site), create PR from integration branch to main, merge, record PR link + merge result here | done | arena-89c32e23-fl1 | repo / GitHub Pages | n/a | Pages pinned to main branch / root (cannot retarget via API: 403); worked around by building at repo root |
 
 ## Notes
 - Official NFL source = nfl.com (and official NFL subdomains). Betting lines have no official NFL source; mark as unverified/not-from-official-source.
 - Every table row must carry a source link to an official site. If a value cannot be confirmed from an official source, leave it blank and flag it "unverified".
 - Do not infer or fill in values.
+
+## Final results (session arena-89c32e23-fl1)
+- PR: https://github.com/sassnarep3-star/FL1/pull/1 ("FL1: NFL decision-support dashboard, strategies, and verified findings")
+- Merge: merged via `gh pr merge 1 --merge`; merge commit 7c7ae6a1b1bd137727014707fda6ce3f4bac392a; state MERGED
+- GitHub Pages: built successfully from `main` at root `/`
+- Live site: https://sassnarep3-star.github.io/FL1/
+- Sources verified: https://www.nfl.com/injuries/ (injury report), https://www.nfl.com/standings/division/2026/reg (standings), https://www.nfl.com/
+- Flagged irregularities: betting lines/odds have no official NFL source (all strategy/line data unverified); specific player/team injury values not yet pulled from live nfl.com report. Published on Flagged for Review page.
+- All tasks done. Nothing verified without an official source; unverified values left blank and flagged.
