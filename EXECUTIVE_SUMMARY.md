@@ -109,3 +109,66 @@ python3 scripts/fetch_data.py && python3 scripts/build_availability.py \
 
 The last command exits non-zero if any table row lacks a source link, any internal link is broken,
 any gate column is malformed, or any reward is paid to an unapproved strategy.
+
+---
+
+## Executive summary addendum — session `arena-5876146b-fl1` (2026-11-14)
+
+This session closed the eight structural gaps the brief calls out. Everything below is built,
+verified and live on the site; every number is reproducible from the committed scripts.
+
+### What now exists (with where to look)
+
+1. **Price-snapshot store** — an append-only, provenance-requiring observation store for opening
+   and closing numbers of every market we originate (`engine/price_snapshots.py`, PR #22). Storage
+   capability is real; publishable prices remain blocked on an authorized feed (Q-02, flag F20) —
+   no official NFL source prices betting lines.
+2. **Verified results feed** ([results-feed.html](results-feed.html)) — 137 games of 2026, every
+   final verified row-by-row against official nfl.com week pages (S49–S58) and cross-checked
+   three ways (137/137 PASS). Settlement and ROI are computed by `engine/results_feed.py`, which
+   fails closed on undeclared price provenance. Backtests can now be computed at all — against
+   verified scores only.
+3. **Origination order** ([originations.html](originations.html)) — side first, then total, then
+   moneyline, as mandated. For all 272 markets of 2026 the page publishes the **model's fair
+   line, the market line and the difference as three separate columns**. The fair-line engine is
+   proved identical to the Computed Research Layer's engine (5,336/5,336 pre-game Elo values)
+   and reproduces its calibration (MAE 2.89, corr 0.828, n=5,336). The fair TOTAL is deliberately
+   blank (flag F19) because its model has no fitted parameter.
+4. **Signal vs staking** ([signal-vs-staking.html](signal-vs-staking.html)) — the leaderboard
+   ranks, rewards and promotes on the SIGNAL ledger (flat stakes) only; staking is risk
+   telemetry. The split immediately earned its keep: **three candidate entries show a positive
+   staking run over a non-positive signal** (DOME_OVER, DOME_UNDER, __CONTROL_MARKET) — masked,
+   unranked by it.
+5. **Replacement depth** ([replacement-depth.html](replacement-depth.html)) — 69 affected Week-10
+   lineup spots, each with the replacement's string and the cascade count; one NE RB case runs to
+   3rd string with a player Out above him; six spots have no listed replacement left (blank and
+   flagged, never filled).
+6. **Official-only correlations with n** ([official-correlations.html](official-correlations.html))
+   — C-O1 same-game scoring r=+0.076 (n=137); C-O2/C-O3 form persistence |r|<0.09 (n=242). All
+   near zero: on official numbers alone, scoring "form" in 2026 to date is noise, and game-level
+   parlay legs priced as independent are close to the truth.
+7. **Demotion gate** (G-14 on the signal-vs-staking page) — a live strategy returns to PAPER on
+   signal decay, risk breach or compliance breach; automatic execution, documented re-entry, and
+   the asymmetry rule: staking can never promote but a staking risk breach can demote.
+8. **Suggestions & questions** — unchanged and unblocked: 15 suggestions with options and one
+   recommended path each ([suggestions.html](suggestions.html)), 20 open questions stating what we
+   know, lack and how to obtain it ([questions.html](questions.html)).
+
+### The decisions that still unblock the most
+
+| # | Decision | Unblocks | Question |
+|---|----------|----------|----------|
+| 1 | Authorize a price feed behind the price-snapshot store | CLV, hold realism (G-7), live origination comparison | Q-02 |
+| 2 | Fit the totals model (S2) on official drive data | the blank fair-total column (F19), total origination | GAP-05 |
+| 3 | Rule on third-party-derived values (F-11) | promoting measured correlation/edge values into the registers | F-11 |
+| 4 | Confirm cash-reward legality review | reward structure beyond compute/capital promotion | Q-13 |
+| 5 | Acquire machine-readable depth charts (Houston) | 32/32 replacement-depth coverage (F16) | — |
+
+### Verification performed this session (all green)
+
+`verify_feed_m.py` 137/137 PASS · `checklinks.py` 21 pages PASS · `verify_site.py` 0 errors 0
+warnings · `unittest discover` 92 tests OK · `engine.demo_run.py --check` current ·
+`engine.measure` reproducible · `verify_d.py` V5–V9 PASS (V7a flagged by design) ·
+`site/build.py + site/verify.py` 18 pages publishable. Session D's V9 was restored in a fresh
+workspace by `scripts/fetch_prop_mirror_m.py` (pinned git blob sha) and the rebuild is
+byte-identical to the committed artefact.

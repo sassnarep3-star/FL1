@@ -33,12 +33,17 @@ NAV = [
     ("requirements.html", "Requirements"),
     ("injuries.html", "Injuries"),
     ("depth.html", "Backup Depth"),
+    ("replacement-depth.html", "Replacement Depth"),
     ("standings.html", "Standings"),
     ("schedule.html", "Schedule 2026"),
+    ("results-feed.html", "Results Feed"),
     ("prop-correlations.html", "Prop Correlations"),
+    ("official-correlations.html", "Official Correlations"),
 
     ("line-origination.html", "Line Origination"),
+    ("originations.html", "Originations"),
     ("strategies.html", "Leaderboard"),
+    ("signal-vs-staking.html", "Signal vs Staking"),
     ("validation.html", "Validation Gates"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
@@ -243,6 +248,16 @@ def main():
     <p>All 272 regular-season games with results, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
   <a class="card" href="prop-correlations.html"><h3>Prop Correlations</h3>
     <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
+  <a class="card" href="results-feed.html"><h3>Verified Results Feed</h3>
+    <p><strong>137</strong> 2026 finals verified row-by-row against official nfl.com week pages; settlement and ROI computed against it, fail-closed on price provenance.</p></a>
+  <a class="card" href="originations.html"><h3>Originations</h3>
+    <p>Our own numbers, in order: side, then total, then moneyline &mdash; each published as fair line | market line | difference.</p></a>
+  <a class="card" href="signal-vs-staking.html"><h3>Signal vs Staking</h3>
+    <p>The leaderboard split that stops a lucky staking run masking a bad signal, plus the demotion gate that sends a live strategy back to paper.</p></a>
+  <a class="card" href="replacement-depth.html"><h3>Replacement Depth</h3>
+    <p>Which string replaces the missing starter, not just that a replacement exists &mdash; Week 10, 69 affected spots.</p></a>
+  <a class="card" href="official-correlations.html"><h3>Official Correlations</h3>
+    <p>Correlations computed only from officially sourced numbers, every value published with its n.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
     <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a></section>
 """ % {

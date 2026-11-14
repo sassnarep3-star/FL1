@@ -5177,6 +5177,96 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "'Commanders 24, Giants 21, FINAL' cross-check (V2); 14-game slate cross-check (V3)"
+  },
+  {
+   "id": "S50",
+   "title": "nfl.com Week 1 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 1 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S51",
+   "title": "nfl.com Week 2 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 2 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S52",
+   "title": "nfl.com Week 3 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 3 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S53",
+   "title": "nfl.com Week 4 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 4 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S54",
+   "title": "nfl.com Week 5 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 5 schedule page; 15 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S55",
+   "title": "nfl.com Week 6 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 6 schedule page; 14 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S56",
+   "title": "nfl.com Week 7 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 7 schedule page; 14 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S57",
+   "title": "nfl.com Week 8 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 8 schedule page; 14 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
+  },
+  {
+   "id": "S58",
+   "title": "nfl.com Week 9 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 9 schedule page; 15 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way)"
   }
  ],
  "schedule": [
@@ -32703,6 +32793,63 @@ window.DATA = {
     "S48"
    ],
    "action": null
+  },
+  {
+   "id": "F18",
+   "kind": "Internal inconsistency",
+   "item": "A leaderboard design note says 'totals-first architecture' while the brief mandates side-first origination",
+   "detail": "data/leaderboard.json division D2 describes 'the primary output of a totals-first architecture'. The brief mandates: originate the side first, then the total, then the moneyline. originations.html publishes the mandated order and this flag records the discrepancy verbatim rather than editing another session's design record. Needs review: align the D2 wording.",
+   "source": "https://sassnarep3-star.github.io/FL1/originations.html",
+   "severity": "Low",
+   "sourceIds": [],
+   "action": "owner review: reword D2 or restate the origination order there"
+  },
+  {
+   "id": "F19",
+   "kind": "Deliberate blank",
+   "item": "Fair TOTAL line is blank for all 272 markets — the totals model has no fitted parameter",
+   "detail": "Stage S2 (possessions x efficiency) parameters are deliberately unfitted in this repository; the rule is to leave the cell blank rather than invent one. The total market columns (fair | market | difference) are published as structure with the fair and difference cells empty. Filling them requires the official drive/efficiency inputs (GAP-05) and a fitted model.",
+   "source": "https://sassnarep3-star.github.io/FL1/originations.html",
+   "severity": "Medium",
+   "sourceIds": [
+    "S47"
+   ],
+   "action": "fit S2 on officially sourced drive data when acquired (GAP-05)"
+  },
+  {
+   "id": "F20",
+   "kind": "Data provenance",
+   "item": "Market lines in data/fair_lines.csv are third-party (nflverse snapshot) — no official NFL price source exists",
+   "detail": "Every market column (spread, total, moneyline) behind the fair-line comparison comes from data/raw/games.csv (nflverse/nfldata, S47), flagged third-party. The league publishes results and schedules, not betting prices. Difference columns therefore compare the model against a third-party close, not an official one. A licensed/official price feed landing behind the price-snapshot store is the only way past this (Q-02).",
+   "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "severity": "High",
+   "sourceIds": [
+    "S47"
+   ],
+   "action": "acquire authorized price feed (Q-02) and republish differences against it"
+  },
+  {
+   "id": "F21",
+   "kind": "Derived value",
+   "item": "Replacement-depth values are derived (rule published per row), and 6 spots have no listed replacement at all",
+   "detail": "data/replacement_depth.csv derives each replacement from official inputs (Week 10 injury report S01 + club depth charts) using the published rule: first listed player at the same spot whose official game status is not Out; string = published rank. Houston has no machine-readable chart (F16) so no rows exist for it. Six spots show every listed player Out — those replacement cells are blank and flagged, never filled. One NE RB replacement comes from 3rd string with one player Out above him.",
+   "source": "https://www.nfl.com/injuries/",
+   "severity": "Medium",
+   "sourceIds": [
+    "S01",
+    "S08"
+   ],
+   "action": "confirm against official game-day inactives when a machine-readable source exists"
+  },
+  {
+   "id": "F22",
+   "kind": "Dependency note",
+   "item": "requirements.txt declares stdlib-only while scripts/ require pandas, numpy and scipy",
+   "detail": "engine/ and tools/ are standard-library only as documented. scripts/ (strategy_lab.py, fetch_data.py, and session M's builders) require pandas/numpy/scipy — this was already true before this session; the requirements note understates it. Recorded per the repo's own rule that a dependency is a supply-chain decision. Session M added no NEW dependency beyond what scripts/ already used. Scripts-layer parquet support additionally requires pyarrow (pandas read_parquet engine) for scripts/build_prop_correlations_d.py; scripts/fetch_prop_mirror_m.py restores its out-of-repo pinned input (git blob sha adc42c07f2befa3e984a8c123d2861ba9bfb6f1f) in a fresh workspace.",
+   "source": "https://github.com/sassnarep3-star/FL1/blob/main/requirements.txt",
+   "severity": "Low",
+   "sourceIds": [],
+   "action": "amend requirements.txt or add requirements-scripts.txt"
   }
  ]
 };
