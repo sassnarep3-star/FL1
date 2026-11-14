@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="verified-results-feed.html">Verified Results Feed</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main">
 <div class="callout"><p><strong>Update (session arena/685f958d-fl1, 2026-11-14).</strong> Own fair lines are now published for the 13 pending Week 10 games, in the order side, total, then moneyline, with fair, market and difference as separate columns. <strong>No market column is filled</strong>: no official NFL source publishes prices (F18). In a walk-forward backtest on 89 out-of-sample games (weeks 4–10), the side model hits 67.0% of winners (95% CI 56.7%–76.0%), but its margin error (10.49 points) does not beat a constant benchmark (10.33). The total model does not beat its benchmark either (F20). Correlations are withheld (F19). The leaderboard ranks on signal and reports staking beside it, and the G-14 gate sends a live strategy back to paper. See <a href="model-lines.html">Model Lines</a>, <a href="results-feed.html">Results Feed</a> and <a href="governance.html">Signal &amp; Demotion</a>.</p></div>
@@ -24,7 +24,7 @@ and marks everything else as open.</p>
 <section>
 <h2>1. What has been verified</h2>
 <p>The repository was empty apart from a five-byte README, so the entire base is new. Fifteen sources were
-attempted; <strong>56 loaded successfully</strong> and <strong>4 did not</strong>. The failed ones are
+attempted; <strong>57 loaded successfully</strong> and <strong>4 did not</strong>. The failed ones are
 recorded as unverified and are never used to support a claim.</p>
 <p>The most substantial verified artefact is the <strong>official Week 10, 2026 season injury report</strong>:
 345 player rows over 28 clubs, with each player's practice status and game status reproduced exactly as published.
@@ -103,6 +103,23 @@ answering it.</li>
 club has a bye, because no official bye table was verified. It does not resolve two places where official NFL.com
 pages contradict each other. It does not print a single performance number. Each of those is listed with links on
 <a href="flagged.html">Flagged for Review</a>.</p>
+</section>
+
+<section>
+<h2>Requirements sprint &mdash; R21&ndash;R28 (2026-11-14)</h2>
+<p>Eight system requirements were implemented, verified and published in this sprint:</p>
+<div class="twrap"><table class="dense"><thead><tr><th>ID</th><th>Requirement</th><th>Status</th><th>Where</th></tr></thead><tbody><tr><td>R21</td><td>Price-snapshot store: opening + closing numbers per originated market</td><span class="pill ok">done</span><td><a href="price-snapshots.html">price-snapshots.html</a></td></tr><tr><td>R22</td><td>Verified results feed so backtests and ROI are computable</td><span class="pill ok">done</span><td><a href="verified-results-feed.html">verified-results-feed.html</a></td></tr><tr><td>R23</td><td>Origination order: side first, then total, then moneyline</td><span class="pill ok">done</span><td><a href="line-board.html">line-board.html</a></td></tr><tr><td>R24</td><td>Fair line, market line, difference as separate columns</td><span class="pill ok">done</span><td><a href="line-board.html">line-board.html</a></td></tr><tr><td>R25</td><td>Signal separated from staking in the leaderboard</td><span class="pill ok">done</span><td><a href="strategies.html">strategies.html</a></td></tr><tr><td>R26</td><td>Depth of the replacement tracked, not just the fact</td><span class="pill ok">done</span><td><a href="replacement-depth.html">replacement-depth.html</a></td></tr><tr><td>R27</td><td>Correlations from official numbers only, n published with each</td><span class="pill ok">done</span><td><a href="correlation-register.html">correlation-register.html</a></td></tr><tr><td>R28</td><td>Demotion gate: live strategies return to paper</td><span class="pill ok">done</span><td><a href="validation.html#G-14">validation.html#G-14</a></td></tr></tbody></table></div>
+<div class="callout warn"><p><strong>Decisions the owner must make before the numbers mean more than they
+do now.</strong> (1) Q21/Q22 &mdash; approve an opening-price and moneyline source; today 28 of 56 snapshot
+rows have a close and 0 of 56 have an open. (2) Q23 &mdash; ratify the THIRD_PARTY badge policy for market
+prices (flag F23) or order strict blanks. (3) Q24/Q25 &mdash; confirm the demotion-gate thresholds and the
+allowed staking plans. (4) F30 (severity High) &mdash; the computed layer's break-even column is circular
+and its G4 gate is unusable until SG28 lands. Nothing on this site treats any of these as settled.</p></div>
+<p>Measured, from official numbers only: home-field advantage in 2026 to date is
+<strong>&minus;0.02</strong> points per game (n = 137, S52); rest-days asymmetry correlates with home margin
+at <strong>r = 0.43</strong> (n = 121, CI 0.27&ndash;0.56, S52); the verified results feed reconciles
+<strong>32 of 32</strong> clubs against the official standings. These are computed values with their n
+published &mdash; not claims about the NFL at large.</p>
 </section>
 
 </main>

@@ -24,8 +24,8 @@ RAW = os.path.join(ROOT, "raw", "official-finals-2026.tsv")
 SCHED = os.path.join(ROOT, "data", "schedule2026-d.csv")
 OUT = os.path.join(ROOT, "data", "results_feed.csv")
 
-# week -> source id in data/sources.tsv (weeks 1-9 = S50..S58, week 10 = S49)
-WEEK_SOURCE = {w: "S%02d" % (49 + w) for w in range(1, 10)}
+# week -> source id in data/sources.tsv (weeks 1-9 = S61..S69, week 10 = S49)
+WEEK_SOURCE = {w: "S%02d" % (60 + w) for w in range(1, 10)}
 WEEK_SOURCE[10] = "S49"
 WEEK_URL = {w: "https://www.nfl.com/schedules/2026/by-week/week-%d" % w
             for w in range(1, 11)}

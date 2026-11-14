@@ -181,25 +181,25 @@ parallel registers live under `data/specs/`.
 
 - **`results-feed.html`** — the verified results feed: all 137 played 2026 games, finals verified
   row-by-row against official nfl.com week pages (`raw/official-finals-2026.tsv`, sources
-  S49–S58) and cross-checked three ways (`scripts/verify_feed_m.py`, 137/137 PASS).
+  S49–S67) and cross-checked three ways (`scripts/verify_feed_m.py`, 137/137 PASS).
   `engine/results_settlement.py` settles side/total/ML and computes ROI **fail-closed** on price
   provenance (17 unit tests); the verified-ingestion boundary is `engine/results_feed.py`.
 - **`originations.html`** — origination in the mandated order (**side → total → moneyline**), and
   for all 272 markets of 2026 the three separate columns: model fair line | market line |
   difference. Fair-line engine proved identical to the Computed Research Layer's engine
   (5,336/5,336 Elo values) and reproduces its published calibration. Fair TOTAL deliberately
-  blank (S2 unfitted, flag F24).
+  blank (S2 unfitted, flag F33).
 - **`signal-vs-staking.html`** — leaderboard split: signal (flat-stake) ranks and rewards;
   staking is risk telemetry only. Three entries found where a positive staking run would mask a
-  non-positive signal (MASKED flag). Also the **demotion gate G-14** (live → paper: signal decay,
+  non-positive signal (MASKED flag). Also the **demotion gate G-16** (live → paper: signal decay,
   risk breach or compliance breach; automatic; staking can never promote but can demote) and
-  G-15 (signal-only promotion rule).
+  G-17 (signal-only promotion rule).
 - **`replacement-depth.html`** — the depth of the replacement, not just the fact: 69 Week-10
   spots, each replacement's string and cascade count; 6 spots with no listed replacement left
   (blank + flagged).
 - **`official-correlations.html`** — correlations computed **only** from officially sourced
   numbers, each published **with its n** (C-O1 r=+0.076 n=137; C-O2/C-O3 |r|<0.09 n=242).
-- **`data/governance_gates.json`** — G-14/G-15 register; **`data/origination_order.json`** —
+- **`data/governance_gates.json`** — G-16/G-17 register; **`data/origination_order.json`** —
   the order register; **`scripts/fetch_prop_mirror_m.py`** — pinned-blob fetch (sha-verified)
   that restores session D's V9 input in a fresh workspace.
-- Sources S50–S58 (official week pages) and flags F23–F27 added to the registries.
+- Sources S50–S67 (official week pages) and flags F32–F36 added to the registries.

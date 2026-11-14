@@ -12,7 +12,7 @@ Pages written at repo root:
                             separate columns for all 272 markets of 2026.
   signal-vs-staking.html    the leaderboard split (signal ranks and rewards;
                             staking is risk telemetry) + the demotion gate
-                            G-14 (live -> paper) and G-15.
+                            G-16 (live -> paper) and G-17.
   replacement-depth.html    the depth of the replacement, not just the fact.
   official-correlations.html  correlations computed only from officially
                             sourced numbers, each published with its n.
@@ -146,12 +146,20 @@ The same files were previously reconciled to the official standings (records + P
 clubs) &mdash; see <a href="verification.html">Verification</a> and
 <a href="schedule.html">Schedule 2026</a>.</div>
 
+<div class="note"><strong>Parallel implementations preserved (F31).</strong> The same eight
+requirements were built three times concurrently. This page is the merged superset. The
+R21-R28 sprint's own feed page stays at
+<a href="verified-results-feed.html">verified-results-feed.html</a>, and its line/price work at
+<a href="line-board.html">Line Board</a> and
+<a href="price-snapshots.html">Price Snapshots</a>. Cross-checks between the independent captures
+are a feature, not a conflict.</div>
+
 <h2>What a backtest can and cannot show</h2>
 <div class="note"><ul>
 <li><strong>Calibration and error:</strong> yes &mdash; walk-forward, each week predicted only
 from earlier weeks, n on every row (below).</li>
 <li><strong>ROI against <em>official</em> prices:</strong> no &mdash; no official league source
-prices betting lines (F18, F25). ROI columns against third-party snapshots are published on the
+prices betting lines (F18, F34). ROI columns against third-party snapshots are published on the
 strategy pages, labelled third-party throughout.</li>
 <li><strong>Own-line honesty (F20):</strong> the own-line fair model does <strong>not</strong>
 beat a constant benchmark out of sample on side or total MAE. Published because negative results
@@ -186,7 +194,7 @@ python3 -m engine.results_settlement --check   # loader contract check
 python3 -m unittest tests.test_results_feed</pre>
 """
     html = html.replace("__BT_TABLE__", backtest_table())
-    page("results-feed.html", "Verified Results Feed &amp; Backtest", html)
+    page("results-feed.html", "Verified Results Feed & Backtest", html)
 
 
 # ---------------------------------------------------------------------------
@@ -217,7 +225,7 @@ def originations_page(sources_by_id):
                 cell(None),                       # fair total: never invented
                 cell(num(r["total_market"], 1), "n"),
                 cell(None),
-                cell("S2 parameters unfitted (F24)"),
+                cell("S2 parameters unfitted (F33)"),
             ])
         return out
 
@@ -275,7 +283,7 @@ margin first stops dependent markets from leaking information back into it.</p>
 <code>""" + esc(cal["model_version"]) + """</code>.</li>
 <li><strong>Market line &mdash; SOURCE.</strong> The pinned third-party snapshot
 <code>data/raw/games.csv</code> (nflverse/nfldata, <a href="sources.html#S47">S47</a>), flagged
-&mdash; no official NFL price source exists (flag F25).</li>
+&mdash; no official NFL price source exists (flag F34).</li>
 <li><strong>Difference &mdash; COMPUTED.</strong> Fair minus market. Spread columns use the
 away-posted unit of the snapshot (positive = away underdog / home favoured):
 <em>negative difference = the market gives the away side more points than the model says is fair
@@ -305,7 +313,7 @@ calibration:</p>
 slightly worse version of the market, not an independent one: mean absolute disagreement 2.89
 points, sd of disagreement 3.56. It publishes a number &mdash; beating the close needs information
 the market does not already have. Totals are deliberately blank (S2 parameters unfitted, flag
-F24). Future games carry the fair basis &ldquo;Elo snapshot&rdquo; (re-originated weekly before
+F33). Future games carry the fair basis &ldquo;Elo snapshot&rdquo; (re-originated weekly before
 release).</div>
 
 <h2>Stage 1 &mdash; Side (spread): fair | market | difference</h2>
@@ -319,7 +327,7 @@ release).</div>
             total_rows(), cls="wide",
             caption="The columns are published; the fair and difference cells stay BLANK "
                     "because the totals model has no fitted parameter. A number here would be "
-                    "a fabrication (flag F24).") + """
+                    "a fabrication (flag F33).") + """
 <h2>Stage 3 &mdash; Moneyline: fair | market | difference</h2>
 """ + table(["Wk", "Away", "Home",
              "Fair home (Am)", "Market home (Am)", "Home diff (prob pts)",
@@ -381,7 +389,7 @@ def signal_vs_staking_page(sources_by_id):
 stakes) from <strong>staking</strong> (what a betting policy did to the bankroll), so a lucky
 staking run cannot mask a bad signal. Only the signal ledger ranks, rewards and promotes.</p>
 
-<div class="note ok"><strong>The rule (gate G-15, hard).</strong> Rank order, reward eligibility
+<div class="note ok"><strong>The rule (gate G-17, hard).</strong> Rank order, reward eligibility
 and capital promotion read the SIGNAL columns exclusively. The staking ledger is published beside
 it as risk telemetry: it can cap or remove exposure &mdash; and a staking risk breach triggers the
 demotion gate &mdash; but it can never promote. %s</div>
@@ -408,7 +416,7 @@ demotion gate &mdash; but it can never promote. %s</div>
             caption="Policy: %s. The MASKED flag marks a positive staking run over a "
                     "non-positive signal &mdash; the exact failure this split exists to prevent."
                     % esc(ss[0]["staking_policy"] if ss else "")) + """
-<h2>Demotion gate G-14 &mdash; a live strategy goes back to paper</h2>
+<h2>Demotion gate G-16 &mdash; a live strategy goes back to paper</h2>
 """ + table(["Field", "Rule"], [
         [cell("Gate"), cell(g["gate"] + " (" + g["kind"] + ")")],
         [cell("Trigger A — signal decay"), cell(g["trigger_a_signal_decay"])],
@@ -420,7 +428,7 @@ demotion gate &mdash; but it can never promote. %s</div>
         [cell("Asymmetry"), cell(g["asymmetry_rule"])],
         [cell("Why"), cell(g["why"])],
     ], caption="Promotion is slow (two reviews); demotion is fast (one trigger) and automatic. "
-               "Gate G-15 above is the ranking contract it enforces.") + """
+               "Gate G-17 above is the ranking contract it enforces.") + """
 <h2>Luck controls this design stands on</h2>
 <ul>
 <li>Break-even arithmetic: &minus;110 needs 52.38&#37;; separating a true 55&#37; from that at
@@ -494,11 +502,41 @@ Houston rows exist rather than invented ones.</li>
          "Sources", "Flag"],
         body, cls="wide",
         caption="Week 10 official injury report (S01) joined to club depth charts. "
-                "Derived columns carry the rule in data/replacement_depth.csv.") + """
+                "Derived columns carry the rule in data/replacement_depth.csv.") + r26_register_section(sources_by_id) + """
 <h2>Reproduce</h2>
-<pre>python3 scripts/build_replacement_depth_m.py</pre>
+<pre>python3 scripts/build_replacement_depth_m.py
+python3 tools/site.py        # also writes the R21-R28 register to replacement-depth-r21r28.html</pre>
 """
     page("replacement-depth.html", "Replacement Depth", html, wide=True)
+
+
+# ---------------------------------------------------------------------------
+def r26_register_section(sources_by_id):
+    """The R21-R28 sprint's replacement register (session arena/360ca650-fl1,
+    data/replacement_depth.tsv) preserved alongside the week-10 analysis above."""
+    rows = []
+    with open(os.path.join(DATA, "replacement_depth.tsv"), newline="", encoding="utf-8") as fh:
+        for r in csv.DictReader(fh, delimiter="\t"):
+            rows.append(r)
+    body = []
+    for r in rows:
+        body.append([
+            cell(r["team"]), cell(r["unit"]), cell("%s / line %s" % (r["slot"], r["line"] or "—")),
+            cell(r["missing_players"]), cell(r["replacement"]),
+            cell(r["replacement_depth"], "n"), cell(r["replacement_game_status"]),
+            cell(r["note"]), raw_src(src_link(r["source_chart"], sources_by_id)),
+        ])
+    return """
+<h2>The R21&ndash;R28 register (52 slots)</h2>
+<p class="caption">The parallel requirements sprint (session arena/360ca650-fl1) built its """ + \
+        """own replacement register from the same official sources with its own rule &mdash; kept here """ + \
+        """verbatim, including its contingent rows. The two views are deliberately both published """ + \
+        """(integration divergence, flag F31); nothing is discarded. Its generator also writes the """ + \
+        """standalone copy to <a href="replacement-depth-r21r28.html">replacement-depth-r21r28.html</a>.</p>""" + \
+        table(["Team", "Unit", "Slot", "Missing (strings)", "Replacement", "Depth",
+                 "Game status", "Note", "Chart source"], body, cls="wide",
+                caption="data/replacement_depth.tsv (R26) — 52 slots, both sides of the "
+                        "starter-out and contingent cases.")
 
 
 # ---------------------------------------------------------------------------
@@ -520,7 +558,7 @@ table.</p>
 
 <div class="note"><strong>Policy.</strong> The inputs are the verified results feed
 (<a href="results-feed.html">results-feed.html</a>) &mdash; 137 games whose finals are row-level
-official (nfl.com week pages, S49&ndash;S58). The measurement register
+official (nfl.com week pages, S49&ndash;S67). The measurement register
 (<code>data/correlations.json</code>, C-01&ndash;C-15) stays <em>blank</em> under the same rule
 until each pair&rsquo;s inputs are officially sourced (flag F-11, open). Player-prop correlations
 (<a href="prop-correlations.html">Prop Correlations</a>) are computed from a third-party archive

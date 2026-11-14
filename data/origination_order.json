@@ -22,7 +22,7 @@
       "output_columns": ["total_fair", "total_market", "total_difference"],
       "inputs": "Stage S2 scoring-rate model (possessions x efficiency). Parameters are deliberately unfitted in this repository.",
       "why_second": "The total is the second quantity the model must commit to (pace/efficiency view). It is published as a column set so the gap is visible, but the fair value stays BLANK because no parameter has been fitted — filling it would be a fabrication.",
-      "flag": "F24",
+      "flag": "F33",
       "source": "data/fair_lines.csv"
     },
     {

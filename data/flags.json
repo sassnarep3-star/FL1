@@ -252,19 +252,122 @@
  },
  {
   "id": "F23",
+  "kind": "Data provenance",
+  "item": "Market prices are third-party only - no official league source prices NFL lines",
+  "detail": "Requirement R24 mandates publishing the market-line and difference columns; the standing verification rule says leave unconfirmed values blank. Provisional resolution applied in this sprint: market cells are transcribed from the sha256-pinned nflverse capture (S47) and badged THIRD_PARTY; difference cells inherit the badge. The strict-blank alternative is one edit away and is left open as question Q23 (the old F-11 decision, now unavoidable).",
+  "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+  "severity": "Medium",
+  "sourceIds": [
+   "S47"
+  ],
+  "action": "Review Q23 / SG24. Option B switches every market cell to blank."
+ },
+ {
+  "id": "F24",
+  "kind": "Documentation inconsistency",
+  "item": "Root Leaderboard page claimed no backtest existed anywhere in the repository while the computed layer publishes 16 backtested strategies",
+  "detail": "strategies.html carried the sentence 'No backtest has been executed and no performance figure is claimed anywhere in this repository', but data/leaderboard.csv and docs/pages/ carry 16 strategies backtested over third-party data (2006-2026). The two registers answer different questions (official-data plan vs third-party research), but 'anywhere' was false. The sprint section on the Leaderboard page now states the split; the original sentence is preserved there as the plan-level register's statement about official data.",
+  "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+  "severity": "Low",
+  "sourceIds": [
+   "S47"
+  ],
+  "action": "SG25: unify wording across the two layers."
+ },
+ {
+  "id": "F25",
+  "kind": "Missing capture",
+  "item": "Moneyline opening and closing prices are not captured for the Week 10 slate",
+  "detail": "The price-snapshot store holds MONEYLINE-HOME and MONEYLINE-AWAY rows for all 14 games with every price cell blank: the Week 10 board captures spread and total only, and closing_lines.csv carries moneyline prices only for 2006-2025 (third-party). Nothing was inferred to fill them.",
+  "source": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
+  "severity": "Medium",
+  "sourceIds": [
+   "S47"
+  ],
+  "action": "Q22: approve a moneyline capture source."
+ },
+ {
+  "id": "F26",
+  "kind": "Data convention",
+  "item": "week10_signal_board.csv 'closing_spread_home' holds the AWAY team's spread, and 'market_implied_home_winprob' comes from an unvalidated formula",
+  "detail": "Check V8 (data/verification-d.tsv) verified across 13/13 games that nflverse spread_line is the away team's point spread, so the board's column name is wrong for its content. market_implied_home_winprob = logistic(0.28 * spread_line) has no cited basis and behaves like a probability of the away side's margin, not a home win probability; it is excluded from the line board and the price store. The line board negates the verbatim value into home view and says so per row; the store keeps the verbatim number as the AWAY quote.",
+  "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+  "severity": "Medium",
+  "sourceIds": [
+   "S47"
+  ],
+  "action": "SG26: annotate columns and add a derived home-view column; do not rename."
+ },
+ {
+  "id": "F27",
+  "kind": "Design change",
+  "item": "Origination order mandated: side first, then total, then moneyline - supersedes the earlier totals-first note",
+  "detail": "data/models.json described the architecture as 'deliberately totals-first'. Requirement R23 fixes the order SIDE, then TOTAL, then MONEYLINE. The pipeline, the snapshot store and the line board now follow the mandated order. The old wording is preserved in this flag so the change is visible rather than silent.",
+  "source": "https://www.nfl.com/schedules/2026/by-week/week-10",
+  "severity": "Low",
+  "sourceIds": [],
+  "action": "None - recorded so the change is auditable."
+ },
+ {
+  "id": "F28",
+  "kind": "Proposed rule",
+  "item": "Demotion-gate thresholds are proposed competition rules, not measured facts",
+  "detail": "G-14 (engine/demotion.py) uses D1 window=100 settled bets with inferiority alpha 0.10, D2 max drawdown 25 flat-stake units, D3 trailing CLV rot, and re-promotion after 300 fresh settled bets at the G-2b standard. These are constructor arguments chosen as a design decision; a reviewer may change them. What cannot be changed by review is the verdict logic: DEMOTE cannot be reinterpreted as HOLD.",
+  "source": "https://www.nfl.com/",
+  "severity": "Low",
+  "sourceIds": [],
+  "action": "Q24: confirm or revise the thresholds."
+ },
+ {
+  "id": "F29",
+  "kind": "Model provenance",
+  "item": "Fair-line coefficients are computed from the 2026 official feeds only (137 games)",
+  "detail": "Home-field advantage -0.022 points per game and margin sd 13.225 points are computed by engine/fairline.py from data/results.tsv (S52) as of 2026-11-14; the strength convention (PF-PA)/G with a /2 meeting rule is a published bookkeeping choice, not a fitted coefficient. No coefficient is tuned on market prices. The 2026 home-field estimate being ~0 is a property of this season's 137 games, not a claim about the NFL.",
+  "source": "https://www.nfl.com/standings/",
+  "severity": "Low",
+  "sourceIds": [
+   "S52",
+   "S03"
+  ],
+  "action": "Q26: schedule out-of-sample refits after two official seasons."
+ },
+ {
+  "id": "F30",
+  "kind": "Data methodology",
+  "item": "Computed-layer leaderboard's breakeven_hit is circular: 1/(1+realized ROI), not the price hurdle",
+  "detail": "scripts/strategy_lab.py computes avg_dec as the mean of (realized profit/stake + 1) over settled bets - losers contribute 0 - so breakeven_hit = 1/(1+realized ROI) and gate G4 ('beats_vig') is tested against a quantity derived from the outcomes being tested. Every spread strategy at ordinary prices is then failed by construction (e.g. WIND15_UNDER: breakeven_hit 0.9326 = 1/1.0724 = 1/(1+ROI 0.0723)). The per-bet odds ARE present in that pipeline's bet ledger (home_spread_odds etc.), so the correct price-based hurdle is computable there with a one-line fix. Nothing in the computed layer was edited by this session; the value is transcribed as dataset_breakeven_hit_transcribed in data/leaderboard_signal_staking.json and NOT used for ranking - the signal split ranks against the standard -110 reference hurdle instead and labels it.",
+  "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+  "severity": "High",
+  "sourceIds": [
+   "S47"
+  ],
+  "action": "SG28: recompute breakeven from per-bet odds in the computed layer and re-run its gates; until then treat its G4 column as unusable."
+ },
+ {
+  "id": "F31",
+  "kind": "Integration divergence",
+  "item": "Two parallel sessions implemented the same eight requirements (R21-R28); both implementations are preserved",
+  "detail": "Session arena/685f958d-fl1 (PRs #22-#32, merged first) and session arena-360ca650-fl1 (this merge) each built a price store, results feed, line model, signal/staking split, availability/replacement tracking, correlation policy and a demotion gate. Nothing was discarded. The divergences are substantive and left for the owner: (1) MARKET-PRICE POLICY - model-lines.html keeps every market/difference cell blank (no official price source), while line-board.html publishes the pinned third-party capture with a THIRD_PARTY badge and a per-row convention note (see Q23); (2) DEMOTION SEMANTICS - the D1-D3 gate (CLV decay, calibration drift, concentration) and the G-14 gate (signal decay, drawdown, CLV rot; 300-bet re-promotion) define different triggers and thresholds (see Q24); (3) duplicate pages: results-feed.html (arena/685f958d) vs verified-results-feed.html (arena/360ca650), line-board.html vs model-lines.html, plus two price stores (data/price_snapshots.tsv vs data/price_snapshots.json). Cross-links connect each pair. A THIRD parallel implementation (session arena-5876146b-fl1, tasks M1-M8) landed the same eight requirements alongside R21-R28 and the arena/685f958d-fl1 work. Final integration preserved all three: duplicate pages cross-linked (results-feed.html is the merged superset; verified-results-feed.html and the R21-R28 registers stay), and colliding ids were re-issued for the third set: sources S61-S69, flags F32-F36, governance gates G-16/G-17 (renamed from this branch's G-14/G-15 to clear their G-14 in validation_gates.json).",
+  "source": "https://github.com/sassnarep3-star/FL1/pull/33",
+  "severity": "High",
+  "sourceIds": [],
+  "action": "reconciled at final integration; all three implementations preserved and cross-linked"
+ },
+ {
+  "id": "F32",
   "kind": "Internal inconsistency",
   "item": "A leaderboard design note says 'totals-first architecture' while the brief mandates side-first origination",
-  "detail": "data/leaderboard.json division D2 describes 'the primary output of a totals-first architecture'. The brief mandates: originate the side first, then the total, then the moneyline. originations.html publishes the mandated order and this flag records the discrepancy verbatim rather than editing another session's design record. Needs review: align the D2 wording.",
+  "detail": "data/leaderboard.json division D2 describes 'the primary output of a totals-first architecture'. The brief mandates: originate the side first, then the total, then the moneyline. originations.html publishes the mandated order and this flag records the discrepancy verbatim rather than editing another session's design record. Needs review: align the D2 wording. also registered as F27 (mandated order) by the R21-R28 sprint.",
   "source": "https://sassnarep3-star.github.io/FL1/originations.html",
   "severity": "Low",
   "sourceIds": [],
   "action": "owner review: reword D2 or restate the origination order there"
  },
  {
-  "id": "F24",
+  "id": "F33",
   "kind": "Deliberate blank",
   "item": "Fair TOTAL line is blank for all 272 markets — the totals model has no fitted parameter",
-  "detail": "Stage S2 (possessions x efficiency) parameters are deliberately unfitted in this repository; the rule is to leave the cell blank rather than invent one. The total market columns (fair | market | difference) are published as structure with the fair and difference cells empty. Filling them requires the official drive/efficiency inputs (GAP-05) and a fitted model. Distinct from F19 (which withholds third-party correlation values).",
+  "detail": "Stage S2 (possessions x efficiency) parameters are deliberately unfitted in this repository; the rule is to leave the cell blank rather than invent one. The total market columns (fair | market | difference) are published as structure with the fair and difference cells empty. Filling them requires the official drive/efficiency inputs (GAP-05) and a fitted model. Distinct from F19 (which withholds third-party correlation values). see also F29 (fair-line provenance) and F25.",
   "source": "https://sassnarep3-star.github.io/FL1/originations.html",
   "severity": "Medium",
   "sourceIds": [
@@ -273,10 +376,10 @@
   "action": "fit S2 on officially sourced drive data when acquired (GAP-05)"
  },
  {
-  "id": "F25",
+  "id": "F34",
   "kind": "Data provenance",
   "item": "Market lines in data/fair_lines.csv are third-party (nflverse snapshot) — no official NFL price source exists",
-  "detail": "Every market column (spread, total, moneyline) behind the fair-line comparison comes from data/raw/games.csv (nflverse/nfldata, S47), flagged third-party. The league publishes results and schedules, not betting prices. Difference columns therefore compare the model against a third-party close, not an official one. A licensed/official price feed landing behind the price-snapshot store is the only way past this (Q-02). See also F18 (same gap registered by the price-store session).",
+  "detail": "Every market column (spread, total, moneyline) behind the fair-line comparison comes from data/raw/games.csv (nflverse/nfldata, S47), flagged third-party. The league publishes results and schedules, not betting prices. Difference columns therefore compare the model against a third-party close, not an official one. A licensed/official price feed landing behind the price-snapshot store is the only way past this (Q-02). See also F18 (same gap registered by the price-store session). same gap registered as F23 by the R21-R28 sprint.",
   "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
   "severity": "High",
   "sourceIds": [
@@ -285,7 +388,7 @@
   "action": "acquire authorized price feed (Q-02) and republish differences against it"
  },
  {
-  "id": "F26",
+  "id": "F35",
   "kind": "Derived value",
   "item": "Replacement-depth values are derived (rule published per row), and 6 spots have no listed replacement at all",
   "detail": "data/replacement_depth.csv derives each replacement from official inputs (Week 10 injury report S01 + club depth charts) using the published rule: first listed player at the same spot whose official game status is not Out; string = published rank. Houston has no machine-readable chart (F16) so no rows exist for it. Six spots show every listed player Out — those replacement cells are blank and flagged, never filled. One NE RB replacement comes from 3rd string with one player Out above him.",
@@ -298,7 +401,7 @@
   "action": "confirm against official game-day inactives when a machine-readable source exists"
  },
  {
-  "id": "F27",
+  "id": "F36",
   "kind": "Dependency note",
   "item": "requirements.txt declares stdlib-only while scripts/ require pandas, numpy and scipy",
   "detail": "engine/ and tools/ are standard-library only as documented. scripts/ (strategy_lab.py, fetch_data.py, and session M's builders) require pandas/numpy/scipy — this was already true before this session; the requirements note understates it. Recorded per the repo's own rule that a dependency is a supply-chain decision. Session M added no NEW dependency beyond what scripts/ already used. Scripts-layer parquet support additionally requires pyarrow (pandas read_parquet engine) for scripts/build_prop_correlations_d.py; scripts/fetch_prop_mirror_m.py restores its out-of-repo pinned input (git blob sha adc42c07f2befa3e984a8c123d2861ba9bfb6f1f) in a fresh workspace.",

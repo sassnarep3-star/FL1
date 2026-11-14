@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="strategies.html" class="on">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="verified-results-feed.html">Verified Results Feed</a><a href="strategies.html" class="on">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main" class="wide">
 
@@ -20,9 +20,13 @@
 <p class="lead">A competition with gates. A strategy is listed, then it must earn a rank by clearing every gate
 in <a href="validation.html">Validation</a>. Until then it has no score, and the board stays empty.</p>
 <div class="callout bad">
-  <p><strong>0 of 6 entries carry a result.</strong> No backtest has been executed and no performance figure is
-  claimed anywhere in this repository. The leaderboard will stay empty until a strategy clears the gates with a
-  price source supplied. That is the design, not a delay.</p>
+  <p><strong>0 of 6 entries carry a result in this register.</strong> This register holds the plan-level
+  strategies over official data only. Its original claim &mdash; &ldquo;No backtest has been executed and no
+  performance figure is claimed anywhere in this repository&rdquo; &mdash; was true of this register and false
+  of the repository as a whole (<a href="flagged.html#F24">F24</a>): the computed research layer holds 16
+  backtests over third-party data, reported and re-ranked on signal below, and none of those has passed its
+  gates either. The board here will stay empty until a strategy clears the gates with a price source
+  supplied. That is the design, not a delay.</p>
 </div>
 </section>
 
@@ -50,6 +54,43 @@ The reason is set out as open question Q14 and suggestion SG11 rather than answe
 <section>
 <h2>Product types and the extra gate each one carries</h2>
 <div class="twrap"><table class="dense"><thead><tr><th>Product</th><th>Extra requirement</th><th>Status today</th></tr></thead><tbody><tr><td>Single bet</td><td>A benchmark price to define edge</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Parlay</td><td>Every leg validated independently, plus joint correlation</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop</td><td>Player-level historical logs</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop combo</td><td>Prop legs plus pairwise joint outcomes</td><td><span class="pill bad">BLOCKED</span></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Signal and staking are reported separately (requirement R25)</h2>
+<p>A lucky staking run must not be able to mask a bad signal. So the leaderboard has two blocks and the
+rank is computed from <strong>signal only</strong>: flat one-unit stake on every settled bet, ranked on
+the 95% lower bound of the hit rate against the break-even hurdle. The staking block &mdash; ROI at the
+stakes actually used, profit, drawdown &mdash; is reported beside it and can never change a rank, a badge
+or a reward. The arithmetic lives in <code>engine/backtest.py</code>
+(<code>split_signal_staking</code>) and is exercised by the test suite.</p>
+<div class="callout warn"><p><strong>Read the hurdle column correctly.</strong> The table below re-ranks
+the computed research layer's 16 backtested strategies (third-party data &mdash; flagged). That dataset's
+own <code>breakeven_hit</code> column is circular &mdash; computed as 1/(1+realized ROI) &mdash; and is
+NOT used for ranking; it is transcribed in the data file for audit only. See
+<a href="flagged.html#F30">F30</a> (severity High) and suggestion SG28. The reference hurdle here is the
+standard &minus;110 two-way break-even, 0.52381. None of the 16 entries is signal-proven; all 16 are
+REJECTED in their own dataset's gates.</p></div>
+</section>
+
+<section>
+<h2>Computed-layer entries, re-ranked on signal</h2>
+<div class="twrap"><p class="caption">Re-ranking of data/leaderboard.csv on signal only.</p><table class="dense"><thead><tr><th>Signal rank</th><th>ID</th><th>Market</th><th>Settled</th><th>Hit rate</th><th>Wilson 95% CI</th><th>Ref. hurdle</th><th>Signal edge (LCB)</th><th>Signal verdict</th><th>Staking ROI</th><th>Staking profit (u)</th><th>Staking max DD (u)</th><th>Flag</th></tr></thead><tbody><tr><td class="num">1</td><td>DIV_DOG_AND_ELO</td><td>spread</td><td class="num">936</td><td>0.5427</td><td>0.5107 – 0.5744</td><td>0.52381</td><td>-0.0131</td><td><span class="pill bad">NOT PROVEN</span></td><td>0.0573</td><td>53.67</td><td>-27.45</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">2</td><td>DIV_AWAY_DOG</td><td>spread</td><td class="num">1142</td><td>0.5368</td><td>0.5078 – 0.5655</td><td>0.52381</td><td>-0.0160</td><td><span class="pill bad">NOT PROVEN</span></td><td>0.0464</td><td>53.01</td><td>-31.00</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">3</td><td>WIND15_UNDER</td><td>total</td><td class="num">425</td><td>0.5506</td><td>0.5031 – 0.5972</td><td>0.52381</td><td>-0.0207</td><td><span class="pill bad">NOT PROVEN</span></td><td>0.0723</td><td>30.71</td><td>-13.48</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">4</td><td>ELO_MKT_2.5</td><td>spread</td><td class="num">2469</td><td>0.5205</td><td>0.5008 – 0.5402</td><td>0.52381</td><td>-0.0230</td><td><span class="pill bad">NOT PROVEN</span></td><td>0.0089</td><td>21.98</td><td>-44.07</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">5</td><td>ELO_MKT_1.5</td><td>spread</td><td class="num">3460</td><td>0.5168</td><td>0.5001 – 0.5334</td><td>0.52381</td><td>-0.0237</td><td><span class="pill bad">NOT PROVEN</span></td><td>0.0032</td><td>11.18</td><td>-68.31</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">6</td><td>REST_ADV_AWAY</td><td>spread</td><td class="num">593</td><td>0.5312</td><td>0.4910 – 0.5710</td><td>0.52381</td><td>-0.0328</td><td><span class="pill bad">NOT PROVEN</span></td><td>0.0354</td><td>21.01</td><td>-19.62</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">7</td><td>DOME_OVER</td><td>total</td><td class="num">1375</td><td>0.5149</td><td>0.4885 – 0.5412</td><td>0.52381</td><td>-0.0353</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.0003</td><td>-0.42</td><td>-36.32</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">8</td><td>PROB_GAP_6PT</td><td>spread</td><td class="num">3807</td><td>0.4944</td><td>0.4785 – 0.5103</td><td>0.52381</td><td>-0.0453</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.0314</td><td>-119.55</td><td>-133.47</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">9</td><td>__CONTROL_MARKET</td><td>spread</td><td class="num">5067</td><td>0.4865</td><td>0.4728 – 0.5003</td><td>0.52381</td><td>-0.0510</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.0519</td><td>-263.01</td><td>-285.02</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">10</td><td>BIG_FAV_FADE</td><td>spread</td><td class="num">526</td><td>0.5076</td><td>0.4650 – 0.5501</td><td>0.52381</td><td>-0.0588</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.0220</td><td>-11.57</td><td>-30.18</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">11</td><td>DOME_UNDER</td><td>total</td><td class="num">1375</td><td>0.4851</td><td>0.4588 – 0.5115</td><td>0.52381</td><td>-0.0650</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.0566</td><td>-77.84</td><td>-80.84</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">12</td><td>DIV_HOME_DOG</td><td>spread</td><td class="num">703</td><td>0.4922</td><td>0.4554 – 0.5291</td><td>0.52381</td><td>-0.0684</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.0430</td><td>-30.24</td><td>-52.80</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">13</td><td>REST_ADV</td><td>spread</td><td class="num">483</td><td>0.4969</td><td>0.4525 – 0.5413</td><td>0.52381</td><td>-0.0713</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.0324</td><td>-15.64</td><td>-34.27</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">14</td><td>WIND_COLD_UNDER</td><td>total</td><td class="num">180</td><td>0.5222</td><td>0.4495 – 0.5939</td><td>0.52381</td><td>-0.0743</td><td><span class="pill bad">NOT PROVEN</span></td><td>0.0118</td><td>2.12</td><td>-11.25</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">15</td><td>REST_AND_ELO</td><td>spread</td><td class="num">120</td><td>0.4583</td><td>0.3718 – 0.5474</td><td>0.52381</td><td>-0.1520</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.1131</td><td>-13.57</td><td>-22.73</td><td><a href="flagged.html#F30">F30</a></td></tr><tr><td class="num">16</td><td>AVAIL_EDGE_1.5</td><td>spread</td><td class="num">133</td><td>0.4286</td><td>0.3477 – 0.5135</td><td>0.52381</td><td>-0.1761</td><td><span class="pill bad">NOT PROVEN</span></td><td>-0.1818</td><td>-24.18</td><td>-26.16</td><td><a href="flagged.html#F30">F30</a></td></tr></tbody></table></div>
+<p class="caption">Signal columns: flat-stake only. Staking columns: right of the divider, reported and
+never ranked on. Rank = order by (hit CI low &minus; reference hurdle), ties by larger sample.
+Sources: computed layer over the pinned third-party capture <td><a class="src" href="sources.html#S47" title="nflverse/nfldata combined games feed (schedule, results, market lines)">S47</a></td> (flags F17/F23).</p>
+</section>
+
+<section>
+<h2>What the plan-level board will show when its gates run</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>Block</th><th>Columns</th><th>May it affect rank?</th><th>Source of truth</th></tr></thead><tbody><tr><td>SIGNAL</td><td>settled n, hit rate, Wilson CI, break-even hurdle, z/p, flat-stake ROI, abstain rate</td><td>Yes — rank is computed from this block only</td><td>engine/backtest.py split_signal_staking()</td></tr><tr><td>STAKING</td><td>ROI at declared stakes, profit units, max drawdown, largest-bet share of profit</td><td>No — reported, never ranked on</td><td>engine/backtest.py split_signal_staking()</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Demotion: live is a revocable state</h2>
+<p>A strategy that goes live and decays is sent back to paper by the demotion gate
+<a href="validation.html#G-14">G-14</a> &mdash; signal decay, drawdown, or closing-line rot. Live is a
+state you have to keep earning.</p>
 </section>
 
 </main>

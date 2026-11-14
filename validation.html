@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html" class="on">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="verified-results-feed.html">Verified Results Feed</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html" class="on">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main" class="wide">
 
@@ -61,6 +61,20 @@ the honest counterpart to the promotion gates: it defines when a live strategy i
 promotion gates, never after a losing streak. Because D1 needs a benchmark price to measure CLV and no
 official price source exists in this repository (flag F08), D1-D3 are defined here but are not yet active.
 No strategy can be promoted to live until a price source is supplied and the demotion rule is registered.</p>
+</section>
+
+<section id="G-14">
+<h2>G-14 &mdash; the demotion gate (requirement R28): live strategies return to paper</h2>
+<div class="callout warn"><p><strong>Parallel build (F31).</strong> The D1&ndash;D3 demotion gate above (from <a href="governance.html">Signal, Staking &amp; Demotion</a>) and this G-14 gate are two independent implementations of requirement R28 with different triggers and thresholds. Both are preserved; Q24 decides which becomes canonical.</p></div>
+<p>A gate set decides who gets promoted. This gate decides who gets sent back. Without it, a live badge
+outlives the edge that earned it and the leaderboard decays into a graveyard of former winners. Any ONE
+trigger demotes; the verdict logic is not reviewable, the thresholds are.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Rule</th><th>Trigger</th><th>Metric</th><th>Threshold (proposed)</th><th>Why</th></tr></thead><tbody><tr><td>D1</td><td>Signal decay</td><td>Flat-stake hit rate over the trailing window vs break-even at the prices paid</td><td>below break-even AND one-sided p &amp;lt; 0.10 for inferiority</td><td>The edge died; what remains is noise wearing the old badge</td></tr><tr><td>D2</td><td>Drawdown</td><td>Max drawdown of the flat-stake equity curve</td><td>&amp;gt; 25 flat-stake units</td><td>A run of losses that a real bankroll would not survive is a strategy change, not variance</td></tr><tr><td>D3</td><td>Closing-line rot</td><td>Trailing mean CLV and its bootstrap upper bound</td><td>mean CLV &amp;lt; 0 AND 95% upper bound &amp;lt; 0</td><td>The market has stopped moving toward our numbers: the information edge is gone</td></tr><tr><td>RE</td><td>Re-promotion</td><td>Fresh sealed sample, flat-stake hit rate vs break-even</td><td>&amp;ge; 300 fresh settled bets, one-sided p &amp;lt; 0.05 (the G-2b standard)</td><td>Returning to live must be harder than staying live</td></tr></tbody></table></div>
+<p class="caption">States: LIVE &rarr; (any trigger) &rarr; PAPER; PAPER &rarr; LIVE only through
+re-promotion on a fresh sealed sample. Old bets never re-qualify an entry — the burden of proof resets.
+Implementation: <code>engine/demotion.py</code>, tested in <code>tests/test_r21_r28.py</code>.
+Thresholds are proposed competition rules, reviewable under <a href="flagged.html#F28">F28</a> /
+question Q24.</p>
 </section>
 
 </main>

@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html" class="on">Line Origination</a><a href="originations.html">Originations</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html" class="on">Line Origination</a><a href="originations.html">Originations</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="verified-results-feed.html">Verified Results Feed</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main">
 
@@ -60,6 +60,16 @@ fact to flatter the outcome. Every field is either filled from a source or left 
 standard error on a scoring-margin estimate is large enough that two plausible models can differ by more than the
 gap between them and the market. Reporting a band makes that visible; reporting a point estimate hides it.
 The correct response to wide uncertainty is a smaller stake or no position, not a tighter number.</p>
+</section>
+
+<section>
+<h2>Origination order (requirement R23)</h2>
+<p>The order is mandated and fixed before results: <strong>the side first, then the total, then the
+moneyline.</strong> The moneyline is priced last because it is derived from the same margin distribution the
+side model produces &mdash; one model behind the markets, so the markets cannot contradict each other.
+This supersedes the earlier &ldquo;totals-first&rdquo; design note; the change is logged as
+<a href="flagged.html#F27">F27</a> rather than made silently.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Step</th><th>Market</th><th>What originates</th><th>Why in this position</th><th>Live output</th></tr></thead><tbody><tr><td class="num">1</td><td>SIDE (spread)</td><td>Expected margin distribution per game, with its band</td><td>The anchor market: highest liquidity and the only one where an edge is measurable at human sample sizes</td><td><a href="line-board.html">line board</a></td></tr><tr><td class="num">2</td><td>TOTAL</td><td>Expected combined scoring, with its band</td><td>A sum of the same two scoring expectations, so it cannot contradict the side</td><td><a href="line-board.html">line board</a></td></tr><tr><td class="num">3</td><td>MONEYLINE</td><td>Fair win probability from the margin distribution</td><td>Derived last; no separate model, no separate way to be wrong</td><td><a href="line-board.html">line board</a></td></tr></tbody></table></div>
 </section>
 
 </main>
