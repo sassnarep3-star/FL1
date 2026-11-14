@@ -1,191 +1,165 @@
-"""Verified results feed: settlement of every originated market from verified
-final scores, so backtests and ROI are computable at all.
+"""Append-only import boundary for source-checked NFL final scores.
 
-Provenance contract (this is the whole point of the module):
+The module accepts only records explicitly marked verified, with a cited HTTPS URL on
+an nfl.com host, a retrieval/check timestamp, and the SHA-256 of the exact captured
+source payload and stores its digest (the caller remains responsible for archiving the
+payload). It checks provenance shape and arithmetic inputs; it does not fetch NFL pages
+or prove that a human/collector transcribed the page correctly. Callers must run
+an independent line-by-line verifier before asserting `verified=True`.
 
-    SCORES  come only from results that were reconciled against the official
-            league standings (data/results.tsv, verified 32/32 clubs). A row
-            whose score cannot be verified is not in the feed.
-    PRICES  (spread / total / moneyline numbers and odds) come from the
-            committed third-party snapshot (data/raw/games.csv, source record
-            S47/S50). They are labelled third-party everywhere they surface.
-            Where no price exists the market row is omitted for that game and
-            counted in `missing_prices`, never imputed.
-
-Settlement arithmetic is deterministic and push-aware:
-
-    side      home covers if (home_score - away_score) + spread_home > 0;
-              push at exactly 0. `spread_home` is the home team's spread
-              (negative when the home team is favoured) — the same sign
-              convention pinned by verification V8.
-    total     over if away_score + home_score > total_line; push at exactly equal.
-    moneyline home wins outright (overtime included); an outright tie is a push.
-
-ROI at a given American price, per unit staked:
-    win  -> +100/|price|   when price > 0 (underdog)
-    win  -> +|price|/100   when price < 0 (favourite)  [i.e. 100/|price|]
-    loss -> -1
-    push -> 0
+No synthetic or unverified results are shipped in this module. Corrections are retained
+as later events; `latest()` returns the most recently recorded verified revision.
 """
-
 from __future__ import annotations
 
-from typing import Iterable, Sequence
-
-from . import pricing
-
-MARKET_ORDER = ("side", "total", "moneyline")  # must match engine.origination
-
-
-def settle_side(away_score: int, home_score: int, spread_home: float) -> str:
-    """'home' (home covers), 'away', or 'push'. Raises on missing inputs."""
-    margin = (home_score - away_score) + float(spread_home)
-    if margin > 0:
-        return "home"
-    if margin < 0:
-        return "away"
-    return "push"
+from contextlib import contextmanager
+from dataclasses import dataclass
+from datetime import datetime, timezone
+import hashlib
+import sqlite3
+from typing import Iterable
+from urllib.parse import urlparse
 
 
-def settle_total(away_score: int, home_score: int, total_line: float) -> str:
-    """'over', 'under', or 'push'."""
-    total = away_score + home_score
-    line = float(total_line)
-    if total > line:
-        return "over"
-    if total < line:
-        return "under"
-    return "push"
+def _utc(value: str) -> str:
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except (TypeError, ValueError) as exc:
+        raise ValueError("timestamp must be ISO-8601 with a timezone") from exc
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError("timestamp must include a timezone")
+    return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def settle_moneyline(away_score: int, home_score: int) -> str:
-    """'home', 'away', or 'push' (regular-season ties settle as pushes)."""
-    if home_score > away_score:
-        return "home"
-    if home_score < away_score:
-        return "away"
-    return "push"
+def _official_nfl_url(url: str) -> str:
+    parsed = urlparse(url or "")
+    host = (parsed.hostname or "").lower().rstrip(".")
+    if parsed.scheme != "https" or not (host == "nfl.com" or host.endswith(".nfl.com")):
+        raise ValueError("verified results require an HTTPS source URL on nfl.com")
+    return url
 
 
-def settle_result(result: str, american_price: float | None) -> str | None:
-    """Map a selection's settlement ('win'/'loss'/'push') to a PnL in units.
-
-    `result` is the outcome FOR THE SELECTION the row prices. Returns None
-    (not zero) when the price is missing: an ROI that silently treats a
-    missing price as even money is a fabricated number.
-    """
-    if american_price is None:
-        return None
-    if result == "push":
-        return 0.0
-    dec = pricing.american_to_decimal(float(american_price))
-    if result == "win":
-        return round(dec - 1.0, 6)
-    if result == "loss":
-        return -1.0
-    raise ValueError(f"unknown settlement: {result!r}")
+def _sha256(value: str) -> str:
+    value = (value or "").lower()
+    if len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
+        raise ValueError("evidence_sha256 must be a 64-character SHA-256 hex digest")
+    return value
 
 
-def outcome_for(selection: str, settlement: str) -> str | None:
-    """Translate a market settlement into win/loss/push for a selection."""
-    if settlement == "push":
-        return "push"
-    if selection == settlement:
-        return "win"
-    return "loss"
+@dataclass(frozen=True)
+class VerifiedResult:
+    game_id: str
+    season: int
+    week: int
+    away_team: str
+    home_team: str
+    away_score: int
+    home_score: int
+    status: str
+    source_url: str
+    source_checked_at: str
+    evidence_sha256: str
+    evidence_payload: bytes
+    verified: bool = True
 
 
-def feed_rows(games: Sequence[dict]) -> tuple[list[dict], dict]:
-    """Build the long-format results feed from score+price rows.
+class ResultsFeed:
+    """Minimal append-only SQLite feed for officially sourced final results."""
 
-    Each input dict needs:
-        game_id, gameday, week, away, home, away_score, home_score   (verified)
-        spread_home, total_line, ml_home, ml_away                    (price, may be None)
-        result_source_url, line_source_url, line_source_id
+    def __init__(self, path: str):
+        self.path = path
+        with self._connect() as db:
+            db.execute("""CREATE TABLE IF NOT EXISTS result_events (
+                event_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                game_id TEXT NOT NULL,
+                season INTEGER NOT NULL,
+                week INTEGER NOT NULL,
+                away_team TEXT NOT NULL,
+                home_team TEXT NOT NULL,
+                away_score INTEGER NOT NULL,
+                home_score INTEGER NOT NULL,
+                status TEXT NOT NULL CHECK (status='FINAL'),
+                source_url TEXT NOT NULL,
+                source_checked_at TEXT NOT NULL,
+                evidence_sha256 TEXT NOT NULL,
+                verified INTEGER NOT NULL CHECK (verified=1),
+                UNIQUE(game_id, evidence_sha256)
+            )""")
 
-    Output rows carry settle outcome and per-unit PnL where a price exists,
-    ordered game by game, markets within a game in the origination order
-    (side, total, moneyline). The summary counts what is missing so nothing
-    disappears quietly.
-    """
-    rows: list[dict] = []
-    summary = {"games": 0, "market_rows": 0, "pushes": 0,
-               "missing_prices": {"side": 0, "total": 0, "moneyline": 0},
-               "settled_wins": 0, "settled_losses": 0}
-    for g in games:
-        summary["games"] += 1
-        a, h = int(g["away_score"]), int(g["home_score"])
-        common = {
-            "game_id": g["game_id"], "gameday": g["gameday"], "week": g["week"],
-            "away": g["away"], "home": g["home"],
-            "away_score": a, "home_score": h,
-            "result_source_url": g.get("result_source_url", ""),
-            "line_source_url": g.get("line_source_url", ""),
-            "line_source_id": g.get("line_source_id", ""),
-        }
+    @contextmanager
+    def _connect(self):
+        db = sqlite3.connect(self.path)
+        db.row_factory = sqlite3.Row
+        try:
+            with db:
+                yield db
+        finally:
+            db.close()
 
-        def emit(market: str, selection: str, line, odds, settlement: str) -> None:
-            if settlement == "push":
-                summary["pushes"] += 1
-            out = outcome_for(selection, settlement)
-            if out == "win":
-                summary["settled_wins"] += 1
-            elif out == "loss":
-                summary["settled_losses"] += 1
-            pnl = settle_result(out or "push", odds)
-            if line is None or odds is None:
-                summary["missing_prices"][market] += 1
-            rows.append({**common, "market": market, "selection": selection,
-                         "line": "" if line is None else line,
-                         "odds_american": "" if odds is None else odds,
-                         "outcome": out or "", "pnl_unit": "" if pnl is None else pnl})
-            summary["market_rows"] += 1
+    @staticmethod
+    def _validate(record: VerifiedResult) -> VerifiedResult:
+        if record.verified is not True:
+            raise ValueError("unverified results cannot enter the verified feed")
+        if not record.game_id or not record.away_team or not record.home_team:
+            raise ValueError("game id and both team identifiers are required")
+        if record.away_team == record.home_team:
+            raise ValueError("away and home teams must differ")
+        if record.season < 1920 or record.week < 1:
+            raise ValueError("season and week are outside supported NFL game ranges")
+        if (isinstance(record.away_score, bool) or isinstance(record.home_score, bool)
+                or not isinstance(record.away_score, int) or not isinstance(record.home_score, int)
+                or record.away_score < 0 or record.home_score < 0):
+            raise ValueError("final scores must be non-negative integers")
+        if record.status != "FINAL":
+            raise ValueError("only explicitly final results may be imported")
+        if not isinstance(record.evidence_payload, bytes):
+            raise ValueError("evidence_payload must contain exact captured source bytes")
+        digest = _sha256(record.evidence_sha256)
+        if hashlib.sha256(record.evidence_payload).hexdigest() != digest:
+            raise ValueError("evidence_sha256 does not match the exact evidence_payload bytes")
+        return VerifiedResult(
+            game_id=record.game_id, season=record.season, week=record.week,
+            away_team=record.away_team, home_team=record.home_team,
+            away_score=record.away_score, home_score=record.home_score,
+            status=record.status, source_url=_official_nfl_url(record.source_url),
+            source_checked_at=_utc(record.source_checked_at),
+            evidence_sha256=digest,
+            evidence_payload=record.evidence_payload, verified=True)
 
-        spread = g.get("spread_home")
-        if spread is not None and a is not None and h is not None:
-            s = settle_side(a, h, spread)
-            emit("side", "home", spread, g.get("home_spread_odds"), s)
-        else:
-            summary["missing_prices"]["side"] += 2  # the game row itself is absent
-        tot = g.get("total_line")
-        if tot is not None:
-            s = settle_total(a, h, tot)
-            emit("total", "over", tot, g.get("over_odds"), s)
-        else:
-            summary["missing_prices"]["total"] += 2
-        mlh, mla = g.get("ml_home"), g.get("ml_away")
-        if mlh is not None or mla is not None:
-            s = settle_moneyline(a, h)
-            emit("moneyline", "home", mlh, mlh, s)
-            emit("moneyline", "away", mla, mla, s)
-        else:
-            summary["missing_prices"]["moneyline"] += 2
-    return rows, summary
+    def ingest(self, records: Iterable[VerifiedResult]) -> int:
+        """Validate then append a batch atomically; returns number newly inserted."""
+        validated = [self._validate(r) for r in records]
+        if len({(r.game_id, r.evidence_sha256) for r in validated}) != len(validated):
+            raise ValueError("duplicate game/payload records in batch")
+        inserted = 0
+        with self._connect() as db:
+            for r in validated:
+                cur = db.execute("""INSERT OR IGNORE INTO result_events
+                    (game_id,season,week,away_team,home_team,away_score,home_score,status,
+                     source_url,source_checked_at,evidence_sha256,verified)
+                    VALUES (?,?,?,?,?,?,?,?,?,?,?,1)""",
+                    (r.game_id, r.season, r.week, r.away_team, r.home_team,
+                     r.away_score, r.home_score, r.status, r.source_url,
+                     r.source_checked_at, r.evidence_sha256))
+                inserted += cur.rowcount
+        return inserted
+
+    def latest(self) -> list[dict]:
+        """Return latest recorded verified revision per game, including provenance."""
+        with self._connect() as db:
+            return [dict(row) for row in db.execute("""
+                SELECT e.* FROM result_events e
+                JOIN (SELECT game_id, MAX(event_id) AS event_id FROM result_events GROUP BY game_id) x
+                  ON x.event_id=e.event_id
+                ORDER BY e.season, e.week, e.game_id
+            """)]
+
+    def history(self, game_id: str) -> list[dict]:
+        with self._connect() as db:
+            return [dict(row) for row in db.execute(
+                "SELECT * FROM result_events WHERE game_id=? ORDER BY event_id", (game_id,))]
 
 
-def roi(rows: Iterable[dict]) -> dict:
-    """Per-unit ROI over priced rows. Pushes count in n with zero return.
-
-    Rows with a blank pnl_unit (no price) are excluded from n and reported,
-    because a backtest that averages over missing prices is measuring the
-    missingness.
-    """
-    n = wins = losses = pushes = unpriced = 0
-    total = 0.0
-    for r in rows:
-        if r.get("pnl_unit") == "" or r.get("pnl_unit") is None:
-            unpriced += 1
-            continue
-        n += 1
-        p = float(r["pnl_unit"])
-        total += p
-        if p > 0:
-            wins += 1
-        elif p < 0:
-            losses += 1
-        else:
-            pushes += 1
-    return {"n_priced": n, "wins": wins, "losses": losses, "pushes": pushes,
-            "n_unpriced": unpriced,
-            "roi_per_unit": round(total / n, 6) if n else None,
-            "pnl_units": round(total, 6)}
+def sha256_bytes(payload: bytes) -> str:
+    """Digest the exact captured source bytes referenced by a result record."""
+    return hashlib.sha256(payload).hexdigest()

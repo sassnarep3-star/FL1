@@ -13,7 +13,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from engine import demotion, gates, leaderboard, origination, pricing, results_feed  # noqa: E402
+from engine import demotion, gates, leaderboard, origination, pricing, settlement  # noqa: E402
 
 
 # ---------------------------------------------------------------- origination
@@ -64,19 +64,19 @@ class TestOrigination(unittest.TestCase):
 # ---------------------------------------------------------------- results feed
 class TestResultsFeed(unittest.TestCase):
     def test_settlements_and_pushes(self):
-        self.assertEqual(results_feed.settle_side(24, 21, 1.5), "away")   # WAS 24 @ NYG 21, NYG +1.5: -3+1.5 < 0
-        self.assertEqual(results_feed.settle_side(21, 24, -3.0), "push")  # margin +3, spread -3
-        self.assertEqual(results_feed.settle_total(24, 21, 40.5), "over")
-        self.assertEqual(results_feed.settle_total(24, 21, 45.0), "push")
-        self.assertEqual(results_feed.settle_moneyline(24, 21), "away")
-        self.assertEqual(results_feed.settle_moneyline(20, 20), "push")
+        self.assertEqual(settlement.settle_side(24, 21, 1.5), "away")   # WAS 24 @ NYG 21, NYG +1.5: -3+1.5 < 0
+        self.assertEqual(settlement.settle_side(21, 24, -3.0), "push")  # margin +3, spread -3
+        self.assertEqual(settlement.settle_total(24, 21, 40.5), "over")
+        self.assertEqual(settlement.settle_total(24, 21, 45.0), "push")
+        self.assertEqual(settlement.settle_moneyline(24, 21), "away")
+        self.assertEqual(settlement.settle_moneyline(20, 20), "push")
 
     def test_pnl_at_american_prices(self):
-        self.assertAlmostEqual(results_feed.settle_result("win", -110), 100 / 110, places=5)
-        self.assertAlmostEqual(results_feed.settle_result("win", 140), 1.4, places=5)
-        self.assertEqual(results_feed.settle_result("loss", -110), -1.0)
-        self.assertEqual(results_feed.settle_result("push", -110), 0.0)
-        self.assertIsNone(results_feed.settle_result("win", None))  # no price, no number
+        self.assertAlmostEqual(settlement.settle_result("win", -110), 100 / 110, places=5)
+        self.assertAlmostEqual(settlement.settle_result("win", 140), 1.4, places=5)
+        self.assertEqual(settlement.settle_result("loss", -110), -1.0)
+        self.assertEqual(settlement.settle_result("push", -110), 0.0)
+        self.assertIsNone(settlement.settle_result("win", None))  # no price, no number
 
     def test_feed_rows_and_roi(self):
         games = [{
@@ -89,7 +89,7 @@ class TestResultsFeed(unittest.TestCase):
             "line_source_url": "https://github.com/nflverse/nfldata",
             "line_source_id": "S47",
         }]
-        rows, summary = results_feed.feed_rows(games)
+        rows, summary = settlement.feed_rows(games)
         self.assertEqual([r["market"] for r in rows],
                          ["side", "total", "moneyline", "moneyline"])
         by = {(r["market"], r["selection"]): r for r in rows}
@@ -97,7 +97,7 @@ class TestResultsFeed(unittest.TestCase):
         self.assertEqual(by[("total", "over")]["outcome"], "win")  # 45 > 40.5
         self.assertEqual(by[("moneyline", "home")]["outcome"], "loss")
         self.assertEqual(by[("moneyline", "away")]["outcome"], "win")
-        r = results_feed.roi(rows)
+        r = settlement.roi(rows)
         self.assertEqual(r["n_priced"], 4)
         self.assertIsNotNone(r["roi_per_unit"])
         self.assertEqual(summary["pushes"], 0)
@@ -106,10 +106,10 @@ class TestResultsFeed(unittest.TestCase):
         games = [{"game_id": "g", "gameday": "d", "week": "1", "away": "A", "home": "H",
                   "away_score": 10, "home_score": 10,
                   "spread_home": None, "total_line": None, "ml_home": None, "ml_away": None}]
-        rows, summary = results_feed.feed_rows(games)
+        rows, summary = settlement.feed_rows(games)
         self.assertEqual(len(rows), 0)
         self.assertEqual(summary["missing_prices"]["side"], 2)
-        self.assertEqual(results_feed.roi(rows)["roi_per_unit"], None)
+        self.assertEqual(settlement.roi(rows)["roi_per_unit"], None)
 
 
 # ---------------------------------------------------------------- demotion gate

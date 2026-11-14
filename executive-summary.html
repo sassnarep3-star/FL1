@@ -14,7 +14,7 @@
   <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed</a><a href="price-snapshots.html">Price Snapshots</a><a href="line-board.html">Origination Board</a><a href="prop-correlations.html">Prop Correlations</a><a href="correlations-official.html">Official Correlations</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main">
-
+<div class="callout"><p><strong>Update (session arena/685f958d-fl1, 2026-11-14).</strong> Own fair lines are now published for the 13 pending Week 10 games, in the order side, total, then moneyline, with fair, market and difference as separate columns. <strong>No market column is filled</strong>: no official NFL source publishes prices (F18). In a walk-forward backtest on 89 out-of-sample games (weeks 4–10), the side model hits 67.0% of winners (95% CI 56.7%–76.0%), but its margin error (10.49 points) does not beat a constant benchmark (10.33). The total model does not beat its benchmark either (F20). Correlations are withheld (F19). The leaderboard ranks on signal and reports staking beside it, and the G-14 gate sends a live strategy back to paper. See <a href="model-lines.html">Model Lines</a>, <a href="results-feed.html">Results Feed</a> and <a href="governance.html">Signal &amp; Demotion</a>.</p></div>
 <section>
 <h1>Executive Summary</h1>
 <p class="lead">Status as of 2026-11-14. This page states only what can be traced to an official source,
@@ -24,7 +24,7 @@ and marks everything else as open.</p>
 <section>
 <h2>1. What has been verified</h2>
 <p>The repository was empty apart from a five-byte README, so the entire base is new. Fifteen sources were
-attempted; <strong>45 loaded successfully</strong> and <strong>4 did not</strong>. The failed ones are
+attempted; <strong>47 loaded successfully</strong> and <strong>4 did not</strong>. The failed ones are
 recorded as unverified and are never used to support a claim.</p>
 <p>The most substantial verified artefact is the <strong>official Week 10, 2026 season injury report</strong>:
 345 player rows over 28 clubs, with each player's practice status and game status reproduced exactly as published.
@@ -112,14 +112,16 @@ what is still missing instead of hiding it:</p>
 <ul class="tight">
 <li><strong>Price-snapshot store</strong> &mdash; <code>engine/price_snapshots.py</code> (append-only, sourced
 quotes) and the Week 10 export on <a href="price-snapshots.html">Price Snapshots</a>: 56 market rows with
-opening and closing columns. Openings are blank &mdash; no verified opener source exists (F18).</li>
+opening and closing columns. The values are recorded in the store for audit and left blank on the page
+(F18, F25); openings have no verified source at all (F23).</li>
 <li><strong>Verified results feed</strong> &mdash; <a href="results-feed.html">Results Feed</a>: 137 verified
 2026 games, 548 settled market rows in origination order, push-aware, so backtests and ROI are computable
 today.</li>
 <li><strong>Origination order</strong> &mdash; side first, then total, then moneyline, enforced in
 <code>engine/origination.py</code>; the queue raises on anything else.</li>
 <li><strong>Fair / market / difference</strong> &mdash; three separate columns on
-<a href="line-board.html">Origination Board</a>. Fair is blank until a model is fitted (F19); difference never
+<a href="line-board.html">Origination Board</a>. Fair is blank until a model passes acceptance (F24);
+the market column is blank too &mdash; no official price source (F18/F25); difference never
 computes from one arm.</li>
 <li><strong>Signal separated from staking</strong> &mdash; the <a href="strategies.html">Leaderboard</a> scores
 selection quality and sizing independently and ranks on signal only; a lucky staking run carries a masking
@@ -127,7 +129,7 @@ warning instead of a rank.</li>
 <li><strong>Depth of replacement</strong> &mdash; <a href="replacement-depth.html">Replacement Depth</a>:
 112 charted players carry an official game status; 91 name the club&rsquo;s next man and record his string
 (48 second-string, 17 third, 11 fourth &mdash; the brief&rsquo;s case &mdash; 13 fifth, 2 sixth), 21 publish no
-further name at the slot, and Houston stays blank (F21).</li>
+further name at the slot, and Houston stays blank (F26).</li>
 <li><strong>Correlations from official numbers with n</strong> &mdash;
 <a href="correlations-official.html">Official Correlations</a>: four measured values (n = 160, 32, 32, 137)
 and three blocked rows that stay blank until officially sourced inputs exist.</li>

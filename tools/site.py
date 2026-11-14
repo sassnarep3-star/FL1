@@ -85,6 +85,12 @@ def cell_notlisted():
             'report for this week">not listed</td>')
 
 
+def blankcell(reason="No official source confirms this value — left blank on purpose"):
+    """A deliberately blank table cell: nothing inferred; the reason is in the cell and title."""
+    return '<td class="blank" title="%s">—<small class="flag">%s</small></td>' % (
+        reason.replace('"', "'"), reason)
+
+
 def raw_src(html_fragment):
     """Pass an already-rendered HTML fragment through as a table cell.
 
@@ -213,6 +219,9 @@ def main():
     flagged_depth = [r for r in depth_rows if r["flagged"]]
 
     written = []
+    import brief  # session arena-685f958d-fl1: model-lines + governance pages, results body
+    written.extend(brief.render(sys.modules[__name__]))
+    rf_extra = getattr(brief, "RESULTS_BODY", "")
 
     # ------------------------------------------------------------------ index
     n_sugg = len(suggestions)
@@ -249,6 +258,9 @@ def main():
   <a class="card" href="suggestions.html"><h3>Suggestions</h3>
     <p><strong>%(n_suggestions)d</strong> proposals with options, trade-offs and one recommended path. Review before
     anything is implemented.</p></a>
+  <a class="card" href="governance.html"><h3>Signal &amp; Demotion</h3>
+    <p>The leaderboard ranks on signal only, staking is shown beside it, the demotion gate sends a live
+    strategy back to paper, and correlations from non-official sources are withheld.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
   <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
@@ -257,9 +269,13 @@ def main():
     <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
     <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a>
-  <a class="card" href="results-feed.html"><h3>Results Feed</h3>
-    <p><strong>137</strong> verified 2026 games, <strong>548</strong> settled market rows &mdash; scores from
-    the official standings, prices labelled third-party. Backtests and ROI are computable from this table.</p></a>
+  <a class="card" href="results-feed.html"><h3>Results Feed &amp; Backtest</h3>
+    <p><strong>137</strong> verified 2026 results with official page links, a strictly out-of-sample
+    backtest, and the settled market feed (<strong>548</strong> rows). Price and ROI cells stay blank:
+    no official price source exists (F18).</p></a>
+  <a class="card" href="model-lines.html"><h3>Model Lines &amp; Price Store</h3>
+    <p>Our own fair side, total and moneyline for the 13 pending Week 10 games, in that order. Market and
+    difference cells are blank: no official price source exists.</p></a>
   <a class="card" href="line-board.html"><h3>Origination Board</h3>
     <p>Fair line, market line and difference as three separate columns, originated side &rarr; total &rarr;
     moneyline. Fair stays blank until a model is fitted &mdash; never a fabricated number.</p></a>
@@ -417,14 +433,16 @@ what is still missing instead of hiding it:</p>
 <ul class="tight">
 <li><strong>Price-snapshot store</strong> &mdash; <code>engine/price_snapshots.py</code> (append-only, sourced
 quotes) and the Week 10 export on <a href="price-snapshots.html">Price Snapshots</a>: 56 market rows with
-opening and closing columns. Openings are blank &mdash; no verified opener source exists (F18).</li>
+opening and closing columns. The values are recorded in the store for audit and left blank on the page
+(F18, F25); openings have no verified source at all (F23).</li>
 <li><strong>Verified results feed</strong> &mdash; <a href="results-feed.html">Results Feed</a>: 137 verified
 2026 games, 548 settled market rows in origination order, push-aware, so backtests and ROI are computable
 today.</li>
 <li><strong>Origination order</strong> &mdash; side first, then total, then moneyline, enforced in
 <code>engine/origination.py</code>; the queue raises on anything else.</li>
 <li><strong>Fair / market / difference</strong> &mdash; three separate columns on
-<a href="line-board.html">Origination Board</a>. Fair is blank until a model is fitted (F19); difference never
+<a href="line-board.html">Origination Board</a>. Fair is blank until a model passes acceptance (F24);
+the market column is blank too &mdash; no official price source (F18/F25); difference never
 computes from one arm.</li>
 <li><strong>Signal separated from staking</strong> &mdash; the <a href="strategies.html">Leaderboard</a> scores
 selection quality and sizing independently and ranks on signal only; a lucky staking run carries a masking
@@ -432,7 +450,7 @@ warning instead of a rank.</li>
 <li><strong>Depth of replacement</strong> &mdash; <a href="replacement-depth.html">Replacement Depth</a>:
 112 charted players carry an official game status; 91 name the club&rsquo;s next man and record his string
 (48 second-string, 17 third, 11 fourth &mdash; the brief&rsquo;s case &mdash; 13 fifth, 2 sixth), 21 publish no
-further name at the slot, and Houston stays blank (F21).</li>
+further name at the slot, and Houston stays blank (F26).</li>
 <li><strong>Correlations from official numbers with n</strong> &mdash;
 <a href="correlations-official.html">Official Correlations</a>: four measured values (n = 160, 32, 32, 137)
 and three blocked rows that stay blank until officially sourced inputs exist.</li>
@@ -445,6 +463,8 @@ on open question Q24.</li>
        depth_cov["covered"],
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
+    import brief as _brief  # session arena-685f958d-fl1
+    es = _brief.exec_banner() + es
     written.append(page("executive-summary.html", "Executive Summary", es))
 
     # ------------------------------------------------------------ requirements
@@ -1021,7 +1041,7 @@ The correct response to wide uncertainty is a smaller stake or no position, not 
              cell("Forecast available; roof/surface registry not verified")],
             [cell("Market price"), cell("Benchmark line and price"), '<td>%s</td>' % pill("PARTIAL", "warn"),
              '<td>%s</td>' % src_link("S47", sources_by_id),
-             cell("Third-party snapshot only (games feed, label kept on every cell); no official source of NFL prices exists — F20")],
+             cell("Third-party snapshot only (games feed); recorded in the audit layer with the label, not displayed — F25; no official source of NFL prices exists (F18)")],
             [cell("Historical results"), cell("Prior-season outcomes"), '<td>%s</td>' % pill("AVAILABLE", "ok"),
              '<td>%s</td>' % src_link("S03", sources_by_id),
              cell("Verified 2026 results feed (137 games, settled markets) on results-feed.html; earlier seasons exist only as third-party rows")],
@@ -1031,7 +1051,7 @@ The correct response to wide uncertainty is a smaller stake or no position, not 
             [cell("Kickoff timestamp (UTC)"), '<td>%s</td>' % pill("READY", "ok"),
              cell("Needed for the pre-kickoff seal")],
             [cell("Fair-value probability"), '<td>%s</td>' % pill("BLANK", "warn"),
-             cell("Requires a fitted model; none has been run")],
+             cell("A fitted model exists (model-lines.html) but has not passed acceptance (F20); blank until Q22 is answered")],
             [cell("Uncertainty band"), '<td>%s</td>' % pill("BLANK", "warn"), cell("Same dependency")],
             [cell("Market price"), '<td>%s</td>' % pill("BLANK", "bad"), cell("No official source exists")],
             [cell("Edge / expected value"), '<td>%s</td>' % pill("BLANK", "bad"),
@@ -1039,9 +1059,9 @@ The correct response to wide uncertainty is a smaller stake or no position, not 
             [cell("Closing-line value"), '<td>%s</td>' % pill("BLANK", "bad"), cell("Requires closing prices")],
             [cell("Prediction hash"), '<td>%s</td>' % pill("READY", "ok"), cell("Computable locally right now")],
             [cell("Fair line (own column)"), '<td>%s</td>' % pill("BLANK", "warn"),
-             cell("Published as its own column on the board; blank until a model is fitted — F19")],
+             cell("Published as its own column on the board; blank until a model passes acceptance — F24")],
             [cell("Market line (own column)"), '<td>%s</td>' % pill("PARTIAL", "warn"),
-             cell("Published as its own column; third-party snapshot values, labelled — F20")],
+             cell("Published as its own column; blank — market prices need an official source (F18/F25)")],
             [cell("Difference (own column)"), '<td>%s</td>' % pill("BLANK", "warn"),
              cell("market minus fair, computed only when both arms exist; never from one arm")],
         ], cls="dense")
@@ -1236,7 +1256,7 @@ unit tests in <code>tests/test_requirements_core8.py</code>. A window too small 
 <code>INSUFFICIENT_DATA</code> &mdash; never a quiet pass. The demotion thresholds are fixed before the first
 live stake and reviewed on the same schedule as the promotion gates, never after a losing streak. Because D1
 needs a benchmark price to measure CLV and no official price source exists in this repository
-(<a href="flagged.html#F20">F20</a>), D1-D3 are defined and implemented but not yet fed: no strategy can be
+(<a href="flagged.html#F18">F18</a>), D1-D3 are defined and implemented but not yet fed: no strategy can be
 promoted to live until a price source is supplied and the demotion thresholds are registered in one commit
 (see <a href="questions.html">open question Q24</a>).</p>
 </section>
@@ -1277,8 +1297,11 @@ promoted to live until a price source is supplied and the demotion thresholds ar
         snap_rows.append([
             cell(r["gameday"], "n"), cell("%s @ %s" % (r["away"], r["home"])),
             cell(r["market_type"]), cell(r["side"]),
-            cell(r["open_line"], "n"), cell(r["open_captured_at_utc"]),
-            cell(r["close_line"], "n"), cell(r["close_odds_american"], "n"),
+            blankcell("No verified opener source (F18)" if not r["open_line"] else
+                      "Opening price needs an official source (F18)"),
+            blankcell("No capture timestamp recorded"),
+            blankcell("Closing price needs an official source (F18)"),
+            blankcell("Odds need an official source (F18)"),
             cell(r["phase"]), cell(r["note"]),
             raw_src(src_links(r["source_id"], sources_by_id) + " "
                     + src_links(r["slate_source_id"], sources_by_id)),
@@ -1295,7 +1318,7 @@ Week 10 slate.</p>
   <p><strong>Opening prices are blank on purpose.</strong> No verified source of NFL opening lines exists in
   this repository &mdash; the third-party snapshot holds closes only. An opener inferred from a close would be
   a fabrication, so the columns exist and stay empty until a priced feed is acquired
-  (open question Q21, flag F18). The store is ready: record() takes phase=&quot;open&quot; today.</p>
+  (open question Q21, flags F18 and F23). The store is ready: record() takes phase=&quot;open&quot; today.</p>
 </div>
 </section>
 
@@ -1326,8 +1349,8 @@ close. Closing values for those games will replace these rows as additional capt
          raw_src(src_links("S47;S49", sources_by_id))],
         [cell("Opening prices captured"), cell(n_open, "n"),
          cell("No opener feed exists yet (F18)"), raw_src('<a class="src" href="flagged.html#F18">F18</a>')],
-        [cell("Closing / latest captured"), cell(n_close, "n"),
-         cell("Third-party snapshot, labelled; closes only for played games"),
+        [cell("Closing / latest recorded in the store"), cell(n_close, "n"),
+         cell("Recorded in data/price_snapshots.csv (audit, third-party); values not displayed (F25)"),
          raw_src(src_links("S47", sources_by_id))],
     ], cls="dense"),
     table(["Date", "Game", "Market", "Side", "Open line", "Open captured",
@@ -1338,42 +1361,48 @@ close. Closing values for those games will replace these rows as additional capt
 
     # ---- verified results feed ---------------------------------------------
     feed = load_csv("results_feed.csv")
-    wins = sum(1 for r in feed if r["outcome"] == "win")
-    losses = sum(1 for r in feed if r["outcome"] == "loss")
-    pushes = sum(1 for r in feed if r["outcome"] == "push")
-    pnl = sum(float(r["pnl_unit"]) for r in feed if r["pnl_unit"].strip())
-    n_priced = sum(1 for r in feed if r["pnl_unit"].strip())
+    # Display policy (user constraint + site footer): prices and any figure derived from them
+    # are not displayed without an official source. The computed values live in the audit layer
+    # data/results_feed.csv (engine/settlement.py) with third-party provenance on every row (F25).
     feed_rows = []
     for r in feed:
         feed_rows.append([
             cell(r["gameday"], "n"),
             cell("%s %s @ %s %s" % (r["away"], r["away_score"], r["home"], r["home_score"])),
             cell(r["market"]), cell(r["selection"]),
-            cell(r["line"], "n"), cell(r["odds_american"], "n"),
-            cell(r["outcome"]), cell(r["pnl_unit"], "n"),
+            blankcell("Line needs an official price source (F18)"),
+            blankcell("Odds need an official price source (F18)"),
+            blankcell("Settlement outcome is derived from third-party prices (F25)"),
+            blankcell("PnL needs an official price source (F18)"),
             raw_src(src_links(r["result_source_id"], sources_by_id)),
             raw_src(src_links(r["line_source_id"], sources_by_id)),
         ])
     rfpage = """
 <section>
-<h1>Verified Results Feed</h1>
+<h1>Verified Results Feed &amp; Backtest</h1>
 <p class="lead">Backtests and ROI need settled outcomes. This feed settles every originated market &mdash;
 side, total, moneyline, in that order &mdash; from scores that were reconciled against the official league
-standings (32 of 32 clubs, see <a href="verification.html">Verification</a>). Prices are the committed
-third-party snapshot and are labelled third-party on every row. Settlement is push-aware: 4 of the 548 rows
-are pushes and count as zero, never as drops.</p>
+standings (32 of 32 clubs, see <a href="verification.html">Verification</a>). The scores on every row are
+official. The prices behind settlement are the committed third-party snapshot (F25): per the display rule
+they are <em>recorded in the store and the audit file</em>
+<code>data/results_feed.csv</code> but <em>left blank on this page</em>, with the reason on every cell (F18).
+Nothing price-derived is displayed until an official price source exists.</p>
 </section>
+
+%s
 
 <section>
 <h2>Feed summary</h2>
 %s
-<p class="caption">Every figure on this table is computed by <code>engine/results_feed.py</code> from the
-committed inputs; run <code>python3 tools/build_results_feed.py</code> to regenerate. The flat-bet ROI is
-descriptive &mdash; it bets every market row equally &mdash; and is not a strategy result.</p>
+<p class="caption">Every audit value on this table is computed by <code>engine/settlement.py</code> from
+committed inputs and written to <code>data/results_feed.csv</code> (run
+<code>python3 tools/build_results_feed.py</code> to regenerate). The displayed cells for prices, outcomes,
+PnL and ROI are blank on purpose (F18/F25); the values remain in the audit file with third-party provenance
+on every row.</p>
 </section>
 
 <section>
-<h2>The feed</h2>
+<h2>The settled feed &mdash; audit rows</h2>
 %s
 </section>
 
@@ -1381,9 +1410,10 @@ descriptive &mdash; it bets every market row equally &mdash; and is not a strate
 <h2>What this feed is not</h2>
 <p>It is not historical: the verified scope is the 2026 season to date. Earlier seasons exist in the repo only
 as third-party rows and are not promoted into a <em>verified</em> feed (open question Q25). It is not an odds
-source: the price columns are third-party data (F20), and no official NFL price feed exists.</p>
+source: the stored price columns are third-party data (F25), and no official NFL price feed exists.</p>
 </section>
 """ % (
+    rf_extra,
     table(["Metric", "Value", "Basis", "Source"], [
         [cell("Verified games"), cell(137, "n"),
          cell("2026 season to date, scores reconciled 32/32 with official standings"),
@@ -1392,19 +1422,19 @@ source: the price columns are third-party data (F20), and no official NFL price 
          cell("side + total + 2 moneyline rows per game"),
          raw_src(src_links("S03;S47", sources_by_id))],
         [cell("Wins / losses / pushes"),
-         cell("%d / %d / %d" % (wins, losses, pushes), "n"),
-         cell("Push-aware settlement in engine/results_feed.py"),
+         blankcell("Outcome counts are derived from third-party prices (F25) \u2014 audit file only"),
+         cell("Push-aware settlement in engine/settlement.py"),
          raw_src(src_links("S03", sources_by_id))],
         [cell("Flat-bet ROI per unit"),
-         cell("%.4f" % (pnl / n_priced) if n_priced else "", "n"),
-         cell("All %d priced rows at 1 unit; descriptive, not a strategy" % n_priced),
+         blankcell("ROI needs official prices (F18)"),
+         cell("Computed in the audit file from labelled third-party prices; not displayed"),
          raw_src(src_links("S47", sources_by_id))],
     ], cls="dense"),
     table(["Date", "Result (away score @ home score)", "Market", "Selection",
            "Line", "Odds", "Outcome", "PnL/unit", "Result source", "Line source"],
           feed_rows, cls="dense searchable"),
 )
-    written.append(page("results-feed.html", "Results Feed", rfpage, wide=True))
+    written.append(page("results-feed.html", "Verified Results Feed & Backtest", rfpage, wide=True))
 
     # ---- origination board (fair / market / difference) ---------------------
     board = load_csv("line_board.csv")
@@ -1414,8 +1444,10 @@ source: the price columns are third-party data (F20), and no official NFL price 
             cell(r["origination"], "n"),
             cell(r["gameday"], "n"), cell("%s @ %s" % (r["away"], r["home"])),
             cell(r["market"]), cell(r["selection"]),
-            cell(r["fair_line"], "n"), cell(r["market_line"], "n"),
-            cell(r["difference"], "n"), cell(r["difference_unit"]),
+            blankcell("Fair line blank until a model passes acceptance (Q22, F24)"),
+            blankcell("Market line needs an official price source (F18/F25)"),
+            blankcell("Difference needs both columns (F24)"),
+            cell(r["difference_unit"]),
             cell(r["phase"]),
             raw_src(src_links(r["source_id"], sources_by_id) + " "
                     + src_links(r["slate_source_id"], sources_by_id)),
@@ -1428,10 +1460,12 @@ difference as three separate columns &mdash; never a blended number. Markets are
 <strong>side first, then total, then moneyline</strong>, and the order is enforced by
 <code>engine/origination.py</code>, not by habit.</p>
 <div class="callout warn">
-  <p><strong>The fair column is blank (F19).</strong> The model specification leaves every coefficient
-  deliberately unfitted; a number in that column today would be fabricated. The difference column is blank
-  with it, because a difference computed from one arm is not a difference. The market column carries
-  third-party snapshot values with their source (F20) &mdash; no official NFL price source exists.</p>
+  <p><strong>The fair column is blank (F24).</strong> A fitted fair-line model exists on
+  <a href="model-lines.html">Model Lines</a> but has not passed acceptance: its own flag records that it
+  does not beat a constant benchmark out of sample (F20). A number in this column today would present an
+  unaccepted model as accepted. The difference column is blank with it, because a difference computed from
+  one arm is not a difference. The market column is blank too: third-party snapshot values are recorded in
+  the audit layer (data/line_board.csv) but not displayed without an official price source (F18/F25).</p>
 </div>
 </section>
 
@@ -1512,7 +1546,7 @@ event from a second-string one, and a flat &ldquo;someone is out&rdquo; hides th
 %s
 <p class="caption">112 charted players with an official game status across 23 clubs. 91 name the club's own
 next man and record his string &mdash; the depth-of-replacement number &mdash; 21 publish no further name at
-the slot and say so, and one honest blank row covers Houston (F21). Method: order each club's own published
+the slot and say so, and one honest blank row covers Houston (F26). Method: order each club's own published
 chart, skip only players designated Out, take the next name. Nothing is inferred.</p>
 </section>
 
@@ -1541,7 +1575,7 @@ own status visible, never skipped and never upgraded.</p>
     corr_rows = []
     for r in corr:
         chip = (src_links(r["sources"], sources_by_id) if r["sources"].strip()
-                else '<a class="src" href="flagged.html#F20">no official source</a>')
+                else '<a class="src" href="flagged.html#F25">no official source</a>')
         corr_rows.append([
             cell(r["id"]), cell(r["label"]), cell(r["method"]),
             cell(r["n"], "n"), cell(r["value"], "n"),

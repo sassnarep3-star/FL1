@@ -1,0 +1,11 @@
+check	description	result	detail	source
+V1	13 pending games match the official capture (URL, teams, date, time, network)	PASS	13 slate rows, 13 official URLs; mismatches: none	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V2	slate equals the unplayed Week 10 games in data/schedule2026-d.csv	PASS	schedule feed 13 games, slate 13 games	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V3	fair side, total and moneyline reproduce from a fresh re-run	PASS	13 rows re-run; mismatches: none	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V4	market and difference cells are blank; every row has an official game URL	PASS	0 market cells filled (must be 0); official URL on 13/13 rows	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V5	price store: 39 rows (13 games x 3 markets), all price fields blank, official URL on each	PASS	39 rows; filled price fields: 0	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V6	137 results equal the played rows of the repo schedule feed (teams, week, scores)	PASS	results 137, played in feed 137; mismatches: none	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V7	backtest: n on every row; ROI blank on every row	PASS	8 rows	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V8	no withheld correlation coefficient appears on a published page	PASS	9 withheld values checked on 5 pages; leaks: none	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V9	flagged page has anchors F18-F22	PASS	missing: none	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md
+V10	standings reconciliation still passes (tools/verify_results.py)	PASS	exit 0	https://www.nfl.com/schedules/2026/REG10/ ; raw/nfl-week10-2026-capture.md

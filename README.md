@@ -156,6 +156,7 @@ parallel registers live under `data/specs/`.
 - **Reproduce:** `python3 -m unittest discover -s tests -q` · `python3 engine/demo_run.py --check` ·
   `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 
+<<<<<<< HEAD
 ## Session F additions (2026-11-14) — the eight requirement items
 
 Branch `arena/5a8baf03-fl1`. This pass implements the brief's eight bolded requirements as tested
@@ -165,7 +166,7 @@ library only, per the dependency policy above:
 - `engine/origination.py` — the mandated origination order (side, total, moneyline) as an executable
   queue, and fair/market/difference as three separate columns with the difference convention fixed
   before any result.
-- `engine/results_feed.py` — push-aware settlement of side/total/moneyline from verified scores and
+- `engine/settlement.py` — push-aware settlement of side/total/moneyline from verified scores and
   per-unit PnL at American prices; missing prices are reported, never imputed.
 - `engine/demotion.py` — the live-to-paper demotion gate (D1 decay, D2 calibration drift, D3
   concentration) plus the paper-to-live promotion check. INSUFFICIENT_DATA is a first-class outcome.
@@ -173,12 +174,12 @@ library only, per the dependency policy above:
   rank follows the signal, so a lucky staking run cannot mask a bad signal (unit-tested).
 - `tools/build_{results_feed,snapshots,line_board,replacement_depth,correlations_official}.py` —
   deterministic builders for `data/results_feed.csv` (548 settled rows), `data/price_snapshots.csv`
-  (56 rows, opens blank — F18), `data/line_board.csv` (56 rows, fair blank — F19),
+  (56 rows, opens blank — F23), `data/line_board.csv` (56 rows, fair blank — F24),
   `data/replacement_depth.csv` (112 affected players; 4th-string-or-deeper replacements: 26),
   `data/correlations_official.csv` (4 measured values with n; 3 blocked rows kept blank).
 - `tools/checkrows.py` — the row-level verification gate: every data row on every page either carries
   a source link or publishes nothing (3,724 rows audited).
-- Registers: flags F18-F23, questions Q21-Q25, suggestions SG16-SG20. Five new site pages:
+- Registers: flags F23-F28, questions Q21-Q25, suggestions SG16-SG20. Five new site pages:
   `results-feed.html`, `price-snapshots.html`, `line-board.html`, `replacement-depth.html`,
   `correlations-official.html`.
 
@@ -187,3 +188,26 @@ verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
 `scripts/verify_site.py` (0 errors), `scripts/verify_d.py` (V5-V9 PASS), `site/build.py` +
 `site/verify.py`. See `COORDINATION.md` for the full sources/verification/irregularities record.
 
+=======
+---
+
+## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
+
+- **`model-lines.html`** — own fair lines for the 13 pending Week 10 games, in the order side → total → moneyline.
+  Fair, market and difference are separate columns. Every market and difference cell is blank: no official NFL
+  source publishes prices (F23). Source: `data/model_lines.tsv`, `engine/originate.py`.
+- **`data/price_snapshots.tsv`** — the opening/closing store, one row per game and market (39 rows), all blank.
+- **`results-feed.html`** — the 137 final 2026 results used as inputs, and a strictly out-of-sample walk-forward
+  backtest (weeks 4–10, n = 89). The side model's sign accuracy is above 50%, but its margin and total errors do
+  not beat a constant benchmark (F25). ROI is blank (no prices).
+- **`governance.html`** — signal ranks the leaderboard, staking is reported beside it (`engine/leaderboard.py`
+  `split_scores`); the G-14 demotion gate sends a live strategy back to paper (`engine/gates.py`
+  `demotion_decision`); correlation values are withheld, with n shown (F24).
+- **Verification** — `tools/verify_brief.py` writes `data/verification-brief.tsv` (10 checks, incl. the 13-game slate
+  against `raw/nfl-week10-2026-capture.md`, and a fresh re-run of every fair value). `tests/test_brief.py` holds 17
+  hand-checkable tests.
+- **Withheld on purpose (brief B6):** market columns on `schedule.html`; coefficients on `prop-correlations.html`
+  (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
+- **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
+  `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
+>>>>>>> origin/main

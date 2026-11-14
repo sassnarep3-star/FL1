@@ -72,14 +72,14 @@ def schedule_page(sources_by_id):
             cell(abbr(g, "away")), cell(abbr(g, "home")), cell(scored),
             cell("OT" if g["overtime"] == "yes" else ""),
             cell(g["stadium"]),
-            cell(g["market_spread_away"]), cell(g["market_total"]),
+            cell(""), cell(""),   # B6: market values withheld (third-party, no official price source; F18)
             cell("yes (reconciled)" if g["scores_verified"] else ""),
             cell(g["flags"]),
             '<td><a class="src" href="sources.html#S47">S47</a> <a class="src" href="sources.html#S03">S03</a></td>',
         ])
     ver_rows = []
     for v in ver:
-        status = f'<td>{pill(v[3], "ok" if v[3] == "PASS" else ("bad" if v[3] == "FAIL" else "warn"))}</td>' if v[3] in ("PASS", "FAIL", "FLAGGED") else cell(v[3])
+        status = f'<td>{pill(v[3], "ok" if v[3] == "PASS" else ("bad" if v[3] == "FAIL" else "warn"))}</td>' if v[3] in ("PASS", "FAIL", "FLAGGED", "BLOCKED", "CHECK") else cell(v[3])
         ver_rows.append([cell(v[0]), cell(v[1]), cell(v[2]), status, cell(v[4]),
                          '<td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/data/verification-d.tsv">record</a></td>'])
     body = """
@@ -110,10 +110,11 @@ Every check recomputes from raw inputs; nothing is hand-entered.</p>
 %s
 </section>
 """ % (table(["Wk", "Date", "KO ET", "Away", "Home", "Score", "OT", "Stadium",
-              "Mkt spread (away)", "Mkt total", "Scores verified", "Flags", "Source"],
+              "Mkt spread (away) — withheld", "Mkt total — withheld", "Scores verified", "Flags", "Source"],
              out_rows, cls="dense searchable",
-             caption="Away–home score shown only for played games. Mkt = third-party market "
-                     "line, flagged. Blank cells are blank on purpose."),
+             caption="Away–home score shown only for played games. Market columns are blank on purpose: "
+                     "no official NFL source publishes betting lines (F18). The third-party values "
+                     "remain in data/schedule2026-d.csv for audit only."),
        table(["Check", "Description", "Result", "Status", "Source", "Record"],
              ver_rows, cls="dense"))
     return page("schedule.html", "Schedule 2026", body, wide=True)
@@ -123,22 +124,24 @@ def prop_correlations_page(sources_by_id):
     rows = load_csv(os.path.join(DATA, "prop-correlations-d.csv"))
     out_rows = []
     for r in rows:
-        if r["pearson_r"]:
-            stat = f"r = {r['pearson_r']} [{r['ci95_low']}, {r['ci95_high']}] (ρ {r['spearman_rho']})"
-        elif r["lift"]:
-            stat = f"lift = {r['lift']} {r['lift_ci95']}"
-        else:
-            stat = ""
+        # B6 (brief): correlations are computed only from officially sourced numbers. This source
+        # is a third-party mirror, so the estimate is withheld here; n is published with the row.
+        stat = ""
         out_rows.append([
             cell(r["pair_id"]), cell(r["scope"]), cell(r["window"]),
-            cell(r["n"], "n"), cell(stat), cell("computed"), cell(r["notes"]),
+            cell(r["n"], "n"), cell(""), cell("WITHHELD — third-party source; n shown, no value (F19)"),
+            cell(r["notes"]),
             '<td><a class="src" href="sources.html#S48">S48</a></td>',
         ])
     body = """
 <section>
 <h2>Empirical player-level correlations — closes open question Q-PROP-01</h2>
 <div class="callout">
-<p><strong>What this is.</strong> The computed research layer's correlation engine
+<p><strong>Status under the brief (B6).</strong> Correlations may be computed only from officially
+sourced numbers. The nflverse mirror below is third-party, so <em>no coefficient is published on this
+page</em>. The sample size n is kept for every pair so a reviewer can see what would be needed. The
+withheld values are listed for review on <a href="flagged.html">Flagged for Review</a> (F19).</p>
+<p><strong>What this was.</strong> The computed research layer's correlation engine
 (<code>scripts/build_correlations.py</code>) measures team-level proxies and records
 <strong>Q-PROP-01</strong>: player-prop-level correlation was unmeasured because player data was
 unavailable to that session. This page closes that gap with the same repo rules: computed from
@@ -186,13 +189,13 @@ guarantee for any single named pair; use it as a prior, then gate on actual n.</
 not determine the other — useful for building correlated RB props deliberately rather than
 assuming dependence.</li>
 <li>Binary lifts are threshold-specific: re-derive for different thresholds before pricing.</li>
-<li>All values are estimates from nflverse-derived data via a third-party mirror; they are inputs
-for review, not verified league facts.</li>
+<li>Estimates were computed from nflverse-derived data via a third-party mirror. Under brief B6 they are
+withheld and are not verified league facts. n is published; values are not.</li>
 </ul>
 </section>
-""".replace("@TABLE@", table(["Pair", "Scope", "Window", "n", "Estimate (95% CI)", "Status", "Notes", "Source"],
+""".replace("@TABLE@", table(["Pair", "Scope", "Window", "n", "Estimate — withheld", "Status", "Notes", "Source"],
             out_rows, cls="dense searchable",
-            caption="r = Pearson; ρ = Spearman; lift = P(A and B)/(P(A)P(B)) with bootstrap 95% CI."))
+            caption="Estimate column withheld on purpose (third-party source, brief B6). n is the sample size behind each pair."))
     return page("prop-correlations.html", "Prop Correlations", body)
 
 

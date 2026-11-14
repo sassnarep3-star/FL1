@@ -185,17 +185,73 @@
     "id": "F17",
     "kind": "Data provenance",
     "item": "Player-prop correlations are computed estimates from a third-party mirror",
-    "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts.",
+    "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts. The source parquet is not committed and its prior workspace-only path is absent from this checkout; therefore the prop-correlation rebuild check V9 is BLOCKED here. The existing coefficients remain third-party-derived and were not independently regenerated in this run.",
     "source": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
     "severity": "Medium",
     "sourceIds": [
       "S47",
       "S48"
     ],
-    "action": null
+    "action": "Retain the third-party label; for reproducible refreshes, fetch a pinned source artifact and record its content hash. Until that input and QA run are available, treat V9 as BLOCKED and do not claim this checkout independently reproduced the estimates."
   },
   {
     "id": "F18",
+    "kind": "Missing official source (prices)",
+    "item": "Betting prices, opening and closing lines, for every market we originate (side, total, moneyline)",
+    "detail": "No official NFL source publishes betting lines or closing prices (GAP-01; Q-02). The price-snapshot store (data/price_snapshots.tsv) therefore holds no prices. The market and difference columns in data/model_lines.tsv are blank, and so is the ROI column in the backtest. Third-party prices exist in data/raw/closing_lines.csv (nflverse) and were not promoted.",
+    "sourceIds": [
+      "S51"
+    ],
+    "severity": "High",
+    "action": "Owner decision needed: an official or licensed price feed, or an explicit decision to accept a third-party feed as a labelled non-official source. Until then every market cell stays blank."
+  },
+  {
+    "id": "F19",
+    "kind": "Correlation withheld (third-party source)",
+    "item": "Correlation values computed from nflverse / third-party data (prop correlations; C-01 measured rho)",
+    "detail": "Brief B6 requires correlations to be computed only from officially sourced numbers, with n published. The prop-correlation values (for example QB pass yards vs WR receiving yards r = 0.7887, n = 5,246; QB vs TE r = 0.3729, n = 5,208; RB rush vs RB receive r = 0.3562, n = 5,246, and the 2022-2024 window values) and the measured C-01 rho = +0.00696 (95% CI -0.03324 to +0.04831, n = 6,813) come from the third-party nflverse mirror. They are withheld from the root site and the measured page carries a withdrawal banner. n is kept for each pair. The withheld values are reproduced here for review only.",
+    "sourceIds": [
+      "S48"
+    ],
+    "severity": "High",
+    "action": "Owner to decide whether any third-party-derived correlation may be re-admitted. The current rule says no. No official joint sample of this kind exists in the repo yet (n = 0 for market pairs)."
+  },
+  {
+    "id": "F20",
+    "kind": "Model does not beat a constant benchmark out of sample",
+    "item": "Own-line fair model (side, total) backtest, weeks 4-10 of 2026",
+    "detail": "Walk-forward, strictly out of sample, n = 89 games. Side: model MAE 10.49 vs constant league-average benchmark 10.33 points; sign accuracy 67.0% (95% Wilson CI 56.7%-76.0%, n = 88). Total: model MAE 11.07 vs constant 10.96 points. Moneyline Brier 0.2181 vs 0.2472 for a 50/50 forecast. The fair lines are published as model output only. They are not a validated edge, there is no market baseline, and ROI cannot be computed (F18).",
+    "sourceIds": [
+      "S50"
+    ],
+    "severity": "High",
+    "action": "Do not treat the fair lines as a recommendation. Review the calibration table before any further model work; a larger sample (more seasons of official results) is needed before any margin claim."
+  },
+  {
+    "id": "F21",
+    "kind": "Assumption: home-field term at the Munich game",
+    "item": "Patriots at Lions, 15 Nov 2026, Munich",
+    "detail": "The official Week 10 page labels this game an 'International Game' played in Munich, Germany, and lists it as 'Patriots at Lions'. The model sets the home-field term to zero for this game. That is an assumption made by this session, not an official fact. The neutral-venue flag for the 137 results comes from the third-party schedule feed (data/schedule2026-d.csv).",
+    "sourceIds": [
+      "S51"
+    ],
+    "severity": "Low",
+    "action": "Confirm the venue convention for the fair line. The effect is at most the home-field estimate of about 0.05 points on the fitted model."
+  },
+  {
+    "id": "F22",
+    "kind": "Partial per-game verification of results",
+    "item": "137 results in data/results.tsv used as model inputs",
+    "detail": "Per-game scores were re-read from an official page only for Week 10 (Commanders 24, Giants 21, FINAL). For Weeks 1-9, the 137 results were reconciled in aggregate to the official nfl.com standings (0 mismatches across 32 clubs, from the earlier results check, verify_results.py), but each game row was not re-read from the official week page in this session.",
+    "sourceIds": [
+      "S50",
+      "S03"
+    ],
+    "severity": "Medium",
+    "action": "Re-read the official Week 1-9 pages and compare each game row (a line-by-line check). Until then the per-game status is 'aggregate reconciled'."
+  },
+  {
+    "id": "F23",
     "kind": "Missing source",
     "item": "No verified source of opening (open) prices for NFL markets",
     "detail": "The brief requires a price-snapshot store recording OPENING and CLOSING numbers for every market originated. The store (engine/price_snapshots.py) records both phases, but no verified opener source exists in this repository: the third-party games snapshot holds closing/latest values only, and the historical closing-lines file covers 2006-2025 with closes and no 2026 rows. Every open_* cell on price-snapshots.html is therefore blank. An opener inferred from a close would be a fabrication.",
@@ -206,27 +262,28 @@
     "action": "Open columns stay blank. Acquisition is open question Q21. The store accepts phase=open rows today; nothing else needs building."
   },
   {
-    "id": "F19",
+    "id": "F24",
     "kind": "Model not fitted",
     "item": "Fair-line column blank on the Origination Board",
-    "detail": "The brief requires the model's fair line, the market line and the difference published as separate columns. The three columns exist on line-board.html and the difference computes mechanically (engine/origination.py), but data/models.json deliberately leaves every model coefficient blank rather than estimated. A fair line printed today would be fabricated, and a difference computed from one arm would not be a difference, so both cells stay blank until a model is fitted and accepted (Q22).",
+    "detail": "The brief requires the model's fair line, the market line and the difference published as separate columns. The three columns exist on line-board.html and the difference computes mechanically (engine/origination.py). A fitted fair-line model now exists on model-lines.html (session arena/685f958d-fl1) but has NOT passed acceptance: its own flag F20 records that it does not beat a constant benchmark out of sample. Until a model passes the acceptance criteria (Q22), the line-board fair column stays blank, and a difference computed from one arm would not be a difference.",
     "sourceIds": [],
     "severity": "Medium",
-    "action": "Fair and difference columns blank with the reason published. The moment a fitted model emits a fair line, exactly one column changes."
+    "action": "Fair and difference columns blank on line-board.html with the reason published; model output with its failure flag lives on model-lines.html. Exactly one column changes when a model passes acceptance."
   },
   {
-    "id": "F20",
-    "kind": "Data provenance",
-    "item": "All market prices on this site are third-party",
-    "detail": "No official NFL source publishes betting lines. Every spread, total and moneyline number on price-snapshots.html, line-board.html and results-feed.csv comes from the committed nflverse games snapshot (S47, a community feed reconciled against official results). Rows carry the third-party source chip and are never presented as official. Whether third-party-derived values may ever be promoted into sourced registers is an open policy decision (Q23).",
+    "id": "F25",
+    "kind": "Third-party prices: recorded in the store, withheld from display",
+    "item": "Betting prices are third-party snapshots (S47); no official NFL price source exists (their F18). The store records them with provenance; the site displays them nowhere.",
+    "detail": "The user constraint requires any value that cannot be confirmed from an official source to be left blank and flagged. The captured third-party prices are retained in the audit layer (data/price_snapshots.csv, data/line_board.csv, data/results_feed.csv) with source record and capture date on every row, and are blanked on every published table with the reason in the cell (F18). Two sessions had opposite display policies; this flag records the resolution: store records, display withholds.",
     "sourceIds": [
       "S47"
     ],
     "severity": "High",
-    "action": "Third-party label kept on every price cell; official registers keep price-dependent values blank."
+    "action": "Every price-derived display cell is blank with a reason; the audit file keeps the values. No number derived from a third-party price (cover, PnL, ROI, W/L counts) is shown on the site.",
+    "url": "https://www.nfl.com/"
   },
   {
-    "id": "F21",
+    "id": "F26",
     "kind": "Source not machine-readable",
     "item": "Replacement depth unknown where the club publishes no further name",
     "detail": "The replacement-depth table tracks which string replaces an affected player. It cannot do so for Houston (image-only chart, F16), and for 21 affected players whose club chart publishes no further name at that slot. Those rows carry blank replacement fields and a note instead of a guess; 91 rows do carry the club's own next name and his string (48 second-string, 17 third, 11 fourth, 13 fifth, 2 sixth).",
@@ -238,7 +295,7 @@
     "action": "Blank fields with a published note. The depth distribution counts only named replacements."
   },
   {
-    "id": "F22",
+    "id": "F27",
     "kind": "Not yet computable",
     "item": "Week-10 availability-vs-outcome correlation blocked (CO-05)",
     "detail": "Correlation CO-05 (per-club unavailable count vs scoring margin in the same week) is exactly the officially sourced correlation the brief asks for, but at capture time only the Thursday game of Week 10 is settled: n=0 joint observations exist. The row is published with n=0 and blank value, not estimated from other weeks and presented as Week 10. It becomes computable when the week settles.",
@@ -250,7 +307,7 @@
     "action": "Blank value with n=0 and the reason; recompute via tools/build_correlations_official.py after the week settles."
   },
   {
-    "id": "F23",
+    "id": "F28",
     "kind": "Build irregularity (found and fixed)",
     "item": "Hand-edited validation.html was silently wiped by site regeneration",
     "detail": "A prior session added the demotion-gate section directly to the validation.html artefact. tools/site.py regenerates every page at the repo root, so the section disappeared on the next build. Found in this session's line-by-line review (git diff after re-running tools/site.py). Fixed by porting the section into tools/site.py's generator and regenerating; no content was lost. The pattern is the irregularity: page content must be edited in the generator, never in the generated HTML.",
