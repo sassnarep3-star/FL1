@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Methods · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html">Findings</a><a href="lines.html">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="requirements.html">Requirements</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html" class="on">Methods</a></nav>
+</div></header>
+<main>
+<h1>Methods</h1>
+<p class="lead">The exact rules this build followed, so any number can be attacked on its merits.</p>
+
+<h2>Principles</h2>
+<ol>
+<li><strong>No invented numbers.</strong> If a value cannot be computed from a pinned source or read
+off an official page, the cell is blank and the item goes on
+<a href="flagged.html">Flagged for review</a>.</li>
+<li><strong>No fitting to profit.</strong> Elo constants and the Elo→spread conversion were fixed
+before any backtest ran. They are in the script, in <code>scripts/strategy_lab.py</code>, in plain
+sight.</li>
+<li><strong>Walk-forward only.</strong> A signal may only use information available before the kickoff
+it prices. Ratings are read pre-game; form is accumulated post-game.</li>
+<li><strong>Every strategy faces the same gates.</strong> Thresholds are global constants, not tuned
+per strategy.</li>
+<li><strong>Publish the failures.</strong> The search count is public because the Bonferroni
+correction depends on it.</li>
+</ol>
+
+<h2>Economics</h2>
+<ul>
+<li>Bets are settled at the <em>closing</em> price from <code>games.csv</code> (spread odds, total
+odds, moneyline).</li>
+<li>Pushes are excluded from both numerator and denominator.</li>
+<li>ROI = total profit ÷ total staked, with 1 unit staked per bet.</li>
+<li>The breakeven hit rate is computed exactly from the realised average decimal price, not assumed
+to be 52.38%.</li>
+<li>Significance is a one-sided t-test on per-bet return, with a Wilson 95% interval on hit rate.</li>
+</ul>
+
+<h2>Gates</h2>
+<ul>
+<li><strong>G1</strong> ≥150 settled bets and ≥60 out-of-sample settled bets.</li>
+<li><strong>G2</strong> ROI &gt; 0 in-sample <em>and</em> out-of-sample.</li>
+<li><strong>G3</strong> one-sided p &lt; 0.05 on per-bet return.</li>
+<li><strong>G4</strong> Wilson 95% lower bound on hit rate &gt; the vig breakeven.</li>
+<li><strong>G5</strong> no single season supplies more than 40% of total profit.</li>
+<li><strong>G6</strong> p &lt; 0.05/N where N is the number of variants actually searched. N is read from the signal registry at runtime, so the denominator can never drift from the real search count. With the current build N = 16, giving p &lt; 0.00313.</li>
+<li><strong>G7</strong> maximum drawdown smaller than total profit.</li>
+</ul>
+
+<h2>Known limitations</h2>
+<ul>
+<li>Closing prices only — no opening-line series for the full sample
+(<a href="flagged.html">FLAG-08</a>). A real edge measured against the close is understated, and line
+movement cannot be studied at all.</li>
+<li>Result-history Elo is information the market already has. That is why the market-divergence
+family fails; it is not evidence that no edge exists anywhere.</li>
+<li>Injury weights are an assumption. The NFL publishes definitions, not probabilities.</li>
+<li>Depth order is absent from every reachable source, so the 2nd/3rd/4th-string model stops at the
+quarterback.</li>
+<li>2026 data is one completed Week 10 game. Nothing here is a 2026 out-of-sample claim.</li>
+<li>No prop market data, so prop-combo correlation is unmeasured.</li>
+</ul>
+
+<h2>Reproducing this site</h2>
+<p><code>python3 scripts/fetch_data.py</code> → <code>scripts/build_availability.py</code> →
+<code>scripts/build_correlations.py</code> → <code>scripts/strategy_lab.py</code> →
+<code>scripts/build_week10_board.py</code> → <code>scripts/build_registers.py</code> →
+<code>scripts/build_site.py</code> → <code>scripts/verify_site.py</code>.
+The last step fails the build if any table row lacks a source.</p>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Generated 2026-11-14 03:07 UTC.</footer>
+</body></html>

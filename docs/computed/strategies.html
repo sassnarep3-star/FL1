@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strategies &amp; gates · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html">Findings</a><a href="lines.html">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html" class="on">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="requirements.html">Requirements</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html">Methods</a></nav>
+</div></header>
+<main>
+<h1>Strategies &amp; gates</h1>
+<p class="lead">Sixteen pre-registered variants, seven gates, and the reason each failure is a failure.</p>
+
+<h2>The seven gates</h2>
+<p>These were fixed before any result was inspected. A strategy must pass all seven. Every gate is
+a number, so "skill" is falsifiable.</p>
+<div class="tw"><table><thead><tr><th>Gate</th><th class="n">Passed</th><th class="n">Out of</th></tr></thead><tbody><tr><td>G1 — Sample size: ≥150 settled bets and ≥60 out-of-sample.</td><td class='n'>13</td><td class='n'>16</td></tr><tr><td>G2 — ROI &gt; 0 in the in-sample period AND out-of-sample.</td><td class='n'>4</td><td class='n'>16</td></tr><tr><td>G3 — One-sided t-test on per-bet ROI, p &lt; 0.05.</td><td class='n'>1</td><td class='n'>16</td></tr><tr><td>G4 — Wilson 95% lower bound on hit rate exceeds the vig breakeven.</td><td class='n'>0</td><td class='n'>16</td></tr><tr><td>G5 — No single season may supply &gt;40% of total profit.</td><td class='n'>2</td><td class='n'>16</td></tr><tr><td>G6 — p &lt; 0.05/15 = 0.0033 (Bonferroni over searched variants).</td><td class='n'>0</td><td class='n'>16</td></tr><tr><td>G7 — Max drawdown must be smaller than total profit.</td><td class='n'>4</td><td class='n'>16</td></tr></tbody></table></div>
+
+<h2>Full test matrix</h2>
+<div class="tw"><table><thead><tr><th>Strategy</th><th>Family</th><th>Market</th><th class="n">Bets</th><th class="n">Hit %</th><th class="n">Breakeven %</th><th class="n">ROI %</th><th class="n">IS ROI %</th><th class="n">OOS ROI %</th><th class="n">p</th><th class="n">Max DD</th><th class="n">Gates</th><th>Verdict</th></tr></thead><tbody><tr><td>WIND15_UNDER</td><td>weather</td><td>total</td><td class='n'>425</td><td class='n'>55.06</td><td class='n'>93.26</td><td class='n'>7.23</td><td class='n'>7.79</td><td class='n'>5.66</td><td class='n'>0.0628</td><td class='n'>-13.48</td><td class='n'>3</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>DIV_DOG_AND_ELO</td><td>conjunction</td><td>spread</td><td class='n'>936</td><td class='n'>54.27</td><td class='n'>94.58</td><td class='n'>5.73</td><td class='n'>4.73</td><td class='n'>8.05</td><td class='n'>0.0358</td><td class='n'>-27.45</td><td class='n'>5</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>DIV_AWAY_DOG</td><td>situational</td><td>spread</td><td class='n'>1,142</td><td class='n'>53.68</td><td class='n'>95.56</td><td class='n'>4.64</td><td class='n'>4.23</td><td class='n'>5.53</td><td class='n'>0.0538</td><td class='n'>-31.00</td><td class='n'>4</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>REST_ADV_AWAY</td><td>situational</td><td>spread</td><td class='n'>593</td><td class='n'>53.12</td><td class='n'>96.58</td><td class='n'>3.54</td><td class='n'>2.91</td><td class='n'>4.90</td><td class='n'>0.1883</td><td class='n'>-19.62</td><td class='n'>3</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>WIND_COLD_UNDER</td><td>weather</td><td>total</td><td class='n'>180</td><td class='n'>52.22</td><td class='n'>98.84</td><td class='n'>1.18</td><td class='n'>5.13</td><td class='n'>-7.58</td><td class='n'>0.4355</td><td class='n'>-11.25</td><td class='n'>0</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>ELO_MKT_2.5</td><td>market_devig</td><td>spread</td><td class='n'>2,469</td><td class='n'>52.05</td><td class='n'>99.12</td><td class='n'>0.8900</td><td class='n'>2.48</td><td class='n'>-2.36</td><td class='n'>0.3242</td><td class='n'>-44.07</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>ELO_MKT_1.5</td><td>market_devig</td><td>spread</td><td class='n'>3,460</td><td class='n'>51.68</td><td class='n'>99.68</td><td class='n'>0.3200</td><td class='n'>1.95</td><td class='n'>-2.90</td><td class='n'>0.4224</td><td class='n'>-68.31</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>DOME_OVER</td><td>situational</td><td>total</td><td class='n'>1,375</td><td class='n'>51.49</td><td class='n'>100</td><td class='n'>-0.0300</td><td class='n'>0.0700</td><td class='n'>-0.1800</td><td class='n'>0.5047</td><td class='n'>-36.32</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>BIG_FAV_FADE</td><td>situational</td><td>spread</td><td class='n'>526</td><td class='n'>50.76</td><td class='n'>102</td><td class='n'>-2.20</td><td class='n'>1.75</td><td class='n'>-12.11</td><td class='n'>0.6994</td><td class='n'>-30.18</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>PROB_GAP_6PT</td><td>market_devig</td><td>spread</td><td class='n'>3,807</td><td class='n'>49.44</td><td class='n'>103</td><td class='n'>-3.14</td><td class='n'>-2.25</td><td class='n'>-4.86</td><td class='n'>0.9758</td><td class='n'>-133</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>REST_ADV</td><td>situational</td><td>spread</td><td class='n'>483</td><td class='n'>49.69</td><td class='n'>103</td><td class='n'>-3.24</td><td class='n'>-3.64</td><td class='n'>-2.56</td><td class='n'>0.7669</td><td class='n'>-34.27</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>DIV_HOME_DOG</td><td>situational</td><td>spread</td><td class='n'>703</td><td class='n'>49.22</td><td class='n'>104</td><td class='n'>-4.30</td><td class='n'>-7.92</td><td class='n'>2.43</td><td class='n'>0.8790</td><td class='n'>-52.80</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>__CONTROL_MARKET</td><td>control</td><td>spread</td><td class='n'>5,067</td><td class='n'>48.65</td><td class='n'>105</td><td class='n'>-5.19</td><td class='n'>-5.12</td><td class='n'>-5.34</td><td class='n'>0.9999</td><td class='n'>-285</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>DOME_UNDER</td><td>situational</td><td>total</td><td class='n'>1,375</td><td class='n'>48.51</td><td class='n'>106</td><td class='n'>-5.66</td><td class='n'>-4.76</td><td class='n'>-6.99</td><td class='n'>0.9844</td><td class='n'>-80.84</td><td class='n'>1</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>REST_AND_ELO</td><td>conjunction</td><td>spread</td><td class='n'>120</td><td class='n'>45.83</td><td class='n'>113</td><td class='n'>-11.31</td><td class='n'>-24.35</td><td class='n'>8.27</td><td class='n'>0.8980</td><td class='n'>-22.73</td><td class='n'>0</td><td><span class="pill p-bad">REJECTED</span></td></tr><tr><td>AVAIL_EDGE_1.5</td><td>availability</td><td>spread</td><td class='n'>133</td><td class='n'>42.86</td><td class='n'>122</td><td class='n'>-18.18</td><td class='n'></td><td class='n'>-18.18</td><td class='n'>0.9856</td><td class='n'>-26.16</td><td class='n'>0</td><td><span class="pill p-bad">REJECTED</span></td></tr></tbody></table></div>
+
+<h2>Why the two closest candidates were rejected</h2>
+<p><strong>WIND15_UNDER</strong> — 425 bets, 55.1% hit against a 51.2% breakeven, +7.2% ROI,
++5.7% OOS, p = 0.063. Passes G1, G2 and G7. Fails G3 (needs p &lt; 0.05), G4 (lower bound on hit
+rate still crosses the breakeven at this sample size) and G6 (needs p &lt; 0.00313). It also uses
+post-game measured wind, which is not knowable before kickoff, so it is not implementable as written
+before it is even a statistics question.</p>
+<p><strong>DIV_DOG_AND_ELO</strong> — 936 bets, 54.3% hit, +5.7% ROI, +8.1% OOS, p = 0.036.
+Passes G1, G2, G3 and G7. Fails G4 (its 95% lower bound on hit rate, ~51.1%, does not clear the
+51.4% vig breakeven), G5 (one season supplies too much of the profit) and G6 (p = 0.036 is not
+&lt; 0.00313). This is the classic shape of a finding that is real in-sample and
+survives a split, but is selected out of fifteen tries. It is the one worth re-testing on new data,
+not the one worth betting.</p>
+
+<h2>Families tested</h2>
+<ul>
+<li><strong>market_devig</strong> — Elo vs close, win-probability gap vs the implied probability.</li>
+<li><strong>situational</strong> — rest advantage, divisional underdogs, big-favourite fade, dome totals.</li>
+<li><strong>weather</strong> — wind, cold-and-wind.</li>
+<li><strong>conjunction</strong> — rest AND Elo, divisional dog AND Elo.</li>
+<li><strong>availability</strong> — weighted injury disadvantage (2025 only; fails G1 by design).</li>
+<li><strong>control</strong> — bet every home team. Not a strategy; it measures the vig.</li>
+</ul>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Generated 2026-11-14 03:07 UTC.</footer>
+</body></html>

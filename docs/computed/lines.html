@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Line origination · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html">Findings</a><a href="lines.html" class="on">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="requirements.html">Requirements</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html">Methods</a></nav>
+</div></header>
+<main>
+<h1>Line origination</h1>
+<p class="lead">The exact model, its constants, its calibration, and why it is not yet an independent line.</p>
+
+<h2>How a number is originated here</h2>
+<p>The line engine is deliberately boring and fully auditable. Nothing is fitted to betting
+profit, because fitting to profit is how a backtest is manufactured.</p>
+<ul>
+<li><strong>Ratings.</strong> A causal Elo is updated after every game with a margin-of-victory
+multiplier and a 48-point home-field term. Between seasons every team is regressed 25% toward
+1505. Ratings are read <em>before</em> the game they price, so there is no leakage.</li>
+<li><strong>Conversion.</strong> Elo difference becomes a win probability, and a win probability becomes
+a spread with a <em>fixed</em> constant of 2.7 points per 100 Elo
+(<code>spread = 10.8 × log10(p/(1−p))</code>). The constant was fixed before any backtest ran.</li>
+<li><strong>Comparison.</strong> That model spread is differenced against the closing spread. The
+difference is the only signal the market-divergence family is allowed to see.</li>
+<li><strong>Calibration check.</strong> Mean signed error −0.77 points, mean absolute error 2.89 points,
+correlation with the close 0.828, over 5,336 games. The model is a slightly worse version of the
+market, not an independent one — which is exactly why the divergence strategies lose.</li>
+</ul>
+
+<div class="note warn"><strong>Honest limitation.</strong> This is not yet “your own line” in the sense
+that matters. Its disagreement with the close has a standard deviation of 3.56 points, and that
+whole distribution is inside the range where the market is simply more accurate. Publishing a
+number is easy; publishing a number that is <em>better</em> requires information the market does not
+have, and result-history Elo is information the market already has.
+See <a href="questions.html">OQ-01</a> and <a href="suggestions.html">SG-08</a>.</div>
+
+<h2>What an independent line would need</h2>
+<ul>
+<li>Pace and efficiency inputs the close does not fully absorb: play-by-play EPA by situation,
+success rate on early downs, pressure rate.</li>
+<li>Availability priced per <em>starter lost at a position</em>, not per player — which needs the
+depth feed (FLAG-02).</li>
+<li>An opening-line feed, so a model can be tested against a price that is actually obtainable
+(FLAG-08).</li>
+<li>A weather forecast pulled at kickoff-minus-72h, not the measured post-game wind. The one
+weather candidate that looked interesting (WIND15_UNDER) uses post-game wind, which is not
+available before the game. That alone disqualifies it from live use even if it had passed the
+statistical gates.</li>
+</ul>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Generated 2026-11-14 03:07 UTC.</footer>
+</body></html>
