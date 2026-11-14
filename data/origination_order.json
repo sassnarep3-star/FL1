@@ -1,0 +1,46 @@
+{
+  "id": "origination-order",
+  "title": "Market origination order — side first, then total, then moneyline",
+  "updated": "2026-11-14",
+  "owner_session": "arena-5876146b-fl1",
+  "description": "The mandated order in which this programme originates a game's markets. The side is originated first because it is the anchor quantity: both the total and the moneyline are downstream of the same scoring decomposition, and publishing the side first forces the model to commit to a margin before any dependent market is priced.",
+  "columns_rule": "Every market we originate publishes three SEPARATE columns: the model's fair line (MODEL OUTPUT, versioned), the market line (SOURCE, third-party flagged — no official NFL price source exists), and the difference (COMPUTED). No cell is ever inferred: where the model has no fitted parameter (totals), the fair and difference cells stay blank and are flagged.",
+  "order": [
+    {
+      "stage": 1,
+      "market": "Side (game spread)",
+      "status": "ORIGINATED",
+      "output_columns": ["side_fair_spread_away", "side_market_spread_away", "side_difference"],
+      "inputs": "Causal pre-game Elo (K=20, HFA=48, inter-season regression), fixed spread conversion 10.8*log10(p/(1-p))",
+      "why_first": "The margin is the anchor quantity. Total and moneyline both decompose from the same scoring view; originating the side first fixes the model's committed margin before anything dependent is priced.",
+      "source": "data/fair_lines.csv (scripts/build_fair_lines_m.py)"
+    },
+    {
+      "stage": 2,
+      "market": "Total (game points)",
+      "status": "BLOCKED — structure published, fair line blank",
+      "output_columns": ["total_fair", "total_market", "total_difference"],
+      "inputs": "Stage S2 scoring-rate model (possessions x efficiency). Parameters are deliberately unfitted in this repository.",
+      "why_second": "The total is the second quantity the model must commit to (pace/efficiency view). It is published as a column set so the gap is visible, but the fair value stays BLANK because no parameter has been fitted — filling it would be a fabrication.",
+      "flag": "F19",
+      "source": "data/fair_lines.csv"
+    },
+    {
+      "stage": 3,
+      "market": "Moneyline (game winner)",
+      "status": "ORIGINATED",
+      "output_columns": ["ml_fair_home_american", "ml_fair_away_american", "ml_market_home_american", "ml_market_away_american", "ml_diff_home_prob_pts", "ml_diff_away_prob_pts"],
+      "inputs": "The same win probability p that produced the side, converted to American odds (p clipped to [0.02, 0.98]); differences published in implied-probability percentage points vs the market's raw implied probability (vig included).",
+      "why_third": "The moneyline is a restatement of the side's win probability in price form; originating it last prevents it from leaking information back into the margin.",
+      "source": "data/fair_lines.csv"
+    }
+  ],
+  "origination_policy": [
+    "Every release re-originates in this order: side, total, moneyline.",
+    "A model number is never published without its model version and basis (pre-game causal vs snapshot).",
+    "A market number is never published without its provenance label (third-party flagged until a licensed/official price feed lands behind the price-snapshot store).",
+    "The difference column is computed, never typed: fair minus market, with the sign convention stated on the page.",
+    "Player props and parlays are NOT originated in v1 (prop settlement definitions and joint pricing are blocked — see questions.html)."
+  ],
+  "sources": ["S47"]
+}
