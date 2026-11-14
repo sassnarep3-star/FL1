@@ -65,7 +65,6 @@ Shared task board for the FL1 (NFL) project. All sessions must read this before 
 
 ## ⚠️ CONFLICT RECORD — three sessions merged to `main` in parallel
 
-<<<<<<< HEAD
 On 2026-11-14 **three** sessions built a site from the same empty repo and all three merged toward `main`.
 This section records both reconciliations.
 
@@ -255,7 +254,9 @@ _None outstanding._
 
 All 15 items on [`flagged.html`](flagged.html). Every unverifiable value in this repo is left blank there
 with the reason and the source that was attempted.
-=======
+
+### Preserved task board and integration record from the merged branch (verbatim)
+
 | # | Task | Status | Owner | File scope | Sources / verification | Irregularities |
 |---|------|--------|-------|------------|------------------------|----------------|
 | 1 | Create COORDINATION.md task board | done | arena-89c32e23-fl1 | COORDINATION.md | n/a | none |
@@ -283,7 +284,6 @@ with the reason and the source that was attempted.
 - Sources used (verified): https://www.nfl.com/injuries/ , https://www.nfl.com/standings/ , https://www.nfl.com/teams/{team}/roster
 - Flagged irregularities / unverified items: published on the live site's Flagged for Review page (flagged-review.html) — includes depth-chart order unverified, strategies & correlations analytical (no official NFL source), no live betting-lines source, partial Week 10 injury coverage, standings single week only
 - Live site: https://sassnarep3-star.github.io/FL1/
->>>>>>> origin/main
 
 ---
 
@@ -372,6 +372,42 @@ session branches and five merges to `main` appeared during the run.** Re-check `
 immediately before the first push and again before opening a PR. Scopes here stayed non-overlapping
 only because the build wrote to new paths.
 
+---
+
+## Session record — `arena-046256d0-fl1` (`arena/046256d0-fl1`) · 2026-11-14
+
+**Scope:** built a full verification-first decision dashboard from the empty repo (README-only at start):
+landing page plus category subpages, verified Week 10 (2026) standings/schedule/injury data, decision-gate
+questions, suggestions register, strategy framework (single bet / parlay / player-prop combos, validation
+gates, correlation, luck removal, leaderboard rewards), lines page with verification-gated cells, and a
+flagged-for-review page. Sources: NFL.com standings, schedule, injury report, game center (all official).
+
+**Tasks, sources, verification (see `data/verification-log.md` in the archive):** all 32-team standings,
+16-game schedule, and the complete Week 10 injury report verified line-by-line against NFL.com on
+2026-11-14. Line values had no reachable official source (DraftKings client-rendered, FanDuel HTTP 500)
+and were left blank + flagged, per rule.
+
+**Irregularities found by this session:**
+- **IR-1 (standings freshness):** NFL.com standings do not reflect the completed Week 10 Thursday game
+  (WAS 24, NYG 21, FINAL) — WAS still 3-5-1, NYG 5-3-1. Published as-is, flagged.
+- **UNV-1 / UNV-2:** all sportsbook line and player-prop values unverifiable — left blank, flagged.
+- **IR-2 (repo hygiene):** the `main`-branch `COORDINATION.md` contained committed merge-conflict
+  markers (lines from a prior session's merge). Resolved during this integration: both conflict sides'
+  records preserved verbatim, markers removed. Flagged here for the record.
+
+**Conflict with the consolidated build on `main` (resolved, no work discarded):** this session's branch
+added site files at the same repo-root paths as the already-merged consolidating build (three earlier
+sessions had merged into `main`). `gh pr merge` failed on add/add conflicts. Resolution per the standing
+rule in this board: the consolidated site at the repo root stays live; this session's complete site is
+preserved **verbatim** in [`archive/arena-046256d0/`](archive/arena-046256d0/) (pages, stylesheet, and
+its `data/` verification records), with a README explaining the mapping. Nothing from this session was
+deleted; nothing from the consolidating build was altered.
+
+**Integration & deployment:** PR https://github.com/sassnarep3-star/FL1/pull/10 opened from
+`arena/046256d0-fl1` to `main`. Merge result and GitHub Pages deploy status recorded in the follow-up
+log entry appended below after the merge and deploy check.
+
+### Integration record — session `arena-ab82c93f` (PR #6, #12, #13)
 ### Integration record — session `arena-ab82c93f` (PR #6)
 
 - **PR:** https://github.com/sassnarep3-star/FL1/pull/6

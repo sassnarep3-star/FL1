@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategies &amp; Leaderboard — FL1</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">FL1</div>
+  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
+  <a class="item" href="index.html">Dashboard</a>
+  <a class="item" href="executive-summary.html">Executive Summary</a>
+  <a class="item" href="questions.html">Decisions &amp; Questions</a>
+  <a class="item" href="suggestions.html">Suggestions</a>
+  <a class="item active" href="strategies.html">Strategies &amp; Leaderboard</a>
+  <a class="item" href="injury-report.html">Injury Report</a>
+  <a class="item" href="standings.html">Standings</a>
+  <a class="item" href="lines.html">Lines &amp; Market</a>
+  <a class="item" href="flagged-review.html">Flagged for Review</a>
+  <a class="item" href="sources.html">Sources</a>
+</nav>
+<main>
+  <h1>Lines-Origination Strategy Framework</h1>
+  <p class="lead">Proposed methodology for the leaderboard competition. Originate NFL lines and generate useful signals that are selectively skill-based; remove luck from performance evaluation so rewards go to genuine edge. <span class="badge b-proposed">Proposed — Pending Review</span></p>
+
+  <h2>Strategy classes</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Single bet</h3>
+      <p>One wager per signal (spread, total, moneyline). Signal sources: line movement vs. model, injury-driven availability gaps, situational factors (rest, travel, schedule density), and single-market inefficiency. Each bet must state the signal, model estimate, and market price.</p>
+    </div>
+    <div class="panel">
+      <h3>Parlay</h3>
+      <p>Multiple legs in one ticket. Legs are combined only after the correlation check (below). Legs must keep a positive edge after correlation adjustment; correlated legs are rejected by the gates.</p>
+    </div>
+    <div class="panel">
+      <h3>Player prop combos</h3>
+      <p>Player props (passing/rushing/receiving yards, TDs) as singles or parlays. Requires position-specific modeling (snap share, usage, opponent deficiency). Prop lines must be verified from an official sportsbook before use — currently unverified (UNV-2).</p>
+    </div>
+    <div class="panel">
+      <h3>Signal inputs (verified weekly)</h3>
+      <ul class="clean">
+        <li>Official injury report → team availability gaps <span class="src"><a href="https://www.nfl.com/injuries/">NFL.com</a></span></li>
+        <li>Standings / efficiency (PF–PA) <span class="src"><a href="https://www.nfl.com/standings/league/2026/reg">NFL.com</a></span></li>
+        <li>Schedule factors (rest, travel, international games) <span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10">NFL.com</a></span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Validation gates — every strategy must pass all</h2>
+  <table>
+    <thead><tr><th>Gate</th><th>Rule (proposed)</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>G1 Sample size</td><td>Minimum independent bets/events before eligibility (proposed: 50+ bets or 1 season of data).</td><td>Avoid small-sample noise.</td></tr>
+      <tr><td>G2 Edge threshold</td><td>Model-implied edge over the market price must exceed a minimum (proposed: 2% expected value).</td><td>Filter out no-edge signals.</td></tr>
+      <tr><td>G3 Statistical significance</td><td>Edge must be significant at a set confidence level (z-score / binomial test on realized vs. expected).</td><td>Remove luck.</td></tr>
+      <tr><td>G4 Correlation check</td><td>Bet components within a parlay must be below the correlation limit (proposed: |r| &lt; 0.6 between legs).</td><td>Avoid correlated-combo distortion.</td></tr>
+      <tr><td>G5 Closing-line value</td><td>Strategy must show non-negative closing-line value over the evaluation window.</td><td>Confirms the edge is real vs. the market.</td></tr>
+      <tr><td>G6 Regime check</td><td>Re-test across regimes (offense vs. defense weeks; home/road splits).</td><td>Confirms the signal is not regime-bound.</td></tr>
+      <tr><td>G7 Discipline check</td><td>No look-ahead, no selective exclusion, fixed sizing rules.</td><td>Prevents curve-fitting and survivorship bias.</td></tr>
+    </tbody>
+  </table>
+  <p class="note">A strategy failing any gate stays "in validation" and does not appear on the leaderboard.</p>
+
+  <h2>Determining correlation values</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li>Compute pairwise correlation (Pearson; Spearman as a robustness check) between: bet components (parlay legs), strategy returns across market factors (totals vs. spreads), and signal inputs (injury score, team efficiency, situational factors).</li>
+      <li>Use a rolling window (proposed: last 3 seasons where data permits) to keep correlations current.</li>
+      <li>Reject or re-weight any parlay whose legs exceed the correlation limit (G4); publish the correlation matrix per strategy for review.</li>
+    </ul>
+  </div>
+
+  <h2>Removing luck from the equation</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li>Evaluate on expected value and closing-line value — not short-term ROI.</li>
+      <li>Require the minimum bet count (G1) before any strategy is ranked.</li>
+      <li>Use significance testing (G3): a hot streak alone cannot qualify a strategy.</li>
+      <li>Report variance bands alongside ROI; rank by ROI with a z-score tie-breaker.</li>
+      <li>Track in-sample vs. out-of-sample performance to penalize overfitting.</li>
+    </ul>
+  </div>
+
+  <h2>Leaderboard competition &amp; rewards</h2>
+  <table>
+    <thead><tr><th>Element</th><th>Proposed design</th></tr></thead>
+    <tbody>
+      <tr><td>Eligibility</td><td>All strategies that pass gates G1–G7.</td></tr>
+      <tr><td>Ranking metric</td><td>Verified ROI over the evaluation window.</td></tr>
+      <tr><td>Tie-breaker</td><td>Z-score of edge (higher is better).</td></tr>
+      <tr><td>Reward tiers</td><td>Tier 1 (top strategy) — primary reward; Tier 2 — secondary reward; Tier 3 (qualified) — recognition only.</td></tr>
+      <tr><td>Release</td><td>Rewards released only after the evaluation window closes and gates are re-verified.</td></tr>
+      <tr><td>Re-entry</td><td>Strategies re-enter each cycle; a strategy that fails a gate is removed until it re-passes.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Data dependencies (must close before live operation)</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li>Verified live lines (UNV-1) and player props (UNV-2) — see the <a href="questions.html">Questions</a> page.</li>
+      <li>Historical closing lines and results (Q10) for backtesting and closing-line value.</li>
+      <li>Bankroll/unit policy (Q8) for sizing and reward normalization.</li>
+      <li>Injury data continuity — the official NFL.com injury report is the weekly baseline (already integrated).</li>
+    </ul>
+  </div>
+
+  <h2>Execution guardrails</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li>Fixed unit sizing from the approved bankroll policy.</li>
+      <li>No manual overrides of gate results; overrides are logged and reviewed.</li>
+      <li>Weekly refresh: re-run gates, update the leaderboard, re-publish tables with source links.</li>
+    </ul>
+  </div>
+
+  <div class="footer"><a href="index.html">Back to dashboard</a> · Methodology proposal pending review on the <a href="suggestions.html">Suggestions</a> page.</div>
+</main>
+</div>
+</body>
+</html>

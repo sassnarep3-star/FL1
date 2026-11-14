@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Summary — FL1</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">FL1</div>
+  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
+  <a class="item" href="index.html">Dashboard</a>
+  <a class="item active" href="executive-summary.html">Executive Summary</a>
+  <a class="item" href="questions.html">Decisions &amp; Questions</a>
+  <a class="item" href="suggestions.html">Suggestions</a>
+  <a class="item" href="strategies.html">Strategies &amp; Leaderboard</a>
+  <a class="item" href="injury-report.html">Injury Report</a>
+  <a class="item" href="standings.html">Standings</a>
+  <a class="item" href="lines.html">Lines &amp; Market</a>
+  <a class="item" href="flagged-review.html">Flagged for Review</a>
+  <a class="item" href="sources.html">Sources</a>
+</nav>
+<main>
+  <h1>Executive Summary</h1>
+  <p class="lead">Project FL1 — NFL line origination, signal research, and decision support. Date: 2026-11-14. Current week: NFL Week 10, 2026 season.</p>
+
+  <h2>1. What this site is</h2>
+  <div class="panel">
+    A verification-first decision-support dashboard for originating NFL lines and evaluating betting strategies. Every published data row carries a link to an official source. Values that could not be confirmed from an official source are left blank and flagged UNVERIFIED. No value has been inferred or filled in.
+  </div>
+
+  <h2>2. Repo review result</h2>
+  <div class="panel">
+    The repository was empty at session start (a single <code>README.md</code> containing "# FL1"). No existing code, configuration, or data files required review. No irregularities in repo contents. Source data, verification records, and the full site were created in this session.
+  </div>
+
+  <h2>3. Verified data in hand (all from NFL.com, official)</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li><strong>Standings (32 teams):</strong> Buffalo and San Francisco lead at 7-1 (.875). Jacksonville's defense allows 15.1 PPG (121 points in 8 games) — the league's stingiest. Minnesota's offense scores 18.3 PPG despite a 6-2 record. <span class="src">[NFL.com standings](https://www.nfl.com/standings/league/2026/reg)</span></li>
+      <li><strong>Week 10 schedule (16 games):</strong> full slate with times and networks, including the Munich international game (NE at DET) and the completed Thursday game (WAS 24, NYG 21). Bye: CHI, DEN, PHI, TB. <span class="src">[NFL.com schedule](https://www.nfl.com/schedules/2026/by-week/week-10)</span></li>
+      <li><strong>Week 10 injury report:</strong> complete official report for all 16 games. Key availability signals: Vikings QB <strong>Kyler Murray OUT</strong> (hamstring); Seahawks QB <strong>Sam Darnold OUT</strong> (ribs/quad); Ravens QB <strong>Lamar Jackson out 6–10 weeks</strong> (thumb, IR); Packers RB <strong>Josh Jacobs OUT</strong> (finger, surgery); 49ers WR <strong>Mike Evans OUT</strong> (Achilles); Texans WR <strong>Marvin Harrison Jr. OUT</strong>. <span class="src">[NFL.com injury report](https://www.nfl.com/injuries/)</span></li>
+      <li><strong>Irregularity flagged (IR-1):</strong> NFL.com standings do not yet reflect the completed Thursday WAS 24–21 NYG result. Flagged for review, not corrected. <span class="src">[Flagged for Review](flagged-review.html)</span></li>
+    </ul>
+  </div>
+
+  <h2>4. Market status</h2>
+  <div class="panel">
+    No betting line value could be verified from an official sportsbook source through automated fetch (DraftKings' NFL market is client-rendered; FanDuel returned HTTP 500). All spread/total/moneyline and player-prop cells are blank and flagged UNVERIFIED. This is the single largest information gap blocking line-origination decisions. <span class="src">[Lines &amp; Market](lines.html) · [Flagged for Review](flagged-review.html)</span>
+  </div>
+
+  <h2>5. Strategy framework (proposed, pending review)</h2>
+  <div class="panel">
+    A leaderboard-competition system for skills-based strategy selection: <strong>single bet</strong>, <strong>parlay</strong>, and <strong>player-prop combos</strong>, each required to pass validation gates (sample size, edge threshold, significance, correlation check, closing-line value, regime check, discipline check). Correlation values are computed between bet components before parlay assembly. Luck is removed by judging performance on expected value, closing-line value, and significance (z-score) with minimum-bet-count eligibility. Reward tiers go to top-performing verified strategies. <span class="src">[Strategies page](strategies.html)</span>
+  </div>
+
+  <h2>6. Open decisions</h2>
+  <div class="panel">
+    12 decision-gate questions are published; 6 are answered from official sources or proposed methodology, and 6 remain open: the standings-freshness irregularity (Q4), live lines (Q5), player props (Q6), bankroll/unit policy (Q8), jurisdiction legality (Q9), and the historical-odds data source (Q10). The Suggestions page lists the actions proposed to close each gap. <span class="src">[Questions](questions.html) · [Suggestions](suggestions.html)</span>
+  </div>
+
+  <h2>7. Next steps</h2>
+  <div class="panel">
+    <ol class="clean">
+      <li>Review the <a href="flagged-review.html">Flagged for Review</a> page.</li>
+      <li>Decide the bankroll, jurisdiction, and data-source answers on the <a href="questions.html">Questions</a> page.</li>
+      <li>Select which suggestion proposals to implement on the <a href="suggestions.html">Suggestions</a> page.</li>
+      <li>Verify current lines on an official sportsbook, then populate the <a href="lines.html">Lines</a> page and launch the leaderboard competition.</li>
+    </ol>
+  </div>
+
+  <div class="footer">Verified line-by-line against official sources on 2026-11-14. <a href="index.html">Back to dashboard</a></div>
+</main>
+</div>
+</body>
+</html>
