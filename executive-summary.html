@@ -24,7 +24,7 @@ and marks everything else as open.</p>
 <section>
 <h2>1. What has been verified</h2>
 <p>The repository was empty apart from a five-byte README, so the entire base is new. Fifteen sources were
-attempted; <strong>15 loaded successfully</strong> and <strong>3 did not</strong>. The failed ones are
+attempted; <strong>45 loaded successfully</strong> and <strong>4 did not</strong>. The failed ones are
 recorded as unverified and are never used to support a claim.</p>
 <p>The most substantial verified artefact is the <strong>official Week 10, 2026 season injury report</strong>:
 345 player rows over 28 clubs, with each player's practice status and game status reproduced exactly as published.
@@ -44,9 +44,11 @@ league calendar through Super Bowl LXI on 2027-02-14.</p>
 prices. Without a price there is no edge, no expected value and no closing-line value. Every such field on this
 site is blank. This is blocker #1 and it gates the entire leaderboard.</li>
 <li><strong>No official snap counts and no league-wide official depth chart.</strong>
-<code>nfl.com/depth-charts/</code> returns 404, and the one club depth chart captured in full is titled
-<em>Unofficial Depth Chart</em> by the club itself. So &ldquo;which backup replaced which starter&rdquo; cannot be
-measured, only alleged. The site shows official absence instead, and labels the depth layer as derived.</li>
+<code>nfl.com/depth-charts/</code> returns 404. Depth therefore has to be captured club by club, and each club
+titles its own chart <em>Unofficial Depth Chart</em>. 31 of the 32 clubs publish one as a readable table; Houston
+publishes its as an image (<a href="flagged.html#F16">F16</a>). So &ldquo;which backup replaced which
+starter&rdquo; cannot be measured, only alleged. The site shows official absence and the club&rsquo;s own
+published ordering instead, and labels the depth layer as derived.</li>
 <li><strong>One snapshot, one season.</strong> Everything here is a single capture on a single day. No backtest,
 no persistence claim and no multi-season holdout is possible from this data.</li>
 </ol>
@@ -57,10 +59,13 @@ no persistence claim and no multi-season holdout is possible from this data.</li
 <p>Among the clubs captured, 66 players are designated Out, split <strong>37 on offense, 27 on defense and 2 on
 special teams</strong>. Defensive line and secondary depth is the most exposed area, which is the part of the
 brief about 2nd and 3rd string defenders being forced in.</p>
-<p>On the one club worked end to end, the pattern is concrete and checkable: the starting right tackle is Out
-(ankle) and the starting running back is Questionable after not practising (groin), while the second-string
-defensive tackle is Out (neck). Those are observed facts with a source link. The claim that a specific backup
-took the snaps is <em>not</em> made, because no snap-count source was verified.</p>
+<p>The pattern is concrete and checkable across the league: of the 753 first-string slots charted, <strong>71
+carry an official Out / Doubtful / Questionable status</strong> this week, and for each one the club&rsquo;s own
+chart names the next player at that same slot. Kansas City is worked end to end on
+<a href="depth.html">Backup Depth</a> — starting right tackle Out (ankle), starting running back Questionable
+after not practising (groin), second-string defensive tackle Out (neck). Those are observed facts with a source
+link. The claim that a specific backup took the snaps is <em>not</em> made, because no snap-count source was
+verified.</p>
 </section>
 
 <section>

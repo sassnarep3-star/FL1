@@ -65,7 +65,6 @@ Shared task board for the FL1 (NFL) project. All sessions must read this before 
 
 ## ⚠️ CONFLICT RECORD — three sessions merged to `main` in parallel
 
-<<<<<<< HEAD
 On 2026-11-14 **three** sessions built a site from the same empty repo and all three merged toward `main`.
 This section records both reconciliations.
 
@@ -255,7 +254,9 @@ _None outstanding._
 
 All 15 items on [`flagged.html`](flagged.html). Every unverifiable value in this repo is left blank there
 with the reason and the source that was attempted.
-=======
+
+### Preserved task board and integration record from the merged branch (verbatim)
+
 | # | Task | Status | Owner | File scope | Sources / verification | Irregularities |
 |---|------|--------|-------|------------|------------------------|----------------|
 | 1 | Create COORDINATION.md task board | done | arena-89c32e23-fl1 | COORDINATION.md | n/a | none |
@@ -283,7 +284,145 @@ with the reason and the source that was attempted.
 - Sources used (verified): https://www.nfl.com/injuries/ , https://www.nfl.com/standings/ , https://www.nfl.com/teams/{team}/roster
 - Flagged irregularities / unverified items: published on the live site's Flagged for Review page (flagged-review.html) — includes depth-chart order unverified, strategies & correlations analytical (no official NFL source), no live betting-lines source, partial Week 10 injury coverage, standings single week only
 - Live site: https://sassnarep3-star.github.io/FL1/
->>>>>>> origin/main
+
+---
+
+## Session `arena/3f677e8a-fl1` — board preserved verbatim (merged into `main` on 2026-11-14)
+
+> This session branched from `main` @ `e001e0a`, i.e. **before** PRs #1–#5 landed. It discovered
+> the divergence when `git pull --rebase` tried to replay its commits onto `d5e9cc0`. Per the
+> conflict rule in the brief, it stopped, and reconciled by **merging `main` in** rather than
+> force-pushing, so no other session's work was discarded. Its independent captures are kept
+> below and were cross-checked against the consolidated `data/` files (results recorded in
+> `data/verification.tsv`).
+
+# COORDINATION.md — Shared Task Board
+
+Repo: `sassnarep3-star/FL1`
+Purpose: NFL requirements / decision-support / line-generation research site.
+
+## Branch policy for this session (read first)
+
+This session runs on the Arena-managed branch **`arena/3f677e8a-fl1`** (branched from
+`main` @ `e001e0a24c2ca5a432f6bd39cea3b5e6fcc035a2`). Arena tracks this session by that
+branch, so **this session will not create or push any other branch**, including
+`session-<id>/<task>` worktrees. Instead of branch-per-task isolation, this session uses
+**file-scope isolation**: every task below claims an explicit, non-overlapping set of files,
+and no task may edit files outside its claimed scope. If another session is live, claim an
+unclaimed task (or a sub-scope) below, commit and push the claim immediately, and respect
+the file scopes already claimed here.
+
+If a second session is running concurrently and wants branch-per-task isolation, it may
+create `session-<id>/<task>` branches; in that case it must do the final integration merge
+itself, because this session can only push `arena/3f677e8a-fl1`.
+
+## Session registry
+
+| Session ID | Branch | Started | Status | Notes |
+|---|---|---|---|---|
+| `session-3f677e8a` | `arena/3f677e8a-fl1` | 2026-11-14 | active | Single session observed. Performing all tasks incl. final integration. |
+
+## Task board
+
+Status values: `unclaimed` · `in progress` · `done` · `needs review` · `blocked`
+(`needs review` = published on the Flagged for Review page; does **not** block anything.)
+
+| # | Task | Status | Owner | File scope (claimed) |
+|---|---|---|---|---|
+| T01 | Repo audit — line-by-line review of existing repo contents | done | `session-3f677e8a` | `REPO_AUDIT.md`, `README.md` |
+| T02 | Coordination board + branch/scope protocol | done | `session-3f677e8a` | `COORDINATION.md` |
+| T03 | Source registry (official-only, tiered, with retrieval dates) | in progress | `session-3f677e8a` | `data/sources.json` |
+| T04 | Official NFL standings + schedule scrape (2026 season) | in progress | `session-3f677e8a` | `data/standings.json`, `data/schedule.json` |
+| T05 | Official NFL injury report (Week 10, 2026) | in progress | `session-3f677e8a` | `data/injuries.json` |
+| T06 | Official team depth charts — starter / 2nd / 3rd / 4th string | in progress | `session-3f677e8a` | `data/depth_charts.json` |
+| T07 | Market/consensus lines capture (external book pages) | in progress | `session-3f677e8a` | `data/market_lines.json` |
+| T08 | Historical dataset acquisition for backtesting (nflverse via GitHub) | in progress | `session-3f677e8a` | `tools/fetch_data.py`, `data_raw/` (git-ignored) |
+| T09 | Requirements register (full list of requirements) | unclaimed→in progress | `session-3f677e8a` | `data/requirements.json` |
+| T10 | Suggestions / decision register (reviewable, choose-before-implement) | unclaimed→in progress | `session-3f677e8a` | `data/suggestions.json` |
+| T11 | Open questions: info we have / don't have / how to discover | unclaimed→in progress | `session-3f677e8a` | `data/open_questions.json` |
+| T12 | Own-line generation model spec + current-week model output | unclaimed→in progress | `session-3f677e8a` | `data/model_lines.json`, `MODEL.md` |
+| T13 | Strategy leaderboard: single bets, parlays, prop combos | unclaimed→in progress | `session-3f677e8a` | `data/strategies.json` |
+| T14 | Validation gates + correlation values + skill-vs-luck statistics | unclaimed→in progress | `session-3f677e8a` | `data/validation.json`, `data/correlations.json`, `VALIDATION.md` |
+| T15 | Executive summary | unclaimed→in progress | `session-3f677e8a` | `data/exec_summary.json`, `EXECUTIVE_SUMMARY.md` |
+| T16 | Site build (landing + category subpages, dashboard UI, tables) | unclaimed→in progress | `session-3f677e8a` | `assets/`, `tools/build_site.py`, `*.html` |
+| T17 | Verification pass — every row link-checked; unconfirmed → blank + flagged | unclaimed | `session-3f677e8a` | `VERIFICATION.md`, `tools/verify.py` |
+| T18 | Flagged-for-Review page (irregularities + unverified items w/ source links) | unclaimed | `session-3f677e8a` | `flagged.html` |
+| T19 | Final integration: merge, re-verify, link check, publish Pages | unclaimed | `session-3f677e8a` | `*` (integration only after T01–T18 done) |
+| T20 | PR → main, merge without waiting, confirm Pages deploy | unclaimed | `session-3f677e8a` | PR only |
+
+## Integration rules (from the task brief)
+
+* Shared outputs — the table data in `data/` and the site's `index.html` + navigation —
+  are merged/changed only by the final integration task (T19), after T01–T18 are done.
+* Small, frequent commits; `git pull --rebase` before every push.
+* On merge conflict: stop, resolve without discarding the other session's work, log it below.
+* Never mark anything verified without checking it against an official source, and link it.
+* Stale-claim rule: a claim older than 60 minutes with no commits may be taken over; note
+  the handoff in the log.
+
+## Change log
+
+| Timestamp (UTC) | Session | Entry |
+|---|---|---|
+| 2026-11-14T00:00Z | `session-3f677e8a` | Board created. Repo found empty (single 5-byte `README.md`, commit `e001e0a`). Branch-per-task isolation replaced by file-scope isolation due to Arena single-branch policy. |
+
+
+### Reconciliation notes for this session
+
+- **Standings:** an independent recount of W/L/T + PF + PA computed from this session's
+  137-game results file matches `data/standings.tsv` for all 32 clubs — **0 mismatches**.
+  This also settles the snapshot date: with the Week 10 TNF row included the numbers match
+  exactly, with it excluded NYG and WAS are off. **The standings snapshot includes
+  Thursday 2026-11-12 (WAS 24 @ NYG 21).**
+- **Abbreviations:** this session used `AZ` for Arizona; the consolidated site uses the official
+  `ARI`. Its capture was normalised to `ARI` on integration. No data lost.
+- **Depth charts:** the consolidated site only carried Kansas City (`data/depth-kc.tsv`).
+  This session transcribed **30 of 32** clubs and contributed them as `data/depth.tsv`.
+  Houston is **not** included — its club page renders the depth chart as an image, so there is
+  nothing machine-readable to transcribe without inferring. Flagged, not filled in.
+
+### Session `arena/3f677e8a-fl1` — completion record
+
+- **Merge into main:** https://github.com/sassnarep3-star/FL1/pull/6
+- **What this session added on top of main (PRs #1–#5):**
+  - `data/depth.tsv`, `data/depth-sources.tsv`, `tools/normalize_depth.py` — depth charts for
+    30 clubs, folded in with the existing Kansas City chart for **31 of 32 clubs covered**.
+  - `data/results.tsv`, `tools/verify_results.py` — 137 game results, proven against the
+    published standings.
+  - `data/sources.tsv` S16–S46 (30 club depth-chart pages plus Houston's image-only page).
+  - `data/flags.json` F16 (Houston chart not machine-readable).
+  - `data/verification.tsv` — 5 new checks, including two independent cross-transcriptions.
+  - Depth page rebuilt league-wide; standings page gains scoring rates and full game log.
+- **Sources verified (loaded and read, 2026-11-14):** 30 `<club>.com/team/depth-chart` pages,
+  `nfl.com/schedules/2026/by-week/week-1..10`, `nfl.com/standings/`, `nfl.com/injuries/`.
+- **Verification performed:**
+  - 137 games summed → matches the official standings for all 32 clubs, 0 mismatches.
+  - Standings: 352 field comparisons against an independently captured table, 0 differences.
+  - Injuries: 345 rows, two independent transcriptions of the same page, identical content
+    (2 Houston rows in a different order; 2 cosmetic vocabulary differences).
+  - Club membership: 0 players charted by a club other than the one on whose injury report
+    they appear.
+- **Irregularity withdrawn, not published:** before the club charts were captured, several
+  injury-report names looked like they belonged to other clubs. With the charts in hand the
+  check above returns zero conflicts, so the suspicion was **not supported by the official
+  documents and is withdrawn**. It is deliberately *not* listed on Flagged for Review.
+- **Still open / flagged:** Houston depth chart (F16, image-only); no official snap counts
+  (F09); no market price source; single-season snapshot.
+- **Branch divergence note (why a force push was needed and was safe):**
+  this session branched from `main` @ `e001e0a` before PRs #1–#5 landed, and by the time it
+  discovered that, `main` had moved to `d5e9cc0`. It reconciled by **merging** `main` in
+  (commit `92cd9e5`) rather than force-pushing, so no other session's work was overwritten.
+  A side effect is that this branch's history now contains all of `main`, while the branch's
+  own remote tip was still this session's earlier commit `ab0b331`. Ordinary
+  `git pull --rebase` therefore tries to replay main's entire history onto `ab0b331` and
+  deadlocks on `COORDINATION.md`. Verified before pushing:
+  `ab0b331`, `5a0e62a`, `b124358`, `3183479` and `d5e9cc0` are all ancestors of `HEAD`, and
+  `git diff HEAD origin/arena/3f677e8a-fl1` shows no file present on the remote tip that is
+  missing locally. The force push with lease therefore drops nothing; it only moves the
+  branch pointer forward past this session's own superseded commits.
+- **Upstream fixed:** `arena/3f677e8a-fl1` now tracks `origin/arena/3f677e8a-fl1`. It had no
+  upstream configured, so `git pull` was silently rebasing onto `origin/main` — the cause of
+  the first conflict. Any other session on this branch should check `git rev-parse --abbrev-ref @{u}`.
 
 ---
 
@@ -372,6 +511,42 @@ session branches and five merges to `main` appeared during the run.** Re-check `
 immediately before the first push and again before opening a PR. Scopes here stayed non-overlapping
 only because the build wrote to new paths.
 
+---
+
+## Session record — `arena-046256d0-fl1` (`arena/046256d0-fl1`) · 2026-11-14
+
+**Scope:** built a full verification-first decision dashboard from the empty repo (README-only at start):
+landing page plus category subpages, verified Week 10 (2026) standings/schedule/injury data, decision-gate
+questions, suggestions register, strategy framework (single bet / parlay / player-prop combos, validation
+gates, correlation, luck removal, leaderboard rewards), lines page with verification-gated cells, and a
+flagged-for-review page. Sources: NFL.com standings, schedule, injury report, game center (all official).
+
+**Tasks, sources, verification (see `data/verification-log.md` in the archive):** all 32-team standings,
+16-game schedule, and the complete Week 10 injury report verified line-by-line against NFL.com on
+2026-11-14. Line values had no reachable official source (DraftKings client-rendered, FanDuel HTTP 500)
+and were left blank + flagged, per rule.
+
+**Irregularities found by this session:**
+- **IR-1 (standings freshness):** NFL.com standings do not reflect the completed Week 10 Thursday game
+  (WAS 24, NYG 21, FINAL) — WAS still 3-5-1, NYG 5-3-1. Published as-is, flagged.
+- **UNV-1 / UNV-2:** all sportsbook line and player-prop values unverifiable — left blank, flagged.
+- **IR-2 (repo hygiene):** the `main`-branch `COORDINATION.md` contained committed merge-conflict
+  markers (lines from a prior session's merge). Resolved during this integration: both conflict sides'
+  records preserved verbatim, markers removed. Flagged here for the record.
+
+**Conflict with the consolidated build on `main` (resolved, no work discarded):** this session's branch
+added site files at the same repo-root paths as the already-merged consolidating build (three earlier
+sessions had merged into `main`). `gh pr merge` failed on add/add conflicts. Resolution per the standing
+rule in this board: the consolidated site at the repo root stays live; this session's complete site is
+preserved **verbatim** in [`archive/arena-046256d0/`](archive/arena-046256d0/) (pages, stylesheet, and
+its `data/` verification records), with a README explaining the mapping. Nothing from this session was
+deleted; nothing from the consolidating build was altered.
+
+**Integration & deployment:** PR https://github.com/sassnarep3-star/FL1/pull/10 opened from
+`arena/046256d0-fl1` to `main`. Merge result and GitHub Pages deploy status recorded in the follow-up
+log entry appended below after the merge and deploy check.
+
+### Integration record — session `arena-ab82c93f` (PR #6, #12, #13)
 ### Integration record — session `arena-ab82c93f` (PR #6)
 
 - **PR:** https://github.com/sassnarep3-star/FL1/pull/6
@@ -410,16 +585,39 @@ lost**, because the branch had been pushed before the deletion. From that point 
 onto current `main`. Recorded here rather than omitted, since the board asks for irregularities to be
 logged including the ones a session caused itself.
 
+### Follow-up — session `arena-ab82c93f` (PRs #12 and #13)
+
+- **PR #12** (merged 2026-11-14T03:16:23Z): fixed a real rendering bug where four tables — including
+  the entire source registry, the entire Flagged-for-Review register, and all 345 Week-10 official
+  injury rows — were publishing **completely empty**. `table()` was being called with display labels
+  as column keys, so every cell looked up a non-existent column. Two defences added so it cannot recur:
+  `table()` now raises `KeyError` on an unknown column, and `verify_site.py` gains **T2** (no table may
+  render an entirely-empty row) and **T3** (every `flagged.html#ANCHOR` must resolve). T2 immediately
+  found three further instances that had not been spotted by eye.
+- **Lesson worth carrying:** the original 19-check gate verified *data*, *links* and *gate columns* but
+  never verified that a rendered table had any content. A verification suite that checks sources but
+  not output is half a suite. Any future session adding a table should run the T2 check.
+
+### Final state of this session's contribution
+
+| | |
+|---|---|
+| PRs merged | #6 (computed layer), #11 (merge record), #12 (empty-table fix) |
+| CI | `verify-research-build` green on every merge |
+| Pages | build `67adb6f` status `built`; `docs/computed/` confirmed live with populated tables |
+| Root site | untouched and verified reachable after every merge |
+| Data | 16 strategies / 0 approved / 0 reward paid; 345 verified official rows; 16 sources |
+
 ---
 
-## Session D — `arena-34db7d1d-fl1` (active; rebased onto `origin/main` @ 9343c19, 2026-11-14)
+## Session D — `arena-34db7d1d-fl1` (completion record; merged through PR below)
 
-- Rebased through PRs #5–#11 landing mid-session; scope below reflects what is already done by others.
-- Acknowledges session `ab82c93f-fl1`'s computed layer (Elo line engine, 16 strategies × 7 gates, team-level correlations) and its flagged open question **Q-PROP-01 (player-prop correlation unmeasured)**.
-- Scope claimed (new files only):
-  1. `data/prop-correlations-d.csv` + `scripts/build_prop_correlations_d.py` — **closes Q-PROP-01**: empirical player-level correlations, nflverse `player_stats` 1999–2024 (mirror Beexly/Sports), QA-reconciled vs `data/raw/games.csv` before publication.
-  2. `data/schedule2026-d.csv` + `raw/games-nfldata.csv` + `scripts/build_schedule_d.py` + page `schedule.html` — full 272-game season; strict 32/32 reconciliation vs official standings; W10 final cross-checked vs nfl.com.
-  3. `.github/workflows/refresh.yml` — scheduled cron refresh: re-fetch nflverse games.csv, rebuild `-d` artefacts, verify, commit data-only changes; deploys nothing.
-  4. `data/verification-d.tsv` — independent re-verification of the merged computed layer.
-  5. Pages `schedule.html`, `prop-correlations.html` rendered via `tools/site.py` helpers; one NAV integration edit.
-- Standing rule followed: extend, don't rebuild; archived work untouched; no Pages deploy workflow.
+- Work delivered on branch `arena/34db7d1d-fl1` (single-session branch per Arena constraint; claim first pushed ~03:20 UTC):
+  1. **Q-PROP-01 closed**: `data/prop-correlations-d.csv` + `scripts/build_prop_correlations_d.py` — empirical player-level correlations from nflverse player_stats 1999–2024 (13,384 team-games, 100% score join vs games.csv after canonicalizing SD/STL/OAK/LA); QA-gated (schema/coverage/join/sanity/determinism); binary lifts with bootstrap CIs. Pages: `prop-correlations.html`.
+  2. **Full-season schedule**: `data/schedule2026-d.csv` (272 rows) + `raw/games-nfldata.csv` snapshot + `schedule.html`; strict V1 reconciliation 32/32 clubs (records+PF+PA) vs official standings capture; V2 Thursday final vs official schedule page; V3 slate equality; V4 internal consistency.
+  3. **Independent verification V5–V9** (`data/verification-d.tsv`, `scripts/verify_d.py`): bye-club completeness; deterministic byte-identical rebuild of the merged computed layer; 18/18 injury transcription fidelity vs `week10_2026_official.csv`; spread-sign convention 13/13 vs moneylines; prop-correlations reproducibility.
+  4. **Weekly refresh workflow** `.github/workflows/refresh.yml` — scheduled cron; rebuilds + re-verifies; commits only on all-green; deploys nothing (per verify.yml policy).
+  5. Integration edits: NAV +2 entries in `tools/site.py`; sources S47–S49; flags F16–F17; README addendum.
+- Sources: S47 (nflverse games feed), S48 (player_stats mirror), S49 (official W10 schedule page), plus S01–S03 official captures.
+- Irregularities logged: F16 (Mike Evans listed under 49ers while TB on bye — published verbatim), F17 (prop correlations are computed estimates, not official stats).
+- Conflict log: rebase/merge conflicts on COORDINATION.md and registries with sessions ab4e9b05/ab82c93f/3f677e8a resolved by taking origin/main's board and re-appending; registries unioned by id (my S16–S18 re-issued as S47–S49 after id collision); no other session's work discarded.

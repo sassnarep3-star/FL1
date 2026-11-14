@@ -161,7 +161,12 @@ def status_pill(s):
 def table(df, cols, headers=None, num=None, linkcol=None, maxrows=None, pillcols=()):
     """Render a dataframe slice as a table. `linkcol` values become <a> links."""
     num = num or set()
-    headers = headers or cols
+    if headers is None:
+        headers = cols
+    missing = [c for c in cols if c not in df.columns]
+    if missing:
+        raise KeyError(f"table() given column(s) not in the dataframe: {missing}. "
+                       f"Available: {list(df.columns)}")
     out = ['<div class="tw"><table><thead><tr>']
     for c, h in zip(cols, headers):
         cls = ' class="n"' if c in num else ""
@@ -431,7 +436,7 @@ what fails, and how close it was, is the useful output.</div>
 
 <h2>Ranked board</h2>
 {table(lbv, ['rank','strategy_id','family','settled','hit_rate','roi','oos_roi','p_value','gates_passed','verdict','reward_units'],
-       ['#','Strategy','Family','Bets','Hit %','ROI %','OOS ROI %','p (one-sided)','Gates','Verdict','Reward'],
+       headers=['#','Strategy','Family','Bets','Hit %','ROI %','OOS ROI %','p (one-sided)','Gates','Verdict','Reward'],
        num={'rank','settled','hit_rate','roi','oos_roi','p_value','gates_passed','reward_units'},
        pillcols=('verdict',))}
 
@@ -450,7 +455,7 @@ all in 2025, because the release CDN limited the injury history to one season
 badly-specified signal, not evidence about the idea. It fails G1 by construction.</p>
 {table(lbs[lbs.strategy_id.isin(['WIND15_UNDER','DIV_DOG_AND_ELO','DIV_AWAY_DOG','REST_ADV_AWAY'])],
        ['strategy_id','season','settled','wins','profit_units','roi'],
-       ['Strategy','Season','Bets','Wins','Profit (units)','ROI'],
+       headers=['Strategy','Season','Bets','Wins','Profit (units)','ROI'],
        num={'season','settled','wins','profit_units','roi'})}
 <p class="src">The four closest rejects only. Full ledger (15 strategies × 21 seasons) is in
 <code>data/leaderboard_by_season.csv</code>.</p>
@@ -483,11 +488,11 @@ badly-specified signal, not evidence about the idea. It fails G1 by construction
 <h2>The seven gates</h2>
 <p>These were fixed before any result was inspected. A strategy must pass all seven. Every gate is
 a number, so "skill" is falsifiable.</p>
-{table(gt, ['gate','pass','of'], ['Gate','Passed','Out of'], num={'pass','of'})}
+{table(gt, ['gate','pass','of'], headers=['Gate','Passed','Out of'], num={'pass','of'})}
 
 <h2>Full test matrix</h2>
 {table(sv, ['strategy_id','family','market','settled','hit_rate','breakeven_hit','roi','is_roi','oos_roi','p_value','max_drawdown','gates_passed','verdict'],
-       ['Strategy','Family','Market','Bets','Hit %','Breakeven %','ROI %','IS ROI %','OOS ROI %','p','Max DD','Gates','Verdict'],
+       headers=['Strategy','Family','Market','Bets','Hit %','Breakeven %','ROI %','IS ROI %','OOS ROI %','p','Max DD','Gates','Verdict'],
        num={'settled','hit_rate','breakeven_hit','roi','is_roi','oos_roi','p_value','max_drawdown','gates_passed'},
        pillcols=('verdict',))}
 
@@ -538,7 +543,7 @@ profit from a same-game parlay you must know the true correlation better than th
 The measured correlations here are either structural (cover ≈ win) or indistinguishable from zero.</p>
 {table(parecon, ['parlay_legs','correlation_assumption','pairwise_phi','price_at_-110_each_decimal',
                  'implied_prob_at_that_price','true_joint_prob','ev_per_unit_if_priced_independent'],
-       ['Legs','Assumption','Pairwise φ','Decimal price','Implied prob','True joint prob','EV per unit'],
+       headers=['Legs','Assumption','Pairwise φ','Decimal price','Implied prob','True joint prob','EV per unit'],
        num={'parlay_legs','pairwise_phi','price_at_-110_each_decimal','implied_prob_at_that_price',
             'true_joint_prob','ev_per_unit_if_priced_independent'})}
 
@@ -583,7 +588,7 @@ see <a href="questions.html">OQ-11</a> and <a href="flagged.html">FLAG-05</a>.</
 <p>Weights are fixed a priori: Out 1.00, Doubtful 0.50, Questionable 0.25, Injured Reserve 1.00.
 388 team-weeks, 32 clubs, Weeks 1–13. Highest-disadvantage team-weeks:</p>
 {table(top, ['season','week','team','listed_players','out','doubtful','questionable','injured_reserve','avail_disadv'],
-       ['Season','Week','Team','Listed','Out','Doubtful','Questionable','IR','Weighted disadvantage'],
+       headers=['Season','Week','Team','Listed','Out','Doubtful','Questionable','IR','Weighted disadvantage'],
        num={'season','week','listed_players','out','doubtful','questionable','injured_reserve','avail_disadv'})}
 <p class="src">Source: nflverse injuries release (2025), via mirror — see
 <a href="sources.html">D05 / D06</a> and <a href="flagged.html">FLAG-01</a>.</p>
@@ -593,7 +598,7 @@ see <a href="questions.html">OQ-11</a> and <a href="flagged.html">FLAG-05</a>.</
 primary QB is its modal starter that season; any other starter is a change. The rank is the order in
 which starters first appeared — <em>not</em> a published depth slot.</p>
 {table(d26, ['season','week','team','starters_not_primary','max_start_sequence_rank','qb_deficiency'],
-       ['Season','Week','Team','Starts by a non-primary QB','Highest start-sequence rank','Classification'],
+       headers=['Season','Week','Team','Starts by a non-primary QB','Highest start-sequence rank','Classification'],
        num={'season','week','starters_not_primary','max_start_sequence_rank'})}
 
 <div class="note bad"><strong>The 2nd/3rd/4th-string requirement is not met, and cannot be met from
@@ -620,7 +625,10 @@ prediction; it is the measurable input.</p>
 {table(w[['gameday','away_team','home_team','closing_spread_home','closing_total',
           'away_listed','away_out','home_listed','home_out','avail_edge_home','avail_rank',
           'home_qb_status','away_qb_status']],
-       ['Date','Away','Home','Spread (home)','Total','Away listed','Away Out','Home listed','Home Out',
+       ['gameday','away_team','home_team','closing_spread_home','closing_total',
+        'away_listed','away_out','home_listed','home_out','avail_edge_home','avail_rank',
+        'home_qb_status','away_qb_status'],
+       headers=['Date','Away','Home','Spread (home)','Total','Away listed','Away Out','Home listed','Home Out',
         'Avail. edge (home)','Rank','Home QB on report','Away QB on report'],
        num={'closing_spread_home','closing_total','away_listed','away_out','home_listed','home_out',
             'avail_edge_home','avail_rank'})}
@@ -647,7 +655,8 @@ quality, which needs the depth feed. The board shows the input; it does not clai
 <h2>Full official report</h2>
 <p>All {len(w10off)} rows, with the exact quoted source line for each:</p>
 {table(w10off[['team','opponent','player','position','injury','practice_status','game_status','official_source_url']],
-       ['Team','Opp','Player','Pos','Injury','Practice','Game status','Source'],
+       ['team','opponent','player','position','injury','practice_status','game_status','official_source_url'],
+       headers=['Team','Opp','Player','Pos','Injury','Practice','Game status','Source'],
        pillcols=(),
        maxrows=None)}
 <p class="src">Every row links to <a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>; the
@@ -672,7 +681,7 @@ can act on.</div>
 
 <h2>Register</h2>
 {table(qv, ['id','area','priority','question','have','lack','why','answer_format','blocks','owner'],
-       ['ID','Area','Priority','Question','We have','We lack','Why it blocks a decision','Answer format needed','Blocks','Owner'],
+       headers=['ID','Area','Priority','Question','We have','We lack','Why it blocks a decision','Answer format needed','Blocks','Owner'],
        pillcols=('priority',))}
 
 <h2>The five that matter most</h2>
@@ -707,7 +716,7 @@ evidence says the path loses money.</div>
 
 <h2>Ranked suggestions</h2>
 {table(sv2, ['rank','id','gate','area','suggestion','evidence','unlocks','cost','risk','missing'],
-       ['#','ID','Gate','Area','Suggestion','Evidence','Unblocks','Cost','Risk','Still missing'],
+       headers=['#','ID','Gate','Area','Suggestion','Evidence','Unblocks','Cost','Risk','Still missing'],
        num={'rank'}, pillcols=('gate',))}
 
 <h2>Site and decision-making improvements</h2>
@@ -801,15 +810,14 @@ specific thing they describe, so each one names its own blast radius.</p>
 <a href="flagged.html#FLAG-01">FLAG-01</a>; four other items are consequences of it.</div>
 
 <h2>Irregularities</h2>
-{table(irr[['id','severity','area','title','detail','impact','mitigation','fix','link']],
-       ['ID','Severity','Area','Issue','Detail','Impact','Mitigation applied','Fix required','Source'],
-       linkcol='link', pillcols=('severity',))}
+{irr_table}
 
 <h2>Unverified and left blank</h2>
 <p>These values were requested or would be useful, and are deliberately empty. They were not
 estimated, interpolated or recalled from memory.</p>
-{table(unv[['item','value','reason','source_attempted','flag']],
-       ['Item','Value','Why it is blank','Source attempted','Flag'],
+{table(unv,
+       ['item','value','reason','source_attempted','flag'],
+       headers=['Item','Value','Why it is blank','Source attempted','Flag'],
        linkcol='source_attempted')}
 
 <h2>What to check first</h2>
@@ -848,7 +856,8 @@ Secondary is context only and is never the origin of a computed number.</p>
 
 <h2>Registry</h2>
 {table(sdf[['id','tier','publisher','title','url','used_for','status']],
-       ['ID','Tier','Publisher','Title','URL','Used for','Status'],
+       ['id','tier','publisher','title','url','used_for','status'],
+       headers=['ID','Tier','Publisher','Title','URL','Used for','Status'],
        linkcol='url', pillcols=('tier','status'))}
 
 <h2>Input manifest</h2>

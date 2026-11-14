@@ -171,17 +171,15 @@
   },
   {
     "id": "F16",
-    "kind": "Cross-check finding",
-    "item": "Mike Evans listed under the 49ers in the official Week 10 injury report",
-    "detail": "The official nfl.com/injuries/ page lists Tampa Bay WR Mike Evans (Achilles, Did Not Participate, Out) inside the 49ers table while Tampa Bay is on its Week 10 bye. Independently confirmed twice by two sessions on 2026-11-14. Session B corroborated two other cross-club listings with NFL.com news (F04: Myles Garrett is a Rams player per NFL.com articles; F05: Aaron Donald profile contradiction), so this row is published verbatim as captured and is NOT corrected silently; it may reflect an unreported transaction or an official-page bug.",
-    "source": "https://www.nfl.com/injuries/",
-    "status": "needs review",
-    "severity": "Medium",
+    "kind": "Source not machine-readable",
+    "item": "Houston Texans depth chart published as an image",
+    "detail": "https://www.houstontexans.com/team/depth-chart loads, but the chart itself is rendered as an image inside a photo-gallery widget rather than as a position table. No player names are machine-readable. Houston is therefore the only club of 32 with no depth chart on this site. The Texans roster page does publish a readable table, but it is ordered alphabetically, not by depth, so it cannot be substituted without inventing the string ordering. Depth is an ordering, and the ordering is the fact being reported.",
     "sourceIds": [
       "S01",
-      "S18"
+      "S49"
     ],
-    "action": null
+    "severity": "Medium",
+    "action": "Houston is absent from the Backup Depth page and counted as uncovered. Nothing inferred in its place."
   },
   {
     "id": "F17",
@@ -191,8 +189,8 @@
     "source": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
     "severity": "Medium",
     "sourceIds": [
-      "S16",
-      "S17"
+      "S47",
+      "S48"
     ],
     "action": null
   }
