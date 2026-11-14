@@ -268,6 +268,18 @@
       "owner_class": "Owner (provisioning)",
       "sources": [],
       "no_source_reason": "Internal statement of a gap we searched for and could not close; the failed lookups are documented in the flagged-for-review register."
+    },
+    {
+      "gap_id": "GAP-19",
+      "item": "Week 10 injury-report rows for the ten Sunday games not transcribed (Carolina/New Orleans through Cincinnati/Pittsburgh), and every earlier week of 2026",
+      "kind": "PARTIAL",
+      "blocking": "Partly — the ingestion contract is proven on two real captures; the injury *archive* (GAP-03) still needs the rest of the season",
+      "why": "The official page renders progressively and a single fetch returns a variable number of rows per club table: capture A yielded 24 rows, capture B 68 for the same six clubs an hour later. Transcribing everything by hand in one session is not reliable, and the honest state is a labelled partial capture rather than an implied complete one.",
+      "obtain": "A scheduled collector that fetches the page until the per-club row count is stable across two consecutive renders, stores (timestamp, row count, chunk coverage) with each capture, and replays the week selector back through 1965 for the archive. One host, no licence cost.",
+      "sources": [
+        "SRC-001"
+      ],
+      "status": "PARTIAL"
     }
   ]
 }

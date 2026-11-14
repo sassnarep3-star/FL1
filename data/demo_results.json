@@ -1122,7 +1122,45 @@
       "Washington::Treylon Burks"
     ],
     "rows_in_capture": 24,
-    "capture_is_partial": true
+    "capture_is_partial": true,
+    "ab_reconciliation": {
+      "capture_a_rows": 24,
+      "capture_b_rows": 68,
+      "out_designations_only_in_b": [
+        "Jaylon Moore",
+        "Omarr Norman-Lott",
+        "Peter Woods",
+        "Zachariah Branch"
+      ],
+      "diff_events": 48,
+      "by_type": {
+        "ADDED": 46,
+        "REMOVED": 2,
+        "STATUS": 0
+      },
+      "shared_players": 22,
+      "field_disagreements_on_shared_players": 0,
+      "status_changes": [],
+      "players_only_in_b": [
+        "None/Abdul Carter",
+        "None/Andrew Thomas",
+        "None/Brenden Schooler",
+        "None/Brian Branch",
+        "None/Cam Skattebo",
+        "None/Cameron Latu",
+        "None/Cameron Thomas",
+        "None/Charles Woods",
+        "None/Charlie Jones",
+        "None/Chig Okonkwo",
+        "None/Colton Hood",
+        "None/DJ Wonnum"
+      ],
+      "players_only_in_a": [],
+      "placeholder_rows_excluded": [
+        "None/(not captured)"
+      ],
+      "finding": "Two captures of the same URL ~1 hour apart produced 24 rows and then 68 rows. They agree on all 22 players both of them rendered (0 disagreements), yet the second contains 46 players the first never showed, including 4 confirmed 'Out' designations. That is the specific failure this reconciliation exists to catch: a truncated render is not wrong, it is quietly short, and it looks like a quiet week. Ingestion therefore fetches until row counts stabilise, records (timestamp, row count, chunk coverage) per capture, reconciles at least two renders, and never overwrites."
+    }
   },
   "compliance": {
     "slate_size": 7,

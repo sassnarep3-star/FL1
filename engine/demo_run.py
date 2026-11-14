@@ -86,6 +86,13 @@ def _strategy_grid() -> list[leaderboard.Entry]:
     ]
 
 
+def _row_of(rows, club, player):
+    for r in rows:
+        if r.get("club") == club and r.get("player") == player:
+            return (r.get("injury"), r.get("practice"), r.get("game_status"))
+    return None
+
+
 def main(write: bool = True) -> dict:
     src = json.load(open(os.path.join(ROOT, "data", "injury_snapshot.json"), encoding="utf-8"))
     rows = injuries.load_rows(src)
@@ -146,6 +153,59 @@ def main(write: bool = True) -> dict:
         "rows_in_capture": len(rows),
         "capture_is_partial": True,
     }
+
+    # 8. the REAL diff: two captures of the same official page, one hour apart
+    b_path = os.path.join(ROOT, "data", "injury_snapshot_b.json")
+    if os.path.exists(b_path):
+        snap_b = json.load(open(b_path, encoding="utf-8"))
+        real_diff = injuries.diff_snapshots(src, snap_b)
+        rows_a = injuries.load_rows(src)
+        rows_b2 = injuries.load_rows(snap_b)
+        counts_a, counts_b = len(rows_a), len(rows_b2)
+        out_a = {r["player"] for r in rows_a if r.get("game_status") == "Out"}
+        out_b = {r["player"] for r in rows_b2 if r.get("game_status") == "Out"}
+        ka = {(r["club"], r["player"]) for r in rows_a}
+        kb = {(r["club"], r["player"]) for r in rows_b2}
+        shared = ka & kb
+        disagreements = sum(1 for club, p in shared
+                            if _row_of(rows_a, club, p) != _row_of(rows_b2, club, p))
+        counts = {"ADDED": 0, "REMOVED": 0, "STATUS": 0}
+        for c in real_diff:
+            counts[c["change"]] = counts.get(c["change"], 0) + 1
+        diff_demo["ab_reconciliation"] = {
+            "capture_a_rows": counts_a,
+            "capture_b_rows": counts_b,
+            "out_designations_only_in_b": sorted(out_b - out_a),
+            "diff_events": len(real_diff),
+            "by_type": counts,
+            "shared_players": len(shared),
+            "field_disagreements_on_shared_players": disagreements,
+            "status_changes": [
+                {"player": "/".join(str(x) for x in c["key"][1:3]), "club": c["key"][1],
+                 "field": c.get("field"), "in_capture_a": c.get("before"), "in_capture_b": c.get("after"),
+                 "direction": c.get("direction")}
+                for c in real_diff if c["change"] == "STATUS"
+            ][:12],
+            "players_only_in_b": sorted({"/".join(str(x) for x in c["key"][1:3])
+                                        for c in real_diff if c["change"] == "ADDED"})[:12],
+            # '(not captured)' rows are our own declared placeholders, not report rows: they
+            # show up as removals, and hiding them here would make the diff look worse than it is.
+            "players_only_in_a": sorted({"/".join(str(x) for x in c["key"][1:3])
+                                         for c in real_diff if c["change"] == "REMOVED"
+                                         and "(not captured)" not in str(c["key"])}),
+            "placeholder_rows_excluded": sorted({"/".join(str(x) for x in c["key"][1:3])
+                                                  for c in real_diff if c["change"] == "REMOVED"
+                                                  and "(not captured)" in str(c["key"])}),
+            "finding": ("Two captures of the same URL ~1 hour apart produced {a} rows and then {b} rows. They "
+                        "agree on all {shared} players both of them rendered ({disagree} disagreements), yet the "
+                        "second contains {added} players the first never showed, including {extra_out} confirmed "
+                        "'Out' designations. That is the specific failure this reconciliation exists to catch: a "
+                        "truncated render is not wrong, it is quietly short, and it looks like a quiet week. "
+                        "Ingestion therefore fetches until row counts stabilise, records (timestamp, row count, "
+                        "chunk coverage) per capture, reconciles at least two renders, and never overwrites."
+                        ).format(a=counts_a, b=counts_b, shared=len(shared), disagree=disagreements,
+                                 added=counts.get("ADDED", 0), extra_out=len(out_b - out_a)),
+        }
 
     # 7. the compliance veto, run over a realistic candidate slate
     slate = [

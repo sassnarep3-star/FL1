@@ -41,9 +41,9 @@
       "claim": "The NFL publishes one league-wide Official Injury Report per game, grouped by matchup, with columns Player / Position / Injuries / Practice Status / Game Status, updated on each practice day of the game week (Week 10 2026 shows a Thursday, Nov 12 report for Sunday, Nov 15 games and a Tuesday, Nov 10 report for the Thursday game).",
       "publisher": "NFL.com — league official site",
       "url": "https://www.nfl.com/injuries/",
-      "accessed": "2026-11-14",
+      "accessed": "2026-11-14 (two captures: 02:40 UTC and 03:40 UTC)",
       "verification": "FETCHED",
-      "note": "Page title read: 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. Season selector runs 1965-2026 and a week selector runs Week 1-10 in this view, which is what makes a historical availability archive technically possible. Only chunk 1 of 8 was captured, so our snapshot is a partial sample, never the full report."
+      "note": "Page title read: 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. Season selector runs 1965-2026 and a week selector runs Week 1-10 in this view, which is what makes a historical availability archive technically possible. Only chunk 1 of 8 was captured, so our snapshot is a partial sample, never the full report. Capture protocol proven in-session: two fetches of this URL ~1 hour apart returned 24 and 68 rows for the same six club tables with zero contradictions, so 'the report' is only meaningful as 'the report as rendered at timestamp T' — data/injury_snapshot.json (A) and data/injury_snapshot_b.json (B) are both committed to demonstrate it."
     },
     {
       "src_id": "SRC-002",

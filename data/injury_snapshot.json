@@ -1,7 +1,7 @@
 {
   "id": "injury_snapshot",
   "title": "Official NFL Injury Report — captured sample, Week 10 of the 2026 season",
-  "description": "Verbatim rows from the league's own Injury Report file (NFL.com), captured 2026-11-14 while the Week 10 Thursday (12 Nov) and Sunday (15 Nov) reports were live. This is the only live sports data in this repository, and it exists to prove the ingestion contract, not to predict anything. Cells shown exactly as the official page presented them: an empty 'Injuries' cell is an empty cell in the source, not a value we chose to omit. Only chunk 1 of 8 of the official page was captured, so this sample is incomplete by construction — the Atlanta and later-game tables were not fetched and are recorded below as missing rather than as absent.",
+  "description": "Capture A of the league's own injury report (nfl.com/injuries), fetched 2026-11-14 ~02:40 UTC while the Week 10 Thursday (12 Nov) and Sunday (15 Nov) reports were live. Companion capture B (data/injury_snapshot_b.json) is the same page an hour later: it agrees with this capture on every shared row and adds 46 more, which is why a single render is recorded here as a *render*, not as the report. This is the only live sports data in the repository, and it exists to prove the ingestion contract, not to predict anything. Cells are shown exactly as the page presented them: an empty 'injuries' cell is empty in the source, not a value we chose to omit. Only part of the page was transcribed, so the sample is incomplete by design.",
   "updated": "2026-11-14",
   "source_url": "https://www.nfl.com/injuries/",
   "source_ids": [
@@ -64,7 +64,8 @@
       "signal": "Starting-centre absence with a concussion protocol already in motion: line cohesion effect, not just individual talent.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
@@ -78,7 +79,8 @@
       "signal": "Depth-chart tail, third-string. Weight near zero in a totals model.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
@@ -93,7 +95,8 @@
       "sources": [
         "SRC-001",
         "SRC-002"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
@@ -108,7 +111,8 @@
       "sources": [
         "SRC-001",
         "SRC-002"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
@@ -122,7 +126,8 @@
       "signal": "Cornerback limited in practice: the WR-vs-CB matchup input our prop model wants, but 'Limited' is a workload flag, not a snap-count forecast.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
@@ -136,7 +141,8 @@
       "signal": "Linebacker Questionable on a run-first offence: raise the rush-yards and between-the-tackles exposure, expect the second-stringer to inherit the goal-line snap.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
@@ -151,7 +157,8 @@
       "sources": [
         "SRC-001",
         "SRC-002"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
@@ -165,7 +172,8 @@
       "signal": "WR1 full: the absence-driven re-distribution of targets is not in play, so any target-share prop signal on the second receiver should be suppressed this week.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -180,7 +188,8 @@
       "sources": [
         "SRC-001",
         "SRC-002"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -194,7 +203,8 @@
       "signal": "Starting outside corner OUT: the clearest coverage-deficiency input in this sample. Expect the next-man-up index to promote a slot/second outside corner into the boundary matchup.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -208,7 +218,8 @@
       "signal": "Illness DNPs are the noisiest 'Out' class — return-to-play risk is high, snap share unstable. Down-weight in a totals model, keep in a rush-attorney prop model.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -222,7 +233,8 @@
       "signal": "Concussion case playing through a limited practice: tackle depth becomes the weak link, an offensive-line-quality input for both sack and pressure-prop signals.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -236,7 +248,8 @@
       "signal": "Second interior-line absence for the same club in one week — a pattern worth a group-level (not player-level) adjustment.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -250,7 +263,8 @@
       "signal": "Feature back limited-plus-Questionable is the classic 'plays on a light load' profile: rush-attempt props get compressed, team pass rate rises.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -265,7 +279,8 @@
       "sources": [
         "SRC-001",
         "SRC-002"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -279,7 +294,8 @@
       "signal": "Deep-middle safety out: raise expected completion rate and explosive plays against that coverage shell, before adjusting for the opponent.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -293,7 +309,8 @@
       "signal": "Opposite-side starter OUT in the same week as a safety OUT: two-man shell becomes a bracket problem — a genuine pass-game interaction, not an additive injury count.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -307,7 +324,8 @@
       "signal": "Interior depth out; the effect shows up in run-blocking first, so route it to the rushing-props model rather than the spread.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -321,7 +339,8 @@
       "signal": "High-usage WR1 with a torso injury at Questionable: target share is the variable that moves, not the QB's availability. Prop-combo leg worth pricing.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
@@ -336,7 +355,8 @@
       "sources": [
         "SRC-001",
         "SRC-002"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
@@ -350,7 +370,8 @@
       "signal": "Same as above: full practice, unlisted designation. Record it, do not interpret it as news.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
@@ -364,7 +385,8 @@
       "signal": "Rookie-scale DB with full practice and a Questionable tag: a 'will-play-but-maybe-limited' case where snap-share priors beat the designation.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
@@ -378,7 +400,8 @@
       "signal": "UNVERIFIED — NOT BLANK-BY-DATA: the Falcons' table sits beyond chunk 1 of the official page (8 chunks total) and was deliberately not invented. Ingestion must capture every table for every game, and store the chunk/page cursor it used.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     },
     {
       "game": "Weeks 1-9 of 2026, and all games from Week 11 onward",
@@ -392,7 +415,8 @@
       "signal": "UNVERIFIED: the official page exposes a season selector back to 1965 and a week selector, so a historical archive appears reachable — but we have not fetched it, so we do not claim a single historical row. Building the archive is task T-08, not a footnote.",
       "sources": [
         "SRC-001"
-      ]
+      ],
+      "capture": "A"
     }
   ],
   "data_quality_findings": [
@@ -415,8 +439,14 @@
     {
       "finding": "Kickoff times are labelled 'EST' on the page even for 9:30 AM Pacific-slot games, and one listing showed '8:15 PM EST' for a Thursday game.",
       "action": "Normalise all times to UTC with an explicit tz label; store the raw string as displayed for audit."
+    },
+    {
+      "finding": "This capture is truncated by the page's own rendering, not by our transcription: a second capture an hour later contained 46 additional rows for the same six clubs, with no contradictions. Two of the rows below are explicit '(not captured)' placeholders rather than data.",
+      "action": "Keep placeholder rows visible instead of deleting them, so the reader can see exactly which cells are owed; reconcile against a second render before treating any absence as fact."
     }
   ],
   "captured_partial": true,
-  "capture_note": "Captured from chunk 1 of 8 of https://www.nfl.com/injuries/ on 2026-11-14. Rows below are verbatim from that chunk; the remaining chunks were not fetched, so absence of a club or game here means absence from our capture, not from the report."
+  "capture_note": "Captured from chunks 0-1 of 8 of https://www.nfl.com/injuries/. Rows below are verbatim from that render. The remaining chunks were read but not transcribed; the games they contain are logged as missing (GAP-19) rather than treated as absent from the report.",
+  "capture": "A",
+  "companion_capture": "injury_snapshot_b"
 }

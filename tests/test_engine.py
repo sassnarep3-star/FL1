@@ -286,7 +286,9 @@ class TestInjuries(unittest.TestCase):
     def test_snapshot_is_not_empty_and_is_labelled_partial(self):
         self.assertGreater(len(self.rows), 10)
         self.assertTrue(self.snap.get("captured_partial"))
-        self.assertIn("chunk 1 of 8", (self.snap.get("description") or "").lower())
+        self.assertIn("chunks 0-1 of 8", (self.snap.get("capture_note") or "").lower())
+        self.assertEqual(self.snap.get("capture"), "A")
+        self.assertEqual(self.snap.get("companion_capture"), "injury_snapshot_b")
 
     def test_blank_injury_stays_none(self):
         Daniels = [r for r in self.rows if r["player"] == "Jayden Daniels"][0]

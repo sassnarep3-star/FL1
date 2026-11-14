@@ -55,8 +55,10 @@ PAGES = [
      "Estimators, handling rules, and the correlation values that still have to be measured."),
     ("injuries", "injury_model", "Injury, availability and depth-deficiency tracking", "Injuries & depth",
      "Availability tracking and the Next-Man-Up index, on official definitions only."),
-    ("injury-snapshot", "injury_snapshot", "Official injury report — captured sample", "Injury report sample",
-     "Verbatim rows from the league's Week 10 2026 report: the ingestion contract made concrete."),
+    ("injury-snapshot", "injury_snapshot", "Official injury report — capture A", "Injury report A",
+     "Verbatim rows from the league's Week 10 2026 report, first render: the ingestion contract made concrete."),
+    ("injury-snapshot-b", "injury_snapshot_b", "Official injury report — capture B (one hour later)", "Injury report B",
+     "The same page rendered an hour later: 46 rows the first capture never showed, and no contradictions."),
     ("leaderboard", "leaderboard", "Leaderboard competition design", "Leaderboard",
      "Divisions, luck-adjusted scoring, rewards, and the anti-gaming rules."),
     ("missing", "missing_data", "Missing-information register", "Missing information",
@@ -292,13 +294,14 @@ def nav_html(pid: str) -> str:
 
 
 NAV_ORDER = ["index", "summary", "requirements", "questions", "suggestions", "methodology",
-             "validation", "correlation", "injuries", "injury-snapshot", "leaderboard",
+             "validation", "correlation", "injuries", "injury-snapshot", "injury-snapshot-b", "leaderboard",
              "missing", "audit", "demo", "sources", "flagged"]
 
 NAV_LABEL = {
     "index": "Dashboard", "summary": "Executive summary", "audit": "Repo audit",
     "demo": "Engine demo", "flagged": "Flagged for review", "sources": "Sources",
     "missing": "Missing information", "injuries": "Injuries &amp; depth",
+    "injury-snapshot": "Injury report A", "injury-snapshot-b": "Injury report B",
 }
 
 FOOTER = """<footer class="foot">
@@ -371,7 +374,7 @@ def stats_tokens() -> dict:
         "n_rho_blank": blank,
         "n_rho_na": na,
         "seasons55": f"{(ar.get('sample_for_55pct', stats.required_sample(hurdle, 0.55)) or 0) / 150:.1f}",
-        "n_inj": len(load("injury_snapshot")["rows"]),
+        "n_inj": len(load("injury_snapshot")["rows"]) + len(load("injury_snapshot_b")["rows"]),
         "n_signals": sum(1 for s in load("models")["sections"]
                          if s.get("rows") and "sig" in s["rows"][0] for _ in s["rows"]),
         "n_flags": sum(len(s.get("rows", [])) for s in load("flags")["sections"]),
@@ -565,6 +568,47 @@ def render_demo(sources: dict) -> str:
     parts.append(f'<div class="warnbox"><b>Next-Man-Up index status:</b> {esc((av.get("nmu") or {}).get("mode"))} — '
                  f'{esc((av.get("nmu") or {}).get("unavailable_value"))}</div>')
 
+    ab = (d.get("availability") or {}).get("ab_reconciliation") or {}
+    if ab:
+        parts.append("<h2>8. Two captures of the same official page, one hour apart</h2>")
+        parts.append('<p class="lede">The ingestion contract tested against reality: capture A and capture B are the '
+                     "same URL, same season, same week, fetched ~1 hour apart, and they are not the same table. "
+                     "Everything in this section is real, verified data; the arithmetic in section 1 is real too; "
+                     "only the bet logs are constructed.</p>")
+        parts.append(render_table({
+            "id": "ab",
+            "columns": [{"key": "k", "label": "Measure"}, {"key": "v", "label": "Value", "render": "num"},
+                        {"key": "n", "label": "Note"}],
+            "rows": [
+                {"k": "Rows in capture A", "v": ab.get("capture_a_rows"), "n": "our earlier transcription"},
+                {"k": "Rows in capture B", "v": ab.get("capture_b_rows"), "n": "the later transcription of the same page"},
+                {"k": "Diff events reported by engine/injuries.diff_snapshots", "v": ab.get("diff_events"),
+                 "n": "adds, removals and field-level status changes"},
+                {"k": "Added in B", "v": (ab.get("by_type") or {}).get("ADDED"), "n": "players the first render did not show"},
+                {"k": "Removed from B", "v": (ab.get("by_type") or {}).get("REMOVED"), "n": "players the first render showed and the second did not"},
+                {"k": "Field-level status changes", "v": (ab.get("by_type") or {}).get("STATUS"),
+                 "n": "practice or game-status differences on players present in both"},
+            ],
+        }, sources, "A/B reconciliation", editorial=True))
+        if ab.get("status_changes"):
+            parts.append(render_table({
+                "id": "abchanges",
+                "columns": [{"key": "player", "label": "Player"}, {"key": "club", "label": "Club"},
+                            {"key": "field", "label": "Field"},
+                            {"key": "in_capture_a", "label": "Capture A", "render": "blankflag"},
+                            {"key": "in_capture_b", "label": "Capture B", "render": "blankflag"},
+                            {"key": "direction", "label": "Direction"}],
+                "rows": ab["status_changes"],
+            }, sources, "status differences between the two renders", editorial=True))
+        for label, key in (("Players present only in capture B", "players_only_in_b"),
+                           ("Players present only in capture A", "players_only_in_a")):
+            vals = ab.get(key) or []
+            if vals:
+                parts.append(f'<div class="card"><b>{esc(label)}.</b> {esc(", ".join(vals))}'
+                             f'<p class="meta">…of {len(vals)} shown here; the full set is in data/demo_results.json. '
+                             "A render that omits rows silently is the failure mode this comparison exists to catch.</p></div>")
+        parts.append(f'<div class="warnbox"><b>{esc(ab.get("finding"))}</b></div>')
+
     parts.append("<h2>7. Compliance veto on a realistic slate</h2>")
     comp = d.get("compliance", {})
     parts.append(render_table({
@@ -673,7 +717,7 @@ that could not be confirmed from one is left blank and flagged rather than estim
 <div class="kpi"><b>{tokens['n_gaps']}</b><small>missing datasets, each with a discovery action</small></div>
 <div class="kpi"><b>{tokens['n_gates']}</b><small>validation gates, most of them hard (profit cannot override)</small></div>
 <div class="kpi"><b>{tokens['n_rho_blank']} / {tokens['n_rho']}</b><small>correlation coefficients deliberately blank until measured</small></div>
-<div class="kpi"><b>{tokens['n_inj']}</b><small>injury-report rows transcribed verbatim from the official file</small></div>
+<div class="kpi"><b>{tokens['n_inj']}</b><small>injury-report rows transcribed verbatim from the official file, across two real captures one hour apart</small></div>
 <div class="kpi"><b>{tokens['n_flags']}</b><small>items on the flagged-for-review page</small></div>
 </div>
 
@@ -689,7 +733,8 @@ that could not be confirmed from one is left blank and flagged rather than estim
 <li><a href="methodology.html">Line origination</a> — totals-first, availability-adjusted</li>
 <li><a href="correlation.html">Correlation, parlays, prop combos</a></li>
 <li><a href="injuries.html">Injury &amp; depth-deficiency model</a></li>
-<li><a href="injury-snapshot.html">Captured official injury report</a></li>
+<li><a href="injury-snapshot.html">Official injury report, capture A</a> ·
+<a href="injury-snapshot-b.html">capture B</a></li>
 <li><a href="leaderboard.html">Leaderboard &amp; rewards design</a></li></ul></div>
 <div><h3>Govern</h3><ul class="tight">
 <li><a href="validation.html">Validation gates</a> — how luck is removed</li>

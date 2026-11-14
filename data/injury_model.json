@@ -7,68 +7,285 @@
     {
       "title": "A. Verified inputs and their official basis",
       "columns": [
-        { "key": "field", "label": "Input" },
-        { "key": "official_rule", "label": "What the official source actually says" },
-        { "key": "cadence", "label": "Cadence / timing" },
-        { "key": "use", "label": "How the model uses it" },
-        { "key": "limits", "label": "Limitation we must not paper over" },
-        { "key": "sources", "label": "Source", "render": "srclist" }
+        {
+          "key": "field",
+          "label": "Input"
+        },
+        {
+          "key": "official_rule",
+          "label": "What the official source actually says"
+        },
+        {
+          "key": "cadence",
+          "label": "Cadence / timing"
+        },
+        {
+          "key": "use",
+          "label": "How the model uses it"
+        },
+        {
+          "key": "limits",
+          "label": "Limitation we must not paper over"
+        },
+        {
+          "key": "sources",
+          "label": "Source",
+          "render": "srclist"
+        }
       ],
       "rows": [
-        { "field": "Practice participation status", "official_rule": "Did Not Participate / Limited Participation (less than 100% of a player's normal repetitions) / Full Participation (100% of normal repetitions) — a workload description of practice, not of the game.", "cadence": "Reported per practice day of the game week; the live Week 10 page carried a Thursday report for Sunday games and a Tuesday report for the Thursday game.", "use": "Trajectory feature: DNP-DNP-Limited and Limited-Full are different states with the same Friday designation.", "limits": "Participation is a club-reported estimate, and club-side documents state so; a walkthrough day is not a full-practice day, so the field's meaning shifts with the club's practice schedule.", "sources": ["SRC-002", "SRC-001", "SRC-021"] },
-        { "field": "Game status designation", "official_rule": "Questionable = uncertain whether he plays; Doubtful = unlikely to play; Out = will not play. A player certain to play is not listed at all. 'Probable' was removed because roughly 95% of players so designated played.", "cadence": "Attached to the week's final practice report (Friday for Sunday games on the page we captured).", "use": "Categorical availability input; drives the inactive-list prior and the deficiency index.", "limits": "No official probability is attached, so any P(play) we use is our own fitted estimate. Conversely, an unlisted player is not the same as an unaffected player: absence from the designation list is itself an assertion.", "sources": ["SRC-002", "SRC-001"] },
-        { "field": "Injury descriptor (body part)", "official_rule": "The report lists an injury label such as Knee, Ankle, Hamstring, Concussion, Illness, or leaves the cell empty.", "cadence": "Same as the report.", "use": "Grouping variable for recurrence and position-specific models; concussion and illness are their own classes because their return behaviour differs.", "limits": "Blank does not mean healthy in this file's experience: several rows in our captured snapshot carry a real designation with an empty injury cell, so the field cannot be used as a filter for whether a player is injured.", "sources": ["SRC-001"] },
-        { "field": "Rest / non-injury rows", "official_rule": "Club-side reports carry a 'Not Injury Related - Resting Player' class, and mark status changes (bold indicates change in status).", "cadence": "Club publication alongside or slightly ahead of the league file.", "use": "Must be excluded before any DNP-count feature, or late-season injury burden is systematically overstated.", "limits": "The league page's practice-status column does not always distinguish rest from injury; filtering therefore depends on club-side data we have to fetch per club.", "sources": ["SRC-021", "SRC-001"] },
-        { "field": "Roster architecture and eligibility", "official_rule": "53-man active/inactive list; 54 or 55 only via one or two practice-squad elevations under the Standard Elevation Addendum (a player may be elevated at most three games per league year); gameday active/inactive roster of 47 or 48; practice squads of 16; Reserve/Injured carries a minimum four-game absence with up to eight designated to return (each player twice); Reserve/PUP and Reserve/NFI also clear after four games; Reserve/Suspended, Retired, Did Not Report, Military and Commissioner Exempt sit outside roster limits.", "cadence": "Transactions as they occur; league calendar dates for cutdowns and signing deadlines (4:00 pm ET deadlines appear on the operations calendar).", "use": "Determines who is legally available to replace an absent starter — the mechanism that converts 'Out' into 'third-stringer snaps'.", "limits": "This architecture is verified from an article written around the 2022 league year; the four-game minimum and eight-designation cap must be re-confirmed against the 2026 rulebook before they are hard-coded (GAP-10). Eligibility is not intent: a club may dress a player it never uses.", "sources": ["SRC-003", "SRC-005", "SRC-004"] },
-        { "field": "Depth chart (who is 1st / 2nd / 3rd / 4th stringer)", "official_rule": "NOT VERIFIED AT LEAGUE LEVEL: the expected NFL.com team depth-chart path returned the league's 404 page in this session, and the transactions path redirected to the team directory, which does link each club's own site.", "cadence": "unknown — club-side practice", "use": "Intended to select the replacement in the deficiency index.", "limits": "Until a source is settled, the replacement must be inferred from eligibility plus our own snap-share history, and the result labelled 'estimated, not official'. This is the weakest link in the brief's requirement and we are not going to pretend otherwise.", "sources": ["SRC-009", "SRC-003"] }
+        {
+          "field": "Practice participation status",
+          "official_rule": "Did Not Participate / Limited Participation (less than 100% of a player's normal repetitions) / Full Participation (100% of normal repetitions) — a workload description of practice, not of the game.",
+          "cadence": "Reported per practice day of the game week; the live Week 10 page carried a Thursday report for Sunday games and a Tuesday report for the Thursday game.",
+          "use": "Trajectory feature: DNP-DNP-Limited and Limited-Full are different states with the same Friday designation.",
+          "limits": "Participation is a club-reported estimate, and club-side documents state so; a walkthrough day is not a full-practice day, so the field's meaning shifts with the club's practice schedule.",
+          "sources": [
+            "SRC-002",
+            "SRC-001",
+            "SRC-021"
+          ]
+        },
+        {
+          "field": "Game status designation",
+          "official_rule": "Questionable = uncertain whether he plays; Doubtful = unlikely to play; Out = will not play. A player certain to play is not listed at all. 'Probable' was removed because roughly 95% of players so designated played.",
+          "cadence": "Attached to the week's final practice report (Friday for Sunday games on the page we captured).",
+          "use": "Categorical availability input; drives the inactive-list prior and the deficiency index.",
+          "limits": "No official probability is attached, so any P(play) we use is our own fitted estimate. Conversely, an unlisted player is not the same as an unaffected player: absence from the designation list is itself an assertion.",
+          "sources": [
+            "SRC-002",
+            "SRC-001"
+          ]
+        },
+        {
+          "field": "Injury descriptor (body part)",
+          "official_rule": "The report lists an injury label such as Knee, Ankle, Hamstring, Concussion, Illness, or leaves the cell empty.",
+          "cadence": "Same as the report.",
+          "use": "Grouping variable for recurrence and position-specific models; concussion and illness are their own classes because their return behaviour differs.",
+          "limits": "Blank does not mean healthy in this file's experience: several rows in our captured snapshot carry a real designation with an empty injury cell, so the field cannot be used as a filter for whether a player is injured.",
+          "sources": [
+            "SRC-001"
+          ]
+        },
+        {
+          "field": "Rest / non-injury rows",
+          "official_rule": "Club-side reports carry a 'Not Injury Related - Resting Player' class, and mark status changes (bold indicates change in status).",
+          "cadence": "Club publication alongside or slightly ahead of the league file.",
+          "use": "Must be excluded before any DNP-count feature, or late-season injury burden is systematically overstated.",
+          "limits": "The league page's practice-status column does not always distinguish rest from injury; filtering therefore depends on club-side data we have to fetch per club.",
+          "sources": [
+            "SRC-021",
+            "SRC-001"
+          ]
+        },
+        {
+          "field": "Roster architecture and eligibility",
+          "official_rule": "53-man active/inactive list; 54 or 55 only via one or two practice-squad elevations under the Standard Elevation Addendum (a player may be elevated at most three games per league year); gameday active/inactive roster of 47 or 48; practice squads of 16; Reserve/Injured carries a minimum four-game absence with up to eight designated to return (each player twice); Reserve/PUP and Reserve/NFI also clear after four games; Reserve/Suspended, Retired, Did Not Report, Military and Commissioner Exempt sit outside roster limits.",
+          "cadence": "Transactions as they occur; league calendar dates for cutdowns and signing deadlines (4:00 pm ET deadlines appear on the operations calendar).",
+          "use": "Determines who is legally available to replace an absent starter — the mechanism that converts 'Out' into 'third-stringer snaps'.",
+          "limits": "This architecture is verified from an article written around the 2022 league year; the four-game minimum and eight-designation cap must be re-confirmed against the 2026 rulebook before they are hard-coded (GAP-10). Eligibility is not intent: a club may dress a player it never uses.",
+          "sources": [
+            "SRC-003",
+            "SRC-005",
+            "SRC-004"
+          ]
+        },
+        {
+          "field": "Depth chart (who is 1st / 2nd / 3rd / 4th stringer)",
+          "official_rule": "NOT VERIFIED AT LEAGUE LEVEL: the expected NFL.com team depth-chart path returned the league's 404 page in this session, and the transactions path redirected to the team directory, which does link each club's own site.",
+          "cadence": "unknown — club-side practice",
+          "use": "Intended to select the replacement in the deficiency index.",
+          "limits": "Until a source is settled, the replacement must be inferred from eligibility plus our own snap-share history, and the result labelled 'estimated, not official'. This is the weakest link in the brief's requirement and we are not going to pretend otherwise.",
+          "sources": [
+            "SRC-009",
+            "SRC-003"
+          ]
+        }
       ]
     },
     {
       "title": "B. Next-Man-Up (NMU) deficiency index — specification",
       "description": "One number per unit-group per club per game, expressed in points-per-game-equivalent so it can be summed into the scoring model instead of being a vague 'injury burden' count. Deliberately built as a difference of expectations, because 'starter out' without a replacement quality gap is not a model input, it is a headline.",
-      "columns": [ "key", "value" ],
+      "columns": [
+        "key",
+        "value"
+      ],
       "rows": [
-        { "key": "Formula", "value": "deficiency(group) = sum over absent players of snap_share(player) x [ Q(player, opponent) - Q(expected replacement, opponent) ] where Q is a per-position contribution estimate in points. Group-level output is clipped at a floor so a 4th-string WR absence does not masquerade as a starting-quality hit." },
-        { "key": "Snap share", "value": "Estimated from our own play logs (GAP-04/GAP-05). Until those exist, snap_share defaults to 1.0 for a listed starter and 0.0 otherwise, and every downstream number is printed with the tag 'snap-share unmodelled'." },
-        { "key": "Q() estimator", "value": "Left blank. It must be fitted from data we hold with an out-of-sample log-loss comparison against a league-average-replacement baseline; if the fitted model cannot beat 'assume league-average replacement', we use the naive version and publish that we could not do better. No hand-set position weights." },
-        { "key": "Two-sided symmetry", "value": "The brief asks for defensive deficiency (backups replacing starters) and the offensive equivalent. Both use the same index with different groups: defence = edge CB, slot CB, OLB, ILB, DL interior, safety shell; offence = QB regime, O-line (tackle vs interior), TE, RB committee depth, WR depth. The QB case is a separate discrete regime, not another term (models.json S6)." },
-        { "key": "Coverage-shell interaction", "value": "The index is additive by construction; the verified Week 10 example of a starting outside corner and the deep-middle safety both Out for the same club is precisely the kind of interaction that additive terms understate. An interaction term is specified but gated: it may only enter if it improves out-of-sample log-loss over the additive form (SIG-05)." },
-        { "key": "Availability scenarios", "value": "Rather than a single expectation, we hold three scenarios per game — best case (all Questionable play), expected (per fitted P(play)), worst case (all Questionable sit) — and price a line as the scenario-weighted mixture. The spread is reported with its scenario range, because on a week where six starters are Questionable the point estimate is a fiction." },
-        { "key": "Change detection", "value": "The tradeable object is the diff between consecutive official captures, keyed by (game, club, player, day), including the transition to/from 'not listed' (which per policy means certain to play). Every capture is stored raw with a timestamp so a diff can be audited after the fact." },
-        { "key": "Anti-patterns we forbid in code review", "value": "hard-coded designation probabilities; treating a blank injury cell as 'not injured'; counting rest DNPs as injuries; using a player's absence to justify a bet whose subject is that player's health (prohibited class); assuming the depth-chart order is the usage order." }
+        {
+          "key": "Formula",
+          "value": "deficiency(group) = sum over absent players of snap_share(player) x [ Q(player, opponent) - Q(expected replacement, opponent) ] where Q is a per-position contribution estimate in points. Group-level output is clipped at a floor so a 4th-string WR absence does not masquerade as a starting-quality hit."
+        },
+        {
+          "key": "Snap share",
+          "value": "Estimated from our own play logs (GAP-04/GAP-05). Until those exist, snap_share defaults to 1.0 for a listed starter and 0.0 otherwise, and every downstream number is printed with the tag 'snap-share unmodelled'."
+        },
+        {
+          "key": "Q() estimator",
+          "value": "Left blank. It must be fitted from data we hold with an out-of-sample log-loss comparison against a league-average-replacement baseline; if the fitted model cannot beat 'assume league-average replacement', we use the naive version and publish that we could not do better. No hand-set position weights."
+        },
+        {
+          "key": "Two-sided symmetry",
+          "value": "The brief asks for defensive deficiency (backups replacing starters) and the offensive equivalent. Both use the same index with different groups: defence = edge CB, slot CB, OLB, ILB, DL interior, safety shell; offence = QB regime, O-line (tackle vs interior), TE, RB committee depth, WR depth. The QB case is a separate discrete regime, not another term (models.json S6)."
+        },
+        {
+          "key": "Coverage-shell interaction",
+          "value": "The index is additive by construction; the verified Week 10 example of a starting outside corner and the deep-middle safety both Out for the same club is precisely the kind of interaction that additive terms understate. An interaction term is specified but gated: it may only enter if it improves out-of-sample log-loss over the additive form (SIG-05)."
+        },
+        {
+          "key": "Availability scenarios",
+          "value": "Rather than a single expectation, we hold three scenarios per game — best case (all Questionable play), expected (per fitted P(play)), worst case (all Questionable sit) — and price a line as the scenario-weighted mixture. The spread is reported with its scenario range, because on a week where six starters are Questionable the point estimate is a fiction."
+        },
+        {
+          "key": "Change detection",
+          "value": "The tradeable object is the diff between consecutive official captures, keyed by (game, club, player, day), including the transition to/from 'not listed' (which per policy means certain to play). Every capture is stored raw with a timestamp so a diff can be audited after the fact."
+        },
+        {
+          "key": "Anti-patterns we forbid in code review",
+          "value": "hard-coded designation probabilities; treating a blank injury cell as 'not injured'; counting rest DNPs as injuries; using a player's absence to justify a bet whose subject is that player's health (prohibited class); assuming the depth-chart order is the usage order."
+        }
       ]
     },
     {
       "title": "C. Live demonstration on the verified Week 10 sample",
-      "description": "Applying the index to the only rows we actually hold, to show what the mechanism outputs and how much of it is inference. Scores are model output on a naive snap-share assumption, not official data, and are not validated.",
+      "description": "Applying the index to the only rows we actually hold, to show what the mechanism outputs and how much of it is inference. Scores are model output on a naive snap-share assumption, not official data, and are not validated. Two committed captures of the official page (A and B, one hour apart) are reconciled by engine/injuries.diff_snapshots and published on the Engine demo page, section 8: 22 shared players agree exactly, and B adds 46 rows A never rendered — including four more 'Out' designations. That is the strongest evidence in this repository that ingestion must reconcile renders, not trust one.",
       "columns": [
-        { "key": "club", "label": "Club" },
-        { "key": "side", "label": "Side" },
-        { "key": "absent", "label": "Confirmed absent (Out, official)" },
-        { "key": "at_risk", "label": "Designated Questionable (official)" },
-        { "key": "group_hit", "label": "Group concentration (our classification)" },
-        { "key": "read", "label": "Model read (unvalidated)" },
-        { "key": "confidence", "label": "Confidence", "render": "badge" },
-        { "key": "sources", "label": "Source", "render": "srclist" }
+        {
+          "key": "club",
+          "label": "Club"
+        },
+        {
+          "key": "side",
+          "label": "Side"
+        },
+        {
+          "key": "absent",
+          "label": "Confirmed absent (Out, official)"
+        },
+        {
+          "key": "at_risk",
+          "label": "Designated Questionable (official)"
+        },
+        {
+          "key": "group_hit",
+          "label": "Group concentration (our classification)"
+        },
+        {
+          "key": "read",
+          "label": "Model read (unvalidated)"
+        },
+        {
+          "key": "confidence",
+          "label": "Confidence",
+          "render": "badge"
+        },
+        {
+          "key": "sources",
+          "label": "Source",
+          "render": "srclist"
+        }
       ],
       "rows": [
-        { "club": "New England", "side": "Defence", "absent": "CB Carlton Davis III (Knee)", "at_risk": "S Kevin Byard (Chest, FP); CB Charles Woods (Hamstring, FP)", "group_hit": "Outside cornerback: 1 confirmed out + 1 questionable; safety: 1 questionable", "read": "The most defensible defensive deficiency in the sample: a starting outside corner Out plus a second starter carrying a hamstring tag points at boundary coverage, which is where an opponent's per-route production is set. Direction is credible; magnitude is not measured.", "confidence": "DIRECTIONAL — UNVALIDATED", "sources": ["SRC-001"] },
-        { "club": "New England", "side": "Offence", "absent": "C Lucas-adjacent interior: Ben Brown (Knee); RB TreVeyon Henderson (Illness)", "at_risk": "WR A.J. Brown (Ankle, Knee); RB Rhamondre Stevenson (Knee); G Greg Van Roten (Hamstring); T Walter Rouse (Concussion); TE Cameron Latu; S Brenden Schooler", "group_hit": "Interior line: 1 Out + 2 tagged; backfield: 1 Out + 1 tagged; WR1: tagged", "read": "Distributed rather than concentrated: five of eleven tagged offensive players are line or backfield, the two groups whose absence compresses run production before it moves the spread. In a totals-first architecture this belongs in the run/possession branch, not the QB branch.", "confidence": "DIRECTIONAL — UNVALIDATED", "sources": ["SRC-001"] },
-        { "club": "Detroit", "side": "Defence", "absent": "S Kerby Joseph (Knee); CB D.J. Reed (Hip)", "at_risk": "none listed in the captured chunk", "group_hit": "Secondary: one starting safety and one starting outside corner both confirmed Out", "read": "The clearest interaction case in the sample and the reason the index cannot be a simple count: the deep-middle shell and a boundary defender are simultaneously gone, which changes coverage structure rather than just one matchup. Our additive index will understate this — that is exactly what the gated interaction term (SIG-05) exists to test.", "confidence": "DIRECTIONAL — UNVALIDATED", "sources": ["SRC-001", "SRC-002"] },
-        { "club": "Detroit", "side": "Offence", "absent": "Cade Mays (Ankle)", "at_risk": "WR Amon-Ra St. Brown (Rib); RB Sione Vaki (Ankle)", "group_hit": "Interior depth; WR1 tagged", "read": "QB confirmed full and unlisted on game status, so the offensive deficiency is a usage re-distribution question (WR1 snap share, target share) rather than a scoring-rate question. Route it to the prop-combo branch; do not move the team total on it.", "confidence": "DIRECTIONAL — UNVALIDATED", "sources": ["SRC-001", "SRC-002"] },
-        { "club": "Washington / NY Giants", "side": "both", "absent": "WAS: C Lucas Patrick (Concussion), TE Colson Yankoff (Knee)", "at_risk": "NYG: LB Malik Harrison (Groin)", "group_hit": "WAS interior line; NYG linebacker depth", "read": "A Thursday game with a Tuesday-first-report cycle and a Wednesday walkthrough: fewer practice observations, so the trajectory feature has less to work with and the model should widen its scenario range rather than pretend the shorter week is symmetric with a Sunday one.", "confidence": "LOW — SHORT WEEK", "sources": ["SRC-001", "SRC-021"] },
-        { "club": "Kansas City / Atlanta", "side": "not assessed", "absent": "", "at_risk": "KC: CB Mansoor Delane (Shoulder, FP)", "group_hit": "n/a", "read": "UNVERIFIED — the Falcons table and the later games sit beyond the chunk we captured, and Chiefs rows continue past our capture point. Any 'full Week 10 picture' claim from this sample would be false, so we make none.", "confidence": "INCOMPLETE CAPTURE", "sources": ["SRC-001"] }
+        {
+          "club": "New England",
+          "side": "Defence",
+          "absent": "CB Carlton Davis III (Knee)",
+          "at_risk": "S Kevin Byard (Chest, FP); CB Charles Woods (Hamstring, FP)",
+          "group_hit": "Outside cornerback: 1 confirmed out + 1 questionable; safety: 1 questionable",
+          "read": "The most defensible defensive deficiency in the sample: a starting outside corner Out plus a second starter carrying a hamstring tag points at boundary coverage, which is where an opponent's per-route production is set. Direction is credible; magnitude is not measured.",
+          "confidence": "DIRECTIONAL — UNVALIDATED",
+          "sources": [
+            "SRC-001"
+          ]
+        },
+        {
+          "club": "New England",
+          "side": "Offence",
+          "absent": "C Lucas-adjacent interior: Ben Brown (Knee); RB TreVeyon Henderson (Illness)",
+          "at_risk": "WR A.J. Brown (Ankle, Knee); RB Rhamondre Stevenson (Knee); G Greg Van Roten (Hamstring); T Walter Rouse (Concussion); TE Cameron Latu; S Brenden Schooler",
+          "group_hit": "Interior line: 1 Out + 2 tagged; backfield: 1 Out + 1 tagged; WR1: tagged",
+          "read": "Distributed rather than concentrated: five of eleven tagged offensive players are line or backfield, the two groups whose absence compresses run production before it moves the spread. In a totals-first architecture this belongs in the run/possession branch, not the QB branch.",
+          "confidence": "DIRECTIONAL — UNVALIDATED",
+          "sources": [
+            "SRC-001"
+          ]
+        },
+        {
+          "club": "Detroit",
+          "side": "Defence",
+          "absent": "S Kerby Joseph (Knee); CB D.J. Reed (Hip)",
+          "at_risk": "none listed in the captured chunk",
+          "group_hit": "Secondary: one starting safety and one starting outside corner both confirmed Out",
+          "read": "The clearest interaction case in the sample and the reason the index cannot be a simple count: the deep-middle shell and a boundary defender are simultaneously gone, which changes coverage structure rather than just one matchup. Our additive index will understate this — that is exactly what the gated interaction term (SIG-05) exists to test.",
+          "confidence": "DIRECTIONAL — UNVALIDATED",
+          "sources": [
+            "SRC-001",
+            "SRC-002"
+          ]
+        },
+        {
+          "club": "Detroit",
+          "side": "Offence",
+          "absent": "Cade Mays (Ankle)",
+          "at_risk": "WR Amon-Ra St. Brown (Rib); RB Sione Vaki (Ankle)",
+          "group_hit": "Interior depth; WR1 tagged",
+          "read": "QB confirmed full and unlisted on game status, so the offensive deficiency is a usage re-distribution question (WR1 snap share, target share) rather than a scoring-rate question. Route it to the prop-combo branch; do not move the team total on it.",
+          "confidence": "DIRECTIONAL — UNVALIDATED",
+          "sources": [
+            "SRC-001",
+            "SRC-002"
+          ]
+        },
+        {
+          "club": "Washington / NY Giants",
+          "side": "both",
+          "absent": "WAS: C Lucas Patrick (Concussion), TE Colson Yankoff (Knee)",
+          "at_risk": "NYG: LB Malik Harrison (Groin)",
+          "group_hit": "WAS interior line; NYG linebacker depth",
+          "read": "A Thursday game with a Tuesday-first-report cycle and a Wednesday walkthrough: fewer practice observations, so the trajectory feature has less to work with and the model should widen its scenario range rather than pretend the shorter week is symmetric with a Sunday one.",
+          "confidence": "LOW — SHORT WEEK",
+          "sources": [
+            "SRC-001",
+            "SRC-021"
+          ]
+        },
+        {
+          "club": "Kansas City / Atlanta",
+          "side": "not assessed",
+          "absent": "",
+          "at_risk": "KC: CB Mansoor Delane (Shoulder, FP)",
+          "group_hit": "n/a",
+          "read": "UNVERIFIED — the Falcons table and the later games sit beyond the chunk we captured, and Chiefs rows continue past our capture point. Any 'full Week 10 picture' claim from this sample would be false, so we make none.",
+          "confidence": "INCOMPLETE CAPTURE",
+          "sources": [
+            "SRC-001"
+          ]
+        }
       ]
     },
     {
       "title": "D. Prohibited by design",
-      "description": "Where the injury feature stops being analysis and starts being a problem, stated before anyone has to ask.",
-      "columns": [ "rule", "basis" ],
+      "description": "Where the injury feature stops being analysis and starts being a problem, stated before anyone has to ask. Two committed captures of the official page (A and B, one hour apart) are reconciled by engine/injuries.diff_snapshots and published on the Engine demo page, section 8: 22 shared players agree exactly, and B adds 46 rows A never rendered — including four more 'Out' designations. That is the strongest evidence in this repository that ingestion must reconcile renders, not trust one.",
+      "columns": [
+        "rule",
+        "basis"
+      ],
       "rows": [
-        { "rule": "We do not bet on injuries, and we do not build a market on whether a player plays.", "basis": "The league's published prohibited classes include markets whose subject is player injuries, and pre-determined outcomes such as 'Will QB start this week?' — the league asks its partners not to offer them." },
-        { "rule": "We do not accept, solicit, or use non-public availability information, from any source, however good the signal.", "basis": "The league's gambling policy prohibits sharing inside information such as injuries or lineup changes, monitors betting patterns for indications of a leak, and assigns an integrity representative to every club. Being on the wrong side of that is not a risk premium." },
-        { "rule": "Injury data may only be used as an input to a permitted market (spread, total, team total, permitted stat props).", "basis": "The distinction is between what we know and what we bet on; the league restricts the latter." },
-        { "rule": "No prop priced on a single person's one-play decision.", "basis": "Prohibited class: outcomes 100% determinable by one person in one play (e.g. a kicker to miss, a QB's first pass to be incomplete)." }
+        {
+          "rule": "We do not bet on injuries, and we do not build a market on whether a player plays.",
+          "basis": "The league's published prohibited classes include markets whose subject is player injuries, and pre-determined outcomes such as 'Will QB start this week?' — the league asks its partners not to offer them."
+        },
+        {
+          "rule": "We do not accept, solicit, or use non-public availability information, from any source, however good the signal.",
+          "basis": "The league's gambling policy prohibits sharing inside information such as injuries or lineup changes, monitors betting patterns for indications of a leak, and assigns an integrity representative to every club. Being on the wrong side of that is not a risk premium."
+        },
+        {
+          "rule": "Injury data may only be used as an input to a permitted market (spread, total, team total, permitted stat props).",
+          "basis": "The distinction is between what we know and what we bet on; the league restricts the latter."
+        },
+        {
+          "rule": "No prop priced on a single person's one-play decision.",
+          "basis": "Prohibited class: outcomes 100% determinable by one person in one play (e.g. a kicker to miss, a QB's first pass to be incomplete)."
+        }
       ]
     }
   ]
