@@ -621,3 +621,14 @@ logged including the ones a session caused itself.
 - Sources: S47 (nflverse games feed), S48 (player_stats mirror), S49 (official W10 schedule page), plus S01–S03 official captures.
 - Irregularities logged: F16 (Mike Evans listed under 49ers while TB on bye — published verbatim), F17 (prop correlations are computed estimates, not official stats).
 - Conflict log: rebase/merge conflicts on COORDINATION.md and registries with sessions ab4e9b05/ab82c93f/3f677e8a resolved by taking origin/main's board and re-appending; registries unioned by id (my S16–S18 re-issued as S47–S49 after id collision); no other session's work discarded.
+
+### Session D merge record (2026-11-14)
+
+- **PR created:** https://github.com/sassnarep3-star/FL1/pull/16 (arena/34db7d1d-fl1 → main)
+- **PR merged:** 2026-11-14T03:32:44Z via `gh pr merge 16 --merge`; merge commit on main
+- **GitHub Pages:** build for the merge commit reported status `built` (Pages API, commit e24a848); live pages confirmed served:
+  - `https://sassnarep3-star.github.io/FL1/prop-correlations.html` — 12 empirical coefficients + QA gates rendered
+  - `https://sassnarep3-star.github.io/FL1/schedule.html` — 272-game table with reconciliation banner rendered
+  - `flagged.html` carries F16/F17; NAV shows "Schedule 2026" and "Prop Correlations"
+- **Checks at merge time:** `tools/checklinks.py` OK (16 pages, 77 external links); `scripts/verify_site.py` 0 errors 0 warnings (L4 fixed at generator level: root index now links to `docs/computed/index.html`); `scripts/verify_d.py` V1–V9 no FAIL (V7a FLAGGED by design)
+- Nothing else outstanding from this session. The weekly refresh workflow will run next on its Thursday cron.
