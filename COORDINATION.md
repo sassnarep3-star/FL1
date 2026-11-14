@@ -5,18 +5,40 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
-**Last updated:** 2026-11-14 (UTC)
+**Last updated:** 2026-11-14 (UTC) — reconciliations R1 (PR #1) and R2 (PR #2) recorded below
 
 ---
 
-## ⚠️ CONFLICT RECORD — two sessions merged to `main` in parallel
+## ⚠️ CONFLICT RECORD — three sessions merged to `main` in parallel
 
-On 2026-11-14 two sessions built a site from the same empty repo and both merged toward `main`.
+On 2026-11-14 **three** sessions built a site from the same empty repo and all three merged toward `main`.
+This section records both reconciliations.
+
+### Third session: `arena/a7c0f9c5-fl1` (PR #2, merged as `42b06f5`)
+
+It added `depth-charts.html`, `leaderboard.html`, `assets/` and five CSVs under `data/`, including its own
+independent transcription of the same Week 10 injury report.
+
+**Preserved verbatim in [`archive/v2/`](archive/v2/)**, with a README explaining what it is and how it maps
+to the live pages. Its repo-root pages now carry this build.
+
+**It also produced a real verification win.** Comparing its 161 injury rows against this repo's 345-row
+capture: every one of its 161 rows is also in this capture, 156 match field-for-field, and the 5 that differ
+are players with two listed body parts where its comma-delimited CSV shifted the second body part into the
+practice and game-status columns. So the two independent transcriptions agree, and the disagreement is a
+formatting bug rather than a data dispute. Recorded as **flag F15** and as a row in `data/verification.tsv`.
+Its `data/correlations.csv` carried numeric correlation estimates self-labelled "Unverified — not from an
+official source"; those are preserved in the archive but deliberately **not** published, because this site's
+rule is that correlation is computed from joint observations or left blank.
+
+### First session: `arena/89c32e23-fl1` (PR #1, merged as `7c7ae6a`)
+
+It built a plan-level site at the same root paths.
 
 | | Session A | Session B (this one) |
 |---|---|---|
 | Branch | `arena/89c32e23-fl1` | `arena/ab4e9b05-fl1` |
-| PR | #1 (merged first, commit `7c7ae6a`) | #3 |
+| PR | #1 (`7c7ae6a`) | #3 (this build) |
 | Files | `index.html`, `executive-summary.html`, `suggestions.html`, `injuries.html`, `flagged-review.html`, `nfl-strategies.html`, `css/style.css`, `js/app.js` | 14 pages at repo root under its own navigation, `assets/`, `data/`, `raw/`, `tools/`, `docs/` |
 | Player-level injury data | no — its own board records "player values not yet pulled from live report" | yes — 345 rows, 28 clubs, verified line by line |
 
@@ -30,7 +52,7 @@ On 2026-11-14 two sessions built a site from the same empty repo and both merged
    `index.html`. Session B's version is a superset: it includes all of session A's sections plus the
    verified player-level data, the source registry, the eight validation gates and the verification log.
 3. Nothing from session A was silently dropped — `flagged-review.html` maps onto
-   [`flagged.html`](flagged.html) (14 items), `nfl-strategies.html` maps onto
+   [`flagged.html`](flagged.html) (15 items), `nfl-strategies.html` maps onto
    [`strategies.html`](strategies.html) + [`validation.html`](validation.html), and `suggestions.html`
    is retained at the same path with session B's expanded register.
 4. The merge conflict was resolved **in favour of the superset** and that decision is logged here
@@ -41,9 +63,14 @@ v1 page you want at its old path, and to update the site navigation in the same 
 `archive/v1/`.
 
 **Lesson for future sessions (log it in your own claim row):** check `origin/main` *and* open PRs before
-claiming a repo-root page. `git log origin/main` at the start of this session showed only the initial
-commit; session A's merge landed during the build. A `git fetch origin` immediately before the first
-commit would have caught it.
+claiming a repo-root page, and re-check immediately before every push. At the start of this session
+`git log origin/main` showed only the initial commit. Session A's merge landed during the build, and
+session C's landed while this PR was open. Two `git fetch origin` calls would have caught both, and a
+third session still would have needed the same reconciliation.
+
+**Standing rule adopted after this incident:** this repository now has a single consolidating build at the
+repo root. A new session should **extend** it — add a page under a new filename and add it to `NAV` in
+`tools/site.py` — rather than writing a second `index.html`. Superseded sites belong in `archive/`.
 
 ---
 
@@ -90,9 +117,10 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | T09 | Leaderboard, validation gates, correlation method | `ab4e9b05` | `data/strategies.json`, `strategies.html`, `validation.html` | done |
 | T10 | Executive summary | `ab4e9b05` | `executive-summary.html`, `docs/EXECUTIVE_SUMMARY.md` | done |
 | T11 | Site shell, CSS, build + link check | `ab4e9b05` | `index.html`, `assets/**`, `tools/**` | done |
-| T12 | Flagged for Review (14 items) | `ab4e9b05` | `data/flags.json`, `flagged.html` | done |
+| T12 | Flagged for Review (15 items) | `ab4e9b05` | `data/flags.json`, `flagged.html` | done |
 | T13 | Verification log + reproducibility | `ab4e9b05` | `data/verification.tsv`, `verification.html`, `docs/METHOD.md` | done |
 | T14 | **Integration**: reconcile parallel session, re-verify, build, link check, publish | `ab4e9b05` | all (merge owner) | done |
+| T15 | Second reconciliation (session C) + independent cross-transcription check (F15) | `ab4e9b05` | `archive/v2/`, `data/flags.json`, `data/verification.tsv` | done |
 
 ## Task board — session A (`arena/89c32e23-fl1`), preserved
 
@@ -123,6 +151,9 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | 2026-11-14 | `ab4e9b05` | **Conflict:** `gh pr merge 3` failed — `main` had moved to `7c7ae6a` via session A's PR #1, which built a parallel site (worktree was not stale; `git log` had simply been captured before the merge landed). |
 | 2026-11-14 | `ab4e9b05` | Merged `origin/main`. Five add/add conflicts (`COORDINATION.md`, `index.html`, `executive-summary.html`, `injuries.html`, `suggestions.html`). Resolved in favour of the verified superset; session A's files preserved verbatim in `archive/v1/`. Nothing deleted. |
 | 2026-11-14 | `ab4e9b05` | Re-ran `verify_injuries.py` and `checklinks.py` on the merged tree before pushing. |
+| 2026-11-14 | `ab4e9b05` | `gh pr merge 3` failed again: `main` had moved to `42b06f5` via session C's PR #2. Merged `origin/main` again; conflicts in `sources.html`, `standings.html`, `strategies.html` resolved in favour of this build. Session C's files preserved verbatim in `archive/v2/`; nothing deleted. |
+| 2026-11-14 | `ab4e9b05` | Cross-checked session C's 161-row injury CSV against this repo's 345-row capture: 161/161 rows present in both, 156 identical, 5 differ only where a comma inside `Ankle, Knee`-style values shifted their CSV columns. Recorded as flag F15. |
+| 2026-11-14 | `ab4e9b05` | Re-verified on the final merged tree: `verify_injuries.py` 345/345 PASS, `checklinks.py` 14 pages PASS, `build.py` clean. |
 
 ---
 
@@ -132,5 +163,5 @@ _None outstanding._
 
 ## Open items for review (published, non-blocking)
 
-All 14 items on [`flagged.html`](flagged.html). Every unverifiable value in this repo is left blank there
+All 15 items on [`flagged.html`](flagged.html). Every unverifiable value in this repo is left blank there
 with the reason and the source that was attempted.

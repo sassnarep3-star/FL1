@@ -6714,6 +6714,17 @@ window.DATA = {
    ],
    "severity": "High",
    "action": "Every strategy is marked NOT RUN or BLOCKED. No performance figure is displayed."
+  },
+  {
+   "id": "F15",
+   "kind": "Cross-check finding",
+   "item": "A parallel session's injury CSV had a column-shift bug on multi-injury cells",
+   "detail": "A concurrent session independently transcribed the same Week 10 report into data/injuries.csv. Comparing the two transcriptions row by row: all 161 rows it contains also appear in this repo's 345-row capture, with no row present only in theirs. 156 of 161 rows match field for field, which is a useful independent confirmation of the capture. The 5 that differed all involve a player with two listed body parts: 'Ankle, Knee', 'Wrist, Chest', 'Knee, Achilles', 'Ankle, Triceps' and 'Ankle, Knee'. Because that CSV was comma-delimited and the injury field was unquoted, the second body part shifted into the adjacent columns, so the practice and game status fields were displaced. This repo's capture preserves the full published value and the correct game status, and the raw page capture confirms it (e.g. A.J. Brown 'Ankle, Knee / Limited Participation / Questionable').",
+   "sourceIds": [
+    "S01"
+   ],
+   "severity": "Low",
+   "action": "This repo keeps its own capture, which was verified line by line against the raw page. The other session's files are preserved in archive/v2/ for reference. Any future CSV export must quote every field containing a comma."
   }
  ]
 };

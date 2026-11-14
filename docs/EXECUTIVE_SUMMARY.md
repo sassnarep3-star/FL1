@@ -18,9 +18,9 @@ published dashboard. Three things are true and should be stated plainly at the t
 2. **No line has been originated and no strategy has a result.** Not because the work stopped, but
    because a line requires a fitted model *and* a benchmark price, and only the first of those is
    possible in this repository. Publishing a number without a model would be an invention.
-3. **The binding constraint is data, not method.** Eight of twenty open questions are about inputs that
-   do not exist here: a price feed, snap counts, an official league-wide depth chart, historical
-   seasons. The methodology sections are complete; the inputs are not.
+3. **The binding constraint is data, not method.** Ten of the twenty open questions are marked blocking,
+   and the blocking ones concern inputs that do not exist here: a price feed, snap counts, an official
+   league-wide depth chart, historical seasons. The methodology sections are complete; the inputs are not.
 
 ---
 
@@ -147,7 +147,7 @@ Full reasoning, options and trade-offs are on the **Suggestions** page (15 entri
 
 ## 8. Flagged for review
 
-Fourteen items are published on the **Flagged for Review** page with their source links and nothing
+Fifteen items are published on the **Flagged for Review** page with their source links and nothing
 resolved silently. The most consequential:
 
 - **F04 / F05** — two places where official NFL.com pages contradict each other about Rams defenders.

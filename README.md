@@ -38,7 +38,7 @@ fitted model *and* a benchmark price, and the second does not exist in this repo
 | `questions.html` | Twenty open questions |
 | `suggestions.html` | Fifteen suggestions with options and recommendations |
 | `sources.html` | Source registry with verification status |
-| `flagged.html` | Fourteen flagged items |
+| `flagged.html` | Fifteen flagged items |
 
 ## Repository layout
 
@@ -89,7 +89,7 @@ committed data. Re-run the tools when the data changes and commit the output.
 ## Limitations
 
 Single season, single snapshot, no price data, no snap counts, no official league-wide depth chart.
-See `flagged.html` for all fourteen items, with links.
+See `flagged.html` for all fifteen items, with links.
 
 ## Not advice
 

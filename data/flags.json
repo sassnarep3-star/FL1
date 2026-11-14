@@ -1,128 +1,172 @@
 [
-  {
-    "id": "F01",
-    "kind": "Unreachable source",
-    "item": "2017 NFL Personnel (Injury) Report Policy PDF",
-    "detail": "The policy document that every secondary source cites for injury-designation definitions returned HTTP 404 ('FLAG ON THE PLAY') from operations.nfl.com on 2026-11-14. Consequently this site does not quote the policy text and does not assert what 'Questionable' or 'Doubtful' officially mean. Only the categories observed on the live report are recorded.",
-    "sourceIds": ["S12"],
-    "severity": "Medium",
-    "action": "No definition text published. Category labels reproduced exactly as observed."
-  },
-  {
-    "id": "F02",
-    "kind": "Unreachable source",
-    "item": "League-wide depth charts page",
-    "detail": "https://www.nfl.com/depth-charts/ returns HTTP 404. There is no league-wide official depth chart at that address. All depth information on this site therefore comes from club sites or from roster status codes, and is labelled DERIVED.",
-    "sourceIds": ["S13"],
-    "severity": "High",
-    "action": "Depth presented as a derived layer only, never as official."
-  },
-  {
-    "id": "F03",
-    "kind": "Unreachable source",
-    "item": "Football Operations injury-report landing page",
-    "detail": "https://operations.nfl.com/health-safety/injury-report/ returns HTTP 404. An official policy landing page could not be located at this path.",
-    "sourceIds": ["S14"],
-    "severity": "Low",
-    "action": "None. Recorded for completeness."
-  },
-  {
-    "id": "F04",
-    "kind": "Cross-source contradiction",
-    "item": "Myles Garrett — club attribution",
-    "detail": "NFL.com's Week 10 injury report lists Myles Garrett as an LB on the Los Angeles Rams with a knee designation and a 'resting player' note. NFL.com's Next Gen Stats front page carries a 2026 Rams article titled 'Rams' Sean McVay: No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article is headlined 'How does Myles Garrett fit into Rams defense?'. These agree on the Rams but the injury-row note mixes a real knee injury with a rest designation, which the site will not attempt to untangle. No resolution applied.",
-    "sourceIds": ["S01", "S10"],
-    "severity": "Medium",
-    "action": "Row published verbatim as captured. Both sources linked."
-  },
-  {
-    "id": "F05",
-    "kind": "Cross-source contradiction",
-    "item": "Aaron Donald — listed as a non-participant while shown as active",
-    "detail": "The Week 10 Rams injury table lists Aaron Donald (DT) as 'Did Not Participate In Practice' with no injury and no game status. NFL.com's own player profile for Aaron Donald shows him as an active Los Angeles Rams DE with 11 years of experience, and an NFL.com article states he unretired on Aug. 30 and planned a season debut. Both are official NFL.com pages and they cannot both be read at face value. No resolution applied.",
-    "sourceIds": ["S01", "S15"],
-    "severity": "Medium",
-    "action": "Row published verbatim. Profile linked alongside."
-  },
-  {
-    "id": "F06",
-    "kind": "Coverage gap",
-    "item": "Four clubs absent from the Week 10 injury snapshot",
-    "detail": "The captured Week 10 injury report covers 28 of 32 clubs. Chicago, Denver, Tampa Bay and Philadelphia are absent. All 28 clubs that do appear also appear in the 14-game Week 10 schedule capture. Whether those four clubs are on a bye or their reports were simply not posted at capture time could not be confirmed, because no official 2026 bye-week table was verified in this session.",
-    "sourceIds": ["S01", "S04"],
-    "severity": "Low",
-    "action": "Counts are always stated as 'x of 28 captured clubs', never as a league total."
-  },
-  {
-    "id": "F07",
-    "kind": "Method hazard",
-    "item": "One Week 10 game was already final at capture time",
-    "detail": "Washington at New York Giants kicked off Thursday 2026-11-12 and finished 24-21. Their injury tables are still shown in the Week 10 report. Using those rows as a pre-game signal would be look-ahead bias. They are the completed game's report, not a forecast input.",
-    "sourceIds": ["S01", "S04"],
-    "severity": "Medium",
-    "action": "Flagged so no analysis treats the completed game's rows as forward-looking."
-  },
-  {
-    "id": "F08",
-    "kind": "Verification limit",
-    "item": "No benchmark price source exists in this repository",
-    "detail": "The league publishes results, statistics and schedules but not betting prices. No odds feed, historical closing line, or graded result set is present or was licensed for this session. Every edge, expected-value and closing-line-value field on this site is therefore blank. Nothing has been estimated or imputed to fill them.",
-    "sourceIds": ["S03"],
-    "severity": "High",
-    "action": "All price, edge and EV fields left blank and labelled. See question Q03 and suggestion SG01."
-  },
-  {
-    "id": "F09",
-    "kind": "Coverage gap",
-    "item": "No official snap counts available",
-    "detail": "Determining that a second- or third-string player actually replaced a starter requires snap share. No snap-count feed was located or verified. The deficiency model therefore reports official absence designations only, and does not claim that any specific backup played.",
-    "sourceIds": ["S01"],
-    "severity": "High",
-    "action": "Deficiency magnitude left blank. See question Q05 and suggestion SG04."
-  },
-  {
-    "id": "F10",
-    "kind": "Source qualification",
-    "item": "Club depth charts are self-described as unofficial",
-    "detail": "The one club depth chart captured in full is headed 'Kansas City Chiefs Unofficial Depth Chart' by the club itself. Its ordering is reproduced exactly, but it is not an official league ranking and must not be presented as one.",
-    "sourceIds": ["S08"],
-    "severity": "Medium",
-    "action": "Labelled DERIVED / UNOFFICIAL wherever it appears."
-  },
-  {
-    "id": "F11",
-    "kind": "Data hazard",
-    "item": "Player-name collisions make name joins unsafe",
-    "detail": "Two different players named Marcus Harris appear in the captured data: a Tennessee cornerback and a Kansas City defensive tackle. NFL player URLs disambiguate them with numeric suffixes, but plain names do not. Any join performed on player name alone will silently merge distinct people.",
-    "sourceIds": ["S01"],
-    "severity": "Medium",
-    "action": "Rows kept separate. Any future join must key on the player URL, not the display name."
-  },
-  {
-    "id": "F12",
-    "kind": "Verification limit",
-    "item": "Legal and regulatory sources not verified",
-    "detail": "No gambling-regulator, tax or gaming-commission source was loaded or verified during this session. The site therefore makes no statement about legality, licensing or tax treatment in any jurisdiction, including the user's location. Nothing on this site is a bet, an offer to wager, or bookmaking.",
-    "sourceIds": [],
-    "severity": "Medium",
-    "action": "Legal question recorded as open (Q14) and left unanswered. Leaderboard rewards kept non-monetary (SG11)."
-  },
-  {
-    "id": "F13",
-    "kind": "Verification limit",
-    "item": "Terms of use for automated fetching not reviewed",
-    "detail": "Every capture in this session was a single page load. The terms of use and robots policy of nfl.com and of the 32 club sites were not reviewed, so no statement is made about whether scheduled automated collection would be permitted.",
-    "sourceIds": ["S01", "S07", "S08"],
-    "severity": "Medium",
-    "action": "No scheduled collector was built. See question Q18."
-  },
-  {
-    "id": "F14",
-    "kind": "Verification limit",
-    "item": "Single-season, single-snapshot dataset",
-    "detail": "All data here comes from one 2026 season and, for injuries, one capture on one day. Nothing on this site has a multi-season history, so no claim of persistence over time can be made and no backtest has been run.",
-    "sourceIds": ["S01", "S03"],
-    "severity": "High",
-    "action": "Every strategy is marked NOT RUN or BLOCKED. No performance figure is displayed."
-  }
+ {
+  "id": "F01",
+  "kind": "Unreachable source",
+  "item": "2017 NFL Personnel (Injury) Report Policy PDF",
+  "detail": "The policy document that every secondary source cites for injury-designation definitions returned HTTP 404 ('FLAG ON THE PLAY') from operations.nfl.com on 2026-11-14. Consequently this site does not quote the policy text and does not assert what 'Questionable' or 'Doubtful' officially mean. Only the categories observed on the live report are recorded.",
+  "sourceIds": [
+   "S12"
+  ],
+  "severity": "Medium",
+  "action": "No definition text published. Category labels reproduced exactly as observed."
+ },
+ {
+  "id": "F02",
+  "kind": "Unreachable source",
+  "item": "League-wide depth charts page",
+  "detail": "https://www.nfl.com/depth-charts/ returns HTTP 404. There is no league-wide official depth chart at that address. All depth information on this site therefore comes from club sites or from roster status codes, and is labelled DERIVED.",
+  "sourceIds": [
+   "S13"
+  ],
+  "severity": "High",
+  "action": "Depth presented as a derived layer only, never as official."
+ },
+ {
+  "id": "F03",
+  "kind": "Unreachable source",
+  "item": "Football Operations injury-report landing page",
+  "detail": "https://operations.nfl.com/health-safety/injury-report/ returns HTTP 404. An official policy landing page could not be located at this path.",
+  "sourceIds": [
+   "S14"
+  ],
+  "severity": "Low",
+  "action": "None. Recorded for completeness."
+ },
+ {
+  "id": "F04",
+  "kind": "Cross-source contradiction",
+  "item": "Myles Garrett — club attribution",
+  "detail": "NFL.com's Week 10 injury report lists Myles Garrett as an LB on the Los Angeles Rams with a knee designation and a 'resting player' note. NFL.com's Next Gen Stats front page carries a 2026 Rams article titled 'Rams' Sean McVay: No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article is headlined 'How does Myles Garrett fit into Rams defense?'. These agree on the Rams but the injury-row note mixes a real knee injury with a rest designation, which the site will not attempt to untangle. No resolution applied.",
+  "sourceIds": [
+   "S01",
+   "S10"
+  ],
+  "severity": "Medium",
+  "action": "Row published verbatim as captured. Both sources linked."
+ },
+ {
+  "id": "F05",
+  "kind": "Cross-source contradiction",
+  "item": "Aaron Donald — listed as a non-participant while shown as active",
+  "detail": "The Week 10 Rams injury table lists Aaron Donald (DT) as 'Did Not Participate In Practice' with no injury and no game status. NFL.com's own player profile for Aaron Donald shows him as an active Los Angeles Rams DE with 11 years of experience, and an NFL.com article states he unretired on Aug. 30 and planned a season debut. Both are official NFL.com pages and they cannot both be read at face value. No resolution applied.",
+  "sourceIds": [
+   "S01",
+   "S15"
+  ],
+  "severity": "Medium",
+  "action": "Row published verbatim. Profile linked alongside."
+ },
+ {
+  "id": "F06",
+  "kind": "Coverage gap",
+  "item": "Four clubs absent from the Week 10 injury snapshot",
+  "detail": "The captured Week 10 injury report covers 28 of 32 clubs. Chicago, Denver, Tampa Bay and Philadelphia are absent. All 28 clubs that do appear also appear in the 14-game Week 10 schedule capture. Whether those four clubs are on a bye or their reports were simply not posted at capture time could not be confirmed, because no official 2026 bye-week table was verified in this session.",
+  "sourceIds": [
+   "S01",
+   "S04"
+  ],
+  "severity": "Low",
+  "action": "Counts are always stated as 'x of 28 captured clubs', never as a league total."
+ },
+ {
+  "id": "F07",
+  "kind": "Method hazard",
+  "item": "One Week 10 game was already final at capture time",
+  "detail": "Washington at New York Giants kicked off Thursday 2026-11-12 and finished 24-21. Their injury tables are still shown in the Week 10 report. Using those rows as a pre-game signal would be look-ahead bias. They are the completed game's report, not a forecast input.",
+  "sourceIds": [
+   "S01",
+   "S04"
+  ],
+  "severity": "Medium",
+  "action": "Flagged so no analysis treats the completed game's rows as forward-looking."
+ },
+ {
+  "id": "F08",
+  "kind": "Verification limit",
+  "item": "No benchmark price source exists in this repository",
+  "detail": "The league publishes results, statistics and schedules but not betting prices. No odds feed, historical closing line, or graded result set is present or was licensed for this session. Every edge, expected-value and closing-line-value field on this site is therefore blank. Nothing has been estimated or imputed to fill them.",
+  "sourceIds": [
+   "S03"
+  ],
+  "severity": "High",
+  "action": "All price, edge and EV fields left blank and labelled. See question Q03 and suggestion SG01."
+ },
+ {
+  "id": "F09",
+  "kind": "Coverage gap",
+  "item": "No official snap counts available",
+  "detail": "Determining that a second- or third-string player actually replaced a starter requires snap share. No snap-count feed was located or verified. The deficiency model therefore reports official absence designations only, and does not claim that any specific backup played.",
+  "sourceIds": [
+   "S01"
+  ],
+  "severity": "High",
+  "action": "Deficiency magnitude left blank. See question Q05 and suggestion SG04."
+ },
+ {
+  "id": "F10",
+  "kind": "Source qualification",
+  "item": "Club depth charts are self-described as unofficial",
+  "detail": "The one club depth chart captured in full is headed 'Kansas City Chiefs Unofficial Depth Chart' by the club itself. Its ordering is reproduced exactly, but it is not an official league ranking and must not be presented as one.",
+  "sourceIds": [
+   "S08"
+  ],
+  "severity": "Medium",
+  "action": "Labelled DERIVED / UNOFFICIAL wherever it appears."
+ },
+ {
+  "id": "F11",
+  "kind": "Data hazard",
+  "item": "Player-name collisions make name joins unsafe",
+  "detail": "Two different players named Marcus Harris appear in the captured data: a Tennessee cornerback and a Kansas City defensive tackle. NFL player URLs disambiguate them with numeric suffixes, but plain names do not. Any join performed on player name alone will silently merge distinct people.",
+  "sourceIds": [
+   "S01"
+  ],
+  "severity": "Medium",
+  "action": "Rows kept separate. Any future join must key on the player URL, not the display name."
+ },
+ {
+  "id": "F12",
+  "kind": "Verification limit",
+  "item": "Legal and regulatory sources not verified",
+  "detail": "No gambling-regulator, tax or gaming-commission source was loaded or verified during this session. The site therefore makes no statement about legality, licensing or tax treatment in any jurisdiction, including the user's location. Nothing on this site is a bet, an offer to wager, or bookmaking.",
+  "sourceIds": [],
+  "severity": "Medium",
+  "action": "Legal question recorded as open (Q14) and left unanswered. Leaderboard rewards kept non-monetary (SG11)."
+ },
+ {
+  "id": "F13",
+  "kind": "Verification limit",
+  "item": "Terms of use for automated fetching not reviewed",
+  "detail": "Every capture in this session was a single page load. The terms of use and robots policy of nfl.com and of the 32 club sites were not reviewed, so no statement is made about whether scheduled automated collection would be permitted.",
+  "sourceIds": [
+   "S01",
+   "S07",
+   "S08"
+  ],
+  "severity": "Medium",
+  "action": "No scheduled collector was built. See question Q18."
+ },
+ {
+  "id": "F14",
+  "kind": "Verification limit",
+  "item": "Single-season, single-snapshot dataset",
+  "detail": "All data here comes from one 2026 season and, for injuries, one capture on one day. Nothing on this site has a multi-season history, so no claim of persistence over time can be made and no backtest has been run.",
+  "sourceIds": [
+   "S01",
+   "S03"
+  ],
+  "severity": "High",
+  "action": "Every strategy is marked NOT RUN or BLOCKED. No performance figure is displayed."
+ },
+ {
+  "id": "F15",
+  "kind": "Cross-check finding",
+  "item": "A parallel session's injury CSV had a column-shift bug on multi-injury cells",
+  "detail": "A concurrent session independently transcribed the same Week 10 report into data/injuries.csv. Comparing the two transcriptions row by row: all 161 rows it contains also appear in this repo's 345-row capture, with no row present only in theirs. 156 of 161 rows match field for field, which is a useful independent confirmation of the capture. The 5 that differed all involve a player with two listed body parts: 'Ankle, Knee', 'Wrist, Chest', 'Knee, Achilles', 'Ankle, Triceps' and 'Ankle, Knee'. Because that CSV was comma-delimited and the injury field was unquoted, the second body part shifted into the adjacent columns, so the practice and game status fields were displaced. This repo's capture preserves the full published value and the correct game status, and the raw page capture confirms it (e.g. A.J. Brown 'Ankle, Knee / Limited Participation / Questionable').",
+  "sourceIds": [
+   "S01"
+  ],
+  "severity": "Low",
+  "action": "This repo keeps its own capture, which was verified line by line against the raw page. The other session's files are preserved in archive/v2/ for reference. Any future CSV export must quote every field containing a comma."
+ }
 ]
