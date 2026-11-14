@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sources — FL1</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
+    <div class="tagline">Official &amp; referenced sources</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="injuries.html">Injuries</a>
+      <a href="depth-charts.html">Depth &amp; Deficiencies</a>
+      <a href="standings.html">Standings</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+      <a href="sources.html" class="active">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h1>Sources</h1>
+    <p class="lead">Every table row on this site links to its source. Values confirmed from an official source are marked Verified. Values that cannot be confirmed from an official source are left blank or flagged unverified &mdash; nothing is inferred.</p>
+
+    <h2>Official sources (verified data)</h2>
+    <table class="sortable">
+      <thead>
+        <tr><th class="nosort">Source</th><th class="nosort">URL</th><th class="nosort">Used for</th><th class="nosort">Verified</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>NFL.com &mdash; Official Injury Report</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></td><td>data/injuries.csv; injuries.html; depth-charts.html deficiency examples</td><td><span class="badge badge-verified">Verified</span></td></tr>
+        <tr><td>NFL.com &mdash; Standings</td><td><a class="source-link" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td><td>data/standings.csv; standings.html</td><td><span class="badge badge-verified">Verified</span></td></tr>
+        <tr><td>NFL.com &mdash; Team Rosters</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">https://www.nfl.com/teams/{team}/roster</a></td><td>data/rosters.csv; depth-charts.html roster table</td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>NFL.com (league)</td><td><a class="source-link" href="https://www.nfl.com/" target="_blank" rel="noopener">https://www.nfl.com/</a></td><td>General reference</td><td><span class="badge badge-verified">Verified</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Referenced data files (repository)</h2>
+    <table class="sortable">
+      <thead>
+        <tr><th class="nosort">File</th><th class="nosort">Contents</th><th class="nosort">Verification notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>data/standings.csv</td><td>32 teams, 2026 Week 10 standings</td><td>All rows Verified against nfl.com/standings/</td></tr>
+        <tr><td>data/injuries.csv</td><td>156 player injury rows, Week 10 2026</td><td>All rows Verified against nfl.com/injuries/; blanks = not published</td></tr>
+        <tr><td>data/rosters.csv</td><td>34 Kansas City Chiefs players, 2026 roster</td><td>Roster verified; depth order unverified</td></tr>
+        <tr><td>data/strategies.csv</td><td>8 origination strategies (single/parlay/prop)</td><td>Analytical; not official NFL content; unverified</td></tr>
+        <tr><td>data/correlations.csv</td><td>7 correlation entries</td><td>Analytical estimates; unverified</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Verification policy</h2>
+    <div class="callout">
+      <ul style="margin-left:20px; color:var(--muted);">
+        <li>No value is inferred or filled in. If a value cannot be confirmed from an official source, the cell is left blank and flagged unverified.</li>
+        <li>Betting lines, odds, correlations, and strategy results are analytical &mdash; they are not official NFL content and are flagged unverified.</li>
+        <li>Full source list and irregularities are maintained in data files and on the <a href="flagged-review.html">Flagged for Review</a> page.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>FL1 &mdash; Sources. Official source: <a href="https://www.nfl.com/" target="_blank" rel="noopener" style="color:#93c5fd;">NFL.com</a></div>
+    <div>Betting-content items are analytical, not official NFL content.</div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

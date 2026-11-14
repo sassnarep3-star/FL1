@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depth &amp; Deficiencies — FL1</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
+    <div class="tagline">Depth charts &amp; starter/backup deficiencies &mdash; verified where available</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="injuries.html">Injuries</a>
+      <a href="depth-charts.html" class="active">Depth &amp; Deficiencies</a>
+      <a href="standings.html">Standings</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h1>Depth Charts &amp; Starter/Backup Deficiencies</h1>
+    <p class="lead">Tracks whether offenses and defenses are using starters or backups, including 2nd/3rd/4th string replacements when starters are injured. Roster data verified from <a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com/teams/kansas-city-chiefs/roster</a>. <strong>Depth-chart order (starter vs. backup) is NOT rendered on the official roster page and is therefore flagged unverified &mdash; it must be confirmed against the official depth chart before use.</strong></p>
+
+    <h2>Kansas City Chiefs 2026 roster (verified sample, 34 players)</h2>
+    <p class="count">Source: <a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com/teams/kansas-city-chiefs/roster</a> (2026 roster). Height in inches; weight in lbs; Experience = NFL seasons; R = rookie.</p>
+
+    <div class="filter-bar">
+      <input type="text" id="roster-filter" data-filter="roster-table" placeholder="Filter by player, position, college&#8230;">
+      <span class="count" id="roster-table-count"></span>
+    </div>
+
+    <table id="roster-table" class="sortable">
+      <thead>
+        <tr>
+          <th class="nosort">Jersey</th>
+          <th class="nosort">Player</th>
+          <th class="nosort">Position</th>
+          <th class="nosort">Status</th>
+          <th class="nosort">Height</th>
+          <th class="nosort">Weight</th>
+          <th class="nosort">Exp.</th>
+          <th class="nosort">College</th>
+          <th class="nosort">Depth Order</th>
+          <th class="nosort">Source</th>
+          <th class="nosort">Verified</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>13</td><td>Cyrus Allen</td><td>WR</td><td>ACT</td><td>71</td><td>180</td><td>R</td><td>Cincinnati</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>91</td><td>Felix Anudike-Uzomah</td><td>DE</td><td>ACT</td><td>76</td><td>255</td><td>4</td><td>Kansas State</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>14</td><td>Matt Araiza</td><td>P</td><td>ACT</td><td>74</td><td>200</td><td>3</td><td>San Diego State</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>85</td><td>Andrew Armstrong</td><td>WR</td><td>ACT</td><td>76</td><td>210</td><td>1</td><td>Arkansas</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>31</td><td>Jeffrey Bassa</td><td>LB</td><td>ACT</td><td>74</td><td>235</td><td>2</td><td>Oregon</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>70</td><td>Kahlil Benson</td><td>OT</td><td>ACT</td><td>78</td><td>319</td><td>R</td><td>Indiana</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>32</td><td>Nick Bolton</td><td>LB</td><td>ACT</td><td>71</td><td>237</td><td>6</td><td>Missouri</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>88</td><td>Jake Briningstool</td><td>TE</td><td>ACT</td><td>78</td><td>240</td><td>2</td><td>Clemson</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>7</td><td>Harrison Butker</td><td>K</td><td>ACT</td><td>76</td><td>205</td><td>10</td><td>Georgia Tech</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>66</td><td>Mike Caliendo</td><td>G</td><td>ACT</td><td>76</td><td>300</td><td>4</td><td>Western Michigan</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>22</td><td>Jadon Canady</td><td>CB</td><td>ACT</td><td>70</td><td>185</td><td>R</td><td>Oregon</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>43</td><td>Jack Cochrane</td><td>LB</td><td>ACT</td><td>75</td><td>236</td><td>5</td><td>South Dakota</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>27</td><td>Chamarri Conner</td><td>DB</td><td>ACT</td><td>72</td><td>202</td><td>4</td><td>Virginia Tech</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>5</td><td>Mansoor Delane</td><td>CB</td><td>ACT</td><td>72</td><td>190</td><td>R</td><td>LSU</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>12</td><td>Josh Downs</td><td>WR</td><td>ACT</td><td>69</td><td>171</td><td>4</td><td>North Carolina</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>94</td><td>Bryson Eason</td><td>DT</td><td>ACT</td><td>74</td><td>323</td><td>R</td><td>Tennessee</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>73</td><td>Joshua Ezeudu</td><td>G</td><td>ACT</td><td>76</td><td>310</td><td>5</td><td>North Carolina</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>6</td><td>Justin Fields</td><td>QB</td><td>ACT</td><td>75</td><td>227</td><td>6</td><td>Ohio State</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>8</td><td>Kristian Fulton</td><td>CB</td><td>ACT</td><td>71</td><td>197</td><td>6</td><td>LSU</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>97</td><td>Ashton Gillotte</td><td>DE</td><td>ACT</td><td>75</td><td>270</td><td>2</td><td>Louisville</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>17</td><td>Alohi Gilman</td><td>SAF</td><td>ACT</td><td>70</td><td>201</td><td>7</td><td>Notre Dame</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>83</td><td>Noah Gray</td><td>TE</td><td>ACT</td><td>75</td><td>240</td><td>6</td><td>Duke</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>96</td><td>Marcus Harris</td><td>DT</td><td>ACT</td><td>75</td><td>295</td><td>1</td><td>Auburn</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>21</td><td>Jaden Hicks</td><td>SAF</td><td>ACT</td><td>73</td><td>215</td><td>3</td><td>Washington State</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>52</td><td>Creed Humphrey</td><td>C</td><td>ACT</td><td>76</td><td>302</td><td>6</td><td>Oklahoma</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>10</td><td>Emmett Johnson</td><td>RB</td><td>ACT</td><td>70</td><td>202</td><td>R</td><td>Nebraska</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>95</td><td>Chris Jones</td><td>DE</td><td>ACT</td><td>78</td><td>310</td><td>11</td><td>Mississippi State</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>56</td><td>George Karlaftis</td><td>DE</td><td>ACT</td><td>76</td><td>263</td><td>5</td><td>Purdue</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>87</td><td>Travis Kelce</td><td>TE</td><td>ACT</td><td>77</td><td>250</td><td>14</td><td>Cincinnati</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>15</td><td>Patrick Mahomes</td><td>QB</td><td>ACT</td><td>74</td><td>225</td><td>10</td><td>Texas Tech</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>44</td><td>Cooper McDonald</td><td>LB</td><td>ACT</td><td>75</td><td>240</td><td>2</td><td>TCU</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>77</td><td>Jaylon Moore</td><td>OT</td><td>ACT</td><td>76</td><td>311</td><td>6</td><td>Western Michigan</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>64</td><td>Hunter Nourzad</td><td>C</td><td>ACT</td><td>75</td><td>317</td><td>3</td><td>Penn State</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+        <tr><td>19</td><td>Garrett Nussmeier</td><td>QB</td><td>ACT</td><td>73</td><td>205</td><td>R</td><td>LSU</td><td class="unverified">Unverified (depth order not on roster page)</td><td><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com roster</a></td><td><span class="badge badge-verified">Verified (roster only)</span></td></tr>
+      </tbody>
+    </table>
+    <p class="count"><strong>34 players</strong> (Chiefs roster sample as rendered on the official page). Full depth-chart ordering (QB1/QB2, RB1/RB2, etc.) is unverified.</p>
+
+    <h2>Deficiency tracking framework (starters vs. backups)</h2>
+    <div class="callout danger">
+      <h4>How deficiencies are identified</h4>
+      <p>A <strong>deficiency</strong> exists when a starter is replaced by a 2nd, 3rd, or 4th string backup due to injury or lineup. Each deficiency must be confirmed by cross-referencing (1) the official injury report (Game Status = Out/Doubtful) with (2) the official depth chart. Depth-chart order is currently unverified &mdash; see flag below.</p>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" id="def-filter" data-filter="deficiency-table" placeholder="Filter by team, player, position&#8230;">
+      <span class="count" id="deficiency-table-count"></span>
+    </div>
+
+    <table id="deficiency-table" class="sortable">
+      <thead>
+        <tr>
+          <th class="nosort">Team</th>
+          <th class="nosort">Unit</th>
+          <th class="nosort">Position</th>
+          <th class="nosort">Starter (depth chart)</th>
+          <th class="nosort">Replacement backup</th>
+          <th class="nosort">String (2nd/3rd/4th)</th>
+          <th class="nosort">Reason</th>
+          <th class="nosort">Injury status (source)</th>
+          <th class="nosort">Source</th>
+          <th class="nosort">Verified</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>New England Patriots</td><td>Offense</td><td>Center</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Ben Brown &mdash; Knee, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>New England Patriots</td><td>Offense</td><td>Cornerback</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Carlton Davis III &mdash; Knee, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>New England Patriots</td><td>Offense</td><td>Running back</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>TreVeyon Henderson &mdash; Illness, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Detroit Lions</td><td>Defense</td><td>Safety</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Kerby Joseph &mdash; Knee, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Detroit Lions</td><td>Offense</td><td>Center</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Cade Mays &mdash; Ankle, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Detroit Lions</td><td>Defense</td><td>Cornerback</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>D.J. Reed &mdash; Hip, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Kansas City Chiefs</td><td>Offense</td><td>Tackle</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Jaylon Moore &mdash; Ankle, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Kansas City Chiefs</td><td>Defense</td><td>Defensive tackle</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Peter Woods &mdash; Neck, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Atlanta Falcons</td><td>Offense</td><td>Wide receiver</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Zachariah Branch &mdash; Hamstring, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Minnesota Vikings</td><td>Defense</td><td>Linebacker</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Blake Cashman &mdash; Concussion, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Minnesota Vikings</td><td>Offense</td><td>Tackle</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Did Not Participate</td><td>Christian Darrisaw &mdash; DNP (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Minnesota Vikings</td><td>Offense</td><td>Quarterback</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Kyler Murray &mdash; Hamstring, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Green Bay Packers</td><td>Offense</td><td>Running back</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Josh Jacobs &mdash; Finger, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Green Bay Packers</td><td>Offense</td><td>Center</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Sean Rhyan &mdash; Ankle, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Jacksonville Jaguars</td><td>Defense</td><td>Safety</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (rest)</td><td>Jessie Bates &mdash; resting player, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Tennessee Titans</td><td>Defense</td><td>Linebacker</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Cody Barton &mdash; Concussion, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Tennessee Titans</td><td>Offense</td><td>Guard</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Peter Skoronski &mdash; Hamstring, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Buffalo Bills</td><td>Defense</td><td>Tackle</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Doubtful (injury)</td><td>Spencer Brown &mdash; Ankle, Doubtful (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>New York Jets</td><td>Defense</td><td>Linebacker</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Trevin Wallace &mdash; Groin, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Miami Dolphins</td><td>Offense</td><td>Center</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Aaron Brewer &mdash; Concussion, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+        <tr><td>Indianapolis Colts</td><td>Offense</td><td>Tight end</td><td>Starter</td><td>Backup</td><td>2nd string</td><td>Starter Out (injury)</td><td>Mo Alie-Cox &mdash; Groin, Out (nfl.com/injuries/)</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td><span class="badge badge-unverified">Unverified (depth order)</span></td></tr>
+      </tbody>
+    </table>
+    <p class="count"><strong>20 deficiency candidates</strong> identified from verified Week 10 injury "Out"/"Doubtful" statuses. Depth-order (which backup is 2nd vs 3rd string) is unverified until confirmed against official depth charts.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>FL1 &mdash; Depth &amp; Deficiency Tracking. Data as of 2026 NFL Week 10.</div>
+    <div>Sources: <a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener" style="color:#93c5fd;">nfl.com roster</a> &middot; <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener" style="color:#93c5fd;">nfl.com/injuries/</a></div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
