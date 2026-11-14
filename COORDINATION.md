@@ -21,6 +21,8 @@
 
 **Completion note (2026-11-14):** V6 checks dependencies before attempting a fresh rebuild; V9 separately checks the external parquet input, required libraries, and parquet reader. Missing prerequisites are recorded as `BLOCKED`, never as a false pass/fail. Both status rows render visibly on `schedule.html`; F17 states the reproducibility limitation on `flagged.html`. TSV writers use LF endings for clean diffs. The root generator now also emits the D1–D3 live-to-paper demotion section, preserving the separate gate added on `main`. Verified with `.venv/bin/python -m unittest discover -s tests -q` (78 tests on rebased integration), `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, `python3 tools/checklinks.py`, `python3 tools/verify_injuries.py`, `python3 tools/verify_results.py`, `python3 site/build.py && python3 site/verify.py`, and `.venv/bin/python scripts/verify_site.py` (0 errors/0 warnings).
 
+**Integration record:** PR [#27](https://github.com/sassnarep3-star/FL1/pull/27) merged to `main` at `d495ba844414565f29f2a4d67b4afad3707d5d1e` on 2026-11-14 22:10:36 UTC. Verification workflow [43646645547](https://github.com/sassnarep3-star/FL1/actions/runs/43646645547) passed. GitHub Pages deploy [43646691589](https://github.com/sassnarep3-star/FL1/actions/runs/43646691589) passed; Pages API reports `built` from `main` `/` at https://sassnarep3-star.github.io/FL1/. V9 remains visibly BLOCKED because the uncommitted parquet input is absent; this is an explicit limitation, not a failed site build.
+
 ### Earlier board state, preserved from session C's PR #4
 
 Shared task board for the FL1 (NFL) project. All sessions must read this before starting and keep it up to date.
