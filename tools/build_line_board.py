@@ -5,11 +5,11 @@ moneyline (engine/origination.ORIGINATION_ORDER, enforced at import).
 
     fair_line    BLANK. The model specification (data/models.json) deliberately
                  leaves every coefficient unfitted; a number here would be a
-                 fabricated fair line. Flagged F19. The engine pipeline
+                 fabricated fair line. Flagged F38. The engine pipeline
                  (engine/origination.originate) computes the difference the
                  moment a fitted model emits a fair line.
     market_line  the observed market number from the committed third-party
-                 snapshot (S47), clearly labelled non-official (F20).
+                 snapshot (S47), clearly labelled non-official (F39).
     difference   BLANK while fair_line is blank — never computed from one arm.
 
 Run:  python3 tools/build_line_board.py
@@ -110,7 +110,7 @@ def main():
     print(f"wrote {OUT}")
     print(f"  rows={len(board)} market order seen: {markets_in_order}")
     print(f"  fair_line populated: {sum(1 for r in board if r.get('fair_line') is not None)} "
-          "(0 until a model is fitted — F19)")
+          "(0 until a model is fitted — F38)")
     print(f"  difference populated: {sum(1 for r in board if r.get('difference') is not None)} "
           "(0 while fair_line is blank — never from one arm)")
 

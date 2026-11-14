@@ -6,7 +6,7 @@ against the league standings) to the committed third-party price snapshot
 (data/raw/games.csv) and settles every originated market (side, total,
 moneyline) in the mandated origination order.
 
-Output: data/results_feed.csv — one row per (game, market, selection) with:
+Output: data/settled_markets.csv — one row per (game, market, selection) with:
     result_source_url  official site the SCORE was reconciled against
     line_source_url    third-party snapshot the PRICE came from (clearly labelled)
     outcome            win | loss | push  (push-aware; no pushes are dropped)
@@ -30,7 +30,7 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 from engine import settlement as rf  # noqa: E402
 
 DATA = os.path.join(ROOT, "data")
-OUT = os.path.join(DATA, "results_feed.csv")
+OUT = os.path.join(DATA, "settled_markets.csv")
 
 RESULT_SOURCE_URL = "https://www.nfl.com/standings/league/2026/REG"
 RESULT_SOURCE_ID = "S03"

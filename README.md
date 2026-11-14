@@ -156,7 +156,54 @@ parallel registers live under `data/specs/`.
 - **Reproduce:** `python3 -m unittest discover -s tests -q` · `python3 engine/demo_run.py --check` ·
   `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 
-<<<<<<< HEAD
+---
+
+## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
+
+- **`model-lines.html`** — own fair lines for the 13 pending Week 10 games, in the order side → total → moneyline.
+  Fair, market and difference are separate columns. Every market and difference cell is blank: no official NFL
+  source publishes prices (F18). Source: `data/model_lines.tsv`, `engine/originate.py`.
+- **`data/price_snapshots.tsv`** — the opening/closing store, one row per game and market (39 rows), all blank.
+- **`results-feed.html`** — the 137 final 2026 results used as inputs, and a strictly out-of-sample walk-forward
+  backtest (weeks 4–10, n = 89). The side model's sign accuracy is above 50%, but its margin and total errors do
+  not beat a constant benchmark (F20). ROI is blank (no prices).
+- **`governance.html`** — signal ranks the leaderboard, staking is reported beside it (`engine/leaderboard.py`
+  `split_scores`); the G-14 demotion gate sends a live strategy back to paper (`engine/gates.py`
+  `demotion_decision`); correlation values are withheld, with n shown (F19).
+- **Verification** — `tools/verify_brief.py` writes `data/verification-brief.tsv` (10 checks, incl. the 13-game slate
+  against `raw/nfl-week10-2026-capture.md`, and a fresh re-run of every fair value). `tests/test_brief.py` holds 17
+  hand-checkable tests.
+- **Withheld on purpose (brief B6):** market columns on `schedule.html`; coefficients on `prop-correlations.html`
+  (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
+- **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
+  `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
+## Session M additions (2026-11-14)
+
+- **`results-feed.html`** — the verified results feed: all 137 played 2026 games, finals verified
+  row-by-row against official nfl.com week pages (`raw/official-finals-2026.tsv`, sources
+  S49–S67) and cross-checked three ways (`scripts/verify_feed_m.py`, 137/137 PASS).
+  `engine/results_settlement.py` settles side/total/ML and computes ROI **fail-closed** on price
+  provenance (17 unit tests); the verified-ingestion boundary is `engine/results_feed.py`.
+- **`originations.html`** — origination in the mandated order (**side → total → moneyline**), and
+  for all 272 markets of 2026 the three separate columns: model fair line | market line |
+  difference. Fair-line engine proved identical to the Computed Research Layer's engine
+  (5,336/5,336 Elo values) and reproduces its published calibration. Fair TOTAL deliberately
+  blank (S2 unfitted, flag F33).
+- **`signal-vs-staking.html`** — leaderboard split: signal (flat-stake) ranks and rewards;
+  staking is risk telemetry only. Three entries found where a positive staking run would mask a
+  non-positive signal (MASKED flag). Also the **demotion gate G-16** (live → paper: signal decay,
+  risk breach or compliance breach; automatic; staking can never promote but can demote) and
+  G-17 (signal-only promotion rule).
+- **`replacement-depth.html`** — the depth of the replacement, not just the fact: 69 Week-10
+  spots, each replacement's string and cascade count; 6 spots with no listed replacement left
+  (blank + flagged).
+- **`official-correlations.html`** — correlations computed **only** from officially sourced
+  numbers, each published **with its n** (C-O1 r=+0.076 n=137; C-O2/C-O3 |r|<0.09 n=242).
+- **`data/governance_gates.json`** — G-16/G-17 register; **`data/origination_order.json`** —
+  the order register; **`scripts/fetch_prop_mirror_m.py`** — pinned-blob fetch (sha-verified)
+  that restores session D's V9 input in a fresh workspace.
+- Sources S50–S67 (official week pages) and flags F32–F36 added to the registries.
+
 ## Session F additions (2026-11-14) — the eight requirement items
 
 Branch `arena/5a8baf03-fl1`. This pass implements the brief's eight bolded requirements as tested
@@ -173,13 +220,13 @@ library only, per the dependency policy above:
 - `engine/leaderboard.py` (extended) — signal score and staking score computed separately; overall
   rank follows the signal, so a lucky staking run cannot mask a bad signal (unit-tested).
 - `tools/build_{results_feed,snapshots,line_board,replacement_depth,correlations_official}.py` —
-  deterministic builders for `data/results_feed.csv` (548 settled rows), `data/price_snapshots.csv`
-  (56 rows, opens blank — F23), `data/line_board.csv` (56 rows, fair blank — F24),
-  `data/replacement_depth.csv` (112 affected players; 4th-string-or-deeper replacements: 26),
+  deterministic builders for `data/settled_markets.csv` (548 settled rows), `data/price_snapshots.csv`
+  (56 rows, opens blank — F37), `data/line_board.csv` (56 rows, fair blank — F38),
+  `data/replacement_depth_out.csv` (112 affected players; 4th-string-or-deeper replacements: 26),
   `data/correlations_official.csv` (4 measured values with n; 3 blocked rows kept blank).
 - `tools/checkrows.py` — the row-level verification gate: every data row on every page either carries
   a source link or publishes nothing (3,724 rows audited).
-- Registers: flags F23-F28, questions Q21-Q25, suggestions SG16-SG20. Five new site pages:
+- Registers: flags F37-F42, questions Q30-Q34, suggestions SG16-SG30. Five new site pages:
   `results-feed.html`, `price-snapshots.html`, `line-board.html`, `replacement-depth.html`,
   `correlations-official.html`.
 
@@ -195,14 +242,14 @@ verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
 
 - **`model-lines.html`** — own fair lines for the 13 pending Week 10 games, in the order side → total → moneyline.
   Fair, market and difference are separate columns. Every market and difference cell is blank: no official NFL
-  source publishes prices (F23). Source: `data/model_lines.tsv`, `engine/originate.py`.
+  source publishes prices (F37). Source: `data/model_lines.tsv`, `engine/originate.py`.
 - **`data/price_snapshots.tsv`** — the opening/closing store, one row per game and market (39 rows), all blank.
 - **`results-feed.html`** — the 137 final 2026 results used as inputs, and a strictly out-of-sample walk-forward
   backtest (weeks 4–10, n = 89). The side model's sign accuracy is above 50%, but its margin and total errors do
-  not beat a constant benchmark (F25). ROI is blank (no prices).
+  not beat a constant benchmark (F39). ROI is blank (no prices).
 - **`governance.html`** — signal ranks the leaderboard, staking is reported beside it (`engine/leaderboard.py`
   `split_scores`); the G-14 demotion gate sends a live strategy back to paper (`engine/gates.py`
-  `demotion_decision`); correlation values are withheld, with n shown (F24).
+  `demotion_decision`); correlation values are withheld, with n shown (F38).
 - **Verification** — `tools/verify_brief.py` writes `data/verification-brief.tsv` (10 checks, incl. the 13-game slate
   against `raw/nfl-week10-2026-capture.md`, and a fresh re-run of every fair value). `tests/test_brief.py` holds 17
   hand-checkable tests.
@@ -211,3 +258,15 @@ verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
 - **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
   `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
 >>>>>>> origin/main
+
+**Merge note (same day):** sessions `arena-685f958d-fl1` and `arena-5876146b-fl1` independently built
+parallel second-pass deliverables and both landed on `main` first. The integration keeps main's canonical
+site pages and data stores (verified results feed with row-level official game links, fair lines with
+model coefficients, replacement depth with alias rules, registers to F36/Q29/SG29) and keeps this
+session's audit layer alongside: `tools/checkrows.py` (every table row sourced or blank — now 29 pages,
+4,654 rows), `engine/settlement.py` + `tools/build_results_feed.py` + `data/settled_markets.csv` (market
+settlement audit), `engine/origination.py`, `engine/paper_gate.py` (D1–D3 + promotion check),
+`tools/build_{snapshots,line_board,correlations_official,replacement_depth}.py` and the audit CSVs they
+regenerate. This session's register entries are numbered F37–F42 / Q30–Q34 / SG30–SG34 with
+cross-references to the overlapping entries from the other sessions. Full log in `COORDINATION.md`.
+

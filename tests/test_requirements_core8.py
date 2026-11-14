@@ -4,7 +4,7 @@
     fair/market/difference columns, signal-vs-staking leaderboard split,
     replacement depth (in tools/build_replacement_depth.py, tested via data),
     official correlations (tools/build_correlations_official.py),
-    demotion gate (engine/demotion.py).
+    demotion gate (engine/paper_gate.py).
 """
 
 import os
@@ -13,7 +13,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from engine import demotion, gates, leaderboard, origination, pricing, settlement  # noqa: E402
+from engine import gates, leaderboard, origination, paper_gate, pricing, settlement  # noqa: E402
 
 
 # ---------------------------------------------------------------- origination
@@ -127,43 +127,43 @@ def _live_bets(n=300, clv=-0.02, stake=1.0, quoted=None, won_mod=2):
 class TestDemotion(unittest.TestCase):
     def test_negative_clv_window_demotes_d1(self):
         bets = _live_bets(300, clv=-0.02)
-        d = demotion.evaluate_live(bets, demotion.DemotionConfig(decay_window=250))
-        self.assertEqual(d.action, demotion.DEMOTE_TO_PAPER)
+        d = paper_gate.evaluate_live(bets, paper_gate.DemotionConfig(decay_window=250))
+        self.assertEqual(d.action, paper_gate.DEMOTE_TO_PAPER)
         self.assertTrue(any(r.startswith("D1") for r in d.reasons))
 
     def test_positive_clv_window_keeps_live(self):
         bets = _live_bets(300, clv=0.02)
-        d = demotion.evaluate_live(bets, demotion.DemotionConfig(decay_window=250))
-        self.assertEqual(d.action, demotion.KEEP_LIVE)
+        d = paper_gate.evaluate_live(bets, paper_gate.DemotionConfig(decay_window=250))
+        self.assertEqual(d.action, paper_gate.KEEP_LIVE)
 
     def test_calibration_drift_demotes_d2(self):
         # quoted 80% but wins only half the time -> drift 0.30 > band 0.05
         bets = _live_bets(200, clv=0.02, quoted=0.8)
-        d = demotion.evaluate_live(bets, demotion.DemotionConfig(decay_window=250))
-        self.assertEqual(d.action, demotion.DEMOTE_TO_PAPER)
+        d = paper_gate.evaluate_live(bets, paper_gate.DemotionConfig(decay_window=250))
+        self.assertEqual(d.action, paper_gate.DEMOTE_TO_PAPER)
         self.assertTrue(any(r.startswith("D2") for r in d.reasons))
 
     def test_concentration_breach_demotes_d3(self):
         bets = _live_bets(300, clv=0.02)
         for b in bets:
             b["season"] = 2026
-        d = demotion.evaluate_live(bets, demotion.DemotionConfig(decay_window=250))
-        self.assertEqual(d.action, demotion.DEMOTE_TO_PAPER)
+        d = paper_gate.evaluate_live(bets, paper_gate.DemotionConfig(decay_window=250))
+        self.assertEqual(d.action, paper_gate.DEMOTE_TO_PAPER)
         self.assertTrue(any(r.startswith("D3") for r in d.reasons))
 
     def test_small_window_is_insufficient_not_pass(self):
-        d = demotion.evaluate_live(_live_bets(10), demotion.DemotionConfig())
-        self.assertEqual(d.action, demotion.INSUFFICIENT_DATA)
+        d = paper_gate.evaluate_live(_live_bets(10), paper_gate.DemotionConfig())
+        self.assertEqual(d.action, paper_gate.INSUFFICIENT_DATA)
 
     def test_promotion_requires_all_pass(self):
         gates_order = ("G-1", "G-2", "G-2b", "G-3", "G-4", "G-5", "G-6")
         all_pass = [{"gate": g, "verdict": "PASS"} for g in gates_order]
-        self.assertEqual(demotion.promotion_check(all_pass)["action"], "PROMOTE_TO_LIVE")
+        self.assertEqual(paper_gate.promotion_check(all_pass)["action"], "PROMOTE_TO_LIVE")
         with_blocked = all_pass[:-1] + [{"gate": "G-6", "verdict": "BLOCKED"}]
-        self.assertEqual(demotion.promotion_check(with_blocked)["action"], "REMAIN_ON_PAPER")
+        self.assertEqual(paper_gate.promotion_check(with_blocked)["action"], "REMAIN_ON_PAPER")
         with_fail = [{"gate": g, "verdict": "FAIL" if g == "G-1" else "PASS"}
                      for g in gates_order]
-        self.assertEqual(demotion.promotion_check(with_fail)["action"], "REMAIN_ON_PAPER")
+        self.assertEqual(paper_gate.promotion_check(with_fail)["action"], "REMAIN_ON_PAPER")
 
 
 # ------------------------------------------------- signal vs staking separation

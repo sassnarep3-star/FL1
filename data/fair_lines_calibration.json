@@ -1,0 +1,15 @@
+{
+ "model_version": "fl1-elo-v1 (K=20, HFA=48, inter-season regress x0.75 toward 1505, MOV multiplier ln(mov+1)*2.2/(|elo_gap_hfa|*0.001+2.2), spread=10.8*log10(p/(1-p)), p clipped [0.02,0.98])",
+ "n_games": 5336,
+ "mean_signed_error_points": -0.772,
+ "mean_absolute_error_points": 2.891,
+ "corr_with_close": 0.8276,
+ "published_reference": {
+  "note": "docs/computed/lines.html, same constants",
+  "mean_signed_error_points": -0.77,
+  "mean_absolute_error_points": 2.89,
+  "corr_with_close": 0.828,
+  "n_games": 5336
+ },
+ "as_of": "2026-11-14"
+}

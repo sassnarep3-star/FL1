@@ -1,0 +1,4 @@
+corr_id,x,y,method,n,r,se_r,window,source_ids,inputs,note
+C-O1,"away points, game","home points, game",Pearson,137,0.0759,0.0858,2026 W1-W10 (played games),"S49,S50,S51,S52,S53,S54,S55,S56,S57,S58",data/results_feed.csv (row-level official),game-level scoring co-movement; input for single-game parlay leg dependence once prices exist
+C-O2,"team points scored, game N-1","team points scored, game N",Pearson,242,0.084,0.0643,"2026 W1-W10 (consecutive club games, bye weeks skipped)","S49,S50,S51,S52,S53,S54,S55,S56,S57,S58",data/results_feed.csv (row-level official),scoring form persistence; the reversion question for totals and team-total markets
+C-O3,"team points allowed, game N-1","team points allowed, game N",Pearson,242,0.0491,0.0645,"2026 W1-W10 (consecutive club games, bye weeks skipped)","S49,S50,S51,S52,S53,S54,S55,S56,S57,S58",data/results_feed.csv (row-level official),defensive form persistence; input for opponent-prop and team-total signals (SIG-05 family)

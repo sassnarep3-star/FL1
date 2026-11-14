@@ -9,7 +9,7 @@ the SITE EXPORT of that store for every market we originate: the Week 10 slate
 Opening vs closing:
     open_*   BLANK on purpose. No verified source of opening prices exists in
              this repository, and an opener inferred from a close would be a
-             fabrication. Flagged F18 on the site. The store is ready to record
+             fabrication. Flagged F37 on the site. The store is ready to record
              real openers the moment a licensed feed is acquired (Q21).
     close_*  filled from the committed third-party snapshot (S47). For the
              already-played game the feed records the closing line (phase=close);
@@ -85,7 +85,7 @@ def main():
         played = bool(g["away_score"] and g["home_score"])
         phase = "close" if played else "intermediate"
         phase_note = ("closing line recorded by the third-party feed; the feed "
-                      "publishes no capture timestamp for the close (F18)"
+                      "publishes no capture timestamp for the close (F37)"
                       if played else
                       f"latest observed line as of the {SNAPSHOT_AT} snapshot; "
                       "the game is not played, so this is NOT a close")

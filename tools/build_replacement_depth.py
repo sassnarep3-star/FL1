@@ -38,7 +38,7 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 import build  # noqa: E402
 
 DATA = os.path.join(ROOT, "data")
-OUT = os.path.join(DATA, "replacement_depth.csv")
+OUT = os.path.join(DATA, "replacement_depth_out.csv")
 
 INJURY_SOURCE_ID = "S01"
 INJURY_SOURCE_URL = "https://www.nfl.com/injuries/"

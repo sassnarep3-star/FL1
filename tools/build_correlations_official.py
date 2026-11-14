@@ -192,7 +192,7 @@ def main():
         "joint outcome of (home covers spread) and (game goes over) across games",
         "", "",
         "BLOCKED: computing this requires spread and total prices, and no "
-        "official source publishes NFL betting lines (flag F20). Third-party "
+        "official source publishes NFL betting lines (flag F39). Third-party "
         "estimates exist in docs/computed/ but are excluded here by rule "
         "'correlations only from officially sourced numbers' (open item F11)"))
 

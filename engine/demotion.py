@@ -1,174 +1,184 @@
-"""Demotion gate: when a LIVE strategy goes back to PAPER.
+"""Demotion gate (requirement R28): sends a LIVE strategy back to PAPER.
 
-The validation page defines three demotion rules (D1–D3). This module makes them
-executable, so 'auto-demote' is a function call rather than a policy sentence.
-The lifecycle is explicit and one-directional under failure:
+The gate set decides who gets promoted; this module decides who gets sent back.
+A strategy that passed the gates once can decay — the market can catch up, the
+edge can be a regime that ended, the author can drift. Without a demotion rule
+a bad live run keeps its badge until the next scheduled re-validation, and that
+is exactly how a leaderboard turns into a graveyard of former winners.
 
-    PAPER  --(promotion gates G-1..G-6 clear)-->  LIVE
-    LIVE   --(any D-rule fires)---------------->  PAPER
+Thresholds below are PROPOSED COMPETITION RULES (a design decision, reviewable
+in data/flags.json / the Suggestions page), not facts about football. They are
+constructor arguments so a reviewer can change them without touching logic.
+What a reviewer may not do is reinterpret DEMOTE as HOLD.
 
-D1  Live-decay monitor    rolling closing-line value (CLV) lower confidence
-                          bound stays below zero across the monitoring window.
-D2  Calibration drift    realised hit rate falls outside the declared
-                          probability band around the quoted probabilities.
-D3  Concentration breach one season / team / cluster exceeds its allowed share
-                          of net gains.
+Trigger rules — any ONE of these demotes:
 
-Design rules carried over from the rest of the engine:
-    * thresholds are constructor arguments with documented defaults, never
-      hidden constants — a reviewer changes them in one place;
-    * INSUFFICIENT_DATA is a first-class outcome, not a pass. A window too
-      small to judge decay keeps the strategy where it is and says why;
-    * a demotion decision carries its reasons, so the site can print them
-      verbatim and nobody has to trust a bare verdict.
+    D1  SIGNAL DECAY   over the trailing window of settled bets, the flat-stake
+                       hit rate is below break-even at the prices paid and the
+                       one-sided test of inferiority gives p < 0.10.
+    D2  DRAWDOWN       the flat-stake equity curve's maximum drawdown exceeds
+                       `max_drawdown_units` at any point in the log.
+    D3  CLV ROT        (only when CLV values exist) the trailing window's mean
+                       CLV is below zero and its bootstrap 95% upper bound is
+                       also below zero.
+
+Re-promotion (PAPER -> LIVE) needs a FRESH sealed sample of `repromote_bets`
+settled bets that passes G-1..G-3 again. Old bets never re-qualify an entry:
+the point of the gate is that the burden of proof resets.
+
+States: LIVE -> DEMOTE (transient verdict) -> PAPER (holding state) -> LIVE.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Sequence
 
-from . import stats
+from . import pricing, stats
 
-KEEP_LIVE = "KEEP_LIVE"
-DEMOTE_TO_PAPER = "DEMOTE_TO_PAPER"
-INSUFFICIENT_DATA = "INSUFFICIENT_DATA"
+STATE_LIVE = "LIVE"
+STATE_PAPER = "PAPER"
+VERDICT_DEMOTE = "DEMOTE"
+VERDICT_HOLD = "HOLD"
+VERDICT_PROMOTE = "PROMOTE"
 
 
 @dataclass
 class DemotionConfig:
-    # D1
-    decay_window: int = 250          # settled bets per monitoring window
-    clv_lcb_floor: float = 0.0       # demote when the window's CLV LCB < floor
-    # D2
-    prob_band: float = 0.05          # allowed |realised - quoted| on mean quoted prob
-    min_bets_calibration: int = 100
-    # D3
-    max_season_gain_share: float = 0.45
-    max_team_gain_share: float = 0.25
-    # lifecycle
-    min_settled_to_judge: int = 50   # below this, INSUFFICIENT_DATA
+    window: int = 100                # trailing settled bets evaluated
+    min_window: int = 50             # below this, no decay verdict is issued
+    inferiority_alpha: float = 0.10  # one-sided p for "worse than break-even"
+    max_drawdown_units: float = 25.0 # flat-stake units
+    clv_window: int = 100
+    repromote_bets: int = 300        # fresh settled bets required to return
 
 
-@dataclass
-class DemotionDecision:
-    action: str
-    reasons: list = field(default_factory=list)
-    metrics: dict = field(default_factory=dict)
-
-    @property
-    def demoted(self) -> bool:
-        return self.action == DEMOTE_TO_PAPER
-
-    def as_row(self) -> dict:
-        return {"action": self.action,
-                "reasons": "; ".join(self.reasons) if self.reasons else "",
-                **{k: v for k, v in self.metrics.items()}}
-
-
-def _settled(bets: Sequence[dict]) -> list[dict]:
+def _settled(bets: Sequence[dict]) -> list:
     return [b for b in bets if b.get("won") is not None and not b.get("abstained")]
 
 
-def evaluate_live(bets: Sequence[dict], cfg: DemotionConfig | None = None,
-                  state: str = "LIVE") -> DemotionDecision:
-    """Evaluate a live strategy's bet log against D1–D3.
+def _modal_price(bets: Sequence[dict]) -> float:
+    counts = {}
+    for b in bets:
+        p = b.get("price")
+        if p is not None:
+            counts[p] = counts.get(p, 0) + 1
+    return float(max(counts.items(), key=lambda kv: (kv[1], kv[0]))[0]) if counts else -110.0
 
-    `bets` uses the same record shape as engine.gates (see its docstring):
-    won, price, stake, pnl, clv, season, team, and optionally `quoted_prob`
-    for D2. `state` is the strategy's current lifecycle state; a strategy
-    already on paper is never 'demoted' again — the call is a no-op KEEP-free
-    INSUFFICIENT_DATA-free record. For simplicity we evaluate logs regardless
-    of state and let the caller persist transitions; `state` is echoed into
-    metrics so the decision log is self-describing.
-    """
+
+def _flat_return(b: dict) -> float:
+    won = b["won"]
+    price = b.get("price")
+    if won is None or price is None:
+        return 0.0
+    return pricing.net_odds(int(price)) if won else -1.0
+
+
+def demotion_status(bets: Sequence[dict], cfg: DemotionConfig | None = None) -> dict:
+    """Evaluate a LIVE strategy's bet log. Returns verdict + per-rule detail."""
     cfg = cfg or DemotionConfig()
     s = _settled(bets)
-    decision = DemotionDecision(action=KEEP_LIVE, metrics={"state_in": state,
-                                                           "settled": len(s)})
-    if len(s) < cfg.min_settled_to_judge:
-        decision.action = INSUFFICIENT_DATA
-        decision.reasons.append(
-            f"only {len(s)} settled bets; {cfg.min_settled_to_judge} required "
-            f"to judge a live strategy at all")
-        return decision
+    out = {
+        "verdict": VERDICT_HOLD,
+        "state": STATE_LIVE,
+        "reasons": [],
+        "rules": {},
+        "window_size": 0,
+    }
+    if len(s) < cfg.min_window:
+        out["rules"]["D1"] = {"status": "BLOCKED",
+                              "detail": "only %d settled bets; %d required for a "
+                                        "decay verdict" % (len(s), cfg.min_window)}
+        return out
 
-    # ---- D1: rolling CLV decay -------------------------------------------------
-    clvs = [b["clv"] for b in s if b.get("clv") is not None]
-    decision.metrics["clvs"] = len(clvs)
-    if len(clvs) >= cfg.decay_window:
-        window = clvs[-cfg.decay_window:]
-        point, lo, hi = stats.bootstrap_ci(window, n_boot=1500)
-        decision.metrics["clv_window_lcb"] = round(lo, 5)
-        decision.metrics["clv_window_mean"] = round(point, 5)
-        if lo < cfg.clv_lcb_floor:
-            decision.reasons.append(
-                f"D1 live-decay: rolling {cfg.decay_window}-bet CLV lower bound "
-                f"{lo:.4f} < {cfg.clv_lcb_floor}")
-            decision.action = DEMOTE_TO_PAPER
+    tail = s[-cfg.window:]
+    out["window_size"] = len(tail)
+
+    # --- D1 signal decay -----------------------------------------------------
+    wins = sum(1 for b in tail if b["won"])
+    hurdle = pricing.break_even_probability(_modal_price(tail))
+    p_hat = wins / len(tail)
+    z = stats.z_stat(p_hat, hurdle, len(tail))
+    p_inferior = 1.0 - stats.one_sided_p_above(z)   # P(data | true rate = hurdle)
+    d1 = p_hat < hurdle and p_inferior < cfg.inferiority_alpha
+    out["rules"]["D1"] = {
+        "status": "DEMOTE" if d1 else "HOLD",
+        "hit_rate": round(p_hat, 4),
+        "breakeven": round(hurdle, 4),
+        "p_inferiority": round(p_inferior, 4),
+        "detail": "flat-stake hit rate %s break-even %s with p=%s"
+                  % ("<" if p_hat < hurdle else ">=", round(hurdle, 4),
+                     round(p_inferior, 4)),
+    }
+    if d1:
+        out["reasons"].append("D1 signal decay: hit rate below break-even beyond noise "
+                              "(p=%.4f < %.2f)" % (p_inferior, cfg.inferiority_alpha))
+
+    # --- D2 drawdown ---------------------------------------------------------
+    equity = peak = max_dd = 0.0
+    for b in s:
+        equity += _flat_return(b)
+        peak = max(peak, equity)
+        max_dd = max(max_dd, peak - equity)
+    d2 = max_dd > cfg.max_drawdown_units
+    out["rules"]["D2"] = {
+        "status": "DEMOTE" if d2 else "HOLD",
+        "max_drawdown_units": round(max_dd, 3),
+        "limit_units": cfg.max_drawdown_units,
+        "detail": "flat-stake drawdown %.3f vs limit %.3f" % (max_dd, cfg.max_drawdown_units),
+    }
+    if d2:
+        out["reasons"].append("D2 drawdown: %.3f units > %.3f limit"
+                              % (max_dd, cfg.max_drawdown_units))
+
+    # --- D3 CLV rot ----------------------------------------------------------
+    clvs = [b["clv"] for b in tail if b.get("clv") is not None]
+    if len(clvs) >= 10:
+        mean_clv = sum(clvs) / len(clvs)
+        _, _, hi = stats.bootstrap_ci(clvs, n_boot=1000)
+        d3 = mean_clv < 0 and hi < 0
+        out["rules"]["D3"] = {
+            "status": "DEMOTE" if d3 else "HOLD",
+            "mean_clv": round(mean_clv, 4),
+            "clv_ci_high": round(hi, 4) if hi is not None else None,
+            "detail": "mean CLV %.4f, bootstrap upper bound %s"
+                      % (mean_clv, round(hi, 4) if hi is not None else "None"),
+        }
+        if d3:
+            out["reasons"].append("D3 CLV rot: mean CLV and its upper bound both below zero")
     else:
-        decision.reasons.append(
-            f"D1 not judgeable yet: {len(clvs)} CLV observations, "
-            f"{cfg.decay_window} needed for the monitoring window")
+        out["rules"]["D3"] = {"status": "BLOCKED",
+                              "detail": "no closing-line values in the window (GAP-01)"}
 
-    # ---- D2: calibration drift -------------------------------------------------
-    quoted = [(b.get("quoted_prob"), b["won"]) for b in s if b.get("quoted_prob") is not None]
-    if len(quoted) >= cfg.min_bets_calibration:
-        mean_quoted = stats.mean([q for q, _ in quoted])
-        realised = stats.mean([1.0 if w else 0.0 for _, w in quoted])
-        drift = abs(realised - mean_quoted)
-        decision.metrics["calibration_drift"] = round(drift, 5)
-        if drift > cfg.prob_band:
-            decision.reasons.append(
-                f"D2 calibration drift: |realised {realised:.3f} - quoted "
-                f"{mean_quoted:.3f}| = {drift:.4f} > {cfg.prob_band}")
-            decision.action = DEMOTE_TO_PAPER
+    if out["reasons"]:
+        out["verdict"] = VERDICT_DEMOTE
+        out["state"] = STATE_PAPER
+    return out
+
+
+def repromotion_status(bets: Sequence[dict], cfg: DemotionConfig | None = None) -> dict:
+    """PAPER -> LIVE: requires a fresh sealed sample of settled bets whose
+    flat-stake hit rate beats break-even with one-sided p < 0.05 (the G-2b
+    standard) and at least `repromote_bets` settled bets (the G-1 standard)."""
+    cfg = cfg or DemotionConfig()
+    s = _settled(bets)
+    out = {"verdict": VERDICT_HOLD, "state": STATE_PAPER, "reasons": [], "n": len(s)}
+    if len(s) < cfg.repromote_bets:
+        out["reasons"].append("fresh sample %d < %d settled bets"
+                              % (len(s), cfg.repromote_bets))
+        return out
+    wins = sum(1 for b in s if b["won"])
+    hurdle = pricing.break_even_probability(_modal_price(s))
+    p_hat = wins / len(s)
+    z = stats.z_stat(p_hat, hurdle, len(s))
+    p = stats.one_sided_p_above(z)
+    out["hit_rate"] = round(p_hat, 4)
+    out["breakeven"] = round(hurdle, 4)
+    out["p_one_sided"] = round(p, 6)
+    if p_hat > hurdle and p < 0.05:
+        out["verdict"] = VERDICT_PROMOTE
+        out["state"] = STATE_LIVE
     else:
-        decision.reasons.append(
-            f"D2 not judgeable yet: {len(quoted)} bets carry quoted_prob")
-
-    # ---- D3: concentration breach ---------------------------------------------
-    pnls = [b.get("pnl") or 0.0 for b in s]
-    gains = sum(p for p in pnls if p > 0)
-    if gains > 0:
-        by_season: dict = {}
-        by_team: dict = {}
-        for b, p in zip(s, pnls):
-            if p > 0:
-                by_season[str(b.get("season"))] = by_season.get(str(b.get("season")), 0.0) + p
-                if b.get("team"):
-                    by_team[str(b.get("team"))] = by_team.get(str(b.get("team")), 0.0) + p
-        s_share = max(by_season.values()) / gains if by_season else 0.0
-        t_share = max(by_team.values()) / gains if by_team else 0.0
-        decision.metrics["max_season_gain_share"] = round(s_share, 5)
-        decision.metrics["max_team_gain_share"] = round(t_share, 5)
-        if s_share > cfg.max_season_gain_share or t_share > cfg.max_team_gain_share:
-            decision.reasons.append(
-                f"D3 concentration breach: season share {s_share:.1%} / team share "
-                f"{t_share:.1%} above {cfg.max_season_gain_share:.0%} / "
-                f"{cfg.max_team_gain_share:.0%}")
-            decision.action = DEMOTE_TO_PAPER
-    else:
-        decision.reasons.append(
-            "D3 not judgeable: the window contains no positive PnL to concentrate")
-
-    return decision
-
-
-def promotion_check(gate_rows: Sequence[dict]) -> dict:
-    """The other half of the lifecycle: PAPER -> LIVE requires the promotion
-    gates to clear. `gate_rows` are rows from engine.gates.evaluate().
-
-    A strategy may go live only when every promotion gate (G-1..G-6) is PASS —
-    a BLOCKED gate means an input we do not hold, and live capital does not run
-    on missing inputs. Returns a dict the site can render verbatim.
-    """
-    promote_gates = ("G-1", "G-2", "G-2b", "G-3", "G-4", "G-5", "G-6")
-    by_id = {r.get("gate"): r for r in gate_rows}
-    verdicts = {g: (by_id.get(g, {}).get("verdict", "MISSING")) for g in promote_gates}
-    ready = all(v == "PASS" for v in verdicts.values())
-    return {"action": "PROMOTE_TO_LIVE" if ready else "REMAIN_ON_PAPER",
-            "gate_verdicts": verdicts,
-            "reason": ("every promotion gate PASS" if ready else
-                       "promotion requires PASS on G-1..G-6; any FAIL or BLOCKED "
-                       "keeps the strategy on paper")}
+        out["reasons"].append("hit rate %s break-even at p=%s"
+                              % (round(p_hat, 4), round(p, 4)))
+    return out
