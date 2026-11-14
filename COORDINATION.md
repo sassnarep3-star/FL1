@@ -1267,6 +1267,16 @@ already registered. No source was promoted to official in this pass.
 
 **Integration record (F-T12):** appended below after the merge and the Pages check.
 
+**Integration record (F-T12), complete:** PR
+[#40](https://github.com/sassnarep3-star/FL1/pull/40) (“Second pass: the eight bolded requirements …
+(+ full reconciliation of three parallel sessions)”) merged to `main` with `gh pr merge 40 --merge` at
+merge commit `c377bf1a20bac31c37a3438c5b1dc0a60d96dba8` on 2026-11-14. `verify-research-build` workflow
+[43652594682](https://github.com/sassnarep3-star/FL1/actions/runs/43652594682) passed. GitHub Pages build
+[43652603953](https://github.com/sassnarep3-star/FL1/actions/runs/43652603953) completed successfully
+(`status: built`, error: none) and the site is live at https://sassnarep3-star.github.io/FL1/ serving from
+`main` `/` (plus `/docs/pages/`, `/docs/computed/`). This completion record is merged to `main` via the
+follow-up record PR logged immediately below.
+
 **Merge reconciliation (this branch vs origin/main PRs #25–#32 — sessions 725adbd2, 0669d4cf,
 685f958d):** three sessions built overlapping second-pass deliverables. Nothing was discarded:
 
