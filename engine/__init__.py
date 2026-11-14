@@ -19,7 +19,14 @@ Modules:
     compliance   the league's prohibited-wager classes as an executable gate
     gates        G-1..G-13 evaluation of a bet log
     leaderboard  sealed-entry scoring and ranking
+    snapshots    R21 price-snapshot store: open + close per originated market
+    backtest     R22/R25 verified-feed settlement and the signal/staking split
+    fairline     R23/R24 naive baseline fair lines (side, total, moneyline order)
+    demotion     R28 demotion gate: live strategies return to paper
+    corr_official R27 correlations from officially sourced numbers only, n published
 """
 
-__all__ = ["pricing", "stats", "correlation", "injuries", "compliance", "gates", "leaderboard"]
+__all__ = ["pricing", "stats", "correlation", "injuries", "compliance", "gates",
+           "leaderboard", "snapshots", "backtest", "fairline", "demotion",
+           "corr_official"]
 __version__ = "0.1.0"

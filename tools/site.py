@@ -33,13 +33,18 @@ NAV = [
     ("requirements.html", "Requirements"),
     ("injuries.html", "Injuries"),
     ("depth.html", "Backup Depth"),
+    ("replacement-depth.html", "Replacement Depth"),
     ("standings.html", "Standings"),
     ("schedule.html", "Schedule 2026"),
     ("prop-correlations.html", "Prop Correlations"),
+    ("correlation-register.html", "Correlation Register"),
 
     ("model-lines.html", "Model Lines & Price Store"),
     ("line-origination.html", "Line Origination"),
+    ("line-board.html", "Line Board"),
+    ("price-snapshots.html", "Price Snapshots"),
     ("results-feed.html", "Results Feed & Backtest"),
+    ("verified-results-feed.html", "Verified Results Feed"),
     ("strategies.html", "Leaderboard"),
     ("governance.html", "Signal & Demotion"),
     ("validation.html", "Validation Gates"),
@@ -171,6 +176,568 @@ STATUS_KIND = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Requirements sprint (R21-R28) — pages and sections, session arena-360ca650-fl1
+# ---------------------------------------------------------------------------
+
+TIER_KIND = {
+    "OFFICIAL": "ok",
+    "COMPUTED": "warn",
+    "COMPUTED-FROM-OFFICIAL": "warn",
+    "COMPUTED-OVER-THIRD-PARTY": "bad",
+    "THIRD_PARTY": "bad",
+    "BLANK": "",
+}
+
+
+def badge(tier):
+    return pill(tier, TIER_KIND.get(tier, ""))
+
+
+def _fmt(v, nd=2):
+    if v is None:
+        return ""
+    if isinstance(v, float):
+        return ("%%.%df" % nd) % v
+    return str(v)
+
+
+def sprint_sections(sources_by_id):
+    """Build every page/section added by the requirements sprint. Returns a
+    dict of ready HTML bodies keyed by name. All numbers come from the data
+    files written by scripts/build_*.py; nothing here is typed by hand."""
+    import csv as _csv
+
+    snaps = build.load_json("price_snapshots.json")
+    feed = build.load_json("results_feed.json")
+    board = build.load_json("line_board.json")
+    corr = build.load_json("correlations_official.json")
+    sig = build.load_json("leaderboard_signal_staking.json")
+
+    rd_path = os.path.join(ROOT, "data", "replacement_depth.tsv")
+    with open(rd_path, newline="", encoding="utf-8") as fh:
+        rd_rows = list(_csv.reader(fh, delimiter="\t"))
+    rd_head, rd_body = rd_rows[0], rd_rows[1:]
+
+    out = {}
+
+    # ---------------------------------------------------------- R23 section
+    out["origination_order"] = """
+<section>
+<h2>Origination order (requirement R23)</h2>
+<p>The order is mandated and fixed before results: <strong>the side first, then the total, then the
+moneyline.</strong> The moneyline is priced last because it is derived from the same margin distribution the
+side model produces &mdash; one model behind the markets, so the markets cannot contradict each other.
+This supersedes the earlier &ldquo;totals-first&rdquo; design note; the change is logged as
+<a href="flagged.html#F27">F27</a> rather than made silently.</p>
+%s
+</section>
+""" % table(["Step", "Market", "What originates", "Why in this position", "Live output"], [
+        [cell("1", "n"), cell("SIDE (spread)"),
+         cell("Expected margin distribution per game, with its band"),
+         cell("The anchor market: highest liquidity and the only one where an edge is measurable at human sample sizes"),
+         raw_src('<a href="line-board.html">line board</a>')],
+        [cell("2", "n"), cell("TOTAL"),
+         cell("Expected combined scoring, with its band"),
+         cell("A sum of the same two scoring expectations, so it cannot contradict the side"),
+         raw_src('<a href="line-board.html">line board</a>')],
+        [cell("3", "n"), cell("MONEYLINE"),
+         cell("Fair win probability from the margin distribution"),
+         cell("Derived last; no separate model, no separate way to be wrong"),
+         raw_src('<a href="line-board.html">line board</a>')],
+    ], cls="dense")
+
+    # ---------------------------------------------------------- R25 section
+    lr = []
+    for e in sig["rows"]:
+        s, k = e["signal"], e["staking"]
+        lr.append([
+            cell(e["signal_rank"], "n"),
+            cell(e["strategy_id"]),
+            cell(e["market"]),
+            cell(s["settled"], "n"),
+            cell(_fmt(s["hit_rate"], 4)),
+            cell(_fmt(s["hit_ci_low"], 4) + " – " + _fmt(s["hit_ci_high"], 4)),
+            cell(_fmt(s["reference_hurdle"], 5)),
+            cell(_fmt(s["signal_edge_lcb"], 4)),
+            '<td>%s</td>' % pill(s["signal_verdict"],
+                                 "ok" if s["signal_verdict"] == "SIGNAL PROVEN" else "bad"),
+            cell(_fmt(k["roi"], 4)),
+            cell(_fmt(k["profit_units"], 2)),
+            cell(_fmt(k["max_drawdown"], 2)),
+            raw_src('<a href="flagged.html#F30">F30</a>'),
+        ])
+    out["signal_staking"] = """
+<section>
+<h2>Signal and staking are reported separately (requirement R25)</h2>
+<p>A lucky staking run must not be able to mask a bad signal. So the leaderboard has two blocks and the
+rank is computed from <strong>signal only</strong>: flat one-unit stake on every settled bet, ranked on
+the 95%% lower bound of the hit rate against the break-even hurdle. The staking block &mdash; ROI at the
+stakes actually used, profit, drawdown &mdash; is reported beside it and can never change a rank, a badge
+or a reward. The arithmetic lives in <code>engine/backtest.py</code>
+(<code>split_signal_staking</code>) and is exercised by the test suite.</p>
+<div class="callout warn"><p><strong>Read the hurdle column correctly.</strong> The table below re-ranks
+the computed research layer's 16 backtested strategies (third-party data &mdash; flagged). That dataset's
+own <code>breakeven_hit</code> column is circular &mdash; computed as 1/(1+realized ROI) &mdash; and is
+NOT used for ranking; it is transcribed in the data file for audit only. See
+<a href="flagged.html#F30">F30</a> (severity High) and suggestion SG28. The reference hurdle here is the
+standard &minus;110 two-way break-even, 0.52381. None of the 16 entries is signal-proven; all 16 are
+REJECTED in their own dataset's gates.</p></div>
+</section>
+
+<section>
+<h2>Computed-layer entries, re-ranked on signal</h2>
+%s
+<p class="caption">Signal columns: flat-stake only. Staking columns: right of the divider, reported and
+never ranked on. Rank = order by (hit CI low &minus; reference hurdle), ties by larger sample.
+Sources: computed layer over the pinned third-party capture %s (flags F17/F23).</p>
+</section>
+
+<section>
+<h2>What the plan-level board will show when its gates run</h2>
+%s
+</section>
+
+<section>
+<h2>Demotion: live is a revocable state</h2>
+<p>A strategy that goes live and decays is sent back to paper by the demotion gate
+<a href="validation.html#G-14">G-14</a> &mdash; signal decay, drawdown, or closing-line rot. Live is a
+state you have to keep earning.</p>
+</section>
+""" % (
+        table(["Signal rank", "ID", "Market", "Settled", "Hit rate", "Wilson 95% CI",
+               "Ref. hurdle", "Signal edge (LCB)", "Signal verdict",
+               "Staking ROI", "Staking profit (u)", "Staking max DD (u)", "Flag"],
+              lr, cls="dense",
+              caption="Re-ranking of data/leaderboard.csv on signal only."),
+        raw_src(src_link("S47", sources_by_id)),
+        table(["Block", "Columns", "May it affect rank?", "Source of truth"], [
+            [cell("SIGNAL"),
+             cell("settled n, hit rate, Wilson CI, break-even hurdle, z/p, flat-stake ROI, abstain rate"),
+             cell("Yes — rank is computed from this block only"),
+             cell("engine/backtest.py split_signal_staking()")],
+            [cell("STAKING"),
+             cell("ROI at declared stakes, profit units, max drawdown, largest-bet share of profit"),
+             cell("No — reported, never ranked on"),
+             cell("engine/backtest.py split_signal_staking()")],
+        ], cls="dense"))
+
+    # ---------------------------------------------------------- R28 section
+    out["demotion"] = """
+<section id="G-14">
+<h2>G-14 &mdash; the demotion gate (requirement R28): live strategies return to paper</h2>
+<div class="callout warn"><p><strong>Parallel build (F31).</strong> The D1&ndash;D3 demotion gate above (from <a href="governance.html">Signal, Staking &amp; Demotion</a>) and this G-14 gate are two independent implementations of requirement R28 with different triggers and thresholds. Both are preserved; Q24 decides which becomes canonical.</p></div>
+<p>A gate set decides who gets promoted. This gate decides who gets sent back. Without it, a live badge
+outlives the edge that earned it and the leaderboard decays into a graveyard of former winners. Any ONE
+trigger demotes; the verdict logic is not reviewable, the thresholds are.</p>
+%s
+<p class="caption">States: LIVE &rarr; (any trigger) &rarr; PAPER; PAPER &rarr; LIVE only through
+re-promotion on a fresh sealed sample. Old bets never re-qualify an entry — the burden of proof resets.
+Implementation: <code>engine/demotion.py</code>, tested in <code>tests/test_r21_r28.py</code>.
+Thresholds are proposed competition rules, reviewable under <a href="flagged.html#F28">F28</a> /
+question Q24.</p>
+</section>
+""" % table(["Rule", "Trigger", "Metric", "Threshold (proposed)", "Why"], [
+        [cell("D1"), cell("Signal decay"),
+         cell("Flat-stake hit rate over the trailing window vs break-even at the prices paid"),
+         cell("below break-even AND one-sided p &lt; 0.10 for inferiority"),
+         cell("The edge died; what remains is noise wearing the old badge")],
+        [cell("D2"), cell("Drawdown"),
+         cell("Max drawdown of the flat-stake equity curve"),
+         cell("&gt; 25 flat-stake units"),
+         cell("A run of losses that a real bankroll would not survive is a strategy change, not variance")],
+        [cell("D3"), cell("Closing-line rot"),
+         cell("Trailing mean CLV and its bootstrap upper bound"),
+         cell("mean CLV &lt; 0 AND 95% upper bound &lt; 0"),
+         cell("The market has stopped moving toward our numbers: the information edge is gone")],
+        [cell("RE"), cell("Re-promotion"),
+         cell("Fresh sealed sample, flat-stake hit rate vs break-even"),
+         cell("&ge; 300 fresh settled bets, one-sided p &lt; 0.05 (the G-2b standard)"),
+         cell("Returning to live must be harder than staying live")],
+    ], cls="dense")
+
+    # ------------------------------------------------- R24 line board page
+    coef = board["coefficients"]
+    lb_rows = []
+    for r in board["rows"]:
+        lb_rows.append([
+            cell(r["game"]),
+            cell(r["gameday"]),
+            cell(r["market_type"]),
+            cell(_fmt(r["model_fair_line"], 2)),
+            cell(_fmt(r["model_band"], 2)),
+            '<td>%s</td>' % badge(r["fair_tier"]),
+            cell(_fmt(r["market_line"], 2)),
+            '<td>%s</td>' % badge(r["market_tier"]),
+            cell(_fmt(r["difference"], 2)),
+            '<td>%s</td>' % badge(r["difference_tier"]),
+            cell(r["market_note"]),
+            cell(r["result"]),
+            raw_src(" ".join(src_link(s, sources_by_id) for s in
+                             sorted(set(r["fair_sources"] + r["market_sources"]))))
+            + " " + raw_src(" ".join('<a href="flagged.html#%s">%s</a>' % (fl, fl)
+                                     for fl in r["flags"])),
+        ])
+    out["line_board"] = """
+<section>
+<h1>Line Board &mdash; fair &vert; market &vert; difference</h1>
+<div class="callout warn"><p><strong>Parallel build (F31).</strong> A second implementation of this requirement lives at <a href="model-lines.html">Model Lines &amp; Price Store</a>, which keeps every market and difference cell blank under a strict source policy. This page publishes the pinned capture with a THIRD_PARTY badge. Both are preserved; Q23 decides which becomes canonical.</p></div>
+<p class="lead">Requirement R24: the model's fair line, the market line and the difference are published as
+<strong>three separate columns</strong>, in the mandated origination order (R23): side first, then total,
+then moneyline. difference = model &minus; market. A blank difference is a blank, never a zero.</p>
+<div class="callout"><p><strong>Conventions, fixed before results.</strong> Side quotes are HOME-view
+spreads (negative = home favourite). The pinned market feed records the AWAY club's spread &mdash;
+verified against moneyline direction across 13/13 games (check V8) &mdash; so the market column negates the
+verbatim capture and says so per row; the verbatim number sits in the
+<a href="price-snapshots.html">price-snapshot store</a>. The moneyline market cell is blank because no
+moneyline price was captured (<a href="flagged.html#F25">F25</a>).</p></div>
+</section>
+
+<section>
+<h2>Model coefficients &mdash; every one computed, every one with its n</h2>
+%s
+<p class="caption">Fair lines come from the published naive baseline (<code>engine/fairline.py</code>):
+strength = (PF&minus;PA)/G per club (official standings %s), fair margin = HFA + (strength<sub>h</sub> &minus;
+strength<sub>a</sub>)/2, fair total = (PPG<sub>h</sub> + OPPG<sub>h</sub> + PPG<sub>a</sub> +
+OPPG<sub>a</sub>)/2, moneyline = &Phi;(margin / sd). The /2 is a bookkeeping convention. Nothing is
+fitted on market prices. Band = 1.96 &times; sd / &sqrt;(min games). Provenance:
+<a href="flagged.html#F29">F29</a>.</p>
+</section>
+
+<section>
+<h2>Every originated market &mdash; %d rows</h2>
+%s
+</section>
+
+<section>
+<h2>How to read the difference column</h2>
+<p>A positive difference means the model's number is higher than the market's in the displayed convention.
+The column measures disagreement, not edge: a difference is only actionable once the band excludes the
+market number AND the prices in the <a href="price-snapshots.html">snapshot store</a> clear their hurdle.
+The market column carries the <strong>THIRD_PARTY</strong> badge because no official league source prices
+NFL lines (<a href="flagged.html#F23">F23</a>, question Q23 &mdash; the strict-blank policy is one review
+away).</p>
+</section>
+""" % (
+        table(["Coefficient", "Value", "n", "Tier", "Source"], [
+            [cell("Home-field advantage (points/game)"), cell(_fmt(coef["home_field_advantage_points"], 3), "n"),
+             cell(coef["hfa_n_games"], "n"), badge(coef["tier"]),
+             raw_src(src_link("S52", sources_by_id))],
+            [cell("Game-margin sd (points)"), cell(_fmt(coef["margin_sd_points"], 3), "n"),
+             cell(coef["margin_sd_n_games"], "n"), badge(coef["tier"]),
+             raw_src(src_link("S52", sources_by_id))],
+            [cell("Club strength"), cell(coef["strength"]),
+             cell(32, "n"), badge(coef["tier"]),
+             raw_src(src_link("S03", sources_by_id))],
+        ], cls="dense"),
+        raw_src(src_link("S03", sources_by_id)),
+        len(board["rows"]),
+        table(["Game", "Date", "Market", "Model fair line", "Model band", "Fair tier",
+               "Market line", "Market tier", "Difference", "Difference tier",
+               "Market quote note", "Result", "Sources / flags"],
+              lb_rows, cls="dense searchable"))
+
+    # ---------------------------------------------- R21 price snapshots page
+    cov = snaps["coverage"]
+    ps_rows = []
+    for r in snaps["rows"]:
+        ps_rows.append([
+            cell(r["market_id"]),
+            cell(r["market_type"]),
+            cell(r["side"] + " (" + r["quote_side"] + ")"),
+            cell(_fmt(r["open_price"], 2)),
+            cell(r["open_ts"] or ""),
+            cell(_fmt(r["close_price"], 2)),
+            cell(r["close_ts"] or ""),
+            '<td>%s</td>' % badge(r["close_provenance"] or "BLANK"),
+            raw_src(src_link(r["close_source"], sources_by_id) if r["close_source"]
+                    else '<span class="muted">no source</span>'),
+            cell(r["notes"]),
+        ])
+    out["price_snapshots"] = """
+<section>
+<h1>Price-Snapshot Store</h1>
+<p class="lead">Requirement R21: the store records the <strong>opening and the closing number for every
+market we originate</strong> &mdash; one row per (game, market, quote side), created before kickoff and
+completed at close. A price cell is filled only when a named source record backs it. Rows are stored in the
+mandated origination order: SIDE, then TOTAL, then MONEYLINE (R23).</p>
+<div class="callout warn"><p><strong>Opening prices: %d of %d rows have one.</strong> No source of opening
+prices exists in this repository &mdash; not official, not third-party &mdash; so every open cell is blank
+and recorded as blank. That is the store doing its job: the gap is now a countable, fillable field rather
+than a silence. Question Q21 and suggestions SG20/SG25 own the path forward.</p></div>
+</section>
+
+<section>
+<h2>Coverage</h2>
+%s
+</section>
+
+<section>
+<h2>Policy (enforced in <code>engine/snapshots.py</code>, tested)</h2>
+%s
+</section>
+
+<section>
+<h2>The store &mdash; %d rows</h2>
+%s
+</section>
+""" % (
+        cov["open_filled"], cov["TOTAL_ROWS"],
+        table(["Market type", "Rows", "Open filled", "Close filled", "What a blank means"], [
+            [cell("SIDE"), cell(cov["SIDE"]["rows"], "n"), cell(cov["SIDE"]["open_filled"], "n"),
+             cell(cov["SIDE"]["close_filled"], "n"),
+             cell("No source captured that number; never inferred")],
+            [cell("TOTAL"), cell(cov["TOTAL"]["rows"], "n"), cell(cov["TOTAL"]["open_filled"], "n"),
+             cell(cov["TOTAL"]["close_filled"], "n"),
+             cell("No source captured that number; never inferred")],
+            [cell("MONEYLINE"), cell(cov["MONEYLINE"]["rows"], "n"),
+             cell(cov["MONEYLINE"]["open_filled"], "n"), cell(cov["MONEYLINE"]["close_filled"], "n"),
+             cell("No 2026 moneyline capture exists (F25); rows exist so the gap is visible")],
+        ], cls="dense"),
+        table(["Rule", "Statement"], [
+            [cell("Order"), cell("SIDE, then TOTAL, then MONEYLINE (R23), then kickoff")],
+            [cell("Open"), cell(snaps["policy"]["open_rule"])],
+            [cell("Close"), cell(snaps["policy"]["close_rule"])],
+            [cell("Provenance"), cell(snaps["policy"]["provenance_rule"])],
+            [cell("Validation"), cell("A price without provenance or a source id fails the store; a claim "
+                                      "of OFFICIAL pricing is rejected outright (no official league source "
+                                      "prices NFL lines, F23)")],
+        ], cls="dense"),
+        len(snaps["rows"]),
+        table(["Market ID", "Type", "Quote", "Open", "Open ts", "Close", "Close ts",
+               "Close tier", "Close source", "Notes"], ps_rows, cls="dense searchable"))
+
+    # ------------------------------------------------ R22 results feed page
+    rf_rows = []
+    for g in feed["rows"]:
+        rf_rows.append([
+            cell(g["week"], "n"),
+            cell(g["date"]),
+            cell(g["away"]),
+            cell(g["awayPts"], "n"),
+            cell(g["home"]),
+            cell(g["homePts"], "n"),
+            cell(g["margin_home"], "n"),
+            cell(g["total"], "n"),
+            badge(g["tier"]),
+            raw_src(src_link(g["source_id"], sources_by_id)),
+        ])
+    out["results_feed"] = """
+<section>
+<h1>Verified Results Feed</h1>
+<div class="callout warn"><p><strong>Parallel build (F31).</strong> A second implementation lives at <a href="results-feed.html">Results Feed &amp; Backtest</a> (same 137 official rows, plus a strictly out-of-sample model backtest). Both are preserved; Q29 decides which becomes canonical.</p></div>
+<p class="lead">Requirement R22: backtests and ROI can be computed at all only if there is a results feed
+whose every row is checked against an official source. This is that feed: %d finished games, weeks 1&ndash;10
+of the 2026 season, every row official (%s), every row settled against by
+<code>engine/backtest.py</code> and by nothing else.</p>
+<div class="callout"><p><strong>Verification, not transcription.</strong> Recomputing every club's W/L/T and
+PF/PA from this feed reproduces the official standings capture exactly &mdash; 32 of 32 clubs &mdash; as
+part of the build (<code>scripts/build_results_feed.py</code> fails loudly otherwise). The raw capture is
+<code>raw/schedule-results-2026-week1-10.tsv</code>; <code>tools/verify_results.py</code> re-checks it.</p></div>
+</section>
+
+<section>
+<h2>Coverage</h2>
+%s
+</section>
+
+<section>
+<h2>How backtests and ROI are computed (and labelled)</h2>
+%s
+</section>
+
+<section>
+<h2>Worked example &mdash; the one settled Week 10 board game</h2>
+%s
+<p class="caption">Prices are the captured closing numbers (THIRD_PARTY), scores are official (S52),
+settlement and P&amp;L arithmetic are <code>engine/backtest.py</code> at a flat one-unit stake and standard
+&minus;110. A worked example of the pipeline, not evidence about any strategy: n = 1.</p>
+</section>
+
+<section>
+<h2>Every row &mdash; %d games</h2>
+%s
+</section>
+""" % (
+        len(feed["rows"]),
+        raw_src(src_link("S52", sources_by_id)),
+        table(["Field", "Value"], [
+            [cell("Games"), cell(feed["coverage"]["games"], "n")],
+            [cell("Weeks"), cell("1–10 (through the Week 10 Thursday game)")],
+            [cell("Clubs"), cell(feed["coverage"]["clubs"], "n")],
+            [cell("Tier"), badge(feed["provenance"]["tier"])],
+            [cell("Verification"), cell(feed["provenance"]["verification"])],
+        ], cls="dense"),
+        table(["Step", "What happens", "Provenance rule"], [
+            [cell("1. Index"), cell("Bet logs are joined to this feed by game key or id; no row, no settlement"),
+             cell("OFFICIAL rows only (S52)")],
+            [cell("2. Settle"), cell("Win/loss/push decided from the official score at the recorded line; "
+                                     "pushes are void, never wins"),
+             cell("COMPUTED from OFFICIAL")],
+            [cell("3. Price"), cell("P&amp;L at the recorded American price; ROI = profit / staked units"),
+             cell("inherits the price tier (THIRD_PARTY until Q21/Q23 resolve)")],
+            [cell("4. Split"), cell("Signal block (flat stake) and staking block (declared stakes) reported "
+                                    "separately; rank on signal only (R25)"),
+             cell("COMPUTED")],
+            [cell("5. Report"), cell("Every computed statistic carries its tier; a THIRD_PARTY-backed "
+                                     "statistic is published only with its flag (F23)"),
+             cell("provenance_report() in engine/backtest.py")],
+        ], cls="dense"),
+        table(["Market", "Bet", "Close", "Official result", "Settled", "P&amp;L (u, flat at &minus;110)", "Tier"], [
+            [cell("SIDE"), cell("NYG &minus;1.5 (home view)"), cell("&minus;1.5"),
+             cell("WAS 24 @ NYG 21"), pill("LOSS", "bad"), cell("&minus;1.00"),
+             raw_src(badge("COMPUTED-OVER-THIRD-PARTY"))],
+            [cell("TOTAL"), cell("OVER 40.5"), cell("40.5"),
+             cell("45 total"), pill("WIN", "ok"), cell("+0.91"),
+             raw_src(badge("COMPUTED-OVER-THIRD-PARTY"))],
+            [cell("MONEYLINE"), cell("—"), cell(""),
+             cell("WAS 24 @ NYG 21"), pill("BLANK", "warn"), cell(""),
+             raw_src(badge("BLANK"))],
+        ], cls="dense"),
+        len(feed["rows"]),
+        table(["Week", "Date", "Away", "Pts", "Home", "Pts", "Home margin", "Total",
+               "Tier", "Source"], rf_rows, cls="dense searchable"))
+
+    # --------------------------------------------- R26 replacement depth page
+    rep_rows = []
+    for row in rd_body:
+        (team, unit, slot, line, miss_s, miss_p, rep, depth, gs,
+         note, src_chart, src_inj) = (row + [""] * 12)[:12]
+        rep_rows.append([
+            cell(team), cell(unit), cell(slot), cell(line),
+            cell(miss_s), cell(miss_p),
+            cell(rep), cell(depth, "n"), cell(gs),
+            cell(note),
+            raw_src((src_link(src_chart, sources_by_id) if src_chart else "") + " " +
+                    src_link(src_inj, sources_by_id)),
+        ])
+    deep3 = sum(1 for r in rd_body if (r + [""] * 12)[7] in ("3", "4"))
+    out["replacement_depth"] = """
+<section>
+<h1>Replacement Depth</h1>
+<p class="lead">Requirement R26: track the <strong>depth of the replacement</strong>, not just the fact of a
+replacement. A club missing its starter and its backup is not the same problem as a club missing only its
+starter. This page names, for every affected slot, which string the next <em>available</em> player is.</p>
+<div class="callout"><p><strong>What is observed, and what is not.</strong> The chart order and string
+numbers are published by the clubs themselves (labelled unofficial &mdash; sources per row). The game
+status is the official injury report (%s). A string counts as missing only on an official
+<strong>Out</strong>; Doubtful and Questionable are notes, never absences. Nothing here claims who will
+actually take the field: no snap-count source is verified (question Q27).</p></div>
+</section>
+
+<section>
+<h2>Summary</h2>
+%s
+</section>
+
+<section>
+<h2>Every affected slot &mdash; %d rows</h2>
+%s
+</section>
+""" % (
+        raw_src(src_link("S01", sources_by_id)),
+        table(["Measure", "Value", "Meaning"], [
+            [cell("Affected slots (chart string missing on an official Out)"),
+             cell(len(rd_body), "n"), cell("Rows below")],
+            [cell("Slots whose next available player is string 3 or deeper"),
+             cell(deep3, "n"),
+             cell("The depth cases this page exists to make visible")],
+            [cell("Contingent rows"), cell(sum(1 for r in rd_body if "contingent" in (r + [""] * 12)[9]), "n"),
+             cell("Starter healthy but deeper strings out &mdash; recorded before it hurts")],
+            [cell("Coverage"), cell("31 of 32 club charts (HOU chart is an image — F16)"),
+             cell("Joined to the official report for the 28 clubs playing Week 10")],
+        ], cls="dense"),
+        len(rd_body),
+        table(["Club", "Unit", "Slot", "Line", "Missing strings", "Missing players",
+               "Replacement", "Replacement depth", "Replacement status", "Note",
+               "Sources"], rep_rows, cls="dense searchable"))
+
+    # ------------------------------------------ R27 correlation register page
+    cr_rows = []
+    for r in corr["rows"]:
+        cr_rows.append([
+            cell(r["id"]),
+            cell(r["label"]),
+            cell(r["x"] + " vs " + r["y"]),
+            cell(r["n"], "n"),
+            cell(_fmt(r["r"], 4)),
+            cell(((_fmt(r["ci_low"], 4) + " – " + _fmt(r["ci_high"], 4))
+                  if r["ci_low"] is not None else "")),
+            badge(r["tier"]),
+            cell(r["inputs"]),
+            raw_src(" ".join(src_link(s, sources_by_id) for s in r["sources"])),
+        ])
+    out["correlation_register"] = """
+<section>
+<h1>Correlation Register &mdash; officially sourced numbers only</h1>
+<p class="lead">Requirement R27: correlations are computed <strong>only</strong> from officially sourced
+numbers, and every value publishes its <strong>n</strong> beside it. The rule is enforced as code:
+<code>engine/corr_official.py</code> raises unless every source id of a record is in the official set.</p>
+<div class="callout warn"><p><strong>One value is deliberately blank.</strong> C-A4 (availability vs margin)
+sits at n = 1: only one week of official injury captures exists and only one game with paired inputs is
+settled. A correlation at n = 1 is not a small number, it is no number &mdash; so the cell is blank and the
+n is published, exactly as the requirement asks.</p></div>
+</section>
+
+<section>
+<h2>The register &mdash; %d rows</h2>
+%s
+</section>
+
+<section>
+<h2>Excluded by rule &mdash; third-party registers</h2>
+%s
+<p class="caption">These are measurements of third-party datasets. They are not wrong; they are not
+official, so they cannot enter this register. They live on their own labelled pages.</p>
+</section>
+""" % (
+        len(corr["rows"]),
+        table(["ID", "Pair", "Variables", "n", "r (Pearson)", "Fisher 95% CI",
+               "Tier", "Inputs", "Sources"], cr_rows, cls="dense"),
+        table(["Register", "Why excluded"], [
+            [cell(x["path"]), cell(x["why"])] for x in corr["excluded_registers"]
+        ], cls="dense"))
+
+    # ------------------------------------------------ R21+R22 exec summary addendum
+    out["exec_summary"] = """
+<section>
+<h2>Requirements sprint &mdash; R21&ndash;R28 (2026-11-14)</h2>
+<p>Eight system requirements were implemented, verified and published in this sprint:</p>
+%s
+<div class="callout warn"><p><strong>Decisions the owner must make before the numbers mean more than they
+do now.</strong> (1) Q21/Q22 &mdash; approve an opening-price and moneyline source; today 28 of 56 snapshot
+rows have a close and 0 of 56 have an open. (2) Q23 &mdash; ratify the THIRD_PARTY badge policy for market
+prices (flag F23) or order strict blanks. (3) Q24/Q25 &mdash; confirm the demotion-gate thresholds and the
+allowed staking plans. (4) F30 (severity High) &mdash; the computed layer's break-even column is circular
+and its G4 gate is unusable until SG28 lands. Nothing on this site treats any of these as settled.</p></div>
+<p>Measured, from official numbers only: home-field advantage in 2026 to date is
+<strong>&minus;0.02</strong> points per game (n = 137, S52); rest-days asymmetry correlates with home margin
+at <strong>r = 0.43</strong> (n = 121, CI 0.27&ndash;0.56, S52); the verified results feed reconciles
+<strong>32 of 32</strong> clubs against the official standings. These are computed values with their n
+published &mdash; not claims about the NFL at large.</p>
+</section>
+""" % table(["ID", "Requirement", "Status", "Where"], [
+        [cell("R21"), cell("Price-snapshot store: opening + closing numbers per originated market"),
+         pill("done", "ok"), raw_src('<a href="price-snapshots.html">price-snapshots.html</a>')],
+        [cell("R22"), cell("Verified results feed so backtests and ROI are computable"),
+         pill("done", "ok"), raw_src('<a href="verified-results-feed.html">verified-results-feed.html</a>')],
+        [cell("R23"), cell("Origination order: side first, then total, then moneyline"),
+         pill("done", "ok"), raw_src('<a href="line-board.html">line-board.html</a>')],
+        [cell("R24"), cell("Fair line, market line, difference as separate columns"),
+         pill("done", "ok"), raw_src('<a href="line-board.html">line-board.html</a>')],
+        [cell("R25"), cell("Signal separated from staking in the leaderboard"),
+         pill("done", "ok"), raw_src('<a href="strategies.html">strategies.html</a>')],
+        [cell("R26"), cell("Depth of the replacement tracked, not just the fact"),
+         pill("done", "ok"), raw_src('<a href="replacement-depth.html">replacement-depth.html</a>')],
+        [cell("R27"), cell("Correlations from official numbers only, n published with each"),
+         pill("done", "ok"), raw_src('<a href="correlation-register.html">correlation-register.html</a>')],
+        [cell("R28"), cell("Demotion gate: live strategies return to paper"),
+         pill("done", "ok"), raw_src('<a href="validation.html#G-14">validation.html#G-14</a>')],
+    ], cls="dense")
+
+    return out
+
+
 def main():
     teams = build.load("teams.tsv")
     standings = build.load("standings.tsv")
@@ -202,6 +769,9 @@ def main():
     depth_cov = depth_league["coverage"]
     depth_tot = depth_league["totals"]
     flagged_depth = [r for r in depth_rows if r["flagged"]]
+
+    # Requirements sprint (R21-R28): all sprint pages and cross-page sections.
+    sprint = sprint_sections(sources_by_id)
 
     written = []
 
@@ -246,6 +816,12 @@ def main():
     <p>137 final 2026 results and a strictly out-of-sample backtest. The model does not beat a constant benchmark on margin or total; ROI is blank.</p></a>
   <a class="card" href="governance.html"><h3>Signal &amp; Demotion</h3>
     <p>The leaderboard ranks on signal only, staking is shown beside it, the G-14 gate sends a live strategy back to paper, and correlations are withheld.</p></a>
+  <a class="card" href="line-board.html"><h3>Line Board</h3>
+    <p>Model fair line, market line and difference as three separate columns, in the mandated order:
+    side, then total, then moneyline. Every coefficient published with its n.</p></a>
+  <a class="card" href="price-snapshots.html"><h3>Price Snapshots &amp; Replacement Depth</h3>
+    <p>Opening and closing numbers for every market we originate (opens blank: no source exists), and the
+    string number of the next available player at every slot missing a starter.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
   <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
@@ -290,7 +866,8 @@ def main():
             [cell("Sources that failed to load"), cell(n_404, "n"),
              cell("Recorded as NOT VERIFIED, never cited as fact"), raw_src('<a href="flagged.html">flagged</a>')],
             [cell("Strategies with a result"), cell("0 of %d" % len(strategies), "n"),
-             cell("No backtest executed; no numeric result claimed"), raw_src('<a href="strategies.html">board</a>')],
+             cell("Plan-level register (official data only); the computed-layer backtests are separate and flagged — see the Leaderboard page"),
+             raw_src('<a href="strategies.html">board</a>')],
         ],
         cls="kpi",
         caption="Headline figures. Each is computed by <code>tools/build.py</code> from the data files, not typed in by hand.",
@@ -397,7 +974,8 @@ pages contradict each other. It does not print a single performance number. Each
        depth_tot["starters"], depth_tot["startersWithStatus"])
     import brief as _brief  # session arena/685f958d-fl1
     es = _brief.exec_banner() + es
-    written.append(page("executive-summary.html", "Executive Summary", es))
+    written.append(page("executive-summary.html", "Executive Summary",
+                        es + sprint["exec_summary"]))
 
     # ------------------------------------------------------------ requirements
     by_section = {}
@@ -1101,7 +1679,8 @@ The correct response to wide uncertainty is a smaller stake or no position, not 
             [cell("Prediction hash"), '<td>%s</td>' % pill("READY", "ok"), cell("Computable locally right now")],
         ], cls="dense")
     )
-    written.append(page("line-origination.html", "Line Origination", lo))
+    written.append(page("line-origination.html", "Line Origination",
+                        lo + sprint["origination_order"]))
 
     # -------------------------------------------------------------- strategies
     srows = []
@@ -1124,9 +1703,13 @@ The correct response to wide uncertainty is a smaller stake or no position, not 
 <p class="lead">A competition with gates. A strategy is listed, then it must earn a rank by clearing every gate
 in <a href="validation.html">Validation</a>. Until then it has no score, and the board stays empty.</p>
 <div class="callout bad">
-  <p><strong>0 of %d entries carry a result.</strong> No backtest has been executed and no performance figure is
-  claimed anywhere in this repository. The leaderboard will stay empty until a strategy clears the gates with a
-  price source supplied. That is the design, not a delay.</p>
+  <p><strong>0 of %d entries carry a result in this register.</strong> This register holds the plan-level
+  strategies over official data only. Its original claim &mdash; &ldquo;No backtest has been executed and no
+  performance figure is claimed anywhere in this repository&rdquo; &mdash; was true of this register and false
+  of the repository as a whole (<a href="flagged.html#F24">F24</a>): the computed research layer holds 16
+  backtests over third-party data, reported and re-ranked on signal below, and none of those has passed its
+  gates either. The board here will stay empty until a strategy clears the gates with a price source
+  supplied. That is the design, not a delay.</p>
 </div>
 </section>
 
@@ -1169,7 +1752,8 @@ The reason is set out as open question Q14 and suggestion SG11 rather than answe
            [cell("Player prop combo"), cell("Prop legs plus pairwise joint outcomes"),
             '<td>%s</td>' % pill("BLOCKED", "bad")],
        ], cls="dense"))
-    written.append(page("strategies.html", "Leaderboard", strat, wide=True))
+    written.append(page("strategies.html", "Leaderboard",
+                        strat + sprint["signal_staking"], wide=True))
 
     # -------------------------------------------------------------- validation
     gates = [
@@ -1283,7 +1867,8 @@ No strategy can be promoted to live until a price source is supplied and the dem
              '<td>%s</td>' % pill("BLOCKED", "bad")],
         ], cls="dense")
     )
-    written.append(page("validation.html", "Validation Gates", val, wide=True))
+    written.append(page("validation.html", "Validation Gates",
+                        val + sprint["demotion"], wide=True))
 
     # --------------------------------------------------------------- questions
     q_by_cat = {}
@@ -1527,6 +2112,13 @@ verification note for each one.</p>
                  esc(f["severity"]), esc(f["detail"]), links, esc(f["action"])))
     f_html.append("</section>")
     written.append(page("flagged.html", "Flagged for Review", "".join(f_html)))
+
+    # Requirements sprint pages (R21-R28) — session arena-360ca650-fl1
+    written.append(page("line-board.html", "Line Board", sprint["line_board"], wide=True))
+    written.append(page("price-snapshots.html", "Price Snapshots", sprint["price_snapshots"], wide=True))
+    written.append(page("verified-results-feed.html", "Verified Results Feed", sprint["results_feed"], wide=True))
+    written.append(page("replacement-depth.html", "Replacement Depth", sprint["replacement_depth"], wide=True))
+    written.append(page("correlation-register.html", "Correlation Register", sprint["correlation_register"], wide=True))
 
     import brief  # session arena/685f958d-fl1: model lines, results feed, signal/staking/demotion
     written.extend(brief.render(sys.modules[__name__]))
