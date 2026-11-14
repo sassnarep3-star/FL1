@@ -1,0 +1,169 @@
+{
+ "capture_date": "2026-11-14",
+ "thresholds": {
+  "min_window": 60,
+  "window": 200,
+  "d1_lb_fail": 0.0,
+  "d1_negative_streak": 60,
+  "d2_slope_band": [
+   0.4,
+   1.6
+  ],
+  "d2_hit_band_pp": 6.0,
+  "d3_season_cap": 0.35,
+  "d3_team_cap": 0.3,
+  "d3_venue_cap": 0.35,
+  "d4_price_gap_pct_max": 5.0,
+  "d4_quarantine_pct_max": 0.5,
+  "d4_verification_pct_min": 0.0,
+  "max_demotions_per_season": 2,
+  "reprobe_min_bets": 150
+ },
+ "states": [
+  "PAPER",
+  "LIVE",
+  "DEMOTE",
+  "SUSPENDED"
+ ],
+ "per_strategy": {
+  "SIDE_EDGE_1.0": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D2,D4",
+   "first_breach": "trailing mean +0.8667 pts, 95% LB -2.0750, losing run 1 bets",
+   "repromotion": {
+    "eligible": false,
+    "paper_bets_after_demotion": 3364,
+    "required": 150,
+    "lower_bound_points_beat": -0.28032,
+    "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
+   }
+  },
+  "SIDE_EDGE_1.5": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D2,D4",
+   "first_breach": "trailing mean -0.1667 pts, 95% LB -3.2250, losing run 1 bets",
+   "repromotion": {
+    "eligible": false,
+    "paper_bets_after_demotion": 2874,
+    "required": 150,
+    "lower_bound_points_beat": -0.40397,
+    "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
+   }
+  },
+  "SIDE_EDGE_2.0": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D2,D4",
+   "first_breach": "trailing mean +0.9917 pts, 95% LB -2.3250, losing run 1 bets",
+   "repromotion": {
+    "eligible": false,
+    "paper_bets_after_demotion": 2397,
+    "required": 150,
+    "lower_bound_points_beat": -0.54839,
+    "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
+   }
+  },
+  "SIDE_EDGE_3.0": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D2,D4",
+   "first_breach": "trailing mean +1.5250 pts, 95% LB -1.4750, losing run 1 bets",
+   "repromotion": {
+    "eligible": false,
+    "paper_bets_after_demotion": 1610,
+    "required": 150,
+    "lower_bound_points_beat": -0.77547,
+    "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
+   }
+  },
+  "TOTAL_EDGE_2.0": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D2,D3,D4",
+   "first_breach": "trailing mean +2.3833 pts, 95% LB -0.6583, losing run 0 bets",
+   "repromotion": {
+    "eligible": false,
+    "paper_bets_after_demotion": 2971,
+    "required": 150,
+    "lower_bound_points_beat": -0.25008,
+    "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
+   }
+  },
+  "TOTAL_EDGE_3.0": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D2,D3,D4",
+   "first_breach": "trailing mean +0.8750 pts, 95% LB -2.1667, losing run 1 bets",
+   "repromotion": {
+    "eligible": false,
+    "paper_bets_after_demotion": 2278,
+    "required": 150,
+    "lower_bound_points_beat": -0.33033,
+    "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
+   }
+  },
+  "TOTAL_EDGE_4.5": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D2,D3,D4",
+   "first_breach": "trailing mean +0.1750 pts, 95% LB -2.9750, losing run 0 bets",
+   "repromotion": {
+    "eligible": false,
+    "paper_bets_after_demotion": 1317,
+    "required": 150,
+    "lower_bound_points_beat": -0.9738,
+    "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
+   }
+  },
+  "ML_EDGE_3PP": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D4",
+   "first_breach": "trailing mean +2.4333 pts, 95% LB -1.0333, losing run 1 bets",
+   "repromotion": {
+    "eligible": true,
+    "paper_bets_after_demotion": 3329,
+    "required": 150,
+    "lower_bound_points_beat": 1.24091,
+    "why": "paper window cleared on both counts; re-promotion still requires the promotion gates to pass again"
+   }
+  },
+  "ML_EDGE_5PP": {
+   "state_before": "LIVE",
+   "state_after": "DEMOTE",
+   "triggered": "D1-SUBSTITUTE,D4",
+   "first_breach": "trailing mean +2.8167 pts, 95% LB -0.5333, losing run 1 bets",
+   "repromotion": {
+    "eligible": true,
+    "paper_bets_after_demotion": 2744,
+    "required": 150,
+    "lower_bound_points_beat": 0.80138,
+    "why": "paper window cleared on both counts; re-promotion still requires the promotion gates to pass again"
+   }
+  }
+ },
+ "published_trade_seasons": [
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+ ],
+ "trade_row_cap": 14000,
+ "trades_total": 23219,
+ "trades_published": 13310,
+ "skipped": {
+  "below_threshold": 14826,
+  "no_market_number": 52,
+  "no_verified_result": 1215
+ },
+ "refused_by_ledger": {
+  "push": 335
+ }
+}

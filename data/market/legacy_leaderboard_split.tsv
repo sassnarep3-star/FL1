@@ -1,0 +1,17 @@
+strategy_id	legacy_bets	legacy_hit_rate	legacy_roi	legacy_verdict	points_beat_mean	points_beat_lb	calibration_slope	selectivity_pct	mean_abs_edge	blockable
+WIND15_UNDER	430	0.5506	0.0723	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+DIV_DOG_AND_ELO	958	0.5427	0.0573	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+DIV_AWAY_DOG	1168	0.5368	0.0464	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+REST_ADV_AWAY	606	0.5312	0.0354	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+WIND_COLD_UNDER	181	0.5222	0.0118	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+ELO_MKT_2.5	2528	0.5205	0.0089	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+ELO_MKT_1.5	3546	0.5168	0.0032	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+DOME_OVER	1391	0.5149	-0.0003	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+BIG_FAV_FADE	543	0.5076	-0.022	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+PROB_GAP_6PT	3902	0.4944	-0.0314	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+REST_ADV	497	0.4969	-0.0324	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+DIV_HOME_DOG	722	0.4922	-0.043	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+__CONTROL_MARKET	5202	0.4865	-0.0519	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+DOME_UNDER	1391	0.4851	-0.0566	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+REST_AND_ELO	122	0.4583	-0.1131	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository
+AVAIL_EDGE_1.5	134	0.4286	-0.1818	REJECTED						SIGNAL BLOCK UNPOPULATED - no sealed bet log in the repository

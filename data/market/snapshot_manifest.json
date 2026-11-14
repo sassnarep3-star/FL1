@@ -1,0 +1,240 @@
+{
+ "capture_date": "2026-11-14",
+ "upstream_repo": "nflverse/nfldata",
+ "upstream_pin": "69a1fa550eac8edfb6782cac4f92f2350ddd5b9a",
+ "upstream_pin_at": "2026-11-14T22:05:17Z",
+ "feeds": [
+  {
+   "feed": "games",
+   "file": "games.csv",
+   "sha256": "ee311f898842eaab8429eda944df1ea52eddd88f596981464a2ca613935eda83",
+   "bytes": 2190038,
+   "rows": 7548,
+   "manifest_sha256": "ee311f898842eaab8429eda944df1ea52eddd88f596981464a2ca613935eda83",
+   "upstream_commit": "69a1fa550e",
+   "upstream_at": "2026-11-14T22:05:17Z",
+   "upstream_message": "Automated data update",
+   "vintage": "UNDOCUMENTED",
+   "markets": "SIDE,TOTAL,MONEYLINE",
+   "hash_agrees_with_manifest": "MATCH"
+  },
+  {
+   "feed": "closing_lines",
+   "file": "closing_lines.csv",
+   "sha256": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
+   "bytes": 942229,
+   "rows": 20490,
+   "manifest_sha256": "3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729",
+   "upstream_commit": "46a1ceec90",
+   "upstream_at": "2019-11-15T18:18:00Z",
+   "upstream_message": "Removing wrong odds info",
+   "vintage": "CLOSE",
+   "markets": "SIDE,TOTAL,MONEYLINE",
+   "hash_agrees_with_manifest": "MATCH"
+  },
+  {
+   "feed": "sc_lines",
+   "file": "sc_lines.csv",
+   "sha256": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
+   "bytes": 140765,
+   "rows": 4092,
+   "manifest_sha256": "384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e",
+   "upstream_commit": "ecee8ed2b2",
+   "upstream_at": "2021-06-26T17:02:14Z",
+   "upstream_message": "Automated data update",
+   "vintage": "UNDOCUMENTED",
+   "markets": "SIDE",
+   "hash_agrees_with_manifest": "MATCH"
+  },
+  {
+   "feed": "initial_lines",
+   "file": "initial_lines.csv",
+   "sha256": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
+   "bytes": 45068,
+   "rows": 1088,
+   "manifest_sha256": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
+   "upstream_commit": "3beea2086c",
+   "upstream_at": "2021-05-22T18:57:41Z",
+   "upstream_message": "Automated data update",
+   "vintage": "OPEN",
+   "markets": "SIDE,TOTAL",
+   "hash_agrees_with_manifest": "MATCH"
+  },
+  {
+   "feed": "win_totals",
+   "file": "win_totals.csv",
+   "sha256": "6228fe8c2cf41b340a9df27dc862b63f3da765068ee7c09474397279c1b75c20",
+   "bytes": 12811,
+   "rows": 576,
+   "manifest_sha256": "6228fe8c2cf41b340a9df27dc862b63f3da765068ee7c09474397279c1b75c20",
+   "upstream_commit": "42d9f538bc",
+   "upstream_at": "2021-07-29T03:30:10Z",
+   "upstream_message": "Automated data update",
+   "vintage": "UNDOCUMENTED",
+   "markets": "WIN_TOTAL",
+   "hash_agrees_with_manifest": "MATCH"
+  },
+  {
+   "feed": "injuries_official",
+   "file": "injuries_2025.csv",
+   "sha256": "c107aec1ef1369e6df56274d34144e7876c4b6ab51ce394437d8d2bb40df6b44",
+   "bytes": 169327,
+   "rows": 4442,
+   "manifest_sha256": "c107aec1ef1369e6df56274d34144e7876c4b6ab51ce394437d8d2bb40df6b44",
+   "upstream_commit": "",
+   "upstream_at": "",
+   "upstream_message": "",
+   "vintage": "N/A",
+   "markets": "",
+   "hash_agrees_with_manifest": "MATCH"
+  }
+ ],
+ "registry": [
+  {
+   "feed": "games",
+   "file": "games.csv",
+   "upstream_path": "data/games.csv",
+   "commit": "69a1fa550e",
+   "at": "2026-11-14T22:05:17Z",
+   "message": "Automated data update",
+   "publisher": "nflverse (community); derived from official NFL game books",
+   "documented": "upstream DATASETS.md documents these fields: result = home score - away score; total = sum of both scores; spread_line positive = home favoured by that many points; home_score/away_score are NA for games not yet played. DATASETS.md does NOT state when the price behind spread_line / total_line was taken.",
+   "vintage": "UNDOCUMENTED",
+   "markets": [
+    "SIDE",
+    "TOTAL",
+    "MONEYLINE"
+   ],
+   "note": "upstream ships code/draft_kings.R, which scrapes live DraftKings prices for games whose result is NA; that explains movement on unplayed games but is not documented as the source of the historical columns."
+  },
+  {
+   "feed": "closing_lines",
+   "file": "closing_lines.csv",
+   "upstream_path": "data/closing_lines.csv",
+   "commit": "46a1ceec90",
+   "at": "2019-11-15T18:18:00Z",
+   "message": "Removing wrong odds info",
+   "publisher": "nflverse (community)",
+   "documented": "NOT documented in upstream DATASETS.md. Columns observed: game_id, alt_game_id, type, side, line, odds, outcome.",
+   "vintage": "CLOSE",
+   "vintage_evidence": "filename only ('closing_lines.csv'), and the last commit that touched the file is titled 'Removing wrong odds info', which is why SPREAD/TOTAL odds are present for 1,010 of 6,830 rows.",
+   "markets": [
+    "SIDE",
+    "TOTAL",
+    "MONEYLINE"
+   ],
+   "note": "coverage ends with the 2018 season; no upstream update since 2019-11-15."
+  },
+  {
+   "feed": "sc_lines",
+   "file": "sc_lines.csv",
+   "upstream_path": "data/sc_lines.csv",
+   "commit": "ecee8ed2b2",
+   "at": "2021-06-26T17:02:14Z",
+   "message": "Automated data update",
+   "publisher": "nflverse (community)",
+   "documented": "NOT documented in upstream DATASETS.md. Columns: season, week, away_team, home_team, game_id, side, line.",
+   "vintage": "UNDOCUMENTED",
+   "markets": [
+    "SIDE"
+   ],
+   "note": "spread only, one line per side, no odds. Disagrees with games.csv on the identity of the favoured team in 167 of 2,043 games; recorded as drift, not resolved."
+  },
+  {
+   "feed": "initial_lines",
+   "file": "initial_lines.csv",
+   "upstream_path": "data/initial_lines.csv",
+   "commit": "3beea2086c",
+   "at": "2021-05-22T18:57:41Z",
+   "message": "Automated data update",
+   "publisher": "nflverse (community), single sportsbook WSGT",
+   "documented": "NOT documented in upstream DATASETS.md. Columns: season, sportsbook, type, about, side, line.",
+   "vintage": "OPEN",
+   "vintage_evidence": "filename only. The file covers the whole 2021 regular season but its only upstream commit is dated 2021-05-22, i.e. before the season was played, which is consistent with lines posted for the full schedule shortly after it was released - and inconsistent with per-week openers.",
+   "markets": [
+    "SIDE",
+    "TOTAL"
+   ],
+   "note": "QUARANTINED as a price benchmark: no odds column, one book, and it names the opposite favoured team from games.csv in 61 of 272 games."
+  },
+  {
+   "feed": "win_totals",
+   "file": "win_totals.csv",
+   "upstream_path": "data/win_totals.csv",
+   "commit": "42d9f538bc",
+   "at": "2021-07-29T03:30:10Z",
+   "message": "Automated data update",
+   "publisher": "nflverse (community)",
+   "documented": "NOT documented in upstream DATASETS.md. Columns: season, team, line, over_odds, under_odds.",
+   "vintage": "UNDOCUMENTED",
+   "markets": [
+    "WIN_TOTAL"
+   ],
+   "note": "season win-total market; used to show the store is market-generic, not spread-only."
+  },
+  {
+   "feed": "injuries_official",
+   "file": "injuries_2025.csv",
+   "upstream_path": "(mirror of nflverse release assets)",
+   "commit": "",
+   "at": "",
+   "message": "",
+   "publisher": "nflverse via mirror (see data/raw/MANIFEST.json)",
+   "documented": "third-party mirror; the release CDN was not reachable from the capture environment",
+   "vintage": "N/A",
+   "markets": [],
+   "note": "not a price feed; listed so the registry covers everything under data/raw/."
+  }
+ ],
+ "snapshots_total": 78410,
+ "snapshots_current_season": 1304,
+ "snapshots_quarantined": 1088,
+ "sqlite_interop": {
+  "inserted_calls": 20490,
+  "rows_in_store": 20490,
+  "refused": {
+   "market WIN_TOTAL is outside the store's market vocabulary": 1152,
+   "quarantined feed (not a tradable price)": 1088,
+   "vintage LIVE_CURRENT is outside the store's phase vocabulary": 208,
+   "vintage UNDOCUMENTED is outside the store's phase vocabulary": 55472
+  }
+ },
+ "vintage_counts": {
+  "CLOSE": 20490,
+  "LIVE_CURRENT": 208,
+  "OPEN": 1088,
+  "UNDOCUMENTED": 56624
+ },
+ "files": [
+  {
+   "file": "data/market/price_snapshots_2026.tsv",
+   "rows": 1304,
+   "bytes": 659906
+  },
+  {
+   "file": "data/market/price_snapshots_quarantine.tsv",
+   "rows": 1088,
+   "bytes": 578110
+  },
+  {
+   "file": "data/market/price_coverage.tsv",
+   "rows": 147,
+   "bytes": 7811
+  },
+  {
+   "file": "data/market/price_drift.tsv",
+   "rows": 6,
+   "bytes": 941
+  },
+  {
+   "file": "data/market/price_integrity.tsv",
+   "rows": 5,
+   "bytes": 431
+  },
+  {
+   "file": "data/market/benchmarks.tsv",
+   "rows": 5703,
+   "bytes": 806093
+  }
+ ]
+}

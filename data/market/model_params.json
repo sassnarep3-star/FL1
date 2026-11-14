@@ -1,0 +1,173 @@
+{
+ "capture_date": "2026-11-14",
+ "parameters": {
+  "mu": 21.230818,
+  "mu_basis": "league mean points per team, 1999..2010 (recomputed on a 3-season trailing window during the run)",
+  "lam": 0.88,
+  "s": 0.55,
+  "hfa": 2.5,
+  "sd_residual": 13.788448,
+  "tuning_objective": "mae_margin",
+  "tuning_window": "1999-2010",
+  "tuning_grid_size": 48,
+  "tuning_n_pred": 3165,
+  "model_card": {
+   "stage_order": [
+    "side",
+    "total",
+    "moneyline"
+   ],
+   "stages_completed": {
+    "side": 7548,
+    "total": 4368,
+    "moneyline": 4368
+   },
+   "games_run": 7548,
+   "depends_on": {
+    "side": [
+     "fitted scoring levels"
+    ],
+    "total": [
+     "side (same scoring levels)"
+    ],
+    "moneyline": [
+     "side (margin residual distribution)"
+    ]
+   },
+   "fitted_parameters": {
+    "mu": 21.230818,
+    "lam": 0.88,
+    "s": 0.55,
+    "hfa": 2.5,
+    "sd_residual": 13.788448
+   },
+   "market_price_fitted": false,
+   "residual_window": 6000,
+   "note": "the moneyline is derived, never fitted to prices; market lines are read from the price store and this module never writes to it"
+  }
+ },
+ "tuning_top10": [
+  {
+   "lam": 0.88,
+   "s": 0.55,
+   "hfa": 2.5,
+   "mae_margin": 10.83326869426467,
+   "mae_total": 11.401841226751452,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.92,
+   "s": 0.7,
+   "hfa": 2.5,
+   "mae_margin": 10.837461583828723,
+   "mae_total": 11.40300778421464,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.88,
+   "s": 0.7,
+   "hfa": 2.5,
+   "mae_margin": 10.850340800285153,
+   "mae_total": 11.487155508616882,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.92,
+   "s": 0.55,
+   "hfa": 2.5,
+   "mae_margin": 10.852790087141614,
+   "mae_total": 11.364273169949133,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.88,
+   "s": 0.55,
+   "hfa": 3.5,
+   "mae_margin": 10.861609069929136,
+   "mae_total": 11.626911144075498,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.92,
+   "s": 0.7,
+   "hfa": 3.5,
+   "mae_margin": 10.861714394871964,
+   "mae_total": 11.625148519140902,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.92,
+   "s": 0.7,
+   "hfa": 1.5,
+   "mae_margin": 10.87084821693279,
+   "mae_total": 11.23346130426433,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.88,
+   "s": 0.7,
+   "hfa": 3.5,
+   "mae_margin": 10.870960237615684,
+   "mae_total": 11.70778617030216,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.88,
+   "s": 0.55,
+   "hfa": 1.5,
+   "mae_margin": 10.872505547652759,
+   "mae_total": 11.228604580812343,
+   "n_pred": 3165
+  },
+  {
+   "lam": 0.92,
+   "s": 0.55,
+   "hfa": 3.5,
+   "mae_margin": 10.879982287482749,
+   "mae_total": 11.591340247157008,
+   "n_pred": 3165
+  }
+ ],
+ "tuning_grid_size": 48,
+ "dev_window": "1999-2010",
+ "evaluate_from": 2011,
+ "pipeline_audit": {
+  "stage_order": [
+   "side",
+   "total",
+   "moneyline"
+  ],
+  "stages_completed": {
+   "side": 7548,
+   "total": 4368,
+   "moneyline": 4368
+  },
+  "games_run": 7548,
+  "depends_on": {
+   "side": [
+    "fitted scoring levels"
+   ],
+   "total": [
+    "side (same scoring levels)"
+   ],
+   "moneyline": [
+    "side (margin residual distribution)"
+   ]
+  },
+  "fitted_parameters": {
+   "mu": 21.230818,
+   "lam": 0.88,
+   "s": 0.55,
+   "hfa": 2.5,
+   "sd_residual": 13.788448
+  },
+  "market_price_fitted": false,
+  "residual_window": 6000,
+  "note": "the moneyline is derived, never fitted to prices; market lines are read from the price store and this module never writes to it"
+ },
+ "what_is_not_fitted": [
+  "market prices (read from the price store, never estimated)",
+  "injury designation probabilities (no official mapping exists; see engine/injuries.py)",
+  "replacement-quality to points conversion (no snap counts; see flagged items)"
+ ]
+}
