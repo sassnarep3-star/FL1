@@ -1,0 +1,5 @@
+check	description	result	status	source	notes
+V1	records/PF/PA through all played games == official standings capture (32 teams, strict)	32/32 exact match	PASS	https://www.nfl.com/standings/	nflverse feed vs nfl.com standings capture fetched 2026-11-14 (both include the Wk10 Thursday final)
+V2	Week 10 Thursday final == nfl.com schedule page	WAS 24 @ NYG 21 vs official 'Commanders 24, Giants 21, FINAL'	PASS	https://www.nfl.com/schedules/2026/REG10/	official page fetched 2026-11-14
+V3	Week 10 slate == session B capture (13 games)	feed games 14, capture rows 14, missing-from-capture 0, extra-in-capture 0	PASS	https://www.nfl.com/schedules/2026/REG10/	data/schedule.tsv cross-check
+V4	internal consistency of 272 rows	137 played rows consistent, 135 future rows scoreless	PASS	https://github.com/nflverse/nfldata/blob/master/data/games.csv	nflverse games.csv snapshot
