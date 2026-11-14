@@ -13,6 +13,14 @@
 > **add your tasks to the top board** rather than replacing it.
 
 
+### Current task claim — `arena/725adbd2-fl1` (2026-11-14)
+
+| Task | Status | Owner | File scope | Sources / verification | Irregularities |
+|---|---|---|---|---|---|
+| Make verification results truthful when inputs/dependencies are unavailable; expose blocked prop-correlation rebuild on the review page | done | arena/725adbd2-fl1 | `scripts/verify_d.py`, `scripts/build_schedule_d.py`, `scripts/build_pages_d.py`, `tools/site.py`, `data/verification-d.tsv`, `data/flags.json`, generated `assets/js/data.js`, `schedule.html`, `prop-correlations.html`, `flagged.html`, and `validation.html`, this claim/completion note in `COORDINATION.md` | `scripts/verify_d.py` with workflow-equivalent NumPy/Pandas/SciPy installed in an ignored venv: V6 PASS and V9 BLOCKED; `scripts/verify_site.py` 0 errors/0 warnings; root and docs site verifiers pass; 78 tests pass; internal links and injury/results checks pass | Parquet mirror is not committed and is unavailable in this checkout; V9 correctly remains BLOCKED. V9 now links the actual third-party mirror, not the nflverse games feed. |
+
+**Completion note (2026-11-14):** V6 checks dependencies before attempting a fresh rebuild; V9 separately checks the external parquet input, required libraries, and parquet reader. Missing prerequisites are recorded as `BLOCKED`, never as a false pass/fail. Both status rows render visibly on `schedule.html`; F17 states the reproducibility limitation on `flagged.html`. TSV writers use LF endings for clean diffs. The root generator now also emits the D1–D3 live-to-paper demotion section, preserving the separate gate added on `main`. Verified with `.venv/bin/python -m unittest discover -s tests -q` (78 tests on rebased integration), `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, `python3 tools/checklinks.py`, `python3 tools/verify_injuries.py`, `python3 tools/verify_results.py`, `python3 site/build.py && python3 site/verify.py`, and `.venv/bin/python scripts/verify_site.py` (0 errors/0 warnings).
+
 ### Earlier board state, preserved from session C's PR #4
 
 Shared task board for the FL1 (NFL) project. All sessions must read this before starting and keep it up to date.
