@@ -213,7 +213,9 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | 2026-11-14 | `ab4e9b05` | **PR #3 merged** as `eb50220` (merge commit, 2026-11-14T03:05:45Z). GitHub Pages build for `eb50220`: **built**. Live site verified. |
 | 2026-11-14 | `ab4e9b05` | Found a rendering bug by reading the live page: the dashboard's Source column printed literal `<a class=...>` text, because `src_link()` markup was passed through `cell()` which escapes it. Fixed via `raw_src()`; added an escaped-markup guard to `checklinks.py` and proved the guard fires by injecting the bug. |
 | 2026-11-14 | `ab4e9b05` | **PR #5 merged** as `d5e9cc0`. Pages build for `d5e9cc0`: **built**. Live `index.html` re-fetched and confirmed rendering real links. |
-| 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values. |
+| 2026-11-14 | `ab4e9b05` | **PR #7 merged** as `6ba143f` (review guide, deploy record, option-label tidy). Pages build: **built**. |
+| 2026-11-14 | `ab4e9b05` | Found a second rendering bug by reading the deployed page: `verification.html` printed its own TSV header line as a data row, and two page counts were stale at 13 instead of 14. **PR #8 merged** as `1c6c8ab`; Pages build **built**; live page re-fetched clean. |
+| 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values, 0 estimated values presented as sourced. |
 
 ---
 
@@ -223,11 +225,16 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 |---|---|
 | PR #3 (this session's main deliverable) | **MERGED** into `main` as merge commit `eb50220` at 2026-11-14T03:05:45Z |
 | PR #5 (escaped-link fix) | **MERGED** into `main` as merge commit `d5e9cc0` |
+| PR #7 (review guide, PR/deploy record, option labels) | **MERGED** into `main` as merge commit `6ba143f` |
+| PR #8 (verification table header fix) | **MERGED** into `main` as merge commit `1c6c8ab` |
 | GitHub Pages source | `main`, path `/`, legacy build |
 | Pages build for `eb50220` | **built** |
 | Pages build for `d5e9cc0` | **built** |
+| Pages build for `6ba143f` | **built** |
+| Pages build for `1c6c8ab` | **built** |
 | Live URL | https://sassnarep3-star.github.io/FL1/ |
-| Live verification | `index.html`, `injuries.html`, `flagged.html`, `suggestions.html` fetched from the live host and read; all render correctly |
+| Live verification | `index.html`, `injuries.html`, `flagged.html`, `suggestions.html`, `questions.html`, `verification.html` fetched from the live host and read; all render correctly |
+| Note on caching | GitHub Pages serves `index.html` and cached paths from a CDN. A stale read straight after a deploy is a cache artefact, not a broken deploy — re-fetch with a `?cb=<sha>` query before concluding a page is wrong. This caused one false alarm during this session. |
 | Branches merged before this one | PR #1 (`7c7ae6a`), PR #2 (`42b06f5`), PR #4 (`557ffc3`) — all preserved in `archive/` |
 
 ## Verification performed on the merged `main` tree
