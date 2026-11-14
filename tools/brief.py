@@ -227,10 +227,13 @@ def render(site):
             + _td("<strong>%s</strong> @ %s" % (_esc(r["away"]), _esc(r["home"])))
             + _td(_esc(_fav(r["away"], r["home"], r["fair_home_spread"])), "num")
             + _blank("Market side: no official price source (F18)")
+            + _blank("Difference (side): needs a market value (F18)")
             + _td(_esc("%.1f" % r["fair_total"]), "num")
             + _blank("Market total: no official price source (F18)")
+            + _blank("Difference (total): needs a market value (F18)")
             + _td(_esc("%+d" % r["fair_ml_home"]), "num") + _td(_esc("%+d" % r["fair_ml_away"]), "num")
             + _blank("Market moneyline: no official price source (F18)")
+            + _blank("Difference (ML): needs a market value (F18)")
             + _td(_link(r["url"], "official game page"))
             + _td(_esc("F18, F20, F21" if r["neutral"] else "F18, F20"))
             + "</tr>")
@@ -254,7 +257,7 @@ The fair home line is the negative of the predicted home margin, rounded to the 
 against: (home PF/g + away PA/g) / 2 for the home side, and the mirror for the away side. The step
 does not read the side, but it runs after it by design.</li>
 <li><strong>Moneyline third.</strong> The win probability is &Phi;(predicted home margin / &sigma;), where
-&sigma; = %.2f is the out-of-sample RMSE of the side model. The price is the fair American price for
+&sigma; = __SIGMA__ is the out-of-sample RMSE of the side model. The price is the fair American price for
 that probability, with no vig, so it is a fair price and not a market price.</li>
 </ol>
 <p><strong>Fair, market, difference.</strong> These are three separate columns for each market. The fair
@@ -265,6 +268,7 @@ too. <strong>The backtest does not show that the model beats a constant benchmar
 </div>
 </section>"""
 
+    steps = steps.replace("__SIGMA__", "%.2f" % c["model"].sigma)
     store_rows = []
     for ps in _tsv(os.path.join(DATA, "price_snapshots.tsv")):
         store_rows.append(
