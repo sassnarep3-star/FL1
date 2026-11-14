@@ -383,7 +383,16 @@ Status values: `unclaimed` · `in progress` · `done` · `needs review` · `bloc
 
 ### Session `arena/3f677e8a-fl1` — completion record
 
-- **Merge into main:** https://github.com/sassnarep3-star/FL1/pull/6
+- **Merges into main (all merged, none left open):**
+  - https://github.com/sassnarep3-star/FL1/pull/14 — depth charts, results, verification
+    (merged 2026-11-14T03:27:25Z)
+  - https://github.com/sassnarep3-star/FL1/pull/15 — Kansas City source chip, bye-club note,
+    then superseded on the Computed Lab card by session `arena-34db7d1d-fl1`
+    (merged 2026-11-14T03:39:13Z)
+  - https://github.com/sassnarep3-star/FL1/pull/18 — fix for scrambled landing-page figures
+    (merged 2026-11-14T03:42:08Z)
+- **Note:** an earlier draft of this record cited "PR #6". That was wrong — #6 belongs to
+  another session. Corrected here.
 - **What this session added on top of main (PRs #1–#5):**
   - `data/depth.tsv`, `data/depth-sources.tsv`, `tools/normalize_depth.py` — depth charts for
     30 clubs, folded in with the existing Kansas City chart for **31 of 32 clubs covered**.
