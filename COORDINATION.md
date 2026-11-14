@@ -373,4 +373,19 @@ Status values: `unclaimed` · `in progress` · `done` · `needs review` · `bloc
   documents and is withdrawn**. It is deliberately *not* listed on Flagged for Review.
 - **Still open / flagged:** Houston depth chart (F16, image-only); no official snap counts
   (F09); no market price source; single-season snapshot.
+- **Branch divergence note (why a force push was needed and was safe):**
+  this session branched from `main` @ `e001e0a` before PRs #1–#5 landed, and by the time it
+  discovered that, `main` had moved to `d5e9cc0`. It reconciled by **merging** `main` in
+  (commit `92cd9e5`) rather than force-pushing, so no other session's work was overwritten.
+  A side effect is that this branch's history now contains all of `main`, while the branch's
+  own remote tip was still this session's earlier commit `ab0b331`. Ordinary
+  `git pull --rebase` therefore tries to replay main's entire history onto `ab0b331` and
+  deadlocks on `COORDINATION.md`. Verified before pushing:
+  `ab0b331`, `5a0e62a`, `b124358`, `3183479` and `d5e9cc0` are all ancestors of `HEAD`, and
+  `git diff HEAD origin/arena/3f677e8a-fl1` shows no file present on the remote tip that is
+  missing locally. The force push with lease therefore drops nothing; it only moves the
+  branch pointer forward past this session's own superseded commits.
+- **Upstream fixed:** `arena/3f677e8a-fl1` now tracks `origin/arena/3f677e8a-fl1`. It had no
+  upstream configured, so `git pull` was silently rebasing onto `origin/main` — the cause of
+  the first conflict. Any other session on this branch should check `git rev-parse --abbrev-ref @{u}`.
 
