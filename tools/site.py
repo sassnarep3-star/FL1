@@ -240,7 +240,7 @@ def main():
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
   <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
-    <p>All 272 regular-season games with results, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
+    <p>All 272 regular-season games, %(n_results)d results in so far, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
   <a class="card" href="prop-correlations.html"><h3>Prop Correlations</h3>
     <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
@@ -256,6 +256,7 @@ def main():
        "n_questions": n_q,
        "n_blocking": n_block,
        "n_suggestions": n_sugg,
+       "n_results": len(results),
    }
 
     kpis = table(
