@@ -1,6 +1,6 @@
-feed	rows	games	games_with_line	games_with_price	side_pairs_checked	side_pairs_asymmetric	quarantined_rows	seasons	vintages
-closing_lines	20490	3415	3415	3415	2848	0	0	2006..2018	CLOSE
-games	51588	7439	7439	5458	7439	0	0	1999..2026	LIVE_CURRENT,UNDOCUMENTED
-initial_lines	1088	272	272	0	255	0	1088	2021..2021	OPEN
-sc_lines	4092	2043	2043	0	1892	2	0	2013..2020	UNDOCUMENTED
-win_totals	1152	576	576	576	0	0	0	2003..2020	UNDOCUMENTED
+feed	rows	games	games_with_line	games_with_price	side_pairs_checked	side_pairs_asymmetric	total_pairs_conflicting	quarantined_rows	seasons	vintages
+closing_lines	20490	3415	3415	3415	2848	0	0	0	2006..2018	CLOSE
+games	51588	7439	7439	5458	7439	0	0	0	1999..2026	LIVE_CURRENT,UNDOCUMENTED
+initial_lines	1088	272	272	0	255	0	0	1088	2021..2021	OPEN
+sc_lines	4092	2043	2043	0	1892	2	0	0	2013..2020	UNDOCUMENTED
+win_totals	1152	576	576	576	0	0	0	0	2003..2020	UNDOCUMENTED

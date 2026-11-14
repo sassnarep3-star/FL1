@@ -187,13 +187,22 @@ def build_trades(side_rows: Sequence[dict], total_rows: Sequence[dict],
             eligible[rule["id"]]["eligible"] += 1
             if abs(float(delta)) < thr:
                 skipped["below_threshold"] += 1
+                eligible[rule["id"]]["below_threshold"] += 1
                 continue
             eligible[rule["id"]]["traded"] += 1
             away, home = mkt.get("away"), mkt.get("home")
+            # Which side does the model prefer? The published delta is `fair - market` in a
+            # fixed perspective per market, so the direction differs and is spelled out:
+            #   SIDE  home perspective, so a NEGATIVE delta means our line likes home more
+            #         than the market line does -> back home (we lay fewer points than the
+            #         true edge, or take more points than the fair number gives).
+            #   TOTAL a POSITIVE delta means we project more points -> back the over.
+            #   MONEYLINE a POSITIVE delta means our home probability exceeds the no-vig
+            #         market probability -> back home.
             if market_name == "SIDE":
                 fair_line = row["fair_side_line_home"]
                 market_line = row["market_side_line_home"]
-                side_key = "home" if float(delta) > 0 else "away"
+                side_key = "away" if float(delta) > 0 else "home"
                 team = home if side_key == "home" else away
                 line_for_settle = float(market_line) if side_key == "home" else -float(market_line)
                 price = mkt.get("home_side_price") if side_key == "home" else mkt.get("away_side_price")

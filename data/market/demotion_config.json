@@ -30,12 +30,12 @@
    "state_before": "LIVE",
    "state_after": "DEMOTE",
    "triggered": "D1-SUBSTITUTE,D2,D4",
-   "first_breach": "trailing mean +0.8667 pts, 95% LB -2.0750, losing run 1 bets",
+   "first_breach": "trailing mean +0.4833 pts, 95% LB -2.5083, losing run 0 bets",
    "repromotion": {
     "eligible": false,
-    "paper_bets_after_demotion": 3364,
+    "paper_bets_after_demotion": 3343,
     "required": 150,
-    "lower_bound_points_beat": -0.28032,
+    "lower_bound_points_beat": -0.586,
     "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
    }
   },
@@ -43,12 +43,12 @@
    "state_before": "LIVE",
    "state_after": "DEMOTE",
    "triggered": "D1-SUBSTITUTE,D2,D4",
-   "first_breach": "trailing mean -0.1667 pts, 95% LB -3.2250, losing run 1 bets",
+   "first_breach": "trailing mean +1.3000 pts, 95% LB -1.8083, losing run 1 bets",
    "repromotion": {
     "eligible": false,
-    "paper_bets_after_demotion": 2874,
+    "paper_bets_after_demotion": 2856,
     "required": 150,
-    "lower_bound_points_beat": -0.40397,
+    "lower_bound_points_beat": -0.56863,
     "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
    }
   },
@@ -56,12 +56,12 @@
    "state_before": "LIVE",
    "state_after": "DEMOTE",
    "triggered": "D1-SUBSTITUTE,D2,D4",
-   "first_breach": "trailing mean +0.9917 pts, 95% LB -2.3250, losing run 1 bets",
+   "first_breach": "trailing mean -0.8417 pts, 95% LB -4.3333, losing run 0 bets",
    "repromotion": {
     "eligible": false,
-    "paper_bets_after_demotion": 2397,
+    "paper_bets_after_demotion": 2385,
     "required": 150,
-    "lower_bound_points_beat": -0.54839,
+    "lower_bound_points_beat": -0.4086,
     "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
    }
   },
@@ -69,12 +69,12 @@
    "state_before": "LIVE",
    "state_after": "DEMOTE",
    "triggered": "D1-SUBSTITUTE,D2,D4",
-   "first_breach": "trailing mean +1.5250 pts, 95% LB -1.4750, losing run 1 bets",
+   "first_breach": "trailing mean +1.4250 pts, 95% LB -1.5083, losing run 1 bets",
    "repromotion": {
     "eligible": false,
-    "paper_bets_after_demotion": 1610,
+    "paper_bets_after_demotion": 1601,
     "required": 150,
-    "lower_bound_points_beat": -0.77547,
+    "lower_bound_points_beat": -0.60056,
     "why": "needs 150 settled paper bets with a positive 95% lower bound before a re-promotion vote, and must re-clear the promotion gates; profit alone cannot reopen a fund"
    }
   },
@@ -164,6 +164,6 @@
   "no_verified_result": 1215
  },
  "refused_by_ledger": {
-  "push": 335
+  "push": 395
  }
 }

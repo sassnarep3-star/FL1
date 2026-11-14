@@ -10,8 +10,11 @@ THE ORDER IS NOT COSMETIC
 
         originate_total()      raises until originate_side() has run
         derive_moneyline()     raises until originate_side() has run
-        fit_market_prices()    raises always - there is nothing to fit, the market line
-                               is read from the price store, never estimated by us
+
+    There is no function in this module that estimates a market price. The market line is
+    read from the price store and copied through; a test asserts that this file contains no
+    optimiser import, because a fitted "market line" would be our guess wearing someone
+    else's name.
 
 WHAT IS ESTIMATED, AND HOW
     Everything is fitted from the verified results ledger by walk-forward update, and
@@ -267,6 +270,9 @@ class OriginationPipeline:
         self.games = 0
         self.current: set[str] = set()
         self.market = {}
+        # set by originate_side(); a stage that runs before the side stage must be able to
+        # name the game it is refusing, so the attribute exists from construction
+        self._gid = "(no game opened yet)"
 
     # -- plumbing ----------------------------------------------------------
     def begin_game(self) -> None:

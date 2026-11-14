@@ -23,6 +23,7 @@ Artefacts (all under data/market/):
     price_snapshots_quarantine.tsv  every row we refuse to price with, and why
     benchmarks.tsv                  the market line/price each delta is measured against
     results_ledger_2026.tsv         every 2026 game, both feeds, verification status
+    results_ledger_index.tsv        verification status for every game of every season
     results_ledger_seasons.tsv      per-season verification roll-up
     results_verification.tsv        the checks that were run, with commands and results
     model_params.json               fitted parameters, tuning grid, pipeline audit
@@ -183,11 +184,11 @@ def step_store(games, verify_rows) -> dict:
         wtsv("price_snapshots_quarantine.tsv", quar, ps.FIELDS),
         wtsv("price_coverage.tsv", cov, list(cov[0].keys()) if cov else []),
         wtsv("price_drift.tsv", drift, list(drift[0].keys()) if drift else []),
+        # the column list is derived from the report itself, so a new integrity check
+        # cannot be computed and then silently dropped from the published artefact
         wtsv("price_integrity.tsv", [OrderedDict([("feed", k)] + list(v.items()))
                                      for k, v in integ.items()],
-             ["feed", "rows", "games", "games_with_line", "games_with_price",
-              "side_pairs_checked", "side_pairs_asymmetric", "quarantined_rows",
-              "seasons", "vintages"]),
+             ["feed"] + list(list(integ.values())[0].keys()) if integ else ["feed"]),
     ]
 
     # benchmark per game/market: the number every delta is measured against
@@ -287,6 +288,12 @@ def step_results(games, verify_rows) -> dict:
         ]))
     files = [
         wtsv("results_ledger_2026.tsv", season_rows, rl.LEDGER_FIELDS),
+        # the same rows for every season, so a reviewer can check that no published bet
+        # rests on a game the ledger refuses, without re-running the pipeline
+        wtsv("results_ledger_index.tsv", rows, ["game_id", "season", "week", "gameday", "away",
+                                                 "home", "away_score", "home_score", "margin_home",
+                                                 "total_points", "verify_status", "settle_eligible",
+                                                 "join_basis"]),
         wtsv("results_ledger_seasons.tsv", srows, list(srows[0].keys())),
         wtsv("results_season_reconciliation.tsv", led["season_reconciliation"],
              list(led["season_reconciliation"][0].keys()) if led["season_reconciliation"] else []),

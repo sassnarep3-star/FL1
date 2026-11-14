@@ -61,11 +61,17 @@ def load_aliases() -> dict:
     out = {}
     if not os.path.exists(path):
         return out
+    # positional, no header: this file is three tab-separated fields (depthName, reportName,
+    # note). It used to be read with DictReader, which consumed the first data row as a header
+    # and then found no "depthName" column at all - so the table came back EMPTY and every alias
+    # silently stopped being applied, while the page still claimed an exact post-alias join.
+    # A test feeds a two-row table with one alias and fails if that row is not mapped.
     with open(path, newline="", encoding="utf-8") as fh:
-        for row in csv.DictReader(fh, delimiter="\t"):
-            d = _norm(row.get("depthName", ""))
-            r = _norm(row.get("reportName", ""))
-            if d and r:
+        for parts in csv.reader(fh, delimiter="\t"):
+            if len(parts) < 2:
+                continue
+            d, r = _norm(parts[0]), _norm(parts[1])
+            if d and r and d != "depthname":      # tolerate a header if one is ever added
                 out[d] = r
     return out
 
@@ -139,7 +145,10 @@ def build(depth_rows: Sequence[dict], injuries: Sequence[dict], aliases: dict,
             line_i = int(entry["line"] or 99)
             rank_i = int(entry["rank"] or 99)
             repl = None
-            for nxt in chart[i + 1:]:
+            repl_index = None
+            next_man_injured = None
+            for j in range(i + 1, len(chart)):
+                nxt = chart[j]
                 nxt_nm = _norm(aliases.get(_norm(nxt["player"]), nxt["player"]))
                 nxt_inj = out_by_club[team].get(nxt_nm)
                 nxt_line = int(nxt["line"] or 99)
@@ -147,12 +156,16 @@ def build(depth_rows: Sequence[dict], injuries: Sequence[dict], aliases: dict,
                     continue      # cannot "come up" from a shallower string
                 cand = {"row": nxt, "injured": bool(nxt_inj),
                         "status": (nxt_inj or {}).get("game", "") if nxt_inj else ""}
+                if next_man_injured is None:
+                    # the chain-break fact is about the *immediately* next name on the
+                    # chart, not about whoever finally gets the start: if that player is
+                    # also on the report, the unit is missing two people at one slot
+                    next_man_injured = cand if nxt_inj else None
                 if not nxt_inj:
-                    repl = cand
+                    repl, repl_index = cand, j
                     break
-                # the next man is also hurt: keep looking, but remember we saw it
                 if repl is None:
-                    repl = cand
+                    repl, repl_index = cand, j
             rows.append(OrderedDict([
                 ("team", team), ("unit", unit), ("phase", _phase(unit, slot)),
                 ("slot", slot), ("position", _pos(inj, entry)),
@@ -164,11 +177,10 @@ def build(depth_rows: Sequence[dict], injuries: Sequence[dict], aliases: dict,
                 ("replacement_rank", int(repl["row"]["rank"] or 0) if repl else ""),
                 ("replacement_line", int(repl["row"]["line"] or 0) if repl else ""),
                 ("depth_levels_lost", (int(repl["row"]["line"] or 0) - line_i) if repl else ""),
-                ("depth_remaining", sum(1 for x in chart[i + 1:]
-                                         if int(x["line"] or 99) >= int(repl["row"]["line"] or 0))
-                 if repl else 0),
+                ("depth_remaining", (len(chart) - 1 - repl_index) if repl and repl_index
+                 is not None else 0),
                 ("chain_broken", "YES - the next man up is also on the report"
-                 if (repl and repl["injured"]) else ""),
+                 if next_man_injured else ""),
                 ("no_replacement", "" if repl else "YES - nobody is listed behind this slot"),
                 ("replacement_status", repl["status"] if repl and repl["injured"] else ""),
                 ("roster_starts_prior", _exp(roster, team, repl["row"]["player"] if repl else "")),

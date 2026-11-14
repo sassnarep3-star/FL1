@@ -17,8 +17,9 @@ WHAT A "RESULT" HAS TO CLEAR BEFORE IT IS TRUSTED
     silently dropped, because "we found 3 contradictions" is a fact a reader is owed.
 
 SETTLEMENT RULES (the ones the market uses, stated so a reviewer can object to them)
-    SIDE      home covers if  margin + line_home > 0; equal  => push
-    TOTAL     over wins if  total > line; equal  => push
+    SIDE      the side you bet covers if  (its own margin) + (its own line) > 0; equal => push
+              so an away dog of +3.0 covers iff the home margin is below 3.0
+    TOTAL     over wins if  total > line; under wins if total < line; equal => push
     MONEYLINE winner wins; a tied game => push for both sides (NFL rules: a wager on a
               tied game is a push unless the market is 3-way)
 
@@ -53,8 +54,17 @@ WIN, LOSE, PUSH = "WIN", "LOSE", "PUSH"
 # ---------------------------------------------------------------------------
 # settlement
 # ---------------------------------------------------------------------------
-def settle_side(line_home: float, margin_home: float) -> str:
-    adj = margin_home + float(line_home)
+def settle_side(line: float, margin_home: float, side_key: str = "home") -> str:
+    """Grade one side of a spread.
+
+    `line` is the number posted *for the side being bet*, in that side's own perspective
+    (negative = that side is the favourite). The side covers when its own margin plus its
+    own line is positive, so the away side's margin is the negated home margin. Getting
+    this sign wrong is the classic off-by-a-whole-side error: it turns "away +3 lost by 4"
+    into a win, and it is why `settle_total` takes `side_key` too.
+    """
+    own = float(margin_home) if side_key == "home" else -float(margin_home)
+    adj = own + float(line)
     if adj > 0:
         return WIN
     if adj < 0:
@@ -62,8 +72,11 @@ def settle_side(line_home: float, margin_home: float) -> str:
     return PUSH
 
 
-def settle_total(line: float, total_points: float) -> str:
+def settle_total(line: float, total_points: float, side_key: str = "over") -> str:
+    """`over` wins when the total exceeds the number; `under` wins when it falls short."""
     diff = float(total_points) - float(line)
+    if side_key == "under":
+        diff = -diff
     if diff > 0:
         return WIN
     if diff < 0:
@@ -85,11 +98,11 @@ def settle(market: str, *, side_key: str, line, margin_home, total_points) -> st
     if market == "SIDE":
         if line is None:
             raise ValueError("cannot settle a spread without a number")
-        return settle_side(float(line), float(margin_home))
+        return settle_side(float(line), float(margin_home), side_key)
     if market == "TOTAL":
         if line is None:
             raise ValueError("cannot settle a total without a number")
-        return settle_total(float(line), float(total_points))
+        return settle_total(float(line), float(total_points), side_key)
     if market == "MONEYLINE":
         return settle_moneyline(float(margin_home), side_key)
     raise ValueError("no settlement rule for market %r" % market)

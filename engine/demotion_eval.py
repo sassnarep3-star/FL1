@@ -77,14 +77,14 @@ def _points_beat(t: dict) -> float:
     line = t.get("settle_line")
     if line is None:
         line = t.get("market_line")
+    margin = float(t["margin_home"])
     if t["market"] == "SIDE":
-        home_line = float(line)
-        return float(t["margin_home"]) + (home_line if t["side_key"] == "home" else -home_line)
+        own = margin if t["side_key"] == "home" else -margin
+        return own + float(line)
     if t["market"] == "TOTAL":
-        line = float(line)
-        return (float(t["total_points"]) - line) if t["side_key"] == "over" \
-            else (line - float(t["total_points"]))
-    return float(t["margin_home"])
+        diff = float(t["total_points"]) - float(line)
+        return diff if t["side_key"] == "over" else -diff
+    return margin
 
 
 def d1_live_decay(trades: Sequence[dict], cfg: DemotionConfig) -> dict:

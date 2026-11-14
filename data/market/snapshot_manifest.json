@@ -229,7 +229,7 @@
   {
    "file": "data/market/price_integrity.tsv",
    "rows": 5,
-   "bytes": 431
+   "bytes": 465
   },
   {
    "file": "data/market/benchmarks.tsv",

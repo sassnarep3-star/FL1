@@ -14,7 +14,7 @@
  "games_2026_unplayed": 135,
  "trades": 23219,
  "trades_published": 13310,
- "pushes": 335,
+ "pushes": 395,
  "strategies": 9,
  "strategies_clearing_signal": 0,
  "rewards_paid": 0,
@@ -25,7 +25,7 @@
   "hit_rate": 0.3839,
   "breakeven_hit": 0.43478,
   "roi": -0.06139,
-  "rank_staking": 5
+  "rank_staking": 8
  },
  "correlations_published": 3,
  "correlations_held": 4,
@@ -38,5 +38,5 @@
   "s": 0.55,
   "hfa": 2.5
  },
- "fingerprint": "ac99da9cce3ce178"
+ "fingerprint": "f25651488fc1c42d"
 }

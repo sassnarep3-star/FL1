@@ -178,15 +178,27 @@ def staking_card(trades: Sequence[dict], strategy_id: str | None = None) -> dict
 
 
 def _points_beat(t: dict) -> float:
-    """Signed points by which the pick beat the line. Stake-free and unit-free."""
-    margin, total = float(t["margin_home"]), float(t["total_points"])
+    """Signed points by which the pick beat the line. Stake-free and unit-free.
+
+    Side-aware, on the number the bet was actually struck at (`settle_line`), so a push is
+    a push here and in `engine.results_ledger` at the same time. Duplicated deliberately in
+    `engine.demotion_eval`: the two must agree, and the agreement is asserted by a test
+    against book-style truths rather than assumed.
+    """
+    margin = float(t["margin_home"])
+    total = float(t["total_points"])
+    line = t.get("settle_line")
+    if line is None or line == "":
+        line = t.get("market_line")
+    if line is None or line == "":
+        return float("nan")
+    line = float(line)
     if t["market"] == "SIDE":
-        home_line = float(t["market_line"])
-        adj = margin + (home_line if t["side_key"] == "home" else -home_line)
-        return adj
+        own = margin if t["side_key"] == "home" else -margin
+        return own + line
     if t["market"] == "TOTAL":
-        return (total - float(t["market_line"])) if t["side_key"] == "over" \
-            else (float(t["market_line"]) - total)
+        diff = total - line
+        return diff if t["side_key"] == "over" else -diff
     return margin
 
 
@@ -251,18 +263,28 @@ def _boot_slope(xs: Sequence[float], ys: Sequence[float], n_boot: int = 600,
 
 
 def _grade(row: dict) -> str:
-    """Coarse, rule-based, and recomputable - not a verdict of skill."""
+    """Coarse, rule-based, and recomputable - not a verdict of skill.
+
+    The order is the point. Inversion is a measured fact about the mean points beat, so it is
+    read off that mean and nothing else; the calibration slope is a separate observation about
+    whether a bigger claimed edge buys a bigger beat. Reporting a negative slope as an
+    "inverted signal" would let a column about *scaling* decide a verdict about *direction*,
+    which is exactly the sort of overstatement this site is built to avoid.
+    """
     lb = row.get("points_beat_lb")
     n = row.get("signal_bets") or 0
     slope = row.get("calibration_slope")
+    mean = row.get("points_beat_mean")
     if not isinstance(lb, float):
         return "INSUFFICIENT SAMPLE (<30 settled bets)"
-    if isinstance(slope, float) and slope <= 0:
-        return "INVERTED - the edge points the wrong way"
+    if isinstance(mean, float) and mean < 0:
+        return "INVERTED - the side this rule picks loses points against the line on average"
     if lb > 0:
-        return "SIGNAL CLEARS ZERO at 95% (n=%d)" % n
-    if lb <= 0 and (row.get("points_beat_mean") or 0) > 0:
+        return "SIGNAL CLEARS ZERO at 95%% (n=%d)" % n
+    if isinstance(mean, float) and mean > 0:
         return "POSITIVE MEAN, NOT PROVABLE at n=%d" % n
+    if isinstance(slope, float) and slope <= 0:
+        return "FLAT CALIBRATION - a bigger claimed edge does not buy a bigger beat"
     return "NEGATIVE OR ZERO"
 
 
@@ -294,8 +316,9 @@ def rank(cards_signal: Sequence[dict], cards_staking: Sequence[dict]) -> list[di
         if not edge and profit:
             # the exact failure the split exists to expose: money made on a signal that
             # cannot clear its own break-even
+            # this string is not %-formatted, so a doubled percent would reach the artefact
             diverge = ("STAKING OUTPERFORMS SIGNAL - a profitable run on a signal with no "
-                       "edge at 95%%. No promotion, no reward.")
+                       "edge at 95%. No promotion, no reward.")
         elif edge and not profit:
             diverge = "SIGNAL OUTPERFORMS STAKING - sizing is throwing away a real edge"
         elif not edge and not profit:
