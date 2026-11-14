@@ -101,3 +101,19 @@ See `flagged.html` for all fifteen items, with links.
 
 Nothing here is a bet, an offer to wager, betting advice, or a statement about the legality of any
 activity in any jurisdiction. No regulator or tax source was verified.
+
+---
+
+## Session D additions (2026-11-14)
+
+- **`schedule.html`** — all 272 games of the 2026 regular season with results, reconciled strictly
+  (32/32 clubs' records, PF and PA) against the official standings capture and the official Week 10
+  schedule page; raw feed snapshot at `raw/games-nfldata.csv`.
+- **`prop-correlations.html`** — empirical player-level correlations (QB↔WR r≈0.79, QB↔TE r≈0.37,
+  RB rush↔receive r≈−0.07, binary lifts) computed from nflverse player_stats 1999–2024; closes
+  open question **Q-PROP-01** from the computed research layer; QA-gated and reproducible.
+- **`.github/workflows/refresh.yml`** — scheduled weekly refresh: re-fetches the games feed,
+  rebuilds and re-verifies every session-D artefact, commits only when all checks pass.
+- **Independent verification (V1–V9)** — recorded in `data/verification-d.tsv` and on the schedule
+  page: record reconciliation, deterministic rebuild of the merged computed layer, 18/18 injury
+  transcription fidelity, spread-sign convention (13/13 vs moneylines), bye-club completeness.

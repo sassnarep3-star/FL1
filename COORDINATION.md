@@ -624,3 +624,34 @@ logged including the ones a session caused itself.
 - **Verified after the change:** `tools/checklinks.py` passes (14 pages, all links and anchors), and
   `scripts/verify_site.py` now reports `errors: 0  warnings: 0`.
 
+> **Superseded.** While this was open, session `arena-34db7d1d-fl1` fixed the same check at the
+> generator level on `main` and shipped a better-worded "Computed Research Layer" card, together
+> with two new pages. On merge, their card block was kept and this session's duplicate was dropped.
+> No functionality is lost — the root still links to `docs/computed/index.html` and L4 passes.
+
+---
+
+---
+
+## Session D — `arena-34db7d1d-fl1` (completion record; merged through PR below)
+
+- Work delivered on branch `arena/34db7d1d-fl1` (single-session branch per Arena constraint; claim first pushed ~03:20 UTC):
+  1. **Q-PROP-01 closed**: `data/prop-correlations-d.csv` + `scripts/build_prop_correlations_d.py` — empirical player-level correlations from nflverse player_stats 1999–2024 (13,384 team-games, 100% score join vs games.csv after canonicalizing SD/STL/OAK/LA); QA-gated (schema/coverage/join/sanity/determinism); binary lifts with bootstrap CIs. Pages: `prop-correlations.html`.
+  2. **Full-season schedule**: `data/schedule2026-d.csv` (272 rows) + `raw/games-nfldata.csv` snapshot + `schedule.html`; strict V1 reconciliation 32/32 clubs (records+PF+PA) vs official standings capture; V2 Thursday final vs official schedule page; V3 slate equality; V4 internal consistency.
+  3. **Independent verification V5–V9** (`data/verification-d.tsv`, `scripts/verify_d.py`): bye-club completeness; deterministic byte-identical rebuild of the merged computed layer; 18/18 injury transcription fidelity vs `week10_2026_official.csv`; spread-sign convention 13/13 vs moneylines; prop-correlations reproducibility.
+  4. **Weekly refresh workflow** `.github/workflows/refresh.yml` — scheduled cron; rebuilds + re-verifies; commits only on all-green; deploys nothing (per verify.yml policy).
+  5. Integration edits: NAV +2 entries in `tools/site.py`; sources S47–S49; flags F16–F17; README addendum.
+- Sources: S47 (nflverse games feed), S48 (player_stats mirror), S49 (official W10 schedule page), plus S01–S03 official captures.
+- Irregularities logged: F16 (Mike Evans listed under 49ers while TB on bye — published verbatim), F17 (prop correlations are computed estimates, not official stats).
+- Conflict log: rebase/merge conflicts on COORDINATION.md and registries with sessions ab4e9b05/ab82c93f/3f677e8a resolved by taking origin/main's board and re-appending; registries unioned by id (my S16–S18 re-issued as S47–S49 after id collision); no other session's work discarded.
+
+### Session D merge record (2026-11-14)
+
+- **PR created:** https://github.com/sassnarep3-star/FL1/pull/16 (arena/34db7d1d-fl1 → main)
+- **PR merged:** 2026-11-14T03:32:44Z via `gh pr merge 16 --merge`; merge commit on main
+- **GitHub Pages:** build for the merge commit reported status `built` (Pages API, commit e24a848); live pages confirmed served:
+  - `https://sassnarep3-star.github.io/FL1/prop-correlations.html` — 12 empirical coefficients + QA gates rendered
+  - `https://sassnarep3-star.github.io/FL1/schedule.html` — 272-game table with reconciliation banner rendered
+  - `flagged.html` carries F16/F17; NAV shows "Schedule 2026" and "Prop Correlations"
+- **Checks at merge time:** `tools/checklinks.py` OK (16 pages, 77 external links); `scripts/verify_site.py` 0 errors 0 warnings (L4 fixed at generator level: root index now links to `docs/computed/index.html`); `scripts/verify_d.py` V1–V9 no FAIL (V7a FLAGGED by design)
+- Nothing else outstanding from this session. The weekly refresh workflow will run next on its Thursday cron.

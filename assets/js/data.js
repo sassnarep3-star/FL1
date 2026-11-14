@@ -5147,6 +5147,36 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "PARTIAL",
    "note": "Page loaded (title 'Depth Chart | Houston Texans - HoustonTexans.com') but it renders the chart as an image inside a photo-gallery widget, not as a position table. No names are machine-readable, so nothing was transcribed. Houston is therefore the only club with no depth chart on this site. Its roster page does load as a table but lists players alphabetically, not by depth, so it cannot stand in for a depth chart without inventing the ordering."
+  },
+  {
+   "id": "S47",
+   "title": "nflverse/nfldata combined games feed (schedule, results, market lines)",
+   "publisher": "nflverse (community; derived from official NFL game books)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "tier": "Third-party (reconciled 32/32 vs official standings; W10 final vs nfl.com)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "auto-updated feed; snapshot committed at raw/games-nfldata.csv; market-line columns are third-party betting data"
+  },
+  {
+   "id": "S48",
+   "title": "nflverse player_stats weekly archive 1999-2024 (mirror)",
+   "publisher": "nflverse releases via Beexly/Sports mirror",
+   "url": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
+   "tier": "Third-party mirror (QA-gated: schema, coverage, 100% score join vs games.csv, distribution sanity)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "used only for prop-correlation computation; file commit 2026-11-07; not an official NFL statistic source"
+  },
+  {
+   "id": "S49",
+   "title": "nfl.com Week 10 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/REG10/",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "'Commanders 24, Giants 21, FINAL' cross-check (V2); 14-game slate cross-check (V3)"
   }
  ],
  "schedule": [
@@ -32655,10 +32685,24 @@ window.DATA = {
    "item": "Houston Texans depth chart published as an image",
    "detail": "https://www.houstontexans.com/team/depth-chart loads, but the chart itself is rendered as an image inside a photo-gallery widget rather than as a position table. No player names are machine-readable. Houston is therefore the only club of 32 with no depth chart on this site. The Texans roster page does publish a readable table, but it is ordered alphabetically, not by depth, so it cannot be substituted without inventing the string ordering. Depth is an ordering, and the ordering is the fact being reported.",
    "sourceIds": [
-    "S46"
+    "S01",
+    "S49"
    ],
    "severity": "Medium",
    "action": "Houston is absent from the Backup Depth page and counted as uncovered. Nothing inferred in its place."
+  },
+  {
+   "id": "F17",
+   "kind": "Data provenance",
+   "item": "Player-prop correlations are computed estimates from a third-party mirror",
+   "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts.",
+   "source": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
+   "severity": "Medium",
+   "sourceIds": [
+    "S47",
+    "S48"
+   ],
+   "action": null
   }
  ]
 };
