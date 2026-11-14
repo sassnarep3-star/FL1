@@ -1,0 +1,35 @@
+# Source: https://www.nfl.com/standings/ (Official NFL standings, 2026 regular season)
+# Retrieved: 2026-11-14 UTC. Snapshot includes Thursday, Nov 12 2026 (Week 10 TNF) result.
+# Columns: team\tabbr\tw\tl\tt\tpct\tpf\tpa\tnet\thome\troad\tdiv\tconf\tstrk
+Buffalo Bills	BUF	7	1	0	0.875	256	187	69	3-1-0	4-0-0	0-1-0	4-1-0	4W
+New England Patriots	NE	5	4	0	0.556	211	207	4	3-1-0	2-3-0	3-0-0	5-1-0	1L
+New York Jets	NYJ	2	7	0	0.222	182	223	-41	1-3-0	1-4-0	0-2-0	2-4-0	4L
+Miami Dolphins	MIA	1	7	0	0.125	126	200	-74	0-4-0	1-3-0	1-1-0	1-4-0	2L
+Pittsburgh Steelers	PIT	6	2	0	0.750	180	144	36	4-0-0	2-2-0	2-1-0	3-2-0	4W
+Cincinnati Bengals	CIN	6	2	0	0.750	240	175	65	2-1-0	4-1-0	1-1-0	4-2-0	4W
+Cleveland Browns	CLE	5	4	0	0.556	161	196	-35	3-0-0	2-4-0	2-1-0	3-3-0	2L
+Baltimore Ravens	BAL	4	5	0	0.444	189	236	-47	1-3-0	3-2-0	0-2-0	2-4-0	4L
+Jacksonville Jaguars	JAX	6	2	0	0.750	229	121	108	4-1-0	2-1-0	1-1-0	5-2-0	2W
+Houston Texans	HOU	3	5	0	0.375	209	192	17	0-4-0	3-1-0	2-1-0	3-3-0	1W
+Indianapolis Colts	IND	2	7	0	0.222	184	249	-65	1-3-0	1-4-0	1-2-0	1-5-0	5L
+Tennessee Titans	TEN	1	7	0	0.125	144	199	-55	0-4-0	1-3-0	1-1-0	1-5-0	2L
+Denver Broncos	DEN	7	2	0	0.778	198	186	12	4-0-0	3-2-0	2-1-0	3-1-0	5W
+Kansas City Chiefs	KC	6	2	0	0.750	202	143	59	4-0-0	2-2-0	3-1-0	6-1-0	1W
+Las Vegas Raiders	LV	4	5	0	0.444	238	268	-30	1-3-0	3-2-0	1-1-0	3-3-0	1L
+Los Angeles Chargers	LAC	0	8	0	0.000	121	219	-98	0-4-0	0-4-0	0-3-0	0-5-0	8L
+New York Giants	NYG	5	3	1	0.611	203	196	7	3-2-0	2-1-1	2-1-1	3-3-1	1L
+Dallas Cowboys	DAL	4	5	0	0.444	246	236	10	1-3-0	3-2-0	2-1-0	2-4-0	1W
+Washington Commanders	WAS	3	5	1	0.389	196	223	-27	2-2-1	1-3-0	2-2-1	3-4-1	1W
+Philadelphia Eagles	PHI	2	7	0	0.222	148	221	-73	1-4-0	1-3-0	1-3-0	1-6-0	7L
+Chicago Bears	CHI	7	2	0	0.778	241	184	57	4-1-0	3-1-0	0-2-0	5-2-0	4W
+Detroit Lions	DET	6	2	0	0.750	222	189	33	4-0-0	2-2-0	2-0-0	4-1-0	4W
+Minnesota Vikings	MIN	6	2	0	0.750	146	116	30	3-1-0	3-1-0	2-1-0	4-1-0	2L
+Green Bay Packers	GB	6	3	0	0.667	216	191	25	3-1-0	3-2-0	1-2-0	4-3-0	2W
+Carolina Panthers	CAR	3	5	0	0.375	199	219	-20	1-3-0	2-2-0	1-1-0	3-3-0	3L
+New Orleans Saints	NO	3	5	0	0.375	185	216	-31	1-4-0	2-1-0	0-1-0	1-3-0	1W
+Tampa Bay Buccaneers	TB	3	6	0	0.333	202	178	24	1-4-0	2-2-0	2-0-0	3-3-0	1L
+Atlanta Falcons	ATL	3	6	0	0.333	188	223	-35	1-4-0	2-2-0	1-2-0	3-3-0	2L
+San Francisco 49ers	SF	7	1	0	0.875	235	156	79	5-0-0	2-1-0	3-0-0	4-1-0	1W
+Seattle Seahawks	SEA	5	4	0	0.556	202	162	40	4-2-0	1-2-0	2-1-0	2-3-0	1W
+Los Angeles Rams	LAR	5	4	0	0.556	214	181	33	2-3-0	3-1-0	0-2-0	3-2-0	3W
+Arizona Cardinals	AZ	3	6	0	0.333	178	255	-77	0-3-0	3-3-0	1-3-0	2-5-0	1L
