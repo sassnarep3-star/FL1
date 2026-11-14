@@ -1,8 +1,9 @@
 # Price snapshots and verified results: storage contract
 
-This repository now has two standard-library SQLite storage primitives:
+This repository has two complementary standard-library SQLite storage primitives for prices, plus a results import boundary:
 
-- `engine.snapshot_store.SnapshotStore` writes an opening snapshot when a market is originated and permits one later closing snapshot. `fair_value`, `market_value`, and the signed `difference = fair_value - market_value` are separate fields; American odds are separate from line values. Markets lacking a verified opening or closing quote are returned by `incomplete_markets()`.
+- `engine.price_snapshots.py` is the raw quote-event ledger, preserving vendor line/odds, capture time, source record ID and originating model version.
+- `engine.snapshot_store.SnapshotStore` is the paired analytical ledger: it writes an opening snapshot when a market is originated and permits one later closing snapshot. `fair_value`, `market_value`, and the signed `difference = fair_value - market_value` are separate fields; American odds are separate from line values. Markets lacking a verified opening or closing quote are returned by `incomplete_markets()`.
 - `engine.results_feed.ResultsFeed` accepts only explicitly verified `FINAL` scores with an HTTPS `nfl.com` source URL, checked-at timestamp, and exact captured source bytes whose SHA-256 matches the supplied digest. Re-importing the same game/payload is idempotent. A corrected official result is retained as another event; `latest()` selects the newest imported revision.
 
 ## Deliberate verification boundary
