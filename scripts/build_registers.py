@@ -456,7 +456,7 @@ IRR = [
          impact="Small, but it makes the reported breakeven marginally conservative rather than generous.",
          mitigation="Documented here and in every script docstring.",
          fix="None needed.",
-         link="docs/methods.html"),
+         link="methods.html"),
 ]
 
 # ---------------------------------------------------------------------------
