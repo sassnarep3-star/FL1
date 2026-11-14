@@ -193,5 +193,130 @@
       "S48"
     ],
     "action": "Retain the third-party label; for reproducible refreshes, fetch a pinned source artifact and record its content hash. Until that input and QA run are available, treat V9 as BLOCKED and do not claim this checkout independently reproduced the estimates."
+  },
+  {
+    "id": "F18",
+    "kind": "data gap",
+    "item": "Opening prices exist for exactly one season, from one book, with no odds - so requirement 1 is met on the close side only",
+    "detail": "The price store records an opening number for 272 games (2021, sportsbook WSGT, spreads and totals, no odds) and closes for 6,830 games (2006-2018) plus 7,439 line records on the games feed. Every other season has no first-posted price in any capture this repository holds. The store publishes the gap as coverage rather than filling it: 56,624 of 78,410 snapshots carry the vintage UNDOCUMENTED.",
+    "sourceIds": [
+      "S52",
+      "S50",
+      "S54"
+    ],
+    "severity": "High",
+    "action": "Requirement 1 is recorded as PARTIALLY MET on requirements.html terms: the store holds opening AND closing columns for every market, and the opening column is blank where no dated open exists. Closing the gap needs the live snapshot collector (SG16); no third-party archive is substituted for it."
+  },
+  {
+    "id": "F19",
+    "kind": "measurement caveat",
+    "item": "A quarter of the backtest log is priced at an assumed -110 because the feed carries a line with no odds",
+    "detail": "3,423 of 13,310 published bets (25.7%) are struck against a spread or total number for which the games feed publishes no payout. Those rows carry price_basis NOT_POSTED_ASSUMED_-110. The signal block is unaffected (it never reads a stake or a price); the ROI column for those rules is an approximation and is marked as such in the same table as the 100%-posted moneyline rules.",
+    "sourceIds": [
+      "S47"
+    ],
+    "severity": "Medium",
+    "action": "Published in the staking block next to 'priced at a number the feed holds' and in the roi_is_assumed column; the -110 assumption is never presented as a market quote."
+  },
+  {
+    "id": "F20",
+    "kind": "source conflict",
+    "item": "Two feeds disagree with each other and neither is declared authoritative: 167 games have opposite favourites",
+    "detail": "games.csv vs sc_lines: 2,105 of 4,142 comparable side rows differ, median 0.5 pt, max 11.0, and the sign disagrees on 167 games (e.g. 2013_01 WAS_SD: +7.0 against -7.0). closing_lines vs games.csv moneyline odds agree on 394 of 3,232. initial_lines vs games.csv disagree on 61 of 272. Nothing here averages, picks a winner, or reconciles by authority.",
+    "sourceIds": [
+      "S47",
+      "S51",
+      "S50",
+      "S52"
+    ],
+    "severity": "High",
+    "action": "Published as a drift matrix on price-store.html and used as the reason one feed is quarantined; recorded so a reader can see the size of the vendor disagreement before trusting any single number."
+  },
+  {
+    "id": "F21",
+    "kind": "coverage gap",
+    "item": "38 scheduled 2026 games carry no line in any captured feed, 16 of them in the current Week 11 slate",
+    "detail": "Week 11 (2026-11-19/22) has 16 games and none has a spread, total or moneyline in the capture; the whole season has 272 games of which 234 are lined. For those games the market column on the origination board is blank, so the difference column is blank too - a line can be originated against nothing.",
+    "sourceIds": [
+      "S47",
+      "S54"
+    ],
+    "severity": "Medium",
+    "action": "Board rows published with the market column marked 'no market number captured'; delta left blank rather than measured against an assumed hold."
+  },
+  {
+    "id": "F22",
+    "kind": "spec gap",
+    "item": "The store's phase vocabulary cannot express 'the source never said when this price was taken'",
+    "detail": "engine/price_snapshots.py constrains phase to open/close/intermediate. 57,920 of 78,410 snapshots in this session's ledger are rejected by that CHECK - not because they are bad rows but because labelling an undated number 'intermediate' would invent a provenance the feed does not have.",
+    "sourceIds": [
+      "S54",
+      "S50"
+    ],
+    "severity": "High",
+    "action": "Recorded as a request on COORDINATION.md rather than patched here (that file is another session's): either a fourth phase value is added to the CHECK, or the store stays close-only and the ledger remains a separate export. Decision sits with the storage owner and Q11."
+  },
+  {
+    "id": "F23",
+    "kind": "irregularity",
+    "item": "The 2026 season in the captured feed stops at Week 9 plus one Week 10 game, and the official standings row for 2026 shows 16-1",
+    "detail": "data/results.tsv (transcribed from the official Week-by-week pages, S04/S49) contains 137 games: weeks 1-4 have 16 games, weeks 5 and 9 have 15, weeks 6-8 have 14, week 10 has 1. That is the feed's state at the capture moment, not an error in this repository, but it means 'current' on this site means 2026-11-14 and nothing later. The season recount matches the official 2026 standings for 32 of 32 clubs, which is what makes the shortfall a coverage fact rather than a correctness one.",
+    "sourceIds": [
+      "S04",
+      "S49",
+      "S03"
+    ],
+    "severity": "Medium",
+    "action": "Every dated page states the capture date; the ledger row for each game records which of the two feeds it was verified against."
+  },
+  {
+    "id": "F24",
+    "kind": "gate blocked",
+    "item": "No bet in this repository can be measured for closing-line value, so the promotion gate that needs CLV cannot run and no reward can be paid",
+    "detail": "CLV needs the price at the time the pick was made and the close after it. The capture has no dated open, so 0 of 13,310 bets are measurable. This session's demotion run therefore evaluates D1 against the recorded market line as a named substitute (D1-SUBSTITUTE) and reports the substitution on the page rather than presenting it as the original rule.",
+    "sourceIds": [
+      "S52",
+      "S54"
+    ],
+    "severity": "High",
+    "action": "demotion-gate.html publishes the substitute definition, the numbers, and the exact unlock (the snapshot collector). Rewards: 0 units paid, 9 of 9 rules ineligible - stated on signal-vs-staking.html."
+  },
+  {
+    "id": "F25",
+    "kind": "performance finding",
+    "item": "The model's own signal is negative against the market on all three markets, and worse as the threshold tightens",
+    "detail": "Walk-forward, 2011-2026, 13,310 bets: side rules lose 1.98 to 4.96 points per bet vs the recorded market line (3,364 bets at a 1.0-point gap), and both total rules are inverted - calibration slope -0.02 to -0.07, i.e. a bigger stated gap predicts a worse result. Moneyline rules are -0.017 to -0.020 probability points.",
+    "sourceIds": [
+      "S56",
+      "S47"
+    ],
+    "severity": "Medium",
+    "action": "Published as the headline of the leaderboard rather than hidden in a footnote; nothing is promoted, so nothing is exposed to the negative edge. The tuning grid that chose these parameters is published with the model card."
+  },
+  {
+    "id": "F26",
+    "kind": "documentation gap",
+    "item": "Three of the four line files have no field documentation at all - only filenames assert what they are",
+    "detail": "Upstream DATASETS.md documents the games feed (result = home-away; total = sum; spread_line positive = home favoured) and does not document closing_lines.csv, sc_lines.csv, initial_lines.csv or win_totals.csv. The publisher's own code (code/draft_kings.R) scrapes live DraftKings prices for unplayed games, which explains current-season movement but is not documentation of the historical columns. No CRAN reference page for these functions is reachable.",
+    "sourceIds": [
+      "S50",
+      "S51",
+      "S52",
+      "S53"
+    ],
+    "severity": "Medium",
+    "action": "The store records the vintage claim as 'filename only' in the vintage_evidence column of every snapshot row, and pages print UNDOCUMENTED rather than guessing a market hour."
+  },
+  {
+    "id": "F27",
+    "kind": "change record",
+    "item": "This session refreshed one capture, and the diff is 26 fields - all moneylines of games that have not been played",
+    "detail": "data/raw/games.csv at main was 9 days behind upstream. 7,548 games on both sides, 0 added or removed; the difference is 26 rows' moneyline columns (13 games x 2 sides), e.g. 2026_10_HOU_CLE home moneyline -230 -> -225. Scores, spreads and totals are unchanged, so no historical settlement in this repository moves.",
+    "sourceIds": [
+      "S47",
+      "S54"
+    ],
+    "severity": "Low",
+    "action": "Refreshed file committed with its new sha256 in the manifest and the previous hash recorded alongside it, so the change is auditable rather than silent."
   }
 ]

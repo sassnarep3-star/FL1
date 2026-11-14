@@ -44,6 +44,14 @@ NAV = [
     ("suggestions.html", "Suggestions"),
     ("sources.html", "Sources"),
     ("verification.html", "Verification"),
+    ("price-store.html", "Price Store"),
+    ("results-feed.html", "Results Feed"),
+    ("origination.html", "Origination Run"),
+    ("signal-vs-staking.html", "Signal vs Staking"),
+    ("replacement-depth.html", "Replacement Depth"),
+    ("correlation-gate.html", "Correlation Gate"),
+    ("demotion-gate.html", "Demotion Gate"),
+    ("decision-desk.html", "Decision Desk"),
     ("flagged.html", "Flagged for Review"),
 ]
 
@@ -169,6 +177,11 @@ STATUS_KIND = {
 
 
 def main():
+    # imported here rather than at module scope: pages_market reuses this file's page
+    # shell through a late-bound lookup, and a module-level import would run it before
+    # those helpers are defined (and shadow the stdlib `site` module in the process)
+    import pages_market
+
     teams = build.load("teams.tsv")
     standings = build.load("standings.tsv")
     injuries = build.load("injuries.tsv")
@@ -243,6 +256,30 @@ def main():
     <p>All 272 regular-season games with results, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
   <a class="card" href="prop-correlations.html"><h3>Prop Correlations</h3>
     <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
+  <a class="card" href="price-store.html"><h3>Price-Snapshot Store</h3>
+    <p><strong>%(mk_snapshots)s</strong> append-only price rows with feed, field, capture timestamp and the
+    vintage the publisher actually asserted &mdash; plus the coverage that honest labelling leaves open, and the
+    cross-feed drift that averaging would hide.</p></a>
+  <a class="card" href="results-feed.html"><h3>Verified Results Feed</h3>
+    <p><strong>%(mk_verified)s of %(mk_games)s</strong> current-season games verified game-by-game against the
+    official transcription, with the season recount against the league table. Settlement refused where the
+    status is not earned.</p></a>
+  <a class="card" href="origination.html"><h3>Origination Run</h3>
+    <p>Side, then total, then moneyline &mdash; the order enforced in code. Fair line, market line and the
+    difference as three columns, with the model card and the tuning grid beside every number.</p></a>
+  <a class="card" href="signal-vs-staking.html"><h3>Signal vs Staking</h3>
+    <p>Two scorecards per strategy: a stake-free signal block ranked on its lower bound, and a staking block
+    that is published but never ranked on. <strong>%(mk_rewards)s</strong> reward units payable today.</p></a>
+  <a class="card" href="replacement-depth.html"><h3>Replacement Depth</h3>
+    <p><strong>%(mk_depth)s</strong> vacancies resolved to a named replacement with the depth it cost, instead
+    of a count of who is out.</p></a>
+  <a class="card" href="correlation-gate.html"><h3>Correlation Gate</h3>
+    <p>Official operands only, <em>n</em> on every row, and the pairs the gate refuses shown with their reason
+    instead of quietly dropped.</p></a>
+  <a class="card" href="demotion-gate.html"><h3>Demotion Gate</h3>
+    <p>Four monitors evaluated on a real bet log, with the earliest breach named by season, week and game.</p></a>
+  <a class="card" href="decision-desk.html"><h3>Decision Desk</h3>
+    <p>What this build opened, what it is waiting on, and the next five actions in order.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
     <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a></section>
 """ % {
@@ -256,6 +293,11 @@ def main():
        "n_questions": n_q,
        "n_blocking": n_block,
        "n_suggestions": n_sugg,
+       "mk_snapshots": pages_market.summary_counts()["snapshots"],
+       "mk_verified": pages_market.summary_counts()["verified"],
+       "mk_games": pages_market.summary_counts()["games"],
+       "mk_rewards": pages_market.summary_counts()["rewards"],
+       "mk_depth": pages_market.summary_counts()["depth"],
    }
 
     kpis = table(
@@ -1389,6 +1431,12 @@ verification note for each one.</p>
                  esc(f["severity"]), esc(f["detail"]), links, esc(f["action"])))
     f_html.append("</section>")
     written.append(page("flagged.html", "Flagged for Review", "".join(f_html)))
+
+    # ------------------------------------------------------------- market spine
+    # Eight pages generated from data/market/, i.e. from artefacts a script wrote.
+    # They live in tools/pages_market.py so this file stays the single owner of the
+    # site shell; the numbers here are counts, not new claims.
+    written.extend(pages_market.render_all())
 
     print("wrote %d pages:" % len(written))
     for w in written:

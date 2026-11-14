@@ -258,5 +258,70 @@
     "source": "COORDINATION.md",
     "blocking": "No",
     "recommended_path": "Keep the board current. Log every claim and every handoff with a UTC timestamp."
+  },
+  {
+    "id": "Q21",
+    "category": "Storage",
+    "priority": "Critical",
+    "question": "Should the snapshot store accept a fourth phase value for prices whose vintage the publisher never stated, or stay close-only?",
+    "why_it_matters": "72 percent of the market rows this project can capture are undated. If the store cannot hold them, the store is a 2006-2018 closing-lines table and every current-season origination number lives outside it; if it holds them under a label meaning 'intermediate', the ledger asserts a provenance nobody has.",
+    "what_we_know": "engine/price_snapshots.py constrains phase to open/close/intermediate with a CHECK. Re-running this session's ledger through it accepts 20,490 rows and refuses 57,920 (price-store.html, table E). The refusal is the correct behaviour given the schema.",
+    "what_we_dont_know": "Whether the storage owner would rather widen the enum or keep the store narrow and treat the ledger as a separate export. Both are defensible; the choice changes the write path every future page reads.",
+    "missing_data": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+    "source": "S54",
+    "blocking": "yes - it decides where live prices are written",
+    "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+  },
+  {
+    "id": "Q22",
+    "category": "Measurement",
+    "priority": "High",
+    "question": "What price basis should a published ROI use when the feed carries a line but no odds?",
+    "why_it_matters": "A quarter of the backtest log is priced at an assumed -110 because the games feed publishes spread and total numbers without payout for those games. ROI on an assumed price is a model statistic, not a market result, and it will be read as the latter if it is not labelled.",
+    "what_we_know": "13,310 published bets; 3,423 (25.7 percent) have no posted odds. The moneyline rules are 100 percent posted. Both figures are computed per rule and published.",
+    "what_we_dont_know": "Whether the site should show ROI for the unpriced subset at all, or restrict the headline ROI to posted-price rows and show the rest as points-beat only.",
+    "missing_data": "Nothing further is capturable from these feeds; the odds columns are empty upstream for those seasons.",
+    "source": "S47,S54",
+    "blocking": "no - the choice is presentational, the data does not change",
+    "recommended_path": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number."
+  },
+  {
+    "id": "Q23",
+    "category": "Prices",
+    "priority": "High",
+    "question": "Is the 2021 single-book opening line worth a published movement table, or should it stay quarantined?",
+    "why_it_matters": "It is the only first-posted number in the repository. 255 of 272 spreads moved between it and the recorded close (mean -0.44 points, sd 4.5), which is a real signal about line behaviour - but from one book, with no odds, with a file date that predates the season, and contradicting games.csv on which side is favoured in 61 games.",
+    "what_we_know": "The movement statistics above, computed this session. The contradiction rate. That no other open exists for any season.",
+    "what_we_dont_know": "Whether the numbers were posted at the season's start for the whole schedule (the file's git date suggests so) or updated weekly (the movement pattern suggests partly). The publisher documents neither.",
+    "missing_data": "A dated capture of the same book's line for the same games, which does not exist in any free source this environment can reach.",
+    "source": "S52",
+    "blocking": "no",
+    "recommended_path": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement."
+  },
+  {
+    "id": "Q24",
+    "category": "Presentation",
+    "priority": "Medium",
+    "question": "For the 38 unlined 2026 games, does the board show the fair number with an empty market column, or suppress the row?",
+    "why_it_matters": "Sixteen of the twenty Week 11 games have no market number in the capture. Showing a fair line with a blank difference proves origination happened; it also invites a reader to treat an unbenchmarked number as an edge.",
+    "what_we_know": "The model produces a spread, total and moneyline for all 272 scheduled games from verified scoring inputs, independent of any market number.",
+    "what_we_dont_know": "Whether the user wants unbenchmarked picks visible at all. The site's stated rule is blank-plus-flag, which favours showing them with the gap marked.",
+    "missing_data": "Nothing; the choice is editorial.",
+    "source": "S47,S54",
+    "blocking": "no",
+    "recommended_path": "Show them, with the delta column reading 'no market number captured' and the count of such rows stated above the table. Blank-plus-flag is the rule already on this site."
+  },
+  {
+    "id": "Q25",
+    "category": "Governance",
+    "priority": "High",
+    "question": "Should a D4 integrity trigger block a merge, or only block promotion?",
+    "why_it_matters": "D4 is fail-closed: missing price coverage or a feed contradiction demotes a strategy. Right now it triggers for 9 of 9 rules, chiefly because 25.7 percent of bets are unpriced and because two feeds disagree about the 2026 slate. If that also blocks the site, the site can never ship while the data gap that D4 exists to describe is still open.",
+    "what_we_know": "The standing rule on this project: flagged items and unverified rows publish on the Flagged for Review page and do not block the merge; a broken build or broken links do block it.",
+    "what_we_dont_know": "Whether the same split should apply to D4 specifically, since D4 is a data-quality gate rather than a performance gate.",
+    "missing_data": "A decision from the owner.",
+    "source": "S54",
+    "blocking": "no - the standing rule answers it for now",
+    "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
   }
 ]
