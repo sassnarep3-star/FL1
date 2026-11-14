@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suggestions &amp; Decision Review — FL1 NFL Dashboard</title>
+<meta name="description" content="Dedicated suggestions section: questions, information, and answers that must be addressed before any decision, plus steps to discover missing information.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a href="#content" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><div class="mark">FL1</div><div>NFL Decision Support</div></div>
+    <nav class="nav">
+      <a href="index.html">Dashboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="suggestions.html" class="active">Suggestions &amp; Review</a>
+      <a href="nfl-strategies.html">NFL Strategies</a>
+      <a href="injuries.html">Injuries &amp; Deficiencies</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container" id="content">
+  <header class="page-header">
+    <div>
+      <h1>Suggestions &amp; Decision Review</h1>
+      <div class="subtitle">Review suggestions and choose the best path before implementing any change. No change is made on manual input alone.</div>
+    </div>
+    <a href="index.html" class="btn secondary" style="margin-left:auto;">&larr; Back to Dashboard</a>
+  </header>
+
+  <div class="alert info">
+    <span class="icon">&#9432;</span>
+    <div>
+      <strong>How this section works.</strong> Each item below lists a question, the information needed, the current answer (or blank if unknown), and suggested steps to discover missing information. A reviewer selects the best path before anything is implemented. Items with blank answers are flagged for review.
+    </div>
+  </div>
+
+  <section>
+    <h2>Open Questions &amp; Required Information</h2>
+    <div class="sugg-grid">
+      <div class="q-card">
+        <div class="qid">Q-01</div>
+        <h4>Which official data source will power injury and roster tracking?</h4>
+        <p>Injury status, practice participation, and starter/backup depth must come from a source that can be verified and re-checked.</p>
+        <div class="ans">Answer: NFL.com official injury report (<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a>).</div>
+        <p style="margin-top:8px;"><strong>Missing-info discovery:</strong> Confirm nfl.com exposes a machine-readable feed; if not, document manual scrape cadence and flag.</p>
+      </div>
+      <div class="q-card">
+        <div class="qid">Q-02</div>
+        <h4>Which source will provide NFL betting lines, parlays, and player props?</h4>
+        <p>There is no official NFL source for betting lines. A third-party odds provider must be selected before any line-origination strategy can be validated.</p>
+        <div class="ans blank">Answer: blank — no official source identified yet.</div>
+        <p style="margin-top:8px;"><strong>Missing-info discovery:</strong> Research licensed odds APIs (e.g., official sportsbook data partners), record candidate providers, compare cost/latency/coverage, flag as unverified until selected.</p>
+      </div>
+      <div class="q-card">
+        <div class="qid">Q-03</div>
+        <h4>What validation gates must each betting strategy pass?</h4>
+        <p>Strategies must be shown to be selectively skill-based, not luck-based, before inclusion on the leaderboard.</p>
+        <div class="ans blank">Answer: blank — gates not yet defined.</div>
+        <p style="margin-top:8px;"><strong>Missing-info discovery:</strong> Propose gates: minimum sample size, edge vs. closing line, win-rate threshold, correlation limit, max drawdown, out-of-sample test. Reviewer chooses final gate set.</p>
+      </div>
+      <div class="q-card">
+        <div class="qid">Q-04</div>
+        <h4>How are correlation values determined between bet legs (parlays / player props)?</h4>
+        <p>Correlation must be measured so correlated legs are not double-counted as independent edge.</p>
+        <p class="ans blank">Answer: blank — correlation method not defined.</p>
+        <p style="margin-top:8px;"><strong>Missing-info discovery:</strong> Propose Pearson/Spearman correlation on historical outcomes, conditional probability P(B|A), and variance-inflation checks. Reviewer selects method.</p>
+      </div>
+      <div class="q-card">
+        <div class="qid">Q-05</div>
+        <h4>How is the leaderboard scored and how are rewards allocated?</h4>
+        <p>Top-performing strategies must be rewarded based on verified, skill-based performance.</p>
+        <p class="ans blank">Answer: blank — scoring/reward rules not defined.</p>
+        <p style="margin-top:8px;"><strong>Missing-info discovery:</strong> Propose scoring by risk-adjusted return (e.g., Sharpe-like), hit rate, and edge vs. close; rewards proportional to rank. Reviewer approves.</p>
+      </div>
+      <div class="q-card">
+        <div class="qid">Q-06</div>
+        <h4>Which injury/backup scenarios create the largest offensive/defensive deficiencies?</h4>
+        <p>Must identify when 2nd, 3rd, or 4th string backups replace starters on either side of the ball.</p>
+        <p class="ans blank">Answer: blank — deficiency thresholds not defined.</p>
+        <p style="margin-top:8px;"><strong>Missing-info discovery:</strong> Track snap counts and AV (approx value) drop-off starter-to-backup; flag games where a key starter is out and the backup has limited NFL snaps.</p>
+      </div>
+      <div class="q-card">
+        <div class="qid">Q-07</div>
+        <h4>What triggers a suggestion to become an approved change?</h4>
+        <p>A reviewer must explicitly choose the best path before implementation; auto-approval is not allowed.</p>
+        <p class="ans blank">Answer: blank — approval workflow not defined.</p>
+        <p style="margin-top:8px;"><strong>Missing-info discovery:</strong> Propose: reviewer sign-off, source verification, validation-gate pass, and rollback plan recorded in COORDINATION.md.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Suggestion Review Queue</h2>
+    <p>Suggestions submitted for review appear here with a status. A reviewer chooses Approved, Rejected, or Needs Info before any implementation.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Suggestion</th><th>Submitted By</th><th>Status</th><th>Reviewer Decision</th><th>Source / Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>S-01</td>
+            <td>Use NFL.com injury report as the single source for starter/backup status.</td>
+            <td>System (autonomous)</td>
+            <td><span class="status verified">Pending review</span></td>
+            <td class="blank">— awaiting reviewer</td>
+            <td class="source"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td>
+          </tr>
+          <tr>
+            <td>S-02</td>
+            <td>Add a licensed odds API for betting lines before backtesting strategies.</td>
+            <td>System (autonomous)</td>
+            <td><span class="status unverified">Needs info</span></td>
+            <td class="blank">— provider not selected</td>
+            <td class="source blank">No official NFL source for odds</td>
+          </tr>
+          <tr>
+            <td>S-03</td>
+            <td>Build a skill-based strategy leaderboard with validation gates.</td>
+            <td>System (autonomous)</td>
+            <td><span class="status unverified">Needs info</span></td>
+            <td class="blank">— gates and scoring undefined</td>
+            <td class="source blank">n/a</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Reviewer Actions</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Suggestion ID</label>
+        <input type="text" placeholder="e.g. S-01">
+      </div>
+      <div class="form-group">
+        <label>Decision</label>
+        <select>
+          <option>Approve</option>
+          <option>Reject</option>
+          <option>Needs More Info</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Reviewer notes</label>
+        <textarea rows="3" placeholder="Record the chosen path and rationale"></textarea>
+      </div>
+      <div class="form-group" style="align-self:end;">
+        <button class="btn">Record decision</button>
+      </div>
+    </div>
+    <p class="cite" style="margin-top:10px;">Decisions are logged in COORDINATION.md and reflected on this page after review. Nothing is implemented without a recorded reviewer decision.</p>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><strong>FL1 — NFL Decision Support &amp; Strategy Dashboard</strong></div>
+    <div class="muted">All factual NFL data is sourced from official NFL sources (nfl.com). Betting lines have no official NFL source and are flagged unverified.</div>
+    <div class="muted">Branch: arena/89c32e23-fl1 &middot; See <a href="flagged-review.html">Flagged for Review</a> for unverified items.</div>
+  </div>
+</footer>
+
+</body>
+</html>
