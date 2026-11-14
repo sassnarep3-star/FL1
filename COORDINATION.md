@@ -782,7 +782,7 @@ Existing price/results datasets remain third-party or capture-specific; this tas
 ## Session `arena/685f958d-fl1` — task claims (brief: price store, results feed, origination, leaderboard split, demotion gate, official-only correlations)
 
 **Session ID:** `arena-685f958d-fl1` · **Branch:** `arena/685f958d-fl1` (from `main` @ `9d7ca32`, PR #21 merged) · **Status:** active
-**Protocol note:** this session works only on `arena/685f958d-fl1` (Arena single-branch policy), so file-scope isolation is used, as in earlier sessions. Other sessions on the board are merged and closed.
+**Protocol note:** this session works only on `arena/685f958d-fl1` (Arena single-branch policy), so file-scope isolation is used, as in earlier sessions. Checked 2026-11-14 with `gh pr list --state open`: no other PR is open on the repository. The top board's per-task statuses were not re-audited in this session.
 
 | ID | Task | Status | Owner | File scope (claimed) |
 |---|---|---|---|---|
@@ -828,3 +828,10 @@ Existing price/results datasets remain third-party or capture-specific; this tas
 **Pages changed on the root site:** `schedule.html` and `prop-correlations.html` (values withheld), `index.html` (three new cards), every page (new navigation entries), `executive-summary.html` (update banner), `suggestions.html`, `flagged.html`, `sources.html`. New pages: `model-lines.html`, `results-feed.html`, `governance.html`. Sub-site `docs/pages/measured.html` carries a withdrawal banner.
 
 **Known limits:** the requirement status changes in `data/specs/requirements.json` apply to the sub-site register only; the root `requirements.html` still reads the earlier `data/requirements.json`. Weeks 1–9 per-game verification is still open (SG18).
+
+### Integration record — `arena/685f958d-fl1` (2026-11-14, merge with `main` at `d3b4f4d`)
+
+- **Concurrent work reconciled:** `main` had advanced by PRs #22–#29 (price snapshot ledger `engine/price_snapshots.py`, `engine/snapshot_store.py`, the fail-closed results feed `engine/results_feed.py`, the Week 10 `schedule.html` and `flagged.html` regenerations, and `verify_d.py` dependency checks). These overlap by topic with B1/B3, not by file. Nothing from `main` was removed. Both sides of each conflict were kept: `COORDINATION.md` (both records), `data/flags.json` (main's F01–F17 plus this session's F18–F22; no ID collision), `flagged.html` and `assets/js/data.js` (generated, regenerated from the merged data).
+- **Checks on the merged tree:** `python3 -m unittest discover -s tests -q` OK; `tools/checklinks.py` OK; `tools/verify_brief.py` PASS 10/10; `tools/verify_injuries.py` exact; `tools/verify_results.py` ran clean; `site/build.py` + `site/verify.py` all passed; `engine/demo_run.py --check` current; `engine.measure` SIG-01 n=1302. CI rebuild sequence (`verify.yml`) reproduces with no diff in `data/` or `docs/`.
+- **Refresh workflow note:** `scripts/build_prop_correlations_d.py` exits non-zero in the sandbox because `/home/user/datawork/player_stats_weekly_archive.parquet` is a workspace-only mirror. `refresh.yml` already tolerates this with `|| echo skipped`; no change made.
+- **Left open:** the price store has no official source (F18, SG16); the correlation rule (F19, SG19); Weeks 1–9 per-game verification (F22, SG18).
