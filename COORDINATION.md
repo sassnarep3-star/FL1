@@ -880,3 +880,63 @@ Existing price/results datasets remain third-party or capture-specific; this tas
 **Why D1 was free:** `COORDINATION.md` contains no prior claim mentioning replacement depth; `data/requirements.json` R19 (2nd/3rd/4th-string deficiency) is still `partial`. Existing `nextUp` in `tools/build.py` reports the *next listed* player without skipping strings that are also ruled Out — i.e. it records the fact of a replacement but not its depth. D1 fixes exactly that gap.
 
 **Requests to the integration session (logged per rules, not edited here):** when D1 is verified, R19 in `data/requirements.json` can move `partial → done`; the dashboard/executive-summary wording can cite the new depth-distribution section on `depth.html`.
+
+---
+
+## Session `arena/2fa09442-fl1` — D1 completion record (2026-11-14)
+
+**Status:** D1 **done** on this branch; D2 (PR → main → Pages) follows. Task D1 = the bolded brief item
+"track the depth of the replacement, not just the fact of a replacement", claimed above at 22:14:58Z.
+
+### What was built (all re-runnable)
+
+| Deliverable | Path | What it computes |
+|---|---|---|
+| Replacement-depth analysis | `tools/build.py` → `replacement_depth()` | Per chart ladder (club, unit, slot, line): the string number of the first charted name whose official game status is **not Out** (`depthOut`), the stricter string number of the first name with **no game status at all** (`depthClear`), the full ruled-Out trail, and a separate "thin" list (deeper string ruled Out behind an available first string). Blank + hover reason whenever the club's own chart cannot resolve it — never a guessed number. |
+| KC ladder-fold correction | `tools/build.py` → `analyse_depth_league()` | `data/depth-kc.tsv` is a flat capture with no line column; the old fold gave every KC row a globally unique `line`, which (a) split every KC ladder into single-row groups so `nextUp` could never show KC's next listed player, and (b) counted KC's 60 rows as 60 "charted slots" while every other club counts ladders. Ladders are now rebuilt from where the club's own string numbering restarts (documented rule; no player reordered). KC slots 60 → 28; KC `nextUp` now shows Fulton/Johnson/Ezeudu; league totals unchanged (startersWithStatus stays 71). |
+| Backup Depth page section | `depth.html` (via `tools/site.py`) | "Replacement depth" section: 71-ladder detail table (first string, ruled-Out trail, depth, first-not-ruled-out name, no-designation depth, sources), by-unit distribution (Offense/Defense/Special Teams + all), and 18 thin ladders. Every row carries the club's chart source chip (S08, S16–S45) **and** S01. |
+| Independent verifier | `tools/verify_replacement.py` | A separate walker re-derives every published cell from the committed inputs and diffs it against the rendered HTML: population, cell-by-cell, distribution recount, thin table, source chips (club chip must equal `data/depth-sources.tsv`), blank-reason titles. **Negative-tested**: corrupting one depth cell and removing one source chip both fail the gate. |
+| Verification log | `data/verification-replacement.tsv` | 10 checks, all PASS (see below). |
+
+### Sources / verification (every value traceable)
+
+- Inputs: `data/depth.tsv` (31 club charts, S08/S16–S45), `data/depth-kc.tsv` (S08), `data/injuries.tsv` (S01),
+  `data/depth-aliases.tsv` (documented name equivalences only).
+- `tools/verify_replacement.py` → OK (population 71 = the first-string-status table's population; 0 cell diffs;
+  18 thin ladders; 0 missing source chips; 0 missing blank reasons).
+- `tools/verify_injuries.py` → 345/345 · `tools/verify_results.py` → 32/32 · `tools/checklinks.py` → OK ·
+  `tools/verify_brief.py` → 10/10 (session 685f958d's verifier, run against this branch's merged tree) ·
+  `python3 -m unittest discover -s tests` → **107 OK** · full `scripts/` CI sequence locally (6 rebuilds +
+  `scripts/verify_site.py` 0 errors) with `git diff --exit-code -- data docs` **CLEAN**.
+- **Live spot-checks (fetched this session):** [Titans depth chart](https://www.tennesseetitans.com/team/depth-chart)
+  confirms the capture exactly — including that the club publishes **no second string at LG (Skoronski)** and
+  **none on the Cody Barton LB row**, which is why those two depths are blank with a reason rather than a guess;
+  [nfl.com Week 10 injury report](https://www.nfl.com/injuries/) confirms the game statuses behind the new tables
+  for 15 of 15 players checked (Barton, Skoronski, Hill, Moore, Woods, Delane, Walker, Branch, Whyle, Wallace,
+  Wayne, Alie-Cox, Benford, Brown, CJ Allen).
+
+### Irregularities found by this session (both fixed here, both logged)
+
+1. **KC ladder-fold bug** (above) — published `nextUp` for KC was blank and the KC charted-slot count was
+   inconsistent with every other club. Fixed in `tools/build.py`; effect visible in `depth.html` and `data.js`.
+2. **Dashboard overclaim** — the landing-page schedule card said "All 272 regular-season games **with results**";
+   only 137 of 272 results exist (`data/results.tsv`). The count is now computed (`len(results)`), not typed.
+3. **Claim race on R26 / D1 (needs-review, not blocking):** session `arena/360ca650-fl1` claimed R21–R28
+   including replacement depth at **22:12Z**, this session claimed D1 at **22:14:58Z** — ~3 minutes apart, both
+   claims pushed to separate branches, neither visible to the other at claim time (verified: their branch did not
+   exist at this session's pre-claim `git fetch`; this session's claim commit postdates their claim timestamp).
+   File scopes are largely disjoint (theirs: `scripts/build_replacement_depth.py`, `data/replacement_depth.tsv`,
+   `replacement-depth.html`; this session: `tools/build.py`, `tools/site.py` depth body, `depth.html`,
+   `tools/verify_replacement.py`), so both implementations can ship. **Recommendation for the integration
+   session:** cross-check `data/replacement_depth.tsv` (PR #33) against the Backup Depth section row for row —
+   two independent implementations agreeing is the strongest verification this requirement can get; if they
+   disagree, publish the diff on Flagged for Review rather than picking a winner.
+
+### Regeneration
+
+```
+python3 tools/build.py && python3 tools/site.py        # root pages incl. depth.html
+python3 tools/verify_replacement.py                    # gate, rewrites the TSV
+python3 tools/checklinks.py
+python3 -m unittest discover -s tests -q
+```
