@@ -37,7 +37,9 @@ from scipy import stats as st
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW_GAMES = os.path.join(ROOT, "data", "raw", "games.csv")
 OUT = os.path.join(ROOT, "data", "prop-correlations-d.csv")
-PARQUET = "/home/user/datawork/player_stats_weekly_archive.parquet"
+PARQUET = os.environ.get(
+    "PROP_PARQUET",
+    "/home/user/datawork/player_stats_weekly_archive.parquet")
 
 SOURCE = ("nflverse player_stats 1999-2024 (nflverse-data releases) via Beexly/Sports "
           "mirror, commit 2026-11-07; reconciled vs data/raw/games.csv (QA3)")

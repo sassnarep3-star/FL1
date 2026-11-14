@@ -133,9 +133,9 @@ def main():
         "sample is a session-D re-transcription, not a copy of the capture")
     # known official-page anomalies, confirmed independently (not corrected)
     anomalies = [
-        ("LAR", "Myles Garrett", "listed under Rams; Browns DE (also 'resting player' designation)"),
-        ("LAR", "Aaron Donald", "listed under Rams; retired after 2023 season"),
-        ("SF", "Mike Evans", "listed under 49ers; Buccaneers WR"),
+        ("LAR", "Myles Garrett", "listed under Rams; club move corroborated by NFL.com articles (flag F04) - not an attribution error"),
+        ("LAR", "Aaron Donald", "listed under Rams while profile shows active; session-B flag F05"),
+        ("SF", "Mike Evans", "listed under 49ers while TB on bye; session-D flag F16"),
     ]
     an_ok = []
     for t, p, why in anomalies:
@@ -182,9 +182,15 @@ def main():
         "PASS" if ok else "FAIL", NFLVERSE,
         "player_stats mirror 1999-2024; join rate 1.0000; 13,384 team-games")
 
-    # ---------- append ----------
-    with open(VER, "a", newline="", encoding="utf-8") as fh:
+    # ---------- rewrite with per-check-id dedupe (latest wins) ----------
+    existing = [r for r in csv.reader(open(VER, encoding="utf-8"), delimiter="\t") if r]
+    header, prev = existing[0], existing[1:]
+    new_ids = {r[0] for r in rows}
+    kept = [r for r in prev if r[0] not in new_ids]
+    with open(VER, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh, delimiter="\t")
+        w.writerow(header)
+        w.writerows(kept)
         w.writerows(rows)
     for r_ in rows:
         print(f"{r_[0]} {r_[3]}: {r_[2][:150]}")
