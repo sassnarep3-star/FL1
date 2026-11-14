@@ -3,90 +3,176 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flagged for Review — FL1</title>
-<link rel="stylesheet" href="assets/css/style.css">
+<title>Flagged for Review — FL1 NFL Dashboard</title>
+<meta name="description" content="Flagged irregularities and unverified items with source links. These do not block the merge but should be reviewed after the site is live.">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
-    <div class="tagline">Unverified items &amp; irregularities &mdash; review before implementing changes</div>
-    <nav>
+
+<a href="#content" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><div class="mark">FL1</div><div>NFL Decision Support</div></div>
+    <nav class="nav">
       <a href="index.html">Dashboard</a>
-      <a href="injuries.html">Injuries</a>
-      <a href="depth-charts.html">Depth &amp; Deficiencies</a>
-      <a href="standings.html">Standings</a>
-      <a href="strategies.html">Strategies</a>
-      <a href="leaderboard.html">Leaderboard</a>
       <a href="executive-summary.html">Executive Summary</a>
+      <a href="suggestions.html">Suggestions &amp; Review</a>
+      <a href="nfl-strategies.html">NFL Strategies</a>
+      <a href="injuries.html">Injuries &amp; Deficiencies</a>
       <a href="flagged-review.html" class="active">Flagged for Review</a>
-      <a href="sources.html">Sources</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<div class="container" id="content">
+  <header class="page-header">
+    <div>
+      <h1>Flagged for Review</h1>
+      <div class="subtitle">Irregularities and unverified items, labeled for your review after the site is live. These do not block the merge.</div>
+    </div>
+    <a href="index.html" class="btn secondary" style="margin-left:auto;">&larr; Back to Dashboard</a>
+  </header>
+
+  <div class="alert warn">
+    <span class="icon">&#9888;</span>
+    <div>
+      <strong>Standard:</strong> every table row carries a source link to an official site. If a value cannot be confirmed from an official source, it is left blank and flagged <strong>unverified</strong>. Nothing is inferred or filled in. Flagged items do <em>not</em> block the merge; review them after the site is live and request changes as needed.
+    </div>
+  </div>
+
   <section>
-    <h1>Flagged for Review</h1>
-    <p class="lead">This page lists every item that is <strong>unverified</strong> or flagged as an irregularity. These do <em>not</em> block the site launch, but no change should be implemented until a suggestion here is reviewed and a path is chosen by a named reviewer.</p>
-
-    <h2>Unverified items (never inferred &mdash; left blank or flagged)</h2>
-    <div class="filter-bar">
-      <input type="text" id="flag-filter" data-filter="flags-table" placeholder="Filter by item, type, or source&#8230;">
-      <span class="count" id="flags-table-count"></span>
-    </div>
-
-    <table id="flags-table" class="sortable">
-      <thead>
-        <tr>
-          <th class="nosort">#</th>
-          <th class="nosort">Item</th>
-          <th class="nosort">Type</th>
-          <th class="nosort">Why it is flagged</th>
-          <th class="nosort">Suggested source to confirm</th>
-          <th class="nosort">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Depth-chart order (starter / 2nd / 3rd / 4th string) for all teams</td><td>Data gap</td><td>Official roster page renders players but not depth order; deficiencies inferred from injury report alone are not confirmed.</td><td>Each team's official depth chart page at nfl.com/teams/{team}/depthchart</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>2</td><td>Chiefs 34-player roster depth order</td><td>Data gap</td><td>Roster verified; depth order not on roster page.</td><td>nfl.com/teams/kansas-city-chiefs/roster + official depth chart</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>3</td><td>All 8 origination strategies</td><td>Analytical</td><td>Not official NFL content; validation gates and edge targets are methodological, not sourced.</td><td>Internal backtest / paper-trading record (to be built)</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>4</td><td>All 7 correlation values</td><td>Analytical</td><td>Betting-market correlation conventions; none confirmed from an official source.</td><td>Historical bet results computed in-house</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>5</td><td>Live betting lines / odds</td><td>Data gap</td><td>Not available from any official NFL source; required for line origination.</td><td>Licensed sportsbook odds feed or API</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>6</td><td>Leaderboard results</td><td>Data gap</td><td>No strategy performance data collected yet; leaderboard table intentionally blank.</td><td>Strategy tracking system (to be built)</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
-        <tr><td>7</td><td>Injury report coverage</td><td>Scope</td><td>156 verified rows cover only Week 10 games published in the fetched chunks; not all 32 teams' Week 10 games were captured.</td><td>nfl.com/injuries/ (full Week 10 report)</td><td><span class="badge badge-unverified">Partial coverage</span></td></tr>
-        <tr><td>8</td><td>Standings season context</td><td>Data gap</td><td>Standings are 2026 Week 10 only; no historical seasons captured.</td><td>nfl.com/standings/ (historical years)</td><td><span class="badge badge-unverified">Single week</span></td></tr>
-      </tbody>
-    </table>
-
-    <h2>Irregularities observed during verification</h2>
-    <div class="card">
-      <ul style="margin-left:20px; color:var(--muted);">
-        <li>Parsing cross-contamination was observed in the official injury page markup: <em>Kenneth Walker III</em> (Seahawks RB) appeared inside the Kansas City table, and <em>Zaire Franklin</em> (Colts LB) and <em>Micah Parsons</em> (Cowboys LB) appeared inside the Green Bay table. These rows were <strong>excluded</strong> from data/injuries.csv to avoid misattribution.</td>
-        <li>The Jonathan Taylor (Colts RB) row was cut off at the end of the fetched injury data and was excluded.</td>
-        <li>Game-status cells that were blank in the source are left blank on the site; nothing was inferred.</td>
-      </ul>
-    </div>
-
-    <h2>Review process</h2>
-    <div class="callout">
-      <ol style="margin-left:20px; color:var(--muted);">
-        <li>Open each flagged item above.</li>
-        <li>Check the suggested source link.</li>
-        <li>Record the confirmed value (or confirm it remains unavailable).</li>
-        <li>Update the relevant data file and mark the item resolved or keep it flagged.</li>
-        <li>Only after review, decide whether to implement any related change.</li>
-      </ol>
+    <h2>Irregularities</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Item</th><th>Description</th><th>Severity</th><th>Source link</th><th>Resolution</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>I-01</td>
+            <td>Repository README empty</td>
+            <td>README.md contained only "# FL1"; no project documentation present.</td>
+            <td><span class="status unverified">Low</span></td>
+            <td class="source"><a href="https://github.com/sassnarep3-star/FL1" target="_blank" rel="noopener">GitHub repo (README.md)</a></td>
+            <td class="blank">Site documentation added under /docs; consider updating README</td>
+          </tr>
+          <tr>
+            <td>I-02</td>
+            <td>No official NFL source for betting lines</td>
+            <td>NFL.com does not publish betting lines/odds; lines, parlays, and player props have no official source.</td>
+            <td><span class="status flagged">High</span></td>
+            <td class="source"><a href="https://www.nfl.com" target="_blank" rel="noopener">nfl.com</a></td>
+            <td class="blank">Add third-party odds API (see Suggestions Q-02); keep flagged until added</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
-</main>
 
-<footer>
-  <div class="wrap">
-    <div>FL1 &mdash; Flagged for Review. Unverified items do not block launch.</div>
-    <div>Review and clear items before implementing changes.</div>
+  <section>
+    <h2>Unverified Items (values left blank)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Page / Table</th><th>Field</th><th>Why unverified</th><th>Official source to check</th><th>Needed to resolve</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>U-01</td>
+            <td>nfl-strategies.html — line origination</td>
+            <td>Market line, implied probability, edge</td>
+            <td>No official NFL source for betting lines</td>
+            <td class="source blank">Third-party odds provider (not yet selected)</td>
+            <td>Select and integrate odds API; re-verify</td>
+          </tr>
+          <tr>
+            <td>U-02</td>
+            <td>nfl-strategies.html — validation gates</td>
+            <td>Sample size, edge-vs-close, hit-rate, correlation cap, max drawdown</td>
+            <td>Gate thresholds not yet defined</td>
+            <td class="source blank">n/a (reviewer decision)</td>
+            <td>Reviewer approves gate set (Suggestions Q-03)</td>
+          </tr>
+          <tr>
+            <td>U-03</td>
+            <td>nfl-strategies.html — correlation values</td>
+            <td>Leg-pair correlation numbers</td>
+            <td>Correlation not yet computed</td>
+            <td class="source blank">Historical outcomes (source TBD)</td>
+            <td>Compute correlation; reviewer approves method (Q-04)</td>
+          </tr>
+          <tr>
+            <td>U-04</td>
+            <td>nfl-strategies.html — leaderboard</td>
+            <td>Strategy rankings, scores, rewards</td>
+            <td>Leaderboard empty; no verified strategy data</td>
+            <td class="source blank">Third-party odds + internal model</td>
+            <td>Run strategies through gates; reviewer scores (Q-05)</td>
+          </tr>
+          <tr>
+            <td>U-05</td>
+            <td>injuries.html — starter/backup table</td>
+            <td>Starter, status, replacement string, deficiency flag</td>
+            <td>Not yet pulled from live injury report</td>
+            <td class="source"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td>
+            <td>Pull from nfl.com each week; leave blank if unconfirmed</td>
+          </tr>
+          <tr>
+            <td>U-06</td>
+            <td>injuries.html — depth chart (2nd/3rd/4th string)</td>
+            <td>Replacement string for each injured starter</td>
+            <td>Depth-chart source not yet added</td>
+            <td class="source blank">Official NFL depth charts (source TBD)</td>
+            <td>Add depth-chart source; verify replacements</td>
+          </tr>
+          <tr>
+            <td>U-07</td>
+            <td>All pages — specific player/team values</td>
+            <td>Any observed player or team values</td>
+            <td>Values seen only in search snippets, not re-fetched from official pages</td>
+            <td class="source"><a href="https://www.nfl.com" target="_blank" rel="noopener">nfl.com</a></td>
+            <td>Re-confirm directly on nfl.com before publishing as verified</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Reviewer Sign-off</h2>
+    <p>Review each item above, then record the decision in COORDINATION.md. Unverified items remain flagged until resolved against an official source. Nothing is inferred or filled in.</p>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Item ID</label>
+        <input type="text" placeholder="e.g. U-03">
+      </div>
+      <div class="form-group">
+        <label>Decision</label>
+        <select>
+          <option>Acknowledge</option>
+          <option>Resolved</option>
+          <option>Needs more data</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea rows="3" placeholder="Resolution steps and source confirmed"></textarea>
+      </div>
+      <div class="form-group" style="align-self:end;">
+        <button class="btn">Record sign-off</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><strong>FL1 — NFL Decision Support &amp; Strategy Dashboard</strong></div>
+    <div class="muted">All factual NFL data is sourced from official NFL sources (nfl.com). Betting lines have no official NFL source and are flagged unverified.</div>
+    <div class="muted">Branch: arena/89c32e23-fl1 &middot; See COORDINATION.md for the task board and resolution log.</div>
   </div>
 </footer>
-<script src="assets/js/main.js"></script>
+
 </body>
 </html>
