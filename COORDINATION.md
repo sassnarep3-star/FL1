@@ -30,7 +30,29 @@ its own final integration. Per the standing rule, work is **additive**: new file
 | R27 | Correlations only from officially sourced numbers, publish **n** with each value | done | arena-360ca650-fl1 | `engine/corr_official.py`, `scripts/build_correlations_official.py`, `data/correlations_official.json`, `correlation-register.html` | official results/standings/schedule/injury captures only | Third-party correlations (measured.json, prop-correlations, correlations.csv) stay on their labelled pages, excluded from this register |
 | R28 | Demotion gate — sends a live strategy back to paper | done | arena-360ca650-fl1 | `engine/demotion.py`, `data/validation_gates.json` (append G-14), `validation.html` section | design decision + engine tests | Thresholds are proposed rules, not facts; left reviewable |
 | R29 | Registers + site integration: requirements/questions/suggestions/flags/sources append, NAV, rebuild, checks, exec summary | done | arena-360ca650-fl1 | `data/{requirements,questions,suggestions,flags}.json`, `data/sources.tsv`, `tools/site.py`, `tests/test_r21_r28.py`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | tools/checklinks.py, scripts/verify_site.py, tools/verify_injuries.py, tools/verify_results.py, unittest | — |
-| R30 | Final integration: PR → main, merge, confirm Pages deploy, record result here | unclaimed | arena-360ca650-fl1 | PR only | Pages API | — |
+| R30 | Final integration: PR → main, merge, confirm Pages deploy, record result here | done | arena-360ca650-fl1 | PR only | Pages API + live fetch | PR #33 merged as `f5b6922`; Pages `built`; live pages re-fetched clean |
+
+### Integration completion record — R30 (2026-11-14T22:55Z)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/33 (`arena/360ca650-fl1` → `main`), **merged**
+  as `f5b6922` via `gh pr merge 33 --merge` after CI (`verify-research-build` / `verify`) passed and
+  GitHub reported `MERGEABLE CLEAN`.
+- **GitHub Pages:** build for `f5b6922` → status **`built`** (`gh api repos/.../pages`; source `main` `/`).
+- **Live verification (page-fetch, not curl):** `index.html` and `line-board.html` re-fetched from
+  https://sassnarep3-star.github.io/FL1/ and read — the three separate columns (fair | market |
+  difference) render with per-cell provenance badges, coefficients with n, retagged flag links
+  (F23/F25/F26/F29), S52 source chips, and the F31 cross-links to the parallel build. Dashboard cards
+  from both sessions render; KPI wording fix confirmed.
+- **Post-merge incident (logged, no damage):** `git pull --rebase` on a branch containing the
+  reconciliation merge commit attempted to flatten it and replay `arena/685f958d-fl1`'s commits on top
+  of my line — exactly the discarding-work scenario the brief forbids. The rebase stopped on conflicts
+  before writing anything, `git rebase --abort` restored `0969c58`, and the remote was already correct.
+  **Lesson for future sessions: after a merge-conflict resolution, use `git pull --ff-only` — never
+  `--rebase` across a merge commit.**
+- **Final state:** 22 pages live; 134 unit tests OK; `tools/checklinks.py` 22 pages OK;
+  `scripts/verify_site.py` 0 errors / 0 warnings; `tools/verify_brief.py` 10/10; injuries 345/345;
+  results 32/32; `verify_d.py` V5–V9 PASS. 31 flagged items published (F01–F31), 29 questions,
+  29 suggestions — the owner's decision list is Q21–Q29 on the live Open Questions page.
 
 ### R21–R29 completion record (2026-11-14)
 
@@ -1082,3 +1104,89 @@ and `data/origination_order.json` / `data/governance_gates.json` re-mapped.
 `verify_d` V5–V9 **PASS** · `verify_site` **0 errors** · `checklinks` **28 pages OK** ·
 `site/verify` **publishable** · `register_r21_r28` idempotent · `engine.results_settlement
 --check` OK · `demo_run --check` current.
+
+---
+
+---
+
+## Session `arena/2fa09442-fl1` — task claims (2026-11-14)
+
+**Session ID:** `arena-2fa09442-fl1` · **Branch:** `arena/2fa09442-fl1` (from `main` @ `9d7ca328`, fast-forwarded to `82555e0`) · **Status:** active
+**Protocol:** Arena single-branch policy → file-scope isolation, as in earlier sessions. Claim written and pushed before any task work began.
+
+**Pre-claim sweep (all refs fetched, open PRs checked):** active concurrent claims read first —
+`arena/0669d4cf-fl1` T21 (`engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`);
+`arena/685f958d-fl1` B1–B8 (price-snapshot store, verified results feed, origination order + fair/market/difference columns, leaderboard signal-vs-staking split, demotion gate G-14, official-only correlations, verifier, integration incl. `tools/site.py` NAV + page calls + `README.md`);
+`arena/725adbd2-fl1` V9 verifier availability (`scripts/verify_d.py`, `data/verification-d.tsv`);
+`arena/f1e4deb7-fl1` price-snapshot store — **merged as PR #22**. The bolded brief items those sessions cover are deliberately NOT claimed here.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| D1 | **Replacement-depth tracking** — the one bolded brief item ("track the depth of the replacement, not just the fact of a replacement") with no claim on the board: measure how deep each club's own published chart must be read to reach the first player the league has **not** ruled Out (stacked rule-outs included), per slot, Offense/Defense split, league depth distribution; published on `depth.html` with per-row source links; blank + reason where the chart cannot resolve it | in progress | `arena-2fa09442-fl1` | `tools/build.py` (new analysis function only), `tools/site.py` (depth page body region only), `depth.html` (generated), `tools/verify_replacement.py` (new), `data/verification-replacement.tsv` (new) |
+| D2 | Line-by-line verification of this session's output; PR → `main`; merge; GitHub Pages deploy confirmation; record here | in progress | `arena-2fa09442-fl1` | PR + this file (append only) |
+
+**Co-ownership note (logged, not edited):** `tools/site.py` is claimed by `arena/685f958d-fl1` for "NAV + page calls only". D1 edits only the depth-page body region (the `depth_html` template and its row builders) and adds no NAV entry. If a merge conflict occurs, both regions are preserved.
+
+**Why D1 was free:** `COORDINATION.md` contains no prior claim mentioning replacement depth; `data/requirements.json` R19 (2nd/3rd/4th-string deficiency) is still `partial`. Existing `nextUp` in `tools/build.py` reports the *next listed* player without skipping strings that are also ruled Out — i.e. it records the fact of a replacement but not its depth. D1 fixes exactly that gap.
+
+**Requests to the integration session (logged per rules, not edited here):** when D1 is verified, R19 in `data/requirements.json` can move `partial → done`; the dashboard/executive-summary wording can cite the new depth-distribution section on `depth.html`.
+
+---
+
+## Session `arena/2fa09442-fl1` — D1 completion record (2026-11-14)
+
+**Status:** D1 **done** on this branch; D2 (PR → main → Pages) follows. Task D1 = the bolded brief item
+"track the depth of the replacement, not just the fact of a replacement", claimed above at 22:14:58Z.
+
+### What was built (all re-runnable)
+
+| Deliverable | Path | What it computes |
+|---|---|---|
+| Replacement-depth analysis | `tools/build.py` → `replacement_depth()` | Per chart ladder (club, unit, slot, line): the string number of the first charted name whose official game status is **not Out** (`depthOut`), the stricter string number of the first name with **no game status at all** (`depthClear`), the full ruled-Out trail, and a separate "thin" list (deeper string ruled Out behind an available first string). Blank + hover reason whenever the club's own chart cannot resolve it — never a guessed number. |
+| KC ladder-fold correction | `tools/build.py` → `analyse_depth_league()` | `data/depth-kc.tsv` is a flat capture with no line column; the old fold gave every KC row a globally unique `line`, which (a) split every KC ladder into single-row groups so `nextUp` could never show KC's next listed player, and (b) counted KC's 60 rows as 60 "charted slots" while every other club counts ladders. Ladders are now rebuilt from where the club's own string numbering restarts (documented rule; no player reordered). KC slots 60 → 28; KC `nextUp` now shows Fulton/Johnson/Ezeudu; league totals unchanged (startersWithStatus stays 71). |
+| Backup Depth page section | `depth.html` (via `tools/site.py`) | "Replacement depth" section: 71-ladder detail table (first string, ruled-Out trail, depth, first-not-ruled-out name, no-designation depth, sources), by-unit distribution (Offense/Defense/Special Teams + all), and 18 thin ladders. Every row carries the club's chart source chip (S08, S16–S45) **and** S01. |
+| Independent verifier | `tools/verify_replacement.py` | A separate walker re-derives every published cell from the committed inputs and diffs it against the rendered HTML: population, cell-by-cell, distribution recount, thin table, source chips (club chip must equal `data/depth-sources.tsv`), blank-reason titles. **Negative-tested**: corrupting one depth cell and removing one source chip both fail the gate. |
+| Verification log | `data/verification-replacement.tsv` | 10 checks, all PASS (see below). |
+
+### Sources / verification (every value traceable)
+
+- Inputs: `data/depth.tsv` (31 club charts, S08/S16–S45), `data/depth-kc.tsv` (S08), `data/injuries.tsv` (S01),
+  `data/depth-aliases.tsv` (documented name equivalences only).
+- `tools/verify_replacement.py` → OK (population 71 = the first-string-status table's population; 0 cell diffs;
+  18 thin ladders; 0 missing source chips; 0 missing blank reasons).
+- `tools/verify_injuries.py` → 345/345 · `tools/verify_results.py` → 32/32 · `tools/checklinks.py` → OK ·
+  `tools/verify_brief.py` → 10/10 (session 685f958d's verifier, run against this branch's merged tree) ·
+  `python3 -m unittest discover -s tests` → **107 OK** · full `scripts/` CI sequence locally (6 rebuilds +
+  `scripts/verify_site.py` 0 errors) with `git diff --exit-code -- data docs` **CLEAN**.
+- **Live spot-checks (fetched this session):** [Titans depth chart](https://www.tennesseetitans.com/team/depth-chart)
+  confirms the capture exactly — including that the club publishes **no second string at LG (Skoronski)** and
+  **none on the Cody Barton LB row**, which is why those two depths are blank with a reason rather than a guess;
+  [nfl.com Week 10 injury report](https://www.nfl.com/injuries/) confirms the game statuses behind the new tables
+  for 15 of 15 players checked (Barton, Skoronski, Hill, Moore, Woods, Delane, Walker, Branch, Whyle, Wallace,
+  Wayne, Alie-Cox, Benford, Brown, CJ Allen).
+
+### Irregularities found by this session (both fixed here, both logged)
+
+1. **KC ladder-fold bug** (above) — published `nextUp` for KC was blank and the KC charted-slot count was
+   inconsistent with every other club. Fixed in `tools/build.py`; effect visible in `depth.html` and `data.js`.
+2. **Dashboard overclaim** — the landing-page schedule card said "All 272 regular-season games **with results**";
+   only 137 of 272 results exist (`data/results.tsv`). The count is now computed (`len(results)`), not typed.
+3. **Claim race on R26 / D1 (needs-review, not blocking):** session `arena/360ca650-fl1` claimed R21–R28
+   including replacement depth at **22:12Z**, this session claimed D1 at **22:14:58Z** — ~3 minutes apart, both
+   claims pushed to separate branches, neither visible to the other at claim time (verified: their branch did not
+   exist at this session's pre-claim `git fetch`; this session's claim commit postdates their claim timestamp).
+   File scopes are largely disjoint (theirs: `scripts/build_replacement_depth.py`, `data/replacement_depth.tsv`,
+   `replacement-depth.html`; this session: `tools/build.py`, `tools/site.py` depth body, `depth.html`,
+   `tools/verify_replacement.py`), so both implementations can ship. **Recommendation for the integration
+   session:** cross-check `data/replacement_depth.tsv` (PR #33) against the Backup Depth section row for row —
+   two independent implementations agreeing is the strongest verification this requirement can get; if they
+   disagree, publish the diff on Flagged for Review rather than picking a winner.
+
+### Regeneration
+
+```
+python3 tools/build.py && python3 tools/site.py        # root pages incl. depth.html
+python3 tools/verify_replacement.py                    # gate, rewrites the TSV
+python3 tools/checklinks.py
+python3 -m unittest discover -s tests -q
+```
