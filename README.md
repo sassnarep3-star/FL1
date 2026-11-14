@@ -39,6 +39,7 @@ fitted model *and* a benchmark price, and the second does not exist in this repo
 | `suggestions.html` | Fifteen suggestions with options and recommendations |
 | `sources.html` | Source registry with verification status |
 | `flagged.html` | Fifteen flagged items |
+| `verification.html` | Every check performed, and how to re-run it |
 
 ## Repository layout
 
@@ -85,6 +86,11 @@ committed data. Re-run the tools when the data changes and commit the output.
 - **Derived arithmetic is computed, never typed.** Every count on the site comes out of `tools/build.py`.
 - **Name joins use an explicit alias table** (`data/depth-aliases.tsv`), never fuzzy matching, because two
   different players named Marcus Harris appear in this dataset (flag F11).
+
+## Where to start
+
+See [`REVIEW.md`](REVIEW.md) for a short reading guide, the checks to run, and the judgement calls
+worth disagreeing with.
 
 ## Limitations
 

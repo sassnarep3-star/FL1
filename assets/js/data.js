@@ -5966,9 +5966,9 @@ window.DATA = {
     "Q03"
    ],
    "options": [
-    "A. Fair value only, price column blank and labelled. (Recommended)",
-    "B. Fair value plus a user-supplied price feed.",
-    "C. Wait for a price feed before publishing anything."
+    "Fair value only, price column blank and labelled. (Recommended)",
+    "Fair value plus a user-supplied price feed.",
+    "Wait for a price feed before publishing anything."
    ],
    "recommendation": "A. A blank, labelled column is honest and costs nothing. Option C delays all work on the strength of a data source that was never promised.",
    "impact": "Protects the whole site from being built on an invented number."
@@ -5989,9 +5989,9 @@ window.DATA = {
     "Q19"
    ],
    "options": [
-    "A. Calibration-primary ranking. (Recommended)",
-    "B. Profit-primary ranking with a minimum sample gate.",
-    "C. Rank on both and display them side by side without combining."
+    "Calibration-primary ranking. (Recommended)",
+    "Profit-primary ranking with a minimum sample gate.",
+    "Rank on both and display them side by side without combining."
    ],
    "recommendation": "A, with C as a display layer. Profit-first ranking will surface a lucky strategy in week one and destroy the credibility of the board.",
    "impact": "Turns the leaderboard from a lottery into a measurement."
@@ -6010,9 +6010,9 @@ window.DATA = {
     "Q02"
    ],
    "options": [
-    "A. Hash-sealed prediction log committed before kickoff. (Recommended)",
-    "B. Public timestamping service.",
-    "C. No seal, trust the author."
+    "Hash-sealed prediction log committed before kickoff. (Recommended)",
+    "Public timestamping service.",
+    "No seal, trust the author."
    ],
    "recommendation": "A. It is nearly free, and it is the single cheapest thing that makes the leaderboard credible.",
    "impact": "Converts claims into an auditable record."
@@ -6032,9 +6032,9 @@ window.DATA = {
     "Q05"
    ],
    "options": [
-    "A. Two-layer build, observed and derived kept strictly separate. (Recommended)",
-    "B. Observed absence only; defer depth entirely.",
-    "C. Build derived depth and present it as if it were official."
+    "Two-layer build, observed and derived kept strictly separate. (Recommended)",
+    "Observed absence only; defer depth entirely.",
+    "Build derived depth and present it as if it were official."
    ],
    "recommendation": "A. Option C is the trap: it would look like the most impressive feature on the site while being the least defensible.",
    "impact": "Delivers the requested feature without asserting something the sources cannot support."
@@ -6051,9 +6051,9 @@ window.DATA = {
    "reversibility": "Fully reversible",
    "prerequisites": [],
    "options": [
-    "A. Dedicated page, always populated, never empty. (Recommended)",
-    "B. A footnote at the bottom of the home page.",
-    "C. Leave unreviewed items out of the site entirely."
+    "Dedicated page, always populated, never empty. (Recommended)",
+    "A footnote at the bottom of the home page.",
+    "Leave unreviewed items out of the site entirely."
    ],
    "recommendation": "A. It is the mechanism that lets the rest of the site be trusted.",
    "impact": "Makes the honesty of the dataset visible instead of asserted."
@@ -6072,9 +6072,9 @@ window.DATA = {
     "Q12"
    ],
    "options": [
-    "A. Strict walk-forward with a logged holdout. (Recommended)",
-    "B. k-fold cross-validation on shuffled games.",
-    "C. Single train/test split."
+    "Strict walk-forward with a logged holdout. (Recommended)",
+    "k-fold cross-validation on shuffled games.",
+    "Single train/test split."
    ],
    "recommendation": "A. Option B leaks future information into the past in a sport with strong week-to-week drift.",
    "impact": "Prevents the most common way an in-house model exaggerates its own accuracy."
@@ -6094,9 +6094,9 @@ window.DATA = {
     "Q11"
    ],
    "options": [
-    "A. Sequenced build. (Recommended)",
-    "B. All three product types in parallel.",
-    "C. Singles only, forever."
+    "Sequenced build. (Recommended)",
+    "All three product types in parallel.",
+    "Singles only, forever."
    ],
    "recommendation": "A. Option B is how projects end up with a parlay board backed by three unvalidated legs.",
    "impact": "Keeps every published number downstream of a validated one."
@@ -6115,9 +6115,9 @@ window.DATA = {
     "Q19"
    ],
    "options": [
-    "A. Mandatory baseline comparison. (Recommended)",
-    "B. Baseline shown for information but not required.",
-    "C. No baseline."
+    "Mandatory baseline comparison. (Recommended)",
+    "Baseline shown for information but not required.",
+    "No baseline."
    ],
    "recommendation": "A. Without it the leaderboard measures effort, not edge.",
    "impact": "Makes the leaderboard's ranking mean something."
@@ -6136,9 +6136,9 @@ window.DATA = {
     "Q06"
    ],
    "options": [
-    "A. Immutable timestamped snapshots. (Recommended)",
-    "B. One file overwritten each week.",
-    "C. Capture only once, at the end of the week."
+    "Immutable timestamped snapshots. (Recommended)",
+    "One file overwritten each week.",
+    "Capture only once, at the end of the week."
    ],
    "recommendation": "A. Option C discards the entire within-week signal, which is the only part that is not already in the closing price.",
    "impact": "Preserves the ability to ask timing questions later."
@@ -6155,9 +6155,9 @@ window.DATA = {
    "reversibility": "Fully reversible",
    "prerequisites": [],
    "options": [
-    "A. Static, no build step. (Recommended)",
-    "B. Static site generator with a build action.",
-    "C. Single-page app with a bundler."
+    "Static, no build step. (Recommended)",
+    "Static site generator with a build action.",
+    "Single-page app with a bundler."
    ],
    "recommendation": "A. Nothing to break, nothing to version, and Pages serves it as-is.",
    "impact": "The published site cannot drift from the committed data."
@@ -6177,9 +6177,9 @@ window.DATA = {
     "Q14"
    ],
    "options": [
-    "A. Non-monetary leaderboard, legal question flagged. (Recommended)",
-    "B. Prize pool after review.",
-    "C. No leaderboard at all."
+    "Non-monetary leaderboard, legal question flagged. (Recommended)",
+    "Prize pool after review.",
+    "No leaderboard at all."
    ],
    "recommendation": "A. It delivers the requested competitive structure with none of the exposure.",
    "impact": "Keeps the project squarely informational."
@@ -6196,9 +6196,9 @@ window.DATA = {
    "reversibility": "Fully reversible",
    "prerequisites": [],
    "options": [
-    "A. Visible provenance tag per table. (Recommended)",
-    "B. Provenance documented in a separate methodology page only.",
-    "C. No provenance marking."
+    "Visible provenance tag per table. (Recommended)",
+    "Provenance documented in a separate methodology page only.",
+    "No provenance marking."
    ],
    "recommendation": "A. A reader should never have to guess whether a number was read or computed.",
    "impact": "Makes line-by-line verification possible, which is what the brief asks for."
@@ -6217,9 +6217,9 @@ window.DATA = {
     "Q04"
    ],
    "options": [
-    "A. One verified club first, then expand. (Recommended)",
-    "B. All 32 clubs immediately.",
-    "C. None until all 32 are ready."
+    "One verified club first, then expand. (Recommended)",
+    "All 32 clubs immediately.",
+    "None until all 32 are ready."
    ],
    "recommendation": "A. It demonstrates the method end-to-end and keeps every published cell checkable.",
    "impact": "Proves the approach before scaling it."
@@ -6238,9 +6238,9 @@ window.DATA = {
     "Q08"
    ],
    "options": [
-    "A. Publish both, resolve nothing. (Recommended)",
-    "B. Pick the newer source.",
-    "C. Drop the player from the table."
+    "Publish both, resolve nothing. (Recommended)",
+    "Pick the newer source.",
+    "Drop the player from the table."
    ],
    "recommendation": "A. Any silent choice would be an unlogged inference, which is what the brief prohibits.",
    "impact": "Keeps the dataset honest and makes the source's own errors reviewable."
@@ -6257,9 +6257,9 @@ window.DATA = {
    "reversibility": "Fully reversible",
    "prerequisites": [],
    "options": [
-    "A. Grouped decision brief. (Recommended)",
-    "B. Flat list of questions only.",
-    "C. Free-text memo."
+    "Grouped decision brief. (Recommended)",
+    "Flat list of questions only.",
+    "Free-text memo."
    ],
    "recommendation": "A. It is the difference between a list of worries and a set of choices.",
    "impact": "Makes the review step actually completable."
