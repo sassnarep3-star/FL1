@@ -5180,6 +5180,26 @@ window.DATA = {
   },
   {
    "id": "S50",
+   "title": "NFL 2026 schedule by week (official league schedule pages, weeks 1-11)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "Week 10 page fetched 2026-11-14 (its Week 10 cards and the bye list were read). Week 11 page fetched: Thursday 19 Nov is the first Week 11 game, so it is not in the current slate. Weeks 1-9 pages are linked from the Week 10 page and are NOT re-read per game in this session; their results are reconciled to the official standings in aggregate (see F22)."
+  },
+  {
+   "id": "S51",
+   "title": "Official Week 10 2026 game pages (13 pending games)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/REG10/",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "All 13 pending games (kickoff, network, teams) matched line by line against the official REG10 page; the per-game URLs in data/slate-w10-2026.tsv are the game links printed on that page. Individual game pages were not opened. The Munich game is labelled 'International Game' on the official page."
+  },
+  {
+   "id": "S52",
    "title": "NFL.com 2026 schedules - official game results, weeks 1-10",
    "publisher": "NFL.com (National Football League)",
    "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
@@ -31919,12 +31939,12 @@ window.DATA = {
    "priority": "High",
    "question": "What approved source will supply OPENING prices for every market we originate?",
    "why_it_matters": "The price-snapshot store records the open field, but every open cell is blank: without a source there is no honest number, and without the number closing-line value cannot be computed from the open.",
-   "what_we_know": "The store (data/price_snapshots.json) has the fields and the discipline. Closing prices come from the pinned nflverse capture (S47). No official league source prices NFL markets (F18).",
+   "what_we_know": "The store (data/price_snapshots.json) has the fields and the discipline. Closing prices come from the pinned nflverse capture (S47). No official league source prices NFL markets (F23).",
    "what_we_dont_know": "Whether a licensed line-history feed will be purchased or approved.",
    "missing_data": "Licensed opening + closing line history (GAP-01).",
-   "source": "data/price_snapshots.json; flags F18/F20",
+   "source": "data/price_snapshots.json; flags F23/F25",
    "blocking": "Yes",
-   "recommended_path": "Option A (SG17): buy licensed history. Interim (SG16): snapshot the market's open at the moment we publish our own line, prospectively from Week 11."
+   "recommended_path": "Option A (SG21): buy licensed history. Interim (SG20): snapshot the market's open at the moment we publish our own line, prospectively from Week 11."
   },
   {
    "id": "Q22",
@@ -31948,7 +31968,7 @@ window.DATA = {
    "what_we_know": "The computed research layer already publishes third-party-derived values with labels; the root site's footer promised no price figures without official support, amended in this sprint to describe the THIRD_PARTY badge.",
    "what_we_dont_know": "The owner's preference among the three options below.",
    "missing_data": "None - this is a decision, not a data gap.",
-   "source": "flags F18/F11; data/line_board.json",
+   "source": "flags F23/F11; data/line_board.json",
    "blocking": "Yes",
    "recommended_path": "A: publish with THIRD_PARTY badge + flag until C is affordable; B switches every market cell to blank with one edit; C needs Q21's purchase."
   },
@@ -31961,9 +31981,9 @@ window.DATA = {
    "what_we_know": "Defaults are published as constructor arguments in engine/demotion.py and rendered verbatim as G-14.",
    "what_we_dont_know": "The owner's risk appetite for false demotions vs slow demotions.",
    "missing_data": "None - a rule choice.",
-   "source": "engine/demotion.py; flag F23",
+   "source": "engine/demotion.py; flag F28",
    "blocking": "No",
-   "recommended_path": "Adopt as written for the first season (SG18) and revisit after 300 settled bets of live history."
+   "recommended_path": "Adopt as written for the first season (SG22) and revisit after 300 settled bets of live history."
   },
   {
    "id": "Q25",
@@ -31984,7 +32004,7 @@ window.DATA = {
    "priority": "Medium",
    "question": "When do we fit the fair model's coefficients out-of-sample instead of publishing the naive baseline?",
    "why_it_matters": "The naive baseline (strength = (PF-PA)/G, /2 convention) is deliberately crude. Publishing a fitted model too early invites overfitting; too late leaves edge on the table.",
-   "what_we_know": "models.json attaches the estimator (maximise out-of-sample log-loss, never tune PnL). Coefficients today are computed from 137 official 2026 games (F24).",
+   "what_we_know": "models.json attaches the estimator (maximise out-of-sample log-loss, never tune PnL). Coefficients today are computed from 137 official 2026 games (F29).",
    "what_we_dont_know": "When enough official seasons will be captured to fit and validate honestly.",
    "missing_data": "Multi-season official results feed (today: 2026 weeks 1-10 only).",
    "source": "data/line_board.json; data/models.json",
@@ -32015,7 +32035,20 @@ window.DATA = {
    "missing_data": "Weekly official injury + results captures (grows C-A4's n).",
    "source": "data/correlations_official.json",
    "blocking": "No",
-   "recommended_path": "Pre-register the pairs now (SG19), capture weekly, publish n as it grows."
+   "recommended_path": "Pre-register the pairs now (SG23), capture weekly, publish n as it grows."
+  },
+  {
+   "id": "Q29",
+   "category": "Operations",
+   "priority": "High",
+   "question": "Which of the two parallel implementations of R21-R28 becomes canonical for each requirement?",
+   "why_it_matters": "Two sessions built the same eight requirements and both are live. Several pages now show two answers: market prices are blank on model-lines.html but published with a THIRD_PARTY badge on line-board.html; the demotion gate has two different trigger sets (D1-D3 vs G-14). A decision-maker cannot act on contradictory pages.",
+   "what_we_know": "Both implementations are complete, tested and cross-linked. Every divergence is enumerated in flag F31. Nothing was discarded in the merge.",
+   "what_we_dont_know": "The owner's preference per requirement.",
+   "missing_data": "None - this is a decision, not a data gap.",
+   "source": "flag F31; COORDINATION.md reconciliation record",
+   "blocking": "Yes",
+   "recommended_path": "SG29 option A: review each pair (price store, results feed, line model, signal/staking, demotion), pick one per requirement, archive the other with cross-links. The Q23 and Q24 decisions settle the two substantive divergences."
   }
  ],
  "suggestions": [
@@ -32333,6 +32366,90 @@ window.DATA = {
   },
   {
    "id": "SG16",
+   "title": "Choose a betting-price source before any market column or ROI is computed",
+   "category": "Data",
+   "problem": "No official NFL source publishes betting prices. The price-snapshot store, the market columns and ROI are therefore blank (F18).",
+   "proposal": "The owner names a price source. Until then the store stays empty and nothing on the site shows a market number.",
+   "evidence": "data/price_snapshots.tsv (39 blank rows); data/model_lines.tsv (market columns blank); flagged F18.",
+   "effort": "Medium",
+   "risk": "Medium (a third-party source that looks official would be a credibility risk)",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Owner decision"
+   ],
+   "options": [
+    "Keep blank (no price source) until one is chosen. (Recommended while the decision is open.)",
+    "Owner supplies a licensed feed, labelled 'licensed, not official', with its terms recorded.",
+    "Accept the third-party nflverse closing lines as a labelled non-official source (already in data/raw/closing_lines.csv)."
+   ],
+   "recommendation": "A. Nothing should be computed against prices until the owner has chosen a source and its terms. Option C would make the ROI and the difference columns real, but would sit outside the brief's official-only rule.",
+   "impact": "Decides whether the difference column and ROI can ever be filled."
+  },
+  {
+   "id": "SG17",
+   "title": "Confirm the demotion-gate thresholds (G-14) before any strategy goes live",
+   "category": "Governance",
+   "problem": "The G-14 windows (100 bets to demote, 250 to re-promote) and the 95% lower-bound rule are proposals, not facts about football.",
+   "proposal": "The owner accepts or changes the windows and the bound. The rule shape (exposure, sample, signal, CLV) stays as written.",
+   "evidence": "engine/gates.py (demotion_decision, repromotion_decision); governance.html worked examples; tests/test_brief.py.",
+   "effort": "Low",
+   "risk": "Low while no strategy is live",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Owner decision"
+   ],
+   "options": [
+    "Keep the proposed defaults (100 to demote, 250 to re-promote, 95% lower bound). (Recommended for a paper trial.)",
+    "Longer windows (250 to demote) to make demotion slower and less noisy.",
+    "Add a drawdown trigger, which needs an owner-supplied number."
+   ],
+   "recommendation": "A. The defaults are the smallest honest windows the code supports. A drawdown number is a policy choice and should come from the owner.",
+   "impact": "Sets how quickly a live strategy is returned to paper."
+  },
+  {
+   "id": "SG18",
+   "title": "Re-read the official Week 1-9 pages game by game before any backtest is quoted",
+   "category": "Verification",
+   "problem": "Only Week 10 results were re-read per game from an official page. Weeks 1-9 are reconciled to the standings in aggregate only (F22).",
+   "proposal": "Read the nine official week pages and compare every game row (a line-by-line check), recording the result in data/verification-brief.tsv.",
+   "evidence": "data/results.tsv (137 rows); S50 (official week pages); F22.",
+   "effort": "Medium (nine page reads)",
+   "risk": "Low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Repository access"
+   ],
+   "options": [
+    "Do the nine-page line-by-line check now. (Recommended.)",
+    "Accept aggregate reconciliation for now and label every backtest accordingly.",
+    "Drop Weeks 1-9 from the model inputs until they are verified."
+   ],
+   "recommendation": "A. The backtest is only as good as its inputs, and the brief asks for line-by-line verification.",
+   "impact": "Turns the results feed from aggregate-reconciled into per-game verified."
+  },
+  {
+   "id": "SG19",
+   "title": "Decide whether any third-party-derived correlation may ever be shown",
+   "category": "Governance",
+   "problem": "Brief B6 says correlations come only from official numbers, with n shown. Every existing coefficient comes from the nflverse mirror, so all are withheld (F19).",
+   "proposal": "The owner confirms the strict rule (withheld) or allows third-party values under a visible non-official label.",
+   "evidence": "prop-correlations.html (withheld, n shown); measured.html (withdrawal banner); flagged F19.",
+   "effort": "Low",
+   "risk": "Medium if a third-party coefficient were used as a bet input",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Owner decision"
+   ],
+   "options": [
+    "Keep withheld; no coefficient is published. (Recommended, and the brief's current rule.)",
+    "Show third-party coefficients with n and a 'non-official' label, and never use them to size a bet.",
+    "Find an official joint sample (for example official box scores) before computing any correlation."
+   ],
+   "recommendation": "A. The brief is explicit. Option C is the right long-term path and needs a source that has not been found yet.",
+   "impact": "Decides whether the correlation pages ever show a number."
+  },
+  {
+   "id": "SG20",
    "title": "Record opening prices at origination from Week 11 onward",
    "category": "Prices",
    "problem": "Every open cell in the price-snapshot store is blank because no historical opening-price source exists, and nothing is being recorded prospectively either.",
@@ -32353,12 +32470,12 @@ window.DATA = {
    "impact": "Opening cells fill from Week 11; open-to-close movement becomes measurable."
   },
   {
-   "id": "SG17",
+   "id": "SG21",
    "title": "Purchase a licensed opening + closing line history",
    "category": "Prices",
    "problem": "Closing-line value (gate G-3), honest difference columns and historical backtests all need prices with clean provenance. Today's prices are third-party and flagged.",
    "proposal": "Buy or license a historical line feed covering the seasons we backtest, with open and close per market. This is the single purchase that unblocks the most gates.",
-   "evidence": "G-3 is BLOCKED in engine/gates.py for want of prices; flag F18; question Q21.",
+   "evidence": "G-3 is BLOCKED in engine/gates.py for want of prices; flag F23; question Q21.",
    "effort": "Medium (cost unknown)",
    "risk": "Low",
    "reversibility": "Reversible (stop renewing)",
@@ -32374,12 +32491,12 @@ window.DATA = {
    "impact": "G-3 becomes evaluable; difference columns stop carrying the third-party badge; backtests gain a defensible price basis."
   },
   {
-   "id": "SG18",
+   "id": "SG22",
    "title": "Adopt the signal/staking split and the demotion gate as written competition rules",
    "category": "Competition",
    "problem": "Without the split, a lucky staking run ranks above good signal; without demotion, a live badge outlives the edge that earned it.",
    "proposal": "Rank on the signal block only (engine/backtest.py), report staking separately, and demote live strategies to paper on any of D1/D2/D3 (engine/demotion.py, gate G-14).",
-   "evidence": "data/leaderboard_signal_staking.json re-ranks the 16 computed-layer strategies on signal; flag F23 publishes the thresholds.",
+   "evidence": "data/leaderboard_signal_staking.json re-ranks the 16 computed-layer strategies on signal; flag F28 publishes the thresholds.",
    "effort": "Low",
    "risk": "Low",
    "reversibility": "Rules can be amended between seasons",
@@ -32395,7 +32512,7 @@ window.DATA = {
    "impact": "Lucky staking cannot mask bad signal; decaying strategies return to paper automatically."
   },
   {
-   "id": "SG19",
+   "id": "SG23",
    "title": "Capture official injury and depth snapshots weekly",
    "category": "Data",
    "problem": "One week of injury captures exists. Correlation C-A4 (availability vs margin) is stuck at n=1, and replacement depth only reflects Week 10.",
@@ -32416,12 +32533,12 @@ window.DATA = {
    "impact": "C-A4 becomes computable; replacement depth tracks the whole season."
   },
   {
-   "id": "SG20",
+   "id": "SG24",
    "title": "Decide the market-price publication policy (F-18 / F-11)",
    "category": "Policy",
    "problem": "The brief both demands the market-line column and forbids unconfirmed values. The sprint resolved it provisionally with a THIRD_PARTY badge; the owner should ratify or overrule.",
    "proposal": "Pick one of three policies and record it: (A) publish third-party prices with badge + flag [current], (B) strict blank on every market cell, (C) licensed feed then publish as sourced.",
-   "evidence": "flags F18/F11; question Q23; amended footer describing the badge.",
+   "evidence": "flags F23/F11; question Q23; amended footer describing the badge.",
    "effort": "Low",
    "risk": "Low",
    "reversibility": "One edit per policy switch",
@@ -32435,12 +32552,12 @@ window.DATA = {
    "impact": "Sets what the line board, snapshots and leaderboard are allowed to display."
   },
   {
-   "id": "SG21",
+   "id": "SG25",
    "title": "Unify the leaderboard wording across the two site layers (F-19)",
    "category": "Documentation",
    "problem": "The root Leaderboard page said no backtest existed anywhere in the repository while the computed layer publishes 16 backtested strategies over third-party data.",
    "proposal": "Point the root page at the computed layer explicitly: plan-level strategies (official data only) and computed-layer backtests (third-party, flagged) are two different registers and should say so.",
-   "evidence": "flag F19; strategies.html; docs/pages/leaderboard.html.",
+   "evidence": "flag F24; strategies.html; docs/pages/leaderboard.html.",
    "effort": "Low",
    "risk": "Low",
    "reversibility": "Fully reversible",
@@ -32454,12 +32571,12 @@ window.DATA = {
    "impact": "A reader stops being told two contradictory things."
   },
   {
-   "id": "SG22",
+   "id": "SG26",
    "title": "Annotate, do not rename, the Week 10 board columns (F-21)",
    "category": "Data",
    "problem": "week10_signal_board.csv's 'closing_spread_home' column actually holds the AWAY team's spread (V8-verified), and 'market_implied_home_winprob' derives from an unvalidated formula.",
    "proposal": "Add a convention note and derived home-view column; leave original column names in place so existing consumers do not break. Exclude the implied-probability column from decision pages.",
-   "evidence": "check V8 (data/verification-d.tsv); flag F21; the line board already negates per row and says so.",
+   "evidence": "check V8 (data/verification-d.tsv); flag F26; the line board already negates per row and says so.",
    "effort": "Low",
    "risk": "Low",
    "reversibility": "Fully reversible",
@@ -32473,7 +32590,7 @@ window.DATA = {
    "impact": "Nobody reads the away spread as the home spread again."
   },
   {
-   "id": "SG23",
+   "id": "SG27",
    "title": "Extend the verified results feed through the season in the weekly workflow",
    "category": "Operations",
    "problem": "The feed holds weeks 1-10. Backtests and ROI recompute as results land; nothing appends them automatically.",
@@ -32483,7 +32600,7 @@ window.DATA = {
    "risk": "Low",
    "reversibility": "Fully reversible",
    "prerequisites": [
-    "Weekly official results capture (SG19 shares the plumbing)"
+    "Weekly official results capture (SG23 shares the plumbing)"
    ],
    "options": [
     "Wire into refresh.yml. (Recommended)",
@@ -32494,12 +32611,12 @@ window.DATA = {
    "impact": "ROI and backtests stay current all season with the same provenance bar."
   },
   {
-   "id": "SG24",
-   "title": "Fix the computed layer's break-even to use per-bet odds, then re-run its gates (F25)",
+   "id": "SG28",
+   "title": "Fix the computed layer's break-even to use per-bet odds, then re-run its gates (F30)",
    "category": "Data",
    "problem": "The computed-layer leaderboard's breakeven_hit is 1/(1+realized ROI), a circular quantity, so its G4 'beats_vig' gate is unusable and every strategy is failed by construction.",
    "proposal": "In scripts/strategy_lab.py, compute the hurdle from the odds already in the bet ledger (mean of 1/decimal odds across settled bets, or per-bet break-even), regenerate leaderboard.csv, and re-run the gate columns. A one-line change to avg_dec semantics plus a rebuild.",
-   "evidence": "flag F25; data/leaderboard_signal_staking.json transcribes the wrong value with a warning rather than silently fixing another session's dataset.",
+   "evidence": "flag F30; data/leaderboard_signal_staking.json transcribes the wrong value with a warning rather than silently fixing another session's dataset.",
    "effort": "Low",
    "risk": "Medium (changes computed-layer verdicts)",
    "reversibility": "Reversible (git history holds the old build)",
@@ -32513,6 +32630,28 @@ window.DATA = {
    ],
    "recommendation": "A. The odds are already in the ledger; the correct number is one line away.",
    "impact": "The computed leaderboard's gate columns become meaningful; the signal split can then rank against true price hurdles."
+  },
+  {
+   "id": "SG29",
+   "title": "Choose canonical implementations of R21-R28 from the two parallel builds (F31)",
+   "category": "Operations",
+   "problem": "Two sessions independently implemented the eight requirements. Both are live on the site with different policy choices (market prices: strict blank vs badge-and-publish; demotion: D1-D3 vs G-14). A reader currently sees two answers to several requirements.",
+   "proposal": "For each requirement, review both implementations (cross-linked on the affected pages) and pick one as canonical; move the other to archive/ with a note. Do not delete either: they are independent evidence about the same requirements.",
+   "evidence": "flag F31; COORDINATION.md reconciliation record; line-board.html vs model-lines.html; verified-results-feed.html vs results-feed.html; validation.html (both gate sets).",
+   "effort": "Medium",
+   "risk": "Low",
+   "reversibility": "Archiving is reversible",
+   "prerequisites": [
+    "Q23 price-policy decision",
+    "Q24 demotion-rule decision"
+   ],
+   "options": [
+    "Review pair-by-pair and pick per requirement. (Recommended)",
+    "Merge the best of both into one build now.",
+    "Keep both indefinitely."
+   ],
+   "recommendation": "A. This is the decision the Suggestions page exists for: two real options, one owner, one pass.",
+   "impact": "The site answers each requirement once, with the losing implementation preserved as evidence."
   }
  ],
  "requirements": [
@@ -32689,15 +32828,15 @@ window.DATA = {
    "section": "Requirements sprint (2026-11-14)",
    "requirement": "Add a verified results feed so backtests and ROI can be computed at all",
    "status": "done",
-   "evidence": "data/results_feed.json: 137 official rows (S50); recomputing all 32 clubs' W/L/T + PF/PA from the feed reproduces data/standings.tsv exactly (checked in the build). engine/backtest.py settles bets only against this feed and reports ROI with a provenance tier.",
-   "page": "results-feed.html"
+   "evidence": "data/results_feed.json: 137 official rows (S52); recomputing all 32 clubs' W/L/T + PF/PA from the feed reproduces data/standings.tsv exactly (checked in the build). engine/backtest.py settles bets only against this feed and reports ROI with a provenance tier.",
+   "page": "verified-results-feed.html"
   },
   {
    "id": "R23",
    "section": "Requirements sprint (2026-11-14)",
    "requirement": "Originate the side first, then the total, then the moneyline",
    "status": "done",
-   "evidence": "Order fixed in engine/fairline.py origination_order(), enforced in the snapshot-store sort and the line-board build; the earlier 'totals-first' design note is superseded and preserved in flag F22.",
+   "evidence": "Order fixed in engine/fairline.py origination_order(), enforced in the snapshot-store sort and the line-board build; the earlier 'totals-first' design note is superseded and preserved in flag F27.",
    "page": "line-board.html"
   },
   {
@@ -32705,7 +32844,7 @@ window.DATA = {
    "section": "Requirements sprint (2026-11-14)",
    "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
    "status": "done",
-   "evidence": "data/line_board.json: 42 rows with model_fair_line / market_line / difference as separate columns. Fair computed from official standings+results (HFA -0.022 pts n=137, margin sd 13.225 n=137, published); market from the pinned capture (flag F18); difference = fair - market, blank when either side blank (never zero).",
+   "evidence": "data/line_board.json: 42 rows with model_fair_line / market_line / difference as separate columns. Fair computed from official standings+results (HFA -0.022 pts n=137, margin sd 13.225 n=137, published); market from the pinned capture (flag F23); difference = fair - market, blank when either side blank (never zero).",
    "page": "line-board.html"
   },
   {
@@ -32729,7 +32868,7 @@ window.DATA = {
    "section": "Requirements sprint (2026-11-14)",
    "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
    "status": "done",
-   "evidence": "data/correlations_official.json: 5 rows, every value computed from official captures (S01/S03/S50) and every value publishes n + Fisher-z 95% CI. engine/corr_official.py raises unless every source id is in the official set. Third-party correlation registers (measured.json, prop-correlations-d.csv, correlations.csv) explicitly excluded and listed as excluded.",
+   "evidence": "data/correlations_official.json: 5 rows, every value computed from official captures (S01/S03/S52) and every value publishes n + Fisher-z 95% CI. engine/corr_official.py raises unless every source id is in the official set. Third-party correlation registers (measured.json, prop-correlations-d.csv, correlations.csv) explicitly excluded and listed as excluded.",
    "page": "correlation-register.html"
   },
   {
@@ -32737,7 +32876,7 @@ window.DATA = {
    "section": "Requirements sprint (2026-11-14)",
    "requirement": "Define a demotion gate that sends a live strategy back to paper",
    "status": "done",
-   "evidence": "engine/demotion.py: D1 signal decay (window hit rate below break-even, p<0.10), D2 drawdown (25 flat-stake units), D3 CLV rot; any one demotes LIVE->PAPER. Re-promotion needs 300 fresh settled bets passing the G-2b standard. Registered as G-14 in data/validation_gates.json; thresholds are proposed rules (flag F23).",
+   "evidence": "engine/demotion.py: D1 signal decay (window hit rate below break-even, p<0.10), D2 drawdown (25 flat-stake units), D3 CLV rot; any one demotes LIVE->PAPER. Re-promotion needs 300 fresh settled bets passing the G-2b standard. Registered as G-14 in data/validation_gates.json; thresholds are proposed rules (flag F28).",
    "page": "validation.html"
   }
  ],
@@ -33056,17 +33195,73 @@ window.DATA = {
    "id": "F17",
    "kind": "Data provenance",
    "item": "Player-prop correlations are computed estimates from a third-party mirror",
-   "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts.",
+   "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts. The source parquet is not committed and its prior workspace-only path is absent from this checkout; therefore the prop-correlation rebuild check V9 is BLOCKED here. The existing coefficients remain third-party-derived and were not independently regenerated in this run.",
    "source": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
    "severity": "Medium",
    "sourceIds": [
     "S47",
     "S48"
    ],
-   "action": null
+   "action": "Retain the third-party label; for reproducible refreshes, fetch a pinned source artifact and record its content hash. Until that input and QA run are available, treat V9 as BLOCKED and do not claim this checkout independently reproduced the estimates."
   },
   {
    "id": "F18",
+   "kind": "Missing official source (prices)",
+   "item": "Betting prices, opening and closing lines, for every market we originate (side, total, moneyline)",
+   "detail": "No official NFL source publishes betting lines or closing prices (GAP-01; Q-02). The price-snapshot store (data/price_snapshots.tsv) therefore holds no prices. The market and difference columns in data/model_lines.tsv are blank, and so is the ROI column in the backtest. Third-party prices exist in data/raw/closing_lines.csv (nflverse) and were not promoted.",
+   "sourceIds": [
+    "S51"
+   ],
+   "severity": "High",
+   "action": "Owner decision needed: an official or licensed price feed, or an explicit decision to accept a third-party feed as a labelled non-official source. Until then every market cell stays blank."
+  },
+  {
+   "id": "F19",
+   "kind": "Correlation withheld (third-party source)",
+   "item": "Correlation values computed from nflverse / third-party data (prop correlations; C-01 measured rho)",
+   "detail": "Brief B6 requires correlations to be computed only from officially sourced numbers, with n published. The prop-correlation values (for example QB pass yards vs WR receiving yards r = 0.7887, n = 5,246; QB vs TE r = 0.3729, n = 5,208; RB rush vs RB receive r = 0.3562, n = 5,246, and the 2022-2024 window values) and the measured C-01 rho = +0.00696 (95% CI -0.03324 to +0.04831, n = 6,813) come from the third-party nflverse mirror. They are withheld from the root site and the measured page carries a withdrawal banner. n is kept for each pair. The withheld values are reproduced here for review only.",
+   "sourceIds": [
+    "S48"
+   ],
+   "severity": "High",
+   "action": "Owner to decide whether any third-party-derived correlation may be re-admitted. The current rule says no. No official joint sample of this kind exists in the repo yet (n = 0 for market pairs)."
+  },
+  {
+   "id": "F20",
+   "kind": "Model does not beat a constant benchmark out of sample",
+   "item": "Own-line fair model (side, total) backtest, weeks 4-10 of 2026",
+   "detail": "Walk-forward, strictly out of sample, n = 89 games. Side: model MAE 10.49 vs constant league-average benchmark 10.33 points; sign accuracy 67.0% (95% Wilson CI 56.7%-76.0%, n = 88). Total: model MAE 11.07 vs constant 10.96 points. Moneyline Brier 0.2181 vs 0.2472 for a 50/50 forecast. The fair lines are published as model output only. They are not a validated edge, there is no market baseline, and ROI cannot be computed (F18).",
+   "sourceIds": [
+    "S50"
+   ],
+   "severity": "High",
+   "action": "Do not treat the fair lines as a recommendation. Review the calibration table before any further model work; a larger sample (more seasons of official results) is needed before any margin claim."
+  },
+  {
+   "id": "F21",
+   "kind": "Assumption: home-field term at the Munich game",
+   "item": "Patriots at Lions, 15 Nov 2026, Munich",
+   "detail": "The official Week 10 page labels this game an 'International Game' played in Munich, Germany, and lists it as 'Patriots at Lions'. The model sets the home-field term to zero for this game. That is an assumption made by this session, not an official fact. The neutral-venue flag for the 137 results comes from the third-party schedule feed (data/schedule2026-d.csv).",
+   "sourceIds": [
+    "S51"
+   ],
+   "severity": "Low",
+   "action": "Confirm the venue convention for the fair line. The effect is at most the home-field estimate of about 0.05 points on the fitted model."
+  },
+  {
+   "id": "F22",
+   "kind": "Partial per-game verification of results",
+   "item": "137 results in data/results.tsv used as model inputs",
+   "detail": "Per-game scores were re-read from an official page only for Week 10 (Commanders 24, Giants 21, FINAL). For Weeks 1-9, the 137 results were reconciled in aggregate to the official nfl.com standings (0 mismatches across 32 clubs, from the earlier results check, verify_results.py), but each game row was not re-read from the official week page in this session.",
+   "sourceIds": [
+    "S50",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Re-read the official Week 1-9 pages and compare each game row (a line-by-line check). Until then the per-game status is 'aggregate reconciled'."
+  },
+  {
+   "id": "F23",
    "kind": "Data provenance",
    "item": "Market prices are third-party only - no official league source prices NFL lines",
    "detail": "Requirement R24 mandates publishing the market-line and difference columns; the standing verification rule says leave unconfirmed values blank. Provisional resolution applied in this sprint: market cells are transcribed from the sha256-pinned nflverse capture (S47) and badged THIRD_PARTY; difference cells inherit the badge. The strict-blank alternative is one edit away and is left open as question Q23 (the old F-11 decision, now unavoidable).",
@@ -33075,10 +33270,10 @@ window.DATA = {
    "sourceIds": [
     "S47"
    ],
-   "action": "Review Q23 / SG20. Option B switches every market cell to blank."
+   "action": "Review Q23 / SG24. Option B switches every market cell to blank."
   },
   {
-   "id": "F19",
+   "id": "F24",
    "kind": "Documentation inconsistency",
    "item": "Root Leaderboard page claimed no backtest existed anywhere in the repository while the computed layer publishes 16 backtested strategies",
    "detail": "strategies.html carried the sentence 'No backtest has been executed and no performance figure is claimed anywhere in this repository', but data/leaderboard.csv and docs/pages/ carry 16 strategies backtested over third-party data (2006-2026). The two registers answer different questions (official-data plan vs third-party research), but 'anywhere' was false. The sprint section on the Leaderboard page now states the split; the original sentence is preserved there as the plan-level register's statement about official data.",
@@ -33087,10 +33282,10 @@ window.DATA = {
    "sourceIds": [
     "S47"
    ],
-   "action": "SG21: unify wording across the two layers."
+   "action": "SG25: unify wording across the two layers."
   },
   {
-   "id": "F20",
+   "id": "F25",
    "kind": "Missing capture",
    "item": "Moneyline opening and closing prices are not captured for the Week 10 slate",
    "detail": "The price-snapshot store holds MONEYLINE-HOME and MONEYLINE-AWAY rows for all 14 games with every price cell blank: the Week 10 board captures spread and total only, and closing_lines.csv carries moneyline prices only for 2006-2025 (third-party). Nothing was inferred to fill them.",
@@ -33102,7 +33297,7 @@ window.DATA = {
    "action": "Q22: approve a moneyline capture source."
   },
   {
-   "id": "F21",
+   "id": "F26",
    "kind": "Data convention",
    "item": "week10_signal_board.csv 'closing_spread_home' holds the AWAY team's spread, and 'market_implied_home_winprob' comes from an unvalidated formula",
    "detail": "Check V8 (data/verification-d.tsv) verified across 13/13 games that nflverse spread_line is the away team's point spread, so the board's column name is wrong for its content. market_implied_home_winprob = logistic(0.28 * spread_line) has no cited basis and behaves like a probability of the away side's margin, not a home win probability; it is excluded from the line board and the price store. The line board negates the verbatim value into home view and says so per row; the store keeps the verbatim number as the AWAY quote.",
@@ -33111,10 +33306,10 @@ window.DATA = {
    "sourceIds": [
     "S47"
    ],
-   "action": "SG22: annotate columns and add a derived home-view column; do not rename."
+   "action": "SG26: annotate columns and add a derived home-view column; do not rename."
   },
   {
-   "id": "F22",
+   "id": "F27",
    "kind": "Design change",
    "item": "Origination order mandated: side first, then total, then moneyline - supersedes the earlier totals-first note",
    "detail": "data/models.json described the architecture as 'deliberately totals-first'. Requirement R23 fixes the order SIDE, then TOTAL, then MONEYLINE. The pipeline, the snapshot store and the line board now follow the mandated order. The old wording is preserved in this flag so the change is visible rather than silent.",
@@ -33124,7 +33319,7 @@ window.DATA = {
    "action": "None - recorded so the change is auditable."
   },
   {
-   "id": "F23",
+   "id": "F28",
    "kind": "Proposed rule",
    "item": "Demotion-gate thresholds are proposed competition rules, not measured facts",
    "detail": "G-14 (engine/demotion.py) uses D1 window=100 settled bets with inferiority alpha 0.10, D2 max drawdown 25 flat-stake units, D3 trailing CLV rot, and re-promotion after 300 fresh settled bets at the G-2b standard. These are constructor arguments chosen as a design decision; a reviewer may change them. What cannot be changed by review is the verdict logic: DEMOTE cannot be reinterpreted as HOLD.",
@@ -33134,20 +33329,20 @@ window.DATA = {
    "action": "Q24: confirm or revise the thresholds."
   },
   {
-   "id": "F24",
+   "id": "F29",
    "kind": "Model provenance",
    "item": "Fair-line coefficients are computed from the 2026 official feeds only (137 games)",
-   "detail": "Home-field advantage -0.022 points per game and margin sd 13.225 points are computed by engine/fairline.py from data/results.tsv (S50) as of 2026-11-14; the strength convention (PF-PA)/G with a /2 meeting rule is a published bookkeeping choice, not a fitted coefficient. No coefficient is tuned on market prices. The 2026 home-field estimate being ~0 is a property of this season's 137 games, not a claim about the NFL.",
+   "detail": "Home-field advantage -0.022 points per game and margin sd 13.225 points are computed by engine/fairline.py from data/results.tsv (S52) as of 2026-11-14; the strength convention (PF-PA)/G with a /2 meeting rule is a published bookkeeping choice, not a fitted coefficient. No coefficient is tuned on market prices. The 2026 home-field estimate being ~0 is a property of this season's 137 games, not a claim about the NFL.",
    "source": "https://www.nfl.com/standings/",
    "severity": "Low",
    "sourceIds": [
-    "S50",
+    "S52",
     "S03"
    ],
    "action": "Q26: schedule out-of-sample refits after two official seasons."
   },
   {
-   "id": "F25",
+   "id": "F30",
    "kind": "Data methodology",
    "item": "Computed-layer leaderboard's breakeven_hit is circular: 1/(1+realized ROI), not the price hurdle",
    "detail": "scripts/strategy_lab.py computes avg_dec as the mean of (realized profit/stake + 1) over settled bets - losers contribute 0 - so breakeven_hit = 1/(1+realized ROI) and gate G4 ('beats_vig') is tested against a quantity derived from the outcomes being tested. Every spread strategy at ordinary prices is then failed by construction (e.g. WIND15_UNDER: breakeven_hit 0.9326 = 1/1.0724 = 1/(1+ROI 0.0723)). The per-bet odds ARE present in that pipeline's bet ledger (home_spread_odds etc.), so the correct price-based hurdle is computable there with a one-line fix. Nothing in the computed layer was edited by this session; the value is transcribed as dataset_breakeven_hit_transcribed in data/leaderboard_signal_staking.json and NOT used for ranking - the signal split ranks against the standard -110 reference hurdle instead and labels it.",
@@ -33156,7 +33351,17 @@ window.DATA = {
    "sourceIds": [
     "S47"
    ],
-   "action": "SG24: recompute breakeven from per-bet odds in the computed layer and re-run its gates; until then treat its G4 column as unusable."
+   "action": "SG28: recompute breakeven from per-bet odds in the computed layer and re-run its gates; until then treat its G4 column as unusable."
+  },
+  {
+   "id": "F31",
+   "kind": "Integration divergence",
+   "item": "Two parallel sessions implemented the same eight requirements (R21-R28); both implementations are preserved",
+   "detail": "Session arena/685f958d-fl1 (PRs #22-#32, merged first) and session arena-360ca650-fl1 (this merge) each built a price store, results feed, line model, signal/staking split, availability/replacement tracking, correlation policy and a demotion gate. Nothing was discarded. The divergences are substantive and left for the owner: (1) MARKET-PRICE POLICY - model-lines.html keeps every market/difference cell blank (no official price source), while line-board.html publishes the pinned third-party capture with a THIRD_PARTY badge and a per-row convention note (see Q23); (2) DEMOTION SEMANTICS - the D1-D3 gate (CLV decay, calibration drift, concentration) and the G-14 gate (signal decay, drawdown, CLV rot; 300-bet re-promotion) define different triggers and thresholds (see Q24); (3) duplicate pages: results-feed.html (arena/685f958d) vs verified-results-feed.html (arena/360ca650), line-board.html vs model-lines.html, plus two price stores (data/price_snapshots.tsv vs data/price_snapshots.json). Cross-links connect each pair.",
+   "source": "https://github.com/sassnarep3-star/FL1/pull/33",
+   "severity": "High",
+   "sourceIds": [],
+   "action": "Q29 / SG29: choose the canonical implementation per requirement and archive the other with cross-links; do not delete either."
   }
  ]
 };

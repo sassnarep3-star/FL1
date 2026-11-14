@@ -9,7 +9,7 @@ origination order (R23): SIDE-HOME, TOTAL-GAME, MONEYLINE-HOME, MONEYLINE-AWAY.
 What fills in, and what does not:
   * Closing spread and closing total: transcribed from the pinned third-party
     capture behind data/week10_signal_board.csv (nflverse/nfldata games.csv,
-    sha256 in data/raw/MANIFEST.json). Provenance THIRD_PARTY, flagged F18.
+    sha256 in data/raw/MANIFEST.json). Provenance THIRD_PARTY, flagged F23.
   * Opening prices: NO source exists anywhere in this repository. Every open
     cell is left blank (None) and the row carries the flag. Never inferred.
   * Moneyline closes: not captured in the Week 10 board. Blank + flagged.
@@ -67,10 +67,10 @@ def main() -> int:
         # 3) MONEYLINE last: two quotes, neither captured. Blank + flagged.
         rows.append(snapshots.record(
             **common, market_type="MONEYLINE", side=home, quote_side="HOME",
-            notes="no moneyline price captured for this game — blank and flagged (F20)"))
+            notes="no moneyline price captured for this game — blank and flagged (F25)"))
         rows.append(snapshots.record(
             **common, market_type="MONEYLINE", side=away, quote_side="AWAY",
-            notes="no moneyline price captured for this game — blank and flagged (F20)"))
+            notes="no moneyline price captured for this game — blank and flagged (F25)"))
 
     rows.sort(key=snapshots.sort_key)
     errors = snapshots.validate(rows)
@@ -102,7 +102,7 @@ def main() -> int:
                                "provenance fails validation",
         },
         "coverage": cov,
-        "flags": ["F18", "F20"],
+        "flags": ["F23", "F25"],
         "rows": rows,
     }
     with open(OUT, "w", encoding="utf-8") as fh:

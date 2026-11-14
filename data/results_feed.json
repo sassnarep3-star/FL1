@@ -6,7 +6,7 @@
  "description": "Every row is a finished game transcribed from the official NFL.com week pages (raw/schedule-results-2026-week1-10.tsv) and reconciled against the official standings capture: recomputing all 32 clubs' W/L/T and PF/PA from this feed reproduces data/standings.tsv exactly. Backtests settle ONLY against this feed.",
  "provenance": {
   "tier": "OFFICIAL",
-  "source_id": "S50",
+  "source_id": "S52",
   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
   "capture": "raw/schedule-results-2026-week1-10.tsv",
   "verification": "tools/verify_results.py + standings recomputation (32/32 clubs match data/standings.tsv)"
@@ -35,7 +35,7 @@
    "margin_home": 3,
    "total": 23,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -48,7 +48,7 @@
    "margin_home": -20,
    "total": 34,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -61,7 +61,7 @@
    "margin_home": -12,
    "total": 40,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -74,7 +74,7 @@
    "margin_home": 7,
    "total": 33,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -87,7 +87,7 @@
    "margin_home": -18,
    "total": 64,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -100,7 +100,7 @@
    "margin_home": -5,
    "total": 67,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -113,7 +113,7 @@
    "margin_home": -22,
    "total": 96,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -126,7 +126,7 @@
    "margin_home": 24,
    "total": 44,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -139,7 +139,7 @@
    "margin_home": 8,
    "total": 48,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -152,7 +152,7 @@
    "margin_home": 17,
    "total": 61,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -165,7 +165,7 @@
    "margin_home": 14,
    "total": 40,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -178,7 +178,7 @@
    "margin_home": 1,
    "total": 61,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -191,7 +191,7 @@
    "margin_home": -13,
    "total": 33,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -204,7 +204,7 @@
    "margin_home": 6,
    "total": 60,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -217,7 +217,7 @@
    "margin_home": 2,
    "total": 46,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 1,
@@ -230,7 +230,7 @@
    "margin_home": 21,
    "total": 41,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -243,7 +243,7 @@
    "margin_home": 10,
    "total": 72,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -256,7 +256,7 @@
    "margin_home": -31,
    "total": 37,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -269,7 +269,7 @@
    "margin_home": -14,
    "total": 26,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -282,7 +282,7 @@
    "margin_home": -4,
    "total": 42,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -295,7 +295,7 @@
    "margin_home": -3,
    "total": 37,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -308,7 +308,7 @@
    "margin_home": 3,
    "total": 63,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -321,7 +321,7 @@
    "margin_home": 7,
    "total": 33,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -334,7 +334,7 @@
    "margin_home": -12,
    "total": 40,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -347,7 +347,7 @@
    "margin_home": 22,
    "total": 48,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -360,7 +360,7 @@
    "margin_home": -6,
    "total": 12,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -373,7 +373,7 @@
    "margin_home": -7,
    "total": 41,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -386,7 +386,7 @@
    "margin_home": -4,
    "total": 44,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -399,7 +399,7 @@
    "margin_home": 17,
    "total": 23,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -412,7 +412,7 @@
    "margin_home": -24,
    "total": 38,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -425,7 +425,7 @@
    "margin_home": 17,
    "total": 57,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 2,
@@ -438,7 +438,7 @@
    "margin_home": 22,
    "total": 34,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -451,7 +451,7 @@
    "margin_home": -21,
    "total": 49,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -464,7 +464,7 @@
    "margin_home": 6,
    "total": 66,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -477,7 +477,7 @@
    "margin_home": -3,
    "total": 65,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -490,7 +490,7 @@
    "margin_home": 3,
    "total": 39,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -503,7 +503,7 @@
    "margin_home": 3,
    "total": 57,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -516,7 +516,7 @@
    "margin_home": 2,
    "total": 36,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -529,7 +529,7 @@
    "margin_home": -14,
    "total": 34,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -542,7 +542,7 @@
    "margin_home": 8,
    "total": 40,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -555,7 +555,7 @@
    "margin_home": 4,
    "total": 56,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -568,7 +568,7 @@
    "margin_home": -8,
    "total": 62,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -581,7 +581,7 @@
    "margin_home": -7,
    "total": 39,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -594,7 +594,7 @@
    "margin_home": 29,
    "total": 41,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -607,7 +607,7 @@
    "margin_home": 7,
    "total": 55,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -620,7 +620,7 @@
    "margin_home": 2,
    "total": 64,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -633,7 +633,7 @@
    "margin_home": 5,
    "total": 19,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 3,
@@ -646,7 +646,7 @@
    "margin_home": 20,
    "total": 34,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -659,7 +659,7 @@
    "margin_home": 3,
    "total": 51,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -672,7 +672,7 @@
    "margin_home": 12,
    "total": 60,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -685,7 +685,7 @@
    "margin_home": -4,
    "total": 64,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -698,7 +698,7 @@
    "margin_home": 10,
    "total": 38,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -711,7 +711,7 @@
    "margin_home": 6,
    "total": 58,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -724,7 +724,7 @@
    "margin_home": -3,
    "total": 31,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -737,7 +737,7 @@
    "margin_home": -17,
    "total": 43,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -750,7 +750,7 @@
    "margin_home": -5,
    "total": 39,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -763,7 +763,7 @@
    "margin_home": -3,
    "total": 57,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -776,7 +776,7 @@
    "margin_home": 7,
    "total": 53,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -789,7 +789,7 @@
    "margin_home": -4,
    "total": 44,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -802,7 +802,7 @@
    "margin_home": 5,
    "total": 25,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -815,7 +815,7 @@
    "margin_home": -3,
    "total": 55,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -828,7 +828,7 @@
    "margin_home": 11,
    "total": 35,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -841,7 +841,7 @@
    "margin_home": 6,
    "total": 42,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 4,
@@ -854,7 +854,7 @@
    "margin_home": -21,
    "total": 69,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -867,7 +867,7 @@
    "margin_home": -8,
    "total": 40,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -880,7 +880,7 @@
    "margin_home": -7,
    "total": 53,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -893,7 +893,7 @@
    "margin_home": 24,
    "total": 38,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -906,7 +906,7 @@
    "margin_home": -7,
    "total": 55,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -919,7 +919,7 @@
    "margin_home": 5,
    "total": 29,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -932,7 +932,7 @@
    "margin_home": -6,
    "total": 40,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -945,7 +945,7 @@
    "margin_home": -24,
    "total": 66,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -958,7 +958,7 @@
    "margin_home": -23,
    "total": 29,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -971,7 +971,7 @@
    "margin_home": 12,
    "total": 56,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -984,7 +984,7 @@
    "margin_home": 28,
    "total": 62,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -997,7 +997,7 @@
    "margin_home": -10,
    "total": 36,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -1010,7 +1010,7 @@
    "margin_home": 0,
    "total": 54,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -1023,7 +1023,7 @@
    "margin_home": 2,
    "total": 36,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -1036,7 +1036,7 @@
    "margin_home": -3,
    "total": 61,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 5,
@@ -1049,7 +1049,7 @@
    "margin_home": -3,
    "total": 71,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1062,7 +1062,7 @@
    "margin_home": 3,
    "total": 31,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1075,7 +1075,7 @@
    "margin_home": -2,
    "total": 34,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1088,7 +1088,7 @@
    "margin_home": 3,
    "total": 23,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1101,7 +1101,7 @@
    "margin_home": -3,
    "total": 63,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1114,7 +1114,7 @@
    "margin_home": -11,
    "total": 39,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1127,7 +1127,7 @@
    "margin_home": -8,
    "total": 54,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1140,7 +1140,7 @@
    "margin_home": 10,
    "total": 36,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1153,7 +1153,7 @@
    "margin_home": -3,
    "total": 65,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1166,7 +1166,7 @@
    "margin_home": 16,
    "total": 28,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1179,7 +1179,7 @@
    "margin_home": -7,
    "total": 61,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1192,7 +1192,7 @@
    "margin_home": 7,
    "total": 45,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1205,7 +1205,7 @@
    "margin_home": -7,
    "total": 45,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1218,7 +1218,7 @@
    "margin_home": -6,
    "total": 46,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 6,
@@ -1231,7 +1231,7 @@
    "margin_home": 6,
    "total": 40,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1244,7 +1244,7 @@
    "margin_home": 6,
    "total": 54,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1257,7 +1257,7 @@
    "margin_home": -22,
    "total": 48,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1270,7 +1270,7 @@
    "margin_home": -3,
    "total": 51,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1283,7 +1283,7 @@
    "margin_home": -14,
    "total": 46,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1296,7 +1296,7 @@
    "margin_home": 3,
    "total": 37,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1309,7 +1309,7 @@
    "margin_home": 6,
    "total": 26,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1322,7 +1322,7 @@
    "margin_home": 17,
    "total": 23,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1335,7 +1335,7 @@
    "margin_home": -14,
    "total": 56,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1348,7 +1348,7 @@
    "margin_home": -3,
    "total": 53,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1361,7 +1361,7 @@
    "margin_home": -6,
    "total": 48,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1374,7 +1374,7 @@
    "margin_home": -6,
    "total": 26,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1387,7 +1387,7 @@
    "margin_home": 9,
    "total": 49,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1400,7 +1400,7 @@
    "margin_home": -30,
    "total": 56,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 7,
@@ -1413,7 +1413,7 @@
    "margin_home": -17,
    "total": 59,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1426,7 +1426,7 @@
    "margin_home": 8,
    "total": 46,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1439,7 +1439,7 @@
    "margin_home": -3,
    "total": 63,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1452,7 +1452,7 @@
    "margin_home": 16,
    "total": 16,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1465,7 +1465,7 @@
    "margin_home": 26,
    "total": 46,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1478,7 +1478,7 @@
    "margin_home": 21,
    "total": 33,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1491,7 +1491,7 @@
    "margin_home": 35,
    "total": 49,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1504,7 +1504,7 @@
    "margin_home": 4,
    "total": 52,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1517,7 +1517,7 @@
    "margin_home": 15,
    "total": 33,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1530,7 +1530,7 @@
    "margin_home": -5,
    "total": 71,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1543,7 +1543,7 @@
    "margin_home": 4,
    "total": 34,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1556,7 +1556,7 @@
    "margin_home": -5,
    "total": 43,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1569,7 +1569,7 @@
    "margin_home": 17,
    "total": 37,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1582,7 +1582,7 @@
    "margin_home": 7,
    "total": 79,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 8,
@@ -1595,7 +1595,7 @@
    "margin_home": -17,
    "total": 51,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1608,7 +1608,7 @@
    "margin_home": -23,
    "total": 43,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1621,7 +1621,7 @@
    "margin_home": 14,
    "total": 20,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1634,7 +1634,7 @@
    "margin_home": -17,
    "total": 51,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1647,7 +1647,7 @@
    "margin_home": 1,
    "total": 45,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1660,7 +1660,7 @@
    "margin_home": -4,
    "total": 50,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1673,7 +1673,7 @@
    "margin_home": -5,
    "total": 47,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1686,7 +1686,7 @@
    "margin_home": -10,
    "total": 28,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1699,7 +1699,7 @@
    "margin_home": -18,
    "total": 72,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1712,7 +1712,7 @@
    "margin_home": -22,
    "total": 66,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1725,7 +1725,7 @@
    "margin_home": -7,
    "total": 33,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1738,7 +1738,7 @@
    "margin_home": 21,
    "total": 55,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1751,7 +1751,7 @@
    "margin_home": -8,
    "total": 30,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1764,7 +1764,7 @@
    "margin_home": 23,
    "total": 47,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1777,7 +1777,7 @@
    "margin_home": 3,
    "total": 51,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 9,
@@ -1790,7 +1790,7 @@
    "margin_home": -17,
    "total": 29,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   },
   {
    "week": 10,
@@ -1803,7 +1803,7 @@
    "margin_home": -3,
    "total": 45,
    "tier": "OFFICIAL",
-   "source_id": "S50"
+   "source_id": "S52"
   }
  ]
 }

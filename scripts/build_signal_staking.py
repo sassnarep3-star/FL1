@@ -4,19 +4,19 @@
 Splits every leaderboard entry into a SIGNAL block and a STAKING block and
 re-ranks on SIGNAL ONLY, so a lucky staking run cannot mask a bad signal.
 
-Source: data/leaderboard.csv (computed layer, third-party data, flagged F17/F18
+Source: data/leaderboard.csv (computed layer, third-party data, flagged F17/F23
 family). The stakes in that dataset are flat 1 unit per bet
 (scripts/strategy_lab.py), so staking cannot mask signal IN THIS DATASET — the
 split is enforced anyway, because the competition will admit variable stakes
 and the rule must already exist when it does.
 
-NOTE (flag F25): the dataset's own `breakeven_hit` column is circular — it is
+NOTE (flag F30): the dataset's own `breakeven_hit` column is circular — it is
 computed as 1/(1+realized ROI) from settled profits, not from the prices paid,
 so it cannot serve as a price hurdle. It is transcribed into
 `dataset_breakeven_hit_transcribed` for audit and NOT used for ranking. The
 signal edge is measured against the standard -110 two-way reference hurdle
 (0.52381, engine/pricing.py, source SRC-015) and labelled as such; when the
-computed layer re-emits per-bet odds (SG24), the exact price hurdle replaces it.
+computed layer re-emits per-bet odds (SG28), the exact price hurdle replaces it.
 
 Signal score = hit_ci_low - reference_hurdle (the pessimistic end of the hit-rate
 estimate minus the hurdle). Ranking on the lower bound rather than the
@@ -62,14 +62,14 @@ def main() -> int:
                 "reference_hurdle": REFERENCE_HURDLE,
                 "reference_hurdle_note": "standard -110 two-way break-even "
                                          "(engine/pricing.py, SRC-015); exact "
-                                         "per-bet price hurdle pending SG24",
+                                         "per-bet price hurdle pending SG28",
                 "signal_edge_lcb": signal_edge_lcb,
                 "signal_verdict": ("SIGNAL PROVEN" if (signal_edge_lcb is not None
                                                        and signal_edge_lcb > 0)
                                    else "NOT PROVEN"),
                 "dataset_breakeven_hit_transcribed": f(r["breakeven_hit"]),
                 "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a "
-                                             "price hurdle — flag F25; not used "
+                                             "price hurdle — flag F30; not used "
                                              "for ranking",
                 "tier": "COMPUTED",
             },
@@ -105,7 +105,7 @@ def main() -> int:
             "stakes, profit, drawdown) is reported beside it and can never "
             "change a rank. Source dataset: data/leaderboard.csv (computed "
             "layer over third-party data — flagged), stakes flat 1 unit. The "
-            "dataset's breakeven_hit column is circular (flag F25) and is "
+            "dataset's breakeven_hit column is circular (flag F30) and is "
             "transcribed only for audit."),
         "ranking_rule": "signal_rank = order by (hit_ci_low - reference_hurdle) "
                         "descending; ties break on larger settled sample. Profit "

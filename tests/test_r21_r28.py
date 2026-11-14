@@ -285,7 +285,7 @@ class TestCorrOfficial(unittest.TestCase):
         with self.assertRaises(ValueError):
             corr_official.CorrRecord.build(
                 "X", "x", "a", "b", [1, 2, 3], [2, 4, 6],
-                ["S47"], {"S01", "S03", "S50"})
+                ["S47"], {"S01", "S03", "S52"})
 
     def test_pearson_and_ci_arithmetic(self):
         r = corr_official.pearson([1, 2, 3, 4], [2, 4, 6, 8])
@@ -312,7 +312,7 @@ class TestCorrOfficial(unittest.TestCase):
         for row in reg["rows"]:
             self.assertTrue(set(row["sources"]) <= {"S01", "S02", "S03", "S04",
                                                     "S05", "S06", "S09", "S10",
-                                                    "S49", "S50"}, row["id"])
+                                                    "S49", "S52"}, row["id"])
 
 
 class TestReplacementDepth(unittest.TestCase):

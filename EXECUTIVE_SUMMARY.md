@@ -121,8 +121,8 @@ tests, data artefact and page:
 |---|---|---|---|
 | R21 | Price-snapshot store: opening **and** closing numbers for every market we originate | `engine/snapshots.py`, `data/price_snapshots.json`, `price-snapshots.html` | 56 rows (Week 10 slate, SIDE→TOTAL→MONEYLINE order). 28 closes sourced (third-party capture); **0 opens** — no opening-price source exists, every open cell blank and flagged |
 | R22 | Verified results feed so backtests and ROI can be computed at all | `engine/backtest.py`, `data/results_feed.json`, `results-feed.html` | 137 official rows; recomputing all 32 clubs' records reproduces the official standings exactly |
-| R23 | Originate the side first, then the total, then the moneyline | `engine/fairline.py`, `line-origination.html` | Order fixed in code and enforced in the store; supersedes the earlier "totals-first" note (F22) |
-| R24 | Model fair line, market line, difference as **separate columns** | `data/line_board.json`, `line-board.html` | 42 rows; fair = computed from official numbers with coefficients published (HFA −0.02 pts, n=137; margin sd 13.23, n=137); market = pinned third-party capture (F18); difference blank when either side blank |
+| R23 | Originate the side first, then the total, then the moneyline | `engine/fairline.py`, `line-origination.html` | Order fixed in code and enforced in the store; supersedes the earlier "totals-first" note (F27) |
+| R24 | Model fair line, market line, difference as **separate columns** | `data/line_board.json`, `line-board.html` | 42 rows; fair = computed from official numbers with coefficients published (HFA −0.02 pts, n=137; margin sd 13.23, n=137); market = pinned third-party capture (F23); difference blank when either side blank |
 | R25 | Separate **signal** from **staking** in the leaderboard | `engine/backtest.py`, `data/leaderboard_signal_staking.json`, `strategies.html` | Rank computed from the flat-stake signal block only; staking reported beside it and structurally unable to move a rank |
 | R26 | Track the **depth of the replacement**, not just the fact | `data/replacement_depth.tsv`, `replacement-depth.html` | 52 affected slots, each naming the next available player's string (2nd/3rd/4th); contingent depth recorded before it hurts |
 | R27 | Correlations **only** from officially sourced numbers, **n** published with each | `engine/corr_official.py`, `data/correlations_official.json`, `correlation-register.html` | 5 rows (r = 0.88 n=32; −0.16 n=137; 0.43 n=121; blank n=1; −0.09 n=32). Non-official registers excluded by code |
@@ -131,15 +131,15 @@ tests, data artefact and page:
 ### Decisions only the owner can make (each is a question + options on the site)
 
 1. **Q21/Q22 — price sources.** Opening and moneyline prices have no source at all. Approve a licensed
-   line history (SG17) or start recording opens prospectively (SG16). Until then the cells stay blank.
+   line history (SG21) or start recording opens prospectively (SG20). Until then the cells stay blank.
 2. **Q23 / F-11 — market-price policy.** The brief demands the market column; the verification rule
    demands blanks for unconfirmed values. Provisional answer: publish with a THIRD_PARTY badge + flag
-   (F18). Strict blanks are one review away.
-3. **Q24/Q25 — competition rules.** Demotion thresholds (F23) and allowed staking plans need a signature.
-4. **F25 (severity High) — computed-layer break-even is circular.** `strategy_lab.py` computes
+   (F23). Strict blanks are one review away.
+3. **Q24/Q25 — competition rules.** Demotion thresholds (F28) and allowed staking plans need a signature.
+4. **F30 (severity High) — computed-layer break-even is circular.** `strategy_lab.py` computes
    `breakeven_hit = 1/(1+realized ROI)` instead of the price hurdle, which makes its G4 "beats_vig" gate
    unusable and fails every strategy by construction. Not silently fixed: transcribed with a warning
-   (SG24 is the one-line fix + rebuild).
+   (SG28 is the one-line fix + rebuild).
 
 ### Audit trail for the sprint
 

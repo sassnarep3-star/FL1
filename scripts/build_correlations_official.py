@@ -9,7 +9,7 @@ pages and are listed below as excluded, so a reader can see the boundary.
 
 Official inputs only:
     data/standings.tsv   (S03, official standings capture)
-    data/results.tsv     (S50, official schedule/results capture)
+    data/results.tsv     (S52, official schedule/results capture)
     data/injuries.tsv + data/week10_2026_official.csv (S01, official injury report)
 
 Run:  python3 scripts/build_correlations_official.py
@@ -29,7 +29,7 @@ import build  # noqa: E402
 DATA = os.path.join(ROOT, "data")
 OUT = os.path.join(DATA, "correlations_official.json")
 
-OFFICIAL = {"S01", "S02", "S03", "S04", "S05", "S06", "S09", "S10", "S49", "S50"}
+OFFICIAL = {"S01", "S02", "S03", "S04", "S05", "S06", "S09", "S10", "S49", "S52"}
 
 
 def rest_asymmetry(results):
@@ -73,8 +73,8 @@ def main() -> int:
     recs.append(corr_official.CorrRecord.build(
         "C-A2", "Home margin vs game total (blowouts push totals up)",
         "Home margin", "Game total",
-        xs, ys, ["S50"], OFFICIAL,
-        "137 official result rows (S50)").as_row())
+        xs, ys, ["S52"], OFFICIAL,
+        "137 official result rows (S52)").as_row())
 
     # C-A3: rest-days asymmetry vs home margin.
     pairs = rest_asymmetry(results)
@@ -83,8 +83,8 @@ def main() -> int:
     recs.append(corr_official.CorrRecord.build(
         "C-A3", "Rest-days asymmetry (home minus away) vs home margin",
         "Rest edge (days)", "Home margin",
-        xs, ys, ["S50"], OFFICIAL,
-        "official result dates (S50); games where either club had no prior "
+        xs, ys, ["S52"], OFFICIAL,
+        "official result dates (S52); games where either club had no prior "
         "game in the feed are excluded, n counts the rest").as_row())
 
     # C-A4: paired availability vs margin — BLOCKED at n=1, published as such.
@@ -95,7 +95,7 @@ def main() -> int:
         "n": 1,
         "r": None, "ci_low": None, "ci_high": None,
         "method": corr_official.CorrRecord.method,
-        "sources": ["S01", "S50"],
+        "sources": ["S01", "S52"],
         "inputs": "Only one week of official injury captures exists (Week 10) "
                   "and only the TNF game is settled with paired inputs — n=1 "
                   "cannot support a correlation. Published blank with its n, "
@@ -119,7 +119,7 @@ def main() -> int:
         "requirement": "R27",
         "description": (
             "Every value in this register is computed from rows transcribed "
-            "from official league sources (S01/S03/S50), and every value "
+            "from official league sources (S01/S03/S52), and every value "
             "publishes its n alongside it. Correlations computed from "
             "third-party captures are excluded by rule (engine/corr_official.py "
             "refuses non-official source ids) and remain on their own labelled "

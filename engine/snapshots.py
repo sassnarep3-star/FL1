@@ -117,7 +117,7 @@ def validate(rows):
             if prov == PROVENANCE_OFFICIAL:
                 errors.append(
                     "%s: %s claims OFFICIAL provenance, but no official league "
-                    "source prices NFL markets (see flag F18)" % (where, end))
+                    "source prices NFL markets (see flag F23)" % (where, end))
     return errors
 
 

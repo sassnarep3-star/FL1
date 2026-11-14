@@ -17,7 +17,7 @@ Conventions (fixed before results, published on the page):
 Provenance per column:
   fair      COMPUTED  (engine/fairline.py over official standings + results)
   market    THIRD_PARTY (pinned nflverse capture S47; no official league source
-            prices NFL markets — flag F18/F21)
+            prices NFL markets — flag F23/F26)
   difference COMPUTED-OVER-THIRD-PARTY (carries the market flag)
 
 Run:  python3 scripts/build_line_board.py
@@ -84,7 +84,7 @@ def main() -> int:
                 market, market_note = mkt_total, "captured closing total"
             else:
                 market, market_note = None, (
-                    "no moneyline price captured (flag F20)")
+                    "no moneyline price captured (flag F25)")
             diff = fairline.difference(fr["fair"], market)
             rows.append({
                 "game": "%s @ %s" % (away, home),
@@ -95,15 +95,15 @@ def main() -> int:
                 "market_line": market,
                 "difference": diff,
                 "fair_tier": "COMPUTED",
-                "fair_sources": ["S03", "S50"],
+                "fair_sources": ["S03", "S52"],
                 "market_tier": "THIRD_PARTY" if market is not None else "BLANK",
                 "market_sources": ["S47"] if market is not None else [],
                 "difference_tier": ("COMPUTED-OVER-THIRD-PARTY"
                                     if diff is not None else "BLANK"),
                 "market_note": market_note,
                 "result": result_str,
-                "flags": (["F18", "F21"] if mt == "SIDE" else
-                          ["F18"] if market is not None else ["F20"]),
+                "flags": (["F23", "F26"] if mt == "SIDE" else
+                          ["F23"] if market is not None else ["F25"]),
             })
 
     payload = {
@@ -119,8 +119,8 @@ def main() -> int:
             "(engine/fairline.py) computed from official standings and results "
             "only; its coefficients are printed on the page with their n. The "
             "market column is a pinned third-party capture — no official league "
-            "source prices NFL markets (flag F18) — and the moneyline market "
-            "cell is blank because none was captured (flag F20)."),
+            "source prices NFL markets (flag F23) — and the moneyline market "
+            "cell is blank because none was captured (flag F25)."),
         "conventions": {
             "side_perspective": "HOME-view spread (negative = home favourite)",
             "difference": "model_fair_line - market_line",

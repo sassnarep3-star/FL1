@@ -39,11 +39,14 @@ NAV = [
     ("prop-correlations.html", "Prop Correlations"),
     ("correlation-register.html", "Correlation Register"),
 
+    ("model-lines.html", "Model Lines & Price Store"),
     ("line-origination.html", "Line Origination"),
     ("line-board.html", "Line Board"),
     ("price-snapshots.html", "Price Snapshots"),
-    ("results-feed.html", "Results Feed"),
+    ("results-feed.html", "Results Feed & Backtest"),
+    ("verified-results-feed.html", "Verified Results Feed"),
     ("strategies.html", "Leaderboard"),
+    ("governance.html", "Signal & Demotion"),
     ("validation.html", "Validation Gates"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
@@ -145,12 +148,7 @@ def page(filename, title, body, extra_head="", wide=False):
   <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
   Values that could not be confirmed from an official source are left blank and listed on
   <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
-  Provenance tiers: <strong>OFFICIAL</strong> = transcribed from an official league source;
-  <strong>COMPUTED</strong> = computed from official inputs by published code;
-  <strong>THIRD_PARTY</strong> = transcribed from a pinned third-party capture and flagged — no official
-  league source prices NFL lines, so market prices carry this badge (see
-  <a href="flagged.html#F18">F18</a> and <a href="questions.html">Q23</a>; the strict-blank policy is one
-  review away).</p>
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
 </footer>
 <script src="assets/js/site.js" defer></script>
 </body>
@@ -231,7 +229,7 @@ def sprint_sections(sources_by_id):
 moneyline.</strong> The moneyline is priced last because it is derived from the same margin distribution the
 side model produces &mdash; one model behind the markets, so the markets cannot contradict each other.
 This supersedes the earlier &ldquo;totals-first&rdquo; design note; the change is logged as
-<a href="flagged.html#F22">F22</a> rather than made silently.</p>
+<a href="flagged.html#F27">F27</a> rather than made silently.</p>
 %s
 </section>
 """ % table(["Step", "Market", "What originates", "Why in this position", "Live output"], [
@@ -267,7 +265,7 @@ This supersedes the earlier &ldquo;totals-first&rdquo; design note; the change i
             cell(_fmt(k["roi"], 4)),
             cell(_fmt(k["profit_units"], 2)),
             cell(_fmt(k["max_drawdown"], 2)),
-            raw_src('<a href="flagged.html#F25">F25</a>'),
+            raw_src('<a href="flagged.html#F30">F30</a>'),
         ])
     out["signal_staking"] = """
 <section>
@@ -282,7 +280,7 @@ or a reward. The arithmetic lives in <code>engine/backtest.py</code>
 the computed research layer's 16 backtested strategies (third-party data &mdash; flagged). That dataset's
 own <code>breakeven_hit</code> column is circular &mdash; computed as 1/(1+realized ROI) &mdash; and is
 NOT used for ranking; it is transcribed in the data file for audit only. See
-<a href="flagged.html#F25">F25</a> (severity High) and suggestion SG24. The reference hurdle here is the
+<a href="flagged.html#F30">F30</a> (severity High) and suggestion SG28. The reference hurdle here is the
 standard &minus;110 two-way break-even, 0.52381. None of the 16 entries is signal-proven; all 16 are
 REJECTED in their own dataset's gates.</p></div>
 </section>
@@ -292,7 +290,7 @@ REJECTED in their own dataset's gates.</p></div>
 %s
 <p class="caption">Signal columns: flat-stake only. Staking columns: right of the divider, reported and
 never ranked on. Rank = order by (hit CI low &minus; reference hurdle), ties by larger sample.
-Sources: computed layer over the pinned third-party capture %s (flags F17/F18).</p>
+Sources: computed layer over the pinned third-party capture %s (flags F17/F23).</p>
 </section>
 
 <section>
@@ -328,6 +326,7 @@ state you have to keep earning.</p>
     out["demotion"] = """
 <section id="G-14">
 <h2>G-14 &mdash; the demotion gate (requirement R28): live strategies return to paper</h2>
+<div class="callout warn"><p><strong>Parallel build (F31).</strong> The D1&ndash;D3 demotion gate above (from <a href="governance.html">Signal, Staking &amp; Demotion</a>) and this G-14 gate are two independent implementations of requirement R28 with different triggers and thresholds. Both are preserved; Q24 decides which becomes canonical.</p></div>
 <p>A gate set decides who gets promoted. This gate decides who gets sent back. Without it, a live badge
 outlives the edge that earned it and the leaderboard decays into a graveyard of former winners. Any ONE
 trigger demotes; the verdict logic is not reviewable, the thresholds are.</p>
@@ -335,7 +334,7 @@ trigger demotes; the verdict logic is not reviewable, the thresholds are.</p>
 <p class="caption">States: LIVE &rarr; (any trigger) &rarr; PAPER; PAPER &rarr; LIVE only through
 re-promotion on a fresh sealed sample. Old bets never re-qualify an entry — the burden of proof resets.
 Implementation: <code>engine/demotion.py</code>, tested in <code>tests/test_r21_r28.py</code>.
-Thresholds are proposed competition rules, reviewable under <a href="flagged.html#F23">F23</a> /
+Thresholds are proposed competition rules, reviewable under <a href="flagged.html#F28">F28</a> /
 question Q24.</p>
 </section>
 """ % table(["Rule", "Trigger", "Metric", "Threshold (proposed)", "Why"], [
@@ -382,6 +381,7 @@ question Q24.</p>
     out["line_board"] = """
 <section>
 <h1>Line Board &mdash; fair &vert; market &vert; difference</h1>
+<div class="callout warn"><p><strong>Parallel build (F31).</strong> A second implementation of this requirement lives at <a href="model-lines.html">Model Lines &amp; Price Store</a>, which keeps every market and difference cell blank under a strict source policy. This page publishes the pinned capture with a THIRD_PARTY badge. Both are preserved; Q23 decides which becomes canonical.</p></div>
 <p class="lead">Requirement R24: the model's fair line, the market line and the difference are published as
 <strong>three separate columns</strong>, in the mandated origination order (R23): side first, then total,
 then moneyline. difference = model &minus; market. A blank difference is a blank, never a zero.</p>
@@ -390,7 +390,7 @@ spreads (negative = home favourite). The pinned market feed records the AWAY clu
 verified against moneyline direction across 13/13 games (check V8) &mdash; so the market column negates the
 verbatim capture and says so per row; the verbatim number sits in the
 <a href="price-snapshots.html">price-snapshot store</a>. The moneyline market cell is blank because no
-moneyline price was captured (<a href="flagged.html#F20">F20</a>).</p></div>
+moneyline price was captured (<a href="flagged.html#F25">F25</a>).</p></div>
 </section>
 
 <section>
@@ -401,7 +401,7 @@ strength = (PF&minus;PA)/G per club (official standings %s), fair margin = HFA +
 strength<sub>a</sub>)/2, fair total = (PPG<sub>h</sub> + OPPG<sub>h</sub> + PPG<sub>a</sub> +
 OPPG<sub>a</sub>)/2, moneyline = &Phi;(margin / sd). The /2 is a bookkeeping convention. Nothing is
 fitted on market prices. Band = 1.96 &times; sd / &sqrt;(min games). Provenance:
-<a href="flagged.html#F24">F24</a>.</p>
+<a href="flagged.html#F29">F29</a>.</p>
 </section>
 
 <section>
@@ -415,17 +415,17 @@ fitted on market prices. Band = 1.96 &times; sd / &sqrt;(min games). Provenance:
 The column measures disagreement, not edge: a difference is only actionable once the band excludes the
 market number AND the prices in the <a href="price-snapshots.html">snapshot store</a> clear their hurdle.
 The market column carries the <strong>THIRD_PARTY</strong> badge because no official league source prices
-NFL lines (<a href="flagged.html#F18">F18</a>, question Q23 &mdash; the strict-blank policy is one review
+NFL lines (<a href="flagged.html#F23">F23</a>, question Q23 &mdash; the strict-blank policy is one review
 away).</p>
 </section>
 """ % (
         table(["Coefficient", "Value", "n", "Tier", "Source"], [
             [cell("Home-field advantage (points/game)"), cell(_fmt(coef["home_field_advantage_points"], 3), "n"),
              cell(coef["hfa_n_games"], "n"), badge(coef["tier"]),
-             raw_src(src_link("S50", sources_by_id))],
+             raw_src(src_link("S52", sources_by_id))],
             [cell("Game-margin sd (points)"), cell(_fmt(coef["margin_sd_points"], 3), "n"),
              cell(coef["margin_sd_n_games"], "n"), badge(coef["tier"]),
-             raw_src(src_link("S50", sources_by_id))],
+             raw_src(src_link("S52", sources_by_id))],
             [cell("Club strength"), cell(coef["strength"]),
              cell(32, "n"), badge(coef["tier"]),
              raw_src(src_link("S03", sources_by_id))],
@@ -464,7 +464,7 @@ mandated origination order: SIDE, then TOTAL, then MONEYLINE (R23).</p>
 <div class="callout warn"><p><strong>Opening prices: %d of %d rows have one.</strong> No source of opening
 prices exists in this repository &mdash; not official, not third-party &mdash; so every open cell is blank
 and recorded as blank. That is the store doing its job: the gap is now a countable, fillable field rather
-than a silence. Question Q21 and suggestions SG16/SG21 own the path forward.</p></div>
+than a silence. Question Q21 and suggestions SG20/SG25 own the path forward.</p></div>
 </section>
 
 <section>
@@ -492,7 +492,7 @@ than a silence. Question Q21 and suggestions SG16/SG21 own the path forward.</p>
              cell("No source captured that number; never inferred")],
             [cell("MONEYLINE"), cell(cov["MONEYLINE"]["rows"], "n"),
              cell(cov["MONEYLINE"]["open_filled"], "n"), cell(cov["MONEYLINE"]["close_filled"], "n"),
-             cell("No 2026 moneyline capture exists (F20); rows exist so the gap is visible")],
+             cell("No 2026 moneyline capture exists (F25); rows exist so the gap is visible")],
         ], cls="dense"),
         table(["Rule", "Statement"], [
             [cell("Order"), cell("SIDE, then TOTAL, then MONEYLINE (R23), then kickoff")],
@@ -501,7 +501,7 @@ than a silence. Question Q21 and suggestions SG16/SG21 own the path forward.</p>
             [cell("Provenance"), cell(snaps["policy"]["provenance_rule"])],
             [cell("Validation"), cell("A price without provenance or a source id fails the store; a claim "
                                       "of OFFICIAL pricing is rejected outright (no official league source "
-                                      "prices NFL lines, F18)")],
+                                      "prices NFL lines, F23)")],
         ], cls="dense"),
         len(snaps["rows"]),
         table(["Market ID", "Type", "Quote", "Open", "Open ts", "Close", "Close ts",
@@ -525,6 +525,7 @@ than a silence. Question Q21 and suggestions SG16/SG21 own the path forward.</p>
     out["results_feed"] = """
 <section>
 <h1>Verified Results Feed</h1>
+<div class="callout warn"><p><strong>Parallel build (F31).</strong> A second implementation lives at <a href="results-feed.html">Results Feed &amp; Backtest</a> (same 137 official rows, plus a strictly out-of-sample model backtest). Both are preserved; Q29 decides which becomes canonical.</p></div>
 <p class="lead">Requirement R22: backtests and ROI can be computed at all only if there is a results feed
 whose every row is checked against an official source. This is that feed: %d finished games, weeks 1&ndash;10
 of the 2026 season, every row official (%s), every row settled against by
@@ -548,7 +549,7 @@ part of the build (<code>scripts/build_results_feed.py</code> fails loudly other
 <section>
 <h2>Worked example &mdash; the one settled Week 10 board game</h2>
 %s
-<p class="caption">Prices are the captured closing numbers (THIRD_PARTY), scores are official (S50),
+<p class="caption">Prices are the captured closing numbers (THIRD_PARTY), scores are official (S52),
 settlement and P&amp;L arithmetic are <code>engine/backtest.py</code> at a flat one-unit stake and standard
 &minus;110. A worked example of the pipeline, not evidence about any strategy: n = 1.</p>
 </section>
@@ -559,7 +560,7 @@ settlement and P&amp;L arithmetic are <code>engine/backtest.py</code> at a flat 
 </section>
 """ % (
         len(feed["rows"]),
-        raw_src(src_link("S50", sources_by_id)),
+        raw_src(src_link("S52", sources_by_id)),
         table(["Field", "Value"], [
             [cell("Games"), cell(feed["coverage"]["games"], "n")],
             [cell("Weeks"), cell("1–10 (through the Week 10 Thursday game)")],
@@ -569,7 +570,7 @@ settlement and P&amp;L arithmetic are <code>engine/backtest.py</code> at a flat 
         ], cls="dense"),
         table(["Step", "What happens", "Provenance rule"], [
             [cell("1. Index"), cell("Bet logs are joined to this feed by game key or id; no row, no settlement"),
-             cell("OFFICIAL rows only (S50)")],
+             cell("OFFICIAL rows only (S52)")],
             [cell("2. Settle"), cell("Win/loss/push decided from the official score at the recorded line; "
                                      "pushes are void, never wins"),
              cell("COMPUTED from OFFICIAL")],
@@ -579,7 +580,7 @@ settlement and P&amp;L arithmetic are <code>engine/backtest.py</code> at a flat 
                                     "separately; rank on signal only (R25)"),
              cell("COMPUTED")],
             [cell("5. Report"), cell("Every computed statistic carries its tier; a THIRD_PARTY-backed "
-                                     "statistic is published only with its flag (F18)"),
+                                     "statistic is published only with its flag (F23)"),
              cell("provenance_report() in engine/backtest.py")],
         ], cls="dense"),
         table(["Market", "Bet", "Close", "Official result", "Settled", "P&amp;L (u, flat at &minus;110)", "Tier"], [
@@ -706,12 +707,12 @@ official, so they cannot enter this register. They live on their own labelled pa
 <div class="callout warn"><p><strong>Decisions the owner must make before the numbers mean more than they
 do now.</strong> (1) Q21/Q22 &mdash; approve an opening-price and moneyline source; today 28 of 56 snapshot
 rows have a close and 0 of 56 have an open. (2) Q23 &mdash; ratify the THIRD_PARTY badge policy for market
-prices (flag F18) or order strict blanks. (3) Q24/Q25 &mdash; confirm the demotion-gate thresholds and the
-allowed staking plans. (4) F25 (severity High) &mdash; the computed layer's break-even column is circular
-and its G4 gate is unusable until SG24 lands. Nothing on this site treats any of these as settled.</p></div>
+prices (flag F23) or order strict blanks. (3) Q24/Q25 &mdash; confirm the demotion-gate thresholds and the
+allowed staking plans. (4) F30 (severity High) &mdash; the computed layer's break-even column is circular
+and its G4 gate is unusable until SG28 lands. Nothing on this site treats any of these as settled.</p></div>
 <p>Measured, from official numbers only: home-field advantage in 2026 to date is
-<strong>&minus;0.02</strong> points per game (n = 137, S50); rest-days asymmetry correlates with home margin
-at <strong>r = 0.43</strong> (n = 121, CI 0.27&ndash;0.56, S50); the verified results feed reconciles
+<strong>&minus;0.02</strong> points per game (n = 137, S52); rest-days asymmetry correlates with home margin
+at <strong>r = 0.43</strong> (n = 121, CI 0.27&ndash;0.56, S52); the verified results feed reconciles
 <strong>32 of 32</strong> clubs against the official standings. These are computed values with their n
 published &mdash; not claims about the NFL at large.</p>
 </section>
@@ -719,7 +720,7 @@ published &mdash; not claims about the NFL at large.</p>
         [cell("R21"), cell("Price-snapshot store: opening + closing numbers per originated market"),
          pill("done", "ok"), raw_src('<a href="price-snapshots.html">price-snapshots.html</a>')],
         [cell("R22"), cell("Verified results feed so backtests and ROI are computable"),
-         pill("done", "ok"), raw_src('<a href="results-feed.html">results-feed.html</a>')],
+         pill("done", "ok"), raw_src('<a href="verified-results-feed.html">verified-results-feed.html</a>')],
         [cell("R23"), cell("Origination order: side first, then total, then moneyline"),
          pill("done", "ok"), raw_src('<a href="line-board.html">line-board.html</a>')],
         [cell("R24"), cell("Fair line, market line, difference as separate columns"),
@@ -769,7 +770,7 @@ def main():
     depth_tot = depth_league["totals"]
     flagged_depth = [r for r in depth_rows if r["flagged"]]
 
-    # Requirements sprint (R21-R28): all new pages and cross-page sections.
+    # Requirements sprint (R21-R28): all sprint pages and cross-page sections.
     sprint = sprint_sections(sources_by_id)
 
     written = []
@@ -809,18 +810,24 @@ def main():
   <a class="card" href="suggestions.html"><h3>Suggestions</h3>
     <p><strong>%(n_suggestions)d</strong> proposals with options, trade-offs and one recommended path. Review before
     anything is implemented.</p></a>
+  <a class="card" href="model-lines.html"><h3>Model Lines &amp; Price Store</h3>
+    <p>Our own fair side, total and moneyline for the 13 pending Week 10 games, in that order. Market and difference cells are blank: no official price source exists.</p></a>
+  <a class="card" href="results-feed.html"><h3>Results Feed &amp; Backtest</h3>
+    <p>137 final 2026 results and a strictly out-of-sample backtest. The model does not beat a constant benchmark on margin or total; ROI is blank.</p></a>
+  <a class="card" href="governance.html"><h3>Signal &amp; Demotion</h3>
+    <p>The leaderboard ranks on signal only, staking is shown beside it, the G-14 gate sends a live strategy back to paper, and correlations are withheld.</p></a>
+  <a class="card" href="line-board.html"><h3>Line Board</h3>
+    <p>Model fair line, market line and difference as three separate columns, in the mandated order:
+    side, then total, then moneyline. Every coefficient published with its n.</p></a>
+  <a class="card" href="price-snapshots.html"><h3>Price Snapshots &amp; Replacement Depth</h3>
+    <p>Opening and closing numbers for every market we originate (opens blank: no source exists), and the
+    string number of the next available player at every slot missing a starter.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
   <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
     <p>All 272 regular-season games with results, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
   <a class="card" href="prop-correlations.html"><h3>Prop Correlations</h3>
     <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
-  <a class="card" href="line-board.html"><h3>Line Board</h3>
-    <p>Model fair line, market line and difference as three separate columns, in the mandated order:
-    side, then total, then moneyline. Every coefficient published with its n.</p></a>
-  <a class="card" href="price-snapshots.html"><h3>Price Snapshots &amp; Results Feed</h3>
-    <p>Opening and closing numbers for every market we originate, and a verified results feed
-    (137 official games) so backtests and ROI can be computed at all.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
     <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a></section>
 """ % {
@@ -964,6 +971,8 @@ pages contradict each other. It does not print a single performance number. Each
        depth_cov["covered"],
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
+    import brief as _brief  # session arena/685f958d-fl1
+    es = _brief.exec_banner() + es
     written.append(page("executive-summary.html", "Executive Summary",
                         es + sprint["exec_summary"]))
 
@@ -1570,7 +1579,7 @@ in <a href="validation.html">Validation</a>. Until then it has no score, and the
   <p><strong>0 of %d entries carry a result in this register.</strong> This register holds the plan-level
   strategies over official data only. Its original claim &mdash; &ldquo;No backtest has been executed and no
   performance figure is claimed anywhere in this repository&rdquo; &mdash; was true of this register and false
-  of the repository as a whole (<a href="flagged.html#F19">F19</a>): the computed research layer holds 16
+  of the repository as a whole (<a href="flagged.html#F24">F24</a>): the computed research layer holds 16
   backtests over third-party data, reported and re-ranked on signal below, and none of those has passed its
   gates either. The board here will stay empty until a strategy clears the gates with a price source
   supplied. That is the design, not a delay.</p>
@@ -1697,6 +1706,18 @@ A pairing needs many observations before an estimate means anything; below that 
 <p>The numeric thresholds are deliberately not set on this page. Setting them after seeing a result is the
 single easiest way to manufacture apparent skill, and choosing them before a benchmark price exists would be
 arbitrary. They are registered as open question Q09 and must be fixed in one commit before any grading begins.</p>
+</section>
+
+<section>
+<h2>Demotion gate — live to paper</h2>
+<p class="lead">A strategy that has been promoted to live is not entitled to stay there. The demotion gate is
+the honest counterpart to the promotion gates: it defines when a live strategy is sent back to paper
+(research) so a decaying edge never keeps running capital.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Gate</th><th>Name</th><th>Test</th><th>Action on fail</th><th>Principle</th></tr></thead><tbody><tr><td>D1</td><td>Live-decay monitor</td><td>Rolling CLV lower bound stays below zero across the monitoring window.</td><td>Auto-demote to research; no discretionary rescue.</td><td>An edge that existed and died should not run capital.</td></tr><tr><td>D2</td><td>Calibration drift</td><td>Realised hit rate falls outside the stated probability bucket band on the holdout.</td><td>Demote and re-fit; re-clear G1-G6 before returning to live.</td><td>Stated probabilities must stay well calibrated.</td></tr><tr><td>D3</td><td>Concentration breach</td><td>One season, team, opponent cluster or stadium exceeds its allowed share of net PnL.</td><td>Demote and reduce exposure; re-clear G8 before returning to live.</td><td>One lucky year against three bad teams is not an edge.</td></tr></tbody></table></div>
+<p>The demotion thresholds are fixed before the first live stake and reviewed on the same schedule as the
+promotion gates, never after a losing streak. Because D1 needs a benchmark price to measure CLV and no
+official price source exists in this repository (flag F08), D1-D3 are defined here but are not yet active.
+No strategy can be promoted to live until a price source is supplied and the demotion rule is registered.</p>
 </section>
 """ % (
         table(["Gate", "Name", "Test", "Required artefact", "Status", "Result", "Principle"], gate_rows,
@@ -1965,12 +1986,15 @@ verification note for each one.</p>
     f_html.append("</section>")
     written.append(page("flagged.html", "Flagged for Review", "".join(f_html)))
 
-    # ------------------------------------- requirements sprint pages (R21-R28)
+    # Requirements sprint pages (R21-R28) — session arena-360ca650-fl1
     written.append(page("line-board.html", "Line Board", sprint["line_board"], wide=True))
     written.append(page("price-snapshots.html", "Price Snapshots", sprint["price_snapshots"], wide=True))
-    written.append(page("results-feed.html", "Results Feed", sprint["results_feed"], wide=True))
+    written.append(page("verified-results-feed.html", "Verified Results Feed", sprint["results_feed"], wide=True))
     written.append(page("replacement-depth.html", "Replacement Depth", sprint["replacement_depth"], wide=True))
     written.append(page("correlation-register.html", "Correlation Register", sprint["correlation_register"], wide=True))
+
+    import brief  # session arena/685f958d-fl1: model lines, results feed, signal/staking/demotion
+    written.extend(brief.render(sys.modules[__name__]))
 
     print("wrote %d pages:" % len(written))
     for w in written:

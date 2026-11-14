@@ -41,7 +41,7 @@ def main() -> int:
             "margin_home": int(r["homePts"]) - int(r["awayPts"]),
             "total": int(r["homePts"]) + int(r["awayPts"]),
             "tier": "OFFICIAL",
-            "source_id": "S50",
+            "source_id": "S52",
         })
 
     assert len(feed_rows) == VERIFIED_COUNT, (
@@ -88,7 +88,7 @@ def main() -> int:
             "exactly. Backtests settle ONLY against this feed."),
         "provenance": {
             "tier": "OFFICIAL",
-            "source_id": "S50",
+            "source_id": "S52",
             "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
             "capture": "raw/schedule-results-2026-week1-10.tsv",
             "verification": "tools/verify_results.py + standings recomputation "

@@ -265,12 +265,12 @@
   "priority": "High",
   "question": "What approved source will supply OPENING prices for every market we originate?",
   "why_it_matters": "The price-snapshot store records the open field, but every open cell is blank: without a source there is no honest number, and without the number closing-line value cannot be computed from the open.",
-  "what_we_know": "The store (data/price_snapshots.json) has the fields and the discipline. Closing prices come from the pinned nflverse capture (S47). No official league source prices NFL markets (F18).",
+  "what_we_know": "The store (data/price_snapshots.json) has the fields and the discipline. Closing prices come from the pinned nflverse capture (S47). No official league source prices NFL markets (F23).",
   "what_we_dont_know": "Whether a licensed line-history feed will be purchased or approved.",
   "missing_data": "Licensed opening + closing line history (GAP-01).",
-  "source": "data/price_snapshots.json; flags F18/F20",
+  "source": "data/price_snapshots.json; flags F23/F25",
   "blocking": "Yes",
-  "recommended_path": "Option A (SG17): buy licensed history. Interim (SG16): snapshot the market's open at the moment we publish our own line, prospectively from Week 11."
+  "recommended_path": "Option A (SG21): buy licensed history. Interim (SG20): snapshot the market's open at the moment we publish our own line, prospectively from Week 11."
  },
  {
   "id": "Q22",
@@ -294,7 +294,7 @@
   "what_we_know": "The computed research layer already publishes third-party-derived values with labels; the root site's footer promised no price figures without official support, amended in this sprint to describe the THIRD_PARTY badge.",
   "what_we_dont_know": "The owner's preference among the three options below.",
   "missing_data": "None - this is a decision, not a data gap.",
-  "source": "flags F18/F11; data/line_board.json",
+  "source": "flags F23/F11; data/line_board.json",
   "blocking": "Yes",
   "recommended_path": "A: publish with THIRD_PARTY badge + flag until C is affordable; B switches every market cell to blank with one edit; C needs Q21's purchase."
  },
@@ -307,9 +307,9 @@
   "what_we_know": "Defaults are published as constructor arguments in engine/demotion.py and rendered verbatim as G-14.",
   "what_we_dont_know": "The owner's risk appetite for false demotions vs slow demotions.",
   "missing_data": "None - a rule choice.",
-  "source": "engine/demotion.py; flag F23",
+  "source": "engine/demotion.py; flag F28",
   "blocking": "No",
-  "recommended_path": "Adopt as written for the first season (SG18) and revisit after 300 settled bets of live history."
+  "recommended_path": "Adopt as written for the first season (SG22) and revisit after 300 settled bets of live history."
  },
  {
   "id": "Q25",
@@ -330,7 +330,7 @@
   "priority": "Medium",
   "question": "When do we fit the fair model's coefficients out-of-sample instead of publishing the naive baseline?",
   "why_it_matters": "The naive baseline (strength = (PF-PA)/G, /2 convention) is deliberately crude. Publishing a fitted model too early invites overfitting; too late leaves edge on the table.",
-  "what_we_know": "models.json attaches the estimator (maximise out-of-sample log-loss, never tune PnL). Coefficients today are computed from 137 official 2026 games (F24).",
+  "what_we_know": "models.json attaches the estimator (maximise out-of-sample log-loss, never tune PnL). Coefficients today are computed from 137 official 2026 games (F29).",
   "what_we_dont_know": "When enough official seasons will be captured to fit and validate honestly.",
   "missing_data": "Multi-season official results feed (today: 2026 weeks 1-10 only).",
   "source": "data/line_board.json; data/models.json",
@@ -361,6 +361,19 @@
   "missing_data": "Weekly official injury + results captures (grows C-A4's n).",
   "source": "data/correlations_official.json",
   "blocking": "No",
-  "recommended_path": "Pre-register the pairs now (SG19), capture weekly, publish n as it grows."
+  "recommended_path": "Pre-register the pairs now (SG23), capture weekly, publish n as it grows."
+ },
+ {
+  "id": "Q29",
+  "category": "Operations",
+  "priority": "High",
+  "question": "Which of the two parallel implementations of R21-R28 becomes canonical for each requirement?",
+  "why_it_matters": "Two sessions built the same eight requirements and both are live. Several pages now show two answers: market prices are blank on model-lines.html but published with a THIRD_PARTY badge on line-board.html; the demotion gate has two different trigger sets (D1-D3 vs G-14). A decision-maker cannot act on contradictory pages.",
+  "what_we_know": "Both implementations are complete, tested and cross-linked. Every divergence is enumerated in flag F31. Nothing was discarded in the merge.",
+  "what_we_dont_know": "The owner's preference per requirement.",
+  "missing_data": "None - this is a decision, not a data gap.",
+  "source": "flag F31; COORDINATION.md reconciliation record",
+  "blocking": "Yes",
+  "recommended_path": "SG29 option A: review each pair (price store, results feed, line model, signal/staking, demotion), pick one per requirement, archive the other with cross-links. The Q23 and Q24 decisions settle the two substantive divergences."
  }
 ]

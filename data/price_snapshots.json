@@ -35,8 +35,8 @@
   "close_filled": 28
  },
  "flags": [
-  "F18",
-  "F20"
+  "F23",
+  "F25"
  ],
  "rows": [
   {
@@ -97,7 +97,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-BUF-NYJ-MONEYLINE-HOME",
@@ -117,7 +117,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-CAR-NO-SIDE-AWAY",
@@ -177,7 +177,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-CAR-NO-MONEYLINE-HOME",
@@ -197,7 +197,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-HOU-CLE-SIDE-AWAY",
@@ -257,7 +257,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-HOU-CLE-MONEYLINE-HOME",
@@ -277,7 +277,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-JAX-TEN-SIDE-AWAY",
@@ -337,7 +337,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-JAX-TEN-MONEYLINE-HOME",
@@ -357,7 +357,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-KC-ATL-SIDE-AWAY",
@@ -417,7 +417,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-KC-ATL-MONEYLINE-HOME",
@@ -437,7 +437,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-LAC-BAL-SIDE-AWAY",
@@ -497,7 +497,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-LAC-BAL-MONEYLINE-HOME",
@@ -517,7 +517,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-LAR-ARI-SIDE-AWAY",
@@ -577,7 +577,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-LAR-ARI-MONEYLINE-HOME",
@@ -597,7 +597,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-MIA-IND-SIDE-AWAY",
@@ -657,7 +657,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-MIA-IND-MONEYLINE-HOME",
@@ -677,7 +677,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-MIN-GB-SIDE-AWAY",
@@ -737,7 +737,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-MIN-GB-MONEYLINE-HOME",
@@ -757,7 +757,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-NE-DET-SIDE-AWAY",
@@ -817,7 +817,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-NE-DET-MONEYLINE-HOME",
@@ -837,7 +837,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-PIT-CIN-SIDE-AWAY",
@@ -897,7 +897,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-PIT-CIN-MONEYLINE-HOME",
@@ -917,7 +917,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-SEA-LV-SIDE-AWAY",
@@ -977,7 +977,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-SEA-LV-MONEYLINE-HOME",
@@ -997,7 +997,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-SF-DAL-SIDE-AWAY",
@@ -1057,7 +1057,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-SF-DAL-MONEYLINE-HOME",
@@ -1077,7 +1077,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-WAS-NYG-SIDE-AWAY",
@@ -1137,7 +1137,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   },
   {
    "market_id": "2026-W10-WAS-NYG-MONEYLINE-HOME",
@@ -1157,7 +1157,7 @@
    "close_ts": null,
    "close_source": "",
    "close_provenance": "",
-   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F20)"
+   "notes": "no moneyline price captured for this game \u2014 blank and flagged (F25)"
   }
  ]
 }

@@ -172,15 +172,15 @@
   "section": "Requirements sprint (2026-11-14)",
   "requirement": "Add a verified results feed so backtests and ROI can be computed at all",
   "status": "done",
-  "evidence": "data/results_feed.json: 137 official rows (S50); recomputing all 32 clubs' W/L/T + PF/PA from the feed reproduces data/standings.tsv exactly (checked in the build). engine/backtest.py settles bets only against this feed and reports ROI with a provenance tier.",
-  "page": "results-feed.html"
+  "evidence": "data/results_feed.json: 137 official rows (S52); recomputing all 32 clubs' W/L/T + PF/PA from the feed reproduces data/standings.tsv exactly (checked in the build). engine/backtest.py settles bets only against this feed and reports ROI with a provenance tier.",
+  "page": "verified-results-feed.html"
  },
  {
   "id": "R23",
   "section": "Requirements sprint (2026-11-14)",
   "requirement": "Originate the side first, then the total, then the moneyline",
   "status": "done",
-  "evidence": "Order fixed in engine/fairline.py origination_order(), enforced in the snapshot-store sort and the line-board build; the earlier 'totals-first' design note is superseded and preserved in flag F22.",
+  "evidence": "Order fixed in engine/fairline.py origination_order(), enforced in the snapshot-store sort and the line-board build; the earlier 'totals-first' design note is superseded and preserved in flag F27.",
   "page": "line-board.html"
  },
  {
@@ -188,7 +188,7 @@
   "section": "Requirements sprint (2026-11-14)",
   "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
   "status": "done",
-  "evidence": "data/line_board.json: 42 rows with model_fair_line / market_line / difference as separate columns. Fair computed from official standings+results (HFA -0.022 pts n=137, margin sd 13.225 n=137, published); market from the pinned capture (flag F18); difference = fair - market, blank when either side blank (never zero).",
+  "evidence": "data/line_board.json: 42 rows with model_fair_line / market_line / difference as separate columns. Fair computed from official standings+results (HFA -0.022 pts n=137, margin sd 13.225 n=137, published); market from the pinned capture (flag F23); difference = fair - market, blank when either side blank (never zero).",
   "page": "line-board.html"
  },
  {
@@ -212,7 +212,7 @@
   "section": "Requirements sprint (2026-11-14)",
   "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
   "status": "done",
-  "evidence": "data/correlations_official.json: 5 rows, every value computed from official captures (S01/S03/S50) and every value publishes n + Fisher-z 95% CI. engine/corr_official.py raises unless every source id is in the official set. Third-party correlation registers (measured.json, prop-correlations-d.csv, correlations.csv) explicitly excluded and listed as excluded.",
+  "evidence": "data/correlations_official.json: 5 rows, every value computed from official captures (S01/S03/S52) and every value publishes n + Fisher-z 95% CI. engine/corr_official.py raises unless every source id is in the official set. Third-party correlation registers (measured.json, prop-correlations-d.csv, correlations.csv) explicitly excluded and listed as excluded.",
   "page": "correlation-register.html"
  },
  {
@@ -220,7 +220,7 @@
   "section": "Requirements sprint (2026-11-14)",
   "requirement": "Define a demotion gate that sends a live strategy back to paper",
   "status": "done",
-  "evidence": "engine/demotion.py: D1 signal decay (window hit rate below break-even, p<0.10), D2 drawdown (25 flat-stake units), D3 CLV rot; any one demotes LIVE->PAPER. Re-promotion needs 300 fresh settled bets passing the G-2b standard. Registered as G-14 in data/validation_gates.json; thresholds are proposed rules (flag F23).",
+  "evidence": "engine/demotion.py: D1 signal decay (window hit rate below break-even, p<0.10), D2 drawdown (25 flat-stake units), D3 CLV rot; any one demotes LIVE->PAPER. Re-promotion needs 300 fresh settled bets passing the G-2b standard. Registered as G-14 in data/validation_gates.json; thresholds are proposed rules (flag F28).",
   "page": "validation.html"
  }
 ]

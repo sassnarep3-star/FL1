@@ -3,7 +3,7 @@
  "title": "Leaderboard split \u2014 signal vs staking (rank is signal-only)",
  "updated": "2026-11-14",
  "requirement": "R25",
- "description": "The rank column is computed from the SIGNAL block only: flat-stake hit rate, ranked on the 95% lower bound against the standard -110 reference hurdle. The STAKING block (ROI at actual stakes, profit, drawdown) is reported beside it and can never change a rank. Source dataset: data/leaderboard.csv (computed layer over third-party data \u2014 flagged), stakes flat 1 unit. The dataset's breakeven_hit column is circular (flag F25) and is transcribed only for audit.",
+ "description": "The rank column is computed from the SIGNAL block only: flat-stake hit rate, ranked on the 95% lower bound against the standard -110 reference hurdle. The STAKING block (ROI at actual stakes, profit, drawdown) is reported beside it and can never change a rank. Source dataset: data/leaderboard.csv (computed layer over third-party data \u2014 flagged), stakes flat 1 unit. The dataset's breakeven_hit column is circular (flag F30) and is transcribed only for audit.",
  "ranking_rule": "signal_rank = order by (hit_ci_low - reference_hurdle) descending; ties break on larger settled sample. Profit and ROI are reported, never ranked on.",
  "demotion": "No entry is LIVE in this dataset (all verdicts REJECTED/UNRANKED pending gates), so gate G-14 (engine/demotion.py) has nothing to demote yet; it will apply the moment an entry goes live.",
  "coverage": {
@@ -23,11 +23,11 @@
     "hit_ci_low": 0.5107,
     "hit_ci_high": 0.5744,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.01311,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 0.9458,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -54,11 +54,11 @@
     "hit_ci_low": 0.5078,
     "hit_ci_high": 0.5655,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.01601,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 0.9556,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -85,11 +85,11 @@
     "hit_ci_low": 0.5031,
     "hit_ci_high": 0.5972,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.02071,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 0.9326,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -116,11 +116,11 @@
     "hit_ci_low": 0.5008,
     "hit_ci_high": 0.5402,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.02301,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 0.9912,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -147,11 +147,11 @@
     "hit_ci_low": 0.5001,
     "hit_ci_high": 0.5334,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.02371,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 0.9968,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -178,11 +178,11 @@
     "hit_ci_low": 0.491,
     "hit_ci_high": 0.571,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.03281,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 0.9658,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -209,11 +209,11 @@
     "hit_ci_low": 0.4885,
     "hit_ci_high": 0.5412,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.03531,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.0003,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -240,11 +240,11 @@
     "hit_ci_low": 0.4785,
     "hit_ci_high": 0.5103,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.04531,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.0324,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -271,11 +271,11 @@
     "hit_ci_low": 0.4728,
     "hit_ci_high": 0.5003,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.05101,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.0547,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -302,11 +302,11 @@
     "hit_ci_low": 0.465,
     "hit_ci_high": 0.5501,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.05881,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.0225,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -333,11 +333,11 @@
     "hit_ci_low": 0.4588,
     "hit_ci_high": 0.5115,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.06501,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.06,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -364,11 +364,11 @@
     "hit_ci_low": 0.4554,
     "hit_ci_high": 0.5291,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.06841,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.045,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -395,11 +395,11 @@
     "hit_ci_low": 0.4525,
     "hit_ci_high": 0.5413,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.07131,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.0335,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -426,11 +426,11 @@
     "hit_ci_low": 0.4495,
     "hit_ci_high": 0.5939,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.07431,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 0.9884,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -457,11 +457,11 @@
     "hit_ci_low": 0.3718,
     "hit_ci_high": 0.5474,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.15201,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.1275,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {
@@ -488,11 +488,11 @@
     "hit_ci_low": 0.3477,
     "hit_ci_high": 0.5135,
     "reference_hurdle": 0.52381,
-    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
     "signal_edge_lcb": -0.17611,
     "signal_verdict": "NOT PROVEN",
     "dataset_breakeven_hit_transcribed": 1.2222,
-    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
     "tier": "COMPUTED"
    },
    "staking": {

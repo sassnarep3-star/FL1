@@ -4,7 +4,7 @@
  "updated": "2026-11-14",
  "requirement": "R24",
  "order_requirement": "R23 \u2014 SIDE first, then TOTAL, then MONEYLINE",
- "description": "Three separate columns per originated market, in the mandated origination order. difference = model fair - market, blank when either side is blank. The model is the published naive baseline (engine/fairline.py) computed from official standings and results only; its coefficients are printed on the page with their n. The market column is a pinned third-party capture \u2014 no official league source prices NFL markets (flag F18) \u2014 and the moneyline market cell is blank because none was captured (flag F20).",
+ "description": "Three separate columns per originated market, in the mandated origination order. difference = model fair - market, blank when either side is blank. The model is the published naive baseline (engine/fairline.py) computed from official standings and results only; its coefficients are printed on the page with their n. The market column is a pinned third-party capture \u2014 no official league source prices NFL markets (flag F23) \u2014 and the moneyline market cell is blank because none was captured (flag F25).",
  "conventions": {
   "side_perspective": "HOME-view spread (negative = home favourite)",
   "difference": "model_fair_line - market_line",
@@ -39,7 +39,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -49,8 +49,8 @@
    "market_note": "home-view = negated verbatim away spread 1.5 (V8 transform)",
    "result": "WAS 24 @ NYG 21",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -64,7 +64,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -74,7 +74,7 @@
    "market_note": "captured closing total",
    "result": "WAS 24 @ NYG 21",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -88,15 +88,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "WAS 24 @ NYG 21",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -110,7 +110,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -120,8 +120,8 @@
    "market_note": "home-view = negated verbatim away spread -8.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -135,7 +135,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -145,7 +145,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -159,15 +159,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -181,7 +181,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -191,8 +191,8 @@
    "market_note": "home-view = negated verbatim away spread 2.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -206,7 +206,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -216,7 +216,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -230,15 +230,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -252,7 +252,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -262,8 +262,8 @@
    "market_note": "home-view = negated verbatim away spread -4.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -277,7 +277,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -287,7 +287,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -301,15 +301,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -323,7 +323,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -333,8 +333,8 @@
    "market_note": "home-view = negated verbatim away spread -10.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -348,7 +348,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -358,7 +358,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -372,15 +372,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -394,7 +394,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -404,8 +404,8 @@
    "market_note": "home-view = negated verbatim away spread -3.0 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -419,7 +419,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -429,7 +429,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -443,15 +443,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -465,7 +465,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -475,8 +475,8 @@
    "market_note": "home-view = negated verbatim away spread -9.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -490,7 +490,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -500,7 +500,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -514,15 +514,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -536,7 +536,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -546,8 +546,8 @@
    "market_note": "home-view = negated verbatim away spread 3.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -561,7 +561,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -571,7 +571,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -585,15 +585,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -607,7 +607,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -617,8 +617,8 @@
    "market_note": "home-view = negated verbatim away spread 2.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -632,7 +632,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -642,7 +642,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -656,15 +656,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -678,7 +678,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -688,8 +688,8 @@
    "market_note": "home-view = negated verbatim away spread 2.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -703,7 +703,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -713,7 +713,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -727,15 +727,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -749,7 +749,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -759,8 +759,8 @@
    "market_note": "home-view = negated verbatim away spread 3.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -774,7 +774,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -784,7 +784,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -798,15 +798,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -820,7 +820,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -830,8 +830,8 @@
    "market_note": "home-view = negated verbatim away spread -6.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -845,7 +845,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -855,7 +855,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -869,15 +869,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -891,7 +891,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -901,8 +901,8 @@
    "market_note": "home-view = negated verbatim away spread -4.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -916,7 +916,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -926,7 +926,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -940,15 +940,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   },
   {
@@ -962,7 +962,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -972,8 +972,8 @@
    "market_note": "home-view = negated verbatim away spread 4.5 (V8 transform)",
    "result": "",
    "flags": [
-    "F18",
-    "F21"
+    "F23",
+    "F26"
    ]
   },
   {
@@ -987,7 +987,7 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "THIRD_PARTY",
    "market_sources": [
@@ -997,7 +997,7 @@
    "market_note": "captured closing total",
    "result": "",
    "flags": [
-    "F18"
+    "F23"
    ]
   },
   {
@@ -1011,15 +1011,15 @@
    "fair_tier": "COMPUTED",
    "fair_sources": [
     "S03",
-    "S50"
+    "S52"
    ],
    "market_tier": "BLANK",
    "market_sources": [],
    "difference_tier": "BLANK",
-   "market_note": "no moneyline price captured (flag F20)",
+   "market_note": "no moneyline price captured (flag F25)",
    "result": "",
    "flags": [
-    "F20"
+    "F25"
    ]
   }
  ]
