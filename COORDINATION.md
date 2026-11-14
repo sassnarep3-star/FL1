@@ -21,16 +21,51 @@ its own final integration. Per the standing rule, work is **additive**: new file
 
 | # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
 |---|------|--------|-------|----------------------|------------------------|----------------|
-| R21 | Price-snapshot store — records opening **and** closing numbers for every market we originate | in progress | arena-360ca650-fl1 | `engine/snapshots.py`, `data/price_snapshots.json`, `scripts/build_price_snapshots.py`, `price-snapshots.html` | data/raw/MANIFEST.json (sha256-pinned captures); week-10 board | Opening prices have no source at all → every open cell blank+flagged |
-| R22 | Verified results feed — so backtests and ROI can be computed at all | in progress | arena-360ca650-fl1 | `engine/backtest.py`, `data/results_feed.json`, `scripts/build_results_feed.py`, `results-feed.html` | nfl.com schedules capture (raw/schedule-results-2026-week1-10.tsv), standings cross-check (tools/verify_results.py) | none expected |
-| R23 | Originate the side first, then the total, then the moneyline | in progress | arena-360ca650-fl1 | `data/models.json` (append), `line-origination.html` section, `line-board.html` | requirement text | Supersedes the earlier "totals-first" design note; change logged, old text preserved in archive |
-| R24 | Publish model fair line, market line, difference as **separate columns** | in progress | arena-360ca650-fl1 | `engine/fairline.py`, `scripts/build_line_board.py`, `data/line_board.json`, `line-board.html` | fair = computed from official standings/results; market = pinned third-party capture (flagged) | No official source prices NFL lines (F-18 to log); policy: show with 3P badge + flag per the requirement, strict-blank alternative left open for review |
-| R25 | Separate signal from staking in the leaderboard (lucky staking cannot mask bad signal) | in progress | arena-360ca650-fl1 | `data/leaderboard_signal_staking.json`, `strategies.html` section | engine/leaderboard.py scoring | Root page previously claimed "no backtest anywhere in this repository" while data/leaderboard.csv holds third-party backtests — inconsistency to flag (F-19) |
-| R26 | Track the **depth of the replacement**, not just the fact of a replacement | in progress | arena-360ca650-fl1 | `scripts/build_replacement_depth.py`, `data/replacement_depth.tsv`, `replacement-depth.html` | data/depth.tsv (31 club charts), data/injuries.tsv (official), depth-sources.tsv | HOU chart image-only (already flagged); string order is club-labelled unofficial |
-| R27 | Correlations only from officially sourced numbers, publish **n** with each value | in progress | arena-360ca650-fl1 | `engine/corr_official.py`, `scripts/build_correlations_official.py`, `data/correlations_official.json`, `correlation-register.html` | official results/standings/schedule/injury captures only | Third-party correlations (measured.json, prop-correlations, correlations.csv) stay on their labelled pages, excluded from this register |
-| R28 | Demotion gate — sends a live strategy back to paper | in progress | arena-360ca650-fl1 | `engine/demotion.py`, `data/validation_gates.json` (append G-14), `validation.html` section | design decision + engine tests | Thresholds are proposed rules, not facts; left reviewable |
-| R29 | Registers + site integration: requirements/questions/suggestions/flags/sources append, NAV, rebuild, checks, exec summary | in progress | arena-360ca650-fl1 | `data/{requirements,questions,suggestions,flags}.json`, `data/sources.tsv`, `tools/site.py`, `tests/test_r21_r28.py`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | tools/checklinks.py, scripts/verify_site.py, tools/verify_injuries.py, tools/verify_results.py, unittest | — |
+| R21 | Price-snapshot store — records opening **and** closing numbers for every market we originate | done | arena-360ca650-fl1 | `engine/snapshots.py`, `data/price_snapshots.json`, `scripts/build_price_snapshots.py`, `price-snapshots.html` | data/raw/MANIFEST.json (sha256-pinned captures); week-10 board | Opening prices have no source at all → every open cell blank+flagged |
+| R22 | Verified results feed — so backtests and ROI can be computed at all | done | arena-360ca650-fl1 | `engine/backtest.py`, `data/results_feed.json`, `scripts/build_results_feed.py`, `results-feed.html` | nfl.com schedules capture (raw/schedule-results-2026-week1-10.tsv), standings cross-check (tools/verify_results.py) | none expected |
+| R23 | Originate the side first, then the total, then the moneyline | done | arena-360ca650-fl1 | `data/models.json` (append), `line-origination.html` section, `line-board.html` | requirement text | Supersedes the earlier "totals-first" design note; change logged, old text preserved in archive |
+| R24 | Publish model fair line, market line, difference as **separate columns** | done | arena-360ca650-fl1 | `engine/fairline.py`, `scripts/build_line_board.py`, `data/line_board.json`, `line-board.html` | fair = computed from official standings/results; market = pinned third-party capture (flagged) | No official source prices NFL lines (F-18 to log); policy: show with 3P badge + flag per the requirement, strict-blank alternative left open for review |
+| R25 | Separate signal from staking in the leaderboard (lucky staking cannot mask bad signal) | done | arena-360ca650-fl1 | `data/leaderboard_signal_staking.json`, `strategies.html` section | engine/leaderboard.py scoring | Root page previously claimed "no backtest anywhere in this repository" while data/leaderboard.csv holds third-party backtests — inconsistency to flag (F-19) |
+| R26 | Track the **depth of the replacement**, not just the fact of a replacement | done | arena-360ca650-fl1 | `scripts/build_replacement_depth.py`, `data/replacement_depth.tsv`, `replacement-depth.html` | data/depth.tsv (31 club charts), data/injuries.tsv (official), depth-sources.tsv | HOU chart image-only (already flagged); string order is club-labelled unofficial |
+| R27 | Correlations only from officially sourced numbers, publish **n** with each value | done | arena-360ca650-fl1 | `engine/corr_official.py`, `scripts/build_correlations_official.py`, `data/correlations_official.json`, `correlation-register.html` | official results/standings/schedule/injury captures only | Third-party correlations (measured.json, prop-correlations, correlations.csv) stay on their labelled pages, excluded from this register |
+| R28 | Demotion gate — sends a live strategy back to paper | done | arena-360ca650-fl1 | `engine/demotion.py`, `data/validation_gates.json` (append G-14), `validation.html` section | design decision + engine tests | Thresholds are proposed rules, not facts; left reviewable |
+| R29 | Registers + site integration: requirements/questions/suggestions/flags/sources append, NAV, rebuild, checks, exec summary | done | arena-360ca650-fl1 | `data/{requirements,questions,suggestions,flags}.json`, `data/sources.tsv`, `tools/site.py`, `tests/test_r21_r28.py`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | tools/checklinks.py, scripts/verify_site.py, tools/verify_injuries.py, tools/verify_results.py, unittest | — |
 | R30 | Final integration: PR → main, merge, confirm Pages deploy, record result here | unclaimed | arena-360ca650-fl1 | PR only | Pages API | — |
+
+### R21–R29 completion record (2026-11-14)
+
+**Built (all re-runnable):** `engine/{snapshots,backtest,fairline,demotion,corr_official}.py`;
+`scripts/build_{results_feed,price_snapshots,line_board,correlations_official,replacement_depth,signal_staking,register_r21_r28}.py`;
+`data/{price_snapshots,results_feed,line_board,correlations_official,leaderboard_signal_staking}.json`,
+`data/replacement_depth.tsv`; pages `line-board`, `price-snapshots`, `results-feed`,
+`replacement-depth`, `correlation-register` + sprint sections on Line Origination, Leaderboard,
+Validation (`G-14`), Executive Summary.
+
+**Verification performed (all passing at completion):**
+- `python3 -m unittest discover -s tests -q` → **102 tests OK** (75 pre-existing + 27 sprint rules).
+- `tools/checklinks.py` → **21 pages OK**, every internal link/anchor resolves, all source IDs registered.
+- `scripts/verify_site.py` → **0 errors, 0 warnings** (docs/computed layer intact).
+- `tools/verify_injuries.py` → 345/345 rows match the raw capture. `tools/verify_results.py` → PASS
+  (32/32 clubs). `scripts/verify_d.py` → **V5–V9 PASS** (V7a FLAGGED by design).
+- `scripts/build_results_feed.py` hard-fails unless the feed reproduces the official standings exactly.
+- Rebuild determinism: V6 re-ran `build_correlations.py` / `strategy_lab.py` / `build_week10_board.py`
+  with byte-identical artefacts.
+
+**Sources:** S01/S03/S49/S50 (official nfl.com captures: injuries, standings, schedule, results);
+S47 + `data/raw/MANIFEST.json` sha256 pins (third-party market capture, flagged); club depth charts
+S07/S08/S16–S46 (labelled unofficial). Every new table row links to its source record.
+
+**Irregularities found and published (`flagged.html` F18–F25):** F18 market prices third-party-only
+(policy question Q23); F19 root-vs-computed leaderboard claim contradiction; F20 moneyline closes
+uncaptured; F21 `closing_spread_home` misnamed (V8: feed holds the AWAY spread) + unvalidated
+`market_implied_home_winprob` formula excluded; F22 totals-first superseded by mandated order; F23
+demotion thresholds are proposed rules; F24 fair coefficients computed from 137 official games only;
+**F25 (High)** computed-layer `breakeven_hit` is circular (1/(1+realized ROI)) so its G4 gate is
+unusable — transcribed with a warning, one-line fix offered as SG24, not silently patched.
+
+**Note on environment:** `scripts/verify_d.py` V9 and `build_prop_correlations_d.py` need the
+workspace mirror `/home/user/datawork/player_stats_weekly_archive.parquet` (Beexly/Sports, 5.6 MB)
+plus `pandas numpy scipy pyarrow`; fetched from GitHub for this run and left outside the repo.
 
 ### Earlier board state, preserved from session C's PR #4
 

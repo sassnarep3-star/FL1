@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlation Register · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="prop-correlations.html">Prop Correlations</a><a href="correlation-register.html" class="on">Correlation Register</a><a href="line-origination.html">Line Origination</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="results-feed.html">Results Feed</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main" class="wide">
+
+<section>
+<h1>Correlation Register &mdash; officially sourced numbers only</h1>
+<p class="lead">Requirement R27: correlations are computed <strong>only</strong> from officially sourced
+numbers, and every value publishes its <strong>n</strong> beside it. The rule is enforced as code:
+<code>engine/corr_official.py</code> raises unless every source id of a record is in the official set.</p>
+<div class="callout warn"><p><strong>One value is deliberately blank.</strong> C-A4 (availability vs margin)
+sits at n = 1: only one week of official injury captures exists and only one game with paired inputs is
+settled. A correlation at n = 1 is not a small number, it is no number &mdash; so the cell is blank and the
+n is published, exactly as the requirement asks.</p></div>
+</section>
+
+<section>
+<h2>The register &mdash; 5 rows</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>ID</th><th>Pair</th><th>Variables</th><th>n</th><th>r (Pearson)</th><th>Fisher 95% CI</th><th>Tier</th><th>Inputs</th><th>Sources</th></tr></thead><tbody><tr><td>C-A1</td><td>Season point differential per game vs win percentage</td><td>(PF-PA)/G vs Win pct</td><td class="num">32</td><td>0.8781</td><td>0.7630 – 0.9392</td><span class="pill warn">COMPUTED-FROM-OFFICIAL</span><td>32 official standing rows (S03); one row per club</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr><tr><td>C-A2</td><td>Home margin vs game total (blowouts push totals up)</td><td>Home margin vs Game total</td><td class="num">137</td><td>-0.1607</td><td>-0.3198 – 0.0073</td><span class="pill warn">COMPUTED-FROM-OFFICIAL</span><td>137 official result rows (S50)</td><td><a class="src" href="sources.html#S50" title="NFL.com 2026 schedules - official game results, weeks 1-10">S50</a></td></tr><tr><td>C-A3</td><td>Rest-days asymmetry (home minus away) vs home margin</td><td>Rest edge (days) vs Home margin</td><td class="num">121</td><td>0.4257</td><td>0.2675 – 0.5615</td><span class="pill warn">COMPUTED-FROM-OFFICIAL</span><td>official result dates (S50); games where either club had no prior game in the feed are excluded, n counts the rest</td><td><a class="src" href="sources.html#S50" title="NFL.com 2026 schedules - official game results, weeks 1-10">S50</a></td></tr><tr><td>C-A4</td><td>Availability disadvantage (official report) vs game margin</td><td>avail edge (home) vs Home margin</td><td class="num">1</td><td class="blank" title="Not confirmed by an official source">—</td><td class="blank" title="Not confirmed by an official source">—</td><span class="pill ">BLANK</span><td>Only one week of official injury captures exists (Week 10) and only the TNF game is settled with paired inputs — n=1 cannot support a correlation. Published blank with its n, as the requirement demands, instead of estimated.</td><td><a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a> <a class="src" href="sources.html#S50" title="NFL.com 2026 schedules - official game results, weeks 1-10">S50</a></td></tr><tr><td>C-A5</td><td>Points for vs points against (schedule-strength probe)</td><td>PF vs PA</td><td class="num">32</td><td>-0.0869</td><td>-0.4228 – 0.2700</td><span class="pill warn">COMPUTED-FROM-OFFICIAL</span><td>32 official standing rows (S03)</td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Excluded by rule &mdash; third-party registers</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>Register</th><th>Why excluded</th></tr></thead><tbody><tr><td>data/measured.json</td><td>computed from the third-party nflverse games capture (S47)</td></tr><tr><td>data/prop-correlations-d.csv</td><td>computed from a third-party player_stats mirror (S48, flag F17)</td></tr><tr><td>data/correlations.csv</td><td>computed from third-party closing prices; self-labelled unverified</td></tr></tbody></table></div>
+<p class="caption">These are measurements of third-party datasets. They are not wrong; they are not
+official, so they cannot enter this register. They live on their own labelled pages.</p>
+</section>
+
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  Provenance tiers: <strong>OFFICIAL</strong> = transcribed from an official league source;
+  <strong>COMPUTED</strong> = computed from official inputs by published code;
+  <strong>THIRD_PARTY</strong> = transcribed from a pinned third-party capture and flagged — no official
+  league source prices NFL lines, so market prices carry this badge (see
+  <a href="flagged.html#F18">F18</a> and <a href="questions.html">Q23</a>; the strict-blank policy is one
+  review away).</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
