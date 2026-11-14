@@ -1,0 +1,5 @@
+,home_cover,away_cover,over,home_win
+home_cover,1.0,-0.9614,-0.0001,0.7948
+away_cover,-0.9614,1.0,0.0017,-0.7892
+over,-0.0001,0.0017,1.0,0.0018
+home_win,0.7948,-0.7892,0.0018,1.0

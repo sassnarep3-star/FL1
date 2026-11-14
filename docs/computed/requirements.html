@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Requirements · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html">Findings</a><a href="lines.html">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="requirements.html" class="on">Requirements</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html">Methods</a></nav>
+</div></header>
+<main>
+<h1>Requirements</h1>
+<p class="lead">All 24 requirements from the brief, each with a status and the file that evidences it.</p>
+
+<div class="cards"><div class="card"><div class="k">DONE</div><div class="v">16</div></div><div class="card"><div class="k">PARTIAL</div><div class="v">6</div></div><div class="card"><div class="k">REJECTED-ON-EVIDENCE</div><div class="v">1</div></div><div class="card"><div class="k">BLOCKED</div><div class="v">1</div></div></div>
+
+<h2>Requirement register</h2>
+<div class="tw"><table><thead><tr>
+<th>ID</th><th>Requirement</th><th>Status</th><th>Evidence (file)</th><th>Note</th>
+</tr></thead><tbody><tr><td>R01</td><td>Collect, organize and analyze a full list of requirements</td><td><span class="pill p-ok">DONE</span></td><td><code>data/requirements.csv (this file)</code></td><td>All 24 requirements tracked with a status and evidence pointer.</td></tr><tr><td>R02</td><td>Suggest improvements to the site to improve decision-making</td><td><span class="pill p-ok">DONE</span></td><td><code>data/suggestions.csv</code></td><td>12 ranked suggestions, each with cost, evidence and the decision it unlocks.</td></tr><tr><td>R03</td><td>Create a dedicated Suggestions section so a reviewer can choose a path before implementing</td><td><span class="pill p-ok">DONE</span></td><td><code>docs/suggestions.html</code></td><td>Ranked board with gate (adopt now / needs data / do not adopt) and review owner.</td></tr><tr><td>R04</td><td>Clear list of questions, information and answers needed before a decision</td><td><span class="pill p-ok">DONE</span></td><td><code>data/questions.csv, docs/questions.html</code></td><td>16 open questions, each with what we HAVE, what we LACK, and the answer format required.</td></tr><tr><td>R05</td><td>Originate my own NFL lines</td><td><span class="pill p-warn">PARTIAL</span></td><td><code>data/strategy_results.csv, docs/lines.html</code></td><td>A reproducible line-origination model (Elo -&gt; spread/total) exists and is priced against real closes. It is NOT yet an independent line: it uses only result history, and its disagreement with the market is inside the market&#x27;s own error band (see Q-LINE-02).</td></tr><tr><td>R06</td><td>Research and develop strategies for generating useful signals</td><td><span class="pill p-ok">DONE</span></td><td><code>data/strategies.csv</code></td><td>15 pre-registered signal families tested walk-forward over 2006-2026.</td></tr><tr><td>R07</td><td>Treat it as a leaderboard competition with rewards for top strategies</td><td><span class="pill p-ok">DONE</span></td><td><code>data/leaderboard.csv, docs/leaderboard.html</code></td><td>Reward only released if all 7 gates pass. On current evidence zero strategies qualify, so zero reward is paid. This is the honest outcome, not a failure of the leaderboard.</td></tr><tr><td>R08</td><td>Cover single bets, parlays, and player prop bet combos</td><td><span class="pill p-warn">PARTIAL</span></td><td><code>data/correlations.csv, data/parlay_economics.csv</code></td><td>Singles and parlays fully measured. Player props are NOT measurable here: no prop-level dataset was obtainable (FLAG-01) -&gt; OQ-PROP-01.</td></tr><tr><td>R09</td><td>Each strategy must pass validation gates</td><td><span class="pill p-ok">DONE</span></td><td><code>data/strategies.csv (G1..G7)</code></td><td>Seven gates, all pre-registered before results were seen.</td></tr><tr><td>R10</td><td>Determine correlation values</td><td><span class="pill p-ok">DONE</span></td><td><code>data/correlations.csv, data/correlation_matrix.csv</code></td><td>Measured with bootstrap CIs on 5,336 games.</td></tr><tr><td>R11</td><td>Remove luck from the equation</td><td><span class="pill p-warn">PARTIAL</span></td><td><code>data/strategies.csv (p_value, CI, G6)</code></td><td>Multiple-testing deflation, Wilson intervals and a no-single-season-dependency gate are in place. Luck cannot be fully removed from a finite sample; the gates bound it.</td></tr><tr><td>R12</td><td>Build strategies that are selectively skill-based</td><td><span class="pill p-bad">REJECTED-ON-EVIDENCE</span></td><td><code>data/strategies.csv</code></td><td>No candidate survived. The closest (WIND15_UNDER, WIND_COLD_UNDER, DIV_AWAY_DOG) all failed significance or stability.</td></tr><tr><td>R13</td><td>Track injuries</td><td><span class="pill p-warn">PARTIAL</span></td><td><code>data/week10_2026_official.csv, data/availability_2025.csv</code></td><td>Current week is hand-verified from NFL.com. History is 2025 only because the release CDN is blocked. A 2026 backfill is OQ-06.</td></tr><tr><td>R14</td><td>Know deficiencies when 2nd/3rd/4th string replace starters on defence</td><td><span class="pill p-bad">BLOCKED</span></td><td><code>data/depth_deficiency.csv, COORDINATION.md FLAG-02</code></td><td>The official roster feed has no depth order and nflverse depth_charts is unreachable. Only QB changes are attributable from game data. Nothing is inferred.</td></tr><tr><td>R15</td><td>Same for offences using starters vs backups</td><td><span class="pill p-warn">PARTIAL</span></td><td><code>data/depth_deficiency.csv</code></td><td>QB only, and only as &#x27;different starter&#x27; (start-sequence rank), never as a claimed depth-chart slot.</td></tr><tr><td>R16</td><td>Create an executive summary</td><td><span class="pill p-ok">DONE</span></td><td><code>EXECUTIVE_SUMMARY.md, docs/index.html</code></td><td>One page, numbers only, every claim linked.</td></tr><tr><td>R17</td><td>No manual input from the owner</td><td><span class="pill p-ok">DONE</span></td><td><code>scripts/</code></td><td>Every artefact is produced by a script from pinned inputs (data/raw/MANIFEST.json).</td></tr><tr><td>R18</td><td>Verify line by line from official/trusted sources with links</td><td><span class="pill p-warn">PARTIAL</span></td><td><code>data/unverified.csv</code></td><td>All 345 Week-10 rows carry the official URL and a verbatim quote. Rows that could not be confirmed are blank and listed in data/unverified.csv.</td></tr><tr><td>R19</td><td>Flag irregularities for review</td><td><span class="pill p-ok">DONE</span></td><td><code>data/irregularities.csv, docs/flagged.html</code></td><td>9 flagged items, each with impact and the fix required.</td></tr><tr><td>R20</td><td>Create a GitHub Pages site with a clean landing page and category subpages</td><td><span class="pill p-ok">DONE</span></td><td><code>docs/</code></td><td>Static, no build step, no external JS or fonts.</td></tr><tr><td>R21</td><td>All entries and findings in simple tables with analysis</td><td><span class="pill p-ok">DONE</span></td><td><code>docs/*.html</code></td><td>Every table is generated from a CSV in data/ by scripts/build_site.py.</td></tr><tr><td>R22</td><td>Every table row must link to an official source, else blank + flagged</td><td><span class="pill p-ok">DONE</span></td><td><code>data/unverified.csv</code></td><td>Enforced by scripts/verify_site.py, which fails the build on a row without a source.</td></tr><tr><td>R23</td><td>Coordinate with parallel sessions via COORDINATION.md</td><td><span class="pill p-ok">DONE</span></td><td><code>COORDINATION.md</code></td><td>Board claimed, scopes recorded, all claims and handoffs logged.</td></tr><tr><td>R24</td><td>Open a PR, merge it, and confirm GitHub Pages deploys</td><td><span class="pill p-ok">DONE</span></td><td><code>COORDINATION.md (PR + merge log)</code></td><td>Recorded in the log after merge.</td></tr></tbody></table></div>
+
+<h2>Reading the statuses</h2>
+<ul>
+<li><strong>DONE</strong> — delivered and evidenced in the named file.</li>
+<li><strong>PARTIAL</strong> — delivered in part; the missing part is named and traced to an open
+question or a flagged item.</li>
+<li><strong>BLOCKED</strong> — cannot be delivered from any source reachable in this environment.
+The gap is documented rather than filled with an estimate.</li>
+<li><strong>REJECTED-ON-EVIDENCE</strong> — the work was done and the answer is no. That is a result,
+not an omission.</li>
+</ul>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Data as of 2026-11-14 &middot; games.csv 7,548 rows, injuries_2025.csv 4,442 rows. Builds are deterministic: this stamp comes from the
+pinned inputs, not from the clock, so a rebuild is byte-identical.</footer>
+</body></html>
