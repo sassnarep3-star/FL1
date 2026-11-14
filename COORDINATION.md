@@ -1190,3 +1190,22 @@ python3 tools/verify_replacement.py                    # gate, rewrites the TSV
 python3 tools/checklinks.py
 python3 -m unittest discover -s tests -q
 ```
+
+---
+
+## Session `arena/5876146b-fl1` — PR, merge & deployment record (2026-11-14)
+
+- **PR:** [#34 — Verified results feed, own-line origination (side→total→ML), signal/staking
+  split, replacement depth, official-only correlations, demotion
+  gate](https://github.com/sassnarep3-star/FL1/pull/34)
+- **Merge result:** MERGED to `main` (`gh pr merge 34 --merge`), CI `verify-research-build`
+  green on the branch at merge time (151 unit tests, verify_brief 10/10, verify_feed_m 137/137,
+  verify_d V5–V9, verify_replacement, verify_site 0 errors, checklinks 28 pages).
+- **GitHub Pages:** `pages-build-deployment` completed; `https://sassnarep3-star.github.io/FL1/`
+  live — `results-feed.html` fetched from the live site and checked end-to-end (row-level feed,
+  S61–S69 source chips, walk-forward backtest, cross-links to the parallel registers).
+- **Integration summary:** three parallel implementations of the eight brief requirements
+  (685f958d, 360ca650/R21–R28, this session M1–M8) preserved in full and cross-linked
+  (F31); colliding ids re-issued twice for this session — final ids: sources **S61–S69**,
+  flags **F32–F36**, gates **G-16/G-17** (see the final id map above). PRs #22–#33, #35–#36 all
+  respected (nothing overwritten; `engine/price_snapshots.py` etc. untouched).
