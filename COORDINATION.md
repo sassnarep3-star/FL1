@@ -960,6 +960,150 @@ Existing price/results datasets remain third-party or capture-specific; this tas
 - **Defect shipped in #30 and corrected in #31:** misaligned table cells and an unformatted σ placeholder on `model-lines.html` (see the post-merge correction record above).
 - **Open items carried forward (not blocking):** F18 no official price source (SG16); F19 correlations withheld (SG19); F20 model does not beat a constant benchmark; F21 Munich home-field assumption; F22 Weeks 1–9 per-game verification (SG18); G-14 thresholds (SG17).
 - **Workflow note:** `refresh.yml` step `build_prop_correlations_d.py` cannot run in the sandbox (workspace-only parquet mirror), and is tolerated by its `|| echo skipped`.
+---
+
+## Session `arena/5876146b-fl1` — claim and scope (2026-11-14)
+
+- **Session/branch:** `arena/5876146b-fl1` (Arena-managed single branch; claim pushed at first commit).
+- **Coordination check before claiming:** `origin/main` = `9d7ca32` (PR #21 merged). One open PR
+  inspected: [#22](https://github.com/sassnarep3-star/FL1/pull/22) (`arena/f1e4deb7-fl1`,
+  "Add sourced NFL price snapshot storage", files `engine/price_snapshots.py`,
+  `tests/test_price_snapshots.py`, `README.md`, `COORDINATION.md`). That session owns the
+  **price-snapshot store**; this session will not touch those files and will merge their PR at
+  integration only if it is complete and green.
+- **Claimed tasks (unclaimed at claim time; non-overlapping with PR #22):**
+
+| ID | Task | Files (owned by this session) | Status |
+|---|---|---|---|
+| M1 | Verified results feed (official-sourced, settlement-ready) + ROI/backtest computation, fail-closed | `data/results_feed.csv`, `engine/results_feed.py`, `tests/test_results_feed.py` | in progress |
+| M2 | Market origination order **side → total → moneyline**, and publish **fair line / market line / difference** as three separate columns | `data/fair_lines.csv`, `data/origination_order.json`, `engine/fair_lines.py` | in progress |
+| M3 | Leaderboard: separate **signal** from **staking** (rank on signal only) | `data/signal_vs_staking.csv`, `engine/signal_vs_staking.py` | in progress |
+| M4 | Replacement-**depth** tracking (which string replaces a missing starter), Week 10 2026 | `data/replacement_depth.csv`, `tools/build_replacement_depth.py` | in progress |
+| M5 | Correlations computed **only** from officially sourced numbers, each published **with n** | `data/correlations-official.csv` | in progress |
+| M6 | **Demotion gate**: live strategy → paper, with triggers and re-entry rules (G-14) | `data/governance_gates.json` | in progress |
+| M7 | Root-site integration pages + NAV + executive-summary/README addenda + flags | `originations.html`, `signal-vs-staking.html`, `results-feed.html`, `governance.html` (new pages), `tools/site.py` (NAV + page builders, additive), `data/flags.json` (append-only), `EXECUTIVE_SUMMARY.md`, `README.md` (append-only) | in progress |
+| M8 | Integration: verify line-by-line, merge PR #22 if complete, PR → main, confirm Pages, record here | `COORDINATION.md` | unclaimed→in progress |
+
+- **Shared-file etiquette:** `tools/site.py` gets additive NAV/page-builder edits only (session D
+  precedent); `data/flags.json`, `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` are
+  append-only. No file owned by `arena/f1e4deb7-fl1` will be edited. If PR #22 lands first, this
+  session rebases and keeps both sides' appends.
+- **Sources policy:** official-sourced values only in M1/M4/M5 tables (per-row source IDs from
+  `data/sources.tsv`); model outputs (fair lines) are labelled MODEL OUTPUT with a pinned model
+  version; third-party market prices are labelled third-party and flagged (F-17 lineage). Blank +
+  flagged wherever unverified. Nothing inferred.
+
+---
+
+## Session `arena/5876146b-fl1` — integration & completion record (2026-11-14)
+
+### What was delivered (all committed on this branch, merged in the record below)
+
+| ID | Deliverable | Artefacts | Verification |
+|---|---|---|---|
+| M1 | Verified results feed + fail-closed settlement/ROI | `data/results_feed.csv` (137), `raw/official-finals-2026.tsv`, `engine/results_settlement.py` (renamed at integration; see below), `tests/test_results_feed.py`, `results-feed.html` | `scripts/verify_feed_m.py` 137/137 three-way PASS; `python3 -m engine.results_settlement --check` OK; 17 unit tests |
+| M2 | Origination order **side → total → ML**; fair line \| market line \| difference as separate columns | `data/fair_lines.csv` (272 rows), `data/origination_order.json`, `scripts/build_fair_lines_m.py`, `originations.html` | engine equivalence vs Computed Research Layer 5,336/5,336; published calibration reproduced (MAE 2.89, corr 0.828) |
+| M3 | Signal vs staking split | `data/signal_vs_staking.csv` (16 strategies), `signal-vs-staking.html` | rank on signal only; 3 masked (positive staking over non-positive signal); G-15 signal-only promotion |
+| M4 | Replacement **depth** | `data/replacement_depth.csv` (69 spots), `replacement-depth.html` | string = published rank within spot; 6 blanks (all Out above) flagged; NE RB cascade to 3rd string flagged |
+| M5 | Official-only correlations with n | `data/correlations-official.csv` (C-O1..C-O3), `official-correlations.html` | r=+0.076 n=137; \|r\|<0.09 n=242; every value publishes its n |
+| M6 | Demotion gate live→paper | `data/governance_gates.json` (G-14, G-15), `signal-vs-staking.html` | trigger A signal decay / B risk breach / C compliance; automatic; staking can never promote but can demote |
+| M7/M8 | Site pages + integration | NAV/cards, S52–S60 sources, F23–F27 flags, EXECUTIVE_SUMMARY/README addenda | post-merge matrix below |
+
+### Conflict resolution at merge with `origin/main` (PRs #22–#32) — nothing discarded
+
+1. **`engine/results_feed.py` (add/add):** main's module is the verified-ingestion boundary
+   (SQLite, provenance-shaped; `arena/0669d4cf-fl1`) and **keeps the name**. This branch's
+   settlement/ROI engine is now `engine/results_settlement.py`; its 17 tests follow. Both are
+   cited on `results-feed.html`.
+2. **`data/flags.json` id collision (F18–F22, both sides):** main's F18–F22 kept as registered.
+   This branch's five flags re-issued **F23–F27** (session-D S47–S49 re-issue precedent) and all
+   in-page references updated. Registry status updates, entries kept: their **F19** marked
+   RESOLVED-IN-PART (official-only correlations now published with n); their **F22** marked
+   RESOLVED (row-level official capture of all 137 finals supersedes the aggregate-only
+   reconciliation of weeks 1–9).
+3. **`data/sources.tsv` id collision (S50/S51):** main's S50/S51 kept (by-week overview; week-10
+   game pages). This branch's nine per-week sources re-issued **S52–S60**; `results_feed.csv`
+   rebuilt with the new ids and re-verified 137/137.
+4. **`results-feed.html` (add/add):** one merged page — main's walk-forward backtest table
+   (values preserved from `data/backtest_calibration.tsv`) + this branch's row-level official
+   feed + the settlement contract. `tools/brief.py` no longer writes the page (printed pointer)
+   and continues to compute the data tables; its other pages unchanged.
+5. **`tools/site.py`:** union NAV (23 entries: + model-lines, results-feed, governance from main;
+   + replacement-depth, official-correlations, originations, signal-vs-staking from this branch)
+   and union index cards (one results-feed card).
+6. Generated HTML and `assets/js/data.js` re-rendered from the merged data by the merged
+   generators (tools/site.py, scripts/build_pages_d.py, tools/brief.py, scripts/build_pages_m.py).
+
+### Post-merge verification matrix (2026-11-14)
+
+- `python3 -m unittest discover -s tests -q` — **124 tests OK** (incl. this branch's 17,
+  the price-store and market-results-store suites, and the brief suite).
+- `python3 tools/verify_brief.py` — **10/10 PASS** (its V6 confirms the 137 results equal the
+  played rows of the schedule feed).
+- `python3 scripts/verify_feed_m.py` — PASS 137/137 three-way field-for-field.
+- `python3 scripts/verify_d.py` — V5–V9 PASS (V9 upgraded BLOCKED→PASS by
+  `scripts/fetch_prop_mirror_m.py`, pinned git blob `adc42c07…`, rebuild byte-identical).
+- `python3 scripts/verify_site.py` — 0 errors, 0 warnings. `python3 tools/checklinks.py` — 23
+  pages, every internal link and anchor resolves, every source id registered.
+- `python3 site/build.py && python3 site/verify.py` — publishable.
+  `python3 engine/demo_run.py --check` — current.
+
+### Sources added this session (registries)
+
+S52–S60 (official nfl.com by-week pages, weeks 1–9, row-level finals transcribed and verified;
+`raw/official-finals-2026.tsv`). Market prices remain third-party (S47; F18/F25) — no official
+NFL price source exists; nothing inferred.
+
+### Irregularities flagged this session
+
+F23 (leaderboard note says "totals-first" vs mandated side-first), F24 (fair total blank —
+unfitted S2), F25 (market prices third-party; see also F18), F26 (replacement values derived;
+6 blanks; HOU absent per F16), F27 (requirements.txt understates scripts-layer deps: pandas/
+numpy/scipy/pyarrow — pre-existing; `scripts/` layer only).
+
+---
+
+## Session `arena/5876146b-fl1` — second merge & final id mapping (2026-11-14)
+
+PR #33 (`arena/360ca650-fl1`, R21–R28) landed while this session's PR #34 was open — a
+**third** parallel implementation of the same eight requirements. Resolved exactly like the
+first merge: preserve everything, re-issue colliding ids, cross-link duplicate pages
+(their F31 updated to record all three).
+
+### Final id map (supersedes the ids in the completion record above)
+
+| This session's artefact | Earlier id | **Final id** | Note |
+|---|---|---|---|
+| Week 1–9 official schedule pages | S50–S58, then S52–S60 | **S61–S69** | S50–S52 now held by the R21–R28/685f958d registers |
+| Leaderboard "totals-first" wording discrepancy | F18, then F23 | **F32** | cross-ref their F27 (mandated order) |
+| Fair total blank (unfitted S2) | F19, then F24 | **F33** | cross-ref their F29 |
+| Market prices third-party only | F20, then F25 | **F34** | cross-ref their F23 |
+| Replacement values derived / 6 blanks / HOU absent | F21, then F26 | **F35** | — |
+| requirements.txt understates scripts deps | F22, then F27 | **F36** | — |
+| Demotion gate (session M proposal) | G-14 | **G-16** | their G-14 (validation_gates.json) kept; two proposals, both live |
+| Signal-only promotion rule | G-15 | **G-17** | — |
+
+`data/results_feed.csv` rebuilt against S61–S69/S49 and re-verified 137/137; all page text
+and `data/origination_order.json` / `data/governance_gates.json` re-mapped.
+
+### Duplicate-page map (all preserved)
+
+| Page | Status |
+|---|---|
+| `results-feed.html` | merged superset (685f958d backtest table + this session's row-level official feed + settlement contract) |
+| `verified-results-feed.html` | R21–R28's feed page, kept as-is |
+| `replacement-depth.html` | merged (this session's 69-spot week-10 analysis + the R26 52-slot register section) |
+| `replacement-depth-r21r28.html` | R26 register standalone copy (their generator output, preserved) |
+| `originations.html` / `line-board.html` / `model-lines.html` | all three fair\|market\|difference views kept, cross-linked |
+| `signal-vs-staking.html` / `governance.html` / strategies sprint sections | all kept |
+| `official-correlations.html` / `correlation-register.html` | both kept |
+
+### Post-second-merge verification matrix
+
+`unittest discover` **151 OK** · `verify_brief` **10/10** · `verify_feed_m` **PASS 137/137** ·
+`verify_d` V5–V9 **PASS** · `verify_site` **0 errors** · `checklinks` **28 pages OK** ·
+`site/verify` **publishable** · `register_r21_r28` idempotent · `engine.results_settlement
+--check` OK · `demo_run --check` current.
 
 ---
 

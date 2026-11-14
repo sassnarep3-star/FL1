@@ -1,0 +1,39 @@
+{
+  "id": "governance-gates",
+  "title": "Governance gates — promotion is slow, demotion is fast",
+  "updated": "2026-11-14",
+  "owner_session": "arena-5876146b-fl1",
+  "description": "The lifecycle gates that sit above the performance gates (G-1..G-13). G-16 is the demotion gate the brief mandates: a live strategy that degrades goes back to PAPER, not to a meeting. Promotion on signal only; demotion on either signal decay or risk breach; staking outcomes can never promote.",
+  "rows": [
+    {
+      "g_id": "G-16",
+      "gate": "Demotion gate: live -> paper",
+      "kind": "HARD — automatic",
+      "scope": "any strategy at Stage 3 (live trial) or Stage 4 (funded)",
+      "trigger_a_signal_decay": "rolling 250-bet closing-line-value lower bound < 0 at two consecutive monthly evaluations, OR signal ROI below break-even over the trailing 150 settled bets with the one-sided test p > 0.5 (indistinguishable from losing)",
+      "trigger_b_risk_breach": "drawdown from live peak exceeds 50% of allocated bankroll at live stakes, OR stake cap exceeded, OR a ledger audit invalidates settled results (source correction)",
+      "trigger_c_compliance": "any G-12 failure (prohibited market class, unregistered input, non-public information) — immediate, no evaluation window",
+      "destination": "PAPER (Stage 2 exposure): zero capital, sealed evaluation continues, the entry keeps its record and its graveyard rights",
+      "execution": "automatic at the evaluation checkpoint by the system; no discretion, no appeal; the demotion event is written to the strategy's sealed log",
+      "re_entry": "back through the normal ladder from paper: a fresh sealed window of >= 150 settled paper bets with positive CLV lower bound AND all hard gates re-cleared on that window; a demoted strategy may not re-enter live on the strength of its old record",
+      "asymmetry_rule": "staking outcomes can NEVER promote (promotion reads signal columns only), but a staking risk breach CAN demote. A lucky staking run masks nothing; a dangerous one is punished.",
+      "why": "The failure mode of every strategy programme is the edge that died quietly while the bankroll looked fine. G-11 monitors decay; G-16 is the enforcement: the strategy stops carrying capital the moment the evidence stops supporting it.",
+      "related": ["G-11", "G-12", "G-1", "G-3"],
+      "sources": []
+    },
+    {
+      "g_id": "G-17",
+      "gate": "Signal-only promotion rule",
+      "kind": "HARD — ranking contract",
+      "scope": "leaderboard ranking, rewards, capital promotion",
+      "rule": "rank order, reward eligibility and capital promotion are computed from the SIGNAL ledger (flat stakes: hit rate, CLV/edge, flat ROI, gates, LCB). The STAKING ledger is published as risk telemetry beside it and can only cap or remove exposure. A strategy whose staking run is positive while its signal is not is displayed with the MASKED flag and is not eligible for promotion.",
+      "implementation": "data/signal_vs_staking.csv (scripts/build_signal_staking_m.py); signal_rank is computed without any staking column entering the sort",
+      "why": "so a lucky staking run cannot mask a bad signal",
+      "sources": []
+    }
+  ],
+  "notes": [
+    "G-16 demotion is defined at the strategy level; a division-level circuit breaker (all live entries failing together) is deliberately NOT in v1 and is listed as a suggestion for review.",
+    "Every trigger metric here is computable from the sealed bet log plus the price-snapshot store; none of them require judgment calls at execution time."
+  ]
+}

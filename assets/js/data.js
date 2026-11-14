@@ -5207,6 +5207,96 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "Transcribed in raw/schedule-results-2026-week1-10.tsv (137 games). Verification: recomputing W/L/T and PF/PA for all 32 clubs from the feed reproduces data/standings.tsv exactly (tools/verify_results.py)."
+  },
+  {
+   "id": "S61",
+   "title": "nfl.com Week 1 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 1 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S62",
+   "title": "nfl.com Week 2 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 2 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S63",
+   "title": "nfl.com Week 3 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 3 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S64",
+   "title": "nfl.com Week 4 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 4 schedule page; 16 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S65",
+   "title": "nfl.com Week 5 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 5 schedule page; 15 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S66",
+   "title": "nfl.com Week 6 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 6 schedule page; 14 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S67",
+   "title": "nfl.com Week 7 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 7 schedule page; 14 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S68",
+   "title": "nfl.com Week 8 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 8 schedule page; 14 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S69",
+   "title": "nfl.com Week 9 schedule page (2026)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "2026 Week 9 schedule page; 15 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
   }
  ],
  "schedule": [
@@ -33219,12 +33309,12 @@ window.DATA = {
    "id": "F19",
    "kind": "Correlation withheld (third-party source)",
    "item": "Correlation values computed from nflverse / third-party data (prop correlations; C-01 measured rho)",
-   "detail": "Brief B6 requires correlations to be computed only from officially sourced numbers, with n published. The prop-correlation values (for example QB pass yards vs WR receiving yards r = 0.7887, n = 5,246; QB vs TE r = 0.3729, n = 5,208; RB rush vs RB receive r = 0.3562, n = 5,246, and the 2022-2024 window values) and the measured C-01 rho = +0.00696 (95% CI -0.03324 to +0.04831, n = 6,813) come from the third-party nflverse mirror. They are withheld from the root site and the measured page carries a withdrawal banner. n is kept for each pair. The withheld values are reproduced here for review only.",
+   "detail": "Brief B6 requires correlations to be computed only from officially sourced numbers, with n published. The prop-correlation values (for example QB pass yards vs WR receiving yards r = 0.7887, n = 5,246; QB vs TE r = 0.3729, n = 5,208; RB rush vs RB receive r = 0.3562, n = 5,246, and the 2022-2024 window values) and the measured C-01 rho = +0.00696 (95% CI -0.03324 to +0.04831, n = 6,813) come from the third-party nflverse mirror. They are withheld from the root site and the measured page carries a withdrawal banner. n is kept for each pair. The withheld values are reproduced here for review only. RESOLVED-IN-PART 2026-11-14 (session arena-5876146b-fl1): official-only correlations now published with n at official-correlations.html (C-O1 r=+0.076 n=137; C-O2/C-O3 |r|<0.09 n=242). The third-party prop-correlation values remain withheld as stated.",
    "sourceIds": [
     "S48"
    ],
    "severity": "High",
-   "action": "Owner to decide whether any third-party-derived correlation may be re-admitted. The current rule says no. No official joint sample of this kind exists in the repo yet (n = 0 for market pairs)."
+   "action": "partially closed by official-correlations.html; third-party values stay withheld (F-11)"
   },
   {
    "id": "F20",
@@ -33252,13 +33342,13 @@ window.DATA = {
    "id": "F22",
    "kind": "Partial per-game verification of results",
    "item": "137 results in data/results.tsv used as model inputs",
-   "detail": "Per-game scores were re-read from an official page only for Week 10 (Commanders 24, Giants 21, FINAL). For Weeks 1-9, the 137 results were reconciled in aggregate to the official nfl.com standings (0 mismatches across 32 clubs, from the earlier results check, verify_results.py), but each game row was not re-read from the official week page in this session.",
+   "detail": "Per-game scores were re-read from an official page only for Week 10 (Commanders 24, Giants 21, FINAL). For Weeks 1-9, the 137 results were reconciled in aggregate to the official nfl.com standings (0 mismatches across 32 clubs, from the earlier results check, verify_results.py), but each game row was not re-read from the official week page in this session. RESOLVED 2026-11-14 (session arena-5876146b-fl1): every one of the 137 finals is now verified per-game against the official nfl.com week pages (row-level capture raw/official-finals-2026.tsv; three-way check scripts/verify_feed_m.py 137/137 PASS). The aggregate-only status applied to weeks 1-9 no longer holds.",
    "sourceIds": [
     "S50",
     "S03"
    ],
-   "severity": "Medium",
-   "action": "Re-read the official Week 1-9 pages and compare each game row (a line-by-line check). Until then the per-game status is 'aggregate reconciled'."
+   "severity": "Low",
+   "action": "closed — row-level official capture supersedes aggregate reconciliation"
   },
   {
    "id": "F23",
@@ -33357,11 +33447,68 @@ window.DATA = {
    "id": "F31",
    "kind": "Integration divergence",
    "item": "Two parallel sessions implemented the same eight requirements (R21-R28); both implementations are preserved",
-   "detail": "Session arena/685f958d-fl1 (PRs #22-#32, merged first) and session arena-360ca650-fl1 (this merge) each built a price store, results feed, line model, signal/staking split, availability/replacement tracking, correlation policy and a demotion gate. Nothing was discarded. The divergences are substantive and left for the owner: (1) MARKET-PRICE POLICY - model-lines.html keeps every market/difference cell blank (no official price source), while line-board.html publishes the pinned third-party capture with a THIRD_PARTY badge and a per-row convention note (see Q23); (2) DEMOTION SEMANTICS - the D1-D3 gate (CLV decay, calibration drift, concentration) and the G-14 gate (signal decay, drawdown, CLV rot; 300-bet re-promotion) define different triggers and thresholds (see Q24); (3) duplicate pages: results-feed.html (arena/685f958d) vs verified-results-feed.html (arena/360ca650), line-board.html vs model-lines.html, plus two price stores (data/price_snapshots.tsv vs data/price_snapshots.json). Cross-links connect each pair.",
+   "detail": "Session arena/685f958d-fl1 (PRs #22-#32, merged first) and session arena-360ca650-fl1 (this merge) each built a price store, results feed, line model, signal/staking split, availability/replacement tracking, correlation policy and a demotion gate. Nothing was discarded. The divergences are substantive and left for the owner: (1) MARKET-PRICE POLICY - model-lines.html keeps every market/difference cell blank (no official price source), while line-board.html publishes the pinned third-party capture with a THIRD_PARTY badge and a per-row convention note (see Q23); (2) DEMOTION SEMANTICS - the D1-D3 gate (CLV decay, calibration drift, concentration) and the G-14 gate (signal decay, drawdown, CLV rot; 300-bet re-promotion) define different triggers and thresholds (see Q24); (3) duplicate pages: results-feed.html (arena/685f958d) vs verified-results-feed.html (arena/360ca650), line-board.html vs model-lines.html, plus two price stores (data/price_snapshots.tsv vs data/price_snapshots.json). Cross-links connect each pair. A THIRD parallel implementation (session arena-5876146b-fl1, tasks M1-M8) landed the same eight requirements alongside R21-R28 and the arena/685f958d-fl1 work. Final integration preserved all three: duplicate pages cross-linked (results-feed.html is the merged superset; verified-results-feed.html and the R21-R28 registers stay), and colliding ids were re-issued for the third set: sources S61-S69, flags F32-F36, governance gates G-16/G-17 (renamed from this branch's G-14/G-15 to clear their G-14 in validation_gates.json).",
    "source": "https://github.com/sassnarep3-star/FL1/pull/33",
    "severity": "High",
    "sourceIds": [],
-   "action": "Q29 / SG29: choose the canonical implementation per requirement and archive the other with cross-links; do not delete either."
+   "action": "reconciled at final integration; all three implementations preserved and cross-linked"
+  },
+  {
+   "id": "F32",
+   "kind": "Internal inconsistency",
+   "item": "A leaderboard design note says 'totals-first architecture' while the brief mandates side-first origination",
+   "detail": "data/leaderboard.json division D2 describes 'the primary output of a totals-first architecture'. The brief mandates: originate the side first, then the total, then the moneyline. originations.html publishes the mandated order and this flag records the discrepancy verbatim rather than editing another session's design record. Needs review: align the D2 wording. also registered as F27 (mandated order) by the R21-R28 sprint.",
+   "source": "https://sassnarep3-star.github.io/FL1/originations.html",
+   "severity": "Low",
+   "sourceIds": [],
+   "action": "owner review: reword D2 or restate the origination order there"
+  },
+  {
+   "id": "F33",
+   "kind": "Deliberate blank",
+   "item": "Fair TOTAL line is blank for all 272 markets — the totals model has no fitted parameter",
+   "detail": "Stage S2 (possessions x efficiency) parameters are deliberately unfitted in this repository; the rule is to leave the cell blank rather than invent one. The total market columns (fair | market | difference) are published as structure with the fair and difference cells empty. Filling them requires the official drive/efficiency inputs (GAP-05) and a fitted model. Distinct from F19 (which withholds third-party correlation values). see also F29 (fair-line provenance) and F25.",
+   "source": "https://sassnarep3-star.github.io/FL1/originations.html",
+   "severity": "Medium",
+   "sourceIds": [
+    "S47"
+   ],
+   "action": "fit S2 on officially sourced drive data when acquired (GAP-05)"
+  },
+  {
+   "id": "F34",
+   "kind": "Data provenance",
+   "item": "Market lines in data/fair_lines.csv are third-party (nflverse snapshot) — no official NFL price source exists",
+   "detail": "Every market column (spread, total, moneyline) behind the fair-line comparison comes from data/raw/games.csv (nflverse/nfldata, S47), flagged third-party. The league publishes results and schedules, not betting prices. Difference columns therefore compare the model against a third-party close, not an official one. A licensed/official price feed landing behind the price-snapshot store is the only way past this (Q-02). See also F18 (same gap registered by the price-store session). same gap registered as F23 by the R21-R28 sprint.",
+   "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "severity": "High",
+   "sourceIds": [
+    "S47"
+   ],
+   "action": "acquire authorized price feed (Q-02) and republish differences against it"
+  },
+  {
+   "id": "F35",
+   "kind": "Derived value",
+   "item": "Replacement-depth values are derived (rule published per row), and 6 spots have no listed replacement at all",
+   "detail": "data/replacement_depth.csv derives each replacement from official inputs (Week 10 injury report S01 + club depth charts) using the published rule: first listed player at the same spot whose official game status is not Out; string = published rank. Houston has no machine-readable chart (F16) so no rows exist for it. Six spots show every listed player Out — those replacement cells are blank and flagged, never filled. One NE RB replacement comes from 3rd string with one player Out above him.",
+   "source": "https://www.nfl.com/injuries/",
+   "severity": "Medium",
+   "sourceIds": [
+    "S01",
+    "S08"
+   ],
+   "action": "confirm against official game-day inactives when a machine-readable source exists"
+  },
+  {
+   "id": "F36",
+   "kind": "Dependency note",
+   "item": "requirements.txt declares stdlib-only while scripts/ require pandas, numpy and scipy",
+   "detail": "engine/ and tools/ are standard-library only as documented. scripts/ (strategy_lab.py, fetch_data.py, and session M's builders) require pandas/numpy/scipy — this was already true before this session; the requirements note understates it. Recorded per the repo's own rule that a dependency is a supply-chain decision. Session M added no NEW dependency beyond what scripts/ already used. Scripts-layer parquet support additionally requires pyarrow (pandas read_parquet engine) for scripts/build_prop_correlations_d.py; scripts/fetch_prop_mirror_m.py restores its out-of-repo pinned input (git blob sha adc42c07f2befa3e984a8c123d2861ba9bfb6f1f) in a fresh workspace.",
+   "source": "https://github.com/sassnarep3-star/FL1/blob/main/requirements.txt",
+   "severity": "Low",
+   "sourceIds": [],
+   "action": "amend requirements.txt or add requirements-scripts.txt"
   }
  ]
 };
