@@ -1,0 +1,10 @@
+# Runtime dependencies: none. The engine, the build and the verifier use only the Python
+# standard library (>= 3.9), so the pipeline runs on a bare host and every result here is
+# reproducible without a package index.
+#
+# If a future task needs third-party libraries, record it in COORDINATION.md first:
+# a new dependency is a supply-chain decision, not a pip install.
+#
+# Optional developer conveniences (not required by anything in this repo):
+#   nox>=2024        # to run the same checks CI would run
+#   ruff>=0.6        # style lint; the code is written to pass with defaults

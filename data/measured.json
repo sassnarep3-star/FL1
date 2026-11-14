@@ -1,0 +1,1141 @@
+{
+  "id": "measured",
+  "title": "Measured correlations and market behaviour from in-repo game data",
+  "description": "Computed by engine/measure.py from data/raw/games.csv. Third-party provenance, recorded as such: these are measurements of a dataset, not official market facts. Re-run with `python3 -m engine.measure`.",
+  "updated": "2026-11-14",
+  "editorial": true,
+  "dataset": {
+    "games_used": 7104,
+    "seasons": [
+      1999,
+      2026
+    ],
+    "with_total_and_spread": 7104,
+    "dataset": "nflverse/nfldata games.csv (third-party aggregation of sportsbook closing prices)",
+    "in_repo_path": "data/raw/games.csv",
+    "manifest": "data/raw/MANIFEST.json (records source URL and sha256)",
+    "official": false,
+    "allowed_use": "computed statistics about joint outcomes in this dataset, labelled as such; not a statement about any official market"
+  },
+  "c01_over_versus_home_cover": {
+    "status": "MEASURED",
+    "n": 6813,
+    "p_over": 0.49479,
+    "p_home_covers": 0.48862,
+    "p_both_observed": 0.24351,
+    "p_both_if_independent": 0.24177,
+    "dependence_excess": 0.00174,
+    "rho": 0.00696,
+    "rho_ci95": [
+      -0.03324,
+      0.04831
+    ],
+    "spread_sign_convention": "B",
+    "provenance": {
+      "dataset": "nflverse/nfldata games.csv (third-party aggregation of sportsbook closing prices)",
+      "in_repo_path": "data/raw/games.csv",
+      "manifest": "data/raw/MANIFEST.json (records source URL and sha256)",
+      "official": false,
+      "allowed_use": "computed statistics about joint outcomes in this dataset, labelled as such; not a statement about any official market"
+    }
+  },
+  "c01_under_convention_A": {
+    "status": "MEASURED",
+    "n": 6868,
+    "p_over": 0.49505,
+    "p_home_covers": 0.60032,
+    "p_both_observed": 0.29499,
+    "p_both_if_independent": 0.29719,
+    "dependence_excess": -0.0022,
+    "rho": -0.00897,
+    "rho_ci95": [
+      -0.05253,
+      0.03553
+    ],
+    "spread_sign_convention": "A",
+    "provenance": {
+      "dataset": "nflverse/nfldata games.csv (third-party aggregation of sportsbook closing prices)",
+      "in_repo_path": "data/raw/games.csv",
+      "manifest": "data/raw/MANIFEST.json (records source URL and sha256)",
+      "official": false,
+      "allowed_use": "computed statistics about joint outcomes in this dataset, labelled as such; not a statement about any official market"
+    }
+  },
+  "c01_recent_10_seasons": {
+    "status": "MEASURED",
+    "n": 2434,
+    "p_over": 0.48521,
+    "p_home_covers": 0.4885,
+    "p_both_observed": 0.24158,
+    "p_both_if_independent": 0.23702,
+    "dependence_excess": 0.00455,
+    "rho": 0.01823,
+    "rho_ci95": [
+      -0.04817,
+      0.08789
+    ],
+    "spread_sign_convention": "B",
+    "provenance": {
+      "dataset": "nflverse/nfldata games.csv (third-party aggregation of sportsbook closing prices)",
+      "in_repo_path": "data/raw/games.csv",
+      "manifest": "data/raw/MANIFEST.json (records source URL and sha256)",
+      "official": false,
+      "allowed_use": "computed statistics about joint outcomes in this dataset, labelled as such; not a statement about any official market"
+    }
+  },
+  "parlay_pricing_impact": {
+    "n": 6813,
+    "p_both_observed": 0.24351,
+    "naive_product": 0.24177,
+    "excess": 0.00174,
+    "priced_parlay_n": 4997,
+    "mean_combined_decimal": 3.78535,
+    "break_even_at_that_price": 0.26418,
+    "measured_hit_rate_minus_break_even_pp": -2.0671,
+    "note": "empirical gap between how the pair actually resolves and how the combined price pays, over games where both legs were priced. NOT an edge claim: a book's combined price is not a probability forecast, and no stake was ever placed at it"
+  },
+  "season_stability": [
+    {
+      "season": 2010,
+      "n": 246,
+      "rho": 0.10749,
+      "rho_ci95": [
+        -0.1108,
+        0.34995
+      ],
+      "p_over": 0.56098,
+      "p_home_covers": 0.49593
+    },
+    {
+      "season": 2011,
+      "n": 242,
+      "rho": 0.04132,
+      "rho_ci95": [
+        -0.16362,
+        0.27623
+      ],
+      "p_over": 0.5,
+      "p_home_covers": 0.5
+    },
+    {
+      "season": 2012,
+      "n": 249,
+      "rho": -0.05956,
+      "rho_ci95": [
+        -0.24829,
+        0.16317
+      ],
+      "p_over": 0.50602,
+      "p_home_covers": 0.46586
+    },
+    {
+      "season": 2013,
+      "n": 247,
+      "rho": -0.08803,
+      "rho_ci95": [
+        -0.28988,
+        0.1439
+      ],
+      "p_over": 0.52632,
+      "p_home_covers": 0.52632
+    },
+    {
+      "season": 2014,
+      "n": 248,
+      "rho": 0.07161,
+      "rho_ci95": [
+        -0.12676,
+        0.30106
+      ],
+      "p_over": 0.46371,
+      "p_home_covers": 0.49194
+    },
+    {
+      "season": 2015,
+      "n": 243,
+      "rho": 0.00884,
+      "rho_ci95": [
+        -0.18282,
+        0.23523
+      ],
+      "p_over": 0.47737,
+      "p_home_covers": 0.46091
+    },
+    {
+      "season": 2016,
+      "n": 250,
+      "rho": -0.03116,
+      "rho_ci95": [
+        -0.23065,
+        0.19841
+      ],
+      "p_over": 0.528,
+      "p_home_covers": 0.492
+    },
+    {
+      "season": 2017,
+      "n": 248,
+      "rho": 0.02863,
+      "rho_ci95": [
+        -0.1702,
+        0.25862
+      ],
+      "p_over": 0.45565,
+      "p_home_covers": 0.52419
+    },
+    {
+      "season": 2018,
+      "n": 244,
+      "rho": 0.02224,
+      "rho_ci95": [
+        -0.1717,
+        0.24984
+      ],
+      "p_over": 0.46311,
+      "p_home_covers": 0.48361
+    },
+    {
+      "season": 2019,
+      "n": 245,
+      "rho": 0.05079,
+      "rho_ci95": [
+        -0.14206,
+        0.27798
+      ],
+      "p_over": 0.4898,
+      "p_home_covers": 0.43265
+    },
+    {
+      "season": 2020,
+      "n": 251,
+      "rho": 0.01181,
+      "rho_ci95": [
+        -0.18931,
+        0.242
+      ],
+      "p_over": 0.50598,
+      "p_home_covers": 0.50598
+    },
+    {
+      "season": 2021,
+      "n": 265,
+      "rho": 0.06244,
+      "rho_ci95": [
+        -0.12852,
+        0.28304
+      ],
+      "p_over": 0.46415,
+      "p_home_covers": 0.48679
+    },
+    {
+      "season": 2022,
+      "n": 258,
+      "rho": 0.0296,
+      "rho_ci95": [
+        -0.15957,
+        0.25078
+      ],
+      "p_over": 0.44961,
+      "p_home_covers": 0.49225
+    },
+    {
+      "season": 2023,
+      "n": 256,
+      "rho": 0.0229,
+      "rho_ci95": [
+        -0.16861,
+        0.24592
+      ],
+      "p_over": 0.46094,
+      "p_home_covers": 0.49609
+    },
+    {
+      "season": 2024,
+      "n": 265,
+      "rho": 0.05589,
+      "rho_ci95": [
+        -0.14918,
+        0.2854
+      ],
+      "p_over": 0.53962,
+      "p_home_covers": 0.50566
+    },
+    {
+      "season": 2025,
+      "n": 271,
+      "rho": -0.01832,
+      "rho_ci95": [
+        -0.21123,
+        0.20206
+      ],
+      "p_over": 0.5203,
+      "p_home_covers": 0.49815
+    },
+    {
+      "season": 2026,
+      "n": 131,
+      "rho": -0.17414,
+      "rho_ci95": [
+        -0.39911,
+        0.12559
+      ],
+      "p_over": 0.51145,
+      "p_home_covers": 0.42748
+    }
+  ],
+  "sig01_home_underdog_after_miss": {
+    "status": "MEASURED",
+    "spread_sign_convention": "B",
+    "season_range": [
+      2010,
+      2026
+    ],
+    "n": 1302,
+    "wins": 596,
+    "hit_rate": 0.45776,
+    "wilson_ci95": [
+      0.43086,
+      0.4849
+    ],
+    "pnl_units_at_flat_stakes": -150.411,
+    "roi_per_unit": -0.11552,
+    "most_common_prices": [
+      [
+        -105.0,
+        126
+      ],
+      [
+        -110.0,
+        125
+      ],
+      [
+        -108.0,
+        116
+      ],
+      [
+        -102.0,
+        77
+      ],
+      [
+        -115.0,
+        75
+      ],
+      [
+        -112.0,
+        55
+      ]
+    ],
+    "hurdle_at_-110": 0.52381,
+    "lower_bound_clears_hurdle": false,
+    "caveat": "reproduces a published hypothesis on third-party closing data, not our own model: no injury or availability feature is applied, and 'covered last week' is derived from the same dataset rather than an official roster feed. It shows the pipeline runs on real data. It is not a claim that the strategy is ours, or that it is profitable now."
+  },
+  "sig01_under_convention_A": {
+    "status": "MEASURED",
+    "spread_sign_convention": "A",
+    "season_range": [
+      2010,
+      2026
+    ],
+    "n": 2517,
+    "wins": 1203,
+    "hit_rate": 0.47795,
+    "wilson_ci95": [
+      0.45848,
+      0.49748
+    ],
+    "pnl_units_at_flat_stakes": -189.966,
+    "roi_per_unit": -0.07547,
+    "most_common_prices": [
+      [
+        -110.0,
+        271
+      ],
+      [
+        -105.0,
+        220
+      ],
+      [
+        -108.0,
+        180
+      ],
+      [
+        -102.0,
+        138
+      ],
+      [
+        -115.0,
+        116
+      ],
+      [
+        -104.0,
+        111
+      ]
+    ],
+    "hurdle_at_-110": 0.52381,
+    "lower_bound_clears_hurdle": false,
+    "caveat": "reproduces a published hypothesis on third-party closing data, not our own model: no injury or availability feature is applied, and 'covered last week' is derived from the same dataset rather than an official roster feed. It shows the pipeline runs on real data. It is not a claim that the strategy is ours, or that it is profitable now."
+  },
+  "plausibility_checks": {
+    "convention": {
+      "resolved": "B",
+      "meaning": "spread_line is the AWAY team's line; home covers iff (home-away) - line > 0",
+      "verified_by": "data/verification-d.tsv check V8 (spread direction == moneyline direction, 13/13, against the official Week 10 schedule)",
+      "why_both_are_still_computed": "the file's own documentation is ambiguous about which side the line belongs to; the moneyline cross-check settles it, and publishing the alternative reading is how we show the answer came from a test rather than from a preference"
+    },
+    "resolved_note": "checks are evaluated under the resolved convention (B): spread_line is the AWAY team's line; home covers iff (home-away) - line > 0. Verified by data/verification-d.tsv check V8 (spread direction == moneyline direction, 13/13, against the official Week 10 schedule).",
+    "games_with_spread": 7104,
+    "home_win_rate": 0.55912,
+    "home_cover_rate_measured": 0.48849,
+    "over_rate_measured": 0.49536,
+    "expected_ranges": {
+      "home_win_rate": "~0.52 to ~0.58 historically in the NFL",
+      "home_cover_rate_at_close": "~0.48 to ~0.53; a durable 60% is not a market feature",
+      "over_rate": "~0.49 to ~0.51"
+    },
+    "convention_test": {
+      "A_home_covers_when_margin_plus_line_positive": 0.5859,
+      "B_home_covers_when_margin_minus_line_positive": 0.48849,
+      "A_share_of_games_home_is_favourite": 0.35332,
+      "B_share_of_games_home_is_favourite": 0.64245,
+      "reading": "settled: `spread_line` is the away team's line (verified against moneyline direction in data/verification-d.tsv V8, 13/13), which is reading B — the reading whose plausibility checks pass. Reading A, which the column's own documentation implies, produces a 60% home-cover rate and a 36% home-favourite share, and is published here only as the audit trail of how the question was decided. Spread-derived numbers in this module are therefore computed under B; the remaining caution is provenance, not sign."
+    },
+    "checks": [
+      {
+        "check": "home cover rate within 0.45-0.55",
+        "value": 0.48849,
+        "verdict": "PASS",
+        "consequence": "if it fails, the spread sign convention in this third-party file (or the reading of it) is wrong, and every spread-derived number in this module is internal-only until reconciled against an official source"
+      },
+      {
+        "check": "home win rate within 0.50-0.60",
+        "value": 0.55912,
+        "verdict": "PASS",
+        "consequence": "game outcomes are not sign-derivable, so this isolates whether the anomaly is in the results or in the spread column"
+      },
+      {
+        "check": "over rate within 0.47-0.53",
+        "value": 0.49536,
+        "verdict": "PASS",
+        "consequence": "totals are computed from scores and the total line only, so a pass here while the spread check fails localises the problem to the spread columns"
+      }
+    ],
+    "verdict": "ALL PASS — spread-derived numbers may be published as internal measurements"
+  },
+  "view": {
+    "sections": [
+      {
+        "title": "0. Provenance, stated before any number",
+        "description": "Third-party dataset committed in-repo by a parallel session (checksummed in data/raw/MANIFEST.json). Not an official NFL source, so nothing on this page is promoted into the registers as a published market fact.",
+        "columns": [
+          {
+            "key": "k",
+            "label": "Property"
+          },
+          {
+            "key": "v",
+            "label": "Value"
+          },
+          {
+            "key": "sources",
+            "label": "Source",
+            "render": "srclist"
+          }
+        ],
+        "rows": [
+          {
+            "k": "Dataset",
+            "v": "nflverse/nfldata games.csv (third-party aggregation of sportsbook closing prices)",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "In-repo path",
+            "v": "data/raw/games.csv",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Checksum manifest",
+            "v": "data/raw/MANIFEST.json (records source URL and sha256)",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Games used",
+            "v": "7104",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Seasons covered",
+            "v": "1999–2026",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Games with both a total and a spread",
+            "v": "7104",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Official source?",
+            "v": "No — third-party aggregation of sportsbook closing prices",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Permitted use",
+            "v": "computed statistics about joint outcomes in this dataset, labelled as such; not a statement about any official market",
+            "sources": [
+              "SRC-025"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "1. Plausibility checks the dataset has to pass first",
+        "description": "Run before publishing anything derived from these files, because the first measurement looked wrong in a checkable way. They localise the problem instead of arguing about it.",
+        "columns": [
+          {
+            "key": "check",
+            "label": "Check"
+          },
+          {
+            "key": "value",
+            "label": "Measured",
+            "render": "num"
+          },
+          {
+            "key": "verdict",
+            "label": "Verdict",
+            "render": "badge"
+          },
+          {
+            "key": "consequence",
+            "label": "Consequence if it fails"
+          },
+          {
+            "key": "no_source_reason",
+            "label": "Provenance"
+          },
+          {
+            "key": "sources",
+            "label": "Source",
+            "render": "srclist"
+          }
+        ],
+        "rows": [
+          {
+            "check": "home cover rate within 0.45-0.55",
+            "value": 0.48849,
+            "verdict": "PASS",
+            "consequence": "if it fails, the spread sign convention in this third-party file (or the reading of it) is wrong, and every spread-derived number in this module is internal-only until reconciled against an official source",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "check": "home win rate within 0.50-0.60",
+            "value": 0.55912,
+            "verdict": "PASS",
+            "consequence": "game outcomes are not sign-derivable, so this isolates whether the anomaly is in the results or in the spread column",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "check": "over rate within 0.47-0.53",
+            "value": 0.49536,
+            "verdict": "PASS",
+            "consequence": "totals are computed from scores and the total line only, so a pass here while the spread check fails localises the problem to the spread columns",
+            "sources": [
+              "SRC-025"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "2. Which sign convention the data supports",
+        "description": "The dataset's own documentation implies reading A; its contents behave like reading B. Both are computed and neither is promoted, because picking the flattering one is how a pipeline manufactures a result.",
+        "columns": [
+          {
+            "key": "k",
+            "label": "Test"
+          },
+          {
+            "key": "v",
+            "label": "Value",
+            "render": "num"
+          },
+          {
+            "key": "n",
+            "label": "Reading"
+          },
+          {
+            "key": "no_source_reason",
+            "label": "Provenance"
+          },
+          {
+            "key": "sources",
+            "label": "Source",
+            "render": "srclist"
+          }
+        ],
+        "rows": [
+          {
+            "k": "Home cover rate, reading A (margin + line > 0)",
+            "v": 0.5859,
+            "n": "what the documentation implies — implausibly high",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Home cover rate, reading B (margin − line > 0)",
+            "v": 0.48849,
+            "n": "how the data actually behaves — plausible",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Home is favourite — reading A",
+            "v": 0.35332,
+            "n": "≈36% is not a real NFL frequency",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Home is favourite — reading B",
+            "v": 0.64245,
+            "n": "≈64% is",
+            "sources": [
+              "SRC-025"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3. Pair C-01 measured: over the total versus home covering",
+        "description": "This is the answer to the brief's correlation ask, and the number matters less than what it refutes: at the level of marginal outcomes the two legs are close to independent, so the classic warning about multiplying singles is *not* where the damage is in this pair. The damage is in the price, in section 4.",
+        "columns": [
+          {
+            "key": "label",
+            "label": "Slice"
+          },
+          {
+            "key": "n",
+            "label": "Games",
+            "render": "num"
+          },
+          {
+            "key": "p_over",
+            "label": "P(over)",
+            "render": "num"
+          },
+          {
+            "key": "p_cover",
+            "label": "P(home covers)",
+            "render": "num"
+          },
+          {
+            "key": "p_both",
+            "label": "P(both)",
+            "render": "num"
+          },
+          {
+            "key": "p_independent",
+            "label": "Product of marginals",
+            "render": "num"
+          },
+          {
+            "key": "excess",
+            "label": "Dependence excess",
+            "render": "num"
+          },
+          {
+            "key": "rho",
+            "label": "Measured rho",
+            "render": "num"
+          },
+          {
+            "key": "ci",
+            "label": "95% CI on rho"
+          },
+          {
+            "key": "no_source_reason",
+            "label": "Provenance"
+          },
+          {
+            "key": "sources",
+            "label": "Source",
+            "render": "srclist"
+          }
+        ],
+        "rows": [
+          {
+            "label": "All seasons, resolved convention (B)",
+            "n": 6813,
+            "p_over": 0.49479,
+            "p_cover": 0.48862,
+            "p_both": 0.24351,
+            "p_independent": 0.24177,
+            "excess": 0.00174,
+            "rho": 0.00696,
+            "ci": "[-0.03324, 0.04831]",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "label": "All seasons, documentation's convention (A) — audit trail",
+            "n": 6868,
+            "p_over": 0.49505,
+            "p_cover": 0.60032,
+            "p_both": 0.29499,
+            "p_independent": 0.29719,
+            "excess": -0.0022,
+            "rho": -0.00897,
+            "ci": "[-0.05253, 0.03553]",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "label": "Most recent ten seasons",
+            "n": 2434,
+            "p_over": 0.48521,
+            "p_cover": 0.4885,
+            "p_both": 0.24158,
+            "p_independent": 0.23702,
+            "excess": 0.00455,
+            "rho": 0.01823,
+            "ci": "[-0.04817, 0.08789]",
+            "sources": [
+              "SRC-025"
+            ]
+          }
+        ],
+        "id": "c01"
+      },
+      {
+        "title": "4. What the combined price actually does to the pair (resolved convention)",
+        "description": "Measured on games where both legs had odds in the dataset. The gap below is a property of how parlays are priced against their legs — it is not an edge claim, because a book's price is not a probability forecast and no stake was ever placed at it.",
+        "columns": [
+          {
+            "key": "k",
+            "label": "Quantity"
+          },
+          {
+            "key": "v",
+            "label": "Value",
+            "render": "num"
+          },
+          {
+            "key": "n",
+            "label": "Note"
+          },
+          {
+            "key": "no_source_reason",
+            "label": "Provenance"
+          },
+          {
+            "key": "sources",
+            "label": "Source",
+            "render": "srclist"
+          }
+        ],
+        "rows": [
+          {
+            "k": "Games with both legs priced",
+            "v": 4997,
+            "n": "of 6813 games with a total and a spread",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Observed joint hit rate",
+            "v": 0.24351,
+            "n": "both legs winning",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Naive product of marginals",
+            "v": 0.24177,
+            "n": "what multiplying singles says",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Dependence excess",
+            "v": 0.00174,
+            "n": "observed minus naive — the whole marginal-correlation effect",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Mean combined decimal",
+            "v": 3.78535,
+            "n": "the parlay price implied by the two closing leg prices",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Break-even at that price",
+            "v": 0.26418,
+            "n": "1 / combined decimal",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "k": "Observed minus break-even (pp)",
+            "v": -2.0671,
+            "n": "see the caveat above",
+            "sources": [
+              "SRC-025"
+            ]
+          }
+        ],
+        "id": "price"
+      },
+      {
+        "title": "5. A peer-reviewed hypothesis, run through the real gate pipeline",
+        "description": "SIG-01 (home underdogs after a failed cover) is the one published signal fully computable from in-repo data. It does not survive: the hit rate is far below break-even and the lower bound clears nothing, so gate G-2b rejects it. That is the point of a gate set — a cited, plausible story still fails when the sample is large enough to see through the noise. Which is the difference between removing luck as a slogan and as a rule.",
+        "columns": [
+          {
+            "key": "label",
+            "label": "Sign convention"
+          },
+          {
+            "key": "n",
+            "label": "Bets",
+            "render": "num"
+          },
+          {
+            "key": "hit",
+            "label": "Hit rate",
+            "render": "num"
+          },
+          {
+            "key": "ci",
+            "label": "95% Wilson CI"
+          },
+          {
+            "key": "hurdle",
+            "label": "Break-even",
+            "render": "num"
+          },
+          {
+            "key": "roi",
+            "label": "ROI per unit",
+            "render": "num"
+          },
+          {
+            "key": "pnl",
+            "label": "PnL (units)",
+            "render": "num"
+          },
+          {
+            "key": "clears",
+            "label": "Gate G-2b",
+            "render": "badge"
+          },
+          {
+            "key": "no_source_reason",
+            "label": "Provenance"
+          },
+          {
+            "key": "sources",
+            "label": "Source",
+            "render": "srclist"
+          }
+        ],
+        "rows": [
+          {
+            "label": "Resolved convention (B)",
+            "n": 1302,
+            "hit": 0.45776,
+            "ci": "[0.43086, 0.4849]",
+            "hurdle": 0.52381,
+            "roi": -0.11552,
+            "pnl": -150.411,
+            "clears": "FAILS G-2b",
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "label": "Documentation's convention (A)",
+            "n": 2517,
+            "hit": 0.47795,
+            "ci": "[0.45848, 0.49748]",
+            "hurdle": 0.52381,
+            "roi": -0.07547,
+            "pnl": -189.966,
+            "clears": "FAILS G-2b",
+            "sources": [
+              "SRC-025"
+            ]
+          }
+        ],
+        "id": "sig01"
+      },
+      {
+        "title": "6. Season-by-season stability of the measured rho",
+        "description": "A pooled number hides regime change; per season the estimate is noisy by construction (≈250 games), which is the honest reason the register publishes an interval rather than a point.",
+        "columns": [
+          {
+            "key": "season",
+            "label": "Season",
+            "render": "num"
+          },
+          {
+            "key": "n",
+            "label": "Games",
+            "render": "num"
+          },
+          {
+            "key": "rho",
+            "label": "rho",
+            "render": "num"
+          },
+          {
+            "key": "ci",
+            "label": "95% CI"
+          },
+          {
+            "key": "p_over",
+            "label": "P(over)",
+            "render": "num"
+          },
+          {
+            "key": "p_home_covers",
+            "label": "P(home covers)",
+            "render": "num"
+          },
+          {
+            "key": "no_source_reason",
+            "label": "Provenance"
+          },
+          {
+            "key": "sources",
+            "label": "Source",
+            "render": "srclist"
+          }
+        ],
+        "rows": [
+          {
+            "season": 2010,
+            "n": 246,
+            "rho": 0.10749,
+            "ci": "[-0.1108, 0.34995]",
+            "p_over": 0.56098,
+            "p_home_covers": 0.49593,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2011,
+            "n": 242,
+            "rho": 0.04132,
+            "ci": "[-0.16362, 0.27623]",
+            "p_over": 0.5,
+            "p_home_covers": 0.5,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2012,
+            "n": 249,
+            "rho": -0.05956,
+            "ci": "[-0.24829, 0.16317]",
+            "p_over": 0.50602,
+            "p_home_covers": 0.46586,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2013,
+            "n": 247,
+            "rho": -0.08803,
+            "ci": "[-0.28988, 0.1439]",
+            "p_over": 0.52632,
+            "p_home_covers": 0.52632,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2014,
+            "n": 248,
+            "rho": 0.07161,
+            "ci": "[-0.12676, 0.30106]",
+            "p_over": 0.46371,
+            "p_home_covers": 0.49194,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2015,
+            "n": 243,
+            "rho": 0.00884,
+            "ci": "[-0.18282, 0.23523]",
+            "p_over": 0.47737,
+            "p_home_covers": 0.46091,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2016,
+            "n": 250,
+            "rho": -0.03116,
+            "ci": "[-0.23065, 0.19841]",
+            "p_over": 0.528,
+            "p_home_covers": 0.492,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2017,
+            "n": 248,
+            "rho": 0.02863,
+            "ci": "[-0.1702, 0.25862]",
+            "p_over": 0.45565,
+            "p_home_covers": 0.52419,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2018,
+            "n": 244,
+            "rho": 0.02224,
+            "ci": "[-0.1717, 0.24984]",
+            "p_over": 0.46311,
+            "p_home_covers": 0.48361,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2019,
+            "n": 245,
+            "rho": 0.05079,
+            "ci": "[-0.14206, 0.27798]",
+            "p_over": 0.4898,
+            "p_home_covers": 0.43265,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2020,
+            "n": 251,
+            "rho": 0.01181,
+            "ci": "[-0.18931, 0.242]",
+            "p_over": 0.50598,
+            "p_home_covers": 0.50598,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2021,
+            "n": 265,
+            "rho": 0.06244,
+            "ci": "[-0.12852, 0.28304]",
+            "p_over": 0.46415,
+            "p_home_covers": 0.48679,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2022,
+            "n": 258,
+            "rho": 0.0296,
+            "ci": "[-0.15957, 0.25078]",
+            "p_over": 0.44961,
+            "p_home_covers": 0.49225,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2023,
+            "n": 256,
+            "rho": 0.0229,
+            "ci": "[-0.16861, 0.24592]",
+            "p_over": 0.46094,
+            "p_home_covers": 0.49609,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2024,
+            "n": 265,
+            "rho": 0.05589,
+            "ci": "[-0.14918, 0.2854]",
+            "p_over": 0.53962,
+            "p_home_covers": 0.50566,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2025,
+            "n": 271,
+            "rho": -0.01832,
+            "ci": "[-0.21123, 0.20206]",
+            "p_over": 0.5203,
+            "p_home_covers": 0.49815,
+            "sources": [
+              "SRC-025"
+            ]
+          },
+          {
+            "season": 2026,
+            "n": 131,
+            "rho": -0.17414,
+            "ci": "[-0.39911, 0.12559]",
+            "p_over": 0.51145,
+            "p_home_covers": 0.42748,
+            "sources": [
+              "SRC-025"
+            ]
+          }
+        ],
+        "id": "stab"
+      },
+      {
+        "title": "7. Verdict",
+        "description": "ALL PASS — spread-derived numbers may be published as internal measurements — settled: `spread_line` is the away team's line (verified against moneyline direction in data/verification-d.tsv V8, 13/13), which is reading B — the reading whose plausibility checks pass. Reading A, which the column's own documentation implies, produces a 60% home-cover rate and a 36% home-favourite share, and is published here only as the audit trail of how the question was decided. Spread-derived numbers in this module are therefore computed under B; the remaining caution is provenance, not sign.",
+        "columns": [],
+        "rows": []
+      }
+    ]
+  }
+}

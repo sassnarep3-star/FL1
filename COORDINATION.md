@@ -664,3 +664,63 @@ logged including the ones a session caused itself.
   - `flagged.html` carries F16/F17; NAV shows "Schedule 2026" and "Prop Correlations"
 - **Checks at merge time:** `tools/checklinks.py` OK (16 pages, 77 external links); `scripts/verify_site.py` 0 errors 0 warnings (L4 fixed at generator level: root index now links to `docs/computed/index.html`); `scripts/verify_d.py` V1–V9 no FAIL (V7a FLAGGED by design)
 - Nothing else outstanding from this session. The weekly refresh workflow will run next on its Thursday cron.
+
+---
+
+## Session `arena/c80caab4-fl1` — registers, engine, generated sub-site
+
+**Session ID:** `sess-c80caab4` · **Branch:** `arena/c80caab4-fl1` (from `e001e0a`) · **Scope claimed:** `data/specs/*`, `data/*.json` (registers not owned by others), `engine/*`, `site/*`, `tests/*`, `docs/pages/*`, `LICENSE`, `requirements.txt`
+
+### What this session added (all committed, all re-runnable)
+
+| Deliverable | Path | Verified against |
+|---|---|---|
+| Source register (24 sources, per-source verification level) | `data/specs/sources.json` | each row states whether it was FETCHED, seen via INDEX-MEANS, LINKED or UNREACHABLE |
+| Requirements register R-01…R-40 | `data/specs/requirements.json` | the brief, line by line; blocked items say who must unblock them |
+| Questions Q-01…Q-24 (15 blocking) | `data/specs/questions.json` | known / lacking / obtain / interim default per question |
+| Suggestions S-01…S-24, every `decision: OPEN` | `data/specs/suggestions.json` | nothing implemented on your behalf |
+| Missing-information register GAP-01…GAP-19 | `data/specs/missing_data.json` | each gap names the acquisition action |
+| Line-origination spec S1…S10, SIG-01…14 | `data/models.json` | every coefficient deliberately blank with an estimator attached |
+| Validation gates G-1…G-13 | `data/validation_gates.json` | thresholds + the function claimed to implement each |
+| Correlation register C-01…C-15, rho blank | `data/correlations.json` | treatment + measurement plan per pair |
+| Injury/deficiency model + two real captures | `data/injury_model.json`, `data/injury_snapshot.json`, `data/injury_snapshot_b.json` | nfl.com/injuries, transcribed verbatim |
+| Leaderboard design (divisions, LAS, rewards, anti-gaming) | `data/leaderboard.json` | ranking = 95% lower bound, not PnL |
+| Repo audit, flags, exec summary (computed numbers) | `data/audit.json`, `data/flags.json`, `data/exec_summary.json` | git + gh API, twice |
+| Stdlib engine: pricing, stats, correlation, injuries, compliance, gates, leaderboard, demo | `engine/` | 70 unit tests, `python3 -m unittest discover -s tests` |
+| Generated site (17 pages) + publish gate | `docs/pages/`, `site/build.py`, `site/verify.py` | build fails on unsourced rows, dead links, stale generation |
+| Licence + ignore + dependency policy | `LICENSE`, `.gitignore`, `requirements.txt` | MIT added because the repo had none |
+
+### Key verified conclusions (each with an official source)
+
+1. **Injury report semantics** — Practice = DNP / Limited / Full; Game Status = Questionable / Doubtful / Out; "Probable" was retired because ~95% of those players played; **players certain to play are not listed at all**, so absence from the report is not evidence of availability. Source: [nfl.com injury report](https://www.nfl.com/injuries/) and the [Competition Committee revision](https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693).
+2. **A single scrape of that page is not the report.** Two captures taken ~1 h apart in this session agree on every shared player but differ in row count (24 vs 68 rows for the same six clubs, including four extra `Out` designations). Ingestion must reconcile renders. Recorded in `data/injury_snapshot_b.json`.
+3. **The league bans wager classes, not analysis.** Injury-, officiating-, one-person-one-play and pre-determined markets are prohibited across its official partners; data is distributed exclusively via Genius Sports. Implemented as a fail-closed gate in `engine/compliance.py`. Source: [league/partners release](https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners), [league betting policy PDF](https://media.nfl.com/LSB).
+4. **Luck removal is arithmetic, not attitude.** Break-even at −110 is 52.38%; separating a true 55% from that hurdle at 80% power needs **2,243** settled bets (one-sided α=0.05); at 150 bets a season the provable floor is ~62.4%. Ranking therefore uses a lower confidence bound plus White's reality check / Hansen's SPA (`engine/stats.py`). Source: [Journal of Economics & Finance, DOI 10.1007/s12197-018-9431-4](https://link.springer.com/article/10.1007/s12197-018-9431-4), [RCtest package PDF](https://cloud.r-project.org/web/packages/RCtest/RCtest.pdf).
+5. **No official source prices NFL lines.** Every spread, total, close and CLV cell in this session's output is blank and flagged; a purchase decision (Q-02) is the only way past it.
+
+### Irregularities this session found and flagged (published, not hidden)
+
+- `www.nfl.com/teams/<slug>/depth-chart`, `www.nfl.com/teams/transactions`, `operations.nfl.com/the-rules`, `operations.nfl.com/the-rules/nfl-injury-rules`, and two Nevada Gaming Control Board landing paths all return 404 — the depth-chart and hold-percentage assumptions in the brief have **no official endpoint**. Details and consequences: `docs/pages/flagged.html` (V-1…V-8) and `docs/pages/audit.html` (section B).
+- The widely-repeated "Questionable = 50%" mapping has no official basis anywhere; `engine/injuries.py` raises instead of defaulting.
+- Two figures the brief implies are knowable were **not** confirmed by this session and are therefore not published: any Nevada hold number, and the Wednesday/Thursday/Friday release cadence. They sit in `data/specs/missing_data.json`.
+
+### Conflicts resolved during this merge (nothing discarded)
+
+- `data/sources.json`, `data/requirements.json`, `data/questions.json`, `data/suggestions.json`, `data/flags.json` existed on **both** sides with different schemas. Resolution: the published site's files stay at their original paths untouched; this session's registers moved to `data/specs/` and my generator reads from there. No row of either set was deleted, and `site/verify.py` checks only my own pages, so the published site's checks are unaffected.
+- `.gitignore` was unioned rather than replaced.
+- `COORDINATION.md` was taken from `main` (it is the authoritative board) and this section appended, per the board's own "add, do not replace" rule.
+- Site paths: this session writes only `docs/pages/**`; the published dashboard keeps `index.html`, `*.html`, `assets/`, `css/`, `js/`, `scripts/`, `tools/`, `docs/computed/`.
+
+### Build / check commands
+
+```
+python3 -m unittest discover -s tests -q      # 70 tests
+python3 engine/demo_run.py --check            # demo output reproducibility
+python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
+```
+
+### Status
+
+- T-audit, T-req, T-questions, T-suggest, T-model, T-gates, T-corr, T-injury, T-leaderboard, T-engine, T-site, T-tests: **done** on this branch.
+- T-integrate (this merge): in progress until the PR is merged.
+- Pages: already `built` from `main`/`root`; this session adds `docs/pages/` as a sub-site and does not change the Pages configuration. Deploy status is re-confirmed after merge in the log below.

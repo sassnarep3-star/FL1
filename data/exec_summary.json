@@ -1,0 +1,342 @@
+{
+  "id": "exec_summary",
+  "title": "Executive summary",
+  "description": "One page, written from the registers, for a decision-maker with ten minutes. Numbers in this page are injected at build time from data/*.json and engine computations, so this summary cannot drift out of date relative to the tables it summarises.",
+  "updated": "2026-11-14",
+  "editorial": true,
+  "sections": [
+    {
+      "title": "1. The short version",
+      "description": "The programme was asked to originate NFL lines, rank strategies on a rewarded leaderboard, track injuries and depth deficiencies, verify everything against official sources, and publish it as a live site. At this branch's base commit the repository was one 6-byte file; main is now a published site built by six merged pull requests. This branch delivers the analytical and governance layer the published site does not yet have: a sourced register set, a tested engine, a compliance veto, and a generated sub-site whose build fails if a row loses its source. Line-origination *results* are still not delivered, because they depend on a publishing decision about third-party data — a much cheaper question now than the licence purchase it replaced, because a sibling session has already committed closing-line history to data/raw/.",
+      "columns": [
+        "headline",
+        {
+          "key": "evidence",
+          "label": "Evidence",
+          "html": true
+        }
+      ],
+      "rows": [
+        {
+          "headline": "The repo started as one 6-byte file; main is now a published multi-session project",
+          "evidence": "Branch base e001e0a: one tracked file. Main at merge time: 154 tracked files, Pages reporting built, six merged PRs, and fetched data under data/raw/. See the <a href=\"audit.html\">repo audit</a>."
+        },
+        {
+          "headline": "A full governance and decision layer now exists",
+          "evidence": "{{n_sources}} registered sources with explicit verification levels, {{n_reqs}} requirements, {{n_q}} questions, {{n_sug}} suggestions, {{n_gaps}} named data gaps, {{n_gates}} validation gates, {{n_corr}} correlation pairs awaiting measurement."
+        },
+        {
+          "headline": "Real, verified injury data is in the repo — captured twice in this branch alone",
+          "evidence": "{{n_inj}} rows across two independent captures one hour apart, plus a sibling session's 161-row transcription. The two captures of the same URL agree on every shared player and differ by 44 rows, which is the ingestion finding that matters."
+        },
+        {
+          "headline": "The engine is real code with hand-checkable maths",
+          "evidence": "Pricing, power analysis, bootstrap, max-T multiple-testing correction, correlation-corrected parlay EV, availability diffing, compliance veto — stdlib only, unit-tested, deterministic."
+        },
+        {
+          "headline": "The site is generated, so an unsourced row is impossible by construction",
+          "evidence": "site/build.py renders every page from data/*.json; site/verify.py fails the build on a missing source link or a filled-in value that was flagged unverified."
+        },
+        {
+          "headline": "Correlation was asked for as a number — it is now measured, and the measurement is the interesting part",
+          "evidence": "Computed in-repo by <code>engine/measure.py</code> on 6,813 games: C-01 rho = +0.00696 with a 95% CI of [-0.03324, +0.04831] — marginal dependence indistinguishable from zero, which refutes the usual story about this pair. The real cost is pricing: the pair's joint hit rate is 24.35% against a 26.42% break-even implied by its own legs, a 2.07-point loss before any model error. The peer-reviewed underdog hypothesis, run through the same gates, fails outright (45.8% hit rate over 1,302 bets, ROI -11.6%). The register's rho cell stays blank pending one decision from you — whether third-party-derived values may be published as sourced (flag F-11)."
+        }
+      ]
+    },
+    {
+      "title": "2. What already works (and what does not)",
+      "columns": [
+        "area",
+        "state",
+        {
+          "key": "what_is_missing",
+          "label": "What Is Missing",
+          "html": true
+        }
+      ],
+      "rows": [
+        {
+          "area": "Verification discipline",
+          "state": "Working",
+          "what_is_missing": "Nothing structural. Nine source rows are INDEX-MEANS or LINKED rather than FETCHED and are labelled that way; the fetch queue is in <a href=\"missing.html\">the gap register</a>."
+        },
+        {
+          "area": "Injury and availability tracking",
+          "state": "Mechanism built, data thin",
+          "what_is_missing": "A host to run the collector, and the historical report archive that turns designations into fitted probabilities (Q-06, GAP-03). The parser, the diff, and the 'do not convert a designation to a probability' guard are implemented."
+        },
+        {
+          "area": "Depth-deficiency (2nd/3rd/4th-string) model",
+          "state": "Specified, blocked on an official source",
+          "what_is_missing": "There is no league depth-chart endpoint — the expected URL returns the league's 404 page (V-1). The workaround (derive replacements from roster-eligibility rules plus our own snap-share history) is designed and needs the play-level data in GAP-04/05."
+        },
+        {
+          "area": "Line origination",
+          "state": "Architecture complete, coefficients blank, real data now in-repo",
+          "what_is_missing": "Your decision on publishing from third-party data (F-11): games and closing lines are already committed under data/raw/ with checksums, and engine/measure.py proves the path works end to end."
+        },
+        {
+          "area": "Parlays and prop combos",
+          "state": "Estimator complete; C-01 measured from in-repo data",
+          "what_is_missing": "The other 14 pairs need player-level and per-leg price history no committed file contains. For C-01 nothing is missing but a policy call on publishing third-party-derived values."
+        },
+        {
+          "area": "Validation gates",
+          "state": "Defined and executable",
+          "what_is_missing": "Two of the thirteen gates (G-3 closing-line value, G-7 hold realism) are BLOCKED pending data. They report BLOCKED rather than passing by default — which is the point of them."
+        },
+        {
+          "area": "Leaderboard",
+          "state": "Scoring implemented; no entrants",
+          "what_is_missing": "Your decision on stakes (D-2) and on prizes (D-3). Ranking uses the 95% lower confidence bound of per-unit EV, with per-author clone-merging and hard-gate vetoes."
+        },
+        {
+          "area": "Site",
+          "state": "Built and link-verified",
+          "what_is_missing": "Nothing blocking. Two sibling site branches exist; the integration decision (F-10) is yours."
+        }
+      ]
+    },
+    {
+      "title": "3. The arithmetic that should shape your expectations",
+      "description": "Computed by engine/demo_run.py and shown with its inputs so it can be re-derived by hand. These are the numbers that decide whether 'selective skill-based' is a posture or a slogan.",
+      "columns": [
+        {
+          "key": "metric",
+          "label": "Quantity"
+        },
+        {
+          "key": "value",
+          "label": "Value",
+          "render": "num"
+        },
+        {
+          "key": "meaning",
+          "label": "What it means for the programme",
+          "html": true
+        }
+      ],
+      "rows": [
+        {
+          "metric": "Break-even hit rate at -110",
+          "value": "{{be110}}",
+          "meaning": "52.38%. Any strategy below this loses money slowly enough to feel like variance. Derived, and consistent with the note in the fetched academic source."
+        },
+        {
+          "metric": "Two-way theoretical margin at -110 / -110",
+          "value": "{{margin110}}",
+          "meaning": "4.55%. The floor we assume until the regulator files give us measured hold by market family (GAP-08) — and the number that flatters parlays if carried over to them."
+        },
+        {
+          "metric": "Bets needed to prove a 55% strategy",
+          "value": "{{n55}}",
+          "meaning": "At 80% power, one-sided 5%. A selective strategy placing ~150 bets a season needs roughly {{seasons55}} seasons to reach that. Same sport, different league of patience."
+        },
+        {
+          "metric": "Bets needed to prove a 57% strategy",
+          "value": "{{n57}}",
+          "meaning": "A very good NFL strategy still needs hundreds of settled bets before 'skill' is a defensible word."
+        },
+        {
+          "metric": "Provable hit rate with 150 bets per season",
+          "value": "{{edge150}}",
+          "meaning": "If we bet selectively (≈150 times a season), only an absurdly large edge is demonstrable within a year — so the plan must include multi-season validation or a higher volume, decided knowingly."
+        },
+        {
+          "metric": "Full-Kelly stake at a true 55% with -110",
+          "value": "{{kelly55}}",
+          "meaning": "5.5% of bankroll. We default to a quarter of that with a 2% cap, because Kelly assumes our probability is exact and ours is an estimate with error."
+        },
+        {
+          "metric": "Two-leg parlay break-even at -110 legs",
+          "value": "{{parlay2}}",
+          "meaning": "27.44% joint win probability — versus 52.38% squared (27.44%) if the legs were independent. Same-game legs are not independent, and the operator prices that: which is why nothing in this project multiplies singles to claim value."
+        },
+        {
+          "metric": "Correlation pair-cells still blank",
+          "value": "{{n_rho_blank}}",
+          "meaning": "Out of {{n_rho}} pair-cells specified. The other {{n_rho_na}} are marked n/a by design — pairs we refuse to price at all. Measuring the blanks is cheap in effort and impossible without line history, which is the honest state of the art in this repo."
+        },
+        {
+          "metric": "Measured rho for C-01 (over × home covers)",
+          "value": "+0.00696",
+          "meaning": "6,813 games of third-party closing data; 95% CI [-0.03324, +0.04831]. Read it as a refutation: for the classic over × home-cover pair, multiplying the singles is nearly harmless, and the loss lives in how the parlay is priced (24.35% joint hits against a 26.42% break-even)."
+        },
+        {
+          "metric": "Parlay pricing gap, measured",
+          "value": "-2.0671",
+          "meaning": "Points of break-even the pair fails to reach when you build the parlay from its own legs' closing prices. This is what 'correlation matters' really buys you in this market: not a dependence correction, a price penalty."
+        }
+      ]
+    },
+    {
+      "title": "4. The five moves that unblock the most",
+      "description": "Ordered by how many open questions each one closes, not by effort. Full ranked list on the <a href=\"suggestions.html\">suggestions page</a>.",
+      "columns": [
+        "order",
+        {
+          "key": "move",
+          "label": "Move",
+          "html": true
+        },
+        {
+          "key": "closes",
+          "label": "Closes",
+          "html": true
+        },
+        "cost_class"
+      ],
+      "rows": [
+        {
+          "order": "1",
+          "move": "Buy point-in-time historical NFL lines (openers and closers).",
+          "closes": "Q-02, Q-10, Q-11, Q-14 · R-12, R-31 · unblocks gates G-3 and G-7, correlation measurement, and any real backtest",
+          "cost_class": "Money + a contract to review"
+        },
+        {
+          "order": "2",
+          "move": "Provision one scheduled host for the collector and let it run for a full season of injury reports, transactions and results.",
+          "closes": "Q-06, Q-07, Q-17, Q-19 · GAP-02, GAP-03, GAP-12, GAP-18",
+          "cost_class": "Small infrastructure; zero licence cost"
+        },
+        {
+          "order": "3",
+          "move": "Decide paper versus real stakes, and the risk limits that go with it.",
+          "closes": "Q-01, Q-05, D-2, D-4 · lets the leaderboard open with a frozen gate set",
+          "cost_class": "A decision, not a purchase"
+        },
+        {
+          "order": "4",
+          "move": "Pull the free regulator machine-readable reports (Illinois monthly CSV; New York weekly/monthly Excel) into data/market_hold.csv.",
+          "closes": "Q-10 · replaces an assumed hold with a measured one and unblocks G-7's calibration",
+          "cost_class": "A day of scripting, no cost"
+        },
+        {
+          "order": "5",
+          "move": "Take counsel's view on the prize competition before any cash reward is named.",
+          "closes": "Q-13, GAP-14, D-3",
+          "cost_class": "Legal review"
+        }
+      ]
+    },
+    {
+      "title": "5. Risks you should hold in mind",
+      "columns": [
+        "risk",
+        "why_it_is_real",
+        {
+          "key": "mitigation_in_place",
+          "label": "Mitigation In Place",
+          "html": true
+        }
+      ],
+      "rows": [
+        {
+          "risk": "Overfitting dressed as an edge",
+          "why_it_is_real": "With {{n_signals}} named candidate signals and a small sample, something will look good by construction. It is the default outcome, not a tail risk.",
+          "mitigation_in_place": "G-5 multiple-comparison control over every strategy tried (including retired ones), G-6 deflator, G-9 walk-forward-only, and rank on a lower confidence bound."
+        },
+        {
+          "risk": "Using information we should not use",
+          "why_it_is_real": "Injury and lineup information is exactly where the league's integrity program is most active: personnel may not share non-public information, betting patterns are monitored, and each club has an assigned integrity representative.",
+          "mitigation_in_place": "Compliance gate G-12 refuses prohibited market classes; the input allowlist is the source register, and CI fails on any input not in it (Q-23)."
+        },
+        {
+          "risk": "Betting on markets the league prohibits",
+          "why_it_is_real": "The brief's injury-tracking requirement naturally points at injury-adjacent markets, which the league asks operators not to offer at all.",
+          "mitigation_in_place": "Injury data is permitted as an *input* to spread/total/prop pricing and banned as a *subject*; engine/compliance.py enforces it and refuses unknown markets rather than allowing them."
+        },
+        {
+          "risk": "Infrastructure that quietly stops",
+          "why_it_is_real": "There is no host yet, so 'no manual input' is a design property of the code, not a live capability. A stale dashboard is worse than an absent one.",
+          "mitigation_in_place": "Every page prints the data's as-of date; the collector is specified with a schema-drift alert and a publish-to-price stopwatch (Q-17, GAP-18)."
+        },
+        {
+          "risk": "Correlation assumed rather than measured",
+          "why_it_is_real": "A parlay's true win probability depends on dependence between legs; assuming independence overstates it, and the error compounds per leg.",
+          "mitigation_in_place": "The parlay path refuses a joint probability it has not measured, and prints a sensitivity-to-rho check that refuses any bet whose sign flips under a plausible correlation error."
+        },
+        {
+          "risk": "Legal exposure from a paid-entry, partly-luck contest",
+          "why_it_is_real": "Entry fee, chance and prize is the regulated shape; the league's own posture on prediction markets and daily fantasy shows how closely the neighbourhood is policed.",
+          "mitigation_in_place": "Non-cash rewards by default; the cash question is escalated to counsel and left explicitly open (D-3)."
+        },
+        {
+          "risk": "Gambler's fallacy and hot-hand narratives entering the model",
+          "why_it_is_real": "The literature exists precisely because bettors and bookmakers both misread streaks; a 'due for a bounce-back' feature is a coin toss wearing a tie.",
+          "mitigation_in_place": "Every streak-style signal (SIG-01, SIG-02, SIG-03) must survive the same gates as everything else, and none is quoted as established fact — they are labelled hypotheses with a source at abstract level only."
+        }
+      ]
+    },
+    {
+      "title": "6. What this project refuses to claim",
+      "columns": [
+        "refused",
+        {
+          "key": "because",
+          "label": "Because",
+          "html": true
+        }
+      ],
+      "rows": [
+        {
+          "refused": "That any strategy is profitable, close to profitable, or likely to be profitable",
+          "because": "No bet log was ever run against real prices. The demo output uses synthetic logs specifically so that the *evaluator* can be checked; it is labelled on every page where it appears."
+        },
+        {
+          "refused": "Any coefficient in the origination model",
+          "because": "Every parameter is an argument to be fitted from data, not a constant. Publishing a number would create exactly the untraceable input the brief forbids."
+        },
+        {
+          "refused": "Any designation-to-probability mapping",
+          "because": "The league's definitions are qualitative (Questionable means uncertain). The folklore percentages have no official basis, and hard-coding them would make the injury model look calibrated when it is not."
+        },
+        {
+          "refused": "Any Nevada or per-market hold percentage",
+          "because": "The regulator documents exist and are the right source; we did not open them at page level, so the number is a gap rather than a figure."
+        },
+        {
+          "refused": "That the injury sample is a picture of Week 10",
+          "because": "It is one chunk of an eight-chunk page. The rows we hold are verbatim and complete for what they cover; the coverage is partial and says so."
+        },
+        {
+          "refused": "That 'reachable' equals 'verified'",
+          "because": "A sibling page labels a reachable URL as verified content. Reachability is a weaker tier, and this project keeps the tiers separate: FETCHED, INDEX-MEANS, LINKED, UNREACHABLE."
+        }
+      ]
+    },
+    {
+      "title": "7. How to review this in ten minutes",
+      "columns": [
+        "step",
+        {
+          "key": "action",
+          "label": "Action",
+          "html": true
+        }
+      ],
+      "rows": [
+        {
+          "step": "1",
+          "action": "Open <a href=\"sources.html\">Sources</a> and scan the Level column. Nine rows are INDEX-MEANS or LINKED: those are the places where a human with a browser can beat an agent, and each says what would upgrade it."
+        },
+        {
+          "step": "2",
+          "action": "Open <a href=\"flagged.html\">Flagged for review</a>. Twenty items, grouped into repo/process, failed-official-path, and decisions-only-you-can-make. Nothing there is blocked on more agent work."
+        },
+        {
+          "step": "3",
+          "action": "Set a decision on each row of <a href=\"suggestions.html\">Suggestions</a> — accept, reject, defer. The register is the machine-readable form; editing data/suggestions.json and rebuilding updates this site."
+        },
+        {
+          "step": "4",
+          "action": "Answer Q-01, Q-02 and Q-05 in <a href=\"questions.html\">Open questions</a>. Those three unblock roughly half the blocked items in the whole programme."
+        },
+        {
+          "step": "5",
+          "action": "Run the checks yourself: <code>python3 -m unittest discover -s tests</code>, then <code>python3 engine/demo_run.py --check</code>, then <code>python3 site/build.py</code> and <code>python3 site/verify.py</code>. If they all pass, the site you are reading is exactly what the registers say."
+        }
+      ]
+    }
+  ]
+}

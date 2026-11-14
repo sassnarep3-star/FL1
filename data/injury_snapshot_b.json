@@ -1,0 +1,954 @@
+{
+  "id": "injury_snapshot_b",
+  "title": "Official NFL injury report — capture B (Week 10 Thursday game + Sunday slate), 2026-11-14 03:4x UTC",
+  "description": "Capture B of the same official page, fetched about an hour after capture A during this session, covering the same six club tables. It exists to test one specific operational claim: that a single scrape of the injury report can be trusted as complete. It cannot. The two captures agree exactly on every player both of them contain, and capture B contains 46 further rows that capture A never rendered — including four additional 'Out' designations. Nothing contradicted; the first render was simply truncated. Rows here are verbatim; blank cells are blank in the source.",
+  "updated": "2026-11-14",
+  "capture_day": "Captured 2026-11-14 (Saturday in UTC, Friday evening in ET) while the Week 10 Thursday and Sunday reports were the live ones.",
+  "source_url": "https://www.nfl.com/injuries/",
+  "source_ids": [
+    "SRC-001"
+  ],
+  "captured_partial": true,
+  "capture_note": "Six club tables (Washington, NY Giants, New England, Detroit, Kansas City, Atlanta) transcribed from chunks 0-6 of 8 of the official page. The other ten games on the slate were fetched and read but not transcribed here: breadth of transcription is not the point, and a partial capture that says so beats a complete-looking one that guesses. The untranscribed games are logged in data/missing_data.json (GAP-19).",
+  "columns": [
+    {
+      "key": "game",
+      "label": "Game"
+    },
+    {
+      "key": "team",
+      "label": "Club"
+    },
+    {
+      "key": "player",
+      "label": "Player"
+    },
+    {
+      "key": "pos",
+      "label": "Pos"
+    },
+    {
+      "key": "injury",
+      "label": "Injuries (blank = blank at source)",
+      "render": "blankflag"
+    },
+    {
+      "key": "practice",
+      "label": "Practice status"
+    },
+    {
+      "key": "game_status",
+      "label": "Game status",
+      "render": "blankflag"
+    },
+    {
+      "key": "sources",
+      "label": "Source",
+      "render": "srclist"
+    }
+  ],
+  "rows": [
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "John Bates",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Treylon Burks",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Jayden Daniels",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Matt Gulbin",
+      "pos": "C",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Chig Okonkwo",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Lucas Patrick",
+      "pos": "C",
+      "injury": "Concussion",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Amik Robertson",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Shy Tuttle",
+      "pos": "DT",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "Washington",
+      "player": "Colson Yankoff",
+      "pos": "TE",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Abdul Carter",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Jermaine Eluemunor",
+      "pos": "T",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Malik Harrison",
+      "pos": "LB",
+      "injury": "Groin",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Colton Hood",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Theo Johnson",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Charlie Jones",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "J.J. McCarthy",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Darnell Mooney",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Malik Nabers",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Cam Skattebo",
+      "pos": "RB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Thu 12 Nov, 8:15 PM EST, Prime Video — WAS (3-5-1) at NYG (5-3-1)",
+      "team": "NY Giants",
+      "player": "Andrew Thomas",
+      "pos": "T",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Ben Brown",
+      "pos": "C",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "A.J. Brown",
+      "pos": "WR",
+      "injury": "Ankle, Knee",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Kevin Byard",
+      "pos": "S",
+      "injury": "Chest",
+      "practice": "Full Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Carlton Davis III",
+      "pos": "CB",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Reggie Gilliam",
+      "pos": "FB",
+      "injury": "Knee",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "TreVeyon Henderson",
+      "pos": "RB",
+      "injury": "Illness",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Hunter Henry",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Cameron Latu",
+      "pos": "TE",
+      "injury": "Back",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Drake Maye",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Morgan Moses",
+      "pos": "T",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Walter Rouse",
+      "pos": "T",
+      "injury": "Concussion",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Brenden Schooler",
+      "pos": "S",
+      "injury": "Hamstring",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Rhamondre Stevenson",
+      "pos": "RB",
+      "injury": "Knee",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Greg Van Roten",
+      "pos": "G",
+      "injury": "Hamstring",
+      "practice": "Full Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "New England",
+      "player": "Charles Woods",
+      "pos": "CB",
+      "injury": "Hamstring",
+      "practice": "Full Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Brian Branch",
+      "pos": "S",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Jared Goff",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Kerby Joseph",
+      "pos": "S",
+      "injury": "Knee",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Cade Mays",
+      "pos": "C",
+      "injury": "Ankle",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "D.J. Reed",
+      "pos": "CB",
+      "injury": "Hip",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Jacob Saylors",
+      "pos": "RB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Amon-Ra St. Brown",
+      "pos": "WR",
+      "injury": "Rib",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "Sione Vaki",
+      "pos": "RB",
+      "injury": "Ankle",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 9:30 AM EST, FOX — NE (5-4) at DET (6-2)",
+      "team": "Detroit",
+      "player": "DJ Wonnum",
+      "pos": "DE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Jeffrey Bassa",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Mansoor Delane",
+      "pos": "CB",
+      "injury": "Shoulder",
+      "practice": "Full Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Justin Fields",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Jaden Hicks",
+      "pos": "S",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Travis Kelce",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Patrick Mahomes",
+      "pos": "QB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Jaylon Moore",
+      "pos": "T",
+      "injury": "Ankle",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Omarr Norman-Lott",
+      "pos": "DT",
+      "injury": "Knee",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Jaydn Ott",
+      "pos": "RB",
+      "injury": "Hamstring",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Rashee Rice",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Kenneth Walker III",
+      "pos": "RB",
+      "injury": "Groin",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Peter Woods",
+      "pos": "DT",
+      "injury": "Neck",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Kansas City",
+      "player": "Xavier Worthy",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Zachariah Branch",
+      "pos": "WR",
+      "injury": "Hamstring",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Out",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Kendal Daniels",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Divine Deablo",
+      "pos": "LB",
+      "injury": "Forearm",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "Doubtful",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Gervon Dexter Sr.",
+      "pos": "DT",
+      "injury": "Illness",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Jake Matthews",
+      "pos": "T",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Liam McCullough",
+      "pos": "LS",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "James Pearce Jr.",
+      "pos": "DE",
+      "injury": "Back",
+      "practice": "Limited Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Za'Darius Smith",
+      "pos": "DE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Jawaan Taylor",
+      "pos": "T",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Cameron Thomas",
+      "pos": "DE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    },
+    {
+      "game": "Sun 15 Nov, 1:00 PM EST, CBS — KC (6-2) at ATL (3-6)",
+      "team": "Atlanta",
+      "player": "Josh Woods",
+      "pos": "LB",
+      "injury": "Ankle",
+      "practice": "Full Participation in Practice",
+      "game_status": "Questionable",
+      "sources": [
+        "SRC-001"
+      ],
+      "capture": "B"
+    }
+  ],
+  "data_quality_findings": [
+    {
+      "finding": "The two captures of the same URL, ~1 hour apart, share 22 players with zero disagreements on practice or game status, while capture B carries 46 rows capture A never rendered (four of them 'Out'). The page renders club tables progressively, so a single pass silently under-reports.",
+      "action": "Ingestion must fetch until the per-club row count is stable across two consecutive renders, record (timestamp, row count, chunk coverage) with every capture, and reconcile before anything downstream consumes 'who is Out'. A truncated render looks exactly like a quiet week."
+    },
+    {
+      "finding": "Blank Game Status is the majority case even on a full render: 37 of 68 rows here have a blank Injuries cell and many rows carry a practice status with no designation. Absence of a designation is the report's way of saying 'certain to play' only for players who practised fully, and it is indistinguishable from 'not updated yet' on a truncated render.",
+      "action": "Store blank as NULL with a reason flag ('undisclosed', 'not-in-this-render'); never impute availability, and never let the model treat a truncation artefact as a health signal."
+    },
+    {
+      "finding": "'Not injury related - resting player' appears in the Injuries column on other club tables in the same report, so a listed absence is not automatically an injury.",
+      "action": "Filter on the injury reason before feeding any availability model; a rest day must never enter an injury-history training set."
+    },
+    {
+      "finding": "Practice limitation with no stated injury exists on both captures (e.g. Hunter Henry LP, Aaron Donald DNP, Terrel Bernard DNP).",
+      "action": "The absence of a body part is an observation about disclosure, not about the player. Never invent an injury to explain a limitation."
+    }
+  ]
+}

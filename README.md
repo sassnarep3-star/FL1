@@ -117,3 +117,37 @@ activity in any jurisdiction. No regulator or tax source was verified.
 - **Independent verification (V1–V9)** — recorded in `data/verification-d.tsv` and on the schedule
   page: record reconciliation, deterministic rebuild of the merged computed layer, 18/18 injury
   transcription fidelity, spread-sign convention (13/13 vs moneylines), bye-club completeness.
+
+---
+
+## Session E additions (2026-11-14) — registers, engine, and a measured result
+
+Branch `arena/c80caab4-fl1`, integrated into the published site rather than replacing it. Everything here is
+additive: `data/*.json` registers already on `main` were left byte-for-byte untouched, and this session's
+parallel registers live under `data/specs/`.
+
+- **`docs/pages/`** — 18 pages generated entirely from the registers (`site/build.py`), covering requirements
+  (R-01…R-40), questions (Q-01…Q-24), suggestions (S-01…S-24, all `decision: OPEN`), the line-origination
+  specification, validation gates G-1…G-13, the correlation register, injury/depth modelling, the leaderboard
+  design, the missing-information register (GAP-01…GAP-19), a source register with per-source verification
+  levels, the repo audit, two independent captures of the official injury report, and a flagged-for-review page.
+- **`engine/`** — stdlib-only implementation with 75 tests: pricing and staking, statistics (Wilson intervals,
+  power analysis, bootstrap, max-T multiple-testing control, deflated Sharpe), joint parlay pricing with
+  Frechet-bounded correlation, injury capture reconciliation, a fail-closed compliance gate for the league's
+  prohibited wager classes, the gate evaluator, and sealed-entry leaderboard scoring that ranks on the 95%
+  lower bound of per-unit return.
+- **`data/measured.json` + `docs/pages/measured.html`** — the brief's correlation ask, actually computed:
+  over-the-total versus home-covering has rho **+0.00696** (95% CI [-0.03324, +0.04831], n=6,813) in the
+  in-repo third-party dataset, i.e. marginal dependence indistinguishable from zero. The cost is not
+  correlation, it is price: that pair's joint hit rate is 24.35% against a 26.42% break-even implied by its own
+  legs. The peer-reviewed home-underdog hypothesis, run through the same gates, fails (45.8% over 1,302 bets,
+  ROI -11.6%). The register's `rho` cell stays blank pending one decision: whether third-party-derived values
+  may be published as sourced (flag **F-11**).
+- **Two findings worth reading before trusting any table here.** (1) The official injury report renders a
+  different number of rows per fetch: two captures an hour apart agree on every shared player but differ by 44
+  rows, four of them confirmed `Out` designations — so ingestion reconciles renders instead of trusting one.
+  (2) A plausibility check caught a contested sign convention in the third-party spread column; it was settled
+  by a sibling session's moneyline cross-check (`data/verification-d.tsv` V8), and the wrong reading is
+  published alongside the right one as the audit trail.
+- **Reproduce:** `python3 -m unittest discover -s tests -q` · `python3 engine/demo_run.py --check` ·
+  `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.

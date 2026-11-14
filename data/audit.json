@@ -1,0 +1,311 @@
+{
+  "id": "audit",
+  "title": "Repository audit — line by line",
+  "description": "The brief asked for a review of the repo, verified against official sources, with irregularities flagged and links provided for manual review. There were three lines of content in the repository at the commit this branch started from. This is the audit that review produced, plus the audit of everything the project now contains.",
+  "updated": "2026-11-14",
+  "editorial": true,
+  "sections": [
+    {
+      "title": "A. The repository at this branch's starting point — and what it is now",
+      "description": "Two facts, both verified with git in this workspace. (1) At commit e001e0a, the commit this branch was created from, the repository held exactly one tracked file. (2) By the time this branch was finished, main had been advanced by six merged pull requests from parallel sessions and now carries a published site, generated data files and its own set of registers. This audit reports both, because 'the repo was empty' is true of my base commit and false of main, and a reader needs to know which one a given claim describes.",
+      "columns": [
+        "item",
+        {
+          "key": "finding",
+          "label": "Finding",
+          "html": true
+        },
+        {
+          "key": "evidence",
+          "label": "Evidence",
+          "html": true
+        },
+        {
+          "key": "consequence",
+          "label": "Consequence",
+          "html": true
+        },
+        {
+          "key": "sources",
+          "label": "Official source",
+          "render": "srclist"
+        }
+      ],
+      "rows": [
+        {
+          "item": "Tracked files at branch base (e001e0a)",
+          "finding": "Exactly one: README.md, 6 bytes, contents `# FL1`.",
+          "evidence": "`git ls-tree -r --name-only e001e0a`; byte count via `wc -c`",
+          "consequence": "Nothing pre-existing constrained this session's design; every file under data/specs, engine, site and tests here is new work, not a modification of someone else's."
+        },
+        {
+          "item": "Commit history at branch base",
+          "finding": "One commit, 'Initial commit', 2026-11-14 11:47:48 +0900, author sassnarep3-star.",
+          "evidence": "`git log --format='%H %an %ae %ad %s' e001e0a`",
+          "consequence": "No prior verification trail to inherit or to check against."
+        },
+        {
+          "item": "State of main when this branch was merged forward",
+          "finding": "154 tracked files: a published site at the repo root, `data/` registers and datasets, `scripts/`, `tools/`, `docs/computed/`, `.github/workflows/refresh.yml` and `verify.yml`, an `archive/` tree of superseded site versions, and 152 KB of fetched NFL data (games, closing lines, rosters, injuries) under `data/raw/`.",
+          "evidence": "`git ls-tree -r --name-only origin/main | wc -l`; `git show origin/main:data/raw/MANIFEST.json`",
+          "consequence": "This branch is an *addition* to a working project, not the project itself. Its audit therefore reports what it found and built, and defers to main on anything already published."
+        },
+        {
+          "item": "Licence at branch base",
+          "finding": "Absent. Still absent on main after six merges.",
+          "evidence": "`git ls-tree -r --name-only origin/main | grep -i license` returns nothing",
+          "consequence": "An MIT LICENSE was added on this branch. Since a repo with fetched third-party data and a strategy competition has real reuse and liability questions, the choice deserves an owner decision — see the flagged register."
+        },
+        {
+          "item": "Two register families now coexist",
+          "finding": "main carries `data/{sources,requirements,questions,suggestions,flags}.json` in its own schema (id style `S12`, `R01`, `F01`) feeding the published site; this branch carries the same five names plus eleven more under `data/specs/` (id style `SRC-012`, `R-13`, `F-1`) feeding the generated sub-site.",
+          "evidence": "`git show origin/main:data/requirements.json | head`; this branch's `data/specs/`",
+          "consequence": "Deliberate and reversible: the merge kept main's files byte-for-byte untouched and moved this branch's under `data/specs/` rather than overwriting a published register. The two sets are not yet reconciled; that reconciliation is listed as a decision for you, not something done silently in a merge commit."
+        },
+        {
+          "item": "GitHub Pages",
+          "finding": "Configured and `built`, source `main` path `/`, legacy build, at https://sassnarep3-star.github.io/FL1/",
+          "evidence": "`gh api repos/sassnarep3-star/FL1/pages`",
+          "consequence": "Publication already works; this branch's contribution is a generated sub-site under `docs/pages/` plus the engine and registers, so no Pages configuration change was needed or attempted."
+        },
+        {
+          "item": "Real data now exists in the repo, fetched by another session",
+          "finding": "`data/raw/` holds games.csv (7,548 rows), closing_lines.csv (20,490), rosters.csv (28,617), win_totals.csv, injuries_2025.csv (4,442) with sha256s and a manifest naming nflverse/nfldata as the source and one mirror substitution.",
+          "evidence": "`git show origin/main:data/raw/MANIFEST.json`",
+          "consequence": "This changes what is *possible*: line history and results are now in-repo, so the correlation table and the closing-line gate are no longer blocked on a purchase — they are blocked on a licensing decision about a third-party source, which is a different and smaller question. See GAP-01 and the new flag below."
+        }
+      ]
+    },
+    {
+      "title": "B. Irregularities found while verifying official sources",
+      "description": "These are the findings a reviewer should see first: places where the obvious answer was checked and was not there. Each row is a negative result, deliberately preserved because a project that only records its successes is the one that gets you.",
+      "columns": [
+        "check",
+        "expected",
+        {
+          "key": "actual",
+          "label": "Actual",
+          "html": true
+        },
+        "how_it_was_confirmed",
+        "action_taken",
+        {
+          "key": "sources",
+          "label": "Official source",
+          "render": "srclist"
+        }
+      ],
+      "rows": [
+        {
+          "check": "League depth-chart endpoint",
+          "expected": "https://www.nfl.com/teams/new-england-patriots/depth-chart to serve the club depth chart",
+          "actual": "Returns the league's 404 page ('404 - Flag on the Play')",
+          "how_it_was_confirmed": "Fetched in this session on 2026-11-14; response body is the NFL 404 template",
+          "action_taken": "The deficiency model does not depend on an official depth chart: replacement strength is derived from roster-eligibility rules plus our own snap-share estimate, and the dependency is recorded as gap GAP-06 with both acquisition options.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "League transactions endpoint",
+          "expected": "https://www.nfl.com/teams/transactions to list moves",
+          "actual": "Resolves to the club directory https://www.nfl.com/teams/ (anchor rewritten to /teams, no trailing slash)",
+          "how_it_was_confirmed": "Fetched in this session; the returned document is 'NFL Football Teams - Official Sites of all 32 NFL Teams'",
+          "action_taken": "Transaction-driven roster changes are treated as club-site data; the register records the redirect so a future session does not re-derive it.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "Operations rules index",
+          "expected": "https://operations.nfl.com/the-rules to be the rules index",
+          "actual": "404 page",
+          "how_it_was_confirmed": "Fetched in this session",
+          "action_taken": "Rules citations are built from live navigation (the operations homepage exposes the 2026 rulebook entry point) rather than from remembered paths.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "League injury-rules policy page",
+          "expected": "https://operations.nfl.com/the-rules/nfl-injury-rules/ to publish the injury-report policy",
+          "actual": "404 page",
+          "how_it_was_confirmed": "Fetched in this session",
+          "action_taken": "Definitions are cited from the Competition Committee release, and the operational deadlines are cited as 'observed on the live report page' — with the current policy text recorded as gap GAP-09 rather than paraphrased from memory.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "Nevada regulator revenue-report index",
+          "expected": "Two plausible landing paths on gaming.nv.gov",
+          "actual": "Both returned the host's plain '404 Not Found'",
+          "how_it_was_confirmed": "Both URLs fetched in this session",
+          "action_taken": "No Nevada number is published anywhere in this project. The monthly report is registered as INDEX-MEANS (seen through a search index of the official PDF) and the hold figure is a gap, GAP-08.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "Designation-to-probability mapping",
+          "expected": "A commonly quoted table (Questionable ≈ 50%, Doubtful ≈ 25%)",
+          "actual": "The league's definitions are qualitative; no percentage is attached to Questionable or Doubtful. The one number the official release gives is historical: Probable was retired because ~95% of those players played.",
+          "how_it_was_confirmed": "Competition Committee release read in this session",
+          "action_taken": "No probability constant exists in the engine; asking for one raises NeedsEstimate. This is the most common silent error in this application area and the code refuses it.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "Roster-rules article currency",
+          "expected": "Current-season roster rules",
+          "actual": "The official article that documents IR, PUP, NFI and practice-squad mechanics is written around the 2022 league year (it still discusses suspended COVID protocols and 2022 amendments)",
+          "how_it_was_confirmed": "Fetched and read in this session; the article's own internal dates establish the vintage",
+          "action_taken": "Treated as 'as-described 2022' rather than current law, flagged in the source register, and re-confirmation against the 2026 rulebook is gap GAP-10.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "'Official' NFL betting data",
+          "expected": "A league-published odds feed we could cite for lines",
+          "actual": "The league does not publish betting lines; its official betting data feed is distributed exclusively by one partner under a deal running through the 2029 season",
+          "how_it_was_confirmed": "League press release fetched in this session, corroborated by the distributor's own investor release",
+          "action_taken": "Line data is a purchase decision escalated to you (Q-02, S-01) and every claim that depends on it is marked BLOCKED, not quietly sourced from an unofficial odds aggregator.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "check": "Collision with main's registers",
+          "expected": "Five register filenames unique to this branch",
+          "actual": "main had already published `data/{sources,requirements,questions,suggestions,flags}.json` with a different schema and different id vocabulary",
+          "how_it_was_confirmed": "`git ls-tree -r origin/main`; direct read of both versions during the merge",
+          "action_taken": "Main's files kept byte-for-byte; this branch's moved to `data/specs/` and the generator and verifier repointed to resolve from there first. Nothing deleted, nothing overwritten, and the divergence is flagged for you rather than averaged away."
+        }
+      ]
+    },
+    {
+      "title": "C. Parallel-session coordination",
+      "description": "Six parallel sessions branched from the same commit and each wrote a board claiming everything, because each could see only itself at claim time. Main absorbed five of them through merged pull requests before this branch landed. This is the reconciliation actually performed, with nothing discarded.",
+      "columns": [
+        "branch",
+        "what_it_contains",
+        "content_overlap_with_this_branch",
+        {
+          "key": "resolution",
+          "label": "Resolution",
+          "html": true
+        },
+        {
+          "key": "sources",
+          "label": "Official source",
+          "render": "srclist"
+        }
+      ],
+      "rows": [
+        {
+          "branch": "arena/68fb582e-fl1",
+          "what_it_contains": "COORDINATION.md and README.md (claims to site/, scripts/, .github/).",
+          "content_overlap_with_this_branch": "Scope overlap; no file collisions with this branch.",
+          "resolution": "Its README is on main and was not modified here. Its verification rule matches this branch's; nothing to merge."
+        },
+        {
+          "branch": "arena/a7c0f9c5-fl1",
+          "what_it_contains": "A first site attempt plus depth-chart, leaderboard and five injury/standings CSVs; its independent 161-row transcription of the same Week 10 report.",
+          "content_overlap_with_this_branch": "Overlapping subject (injuries, leaderboard, depth charts) at different paths.",
+          "resolution": "Already merged to main (PR #2) and archived under `archive/v2/`. Main's board records that its 161 rows were cross-checked against a 345-row capture with 156 exact matches. This branch's own injury captures are a third, independent sample of the same file."
+        },
+        {
+          "branch": "arena/89c32e23-fl1",
+          "what_it_contains": "A complete static site (index, executive summary, injuries, strategies, suggestions, flagged review).",
+          "content_overlap_with_this_branch": "Overlapping subject matter; its pages live at the repo root and under `archive/v1/`, this branch's generated pages live under `docs/pages/`.",
+          "resolution": "Merged (PR #1) and archived. Its label of 'Verified (source reachable)' for nfl.com/injuries is a weaker standard than this branch uses; recorded as a flag, not corrected in place."
+        },
+        {
+          "branch": "arena/3f677e8a-fl1, arena/ab82c93f-fl1, arena/34db7d1d-fl1",
+          "what_it_contains": "Depth charts for 31 of 32 clubs, 137 verified game results, a computed sub-site under docs/computed, a prop-correlations page, a weekly refresh workflow.",
+          "content_overlap_with_this_branch": "Substantial overlap on injuries, correlations and validation — solved differently and published first.",
+          "resolution": "Merged before this branch (PRs #13, #14, #16, #17). This branch adds no conflicting root page; its engine and registers sit beside theirs. Where its registers duplicate theirs in name, this branch's copy lives under `data/specs/`."
+        },
+        {
+          "branch": "arena/c80caab4-fl1 (this one)",
+          "what_it_contains": "Registers, a stdlib engine with 70 tests, a compliance veto, a generated 17-page sub-site with a publish gate, two independent injury captures, and the licence.",
+          "content_overlap_with_this_branch": "n/a",
+          "resolution": "Merges origin/main in with `--no-commit`, resolves the five register collisions in main's favour, appends its own section to the authoritative board, and opens one pull request."
+        }
+      ]
+    },
+    {
+      "title": "D. What this branch changed, and how to re-check it",
+      "columns": [
+        "area",
+        {
+          "key": "files",
+          "label": "Files",
+          "html": true
+        },
+        {
+          "key": "review_command",
+          "label": "Review Command",
+          "html": true
+        },
+        {
+          "key": "sources",
+          "label": "Official source",
+          "render": "srclist"
+        }
+      ],
+      "rows": [
+        {
+          "area": "Governance",
+          "files": "COORDINATION.md",
+          "review_command": "git log --oneline; read the board, the flags table and the log",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "area": "Registers (11 files)",
+          "files": "data/*.json",
+          "review_command": "for f in data/*.json; do python3 -c \"import json;json.load(open('$f'))\"; done",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "area": "Engine",
+          "files": "engine/*.py",
+          "review_command": "python3 -m unittest discover -s tests -v",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "area": "Demo output",
+          "files": "data/demo_results.json",
+          "review_command": "python3 engine/demo_run.py --check",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "area": "Site",
+          "files": "docs/pages/**, site/build.py",
+          "review_command": "python3 site/build.py && python3 -m http.server -d . 8000",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "area": "Verification",
+          "files": "site/verify.py",
+          "review_command": "python3 site/verify.py",
+          "sources": [
+            "SRC-024"
+          ]
+        }
+      ]
+    }
+  ]
+}
