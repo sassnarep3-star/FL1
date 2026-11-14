@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NFL Strategies — FL1 NFL Dashboard</title>
+<meta name="description" content="NFL betting strategy framework: line origination, signal generation, single bets/parlays/player props, validation gates, correlation, skill-based leaderboard. Unverified data flagged.">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a href="#content" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand"><div class="mark">FL1</div><div>NFL Decision Support</div></div>
+    <nav class="nav">
+      <a href="index.html">Dashboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="suggestions.html">Suggestions &amp; Review</a>
+      <a href="nfl-strategies.html" class="active">NFL Strategies</a>
+      <a href="injuries.html">Injuries &amp; Deficiencies</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container" id="content">
+  <header class="page-header">
+    <div>
+      <h1>NFL Betting Strategies</h1>
+      <div class="subtitle">Originate NFL lines, generate signals, run single bets / parlays / player-prop combos through validation gates, and rank skill-based strategies on a leaderboard.</div>
+    </div>
+    <a href="index.html" class="btn secondary" style="margin-left:auto;">&larr; Back to Dashboard</a>
+  </header>
+
+  <div class="alert bad">
+    <span class="icon">&#9888;</span>
+    <div>
+      <strong>Betting lines have no official NFL source.</strong> All line, odds, parlay, and player-prop values below are <strong>unverified</strong> until a third-party odds source is added and reviewed (see Suggestions Q-02). Nothing is inferred or filled in.
+    </div>
+  </div>
+
+  <section>
+    <h2>1. Line Origination Approach</h2>
+    <p>The system originates its own NFL lines by comparing an internal win-probability model against the market line. Edge = internal probability &minus; implied market probability. A bet is only signalled when edge exceeds a validation-gate threshold.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Description</th><th>Data required</th><th>Status</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Internal win-probability model</td>
+            <td>Model-based probability for each side of a game.</td>
+            <td>Team stats, injuries, rest, venue, weather</td>
+            <td><span class="status unverified">Unverified — model not built</span></td>
+            <td class="source blank">n/a</td>
+          </tr>
+          <tr>
+            <td>Market line (spread / moneyline / total)</td>
+            <td>Closing or opening line from odds provider.</td>
+            <td>Third-party odds feed</td>
+            <td><span class="status unverified">Unverified — no official NFL source</span></td>
+            <td class="source blank">Third-party only</td>
+          </tr>
+          <tr>
+            <td>Implied probability</td>
+            <td>Derived from market line and vig.</td>
+            <td>Market line</td>
+            <td><span class="status unverified">Unverified</span></td>
+            <td class="source blank">Third-party only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Signal Generation</h2>
+    <p>Signals are generated for single bets, parlays, and player-prop combinations. A signal fires only when the originated edge clears the gate and correlation rules are satisfied.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Signal type</th><th>Legs</th><th>Correlation rule</th><th>Validation required</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Single bet</td>
+            <td>1</td>
+            <td>N/A</td>
+            <td>Edge &ge; gate threshold</td>
+            <td><span class="status unverified">Unverified — gates undefined</span></td>
+          </tr>
+          <tr>
+            <td>Parlay (game sides/totals)</td>
+            <td>2+</td>
+            <td>Leg correlation must be below cap</td>
+            <td>Each leg edge &ge; threshold; combined correlation &le; cap</td>
+            <td><span class="status unverified">Unverified</span></td>
+          </tr>
+          <tr>
+            <td>Player-prop combo</td>
+            <td>2+</td>
+            <td>Prop correlation (e.g., pass yards &amp; receptions) measured</td>
+            <td>Conditional probability P(B\|A) checked; no double-counting</td>
+            <td><span class="status unverified">Unverified</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Validation Gates (each strategy must pass all)</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Minimum sample size</h3>
+        <p>Strategy must be tested over enough games to separate skill from noise.</p>
+        <p class="cite">Value: <span class="blank">blank</span> &middot; <span class="status unverified">unverified</span></p>
+      </div>
+      <div class="card">
+        <h3>Edge vs. closing line</h3>
+        <p>Originated edge must beat the market closing line (beat the close).</p>
+        <p class="cite">Value: <span class="blank">blank</span> &middot; <span class="status unverified">unverified</span></p>
+      </div>
+      <div class="card">
+        <h3>Win-rate / hit-rate threshold</h3>
+        <p>Minimum long-term hit rate required for the bet type and vig.</p>
+        <p class="cite">Value: <span class="blank">blank</span> &middot; <span class="status unverified">unverified</span></p>
+      </div>
+      <div class="card">
+        <h3>Correlation cap</h3>
+        <p>Multi-leg strategies must not double-count correlated outcomes.</p>
+        <p class="cite">Value: <span class="blank">blank</span> &middot; <span class="status unverified">unverified</span></p>
+      </div>
+      <div class="card">
+        <h3>Max drawdown</h3>
+        <p>Maximum acceptable drawdown during out-of-sample testing.</p>
+        <p class="cite">Value: <span class="blank">blank</span> &middot; <span class="status unverified">unverified</span></p>
+      </div>
+      <div class="card">
+        <h3>Out-of-sample test</h3>
+        <p>Strategy must perform on data it was not trained/fit on.</p>
+        <p class="cite">Value: <span class="blank">blank</span> &middot; <span class="status unverified">unverified</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Correlation Determination</h2>
+    <p>Correlation between legs is measured so correlated parlay/prop legs are not treated as independent. Proposed method: Pearson/Spearman correlation on historical outcomes plus conditional probability P(B&#124;A) and variance-inflation checks. Exact method and cap are a reviewer decision (Suggestions Q-04).</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Leg pair</th><th>Correlation value</th><th>Method</th><th>Status</th><th>Source</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Team A win &amp; Team A over total</td>
+            <td class="blank">blank</td>
+            <td>Proposed: Pearson on historical game outcomes</td>
+            <td><span class="status unverified">Unverified</span></td>
+            <td class="source blank">n/a</td>
+          </tr>
+          <tr>
+            <td>Player pass yards &amp; player receptions</td>
+            <td class="blank">blank</td>
+            <td>Proposed: conditional probability P(B&#124;A)</td>
+            <td><span class="status unverified">Unverified</span></td>
+            <td class="source blank">n/a</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Skill-Based Leaderboard (rewards for top strategies)</h2>
+    <p>Strategies are ranked on verified, skill-based performance — not luck. Scoring is a reviewer decision (Suggestions Q-05); proposed metrics: risk-adjusted return, hit rate, edge vs. close, out-of-sample consistency.</p>
+    <div class="table-wrap">
+      <table class="leaderboard">
+        <thead>
+          <tr>
+            <th>Rank</th><th>Strategy</th><th>Type</th><th>Signals</th><th>Win rate</th><th>Edge vs. close</th><th>Gates passed</th><th>Score</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="rank">—</td>
+            <td class="blank">No strategies yet</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td class="blank">—</td>
+            <td><span class="status unverified">Unverified — leaderboard empty</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cite">Rewards are allocated to top-ranked strategies only after each strategy passes all validation gates and performance is verified against a third-party odds source (not an official NFL source).</p>
+  </section>
+
+  <section>
+    <h2>Removing Luck — Skill-Based Filter</h2>
+    <p>To remove luck, a strategy is retained only if: (1) it passes every validation gate, (2) its edge holds out-of-sample, (3) correlation is accounted for, and (4) performance remains above threshold across multiple seasons. Strategies failing any gate are excluded from the leaderboard.</p>
+  </section>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><strong>FL1 — NFL Decision Support &amp; Strategy Dashboard</strong></div>
+    <div class="muted">Betting lines have no official NFL source; all line/odds data is flagged unverified until a third-party source is added.</div>
+    <div class="muted">Branch: arena/89c32e23-fl1 &middot; See <a href="flagged-review.html">Flagged for Review</a> for unverified items.</div>
+  </div>
+</footer>
+
+</body>
+</html>
