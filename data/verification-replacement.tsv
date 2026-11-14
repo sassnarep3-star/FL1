@@ -1,0 +1,11 @@
+date	check	expected	actual	result	sources
+2026-11-14	replacement-depth population equals independent walk of data/depth.tsv + data/injuries.tsv	71	71	PASS	S01;S08;S16-S45
+2026-11-14	same ladder population as the first-string game-status table	identical	identical	PASS	S01;S08;S16-S45
+2026-11-14	depth, first-not-ruled-Out, ruled-Out trail and no-designation depth match cell for cell	0 diffs	0 diffs	PASS	S01;S08;S16-S45
+2026-11-14	by-unit distribution equals a recount of the detail rows	4 rows	4 rows	PASS	S01
+2026-11-14	thin ladders equal an independent recomputation	18	18	PASS	S01;S08;S16-S45
+2026-11-14	every row carries a registered source chip (club chart + official injury report)	0 missing	0 missing	PASS	S01;S08;S16-S45
+2026-11-14	every blank depth cell carries a reason in its title attribute	0 missing	0 missing	PASS	
+2026-11-14	Kansas City flat-capture ladders rebuilt from the club's own string-numbering restarts (depth-kc.tsv has no line column)	documented rule	documented rule	PASS	S08
+2026-11-14	live fetch of the Titans depth chart confirms the capture: no second string at LG (Skoronski) and none on the Cody Barton LB row, which is why those two replacement depths are blank with a reason	chart matches capture	chart matches capture	PASS	S44
+2026-11-14	live fetch of the official Week 10 injury report confirms the game statuses behind the new tables for Barton, Skoronski, Hill, Moore, Woods, Delane, Walker, Branch, Whyle, Wallace, Wayne, Alie-Cox, Benford, Brown and CJ Allen	15 of 15 match	15 of 15 match	PASS	S01

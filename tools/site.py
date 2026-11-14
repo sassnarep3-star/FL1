@@ -525,6 +525,67 @@ for that field — they are not blank because a value was unknown to us.</p>
             raw_src(src_link(r["source"], sources_by_id) + " " + src_link("S01", sources_by_id)),
         ])
 
+    # ------------------------------------------------------ replacement depth
+    # Document arithmetic over the same inputs as the table above: how deep the
+    # club's OWN chart must be read to reach a name the league has not ruled
+    # Out. Recomputed every build from data/depth.tsv + data/injuries.tsv and
+    # re-checked by tools/verify_replacement.py against the rendered HTML.
+    rep = build.replacement_depth(depth_league["rows"])
+    rep_rows = []
+    for r in rep["ladders"]:
+        depth_cell = (cell(r["depthOut"], "n") if r["depthOut"] != "" else
+                      '<td class="blank" title="%s">—</td>' % esc(r["depthOutReason"]))
+        clear_cell = (cell(r["depthClear"], "n") if r["depthClear"] != "" else
+                      '<td class="blank" title="%s">—</td>' % esc(r["depthClearReason"]))
+        rep_rows.append([
+            cell(team_name.get(r["team"], r["team"])),
+            cell(r["unit"]),
+            cell("%s · line %s" % (r["slot"], r["line"])),
+            cell(r["firstString"]),
+            cell(r["ruledOut"]) if r["ruledOut"] else
+            '<td class="blank" title="No charted name on this ladder is ruled Out">—</td>',
+            depth_cell,
+            cell(r["firstNotOut"]) if r["firstNotOut"] else
+            '<td class="blank" title="No charted name on this ladder is available to list">—</td>',
+            clear_cell,
+            cell(r["firstClear"]) if r["firstClear"] else
+            '<td class="blank" title="Every charted name on this ladder carries a game status">—</td>',
+            raw_src(src_link(r["source"], sources_by_id) + " " + src_link("S01", sources_by_id)),
+        ])
+
+    # distribution of replacement depth by unit (Offense / Defense / Special Teams)
+    units = ["Offense", "Defense", "Special Teams"]
+    dist_rows = []
+    for u in units + ["All units"]:
+        sub = [p for p in rep["ladders"] if u == "All units" or p["unit"] == u]
+        d1 = sum(1 for p in sub if p["depthOut"] == 1)
+        d2 = sum(1 for p in sub if p["depthOut"] == 2)
+        d3 = sum(1 for p in sub if p["depthOut"] != "" and p["depthOut"] >= 3)
+        unres = sum(1 for p in sub if p["depthOut"] == "")
+        thin_n = sum(1 for t in rep["thin"] if u == "All units" or t["unit"] == u)
+        dist_rows.append([
+            cell(u),
+            cell(len(sub), "n"),
+            cell(d1, "n"),
+            cell(d2, "n"),
+            cell(d3, "n"),
+            cell(unres, "n"),
+            cell(thin_n, "n"),
+            raw_src(src_link("S01", sources_by_id) +
+                    ' <a class="src" href="sources.html" title="Club depth charts S08 and S16–S45">charts</a>'),
+        ])
+
+    thin_rows = []
+    for r in rep["thin"]:
+        thin_rows.append([
+            cell(team_name.get(r["team"], r["team"])),
+            cell(r["unit"]),
+            cell("%s · line %s" % (r["slot"], r["line"])),
+            cell(r["firstString"]),
+            cell(r["deeperOut"]),
+            raw_src(src_link(r["source"], sources_by_id) + " " + src_link("S01", sources_by_id)),
+        ])
+
     da_rows = []
     for r in depth_league["rows"]:
         status_cells = ([cell_pub(r["practice"]), cell_pub(r["injury"]),
@@ -636,6 +697,49 @@ slot and string number.</p>
 </section>
 
 <section>
+<h2>Replacement depth — how deep past a ruled-Out first string</h2>
+<p>The table above records the <em>fact</em> of a replacement: the first string carries a status and the club
+publishes a next name. This table records the <strong>depth</strong> of that replacement. For every chart ladder
+whose first string carries an official game status (<strong>%(rep_n)d</strong> ladders — the same population as
+the table above), it reports how many strings the club's own chart must be read through before the first name the
+league has <strong>not</strong> ruled Out appears.</p>
+<div class="callout">
+  <p><strong>Definition, fixed before any value was computed.</strong> <em>Replacement depth</em> = the string
+  number of the first charted name on the ladder whose game status is not <em>Out</em>, walking the club's own
+  string order. Depth <strong>1</strong> means at least one name on the first string is not ruled Out — no
+  replacement past the first string is required by the documents (the first string is Questionable or Doubtful,
+  but not ruled Out). Depth <strong>2</strong> means every name on the first string is ruled Out and the second
+  string holds a name that is not — and so on. Strings that are themselves ruled Out are skipped, so a depth is
+  recorded only once a name that is not ruled Out is reached. Where the club publishes no
+  name at an intermediate string, or every charted name on the ladder is ruled Out, the cell is blank and carries
+  the reason in its hover text — never a guessed number.</p>
+  <p><strong>Two depths are shown.</strong> The first counts only <em>Out</em> as a rule-out. The second, stricter
+  one counts any listed game status (Out, Doubtful or Questionable) and therefore reports how deep the chart must
+  be read before a name the league has said nothing about appears. A blank there means every charted name on that
+  ladder carries a status.</p>
+  <p><strong>What this does not say.</strong> It does not say who plays. No snap-count source was verified
+  (<a href="flagged.html#F09">F09</a>), Houston has no machine-readable chart (<a href="flagged.html#F16">F16</a>),
+  and a club's chart is self-described as unofficial. The numbers are arithmetic on two published documents — the
+  club's depth chart and the league's injury report — and nothing more.</p>
+</div>
+%(rep_table)s
+
+<h3>Replacement depth by unit</h3>
+<p>Counts over the %(rep_n)d ladders above. <em>Thin</em> counts ladders whose first string is <strong>not</strong>
+ruled Out while a deeper string already is: there at least one name below the first string is already
+unavailable before it is needed. Every cell is recomputed from the committed inputs on each build and re-checked
+against this page by <code>tools/verify_replacement.py</code>.</p>
+%(dist_table)s
+
+<h3>Deeper strings already ruled out behind an available first string</h3>
+<p><strong>%(thin_n)d</strong> ladders. The first string is not ruled Out, but a deeper string on the same ladder
+already is. The ladder is therefore thinner than its first string alone suggests: should the first-string player
+miss the game, one of the names below him is already unavailable — the depth of the replacement showing up before
+the replacement is required.</p>
+%(thin_table)s
+</section>
+
+<section>
 <h2>Every charted slot, every club</h2>
 <p>%(rows)d published slots across %(covered)d clubs. String 1 = first team. Use the filter box to narrow by club
 or player. Players not on their club&rsquo;s Week 10 injury report are marked <em>not listed</em> — an absence
@@ -700,6 +804,28 @@ source publishes that ordering.</li>
             nu_rows, cls="dense searchable",
             caption="%d of %d charted first-string slots carry an official Week 10 game status. "
                     "Sorted by club." % (tot["startersWithStatus"], tot["starters"])),
+        "rep_n": len(rep["ladders"]),
+        "thin_n": len(rep["thin"]),
+        "rep_table": table(
+            ["Club", "Unit", "Ladder (slot · line)", "First string (status)",
+             "Charted names ruled Out", "Replacement depth",
+             "First name not ruled Out", "Depth to first name with no designation",
+             "First name with no designation", "Sources"],
+            rep_rows, cls="dense searchable",
+            caption="Replacement depth = string number of the first charted name on the ladder whose "
+                    "game status is not Out, in the club's own string order. A blank cell carries the "
+                    "reason in its hover text. Sorted by club, unit, ladder."),
+        "dist_table": table(
+            ["Unit", "Ladders with a status on the first string", "Depth 1",
+             "Depth 2", "Depth 3+", "Depth unresolvable (blank)", "Thin ladders", "Sources"],
+            dist_rows, cls="dense",
+            caption="Recomputed from data/depth.tsv and data/injuries.tsv on every build; "
+                    "Depth 1 = no replacement past the first string required by the documents."),
+        "thin_table": table(
+            ["Club", "Unit", "Ladder (slot · line)", "First string (status)",
+             "Deeper strings ruled Out", "Sources"],
+            thin_rows, cls="dense searchable",
+            caption="First string not ruled Out, deeper string(s) ruled Out on the same ladder."),
         "da_table": table(
             ["Club", "Unit", "Slot", "String", "Player", "Note", "Practice", "Injury",
              "Game status", "Source"],
