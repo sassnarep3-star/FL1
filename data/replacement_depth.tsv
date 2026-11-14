@@ -1,0 +1,53 @@
+team	unit	slot	line	missing_strings	missing_players	replacement	replacement_depth	replacement_game_status	note	source_chart	source_injury
+ARI	Offense	C	1	1	Hjalte Froholdt (1)	Kingsley Eguakun	2	not listed		S16	S01
+ARI	Offense	RG	1	2	Jon Gaines II (2)	Isaiah Adams	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S16	S01
+ATL	Offense	WR	2	2	Zachariah Branch (2)	Olamide Zaccheaus	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S17	S01
+CAR	Defense	LB	2	1	Bobby Okereke (1)	Tyrel Dodson	2	not listed		S20	S01
+CIN	Defense	S	2	2	Kyle Dugger (2)	Jordan Battle	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S22	S01
+CLE	Offense	RB	1	3	Michael Burton (3)	Quinshon Judkins	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S23	S01
+DAL	Defense	OLB	1	1	Donovan Ezeiruaku (1)	James Houston	2	not listed		S24	S01
+DAL	Defense	S	1	1	P.J. Locke (1)	Juanyeh Thomas	2	Doubtful	also uncertain: Juanyeh Thomas (2, Doubtful)	S24	S01
+DAL	Offense	RB	1	2	Tyler Goodson (2)	Javonte Williams	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S24	S01
+DAL	Offense	TE	1	1	Jake Ferguson (1)	Luke Schoonmaker	2	not listed		S24	S01
+DAL	Offense	WR	3	2	Jonathan Mingo (2)	CeeDee Lamb	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S24	S01
+DET	Defense	CB	1	1	D.J. Reed (1)	Rock Ya-Sin	2	not listed		S26	S01
+DET	Offense	C	1	1	Cade Mays (1)	Juice Scruggs	2	not listed		S26	S01
+GB	Offense	C	1	1	Sean Rhyan (1)	Jager Burton	2	not listed		S27	S01
+GB	Offense	RB	1	1	Josh Jacobs (1)	MarShawn Lloyd	2	not listed		S27	S01
+GB	Offense	TE	1	3	Josh Whyle (3)	Tucker Kraft	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S27	S01
+IND	Defense	MLB	1	1	Akeem Davis-Gaither (1)	CJ Allen	2	not listed		S28	S01
+IND	Defense	NT	1	2	Jerry Tillery (2)	Grover Stewart	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S28	S01
+IND	Defense	WLB	1	1	Jaylon Carlies (1)	Bryce Boettcher	2	not listed		S28	S01
+IND	Offense	RT	1	1	Jalen Travis (1)	Luke Tenuta	2	not listed		S28	S01
+IND	Offense	TE	1	2	Mo Alie-Cox (2)	Tyler Warren	1	not listed	contingent: starter healthy; if lost, the next available is string 1 | also uncertain: Will Mallory (4, Questionable)	S28	S01
+JAX	Defense	NT	1	1	Jordan Davis (1)	Davon Godchaux	2	not listed		S29	S01
+KC	Defense	DT	31	2	Peter Woods (2)			no charted player left	every charted string at this slot carries an OUT designation	S08	S01
+KC	Offense	RT	12	1	Jaylon Moore (1)			no charted player left	every charted string at this slot carries an OUT designation	S08	S01
+LAR	Offense	LG	1	1	Steve Avila (1)	Bill Murray	2	not listed		S31	S01
+MIA	Offense	C	1	1	Aaron Brewer (1)	Andrew Meyer	2	not listed		S33	S01
+MIA	Offense	WR	1	2	Jared Wayne (2)	Caleb Douglas	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S33	S01
+MIN	Defense	DL	3	1	Tyrion Ingram-Dawkins (1)	Elijah Williams	2	not listed		S34	S01
+MIN	Defense	LB	1	1	Blake Cashman (1)	Ivan Pace Jr.	2	not listed		S34	S01
+MIN	Offense	QB	1	1	Kyler Murray (1)	Carson Wentz	2	not listed		S34	S01
+MIN	Offense	TE	1	1	T.J. Hockenson (1)	Gavin Bartholomew	2	not listed		S34	S01
+MIN	Offense	WR	3	1	Jauan Jennings (1)	Myles Price	2	not listed		S34	S01
+NE	Defense	CB	1	1	Carlton Davis III (1)	Channing Canada	2	not listed		S35	S01
+NE	Offense	C	1	2	Ben Brown (2)	Jared Wilson	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S35	S01
+NE	Offense	LG	1	1	Ben Brown (1)	Walter Rouse	2	Questionable	also uncertain: Walter Rouse (2, Questionable)	S35	S01
+NE	Offense	RB	1	2	TreVeyon Henderson (2)	Rhamondre Stevenson	1	Questionable	contingent: starter healthy; if lost, the next available is string 1 | also uncertain: Rhamondre Stevenson (1, Questionable)	S35	S01
+NO	Defense	DL	2	2	Christen Miller (2)	Khristian Boyd	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S36	S01
+NO	Offense	C	1	1	Erik McCoy (1)	William Sherman	2	not listed		S36	S01
+NO	Offense	RB	1	3	CJ Donaldson (3)	Alvin Kamara	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S36	S01
+NO	Offense	RT	1	1	Taliese Fuaga (1)	Mason Murphy	2	not listed		S36	S01
+NYJ	Defense	LB	1	2	Trevin Wallace (2)	Jamien Sherwood	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S38	S01
+SEA	Defense	DT	1	1	Leonard Williams (1)	Rylie Mills	2	not listed		S41	S01
+SEA	Offense	LG	1	1	Quenton Nelson (1)	Anthony Bradford	2	not listed		S41	S01
+SEA	Offense	LT	1	1	Charles Cross (1)	Josh Jones	2	not listed		S41	S01
+SEA	Offense	QB	1	1	Sam Darnold (1)	Drew Lock	2	not listed		S41	S01
+SF	Offense	WR	1	1	Mike Evans (1)	Jordan Watkins	2	not listed		S42	S01
+TEN	Defense	LB	1	1	Cody Barton (1)			no charted player left	every charted string at this slot carries an OUT designation	S44	S01
+TEN	Defense	LB	3	1	Anthony Hill Jr. (1)	Dorian Mausi	2	not listed		S44	S01
+TEN	Offense	LG	1	1	Peter Skoronski (1)			no charted player left	every charted string at this slot carries an OUT designation	S44	S01
+TEN	Offense	WR	3	1	Carnell Tate (1)	Elic Ayomanor	2	not listed		S44	S01
+TEN	Special Teams	K	1	2	Tommy Townsend (2)	Joey Slye	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S44	S01
+WAS	Offense	TE	2	2	Colson Yankoff (2)	John Bates	1	not listed	contingent: starter healthy; if lost, the next available is string 1	S45	S01

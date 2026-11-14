@@ -158,5 +158,69 @@
   "status": "done",
   "evidence": "Static dashboard with 11 pages, no build step, every table row linked to a source, and a separate executive summary page.",
   "page": "index.html"
+ },
+ {
+  "id": "R21",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Add a price-snapshot store that records opening and closing numbers for every market we originate",
+  "status": "done",
+  "evidence": "engine/snapshots.py + data/price_snapshots.json: 56 rows (14 games x SIDE/TOTAL/2x MONEYLINE) in mandated order. Closing spread/total sourced from the pinned capture (28/56 cells); every opening cell blank+flagged because no source exists; store validation (price requires provenance+source; OFFICIAL pricing claim rejected) enforced in tests.",
+  "page": "price-snapshots.html"
+ },
+ {
+  "id": "R22",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Add a verified results feed so backtests and ROI can be computed at all",
+  "status": "done",
+  "evidence": "data/results_feed.json: 137 official rows (S52); recomputing all 32 clubs' W/L/T + PF/PA from the feed reproduces data/standings.tsv exactly (checked in the build). engine/backtest.py settles bets only against this feed and reports ROI with a provenance tier.",
+  "page": "verified-results-feed.html"
+ },
+ {
+  "id": "R23",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Originate the side first, then the total, then the moneyline",
+  "status": "done",
+  "evidence": "Order fixed in engine/fairline.py origination_order(), enforced in the snapshot-store sort and the line-board build; the earlier 'totals-first' design note is superseded and preserved in flag F27.",
+  "page": "line-board.html"
+ },
+ {
+  "id": "R24",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
+  "status": "done",
+  "evidence": "data/line_board.json: 42 rows with model_fair_line / market_line / difference as separate columns. Fair computed from official standings+results (HFA -0.022 pts n=137, margin sd 13.225 n=137, published); market from the pinned capture (flag F23); difference = fair - market, blank when either side blank (never zero).",
+  "page": "line-board.html"
+ },
+ {
+  "id": "R25",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Separate 'signal' from 'staking' in the leaderboard so a lucky staking run cannot mask a bad signal",
+  "status": "done",
+  "evidence": "engine/backtest.py split_signal_staking(): signal block is flat-stake only (hit rate vs break-even, Wilson CI, z/p); staking block carries ROI at actual stakes, profit, drawdown. Rank is computed from the signal block only; data/leaderboard_signal_staking.json applies the split to the 16 computed-layer strategies and re-ranks them on signal.",
+  "page": "strategies.html"
+ },
+ {
+  "id": "R26",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+  "status": "done",
+  "evidence": "data/replacement_depth.tsv: 52 affected slots; each row names the missing strings and the NEXT AVAILABLE player's string number (the depth of the replacement), plus contingent depth where the starter is healthy but deeper strings are out. Sources: club depth charts + official injury report S01; no snap-count claims.",
+  "page": "replacement-depth.html"
+ },
+ {
+  "id": "R27",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
+  "status": "done",
+  "evidence": "data/correlations_official.json: 5 rows, every value computed from official captures (S01/S03/S52) and every value publishes n + Fisher-z 95% CI. engine/corr_official.py raises unless every source id is in the official set. Third-party correlation registers (measured.json, prop-correlations-d.csv, correlations.csv) explicitly excluded and listed as excluded.",
+  "page": "correlation-register.html"
+ },
+ {
+  "id": "R28",
+  "section": "Requirements sprint (2026-11-14)",
+  "requirement": "Define a demotion gate that sends a live strategy back to paper",
+  "status": "done",
+  "evidence": "engine/demotion.py: D1 signal decay (window hit rate below break-even, p<0.10), D2 drawdown (25 flat-stake units), D3 CLV rot; any one demotes LIVE->PAPER. Re-promotion needs 300 fresh settled bets passing the G-2b standard. Registered as G-14 in data/validation_gates.json; thresholds are proposed rules (flag F28).",
+  "page": "validation.html"
  }
 ]

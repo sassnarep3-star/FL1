@@ -109,3 +109,48 @@ python3 scripts/fetch_data.py && python3 scripts/build_availability.py \
 
 The last command exits non-zero if any table row lacks a source link, any internal link is broken,
 any gate column is malformed, or any reward is paid to an unapproved strategy.
+
+---
+
+## Requirements sprint — R21–R28 (session `arena-360ca650-fl1`, 2026-11-14)
+
+Eight system requirements were implemented on top of the layers above, each with its engine code,
+tests, data artefact and page:
+
+| # | Requirement | Where it landed | State |
+|---|---|---|---|
+| R21 | Price-snapshot store: opening **and** closing numbers for every market we originate | `engine/snapshots.py`, `data/price_snapshots.json`, `price-snapshots.html` | 56 rows (Week 10 slate, SIDE→TOTAL→MONEYLINE order). 28 closes sourced (third-party capture); **0 opens** — no opening-price source exists, every open cell blank and flagged |
+| R22 | Verified results feed so backtests and ROI can be computed at all | `engine/backtest.py`, `data/results_feed.json`, `results-feed.html` | 137 official rows; recomputing all 32 clubs' records reproduces the official standings exactly |
+| R23 | Originate the side first, then the total, then the moneyline | `engine/fairline.py`, `line-origination.html` | Order fixed in code and enforced in the store; supersedes the earlier "totals-first" note (F27) |
+| R24 | Model fair line, market line, difference as **separate columns** | `data/line_board.json`, `line-board.html` | 42 rows; fair = computed from official numbers with coefficients published (HFA −0.02 pts, n=137; margin sd 13.23, n=137); market = pinned third-party capture (F23); difference blank when either side blank |
+| R25 | Separate **signal** from **staking** in the leaderboard | `engine/backtest.py`, `data/leaderboard_signal_staking.json`, `strategies.html` | Rank computed from the flat-stake signal block only; staking reported beside it and structurally unable to move a rank |
+| R26 | Track the **depth of the replacement**, not just the fact | `data/replacement_depth.tsv`, `replacement-depth.html` | 52 affected slots, each naming the next available player's string (2nd/3rd/4th); contingent depth recorded before it hurts |
+| R27 | Correlations **only** from officially sourced numbers, **n** published with each | `engine/corr_official.py`, `data/correlations_official.json`, `correlation-register.html` | 5 rows (r = 0.88 n=32; −0.16 n=137; 0.43 n=121; blank n=1; −0.09 n=32). Non-official registers excluded by code |
+| R28 | Demotion gate: a live strategy goes back to paper | `engine/demotion.py`, G-14 in `data/validation_gates.json`, `validation.html#G-14` | D1 signal decay / D2 drawdown / D3 CLV rot; re-promotion needs 300 fresh settled bets |
+
+### Decisions only the owner can make (each is a question + options on the site)
+
+1. **Q21/Q22 — price sources.** Opening and moneyline prices have no source at all. Approve a licensed
+   line history (SG21) or start recording opens prospectively (SG20). Until then the cells stay blank.
+2. **Q23 / F-11 — market-price policy.** The brief demands the market column; the verification rule
+   demands blanks for unconfirmed values. Provisional answer: publish with a THIRD_PARTY badge + flag
+   (F23). Strict blanks are one review away.
+3. **Q24/Q25 — competition rules.** Demotion thresholds (F28) and allowed staking plans need a signature.
+4. **F30 (severity High) — computed-layer break-even is circular.** `strategy_lab.py` computes
+   `breakeven_hit = 1/(1+realized ROI)` instead of the price hurdle, which makes its G4 "beats_vig" gate
+   unusable and fails every strategy by construction. Not silently fixed: transcribed with a warning
+   (SG28 is the one-line fix + rebuild).
+
+### Audit trail for the sprint
+
+```
+python3 scripts/build_results_feed.py && python3 scripts/build_price_snapshots.py \
+  && python3 scripts/build_line_board.py && python3 scripts/build_correlations_official.py \
+  && python3 scripts/build_replacement_depth.py && python3 scripts/build_signal_staking.py \
+  && python3 tools/site.py && python3 tools/checklinks.py
+python3 -m unittest discover -s tests -q      # 102 tests, includes the sprint rules
+python3 scripts/verify_site.py                # 0 errors, 0 warnings
+python3 tools/verify_injuries.py && python3 tools/verify_results.py
+```
+
+All of the above pass as of the merge. Verification records: `COORDINATION.md`, `data/verification-d.tsv`.

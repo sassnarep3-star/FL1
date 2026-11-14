@@ -1,0 +1,105 @@
+{
+ "id": "correlations_official",
+ "title": "Correlation register \u2014 officially sourced numbers only",
+ "updated": "2026-11-14",
+ "requirement": "R27",
+ "description": "Every value in this register is computed from rows transcribed from official league sources (S01/S03/S52), and every value publishes its n alongside it. Correlations computed from third-party captures are excluded by rule (engine/corr_official.py refuses non-official source ids) and remain on their own labelled pages.",
+ "excluded_registers": [
+  {
+   "path": "data/measured.json",
+   "why": "computed from the third-party nflverse games capture (S47)"
+  },
+  {
+   "path": "data/prop-correlations-d.csv",
+   "why": "computed from a third-party player_stats mirror (S48, flag F17)"
+  },
+  {
+   "path": "data/correlations.csv",
+   "why": "computed from third-party closing prices; self-labelled unverified"
+  }
+ ],
+ "method": "Pearson r; Fisher-z 95% CI; n published with every value",
+ "rows": [
+  {
+   "id": "C-A1",
+   "label": "Season point differential per game vs win percentage",
+   "x": "(PF-PA)/G",
+   "y": "Win pct",
+   "n": 32,
+   "r": 0.8781,
+   "ci_low": 0.763,
+   "ci_high": 0.9392,
+   "method": "Pearson r over game/team-level rows; Fisher-z 95% CI",
+   "sources": [
+    "S03"
+   ],
+   "inputs": "32 official standing rows (S03); one row per club",
+   "tier": "COMPUTED-FROM-OFFICIAL"
+  },
+  {
+   "id": "C-A2",
+   "label": "Home margin vs game total (blowouts push totals up)",
+   "x": "Home margin",
+   "y": "Game total",
+   "n": 137,
+   "r": -0.1607,
+   "ci_low": -0.3198,
+   "ci_high": 0.0073,
+   "method": "Pearson r over game/team-level rows; Fisher-z 95% CI",
+   "sources": [
+    "S52"
+   ],
+   "inputs": "137 official result rows (S52)",
+   "tier": "COMPUTED-FROM-OFFICIAL"
+  },
+  {
+   "id": "C-A3",
+   "label": "Rest-days asymmetry (home minus away) vs home margin",
+   "x": "Rest edge (days)",
+   "y": "Home margin",
+   "n": 121,
+   "r": 0.4257,
+   "ci_low": 0.2675,
+   "ci_high": 0.5615,
+   "method": "Pearson r over game/team-level rows; Fisher-z 95% CI",
+   "sources": [
+    "S52"
+   ],
+   "inputs": "official result dates (S52); games where either club had no prior game in the feed are excluded, n counts the rest",
+   "tier": "COMPUTED-FROM-OFFICIAL"
+  },
+  {
+   "id": "C-A4",
+   "label": "Availability disadvantage (official report) vs game margin",
+   "x": "avail edge (home)",
+   "y": "Home margin",
+   "n": 1,
+   "r": null,
+   "ci_low": null,
+   "ci_high": null,
+   "method": "Pearson r over game/team-level rows; Fisher-z 95% CI",
+   "sources": [
+    "S01",
+    "S52"
+   ],
+   "inputs": "Only one week of official injury captures exists (Week 10) and only the TNF game is settled with paired inputs \u2014 n=1 cannot support a correlation. Published blank with its n, as the requirement demands, instead of estimated.",
+   "tier": "BLANK"
+  },
+  {
+   "id": "C-A5",
+   "label": "Points for vs points against (schedule-strength probe)",
+   "x": "PF",
+   "y": "PA",
+   "n": 32,
+   "r": -0.0869,
+   "ci_low": -0.4228,
+   "ci_high": 0.27,
+   "method": "Pearson r over game/team-level rows; Fisher-z 95% CI",
+   "sources": [
+    "S03"
+   ],
+   "inputs": "32 official standing rows (S03)",
+   "tier": "COMPUTED-FROM-OFFICIAL"
+  }
+ ]
+}
