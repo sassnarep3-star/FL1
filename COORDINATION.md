@@ -757,3 +757,52 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Verification:** run `python3 -m unittest discover -s tests -q`, `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, and `python3 site/build.py && python3 site/verify.py`. Tests cover open/close persistence, model-version capture, idempotency, and fail-closed validation of missing source / unsupported market and phase.
 - **Sources / irregularities:** no provider was selected and no quote was inserted. NFL official sources do not publish sportsbook prices; price values stay unverified/blank until an authorized source is acquired. The store requires explicit source URL, source record identifier, phase, timestamp and originating model version, and deliberately performs no inference.
 - **Integration record:** PR https://github.com/sassnarep3-star/FL1/pull/22 merged on 2026-11-14T22:06:18Z. CI run 43646254061 passed; GitHub Pages deployment run 43646303860 passed. Pages source remains `main` / `/`.
+
+---
+
+## Session `arena/08fef9e9-fl1` — market-data spine, origination run, and the eight brief items
+
+**Session ID:** `sess-08fef9e9` · **Branch:** `arena/08fef9e9-fl1` (from `main` @ `9d7ca328`) · **Started:** 2026-11-14T22:10Z
+**Role:** this session also acts as **integrator** (checked `gh pr list --state open` → no open PRs; `git ls-remote --heads origin` → every
+other `arena/*` branch already merged or abandoned; `origin/main` == this branch's base). If a new session appears mid-flight it should
+claim from the **Unclaimed** list at the bottom of this section, not from the scopes below.
+
+### Scopes claimed (do not edit these files from another session)
+
+| ID | Task | Status | File scope |
+|---|---|---|---|
+| F01 | Price-snapshot store: opening + closing, every market we originate, append-only, per-feed provenance | in progress | `engine/price_snapshot.py`, `data/market/price_*.tsv`, `data/market/price_manifest.json`, `price-store.html` |
+| F02 | Verified results feed: multi-feed reconciliation + settlement engine so backtests and ROI exist | in progress | `engine/results_feed.py`, `data/market/results_feed.tsv`, `results-feed.html` |
+| F03 | Origination order enforced: side → total → derived moneyline; fair / market / delta as separate columns | in progress | `engine/originate.py`, `data/market/fair_lines.tsv`, `origination.html` |
+| F04 | Leaderboard: signal score and staking score computed and published separately | in progress | `engine/signal_staking.py`, `data/market/leaderboard_split.tsv`, `signal-vs-staking.html` |
+| F05 | Depth of the replacement (levels lost, who fills in, what they bring), not just "X is out" | in progress | `engine/replacement_depth.py`, `data/market/replacement_depth.tsv`, `replacement-depth.html` |
+| F06 | Correlation publication gate: official-sourced inputs only, `n` published with every value | in progress | `engine/correlation_gate.py`, `data/market/correlations_gated.tsv`, `correlation-gate.html` |
+| F07 | Demotion gate: rules that send a live strategy back to paper, with hysteresis | in progress | `engine/demotion.py`, `data/market/demotion_eval.tsv`, `demotion-gate.html` |
+| F08 | Decision desk: suggestions + the questions each one hinges on, reviewable before anything is implemented | in progress | `data/market/decisions.json`, `data/market/questions.json`, `decision-desk.html` |
+| F09 | Site integration: shared nav module, 8 new pages in the root build, README/exec-summary addenda | in progress | `tools/site.py` (**NAV block + import only**), `tools/site_shell.py`, `tools/pages_market.py`, `index.html` (+1 card), `README.md` (append-only), `EXECUTIVE_SUMMARY.md` (append-only) |
+| F10 | Verification pass, flags, tests, PR → main → merge → confirm Pages | in progress | `tests/test_market.py`, `data/flags.json` (append), `data/sources.tsv` (append S50+), `docs/MARKET_SPINE.md`, PR |
+
+**Unclaimed after this session starts (free for another session):** `docs/computed/**`, `archive/**`, `docs/pages/**`,
+`scripts/strategy_lab.py`, `scripts/build_week10_board.py`, `schedule.html`, `standings.html`, `injuries.html`, `depth.html`.
+
+### Upstream verification performed before claiming (no other session's data trusted)
+
+- Re-cloned `nflverse/nfldata` (HEAD `69a1fa550eac8edfb6782cac4f92f2350ddd5b9a`, pushed 2026-11-14T22:05Z) and re-hashed every
+  file the repo carries under `data/raw/`: `closing_lines.csv`, `sc_lines.csv`, `rosters.csv`, `win_totals.csv` are **byte-identical
+  to upstream**; `games.csv` differs from upstream HEAD in **26 fields, all of them moneyline columns of games not yet played**
+  (weeks 10–11 of 2026). Score, spread and total columns are unchanged. Recorded as a price-store drift finding, not as an error.
+- Measured the disagreement between the two feeds that both claim to price the same games: `closing_lines.csv` vs `games.csv`
+  `spread_line` agree on **2,267 / 3,368** game-sides; totals **2,078 / 3,368**; moneyline prices **394 / 3,232**.
+- `data/initial_lines.csv` (the only upstream file that claims to be an **opening** price): 2021 regular season only, one sportsbook
+  (`WSGT`), no odds, undocumented in upstream `DATASETS.md`, added by a single upstream commit dated 2021-05-22 — before the games
+  it contains — and it names the **opposite** favoured team from `games.csv` in **61 of 272** games. Quarantined, not used for ROI.
+
+### Log
+
+| When (UTC) | Entry |
+|---|---|
+| 2026-11-14T22:10Z | Read board. `main` @ `9d7ca328` (PR #21 merge). All prior session boards/records preserved. No open PRs. |
+| 2026-11-14T22:12Z | Upstream re-verification of `data/raw/*` against `nflverse/nfldata` HEAD completed (results above). Baseline checks on this tree: `unittest` 75 OK, `tools/build.py` OK, `tools/site.py` OK (16 pages), `tools/checklinks.py` OK, `tools/verify_injuries.py` 345/345 OK. |
+
+| 2026-11-14T22:14Z | **Conflict, resolved without discarding work.** `git pull --rebase origin main` hit a `COORDINATION.md` conflict: `main` had advanced through PRs #22–#27 while this claim was being written (sessions `4a9893e6`, `f1e4deb7`, `725adbd2` merged, including `d872543` "retain demotion gate in regenerated validation page"). Resolution = take `main`'s board verbatim and re-append this section, per the board's own rule. **Re-scope noted:** `725adbd2` touched the validation-page demotion-gate rendering; this session's F07 therefore ships as a *new* page + engine module and will not edit `validation.html`'s generator output — if `main`'s validation page already carries a demotion gate, both are published and reconciled at integration. |
+| 2026-11-14T22:15Z | `git ls-remote` re-checked: branches `arena/4a9893e6-fl1`, `arena/f1e4deb7-fl1`, `arena/725adbd2-fl1` all merged into `main` at `d495ba8`. No open PRs at claim time. |
