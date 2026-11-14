@@ -1,0 +1,741 @@
+# Official team depth charts, retrieved 2026-11-14 from each club's official site (domains verified via https://www.nfl.com/teams/)
+# Format: TEAM|SIDE|POSITION|P1|P2|P3|P4   (P1=starter/"1st string", P2=2nd string, ...)
+# NOTE: clubs publish these as "unofficial" depth charts; see data/sources.json tier notes.
+BUF|O|WR|DJ Moore|Skyler Bell||
+BUF|O|LT|Dion Dawkins|Jude Bowry||
+BUF|O|LG|Alec Anderson|Austin Corbett||
+BUF|O|C|Connor McGovern|Lloyd Cushenberry||
+BUF|O|RG|O'Cyrus Torrence|Ar'maj Reed-Adams||
+BUF|O|RT|Spencer Brown|Tylan Grable||
+BUF|O|TE|Dalton Kincaid|Dawson Knox|Jackson Hawes|Keleki Latu
+BUF|O|QB|Josh Allen|Kyle Allen||
+BUF|O|RB|James Cook III|Ray Davis|Ty Johnson|
+BUF|O|WR|Khalil Shakir|Greg Dortch||
+BUF|O|WR|Keon Coleman|||
+BUF|D|DL|Ed Oliver|DeWayne Carter||
+BUF|D|DL|Deone Walker|Greg Gaines||
+BUF|D|DL|T.J. Sanders|Landon Jackson||
+BUF|D|OLB|Greg Rousseau|Michael Hoecht|Mike Danna|
+BUF|D|OLB|Bradley Chubb|TJ Parker|Javon Solomon|
+BUF|D|ILB|Dorian Williams|Kaleb Elarms-Orr||
+BUF|D|ILB|Terrel Bernard|Joe Andreessen||
+BUF|D|CB|Christian Benford|Dee Alford||
+BUF|D|CB|Davison Igbinosun|Maxwell Hairston||
+BUF|D|NCB|Dee Alford|Te'Cory Couch||
+BUF|D|S|Damar Hamlin|Sam Franklin Jr.||
+BUF|D|S|Cole Bishop|Jalon Kilgore||
+BUF|S|K|Tyler Bass|||
+MIA|O|WR|Caleb Douglas|Jared Wayne||
+MIA|O|LT|Patrick Paul|Chukwuebuka Godrick||
+MIA|O|LG|Kadyn Proctor|Jarrett Kingston||
+MIA|O|C|Aaron Brewer|Andrew Meyer||
+MIA|O|RG|Jonah Savaiinaea|Caedan Wallace|Christian Haynes|
+MIA|O|RT|Austin Jackson|Caedan Wallace||
+MIA|O|TE|Greg Dulcich|Will Kacmarek|Seydou Traore|Justin Joly
+MIA|O|FB|DJ Herman|||
+MIA|O|RB|Ollie Gordon II|Jaylen Wright|Kaytron Allen|
+MIA|O|QB|Kyle McCord|||
+MIA|O|WR|Malik Washington|Kevin Coleman Jr.||
+MIA|O|WR|Chris Bell|Jalen Tolbert||
+MIA|D|DT|Jordan Phillips|Kenneth Grant||
+MIA|D|DT|Zeek Biggers|||
+MIA|D|EDGE|Chop Robinson|Malik Herring|Rodney McGraw|
+MIA|D|EDGE|Josh Uche|Jamree Kromah||
+MIA|D|ILB|Jordyn Brooks|Jackson Woodard|Shaka Heyward|
+MIA|D|ILB|Jacob Rodriguez|Willie Gay Jr.||
+MIA|D|NB|Chris Johnson|||
+MIA|D|CB|JuJu Brents|Marcellas Dial Jr.||
+MIA|D|CB|Jason Marshall Jr.|Jaylin Simpson||
+MIA|D|S|Michael Taaffe|Zayne Anderson||
+MIA|D|S|Dante Trader Jr.|Kyle Louis|Julius Wood|
+MIA|S|K|||UNVERIFIED_BLANK
+MIA|S|P|Bradley Pinion|||
+NE|O|WR|A.J. Brown|Efton Chism III||
+NE|O|LT|Will Campbell|Dametrious Crownover|Marcus Bryant|
+NE|O|LG|Ben Brown|Walter Rouse||
+NE|O|C|Jared Wilson|Ben Brown||
+NE|O|RG|Matt Pryor|Walter Rouse||
+NE|O|RT|Morgan Moses|Caleb Lomu||
+NE|O|TE|Hunter Henry|Eli Raridon|Cameron Latu|
+NE|O|WR|DeMario Douglas|Kyle Williams||
+NE|O|WR|Efton Chism III|Kyle Williams||
+NE|O|RB|Rhamondre Stevenson|TreVeyon Henderson|Corey Kiner|Lan Larison
+NE|O|QB|Drake Maye|Tommy DeVito|Behren Morton|
+NE|D|OLB|Dre'Mont Jones|Gabe Jacas||
+NE|D|DT|Christian Barmore|Leonard Taylor III||
+NE|D|DT|Cory Durden|DaQuan Jones||
+NE|D|DT|Milton Williams|Joshua Farmer||
+NE|D|OLB|Elijah Ponder|Gabe Jacas||
+NE|D|LB|Robert Spillane|Darius Muasau|Erick Hunter|
+NE|D|LB|Christian Elliss|Namdi Obiazor||
+NE|D|CB|Carlton Davis III|Channing Canada||
+NE|D|S|Craig Woodson|Mike Brown||
+NE|D|S|Kevin Byard III|Jaylen Reed|Brenden Schooler|
+NE|D|CB|Marcus Jones|Charles Woods||
+NE|D|CB|Christian Gonzalez|Karon Prunty||
+NE|S|K|Andy Borregales|||
+NYJ|O|WR|Garrett Wilson|Omar Cooper Jr.|Isaiah Williams|
+NYJ|O|TE|Jeremy Ruckert|Jelani Woods||
+NYJ|O|LT|Olu Fashanu|||
+NYJ|O|LG|Dylan Parham|Jordan Meredith||
+NYJ|O|C|Josh Myers|Jordan Meredith||
+NYJ|O|RG|Joe Tippmann|Kohl Levao||
+NYJ|O|RT|Armand Membou|Chukwuma Okorafor||
+NYJ|O|TE|Mason Taylor|Kenyon Sadiq||
+NYJ|O|WR|Adonai Mitchell|Tim Patrick|Malik McClain|
+NYJ|O|QB|Geno Smith|Cade Klubnik||
+NYJ|O|FB|Andrew Beck|||
+NYJ|O|RB|Breece Hall|Braelon Allen|Isaiah Davis|Kene Nwangwu
+NYJ|D|EDGE|Kingsley Enagbare|Will McDonald IV||
+NYJ|D|DL|Harrison Phillips|Jack Heflin||
+NYJ|D|DL||Jack Heflin||UNVERIFIED_BLANK_STARTER
+NYJ|D|DL|Jowon Briggs|Darrell Jackson Jr.||
+NYJ|D|EDGE|David Bailey|Joseph Ossai|Nate Lynn|
+NYJ|D|LB|Jamien Sherwood|Trevin Wallace||
+NYJ|D|LB|Demario Davis|Jaden Keller||
+NYJ|D|NB|Jarvis Brownlee Jr.|D'Angelo Ponds||
+NYJ|D|CB|Brandon Stephens|Qwan'tez Stiggers||
+NYJ|D|CB|Azareye'h Thomas|Nahshon Wright||
+NYJ|D|S|Minkah Fitzpatrick|Malachi Moore||
+NYJ|D|S|Dane Belton|||
+NYJ|S|K|Jason Sanders|||
+BAL|O|WR|Zay Flowers|Devontez Walker|Elijah Sarratt|
+BAL|O|WR|Rashod Bateman|Ja'Kobi Lane|LaJohntay Wester|
+BAL|O|LT|Ronnie Stanley|Carson Vinson||
+BAL|O|LG|John Simpson|Ryan Neuzil||
+BAL|O|C|Cam Jurgens|Ryan Neuzil||
+BAL|O|RG|Vega Ioane|Emery Jones Jr.||
+BAL|O|RT|Roger Rosengarten|Carson Vinson||
+BAL|O|TE|Mark Andrews|Josh Cuevas||
+BAL|O|TE|Matt Hibner|||
+BAL|O|QB|Jacoby Brissett|Joe Fagnano|Kedon Slovis|
+BAL|O|RB|Derrick Henry|Justice Hill|Rasheen Ali|
+BAL|D|DT|Nnamdi Madubuike|Broderick Washington Jr.||
+BAL|D|NT|Travis Jones|John Jenkins||
+BAL|D|DE|Calais Campbell|Aeneas Peebles||
+BAL|D|RUSH|Trey Hendrickson|Mike Green||
+BAL|D|MLB|Roquan Smith|Jay Higgins IV||
+BAL|D|WLB|Trenton Simpson|Teddye Buchanan||
+BAL|D|SAM|Mike Green|Zion Young|Ethan Burke|
+BAL|D|CB|Marlon Humphrey|Chidobe Awuzie||
+BAL|D|DB|Kyle Hamilton|Keyon Martin|Chandler Rivers|
+BAL|D|SS|Jaylinn Hawkins|Keondre Jackson||
+BAL|D|FS|Malaki Starks|K'Von Wallace||
+BAL|D|CB|Nate Wiggins|T.J. Tampa Jr.||
+BAL|S|K|||UNVERIFIED_BLANK
+BAL|S|P|Ryan Eckley|||
+CIN|O|WR|Ja'Marr Chase|Mitch Tinsley||
+CIN|O|LOT|Orlando Brown Jr.|Javon Foster||
+CIN|O|LG|Dylan Fairchild|Jalen Rivers||
+CIN|O|C|Ted Karras|Connor Lew||
+CIN|O|RG|Dalton Risner|Jacob Bayer||
+CIN|O|ROT|Amarius Mims|Myles Hinton||
+CIN|O|TE|Drew Sample|Mike Gesicki|Jack Endries & Cam Grandy|
+CIN|O|WR|Dohnte Meyers|||
+CIN|O|WR|Tee Higgins|Colbie Young||
+CIN|O|QB|Joe Burrow|Joe Flacco||
+CIN|O|HB|Chase Brown|Samaje Perine|Tahj Brooks|
+CIN|D|LDE|Myles Murphy|Shemar Stewart|Cedric Johnson|
+CIN|D|NT|Dexter Lawrence II|T.J. Slaton Jr.||
+CIN|D|DT|Jonathan Allen|B.J. Hill|Kris Jenkins Jr. & Landon Robinson|
+CIN|D|RDE|Boye Mafe|Cashius Howell||
+CIN|D|LB|Barrett Carter|Joe Giles-Harris|Jack Kiser|
+CIN|D|LB|Demetrius Knight Jr.|Oren Burks||
+CIN|D|NCB|Dax Hill|Josh Newton||
+CIN|D|CB|DJ Ivey|Tacario Davis||
+CIN|D|CB|DJ Turner II|Tacario Davis||
+CIN|D|S|Bryan Cook|PJ Jules||
+CIN|D|S|Jordan Battle|Kyle Dugger|Russ Yeast|
+CIN|S|K|Evan McPherson|||
+KC|O|WR|Rashee Rice|Jalen Royals|Andrew Armstrong|
+KC|O|LT|Kahlil Benson|Diego Pounds||
+KC|O|LG|Kingsley Suamataia|Joshua Ezeudu||
+KC|O|C|Creed Humphrey|Hunter Nourzad||
+KC|O|RG|Trey Smith|Mike Caliendo||
+KC|O|RT|Jaylon Moore|Joshua Ezeudu||
+KC|O|TE|Travis Kelce|Noah Gray|Jared Wiley|Jake Briningstool
+KC|O|QB|Patrick Mahomes|Justin Fields|Garrett Nussmeier|
+KC|O|RB|Kenneth Walker|Emmett Johnson|Jaydn Ott|
+KC|O|FB|Ben VanSumeren|||
+KC|O|WR|Xavier Worthy|Cyrus Allen|Josh Downs|
+KC|D|DE|Felix Anudike-Uzomah|Ashton Gillotte||
+KC|D|DT|Chris Jones|Peter Woods|Marcus Harris|
+KC|D|DT|Khyiris Tonga|Bryson Eason||
+KC|D|DE|George Karlaftis|R Mason Thomas||
+KC|D|LB|Jack Cochrane|Cooper McDonald||
+KC|D|LB|Nick Bolton|Jack Cochrane||
+KC|D|LB|Drue Tranquill|Jeffrey Bassa||
+KC|D|CB|Nohl Williams|Jadon Canady||
+KC|D|CB|Mansoor Delane|Kristian Fulton|Melvin Smith|
+KC|D|S|Alohi Gilman|Chris Roland-Wallace||
+KC|D|S|Chamarri Conner|Jaden Hicks|Xavier Nwankpa|
+KC|S|K|Harrison Butker|||
+CLE|O|WR|Jerry Jeudy|Tylan Wallace||
+CLE|O|LT|Spencer Fano|||
+CLE|O|LG|Zion Johnson|Zak Zinter||
+CLE|O|C|Elgton Jenkins|Luke Wypler|Parker Brailsford|
+CLE|O|RG|Austin Barber|||
+CLE|O|RT|Tytus Howard|Dawand Jones||
+CLE|O|WR|Denzel Boston|Malachi Corley||
+CLE|O|QB|Deshaun Watson|Shedeur Sanders|Dillon Gabriel|Taylen Green
+CLE|O|RB|Quinshon Judkins|Dylan Sampson|Michael Burton|Jaleel McLaughlin
+CLE|O|TE|Harold Fannin Jr.|Blake Whiteheart||
+CLE|O|WR|KC Concepcion Jr.|Isaiah Bond||
+CLE|D|LDE|Jared Verse|Sam Williams||
+CLE|D|LDT|Maliek Collins|Mike Hall Jr.|Sam Kamara|
+CLE|D|RDT|Mason Graham|Adin Huntington||
+CLE|D|RDE|Isaiah McGuire|Derek Barnett||
+CLE|D|WILL|Carson Schwesinger|||
+CLE|D|MIKE|Quincy Williams|Justin Jefferson||
+CLE|D|SAM|Easton Mascarenas-Arnold|Winston Reid||
+CLE|D|CB|Tyson Campbell|Myles Harden|Noah Igbinoghene|
+CLE|D|CB|Denzel Ward|Mekhi Blackmon|Toriano Pride Jr.|
+CLE|D|SS|Grant Delpit|Emmanuel McNeil-Warren|Daniel Thomas|
+CLE|D|FS|Ronnie Hickman|Donovan McMillon||
+CLE|S|K|Andre Szmyt|||
+PIT|O|WR|DK Metcalf|Kaden Wetjen||
+PIT|O|LT|Troy Fautanu|||
+PIT|O|LG|Mason McCormick|||
+PIT|O|C|Zach Frazier|Ryan McCollum||
+PIT|O|RG|Brock Hoffman|Spencer Anderson||
+PIT|O|RT|Max Iheanachor|Dylan Cook||
+PIT|O|TE|Pat Freiermuth & Darnell Washington|Robert Tonyan||
+PIT|O|WR|Ben Skowronek|Brandon Smith||
+PIT|O|WR|Germie Bernard|||
+PIT|O|QB|Aaron Rodgers|Mason Rudolph|Will Howard|Drew Allar
+PIT|O|RB|Jaylen Warren|Rico Dowdle|Eli Heidenreich|Travis Homer|Lew Nichols
+PIT|O|FB|Riley Nowakowski|||
+PIT|D|DE|Keeanu Benton|Gabriel Rubio|Kevin Jobity Jr.|
+PIT|D|NT|Yahya Black|||
+PIT|D|DT|Cameron Heyward|||
+PIT|D|LOLB|T.J. Watt|||
+PIT|D|LILB|Patrick Queen|Carson Bruener||
+PIT|D|RILB|Payton Wilson|Cole Holcomb||
+PIT|D|ROLB|Alex Highsmith|Jack Sawyer||
+PIT|D|OLB|Nick Herbig|||
+PIT|D|CB|Asante Samuel Jr.|Sean Murphy-Bunting|Doneiko Slaughter|
+PIT|D|NCB|Jalen Ramsey|Brandin Echols||
+PIT|D|CB|Jamel Dean|Daylen Everette|Terell Smith|
+PIT|D|S|Jaquan Brisker|DeShon Elliott|Robert Spears-Jennings|
+PIT|S|K|Chris Boswell|||
+IND|O|WR|Laquon Treadwell|Nick Westbrook-Ikhine||
+IND|O|LT|Bernhard Raimann|Charlie Heck||
+IND|O|LG|Jalen Farmer|Dalton Tucker||
+IND|O|C|Tanor Bortolini|Sedrick Van Pran-Granger||
+IND|O|RG|Matt Goncalves|||
+IND|O|RT|Jalen Travis|Luke Tenuta||
+IND|O|TE|Tyler Warren|Mo Alie-Cox|Drew Ogletree|Will Mallory & Pharaoh Brown
+IND|O|WR|Anthony Gould|||
+IND|O|WR|Ashton Dulin|Deion Burks||
+IND|O|QB|Daniel Jones|Anthony Richardson Sr.|Riley Leonard|
+IND|O|RB|Jonathan Taylor|Seth McGowan|DJ Giddens|
+IND|D|DE|Jaylahn Tuimoloau|George Gumbs Jr.||
+IND|D|DT|Adetomiwa Adebawore|Kevin Givens||
+IND|D|NT|Grover Stewart|Jerry Tillery|Tim Smith|
+IND|D|DE|Laiatu Latu|Caden Curry||
+IND|D|WLB|Jaylon Carlies|Bryce Boettcher|Tahj Chambers|
+IND|D|MLB|Akeem Davis-Gaither|CJ Allen|Austin Ajiake|
+IND|D|CB|Charvarius Ward|Kenneth Harris||
+IND|D|FS|Cam Bynum|Jonathan Owens||
+IND|D|SS|AJ Haulcy|Hunter Wohler||
+IND|D|N|Justin Walley|Kapena Gushiken||
+IND|D|CB|Sauce Gardner|||
+IND|S|K|Spencer Shrader|||
+JAX|O|WR|Parker Washington|Josh Cameron||
+JAX|O|RT|Cole Van Lanen|||
+JAX|O|RG|Ezra Cleveland|Wyatt Milum||
+JAX|O|C|Robert Hainsey|Jonah Monheim||
+JAX|O|LG|Emmanuel Pregnon|Daniel Faalele||
+JAX|O|LT|Walker Little|||
+JAX|O|TE|Brenton Strange|Nate Boerkircher|Quintin Morris|Tanner Koziol
+JAX|O|QB|Trevor Lawrence|Quinn Ewers||
+JAX|O|RB|Bhayshul Tuten & Chris Rodriguez Jr.|LeQuint Allen Jr.|Ameer Abdullah|
+JAX|O|WR|Brian Thomas Jr.|Travis Hunter||
+JAX|O|WR|Jakobi Meyers|CJ Williams||
+JAX|D|NT|Jordan Davis|Davon Godchaux|Matt Dickerson|
+JAX|D|DT|Arik Armstead|Ruke Orhorhoro|Albert Regis|
+JAX|D|DE|Josh Hines-Allen|Bryan Thomas Jr.||
+JAX|D|DE|Travon Walker|Danny Striggow|Wesley Williams|
+JAX|D|LB|Foyesade Oluokun|Jahlani Tavai||
+JAX|D|LB|Ventrell Miller & Branson Combs|||
+JAX|D|LB|Dennis Gardeck|Jalen McLeod||
+JAX|D|CB|Montaric Brown|Jaylon Jones||
+JAX|D|CB|Jourdan Lewis|Jarrian Jones||
+JAX|D|CB|Travis Hunter|||
+JAX|D|S|Jessie Bates III|Kaevon Merriweather|Rayuan Lane III|
+JAX|D|S|Antonio Johnson|Jalen Huskey||
+JAX|S|K|Cam Little|||
+TEN|O|WR|Calvin Ridley|Chimere Dike||
+TEN|O|TE|Gunnar Helm|Daniel Bellinger|David Martin-Robinson & Kylen Granson|
+TEN|O|LT|Dan Moore Jr.|James Hudson III||
+TEN|O|LG|Peter Skoronski|||
+TEN|O|C|Austin Schlottmann|Pat Coogan||
+TEN|O|RG|Atonio Mafi|Garrett Dellinger||
+TEN|O|RT|JC Latham|Brandon Crenshaw-Dickson||
+TEN|O|WR|Wan'Dale Robinson|||
+TEN|O|WR|Carnell Tate|Elic Ayomanor||
+TEN|O|QB|Cam Ward|Mitchell Trubisky||
+TEN|O|RB|Tony Pollard|Tyjae Spears & Nick Singleton|Julius Chestnut & Michael Carter|
+TEN|D|DE|Jermaine Johnson II|Oluwafemi Oladejo||
+TEN|D|DT|Solomon Thomas|Jonah Laulu|Jackie Marshall|
+TEN|D|DL|John Franklin-Myers|Nazir Stackhouse|Timmy Horne|
+TEN|D|DE|Jacob Martin|Keldric Faulk|Truman Jones|
+TEN|D|LB|Cody Barton|||
+TEN|D|LB|Cedric Gray|||
+TEN|D|LB|Anthony Hill Jr.|Dorian Mausi||
+TEN|D|CB|Joshua Williams|Alontae Taylor||
+TEN|D|NCB|Marcus Harris|Alontae Taylor|Micah Robinson|
+TEN|D|S|Tony Adams|||
+TEN|D|S|Kevin Winston Jr.|Terrell Burgess||
+TEN|D|CB|Cor'Dale Flott|Jaylon Jones||
+TEN|S|K|Joey Slye|Tommy Townsend||
+LV|O|WR|Jalen Nailor|Malik Benson|Dont'e Thornton Jr.|
+LV|O|LT|Kolton Miller|Charles Grant||
+LV|O|LG|Spencer Burford|Bryce Cabeldue||
+LV|O|C|Tyler Linderbaum|||
+LV|O|RG|Jackson Powers-Johnson|Caleb Rogers||
+LV|O|RT|DJ Glaze|Trey Zuhn III||
+LV|O|TE|Brock Bowers|Michael Mayer|Ian Thomas|
+LV|O|WR|Tre Tucker|Jack Bech|Dareke Young & Cody White|
+LV|O|QB|Fernando Mendoza|Aidan O'Connell||
+LV|O|RB|Ashton Jeanty|Mike Washington Jr.|Dylan Laube|
+LV|O|FB|Connor Heyward|||
+LV|D|DE|Maxx Crosby|Malcolm Koonce||
+LV|D|DT|Tonka Hemingway|JJ Pegues|Tim Keenan III|
+LV|D|DT|Adam Butler|Folorunso Fatukasi|Thomas Booker IV|
+LV|D|EDGE|Kwity Paye|||
+LV|D|LB|Nakobe Dean|Tommy Eichenberg|Segun Olubi|
+LV|D|LB|Quay Walker|Cody Lindenberg||
+LV|D|CB|Eric Stokes|Jermod McCoy|Darrell Luter Jr.|
+LV|D|CB|Darien Porter|Hezekiah Masses||
+LV|D|CB|Taron Johnson|||
+LV|D|FS|Treydan Stukes|Isaiah Pola-Mao|Tristin McCollum|
+LV|D|SS|Jeremy Chinn|Dalton Johnson||
+LV|S|K|Matt Gay|||
+LAC|O|WR|Ladd McConkey|Tre' Harris|Derius Davis & Theo Wease Jr.|
+LAC|O|LT|Travis Burke|Branson Taylor||
+LAC|O|LG|Kayode Awosika|Logan Taylor||
+LAC|O|C|Jake Slaughter|Jacob Spomer||
+LAC|O|RG|Cole Strange|Logan Taylor||
+LAC|O|RT|Joe Alt|Alex Harkey||
+LAC|O|TE|Charlie Kolar|Oronde Gadsden||
+LAC|O|WR|Quentin Johnston|Brenen Thompson||
+LAC|O|QB|Justin Herbert|DJ Uiagalelei||
+LAC|O|FB|Alec Ingold|Scott Matlock||
+LAC|O|RB|Omarion Hampton|Keaton Mitchell|Kimani Vidal|
+LAC|D|EDGE|Khalil Mack|Akheem Mesidor||
+LAC|D|DL|Jamaree Caldwell|Nick Barrett||
+LAC|D|DL|Dalvin Tomlinson|Justin Eboigbe||
+LAC|D|DL|Teair Tart|||
+LAC|D|EDGE|Tuli Tuipulotu|Bud Dupree||
+LAC|D|LB|Daiyan Henley|Troy Dye||
+LAC|D|LB|Del'Shawn Phillips|Marlowe Wax||
+LAC|D|CB|Tarheeb Still|Cam Hart|Deane Leonard|
+LAC|D|S|Derwin James Jr.|Tony Jefferson|RJ Mickens|
+LAC|D|S|Elijah Molden|Genesis Smith|Kendall Williamson|
+LAC|D|CB|Donte Jackson|Cam Hart|Rodney Shelley|
+LAC|S|K|Cameron Dicker|||
+NYG|O|WR|Malik Nabers|Malachi Fields|Jalin Hyatt|
+NYG|O|WR|Darnell Mooney|Charlie Jones||
+NYG|O|LT|Andrew Thomas|J.C. Davis||
+NYG|O|LG|Jon Runyan Jr.|Aaron Stinnie|Josh Sills|
+NYG|O|C|Bryan Hudson|John Michael Schmitz Jr.||
+NYG|O|RG|Francis Mauigoa|Aaron Stinnie||
+NYG|O|RT|Jermaine Eluemunor|Marcus Mbow||
+NYG|O|TE|Isaiah Likely|Theo Johnson|Chris Manhertz|Thomas Fidone II
+NYG|O|QB|J.J. McCarthy|Jameis Winston||
+NYG|O|FB|Patrick Ricard|||
+NYG|O|RB|Cam Skattebo|Devin Singletary|Gregory Desrosiers|
+NYG|D|DT|Shelby Harris|Darius Alexander|Bobby Jamison-Travis|
+NYG|D|NT|DJ Reader|C.J. Okoye||
+NYG|D|DE|Darius Alexander|||
+NYG|D|RUSH|Kayvon Thibodeaux|Trace Ford||
+NYG|D|MLB|Micah McFadden|Zaire Barnes||
+NYG|D|WLB|Arvell Reese|Jack Kelly||
+NYG|D|SAM|Abdul Carter|Kayvon Thibodeaux||
+NYG|D|CB|Deonte Banks|Paulson Adebo|Nikko Reed|
+NYG|D|SS|Tyler Nubin|Jason Pinnock||
+NYG|D|FS|Jevon Holland|Ar'Darius Washington|Elijah Campbell|
+NYG|D|CB|Greg Newsome II|Colton Hood||
+NYG|D|NB|Dru Phillips|Nic Jones||
+NYG|S|K|Dominic Zvada|||
+DAL|O|WR|George Pickens|Camden Brown||
+DAL|O|LT|Tyler Guyton|Drew Shelton||
+DAL|O|LG|Tyler Smith|T.J. Bass||
+DAL|O|C|Cooper Beebe|T.J. Bass||
+DAL|O|RG|Tyler Booker|Ajani Cornelius||
+DAL|O|RT|Terence Steele|Broderick Jones||
+DAL|O|TE|Jake Ferguson & Brevyn Spann-Ford|Luke Schoonmaker||
+DAL|O|WR|Ryan Flournoy|KaVontae Turpin||
+DAL|O|WR|CeeDee Lamb|Jonathan Mingo||
+DAL|O|QB|Dak Prescott|Sam Howell||
+DAL|O|RB|Javonte Williams|Tyler Goodson||
+DAL|O|FB|Hunter Luepke|||
+DAL|D|DT|Otito Ogbonnia|Elijah Garcia||
+DAL|D|DT|Kenny Clark|||
+DAL|D|DT|Quinnen Williams|LT Overton||
+DAL|D|OLB|Donovan Ezeiruaku|James Houston|Tyrus Wheat|
+DAL|D|LB|DeMarvion Overshown|Dee Winters|Justin Barron|
+DAL|D|LB|Shemar James & Jaishawn Barham|||
+DAL|D|OLB|Rashan Gary|Von Miller|Marist Liufau|
+DAL|D|CB|Joey Porter Jr.|Shavon Revel Jr.|Ameer Speed|
+DAL|D|DB|Caleb Downs|||
+DAL|D|CB|DaRon Bland|Cobie Durant||
+DAL|D|S|P.J. Locke & Markquese Bell|Juanyeh Thomas||
+DAL|D|S|Malik Hooker|Alijah Clark||
+DAL|S|K|Brandon Aubrey|||
+WAS|O|WR|Terry McLaurin|Treylon Burks||
+WAS|O|LT|Brandon Coleman|Andrew Wylie||
+WAS|O|LG|Chris Paul|Tanoa Togiai||
+WAS|O|C|Nick Allegretti|Matt Gulbin||
+WAS|O|RG|Sam Cosmi|Tanoa Togiai||
+WAS|O|RT|Josh Conerly Jr.|Andrew Wylie||
+WAS|O|TE|Chig Okonkwo|Ben Sinnott||
+WAS|O|TE|John Bates|Colson Yankoff||
+WAS|O|WR|Stefon Diggs|Jaylin Lane||
+WAS|O|WR|Dyami Brown|Antonio Williams|Luke McCaffrey|
+WAS|O|QB|Jayden Daniels|Marcus Mariota|Athan Kaliakmanis|
+WAS|O|RB|Jacory Croskey-Merritt|Rachaad White|Austin Ekeler|
+WAS|D|DL|Daron Payne|||
+WAS|D|DL|Tim Settle|Shy Tuttle||
+WAS|D|DL|Javon Kinlaw|Charles Omenihu||
+WAS|D|OLB|Odafe Oweh|Joshua Josephs||
+WAS|D|LB|Sonny Styles|Kain Medrano||
+WAS|D|LB|Frankie Luvu||Kain Medrano|
+WAS|D|OLB|K'Lavon Chaisson|Dorance Armstrong|Javontae Jean-Baptiste|
+WAS|D|CB|Amik Robertson|Rasul Douglas||
+WAS|D|CB|Mike Sainristil|Fabian Moreau||
+WAS|D|SS|Nick Cross|Tyler Owens||
+WAS|D|FS|Jeremy Reaves|Quan Martin|Percy Butler|
+WAS|S|K|Drew Stevens|||
+DET|O|WR|Jameson Williams|||
+DET|O|WR|Amon-Ra St. Brown|DeAndre Carter||
+DET|O|LT|Penei Sewell|||
+DET|O|LG|Christian Mahogany|Miles Frazier||
+DET|O|C|Cade Mays|Juice Scruggs||
+DET|O|RG|Tate Ratledge|Seth McLaughlin||
+DET|O|RT|Blake Miller|Larry Borom||
+DET|O|TE|Sam LaPorta|Brock Wright|Tyler Conklin|Jackson Meeks
+DET|O|WR|Isaac TeSlaa|Tay Martin||
+DET|O|QB|Jared Goff|Joshua Dobbs||
+DET|O|RB|Jahmyr Gibbs|Sione Vaki|Jacob Saylors|
+DET|D|EDGE|Aidan Hutchinson|Derrick Moore|Eric O'Neill|
+DET|D|DL|Alim McNeill|Skyler Gill-Howard|Mekhi Wingo|
+DET|D|DL|Tyleik Williams|Levi Onwuzurike||
+DET|D|EDGE|DJ Wonnum|Tyler Lacy|Ahmed Hassanein|
+DET|D|LB|Derrick Barnes|Joe Bachie||
+DET|D|LB|Malcolm Rodriguez|K.J. Britt||
+DET|D|LB|Trevor Nowaske|Amen Ogbongbemiga||
+DET|D|CB|D.J. Reed|Rock Ya-Sin|Khalil Dorsey|Nick Whiteside
+DET|D|CB|Roger McCreary|Ennis Rakestraw Jr.|Keith Abney II|
+DET|D|S|Chuck Clark|||
+DET|D|S|Brian Branch|Christian Izien||
+DET|S|K|Jake Bates|||
+MIN|O|QB|Kyler Murray|Carson Wentz|Max Brosmer|Kirk Cousins
+MIN|O|RB|Aaron Jones Sr. & Jordan Mason|Demond Claiborne|DeeJay Dallas|
+MIN|O|FB|Max Bredeson|||
+MIN|O|WR|Justin Jefferson|Tai Felton||
+MIN|O|WR|Jordan Addison|||
+MIN|O|WR|Jauan Jennings|Myles Price||
+MIN|O|TE|T.J. Hockenson|Gavin Bartholomew||
+MIN|O|LT|Christian Darrisaw|Ryan Van Demark||
+MIN|O|LG|Joe Huber|||
+MIN|O|C|Blake Brandel|Michael Jurgens|Nick Samac|
+MIN|O|RG|Will Fries|||
+MIN|O|RT|Brian O'Neill|Caleb Tiernan||
+MIN|D|OLB|Dallas Turner|Kyle Van Noy|Chaz Chambliss|
+MIN|D|DL|Jalen Redmond|Caleb Banks||
+MIN|D|DL|Levi Drake Rodriguez|Domonique Orange||
+MIN|D|DL|Tyrion Ingram-Dawkins|Elijah Williams||
+MIN|D|OLB|Andrew Van Ginkel|Bo Richter||
+MIN|D|LB|Blake Cashman|Ivan Pace Jr.||
+MIN|D|LB|Eric Wilson|Jake Golday||
+MIN|D|CB|Isaiah Rodgers|James Pierre|Zemaiah Vaughn|
+MIN|D|CB|Byron Murphy Jr.|Charles Demmings||
+MIN|D|S|Harrison Smith|Theo Jackson|Jacob Thomas|
+MIN|D|S|Joshua Metellus|Jay Ward|Jakobe Thomas|
+MIN|S|K|Will Reichard|||
+GB|O|WR|Christian Watson|Bo Melton||
+GB|O|WR|Matthew Golden|J. Michael Sturdivant||
+GB|O|LT|Jordan Morgan|John Williams||
+GB|O|LG|Aaron Banks|Travis Glover|Donovan Jennings|
+GB|O|C|Sean Rhyan|Jager Burton||
+GB|O|RG|Laken Tomlinson|Kevin Zeitler||
+GB|O|RT|Anthony Belton|Mekhi Becton Sr.||
+GB|O|TE|Tucker Kraft|Jonnu Smith|Mark Redman & Josh Whyle|
+GB|O|WR|Savion Williams|Coleman Owen||
+GB|O|QB|Jordan Love|Tyrod Taylor||
+GB|O|RB|Josh Jacobs|MarShawn Lloyd|Pierre Strong Jr. & Kaleb Johnson|
+GB|D|DT|Karl Brooks|Jordon Riley|Anthony Campbell|
+GB|D|DT|Devonte Wyatt|Chris McClellan||
+GB|D|EDGE|Lukas Van Ness|Brenton Cox Jr.||
+GB|D|LB|Zaire Franklin|Ty'Ron Hopper|Kristian Welch|
+GB|D|LB|Isaiah McDuffie|Nick Niemann||
+GB|D|EDGE|Barryn Sorrell|Dani Dennis-Sutton||
+GB|D|CB|Keisean Nixon|Carrington Valentine||
+GB|D|CB|Brandon Cisse|Benjamin St-Juste||
+GB|D|S|Xavier McKinney|Kitan Oladapo||
+GB|D|S|Evan Williams|Kitan Oladapo||
+GB|D|NB|Javon Bullard|Kamal Hadden||
+GB|S|K|Trey Smack|||
+CAR|O|WR|Tetairoa McMillan|Brycen Tremayne||
+CAR|O|WR|Jalen Coker|||
+CAR|O|LT|Rasheed Walker|Stone Forsythe||
+CAR|O|LG|Damien Lewis|Corey Bullock||
+CAR|O|C|Luke Fortner|Sam Hecht||
+CAR|O|RG|Robert Hunt|Torricelli Simpkins III||
+CAR|O|RT|Monroe Freeling|Stone Forsythe||
+CAR|O|TE|Tommy Tremble|Mitchell Evans|Darren Waller|Ja'Tavion Sanders & Feleipe Franks
+CAR|O|WR|John Metchie III|||
+CAR|O|QB|Bryce Young|Kenny Pickett|Haynes King|
+CAR|O|RB|Chuba Hubbard|Trevor Etienne|AJ Dillon|Anthony Tyus III
+CAR|D|DL|Bobby Brown III|TeRah Edwards||
+CAR|D|DL|Tershawn Wharton|Lee Hunter||
+CAR|D|DL|Derrick Brown|Aaron Hall||
+CAR|D|OLB|Patrick Jones II|Trevis Gipson|Nick Hampton|
+CAR|D|LB|Devin Lloyd|Jackson Kuwatch|Bam Martin-Scott|
+CAR|D|LB|Bobby Okereke|Tyrel Dodson||
+CAR|D|OLB|Jaelan Phillips|Princely Umanmielen||
+CAR|D|CB|Chau Smith-Wade|Malcolm DeWalt IV||
+CAR|D|CB|Will Lee III|||
+CAR|D|S|Tre'von Moehrig|Zakee Wheatley||
+CAR|D|S|Nick Scott|Lathan Ransom|Isaiah Simmons|
+CAR|S|K|Ryan Fitzgerald|||
+NO|O|WR|Chris Olave|Barion Brown||
+NO|O|LT|Kelvin Banks Jr.|Asim Richards||
+NO|O|LG|David Edwards|Jeremiah Wright||
+NO|O|C|Erik McCoy|William Sherman||
+NO|O|RG|Cesar Ruiz|Jeremiah Wright||
+NO|O|RT|Taliese Fuaga|Mason Murphy||
+NO|O|TE|Juwan Johnson|Noah Fant|Oscar Delp|
+NO|O|WR|Devaughn Vele|Bryce Lance||
+NO|O|WR|Jordyn Tyson|Barion Brown||
+NO|O|QB|Tyler Shough|Spencer Rattler|Zach Wilson|
+NO|O|RB|Alvin Kamara|Audric Estime|CJ Donaldson|
+NO|D|EDGE|Chase Young & Carl Granderson|Anfernee Jennings||
+NO|D|DL|Vernon Broughton|John Ridgeway III||
+NO|D|DL|Khristian Boyd|Christen Miller||
+NO|D|DL|Nathan Shepherd|Colby Wooden||
+NO|D|EDGE|Cameron Jordan|Tyree Wilson||
+NO|D|LB|Pete Werner|Chris Rumph II|Isaiah Stalbird|
+NO|D|LB|Kaden Elliss|Danny Stutsman|Jaylan Ford|
+NO|D|CB|Martin Emerson Jr.|Quincy Riley||
+NO|D|S|Julian Blackmon|Jordan Howden||
+NO|D|S|Justin Reid|Mike Reid||
+NO|D|CB|Kool-Aid McKinstry|Decamerion Richardson||
+NO|D|S|Jonas Sanker|Lorenzo Styles||
+NO|S|K|Charlie Smyth|||
+ATL|O|WR|Drake London|Chris Blair||
+ATL|O|LT|Jake Matthews|Cameron Williams||
+ATL|O|LG|Matthew Bergeron|Kyle Hinton||
+ATL|O|C|Corey Levin|||
+ATL|O|RG|Chris Lindstrom|Andrew Vorhees||
+ATL|O|RT|Jawaan Taylor|Ethan Onianwa||
+ATL|O|TE|Kyle Pitts Sr.|Austin Hooper||
+ATL|O|TE|Charlie Woerner|Nick Muse||
+ATL|O|RB|Bijan Robinson|Khalil Herbert||
+ATL|O|QB|Michael Penix Jr.|Tua Tagovailoa|Andy Dalton|Jack Strand
+ATL|O|WR|Olamide Zaccheaus|Zachariah Branch||
+ATL|O|WR|Jahan Dotson|Beaux Collins||
+ATL|D|DE|Cameron Thomas|Za'Darius Smith|Charles Snowden|
+ATL|D|DL|Maason Smith|Gervon Dexter Sr.||
+ATL|D|DL|LaCale London|Zach Harrison||
+ATL|D|DE|Brandon Dorlus|Yasir Abdullah|James Pearce Jr.|
+ATL|D|ILB|Divine Deablo|Christian Harris|Josh Woods|
+ATL|D|ILB|Kendal Daniels|Harold Perkins Jr.||
+ATL|D|CB|A.J. Terrell Jr.|Robert Longerbeam||
+ATL|D|S|DeMarcco Hellams|||
+ATL|D|S|Xavier Watts|Sydney Brown||
+ATL|D|CB|C.J. Henderson|Mike Hughes|Mike Ford Jr.|
+ATL|D|NB|Avieon Terrell|Billy Bowman Jr.||
+ATL|S|K|Jake Moody|||
+AZ|O|WR|Reggie Virgil|Harrison Wallace III||
+AZ|O|LT|Jayden Williams|Jedrick Wills||
+AZ|O|LG|Isaac Seumalo|Hayden Conner||
+AZ|O|C|Hjalte Froholdt|Kingsley Eguakun||
+AZ|O|RG|Isaiah Adams|Jon Gaines II||
+AZ|O|RT|Elijah Wilkinson|Josh Fryar|Albert Reese|
+AZ|O|TE|Trey McBride|||
+AZ|O|TE|Elijah Higgins|Teagan Quitoriano||
+AZ|O|WR|Simi Fehoko|Devin Duvernay||
+AZ|O|QB|Carson Beck|Josh Johnson|Joey Aguilar|
+AZ|O|RB|Tyler Allgeier|Bam Knight|Evan Hull|
+AZ|D|DT|Dante Stills|Darius Robinson||
+AZ|D|NT|Roy Lopez|Andrew Billings||
+AZ|D|DT|Walter Nolen III|L.J. Collier||
+AZ|D|OLB|Josh Sweat|Jordan Burch|Eku Leota|
+AZ|D|ILB|Jack Gibbens|Karson Sharar||
+AZ|D|ILB|Mack Wilson Sr.|Cody Simon||
+AZ|D|OLB|Zaven Collins & Baron Browning|||
+AZ|D|CB|Denzel Burke|Starling Thomas V||
+AZ|D|CB|Max Melton|Kei'Trel Clark||
+AZ|D|CB|Kalen King|Garrett Williams||
+AZ|D|S|Andrew Wingard|Kitan Crawford||
+AZ|D|S|Budda Baker|Dadrion Taylor-Demerson||
+AZ|S|K|Chad Ryland|||
+LAR|O|WR|Konata Mumpfield|CJ Daniels||
+LAR|O|TE|Davis Allen & Tyler Higbee|||
+LAR|O|LT|Alaric Jackson|David Quessenberry||
+LAR|O|LG|Steve Avila|Bill Murray||
+LAR|O|C|Coleman Shelton|Dylan McMahon||
+LAR|O|RG|Kevin Dotson|Beaux Limmer||
+LAR|O|RT|Warren McClendon Jr.|Keagen Trost||
+LAR|O|TE|Colby Parkinson|Max Klare||
+LAR|O|WR|Puka Nacua|Jordan Whittington|Tutu Atwell|
+LAR|O|QB|Matthew Stafford|Stetson Bennett IV|Ty Simpson|
+LAR|O|RB|Kyren Williams|Blake Corum|Ronnie Rivers|
+LAR|D|OLB|Byron Young|Wesley Bailey||
+LAR|D|DE|Braden Fiske|||
+LAR|D|NT|Tyler Davis|Ty Hamilton||
+LAR|D|DE|Aaron Donald|Larrell Murchison||
+LAR|D|OLB|Myles Garrett|Josaiah Stewart|Desjuan Johnson|
+LAR|D|ILB|Omar Speights|Grant Stuard||
+LAR|D|ILB|Nate Landman|Shaun Dolac||
+LAR|D|CB|Trent McDuffie|Cam Lampkin||
+LAR|D|S|Quentin Lake|Kamren Kinchens|Maximus Pulley|
+LAR|D|S|Kam Curl|Jaylen McCollough||
+LAR|D|CB|Emmanuel Forbes Jr. & Josh Wallace|||
+LAR|S|K|Brandon McManus|Joshua Karty||
+SF|O|WR|Mike Evans|Jordan Watkins|Brandin Cooks|
+SF|O|LT|Trent Williams|Vederian Lowe|Enrique Cruz Jr.|
+SF|O|LG|Connor Colby|Carver Willis||
+SF|O|C|Jake Brendel|Jarrett Patterson||
+SF|O|RG|Dominick Puni|||
+SF|O|RT|Colton McKivitz|||
+SF|O|TE|George Kittle|Luke Farrell|Brayden Willis|
+SF|O|WR|Deebo Samuel Sr.|Demarcus Robinson|Jacob Cowing|
+SF|O|RB|Christian McCaffrey|Kaelon Black|Jordan James|
+SF|O|FB|Kyle Juszczyk|||
+SF|O|QB|Brock Purdy|Mac Jones|Kurtis Rourke|
+SF|D|LDE|Keion White|Mykel Williams|Khalid Kareem|
+SF|D|LDT|DeForest Buckner|Gracen Halton|Sebastian Valdez|
+SF|D|RDT|Osa Odighizuwa|James Thompson Jr.||
+SF|D|RDE|Nick Bosa|Romello Height||
+SF|D|SAM|Jaden Dugger|Luke Gifford||
+SF|D|MIKE|Fred Warner|Tatum Bethune||
+SF|D|WILL|Dre Greenlaw|Garret Wallow||
+SF|D|LCB|Renardo Green|||
+SF|D|RCB|Deommodore Lenoir|Ephesians Prysock||
+SF|D|NB|Upton Stout|||
+SF|D|FS|Ji'Ayir Brown|Siran Neal||
+SF|D|SS|Malik Mustapha|Marques Sigle|Ashtyn Davis|
+SF|S|K|Eddy Pinero|||
+SEA|O|WR|Cooper Kupp & Rashid Shaheed|Irvin Charles||
+SEA|O|LT|Charles Cross|Josh Jones||
+SEA|O|LG|Quenton Nelson|Anthony Bradford||
+SEA|O|C|Jalen Sundell|Olu Oluwatimi||
+SEA|O|RG|Grey Zabel|Anthony Bradford|Beau Stephens|
+SEA|O|RT|Abraham Lucas|Josh Jones||
+SEA|O|TE|AJ Barner|Eric Saubert|Nick Kallerup|
+SEA|O|WR|Jaxon Smith-Njigba|Tory Horton||
+SEA|O|QB|Sam Darnold|Drew Lock|Jalen Milroe|
+SEA|O|FB|Brady Russell|||
+SEA|O|RB|Zach Charbonnet|Jadarian Price|Emanuel Wilson|George Holani
+SEA|D|DT|Leonard Williams|Rylie Mills||
+SEA|D|NT|Byron Murphy II|Brandon Pili|Deven Eastern|
+SEA|D|DE|Jarran Reed|Mike Morris||
+SEA|D|RUSH|DeMarcus Lawrence|Derick Hall||
+SEA|D|MLB|Ernest Jones IV|Patrick O'Connell||
+SEA|D|WLB|Drake Thomas|Tyrice Knight|Chazz Surratt|
+SEA|D|SLB|Uchenna Nwosu|Dante Fowler Jr.|Connor O'Toole|
+SEA|D|CB|Devon Witherspoon|Nehemiah Pritchett||
+SEA|D|CB|Josh Jobe|Avery Smith||
+SEA|D|S|Ty Okada|Rodney Thomas II||
+SEA|D|S|Julian Love|||
+SEA|D|S|Nick Emmanwori|||
+SEA|S|K|Jason Myers|||
+DEN|O|WR|Marvin Mims Jr.|Troy Franklin||
+DEN|O|WR|Jaylen Waddle|Lil'Jordan Humphrey||
+DEN|O|LT|Garett Bolles|Matt Peart||
+DEN|O|LG|Ben Powers|Kage Casey||
+DEN|O|C|Luke Wattenberg|Alex Forsyth||
+DEN|O|RG|Quinn Meinerz|Kage Casey||
+DEN|O|RT|Mike McGlinchey|Alex Palczewski||
+DEN|O|TE|Evan Engram|Adam Trautman|Nate Adkins|Dallen Bentley
+DEN|O|WR|Courtland Sutton|||
+DEN|O|RB|J.K. Dobbins|Jonah Coleman||
+DEN|O|FB|Adam Prentice|||
+DEN|O|QB|Bo Nix|Jarrett Stidham|Sam Ehlinger|
+DEN|D|DE|Zach Allen|Jordan Jackson|Tyler Onyedim|
+DEN|D|NT|D.J. Jones|Sai'vion Jones||
+DEN|D|DE|Malcolm Roach|Eyioma Uwazurike||
+DEN|D|SLB|Nik Bonitto|Que Robinson||
+DEN|D|WLB|Jonathon Cooper|Dondrea Tillman||
+DEN|D|ILB|Alex Singleton|Jordan Turner||
+DEN|D|ILB|Justin Strnad|Karene Reid||
+DEN|D|LCB|Pat Surtain II|Jahdae Barron||
+DEN|D|RCB|Riley Moss|Kris Abrams-Draine||
+DEN|D|NCB|Ja'Quan McMillian|Jahdae Barron||
+DEN|D|S|Talanoa Hufanga|JL Skinner|Tycen Anderson|
+DEN|D|S|Brandon Jones|Devon Key|Taylor Rapp|
+DEN|S|K|Wil Lutz|||
+CHI|O|WR|Rome Odunze|Zavion Thomas||
+CHI|O|LT|Theo Benedet|Ozzy Trapilo||
+CHI|O|LG|Joe Thuney|Jordan McFadden||
+CHI|O|C|Garrett Bradbury|Logan Jones||
+CHI|O|RG|Jonah Jackson|Luke Newman||
+CHI|O|RT|Darnell Wright|Ozzy Trapilo||
+CHI|O|TE|Colston Loveland|Sam Roush||
+CHI|O|WR|Kalif Raymond|||
+CHI|O|WR|Luther Burden III|Jahdae Walker||
+CHI|O|QB|Caleb Williams|Tyson Bagent|Case Keenum|
+CHI|O|RB|D'Andre Swift|Kyle Monangai|Roschon Johnson|
+CHI|D|DL|Austin Booker|Shemar Turner|James Lynch|
+CHI|D|DL|Grady Jarrett|Neville Gallimore|Jayden Loving|
+CHI|D|DL|Jeffery Simmons|Kentavius Street|Jordan van den Berg|
+CHI|D|DL|Montez Sweat|Daniel Hardy||
+CHI|D|LB|T.J. Edwards|D'Marco Jackson|Keyshaun Elliott|
+CHI|D|LB|Devin Bush|Noah Sewell|Jack Sanborn|
+CHI|D|S|Dillon Thieneman|Elijah Hicks||
+CHI|D|S|Cam Lewis|Skyler Thomas||
+CHI|D|DB|Kyler Gordon|Malik Muhammad II||
+CHI|D|CB|Tyrique Stevenson Sr.|Clark Phillips III||
+CHI|D|CB|Jaylon Johnson|Josh Blackwell||
+CHI|S|K|Cairo Santos|||
+PHI|O|WR|DeVonta Smith|Hollywood Brown||
+PHI|O|LT|Jordan Mailata|||
+PHI|O|LG|Willie Lampkin|||
+PHI|O|C|Drew Kendall|Jake Majors||
+PHI|O|RG|Tyler Steen|Micah Morris||
+PHI|O|RT|Markel Bell|Fred Johnson||
+PHI|O|TE|Dallas Goedert|Johnny Mundt||
+PHI|O|WR|Makai Lemon|Elijah Moore|Britain Covey|
+PHI|O|WR|Dontayvion Wicks|Darius Cooper||
+PHI|O|RB|Saquon Barkley|||
+PHI|O|QB|Tanner McKee|Cole Payton|Joe Milton|
+PHI|D|EDGE|Jalyx Hunt & Jonathan Greenard|Arnold Ebiketie||
+PHI|D|DT|Jalen Carter|Byron Young||
+PHI|D|DT|UNVERIFIED_BLANK|Ty Robinson||
+PHI|D|DT|Moro Ojomo|||
+PHI|D|EDGE|Nolan Smith Jr. & Jonathan Greenard|A.J. Epenesa||
+PHI|D|LB|Zack Baun|Smael Mondon Jr.||
+PHI|D|LB|Jihaad Campbell|Jeremiah Trotter Jr.||
+PHI|D|CB|Riq Woolen|Jonathan Jones||
+PHI|D|CB|Quinyon Mitchell|Kelee Ringo||
+PHI|D|NCB|Cooper DeJean|Mac McWilliams||
+PHI|D|S|Marcus Epps|Michael Carter II||
+PHI|D|S|Andrew Mukuba|Kenny Moore II||
+PHI|S|K|Jake Elliott|||
+TB|O|WR|Ted Hurst III|David Sills V||
+TB|O|WR|Chris Godwin Jr.|Kameron Johnson||
+TB|O|LT|Tristan Wirfs|Benjamin Chukwuma||
+TB|O|LG|Ben Bredeson|Billy Schrauth||
+TB|O|C|Graham Barton|Dan Feeney||
+TB|O|RG|Cody Mauch|Trevor Keegan||
+TB|O|RT|Luke Goedeke|Justin Skule||
+TB|O|WR|Emeka Egbuka|Tez Johnson||
+TB|O|TE|Cade Otton|Payne Durham|Ko Kieft|Bauer Sharp
+TB|O|QB|Baker Mayfield|Jalon Daniels||
+TB|O|RB|Bucky Irving|Kenny Gainwell|Sean Tucker|
+TB|D|DL|Calijah Kancey|Elijah Roberts||
+TB|D|NT|Vita Vea|Rakeem Nunez-Roches|Elijah Simmons|
+TB|D|DL|A'Shawn Robinson|DeMonte Capehart||
+TB|D|OLB|Yaya Diaby|Anthony Nelson|David Walker|
+TB|D|ILB|Josiah Trotter|SirVocea Dennis||
+TB|D|ILB|Alex Anzalone|||
+TB|D|OLB|Rueben Bain Jr.|Al-Quadin Muhammad||
+TB|D|CB|Zyon McCollum|Benjamin Morrison|Ayden Garnes|
+TB|D|CB|Jacob Parrish|Keionte Scott|Kevin Knowles|
+TB|D|S|Antoine Winfield Jr.|Ifeatu Melifonwu||
+TB|D|S|Tykee Smith|Miles Killebrew||
+TB|S|K|Chase McLaughlin|||
