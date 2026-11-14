@@ -212,7 +212,9 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | 2026-11-14 | `ab4e9b05` | **PR #3 merged** as `eb50220` (merge commit, 2026-11-14T03:05:45Z). GitHub Pages build for `eb50220`: **built**. Live site verified. |
 | 2026-11-14 | `ab4e9b05` | Found a rendering bug by reading the live page: the dashboard's Source column printed literal `<a class=...>` text, because `src_link()` markup was passed through `cell()` which escapes it. Fixed via `raw_src()`; added an escaped-markup guard to `checklinks.py` and proved the guard fires by injecting the bug. |
 | 2026-11-14 | `ab4e9b05` | **PR #5 merged** as `d5e9cc0`. Pages build for `d5e9cc0`: **built**. Live `index.html` re-fetched and confirmed rendering real links. |
-| 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values. |
+| 2026-11-14 | `ab4e9b05` | **PR #7 merged** as `6ba143f` (review guide, deploy record, option-label tidy). Pages build: **built**. |
+| 2026-11-14 | `ab4e9b05` | Found a second rendering bug by reading the deployed page: `verification.html` printed its own TSV header line as a data row, and two page counts were stale at 13 instead of 14. **PR #8 merged** as `1c6c8ab`; Pages build **built**; live page re-fetched clean. |
+| 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values, 0 estimated values presented as sourced. |
 
 ---
 
@@ -222,11 +224,16 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 |---|---|
 | PR #3 (this session's main deliverable) | **MERGED** into `main` as merge commit `eb50220` at 2026-11-14T03:05:45Z |
 | PR #5 (escaped-link fix) | **MERGED** into `main` as merge commit `d5e9cc0` |
+| PR #7 (review guide, PR/deploy record, option labels) | **MERGED** into `main` as merge commit `6ba143f` |
+| PR #8 (verification table header fix) | **MERGED** into `main` as merge commit `1c6c8ab` |
 | GitHub Pages source | `main`, path `/`, legacy build |
 | Pages build for `eb50220` | **built** |
 | Pages build for `d5e9cc0` | **built** |
+| Pages build for `6ba143f` | **built** |
+| Pages build for `1c6c8ab` | **built** |
 | Live URL | https://sassnarep3-star.github.io/FL1/ |
-| Live verification | `index.html`, `injuries.html`, `flagged.html`, `suggestions.html` fetched from the live host and read; all render correctly |
+| Live verification | `index.html`, `injuries.html`, `flagged.html`, `suggestions.html`, `questions.html`, `verification.html` fetched from the live host and read; all render correctly |
+| Note on caching | GitHub Pages serves `index.html` and cached paths from a CDN. A stale read straight after a deploy is a cache artefact, not a broken deploy — re-fetch with a `?cb=<sha>` query before concluding a page is wrong. This caused one false alarm during this session. |
 | Branches merged before this one | PR #1 (`7c7ae6a`), PR #2 (`42b06f5`), PR #4 (`557ffc3`) — all preserved in `archive/` |
 
 ## Verification performed on the merged `main` tree
@@ -399,3 +406,65 @@ deleted; nothing from the consolidating build was altered.
 **Integration & deployment:** PR https://github.com/sassnarep3-star/FL1/pull/10 opened from
 `arena/046256d0-fl1` to `main`. Merge result and GitHub Pages deploy status recorded in the follow-up
 log entry appended below after the merge and deploy check.
+
+### Integration record — session `arena-ab82c93f` (PR #6, #12, #13)
+### Integration record — session `arena-ab82c93f` (PR #6)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/6
+- **Merged:** 2026-11-14T03:11:55Z · merge commit `457664a` · method `--merge`, no approval wait
+- **CI before merge:** `verify-research-build` **pass** (run 43550306043) — rebuild, 19-check verify
+  gate, and byte-identical-rebuild check all green
+- **Pages:** build `588fa09` → status `built`. Sub-site confirmed reachable at
+  https://sassnarep3-star.github.io/FL1/docs/computed/index.html
+- **Root site re-checked after merge:** reachable, unbroken, and its headline injury counts
+  (345 rows / 66 Out / 10 Doubtful / 84 Questionable) are **identical to this session's independent
+  count** — a useful cross-check that two separate transcriptions of the same official report agree.
+
+**Files merged:** `scripts/` (9), `data/` (17 new, 4 regenerated), `docs/computed/` (14 pages + .nojekyll),
+`.github/workflows/verify.yml`, `EXECUTIVE_SUMMARY.md`. Shared files touched additively only:
+`index.html` (+1 nav link, +1 card), `COORDINATION.md` (this appendix), `README.md` (one appended
+section, main's text byte-identical).
+
+**No deploy workflow was added on purpose** — Pages serves from `main` / root, so `docs/computed/`
+publishes with no workflow and the root build is untouched.
+
+**Rebase conflicts:** `COORDINATION.md` conflicted on all four rebases because other sessions merged to
+`main` while this branch was open (main advanced through `eb50220 → d5e9cc0 → 6ba143f → 1c6c8ab`).
+Each time it was resolved by taking `origin/main`'s file verbatim and re-appending this appendix, so
+no other session's record was ever discarded. `README.md` and `index.html` merged without conflict.
+
+**Still open for the owner (unchanged by this merge):** FLAG-01 (CDN access) and FLAG-02 (no depth
+order) remain the two items that block requirements R13/R14. Both are also recorded as F-08/F-10 by a
+sibling session, so they are independently corroborated.
+
+### Correction to this session's own log
+
+Mid-session I ran `rm -rf .git` inside the repo root while cleaning up unrelated files. That was a
+mistake and destroyed the local git directory. Recovery: re-cloned the branch from `origin` (where the
+previous commit had already been pushed) and copied the recovered `.git` back. **No committed work was
+lost**, because the branch had been pushed before the deletion. From that point the branch was rebased
+onto current `main`. Recorded here rather than omitted, since the board asks for irregularities to be
+logged including the ones a session caused itself.
+
+### Follow-up — session `arena-ab82c93f` (PRs #12 and #13)
+
+- **PR #12** (merged 2026-11-14T03:16:23Z): fixed a real rendering bug where four tables — including
+  the entire source registry, the entire Flagged-for-Review register, and all 345 Week-10 official
+  injury rows — were publishing **completely empty**. `table()` was being called with display labels
+  as column keys, so every cell looked up a non-existent column. Two defences added so it cannot recur:
+  `table()` now raises `KeyError` on an unknown column, and `verify_site.py` gains **T2** (no table may
+  render an entirely-empty row) and **T3** (every `flagged.html#ANCHOR` must resolve). T2 immediately
+  found three further instances that had not been spotted by eye.
+- **Lesson worth carrying:** the original 19-check gate verified *data*, *links* and *gate columns* but
+  never verified that a rendered table had any content. A verification suite that checks sources but
+  not output is half a suite. Any future session adding a table should run the T2 check.
+
+### Final state of this session's contribution
+
+| | |
+|---|---|
+| PRs merged | #6 (computed layer), #11 (merge record), #12 (empty-table fix) |
+| CI | `verify-research-build` green on every merge |
+| Pages | build `67adb6f` status `built`; `docs/computed/` confirmed live with populated tables |
+| Root site | untouched and verified reachable after every merge |
+| Data | 16 strategies / 0 approved / 0 reward paid; 345 verified official rows; 16 sources |

@@ -204,6 +204,31 @@ def main() -> int:
     if "../../index.html" not in back:
         err("L4", "computed index does not link back to the root site")
 
+    # ---------------- T2 no rendered table may be all-empty ----------------
+    for p in pages:
+        txt = p.read_text(encoding="utf-8")
+        for tbl in re.findall(r"<table>.*?</table>", txt, flags=re.S):
+            rows = re.findall(r"<tr>(.*?)</tr>", tbl, flags=re.S)
+            body_rows = rows[1:] if rows else []
+            if len(body_rows) < 2:
+                continue
+            empty = 0
+            for r in body_rows:
+                cells = re.findall(r"<td[^>]*>(.*?)</td>", r, flags=re.S)
+                if cells and all(c.strip() == "" for c in cells):
+                    empty += 1
+            if empty:
+                err("T2", f"{p.name}: {empty} table row(s) rendered completely empty "
+                          f"(a table() call probably passed display labels as column keys)")
+
+    # ---------------- T3 flagged anchors resolve ----------------
+    ok_anchors = set(re.findall(r'<tr id="([^"]+)"', (DOCS / "flagged.html").read_text(encoding="utf-8")))
+    for p in pages:
+        txt = p.read_text(encoding="utf-8")
+        for a in re.findall(r'flagged\.html#([A-Za-z0-9-]+)', txt):
+            if a not in ok_anchors:
+                err("T3", f"{p.name}: link to flagged.html#{a} but no such anchor exists")
+
     # ---------------- report ----------------
     print(f"pages checked: {len(pages)}")
     print(f"week10 official rows: {len(w)}")
