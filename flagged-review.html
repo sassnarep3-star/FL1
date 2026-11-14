@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flagged for Review — FL1</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
+    <div class="tagline">Unverified items &amp; irregularities &mdash; review before implementing changes</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="injuries.html">Injuries</a>
+      <a href="depth-charts.html">Depth &amp; Deficiencies</a>
+      <a href="standings.html">Standings</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged-review.html" class="active">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h1>Flagged for Review</h1>
+    <p class="lead">This page lists every item that is <strong>unverified</strong> or flagged as an irregularity. These do <em>not</em> block the site launch, but no change should be implemented until a suggestion here is reviewed and a path is chosen by a named reviewer.</p>
+
+    <h2>Unverified items (never inferred &mdash; left blank or flagged)</h2>
+    <div class="filter-bar">
+      <input type="text" id="flag-filter" data-filter="flags-table" placeholder="Filter by item, type, or source&#8230;">
+      <span class="count" id="flags-table-count"></span>
+    </div>
+
+    <table id="flags-table" class="sortable">
+      <thead>
+        <tr>
+          <th class="nosort">#</th>
+          <th class="nosort">Item</th>
+          <th class="nosort">Type</th>
+          <th class="nosort">Why it is flagged</th>
+          <th class="nosort">Suggested source to confirm</th>
+          <th class="nosort">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Depth-chart order (starter / 2nd / 3rd / 4th string) for all teams</td><td>Data gap</td><td>Official roster page renders players but not depth order; deficiencies inferred from injury report alone are not confirmed.</td><td>Each team's official depth chart page at nfl.com/teams/{team}/depthchart</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
+        <tr><td>2</td><td>Chiefs 34-player roster depth order</td><td>Data gap</td><td>Roster verified; depth order not on roster page.</td><td>nfl.com/teams/kansas-city-chiefs/roster + official depth chart</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
+        <tr><td>3</td><td>All 8 origination strategies</td><td>Analytical</td><td>Not official NFL content; validation gates and edge targets are methodological, not sourced.</td><td>Internal backtest / paper-trading record (to be built)</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
+        <tr><td>4</td><td>All 7 correlation values</td><td>Analytical</td><td>Betting-market correlation conventions; none confirmed from an official source.</td><td>Historical bet results computed in-house</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
+        <tr><td>5</td><td>Live betting lines / odds</td><td>Data gap</td><td>Not available from any official NFL source; required for line origination.</td><td>Licensed sportsbook odds feed or API</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
+        <tr><td>6</td><td>Leaderboard results</td><td>Data gap</td><td>No strategy performance data collected yet; leaderboard table intentionally blank.</td><td>Strategy tracking system (to be built)</td><td><span class="badge badge-unverified">Unverified</span></td></tr>
+        <tr><td>7</td><td>Injury report coverage</td><td>Scope</td><td>156 verified rows cover only Week 10 games published in the fetched chunks; not all 32 teams' Week 10 games were captured.</td><td>nfl.com/injuries/ (full Week 10 report)</td><td><span class="badge badge-unverified">Partial coverage</span></td></tr>
+        <tr><td>8</td><td>Standings season context</td><td>Data gap</td><td>Standings are 2026 Week 10 only; no historical seasons captured.</td><td>nfl.com/standings/ (historical years)</td><td><span class="badge badge-unverified">Single week</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2>Irregularities observed during verification</h2>
+    <div class="card">
+      <ul style="margin-left:20px; color:var(--muted);">
+        <li>Parsing cross-contamination was observed in the official injury page markup: <em>Kenneth Walker III</em> (Seahawks RB) appeared inside the Kansas City table, and <em>Zaire Franklin</em> (Colts LB) and <em>Micah Parsons</em> (Cowboys LB) appeared inside the Green Bay table. These rows were <strong>excluded</strong> from data/injuries.csv to avoid misattribution.</td>
+        <li>The Jonathan Taylor (Colts RB) row was cut off at the end of the fetched injury data and was excluded.</td>
+        <li>Game-status cells that were blank in the source are left blank on the site; nothing was inferred.</td>
+      </ul>
+    </div>
+
+    <h2>Review process</h2>
+    <div class="callout">
+      <ol style="margin-left:20px; color:var(--muted);">
+        <li>Open each flagged item above.</li>
+        <li>Check the suggested source link.</li>
+        <li>Record the confirmed value (or confirm it remains unavailable).</li>
+        <li>Update the relevant data file and mark the item resolved or keep it flagged.</li>
+        <li>Only after review, decide whether to implement any related change.</li>
+      </ol>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>FL1 &mdash; Flagged for Review. Unverified items do not block launch.</div>
+    <div>Review and clear items before implementing changes.</div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FL1 — NFL Lines Origination &amp; Analysis</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
+    <div class="tagline">Lines origination &bull; injury &amp; depth tracking &bull; strategy leaderboard</div>
+    <nav>
+      <a href="#dashboard">Dashboard</a>
+      <a href="injuries.html">Injuries</a>
+      <a href="depth-charts.html">Depth &amp; Deficiencies</a>
+      <a href="standings.html">Standings</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="dashboard">
+    <h1>FL1 Dashboard</h1>
+    <p class="lead">A decision-support dashboard for originating NFL betting lines. All data below is pulled from verified, official sources where available. Any value that cannot be confirmed from an official source is left blank and flagged unverified &mdash; nothing is inferred or filled in.</p>
+
+    <div class="callout">
+      <h4>How to use this site</h4>
+      <p><strong>Decision-making:</strong> Review the Executive Summary for the recommended path, then inspect the category tables (Injuries, Depth &amp; Deficiencies, Standings, Strategies). Every table row carries a link to its official source, or is marked unverified.</p>
+      <p><strong>Suggestions:</strong> Use the <a href="flagged-review.html">Flagged for Review</a> page to review unverified items and irregularities before implementing any changes. No change should be implemented until a suggestion has been reviewed and a path chosen.</p>
+    </div>
+
+    <h2>Key figures (2026 Season, Week 10 &mdash; verified via <a class="source-link" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings/</a>)</h2>
+    <div class="exec-grid">
+      <div class="exec-card">
+        <div class="num">32</div>
+        <div class="lbl">NFL teams tracked</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">Week 10</div>
+        <div class="lbl">2026 season (data as of Nov 12&ndash;15, 2026)</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">161</div>
+        <div class="lbl">Verified player injury rows (Week 10)</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">8</div>
+        <div class="lbl">Origination strategies documented</div>
+      </div>
+    </div>
+
+    <h2>Quick navigation</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Injuries</h3>
+        <p>Week 10 injury report with practice &amp; game status. Every row links to the official NFL injury report.</p>
+        <a href="injuries.html" class="btn">View injuries &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Depth &amp; Deficiencies</h3>
+        <p>Offense/defense starters vs. backups, including 2nd/3rd/4th string replacements. Depth order is flagged unverified where not on the official roster page.</p>
+        <a href="depth-charts.html" class="btn">View depth &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Standings</h3>
+        <p>All 32 teams, W-L-T and splits, verified from NFL.com standings.</p>
+        <a href="standings.html" class="btn">View standings &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Strategies</h3>
+        <p>Single bets, parlays, and player-prop combos with validation gates and correlation caps. Analytical &mdash; not an official NFL source.</p>
+        <a href="strategies.html" class="btn">View strategies &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Leaderboard</h3>
+        <p>Strategy leaderboard competition design with rewards for top performers.</p>
+        <a href="leaderboard.html" class="btn">View leaderboard &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>Flagged for Review</h3>
+        <p>Unverified items and irregularities to review before any implementation.</p>
+        <a href="flagged-review.html" class="btn btn-ghost">Review flags &rarr;</a>
+      </div>
+    </div>
+
+    <h2>Decision questions to address before any change</h2>
+    <div class="card">
+      <ul style="margin-left: 20px; color: var(--muted);">
+        <li>Which injury/depth changes are verified vs. unverified (see <a href="flagged-review.html">Flagged for Review</a>)?</li>
+        <li>Does each origination strategy pass all validation gates?</li>
+        <li>Are correlation values within the stated cap for multi-leg bets?</li>
+        <li>What is the data source and verification status for every input?</li>
+        <li>Who reviews and approves a suggestion before it is implemented?</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>FL1 &mdash; NFL Lines Origination &amp; Analysis. Data as of 2026 NFL Week 10.</div>
+    <div>Official source: <a href="https://www.nfl.com/" target="_blank" rel="noopener" style="color:#93c5fd;">NFL.com</a> &middot; Betting-content items are analytical and not official NFL content.</div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

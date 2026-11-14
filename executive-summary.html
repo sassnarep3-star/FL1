@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Executive Summary — FL1</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">FL1 <span class="accent">&middot; NFL</span></div>
+    <div class="tagline">Executive summary &mdash; decision-relevant details</div>
+    <nav>
+      <a href="index.html">Dashboard</a>
+      <a href="injuries.html">Injuries</a>
+      <a href="depth-charts.html">Depth &amp; Deficiencies</a>
+      <a href="standings.html">Standings</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="executive-summary.html" class="active">Executive Summary</a>
+      <a href="flagged-review.html">Flagged for Review</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h1>Executive Summary</h1>
+    <p class="lead">Important details for decision making. All figures verified against official sources where available; everything else is left blank and flagged unverified.</p>
+
+    <h2>What we have (verified)</h2>
+    <div class="exec-grid">
+      <div class="exec-card">
+        <div class="num">2026 Week 10</div>
+        <div class="lbl">Season/week of all verified data</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">32 / 32</div>
+        <div class="lbl">NFL teams with verified standings</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">161</div>
+        <div class="lbl">Verified injury rows (all marked Verified)</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">34</div>
+        <div class="lbl">Chiefs roster players verified (depth order unverified)</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">8</div>
+        <div class="lbl">Origination strategies documented</div>
+      </div>
+      <div class="exec-card">
+        <div class="num">7</div>
+        <div class="lbl">Correlation entries (all analytical, unverified)</div>
+      </div>
+    </div>
+
+    <h2>What we do NOT have (gaps &mdash; suggestions to discover missing information)</h2>
+    <div class="card">
+      <ul style="margin-left:20px; color:var(--muted);">
+        <li>Complete depth-chart order (starter / 2nd / 3rd / 4th string) for all 32 teams &mdash; the official roster page does not render depth order. <strong>Suggestion:</strong> fetch each team's official depth chart page and cross-check with the injury report before flagging any deficiency as verified.</li>
+        <li>Live betting lines / odds &mdash; not official NFL content and not available from an official source. <strong>Suggestion:</strong> obtain lines from a licensed sportsbook feed or odds API and flag every line as unverified until confirmed.</li>
+        <li>Strategy performance results for the leaderboard &mdash; none collected yet. <strong>Suggestion:</strong> begin paper-tracking each strategy against its validation gates before rewarding any performer.</li>
+        <li>Correlation values confirmed from an official source &mdash; all are analytical estimates. <strong>Suggestion:</strong> compute correlations from historical bet results and document the method.</li>
+      </ul>
+    </div>
+
+    <h2>Key recommendations before any decision</h2>
+    <div class="card">
+      <ol style="margin-left:20px; color:var(--muted);">
+        <li>Review the <a href="flagged-review.html">Flagged for Review</a> page and clear or confirm each unverified item.</li>
+        <li>Do not implement any strategy until it passes every validation gate and its correlation is within cap.</li>
+        <li>Do not treat any injury-driven deficiency as confirmed until depth-chart order is verified against an official depth chart.</li>
+        <li>Assign a named reviewer to approve each suggestion before implementation (no silent changes).</li>
+        <li>Populate the leaderboard only from tracked, out-of-sample results &mdash; never from backtested or inferred data.</li>
+      </ol>
+    </div>
+
+    <h2>Sources relied on</h2>
+    <ul style="margin-left:20px; color:var(--muted);">
+      <li><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a> &mdash; official NFL injury report (Week 10, 2026)</li>
+      <li><a class="source-link" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings/</a> &mdash; official NFL standings (2026 regular season)</li>
+      <li><a class="source-link" href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">nfl.com/teams/{team}/roster</a> &mdash; official team rosters</li>
+      <li>data/strategies.csv and data/correlations.csv &mdash; analytical research (not official NFL content)</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>FL1 &mdash; Executive Summary. Data as of 2026 NFL Week 10.</div>
+    <div>Full source list: <a href="sources.html">Sources</a> &middot; Unverified items: <a href="flagged-review.html">Flagged for Review</a></div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
