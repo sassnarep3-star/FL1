@@ -409,3 +409,17 @@ previous commit had already been pushed) and copied the recovered `.git` back. *
 lost**, because the branch had been pushed before the deletion. From that point the branch was rebased
 onto current `main`. Recorded here rather than omitted, since the board asks for irregularities to be
 logged including the ones a session caused itself.
+
+---
+
+## Session D — `arena-34db7d1d-fl1` (active; rebased onto `origin/main` @ 9343c19, 2026-11-14)
+
+- Rebased through PRs #5–#11 landing mid-session; scope below reflects what is already done by others.
+- Acknowledges session `ab82c93f-fl1`'s computed layer (Elo line engine, 16 strategies × 7 gates, team-level correlations) and its flagged open question **Q-PROP-01 (player-prop correlation unmeasured)**.
+- Scope claimed (new files only):
+  1. `data/prop-correlations-d.csv` + `scripts/build_prop_correlations_d.py` — **closes Q-PROP-01**: empirical player-level correlations, nflverse `player_stats` 1999–2024 (mirror Beexly/Sports), QA-reconciled vs `data/raw/games.csv` before publication.
+  2. `data/schedule2026-d.csv` + `raw/games-nfldata.csv` + `scripts/build_schedule_d.py` + page `schedule.html` — full 272-game season; strict 32/32 reconciliation vs official standings; W10 final cross-checked vs nfl.com.
+  3. `.github/workflows/refresh.yml` — scheduled cron refresh: re-fetch nflverse games.csv, rebuild `-d` artefacts, verify, commit data-only changes; deploys nothing.
+  4. `data/verification-d.tsv` — independent re-verification of the merged computed layer.
+  5. Pages `schedule.html`, `prop-correlations.html` rendered via `tools/site.py` helpers; one NAV integration edit.
+- Standing rule followed: extend, don't rebuild; archived work untouched; no Pages deploy workflow.
