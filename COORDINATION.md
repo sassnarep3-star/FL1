@@ -736,3 +736,36 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Measured, from committed in-repo data (labelled third-party, not promoted to the registers):** C-01 rho **+0.00696** [-0.03324, +0.04831], n=6,813; parlay price penalty **-2.07 pp** (joint hit 24.35% vs 26.42% break-even at the legs' own closing prices); SIG-01 refuted (45.8% over 1,302 bets, ROI −11.6%, gate G-2b fails).
 - **Checks to re-run anything:** `python3 -m unittest discover -s tests -q` (75) · `python3 engine/demo_run.py --check` · `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 - **Left for the owner (deliberately undecided):** F-11 — whether third-party-derived values may be published as sourced (promoting C-01's rho is then a one-line change); the licence confirmation for the added MIT LICENSE; and the two-layer structure decision (F-10: `data/specs/` research registers vs `data/*.json` published registers, and `docs/pages/` beside the root site).
+
+---
+
+## Session `arena/5876146b-fl1` — claim and scope (2026-11-14)
+
+- **Session/branch:** `arena/5876146b-fl1` (Arena-managed single branch; claim pushed at first commit).
+- **Coordination check before claiming:** `origin/main` = `9d7ca32` (PR #21 merged). One open PR
+  inspected: [#22](https://github.com/sassnarep3-star/FL1/pull/22) (`arena/f1e4deb7-fl1`,
+  "Add sourced NFL price snapshot storage", files `engine/price_snapshots.py`,
+  `tests/test_price_snapshots.py`, `README.md`, `COORDINATION.md`). That session owns the
+  **price-snapshot store**; this session will not touch those files and will merge their PR at
+  integration only if it is complete and green.
+- **Claimed tasks (unclaimed at claim time; non-overlapping with PR #22):**
+
+| ID | Task | Files (owned by this session) | Status |
+|---|---|---|---|
+| M1 | Verified results feed (official-sourced, settlement-ready) + ROI/backtest computation, fail-closed | `data/results_feed.csv`, `engine/results_feed.py`, `tests/test_results_feed.py` | in progress |
+| M2 | Market origination order **side → total → moneyline**, and publish **fair line / market line / difference** as three separate columns | `data/fair_lines.csv`, `data/origination_order.json`, `engine/fair_lines.py` | in progress |
+| M3 | Leaderboard: separate **signal** from **staking** (rank on signal only) | `data/signal_vs_staking.csv`, `engine/signal_vs_staking.py` | in progress |
+| M4 | Replacement-**depth** tracking (which string replaces a missing starter), Week 10 2026 | `data/replacement_depth.csv`, `tools/build_replacement_depth.py` | in progress |
+| M5 | Correlations computed **only** from officially sourced numbers, each published **with n** | `data/correlations-official.csv` | in progress |
+| M6 | **Demotion gate**: live strategy → paper, with triggers and re-entry rules (G-14) | `data/governance_gates.json` | in progress |
+| M7 | Root-site integration pages + NAV + executive-summary/README addenda + flags | `originations.html`, `signal-vs-staking.html`, `results-feed.html`, `governance.html` (new pages), `tools/site.py` (NAV + page builders, additive), `data/flags.json` (append-only), `EXECUTIVE_SUMMARY.md`, `README.md` (append-only) | in progress |
+| M8 | Integration: verify line-by-line, merge PR #22 if complete, PR → main, confirm Pages, record here | `COORDINATION.md` | unclaimed→in progress |
+
+- **Shared-file etiquette:** `tools/site.py` gets additive NAV/page-builder edits only (session D
+  precedent); `data/flags.json`, `README.md`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` are
+  append-only. No file owned by `arena/f1e4deb7-fl1` will be edited. If PR #22 lands first, this
+  session rebases and keeps both sides' appends.
+- **Sources policy:** official-sourced values only in M1/M4/M5 tables (per-row source IDs from
+  `data/sources.tsv`); model outputs (fair lines) are labelled MODEL OUTPUT with a pinned model
+  version; third-party market prices are labelled third-party and flagged (F-17 lineage). Blank +
+  flagged wherever unverified. Nothing inferred.
