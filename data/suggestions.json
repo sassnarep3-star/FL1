@@ -310,5 +310,188 @@
   ],
   "recommendation": "A. It is the difference between a list of worries and a set of choices.",
   "impact": "Makes the review step actually completable."
+ },
+ {
+  "id": "SG16",
+  "title": "Record opening prices at origination from Week 11 onward",
+  "category": "Prices",
+  "problem": "Every open cell in the price-snapshot store is blank because no historical opening-price source exists, and nothing is being recorded prospectively either.",
+  "proposal": "The moment we publish our own line for a market, snapshot the market's opening number into the store (the fields and the validation already exist). Over time this manufactures the missing history at zero cost.",
+  "evidence": "data/price_snapshots.json coverage: 0/56 open cells filled.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [
+   "A captured market number at publication time (today: the pinned S47 feed)"
+  ],
+  "options": [
+   "Snapshot at publication. (Recommended)",
+   "Buy history later only.",
+   "Drop the open field."
+  ],
+  "recommendation": "A. It starts closing GAP-01 prospectively at zero cost and cannot make anything worse.",
+  "impact": "Opening cells fill from Week 11; open-to-close movement becomes measurable."
+ },
+ {
+  "id": "SG17",
+  "title": "Purchase a licensed opening + closing line history",
+  "category": "Prices",
+  "problem": "Closing-line value (gate G-3), honest difference columns and historical backtests all need prices with clean provenance. Today's prices are third-party and flagged.",
+  "proposal": "Buy or license a historical line feed covering the seasons we backtest, with open and close per market. This is the single purchase that unblocks the most gates.",
+  "evidence": "G-3 is BLOCKED in engine/gates.py for want of prices; flag F18; question Q21.",
+  "effort": "Medium (cost unknown)",
+  "risk": "Low",
+  "reversibility": "Reversible (stop renewing)",
+  "prerequisites": [
+   "Budget approval"
+  ],
+  "options": [
+   "Buy licensed history. (Recommended)",
+   "Continue third-party capture with badges.",
+   "Blank all price cells."
+  ],
+  "recommendation": "A if budget allows; B is the honest interim and is what runs now.",
+  "impact": "G-3 becomes evaluable; difference columns stop carrying the third-party badge; backtests gain a defensible price basis."
+ },
+ {
+  "id": "SG18",
+  "title": "Adopt the signal/staking split and the demotion gate as written competition rules",
+  "category": "Competition",
+  "problem": "Without the split, a lucky staking run ranks above good signal; without demotion, a live badge outlives the edge that earned it.",
+  "proposal": "Rank on the signal block only (engine/backtest.py), report staking separately, and demote live strategies to paper on any of D1/D2/D3 (engine/demotion.py, gate G-14).",
+  "evidence": "data/leaderboard_signal_staking.json re-ranks the 16 computed-layer strategies on signal; flag F23 publishes the thresholds.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "Rules can be amended between seasons",
+  "prerequisites": [
+   "Q24/Q25 rule decisions"
+  ],
+  "options": [
+   "Adopt with published thresholds. (Recommended)",
+   "Adopt with different thresholds.",
+   "Rank on a blended signal+staking score."
+  ],
+  "recommendation": "A. Blending re-opens the door the requirement exists to close.",
+  "impact": "Lucky staking cannot mask bad signal; decaying strategies return to paper automatically."
+ },
+ {
+  "id": "SG19",
+  "title": "Capture official injury and depth snapshots weekly",
+  "category": "Data",
+  "problem": "One week of injury captures exists. Correlation C-A4 (availability vs margin) is stuck at n=1, and replacement depth only reflects Week 10.",
+  "proposal": "Extend the weekly refresh workflow to capture the official injury report and club depth charts each week of the season, appending to the verified feed.",
+  "evidence": "data/correlations_official.json C-A4 row (n=1, blank); .github/workflows/refresh.yml already runs weekly.",
+  "effort": "Medium",
+  "risk": "Low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [
+   "Stable capture tooling (exists)"
+  ],
+  "options": [
+   "Automate weekly capture. (Recommended)",
+   "Manual capture",
+   "Only at season milestones."
+  ],
+  "recommendation": "A. The correlation register's n is the decision-quality bottleneck.",
+  "impact": "C-A4 becomes computable; replacement depth tracks the whole season."
+ },
+ {
+  "id": "SG20",
+  "title": "Decide the market-price publication policy (F-18 / F-11)",
+  "category": "Policy",
+  "problem": "The brief both demands the market-line column and forbids unconfirmed values. The sprint resolved it provisionally with a THIRD_PARTY badge; the owner should ratify or overrule.",
+  "proposal": "Pick one of three policies and record it: (A) publish third-party prices with badge + flag [current], (B) strict blank on every market cell, (C) licensed feed then publish as sourced.",
+  "evidence": "flags F18/F11; question Q23; amended footer describing the badge.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "One edit per policy switch",
+  "prerequisites": [],
+  "options": [
+   "A: badge + flag. (Recommended interim)",
+   "B: strict blank.",
+   "C: licensed feed."
+  ],
+  "recommendation": "A until C is affordable, then C. B if the no-price promise must hold absolutely.",
+  "impact": "Sets what the line board, snapshots and leaderboard are allowed to display."
+ },
+ {
+  "id": "SG21",
+  "title": "Unify the leaderboard wording across the two site layers (F-19)",
+  "category": "Documentation",
+  "problem": "The root Leaderboard page said no backtest existed anywhere in the repository while the computed layer publishes 16 backtested strategies over third-party data.",
+  "proposal": "Point the root page at the computed layer explicitly: plan-level strategies (official data only) and computed-layer backtests (third-party, flagged) are two different registers and should say so.",
+  "evidence": "flag F19; strategies.html; docs/pages/leaderboard.html.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [],
+  "options": [
+   "Point root page at computed layer. (Recommended)",
+   "Remove computed backtests.",
+   "Keep both as-is."
+  ],
+  "recommendation": "A. Both registers are useful; the error was the word 'anywhere'.",
+  "impact": "A reader stops being told two contradictory things."
+ },
+ {
+  "id": "SG22",
+  "title": "Annotate, do not rename, the Week 10 board columns (F-21)",
+  "category": "Data",
+  "problem": "week10_signal_board.csv's 'closing_spread_home' column actually holds the AWAY team's spread (V8-verified), and 'market_implied_home_winprob' derives from an unvalidated formula.",
+  "proposal": "Add a convention note and derived home-view column; leave original column names in place so existing consumers do not break. Exclude the implied-probability column from decision pages.",
+  "evidence": "check V8 (data/verification-d.tsv); flag F21; the line board already negates per row and says so.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [],
+  "options": [
+   "Annotate + derived column. (Recommended)",
+   "Rename columns.",
+   "Leave untouched."
+  ],
+  "recommendation": "A. Renaming breaks consumers; leaving it silently keeps misleading readers.",
+  "impact": "Nobody reads the away spread as the home spread again."
+ },
+ {
+  "id": "SG23",
+  "title": "Extend the verified results feed through the season in the weekly workflow",
+  "category": "Operations",
+  "problem": "The feed holds weeks 1-10. Backtests and ROI recompute as results land; nothing appends them automatically.",
+  "proposal": "Wire scripts/build_results_feed.py and the standings cross-check into .github/workflows/refresh.yml so the feed extends weekly and fails loudly if the standings check breaks.",
+  "evidence": "data/results_feed.json (137 rows); the build already proves 32/32 standings agreement.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [
+   "Weekly official results capture (SG19 shares the plumbing)"
+  ],
+  "options": [
+   "Wire into refresh.yml. (Recommended)",
+   "Manual weekly build",
+   "Snapshot only."
+  ],
+  "recommendation": "A. The verification is already automated; it should simply run.",
+  "impact": "ROI and backtests stay current all season with the same provenance bar."
+ },
+ {
+  "id": "SG24",
+  "title": "Fix the computed layer's break-even to use per-bet odds, then re-run its gates (F25)",
+  "category": "Data",
+  "problem": "The computed-layer leaderboard's breakeven_hit is 1/(1+realized ROI), a circular quantity, so its G4 'beats_vig' gate is unusable and every strategy is failed by construction.",
+  "proposal": "In scripts/strategy_lab.py, compute the hurdle from the odds already in the bet ledger (mean of 1/decimal odds across settled bets, or per-bet break-even), regenerate leaderboard.csv, and re-run the gate columns. A one-line change to avg_dec semantics plus a rebuild.",
+  "evidence": "flag F25; data/leaderboard_signal_staking.json transcribes the wrong value with a warning rather than silently fixing another session's dataset.",
+  "effort": "Low",
+  "risk": "Medium (changes computed-layer verdicts)",
+  "reversibility": "Reversible (git history holds the old build)",
+  "prerequisites": [
+   "Owner acceptance that computed-layer verdicts may flip"
+  ],
+  "options": [
+   "Fix + rebuild + re-verify. (Recommended)",
+   "Leave and read G4 as unusable.",
+   "Drop G4 from the computed layer."
+  ],
+  "recommendation": "A. The odds are already in the ledger; the correct number is one line away.",
+  "impact": "The computed leaderboard's gate columns become meaningful; the signal split can then rank against true price hurdles."
  }
 ]

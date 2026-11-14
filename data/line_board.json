@@ -1,0 +1,1026 @@
+{
+ "id": "line_board",
+ "title": "Line board \u2014 model fair line, market line, difference (separate columns)",
+ "updated": "2026-11-14",
+ "requirement": "R24",
+ "order_requirement": "R23 \u2014 SIDE first, then TOTAL, then MONEYLINE",
+ "description": "Three separate columns per originated market, in the mandated origination order. difference = model fair - market, blank when either side is blank. The model is the published naive baseline (engine/fairline.py) computed from official standings and results only; its coefficients are printed on the page with their n. The market column is a pinned third-party capture \u2014 no official league source prices NFL markets (flag F18) \u2014 and the moneyline market cell is blank because none was captured (flag F20).",
+ "conventions": {
+  "side_perspective": "HOME-view spread (negative = home favourite)",
+  "difference": "model_fair_line - market_line",
+  "band": "1.96 * sd_margin / sqrt(min games played), sampling error of the margin estimate; reported so the point estimate is not read as precision"
+ },
+ "coefficients": {
+  "home_field_advantage_points": -0.022,
+  "hfa_n_games": 137,
+  "margin_sd_points": 13.225,
+  "margin_sd_n_games": 137,
+  "strength": "(PF-PA)/G per club, official standings",
+  "total": "(PPG_h + OPPG_h + PPG_a + OPPG_a)/2",
+  "ml_prob": "Phi(fair_margin / margin_sd)",
+  "tier": "COMPUTED"
+ },
+ "coverage": {
+  "games": 14,
+  "markets": 42,
+  "fair_filled": 42,
+  "market_filled": 28,
+  "difference_filled": 28
+ },
+ "rows": [
+  {
+   "game": "WAS @ NYG",
+   "gameday": "2026-11-12",
+   "market_type": "SIDE",
+   "model_fair_line": -1.9,
+   "model_band": 8.6,
+   "market_line": -1.5,
+   "difference": -0.4,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread 1.5 (V8 transform)",
+   "result": "WAS 24 @ NYG 21",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "WAS @ NYG",
+   "gameday": "2026-11-12",
+   "market_type": "TOTAL",
+   "model_fair_line": 45.4,
+   "model_band": 8.6,
+   "market_line": 40.5,
+   "difference": 4.9,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "WAS 24 @ NYG 21",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "WAS @ NYG",
+   "gameday": "2026-11-12",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.5561,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "WAS 24 @ NYG 21",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "BUF @ NYJ",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 6.6,
+   "model_band": 9.2,
+   "market_line": 8.5,
+   "difference": -1.9,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread -8.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "BUF @ NYJ",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 50.2,
+   "model_band": 9.2,
+   "market_line": 50.5,
+   "difference": -0.3,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "BUF @ NYJ",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.3085,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "CAR @ NO",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 0.7,
+   "model_band": 9.2,
+   "market_line": -2.5,
+   "difference": 3.2,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread 2.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "CAR @ NO",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 51.2,
+   "model_band": 9.2,
+   "market_line": 48.5,
+   "difference": 2.7,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "CAR @ NO",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.4786,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "HOU @ CLE",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 3.0,
+   "model_band": 9.2,
+   "market_line": 4.5,
+   "difference": -1.5,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread -4.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "HOU @ CLE",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 44.9,
+   "model_band": 9.2,
+   "market_line": 40.5,
+   "difference": 4.4,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "HOU @ CLE",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.4094,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "JAX @ TEN",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 10.2,
+   "model_band": 9.2,
+   "market_line": 10.5,
+   "difference": -0.3,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread -10.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "JAX @ TEN",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 43.3,
+   "model_band": 9.2,
+   "market_line": 46.5,
+   "difference": -3.2,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "JAX @ TEN",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.2201,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "KC @ ATL",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 5.7,
+   "model_band": 9.2,
+   "market_line": 3.0,
+   "difference": 2.7,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread -3.0 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "KC @ ATL",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 44.4,
+   "model_band": 9.2,
+   "market_line": 47.5,
+   "difference": -3.1,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "KC @ ATL",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.3345,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "LAR @ ARI",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 6.1,
+   "model_band": 8.6,
+   "market_line": 9.5,
+   "difference": -3.4,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread -9.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "LAR @ ARI",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 46.0,
+   "model_band": 8.6,
+   "market_line": 39.5,
+   "difference": 6.5,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "LAR @ ARI",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.3214,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "MIA @ IND",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": -1.0,
+   "model_band": 9.2,
+   "market_line": -3.5,
+   "difference": 2.5,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread 3.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "MIA @ IND",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 44.4,
+   "model_band": 9.2,
+   "market_line": 38.5,
+   "difference": 5.9,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "MIA @ IND",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.5299,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "MIN @ GB",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 0.5,
+   "model_band": 9.2,
+   "market_line": -2.5,
+   "difference": 3.0,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread 2.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "MIN @ GB",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 39.0,
+   "model_band": 9.2,
+   "market_line": 42.5,
+   "difference": -3.5,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "MIN @ GB",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.4847,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "NE @ DET",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": -1.8,
+   "model_band": 9.2,
+   "market_line": -2.5,
+   "difference": 0.7,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread 2.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "NE @ DET",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 48.9,
+   "model_band": 9.2,
+   "market_line": 49.5,
+   "difference": -0.6,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "NE @ DET",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.5547,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "PIT @ CIN",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": -1.8,
+   "model_band": 9.2,
+   "market_line": -3.5,
+   "difference": 1.7,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread 3.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "PIT @ CIN",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 46.2,
+   "model_band": 9.2,
+   "market_line": 49.5,
+   "difference": -3.3,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "PIT @ CIN",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.5538,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "SEA @ LV",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 3.9,
+   "model_band": 8.6,
+   "market_line": 6.5,
+   "difference": -2.6,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread -6.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "SEA @ LV",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 48.3,
+   "model_band": 8.6,
+   "market_line": 40.5,
+   "difference": 7.8,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "SEA @ LV",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.3837,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "SF @ DAL",
+   "gameday": "2026-11-15",
+   "market_type": "SIDE",
+   "model_fair_line": 4.4,
+   "model_band": 9.2,
+   "market_line": 4.5,
+   "difference": -0.1,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread -4.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "SF @ DAL",
+   "gameday": "2026-11-15",
+   "market_type": "TOTAL",
+   "model_fair_line": 51.2,
+   "model_band": 9.2,
+   "market_line": 55.5,
+   "difference": -4.3,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "SF @ DAL",
+   "gameday": "2026-11-15",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.3696,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  },
+  {
+   "game": "LAC @ BAL",
+   "gameday": "2026-11-16",
+   "market_type": "SIDE",
+   "model_fair_line": -3.5,
+   "model_band": 9.2,
+   "market_line": -4.5,
+   "difference": 1.0,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "home-view = negated verbatim away spread 4.5 (V8 transform)",
+   "result": "",
+   "flags": [
+    "F18",
+    "F21"
+   ]
+  },
+  {
+   "game": "LAC @ BAL",
+   "gameday": "2026-11-16",
+   "market_type": "TOTAL",
+   "model_fair_line": 44.9,
+   "model_band": 9.2,
+   "market_line": 38.5,
+   "difference": 6.4,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "THIRD_PARTY",
+   "market_sources": [
+    "S47"
+   ],
+   "difference_tier": "COMPUTED-OVER-THIRD-PARTY",
+   "market_note": "captured closing total",
+   "result": "",
+   "flags": [
+    "F18"
+   ]
+  },
+  {
+   "game": "LAC @ BAL",
+   "gameday": "2026-11-16",
+   "market_type": "MONEYLINE",
+   "model_fair_line": 0.6041,
+   "model_band": null,
+   "market_line": null,
+   "difference": null,
+   "fair_tier": "COMPUTED",
+   "fair_sources": [
+    "S03",
+    "S50"
+   ],
+   "market_tier": "BLANK",
+   "market_sources": [],
+   "difference_tier": "BLANK",
+   "market_note": "no moneyline price captured (flag F20)",
+   "result": "",
+   "flags": [
+    "F20"
+   ]
+  }
+ ]
+}

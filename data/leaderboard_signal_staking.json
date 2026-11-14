@@ -1,0 +1,512 @@
+{
+ "id": "leaderboard_signal_staking",
+ "title": "Leaderboard split \u2014 signal vs staking (rank is signal-only)",
+ "updated": "2026-11-14",
+ "requirement": "R25",
+ "description": "The rank column is computed from the SIGNAL block only: flat-stake hit rate, ranked on the 95% lower bound against the standard -110 reference hurdle. The STAKING block (ROI at actual stakes, profit, drawdown) is reported beside it and can never change a rank. Source dataset: data/leaderboard.csv (computed layer over third-party data \u2014 flagged), stakes flat 1 unit. The dataset's breakeven_hit column is circular (flag F25) and is transcribed only for audit.",
+ "ranking_rule": "signal_rank = order by (hit_ci_low - reference_hurdle) descending; ties break on larger settled sample. Profit and ROI are reported, never ranked on.",
+ "demotion": "No entry is LIVE in this dataset (all verdicts REJECTED/UNRANKED pending gates), so gate G-14 (engine/demotion.py) has nothing to demote yet; it will apply the moment an entry goes live.",
+ "coverage": {
+  "entries": 16,
+  "signal_proven": 0,
+  "best_signal": "DIV_DOG_AND_ELO"
+ },
+ "rows": [
+  {
+   "strategy_id": "DIV_DOG_AND_ELO",
+   "family": "conjunction",
+   "market": "spread",
+   "description": "Divisional road dog where Elo also rates the home side no better than the market.",
+   "signal": {
+    "settled": 936,
+    "hit_rate": 0.5427,
+    "hit_ci_low": 0.5107,
+    "hit_ci_high": 0.5744,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.01311,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 0.9458,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": 0.0573,
+    "roi_se": 0.0318,
+    "profit_units": 53.673,
+    "max_drawdown": -27.445,
+    "oos_roi": 0.0805,
+    "oos_settled": 282.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 5,
+   "signal_rank": 1
+  },
+  {
+   "strategy_id": "DIV_AWAY_DOG",
+   "family": "situational",
+   "market": "spread",
+   "description": "Divisional games: take the road underdog.",
+   "signal": {
+    "settled": 1142,
+    "hit_rate": 0.5368,
+    "hit_ci_low": 0.5078,
+    "hit_ci_high": 0.5655,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.01601,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 0.9556,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": 0.0464,
+    "roi_se": 0.0288,
+    "profit_units": 53.012,
+    "max_drawdown": -31.005,
+    "oos_roi": 0.0553,
+    "oos_settled": 364.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 4,
+   "signal_rank": 2
+  },
+  {
+   "strategy_id": "WIND15_UNDER",
+   "family": "weather",
+   "market": "total",
+   "description": "Games with wind >= 15 mph: bet the under.",
+   "signal": {
+    "settled": 425,
+    "hit_rate": 0.5506,
+    "hit_ci_low": 0.5031,
+    "hit_ci_high": 0.5972,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.02071,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 0.9326,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": 0.0723,
+    "roi_se": 0.0471,
+    "profit_units": 30.714,
+    "max_drawdown": -13.482,
+    "oos_roi": 0.0566,
+    "oos_settled": 113.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 3,
+   "signal_rank": 3
+  },
+  {
+   "strategy_id": "ELO_MKT_2.5",
+   "family": "market_devig",
+   "market": "spread",
+   "description": "Same Elo-vs-close signal at a >= 2.5 point disagreement threshold.",
+   "signal": {
+    "settled": 2469,
+    "hit_rate": 0.5205,
+    "hit_ci_low": 0.5008,
+    "hit_ci_high": 0.5402,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.02301,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 0.9912,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": 0.0089,
+    "roi_se": 0.0195,
+    "profit_units": 21.979,
+    "max_drawdown": -44.067,
+    "oos_roi": -0.0236,
+    "oos_settled": 811.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 4
+  },
+  {
+   "strategy_id": "ELO_MKT_1.5",
+   "family": "market_devig",
+   "market": "spread",
+   "description": "Bet the side where a causal pre-game Elo number disagrees with the closing spread by >= 1.5 points.",
+   "signal": {
+    "settled": 3460,
+    "hit_rate": 0.5168,
+    "hit_ci_low": 0.5001,
+    "hit_ci_high": 0.5334,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.02371,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 0.9968,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": 0.0032,
+    "roi_se": 0.0165,
+    "profit_units": 11.181,
+    "max_drawdown": -68.307,
+    "oos_roi": -0.029,
+    "oos_settled": 1163.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 5
+  },
+  {
+   "strategy_id": "REST_ADV_AWAY",
+   "family": "situational",
+   "market": "spread",
+   "description": "Visitor with >= 3 more rest days than the home team.",
+   "signal": {
+    "settled": 593,
+    "hit_rate": 0.5312,
+    "hit_ci_low": 0.491,
+    "hit_ci_high": 0.571,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.03281,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 0.9658,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": 0.0354,
+    "roi_se": 0.04,
+    "profit_units": 21.01,
+    "max_drawdown": -19.618,
+    "oos_roi": 0.049,
+    "oos_settled": 189.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 3,
+   "signal_rank": 6
+  },
+  {
+   "strategy_id": "DOME_OVER",
+   "family": "situational",
+   "market": "total",
+   "description": "Indoor games: bet the over (no weather variance).",
+   "signal": {
+    "settled": 1375,
+    "hit_rate": 0.5149,
+    "hit_ci_low": 0.4885,
+    "hit_ci_high": 0.5412,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.03531,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.0003,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.0003,
+    "roi_se": 0.0262,
+    "profit_units": -0.422,
+    "max_drawdown": -36.317,
+    "oos_roi": -0.0018,
+    "oos_settled": 557.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 7
+  },
+  {
+   "strategy_id": "PROB_GAP_6PT",
+   "family": "market_devig",
+   "market": "spread",
+   "description": "Win-probability gap: model win prob vs the win prob implied by the closing spread, >= 6 pts.",
+   "signal": {
+    "settled": 3807,
+    "hit_rate": 0.4944,
+    "hit_ci_low": 0.4785,
+    "hit_ci_high": 0.5103,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.04531,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.0324,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.0314,
+    "roi_se": 0.0159,
+    "profit_units": -119.552,
+    "max_drawdown": -133.47,
+    "oos_roi": -0.0486,
+    "oos_settled": 1299.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 8
+  },
+  {
+   "strategy_id": "__CONTROL_MARKET",
+   "family": "control",
+   "market": "spread",
+   "description": "CONTROL: bet every home team at the close. Not a strategy \u2014 it measures house vig.",
+   "signal": {
+    "settled": 5067,
+    "hit_rate": 0.4865,
+    "hit_ci_low": 0.4728,
+    "hit_ci_high": 0.5003,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.05101,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.0547,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.0519,
+    "roi_se": 0.0137,
+    "profit_units": -263.008,
+    "max_drawdown": -285.018,
+    "oos_roi": -0.0534,
+    "oos_settled": 1713.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 9
+  },
+  {
+   "strategy_id": "BIG_FAV_FADE",
+   "family": "situational",
+   "market": "spread",
+   "description": "Fade a home favourite of 10+ with the road underdog.",
+   "signal": {
+    "settled": 526,
+    "hit_rate": 0.5076,
+    "hit_ci_low": 0.465,
+    "hit_ci_high": 0.5501,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.05881,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.0225,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.022,
+    "roi_se": 0.0421,
+    "profit_units": -11.574,
+    "max_drawdown": -30.175,
+    "oos_roi": -0.1211,
+    "oos_settled": 150.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 10
+  },
+  {
+   "strategy_id": "DOME_UNDER",
+   "family": "situational",
+   "market": "total",
+   "description": "Indoor games: bet the under. (Paired with DOME_OVER to show the search is symmetric.)",
+   "signal": {
+    "settled": 1375,
+    "hit_rate": 0.4851,
+    "hit_ci_low": 0.4588,
+    "hit_ci_high": 0.5115,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.06501,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.06,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.0566,
+    "roi_se": 0.0262,
+    "profit_units": -77.837,
+    "max_drawdown": -80.845,
+    "oos_roi": -0.0699,
+    "oos_settled": 557.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 11
+  },
+  {
+   "strategy_id": "DIV_HOME_DOG",
+   "family": "situational",
+   "market": "spread",
+   "description": "Divisional games: take the home underdog.",
+   "signal": {
+    "settled": 703,
+    "hit_rate": 0.4922,
+    "hit_ci_low": 0.4554,
+    "hit_ci_high": 0.5291,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.06841,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.045,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.043,
+    "roi_se": 0.0367,
+    "profit_units": -30.242,
+    "max_drawdown": -52.796,
+    "oos_roi": 0.0243,
+    "oos_settled": 246.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 12
+  },
+  {
+   "strategy_id": "REST_ADV",
+   "family": "situational",
+   "market": "spread",
+   "description": "Home team with >= 3 more rest days than the visitor; bet the rested home side.",
+   "signal": {
+    "settled": 483,
+    "hit_rate": 0.4969,
+    "hit_ci_low": 0.4525,
+    "hit_ci_high": 0.5413,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.07131,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.0335,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.0324,
+    "roi_se": 0.0444,
+    "profit_units": -15.638,
+    "max_drawdown": -34.275,
+    "oos_roi": -0.0256,
+    "oos_settled": 180.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 13
+  },
+  {
+   "strategy_id": "WIND_COLD_UNDER",
+   "family": "weather",
+   "market": "total",
+   "description": "Cold AND windy (temp <= 40F, wind >= 12 mph): bet the under.",
+   "signal": {
+    "settled": 180,
+    "hit_rate": 0.5222,
+    "hit_ci_low": 0.4495,
+    "hit_ci_high": 0.5939,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.07431,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 0.9884,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": 0.0118,
+    "roi_se": 0.0724,
+    "profit_units": 2.118,
+    "max_drawdown": -11.251,
+    "oos_roi": -0.0758,
+    "oos_settled": 56.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 0,
+   "signal_rank": 14
+  },
+  {
+   "strategy_id": "REST_AND_ELO",
+   "family": "conjunction",
+   "market": "spread",
+   "description": "Conjunction: home rested 3+ days more AND Elo also likes the home side by 1+.",
+   "signal": {
+    "settled": 120,
+    "hit_rate": 0.4583,
+    "hit_ci_low": 0.3718,
+    "hit_ci_high": 0.5474,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.15201,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.1275,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.1131,
+    "roi_se": 0.0885,
+    "profit_units": -13.566,
+    "max_drawdown": -22.732,
+    "oos_roi": 0.0827,
+    "oos_settled": 48.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 0,
+   "signal_rank": 15
+  },
+  {
+   "strategy_id": "AVAIL_EDGE_1.5",
+   "family": "availability",
+   "market": "spread",
+   "description": "Bet AGAINST the more depleted team (weighted Out/Doubtful/Questionable starter loss). 2025 only - fails G1 by design; included to show the pipeline works, not to claim edge.",
+   "signal": {
+    "settled": 133,
+    "hit_rate": 0.4286,
+    "hit_ci_low": 0.3477,
+    "hit_ci_high": 0.5135,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG24",
+    "signal_edge_lcb": -0.17611,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.2222,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F25; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.1818,
+    "roi_se": 0.0823,
+    "profit_units": -24.183,
+    "max_drawdown": -26.164,
+    "oos_roi": -0.1818,
+    "oos_settled": 133.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 0,
+   "signal_rank": 16
+  }
+ ]
+}
