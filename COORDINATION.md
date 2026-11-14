@@ -13,6 +13,12 @@
 > **add your tasks to the top board** rather than replacing it.
 
 
+### Current task claim — `arena/725adbd2-fl1` (2026-11-14)
+
+| Task | Status | Owner | File scope | Sources / verification | Irregularities |
+|---|---|---|---|---|---|
+| Make the V9 prop-correlation verifier report unavailable local inputs/dependencies as BLOCKED rather than a false FAIL; preserve truthful verification status | in progress | arena/725adbd2-fl1 | `scripts/verify_d.py`, `data/verification-d.tsv`, this claim/completion note in `COORDINATION.md` | Local rerun of verifier and existing QA script; no external player dataset available in this workspace | Current workspace lacks NumPy/Pandas/SciPy and the uncommitted parquet mirror; V9 cannot be independently rerun here |
+
 ### Earlier board state, preserved from session C's PR #4
 
 Shared task board for the FL1 (NFL) project. All sessions must read this before starting and keep it up to date.
