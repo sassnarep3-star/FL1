@@ -3,7 +3,7 @@
     "id": "Q01",
     "category": "Scope",
     "priority": "Critical",
-    "question": "What exactly is being priced — the full-game winner, the spread, the total, or a specific prop — and for which market type first?",
+    "question": "What exactly is being priced \u2014 the full-game winner, the spread, the total, or a specific prop \u2014 and for which market type first?",
     "why_it_matters": "Every downstream choice (data needed, sample size, validation test) differs by market. A spread needs a margin model; a winner market needs only a probability. A total needs a pace model. Picking all of them at once guarantees none reaches statistical significance this season.",
     "what_we_know": "The brief asks for single bets, parlays and player-prop combos. Official NFL data supplies team scoring (PF/PA), records and game status, which is enough to specify a spread or total model.",
     "what_we_dont_know": "Which market the user wants first, and whether the goal is to beat a specific book's price or to produce an independent fair-value number.",
@@ -48,7 +48,7 @@
     "what_we_dont_know": "Whether every club publishes a machine-readable depth chart, and whether any of them agree with each other on the same date.",
     "missing_data": "A league-wide official depth feed. Full 32-club depth chart capture.",
     "source": "S08, S13, S07",
-    "blocking": "Yes — for the backup-deficiency feature",
+    "blocking": "Yes \u2014 for the backup-deficiency feature",
     "recommended_path": "Treat 'official depth chart' as unavailable. Rank depth explicitly from roster status codes plus published club depth charts, and label every derived rank as *derived*, never as official."
   },
   {
@@ -69,12 +69,12 @@
     "category": "Injury tracking",
     "priority": "High",
     "question": "How is the injury report snapped and versioned, given that it changes several times per week?",
-    "why_it_matters": "A player can be Full on Wednesday and Out on Saturday. If snapshots are not timestamped, any model trained on the report is using information that did not exist at the time — a look-ahead bias that manufactures fake skill.",
+    "why_it_matters": "A player can be Full on Wednesday and Out on Saturday. If snapshots are not timestamped, any model trained on the report is using information that did not exist at the time \u2014 a look-ahead bias that manufactures fake skill.",
     "what_we_know": "The Week 10 report captured here (S01) is a single point-in-time snapshot taken 2026-11-14, and it is already partly final: e.g. Sam Darnold is listed Out and a same-page NFL news item confirms he was ruled out.",
     "what_we_dont_know": "The exact publication cadence per club, and whether earlier-week versions are archived anywhere official and free.",
     "missing_data": "A time series of injury reports. This repo holds one snapshot only.",
     "source": "S01",
-    "blocking": "Yes — for any injury-based signal",
+    "blocking": "Yes \u2014 for any injury-based signal",
     "recommended_path": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now."
   },
   {
@@ -96,7 +96,7 @@
     "priority": "High",
     "question": "How should the cross-source irregularities found in this repo be handled?",
     "why_it_matters": "Two official pages disagree. If the build silently picks one, every downstream number inherits an unstated choice.",
-    "what_we_know": "Case 1: NFL.com's Week 10 injury page lists Myles Garrett as a Rams LB, while NFL.com's own Next Gen Stats page carries a Rams article titled 'No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article places Garrett in the Rams defense. Case 2: Aaron Donald is listed as a Did Not Participate on the Rams injury table and NFL.com's player profile shows him active with the Rams, consistent with a same-season NFL.com report that he unretired on Aug. 30 and planned a season debut. Case 3: the injury page header reads 'Week 10 of the 2026 Season' while the article slug for the same week is dated 2026 — consistent — but the Commanders' sideline game is shown as FINAL 24-21 on Nov 12 while the injury page still lists them.",
+    "what_we_know": "Case 1: NFL.com's Week 10 injury page lists Myles Garrett as a Rams LB, while NFL.com's own Next Gen Stats page carries a Rams article titled 'No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article places Garrett in the Rams defense. Case 2: Aaron Donald is listed as a Did Not Participate on the Rams injury table and NFL.com's player profile shows him active with the Rams, consistent with a same-season NFL.com report that he unretired on Aug. 30 and planned a season debut. Case 3: the injury page header reads 'Week 10 of the 2026 Season' while the article slug for the same week is dated 2026 \u2014 consistent \u2014 but the Commanders' sideline game is shown as FINAL 24-21 on Nov 12 while the injury page still lists them.",
     "what_we_dont_know": "Whether these are data-entry errors at the source, stale cached rows, or genuinely correct and our reading is wrong.",
     "missing_data": "An authoritative roster-move log to reconcile against.",
     "source": "S01, S10, S15",
@@ -113,7 +113,7 @@
     "what_we_dont_know": "The effect size any strategy will actually achieve, which is what determines the sample needed.",
     "missing_data": "Historical graded results to estimate variance.",
     "source": "S05, S02",
-    "blocking": "Yes — for the leaderboard",
+    "blocking": "Yes \u2014 for the leaderboard",
     "recommended_path": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate."
   },
   {
@@ -122,7 +122,7 @@
     "priority": "High",
     "question": "How is 'luck removed' defined operationally, rather than as a slogan?",
     "why_it_matters": "The brief asks to remove luck. That needs a testable definition or it becomes an untestable claim.",
-    "what_we_know": "Three measurable proxies exist with data we can actually get: (a) calibration — do 60% predictions win 60% of the time; (b) closing-line value — did the fair value move toward our number; (c) persistence — does the edge hold out of sample and across seasons.",
+    "what_we_know": "Three measurable proxies exist with data we can actually get: (a) calibration \u2014 do 60% predictions win 60% of the time; (b) closing-line value \u2014 did the fair value move toward our number; (c) persistence \u2014 does the edge hold out of sample and across seasons.",
     "what_we_dont_know": "Which proxy the user will accept as the definition.",
     "missing_data": "A benchmark price feed for the CLV test.",
     "source": "S03",
@@ -139,7 +139,7 @@
     "what_we_dont_know": "Whether player-level joint outcomes can be assembled at all from official sources at the depth needed, and how many observations per pair are required.",
     "missing_data": "Player game logs sufficient to estimate pairwise prop correlations.",
     "source": "S03",
-    "blocking": "Yes — for parlay and combo products",
+    "blocking": "Yes \u2014 for parlay and combo products",
     "recommended_path": "Start correlations at the team-total level where data exists. For player props, publish the method and mark correlations blank until the joint sample is adequate."
   },
   {
@@ -166,7 +166,7 @@
     "missing_data": "A decision from the user on any monetary component.",
     "source": "S03",
     "blocking": "No",
-    "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14."
+    "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first \u2014 see Q14."
   },
   {
     "id": "Q14",
@@ -230,7 +230,7 @@
     "what_we_dont_know": "The terms of use and robots policy of nfl.com and the 32 club sites, which were not reviewed in this session.",
     "missing_data": "A terms-of-use review.",
     "source": "S01",
-    "blocking": "Yes — before any scheduled fetching",
+    "blocking": "Yes \u2014 before any scheduled fetching",
     "recommended_path": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached."
   },
   {
@@ -243,7 +243,7 @@
     "what_we_dont_know": "The baseline the user considers fair.",
     "missing_data": "A stated baseline.",
     "source": "S03",
-    "blocking": "Yes — for the leaderboard",
+    "blocking": "Yes \u2014 for the leaderboard",
     "recommended_path": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy."
   },
   {
@@ -258,5 +258,70 @@
     "source": "COORDINATION.md",
     "blocking": "No",
     "recommended_path": "Keep the board current. Log every claim and every handoff with a UTC timestamp."
+  },
+  {
+    "id": "Q21",
+    "category": "Data",
+    "priority": "Critical",
+    "question": "Which licensed source will supply OPENING prices, at what capture cadence, and under what redistribution terms?",
+    "why_it_matters": "The brief requires open/close snapshots for every market originated. Closes exist as labelled third-party data; opens exist nowhere. Without a decision the store stays half-empty and opening-line movement cannot be measured at all (F18).",
+    "what_we_know": "The append-only store records phase=open quotes with source URL, source record id, capture timestamp and model version (engine/price_snapshots.py, tested). The third-party snapshot holds closes/latest only.",
+    "what_we_dont_know": "Which feed we may buy or subscribe to, its cost, and whether its terms allow display on a public site.",
+    "missing_data": "A priced feed decision and its terms of use.",
+    "source": "price-snapshots.html",
+    "blocking": "Yes",
+    "recommended_path": "Choose one feed before the next slate. Capture open at market open and close at kickoff minus one minute, per market, into the existing store. If no feed is approved, say so publicly and keep the columns blank rather than backfilling from closes."
+  },
+  {
+    "id": "Q22",
+    "category": "Model",
+    "priority": "High",
+    "question": "What acceptance criteria must a fitted fair-line model meet before its numbers populate the Origination Board?",
+    "why_it_matters": "The board's fair column is blank by design until a model exists (F19). Without pre-accepted criteria, a model could be accepted because its numbers look good rather than because they beat a baseline.",
+    "what_we_know": "The three-column board and the difference convention are fixed and tested; the validation gates G1-G8 are defined; the naive baseline is specified (season points differential per game).",
+    "what_we_dont_know": "The out-of-sample bar: log-loss versus the naive baseline, calibration tolerance, and how wide the published uncertainty band must be.",
+    "missing_data": "A pre-registered acceptance threshold set.",
+    "source": "validation.html; line-board.html",
+    "blocking": "Yes",
+    "recommended_path": "Pre-register in one commit: the model must beat the naive margin baseline on out-of-sample log loss, publish an uncertainty band with every fair line, and be sealed (hashed) before kickoff. Reject otherwise."
+  },
+  {
+    "id": "Q23",
+    "category": "Trust",
+    "priority": "Critical",
+    "question": "May third-party-derived values be published as sourced on the headline registers, or must every published value resolve to an official source?",
+    "why_it_matters": "This decides whether correlations, market numbers and historical results can ever fill in. The strict rule keeps registers blank where no official source exists; the loose rule risks a reader trusting a number the league never published.",
+    "what_we_know": "Current policy is official-only for registers, with clearly labelled third-party appendices (F17, F20). The research layer left the same question open as its item F-11.",
+    "what_we_dont_know": "Your decision.",
+    "missing_data": "None - a policy choice.",
+    "source": "flagged.html",
+    "blocking": "Yes",
+    "recommended_path": "Keep headline registers official-only and keep labelled third-party appendices as they are. The cost of the strict rule is visible blank cells; the cost of the loose rule is invisible trust leakage. Revisit only with a licensed feed (Q21)."
+  },
+  {
+    "id": "Q24",
+    "category": "Competition",
+    "priority": "High",
+    "question": "What numeric thresholds do demotion rules D1-D3 use, and when are they frozen?",
+    "why_it_matters": "The demotion gate is defined and implemented (engine/demotion.py) but its thresholds are currently documented defaults. Thresholds chosen after seeing a losing streak are as gameable as gates chosen after seeing a result.",
+    "what_we_know": "D1 rolling CLV lower bound, D2 calibration drift band, D3 concentration caps; promotion to live requires G1-G6 all PASS; too-small windows return INSUFFICIENT_DATA, never a pass.",
+    "what_we_dont_know": "Whether the proposed defaults (window 250, band 0.05, caps 45/25 percent) are the ones you want.",
+    "missing_data": "A single pre-registration commit signed off before any live stake.",
+    "source": "validation.html",
+    "blocking": "Yes",
+    "recommended_path": "Freeze the thresholds in one commit before the first live stake, review them only on the gate-review schedule, and never after a losing streak."
+  },
+  {
+    "id": "Q25",
+    "category": "Data",
+    "priority": "Medium",
+    "question": "Should the verified results feed backfill 1999-2025 from third-party rows (labelled) so backtests have history?",
+    "why_it_matters": "Backtests need seasons; the verified feed holds 137 games of 2026. The repo already holds 7,548 third-party game rows back to 1999 and the computed layer backtests on them with labels.",
+    "what_we_know": "Verified scope is 2026 to date (reconciled 32/32 against official standings). Older official scores are not machine-retrievable from nfl.com at season grain.",
+    "what_we_dont_know": "Whether backtest credibility requires official historical scores or accepts labelled third-party history.",
+    "missing_data": "A policy decision, same family as Q23.",
+    "source": "results-feed.html",
+    "blocking": "No",
+    "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
   }
 ]

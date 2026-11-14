@@ -1,0 +1,114 @@
+team,team_name,unit,slot,absent_player,absent_string,absent_game_status,absent_practice_status,replacement_player,replacement_string,depth_of_replacement,replacement_game_status,replacement_on_report,note,depth_source_id,depth_source_url,injury_source_id,injury_source_url
+ARI,Arizona Cardinals,Defense,CB,Max Melton,3,Questionable,LIMITED,Kei'Trel Clark,4,4,,,,S16,https://www.azcardinals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ARI,Arizona Cardinals,Defense,DT,Darius Robinson,2,Questionable,LIMITED,Walter Nolen III,3,3,,,,S16,https://www.azcardinals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ARI,Arizona Cardinals,Defense,NT,Roy Lopez,1,Questionable,LIMITED,Andrew Billings,2,2,,,,S16,https://www.azcardinals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ARI,Arizona Cardinals,Defense,S,Andrew Wingard,1,Questionable,DNP,Kitan Crawford,2,2,,,,S16,https://www.azcardinals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ARI,Arizona Cardinals,Offense,C,Hjalte Froholdt,1,Out,DNP,Kingsley Eguakun,2,2,,,,S16,https://www.azcardinals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ARI,Arizona Cardinals,Offense,LT,Jayden Williams,1,Questionable,LIMITED,Jedrick Wills,2,2,,,,S16,https://www.azcardinals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ARI,Arizona Cardinals,Offense,RG,Jon Gaines II,2,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S16,https://www.azcardinals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ATL,Atlanta Falcons,Defense,DE,James Pearce Jr.,6,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S17,https://www.atlantafalcons.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ATL,Atlanta Falcons,Defense,DL,Gervon Dexter Sr.,2,Questionable,LIMITED,LaCale London,3,3,,,,S17,https://www.atlantafalcons.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ATL,Atlanta Falcons,Defense,ILB,Divine Deablo,1,Doubtful,DNP,Christian Harris,2,2,,,,S17,https://www.atlantafalcons.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ATL,Atlanta Falcons,Defense,ILB,Josh Woods,3,Questionable,FULL,Kendal Daniels,4,4,,yes,,S17,https://www.atlantafalcons.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+ATL,Atlanta Falcons,Offense,WR,Zachariah Branch,4,Out,DNP,Jahan Dotson,5,5,,,,S17,https://www.atlantafalcons.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+BUF,Buffalo Bills,Defense,CB,Christian Benford,1,Questionable,FULL,Dee Alford,2,2,,,,S19,https://www.buffalobills.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+BUF,Buffalo Bills,Defense,S,Sam Franklin Jr.,2,Questionable,LIMITED,Cole Bishop,3,3,,,,S19,https://www.buffalobills.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+BUF,Buffalo Bills,Offense,RT,Spencer Brown,1,Doubtful,DNP,Tylan Grable,2,2,,,,S19,https://www.buffalobills.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+CAR,Carolina Panthers,Defense,CB,Will Lee III,3,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S20,https://www.panthers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+CAR,Carolina Panthers,Defense,LB,Bobby Okereke,4,Out,DNP,Tyrel Dodson,5,5,,,,S20,https://www.panthers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+CAR,Carolina Panthers,Defense,OLB,Jaelan Phillips,4,Questionable,FULL,Princely Umanmielen,5,5,,,,S20,https://www.panthers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+CIN,Cincinnati Bengals,Defense,S,Kyle Dugger,4,Out,DNP,Russ Yeast,5,5,,,,S22,https://www.bengals.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+CLE,Cleveland Browns,Offense,RB,Michael Burton,3,Out,DNP,Jaleel McLaughlin,4,4,,,,S23,https://www.clevelandbrowns.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+CLE,Cleveland Browns,Offense,WR,Denzel Boston,3,Questionable,LIMITED,Malachi Corley,4,4,,,,S23,https://www.clevelandbrowns.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Defense,CB,Joey Porter Jr.,1,Questionable,LIMITED,Shavon Revel Jr.,2,2,,,,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Defense,CB,DaRon Bland,4,Questionable,LIMITED,Cobie Durant,5,5,,,,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Defense,OLB,Donovan Ezeiruaku,1,Out,DNP,James Houston,2,2,,,,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Defense,S,P.J. Locke,2,Out,DNP,Juanyeh Thomas,3,3,Doubtful,yes,,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Defense,S,Juanyeh Thomas,3,Doubtful,DNP,Malik Hooker,4,4,,yes,,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Defense,S,Alijah Clark,5,Questionable,DNP,,,,,,no further player published at this slot — replacement unknown,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Offense,RB,Tyler Goodson,2,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Offense,TE,Jake Ferguson,2,Out,DNP,Luke Schoonmaker,3,3,,yes,,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DAL,Dallas Cowboys,Offense,WR,Jonathan Mingo,6,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S24,https://www.dallascowboys.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DET,Detroit Lions,Defense,CB,D.J. Reed,1,Out,DNP,Rock Ya-Sin,2,2,,,,S26,https://www.detroitlions.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DET,Detroit Lions,Offense,C,Cade Mays,1,Out,DNP,Juice Scruggs,2,2,,,,S26,https://www.detroitlions.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DET,Detroit Lions,Offense,RB,Sione Vaki,2,Questionable,LIMITED,Jacob Saylors,3,3,,yes,,S26,https://www.detroitlions.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+DET,Detroit Lions,Offense,WR,Amon-Ra St. Brown,2,Questionable,LIMITED,DeAndre Carter,3,3,,,,S26,https://www.detroitlions.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Defense,EDGE,Lukas Van Ness,1,Questionable,LIMITED,Brenton Cox Jr.,2,2,,,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Defense,LB,Zaire Franklin,1,Doubtful,DNP,Ty'Ron Hopper,2,2,,yes,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Defense,NB,Javon Bullard,1,Questionable,LIMITED,Kamal Hadden,2,2,,,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Defense,S,Xavier McKinney,1,Questionable,LIMITED,Kitan Oladapo,2,2,,,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Offense,C,Sean Rhyan,1,Out,DNP,Jager Burton,2,2,,,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Offense,LG,Travis Glover,2,Questionable,LIMITED,Donovan Jennings,3,3,,,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Offense,RB,Josh Jacobs,1,Out,DNP,MarShawn Lloyd,2,2,,,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Offense,RG,Kevin Zeitler,2,Questionable,DNP,,,,,,no further player published at this slot — replacement unknown,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+GB,Green Bay Packers,Offense,TE,Josh Whyle,3,Out,DNP,Mark Redman,4,4,,,,S27,https://www.packers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+IND,Indianapolis Colts,Defense,MLB,Akeem Davis-Gaither,1,Out,DNP,CJ Allen,2,2,,yes,,S28,https://www.colts.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+IND,Indianapolis Colts,Defense,NT,Jerry Tillery,2,Out,DNP,Tim Smith,3,3,,,,S28,https://www.colts.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+IND,Indianapolis Colts,Defense,WLB,Jaylon Carlies,1,Out,DNP,Bryce Boettcher,2,2,,,,S28,https://www.colts.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+IND,Indianapolis Colts,Offense,RT,Jalen Travis,1,Out,DNP,Luke Tenuta,2,2,,,,S28,https://www.colts.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+IND,Indianapolis Colts,Offense,TE,Mo Alie-Cox,2,Out,DNP,Drew Ogletree,3,3,,,,S28,https://www.colts.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+IND,Indianapolis Colts,Offense,TE,Will Mallory,5,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S28,https://www.colts.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+JAX,Jacksonville Jaguars,Defense,NT,Jordan Davis,1,Out,LIMITED,Davon Godchaux,2,2,,,,S29,https://www.jaguars.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+JAX,Jacksonville Jaguars,Offense,C,Robert Hainsey,1,Questionable,LIMITED,Jonah Monheim,2,2,,,,S29,https://www.jaguars.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+KC,Kansas City Chiefs,Defense,CB,Mansoor Delane,2,Questionable,FULL,Jadon Canady,3,3,,,,S08,https://www.chiefs.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+KC,Kansas City Chiefs,Defense,DT,Peter Woods,3,Out,DNP,Bryson Eason,4,4,,,,S08,https://www.chiefs.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+KC,Kansas City Chiefs,Offense,RB,Kenneth Walker,1,Questionable,DNP,Emmett Johnson,2,2,,,,S08,https://www.chiefs.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+KC,Kansas City Chiefs,Offense,RB,Jaydn Ott,3,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S08,https://www.chiefs.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+KC,Kansas City Chiefs,Offense,RT,Jaylon Moore,1,Out,DNP,Joshua Ezeudu,2,2,,,,S08,https://www.chiefs.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+LAR,Los Angeles Rams,Defense,CB,Trent McDuffie,1,Questionable,LIMITED,Cam Lampkin,2,2,,,,S31,https://www.therams.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+LAR,Los Angeles Rams,Defense,OLB,Myles Garrett,3,Questionable,DNP,Josaiah Stewart,4,4,,,,S31,https://www.therams.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+LAR,Los Angeles Rams,Defense,S,Kam Curl,4,Questionable,LIMITED,Jaylen McCollough,5,5,,,,S31,https://www.therams.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+LAR,Los Angeles Rams,Offense,LG,Steve Avila,1,Out,DNP,Bill Murray,2,2,,,,S31,https://www.therams.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+LAR,Los Angeles Rams,Offense,TE,Davis Allen,1,Questionable,LIMITED,Tyler Higbee,2,2,,yes,,S31,https://www.therams.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+LV,Las Vegas Raiders,Offense,WR,Dont'e Thornton Jr.,3,Questionable,DNP,Tre Tucker,4,4,,,,S32,https://www.raiders.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIA,Miami Dolphins,Offense,C,Aaron Brewer,1,Out,DNP,Andrew Meyer,2,2,,,,S33,https://www.miamidolphins.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIA,Miami Dolphins,Offense,WR,Jared Wayne,2,Out,DNP,Malik Washington,3,3,,,,S33,https://www.miamidolphins.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIA,Miami Dolphins,Offense,WR,Chris Bell,5,Doubtful,DNP,Jalen Tolbert,6,6,,,,S33,https://www.miamidolphins.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIN,Minnesota Vikings,Defense,DL,Tyrion Ingram-Dawkins,5,Out,DNP,Elijah Williams,6,6,,,,S34,https://www.vikings.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIN,Minnesota Vikings,Defense,LB,Blake Cashman,1,Out,LIMITED,Ivan Pace Jr.,2,2,,,,S34,https://www.vikings.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIN,Minnesota Vikings,Defense,OLB,Kyle Van Noy,2,Questionable,LIMITED,Chaz Chambliss,3,3,,,,S34,https://www.vikings.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIN,Minnesota Vikings,Offense,QB,Kyler Murray,1,Out,DNP,Carson Wentz,2,2,,yes,,S34,https://www.vikings.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIN,Minnesota Vikings,Offense,TE,T.J. Hockenson,1,Out,DNP,Gavin Bartholomew,2,2,,,,S34,https://www.vikings.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIN,Minnesota Vikings,Offense,WR,Jordan Addison,3,Questionable,LIMITED,Myles Price,5,5,,,,S34,https://www.vikings.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+MIN,Minnesota Vikings,Offense,WR,Jauan Jennings,4,Out,DNP,Myles Price,5,5,,,,S34,https://www.vikings.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Defense,CB,Carlton Davis III,1,Out,DNP,Channing Canada,2,2,,,,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Defense,CB,Charles Woods,4,Questionable,FULL,Christian Gonzalez,5,5,,,,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Defense,S,Brenden Schooler,5,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,C,Ben Brown,2,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,LG,Ben Brown,1,Out,DNP,Walter Rouse,2,2,Questionable,yes,,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,LG,Walter Rouse,2,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,RB,Rhamondre Stevenson,1,Questionable,LIMITED,Corey Kiner,3,3,,,,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,RB,TreVeyon Henderson,2,Out,DNP,Corey Kiner,3,3,,,,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,RG,Walter Rouse,2,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,TE,Cameron Latu,3,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NE,New England Patriots,Offense,WR,A.J. Brown,1,Questionable,LIMITED,Efton Chism III,2,2,,,,S35,https://www.patriots.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NO,New Orleans Saints,Defense,DL,Christen Miller,4,Out,DNP,Nathan Shepherd,5,5,,,,S36,https://www.neworleanssaints.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NO,New Orleans Saints,Offense,C,Erik McCoy,1,Out,DNP,William Sherman,2,2,,,,S36,https://www.neworleanssaints.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NO,New Orleans Saints,Offense,RB,CJ Donaldson,3,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S36,https://www.neworleanssaints.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NO,New Orleans Saints,Offense,RT,Taliese Fuaga,1,Out,DNP,Mason Murphy,2,2,,,,S36,https://www.neworleanssaints.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Defense,CB,Nahshon Wright,4,Questionable,FULL,,,,,,no further player published at this slot — replacement unknown,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Defense,DL,Harrison Phillips,1,Questionable,FULL,Jack Heflin,2,2,,,,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Defense,EDGE,Joseph Ossai,4,Questionable,FULL,Nate Lynn,5,5,,,,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Defense,LB,Trevin Wallace,2,Out,DNP,Demario Davis,3,3,,,,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Defense,NB,Jarvis Brownlee Jr.,1,Questionable,LIMITED,D'Angelo Ponds,2,2,,,,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Offense,WR,Garrett Wilson,1,Questionable,FULL,Omar Cooper Jr.,2,2,Questionable,yes,,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Offense,WR,Omar Cooper Jr.,2,Questionable,FULL,Isaiah Williams,3,3,,,,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+NYJ,New York Jets,Offense,WR,Adonai Mitchell,4,Questionable,FULL,Tim Patrick,5,5,,,,S38,https://www.newyorkjets.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+SEA,Seattle Seahawks,Defense,DT,Leonard Williams,1,Out,DNP,Rylie Mills,2,2,,,,S41,https://www.seahawks.com/team/depth-chart/,S01,https://www.nfl.com/injuries/
+SEA,Seattle Seahawks,Offense,LG,Quenton Nelson,1,Out,DNP,Anthony Bradford,2,2,,yes,,S41,https://www.seahawks.com/team/depth-chart/,S01,https://www.nfl.com/injuries/
+SEA,Seattle Seahawks,Offense,LT,Charles Cross,1,Out,DNP,Josh Jones,2,2,,,,S41,https://www.seahawks.com/team/depth-chart/,S01,https://www.nfl.com/injuries/
+SEA,Seattle Seahawks,Offense,QB,Sam Darnold,1,Out,DNP,Drew Lock,2,2,,yes,,S41,https://www.seahawks.com/team/depth-chart/,S01,https://www.nfl.com/injuries/
+SF,San Francisco 49ers,Defense,LCB,Renardo Green,1,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S42,https://www.49ers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+SF,San Francisco 49ers,Defense,NB,Upton Stout,1,Questionable,LIMITED,,,,,,no further player published at this slot — replacement unknown,S42,https://www.49ers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+SF,San Francisco 49ers,Defense,RCB,Deommodore Lenoir,1,Questionable,LIMITED,Ephesians Prysock,2,2,,,,S42,https://www.49ers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+SF,San Francisco 49ers,Defense,WILL,Dre Greenlaw,1,Questionable,LIMITED,Garret Wallow,2,2,,,,S42,https://www.49ers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+SF,San Francisco 49ers,Offense,LT,Trent Williams,1,Questionable,DNP,Vederian Lowe,2,2,,,,S42,https://www.49ers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+SF,San Francisco 49ers,Offense,WR,Mike Evans,1,Out,DNP,Jordan Watkins,2,2,,,,S42,https://www.49ers.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+TEN,Tennessee Titans,Defense,LB,Cody Barton,1,Out,DNP,Cedric Gray,2,2,,,,S44,https://www.tennesseetitans.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+TEN,Tennessee Titans,Defense,LB,Anthony Hill Jr.,3,Out,DNP,Dorian Mausi,4,4,,,,S44,https://www.tennesseetitans.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+TEN,Tennessee Titans,Offense,LG,Peter Skoronski,1,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S44,https://www.tennesseetitans.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+TEN,Tennessee Titans,Offense,RB,Tyjae Spears,3,Questionable,FULL,Julius Chestnut,4,4,,,,S44,https://www.tennesseetitans.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+TEN,Tennessee Titans,Offense,WR,Carnell Tate,4,Out,DNP,Elic Ayomanor,5,5,,,,S44,https://www.tennesseetitans.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+TEN,Tennessee Titans,Special Teams,K,Tommy Townsend,2,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S44,https://www.tennesseetitans.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+WAS,Washington Commanders,Offense,TE,Colson Yankoff,4,Out,DNP,,,,,,no further player published at this slot — replacement unknown,S45,https://www.commanders.com/team/depth-chart,S01,https://www.nfl.com/injuries/
+HOU,Houston Texans,,,,,,,,,,,,"Houston publishes its depth chart as an image (F16): replacement depth cannot be derived without inference, so every field is blank",S46,https://www.houstontexans.com/team/depth-chart,S01,https://www.nfl.com/injuries/

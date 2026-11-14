@@ -193,5 +193,69 @@
       "S48"
     ],
     "action": null
+  },
+  {
+    "id": "F18",
+    "kind": "Missing source",
+    "item": "No verified source of opening (open) prices for NFL markets",
+    "detail": "The brief requires a price-snapshot store recording OPENING and CLOSING numbers for every market originated. The store (engine/price_snapshots.py) records both phases, but no verified opener source exists in this repository: the third-party games snapshot holds closing/latest values only, and the historical closing-lines file covers 2006-2025 with closes and no 2026 rows. Every open_* cell on price-snapshots.html is therefore blank. An opener inferred from a close would be a fabrication.",
+    "sourceIds": [
+      "S47"
+    ],
+    "severity": "High",
+    "action": "Open columns stay blank. Acquisition is open question Q21. The store accepts phase=open rows today; nothing else needs building."
+  },
+  {
+    "id": "F19",
+    "kind": "Model not fitted",
+    "item": "Fair-line column blank on the Origination Board",
+    "detail": "The brief requires the model's fair line, the market line and the difference published as separate columns. The three columns exist on line-board.html and the difference computes mechanically (engine/origination.py), but data/models.json deliberately leaves every model coefficient blank rather than estimated. A fair line printed today would be fabricated, and a difference computed from one arm would not be a difference, so both cells stay blank until a model is fitted and accepted (Q22).",
+    "sourceIds": [],
+    "severity": "Medium",
+    "action": "Fair and difference columns blank with the reason published. The moment a fitted model emits a fair line, exactly one column changes."
+  },
+  {
+    "id": "F20",
+    "kind": "Data provenance",
+    "item": "All market prices on this site are third-party",
+    "detail": "No official NFL source publishes betting lines. Every spread, total and moneyline number on price-snapshots.html, line-board.html and results-feed.csv comes from the committed nflverse games snapshot (S47, a community feed reconciled against official results). Rows carry the third-party source chip and are never presented as official. Whether third-party-derived values may ever be promoted into sourced registers is an open policy decision (Q23).",
+    "sourceIds": [
+      "S47"
+    ],
+    "severity": "High",
+    "action": "Third-party label kept on every price cell; official registers keep price-dependent values blank."
+  },
+  {
+    "id": "F21",
+    "kind": "Source not machine-readable",
+    "item": "Replacement depth unknown where the club publishes no further name",
+    "detail": "The replacement-depth table tracks which string replaces an affected player. It cannot do so for Houston (image-only chart, F16), and for 21 affected players whose club chart publishes no further name at that slot. Those rows carry blank replacement fields and a note instead of a guess; 91 rows do carry the club's own next name and his string (48 second-string, 17 third, 11 fourth, 13 fifth, 2 sixth).",
+    "sourceIds": [
+      "S01",
+      "S46"
+    ],
+    "severity": "Medium",
+    "action": "Blank fields with a published note. The depth distribution counts only named replacements."
+  },
+  {
+    "id": "F22",
+    "kind": "Not yet computable",
+    "item": "Week-10 availability-vs-outcome correlation blocked (CO-05)",
+    "detail": "Correlation CO-05 (per-club unavailable count vs scoring margin in the same week) is exactly the officially sourced correlation the brief asks for, but at capture time only the Thursday game of Week 10 is settled: n=0 joint observations exist. The row is published with n=0 and blank value, not estimated from other weeks and presented as Week 10. It becomes computable when the week settles.",
+    "sourceIds": [
+      "S01",
+      "S04"
+    ],
+    "severity": "Low",
+    "action": "Blank value with n=0 and the reason; recompute via tools/build_correlations_official.py after the week settles."
+  },
+  {
+    "id": "F23",
+    "kind": "Build irregularity (found and fixed)",
+    "item": "Hand-edited validation.html was silently wiped by site regeneration",
+    "detail": "A prior session added the demotion-gate section directly to the validation.html artefact. tools/site.py regenerates every page at the repo root, so the section disappeared on the next build. Found in this session's line-by-line review (git diff after re-running tools/site.py). Fixed by porting the section into tools/site.py's generator and regenerating; no content was lost. The pattern is the irregularity: page content must be edited in the generator, never in the generated HTML.",
+    "sourceIds": [],
+    "severity": "Medium",
+    "action": "Demotion section now generated; full regeneration + link check re-run green. Any future page change must go through tools/site.py."
   }
 ]

@@ -75,11 +75,13 @@ def schedule_page(sources_by_id):
             cell(g["market_spread_away"]), cell(g["market_total"]),
             cell("yes (reconciled)" if g["scores_verified"] else ""),
             cell(g["flags"]),
+            '<td><a class="src" href="sources.html#S47">S47</a> <a class="src" href="sources.html#S03">S03</a></td>',
         ])
     ver_rows = []
     for v in ver:
         status = f'<td>{pill(v[3], "ok" if v[3] == "PASS" else ("bad" if v[3] == "FAIL" else "warn"))}</td>' if v[3] in ("PASS", "FAIL", "FLAGGED") else cell(v[3])
-        ver_rows.append([cell(v[0]), cell(v[1]), cell(v[2]), status, cell(v[4])])
+        ver_rows.append([cell(v[0]), cell(v[1]), cell(v[2]), status, cell(v[4]),
+                         '<td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/data/verification-d.tsv">record</a></td>'])
     body = """
 <section>
 <h2>Full 2026 regular-season schedule &amp; results (272 games)</h2>
@@ -108,11 +110,11 @@ Every check recomputes from raw inputs; nothing is hand-entered.</p>
 %s
 </section>
 """ % (table(["Wk", "Date", "KO ET", "Away", "Home", "Score", "OT", "Stadium",
-              "Mkt spread (away)", "Mkt total", "Scores verified", "Flags"],
+              "Mkt spread (away)", "Mkt total", "Scores verified", "Flags", "Source"],
              out_rows, cls="dense searchable",
              caption="Away–home score shown only for played games. Mkt = third-party market "
                      "line, flagged. Blank cells are blank on purpose."),
-       table(["Check", "Description", "Result", "Status", "Source"],
+       table(["Check", "Description", "Result", "Status", "Source", "Record"],
              ver_rows, cls="dense"))
     return page("schedule.html", "Schedule 2026", body, wide=True)
 
@@ -130,6 +132,7 @@ def prop_correlations_page(sources_by_id):
         out_rows.append([
             cell(r["pair_id"]), cell(r["scope"]), cell(r["window"]),
             cell(r["n"], "n"), cell(stat), cell("computed"), cell(r["notes"]),
+            '<td><a class="src" href="sources.html#S48">S48</a></td>',
         ])
     body = """
 <section>
@@ -160,13 +163,13 @@ your favor; a correlation cap (see <a href="validation.html">validation gates</a
 <section>
 <h2>QA gates that published these numbers</h2>
 <table class="dense">
-<thead><tr><th>Gate</th><th>Definition</th><th>Status</th></tr></thead>
+<thead><tr><th>Gate</th><th>Definition</th><th>Status</th><th>Source</th></tr></thead>
 <tbody>
-<tr><td>QA1</td><td>Required player_stats columns present</td><td>PASS</td></tr>
-<tr><td>QA2</td><td>Seasons 1999–2024 complete; 2002–2020 seasons ≥ 250 team-games</td><td>PASS</td></tr>
-<tr><td>QA3</td><td>≥ 99% of team-games join a played game in data/raw/games.csv</td><td>PASS (100.00%)</td></tr>
-<tr><td>QA4</td><td>2015–2024 mean team passing yards 200–300 y/g; mean points 15–30 p/g</td><td>PASS</td></tr>
-<tr><td>QA5</td><td>Deterministic rebuild: same 12 rows on re-run (fixed bootstrap seed 42)</td><td>PASS</td></tr>
+<tr><td>QA1</td><td>Required player_stats columns present</td><td>PASS</td><td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/scripts/build_prop_correlations_d.py">script</a></td></tr>
+<tr><td>QA2</td><td>Seasons 1999–2024 complete; 2002–2020 seasons ≥ 250 team-games</td><td>PASS</td><td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/scripts/build_prop_correlations_d.py">script</a></td></tr>
+<tr><td>QA3</td><td>≥ 99% of team-games join a played game in data/raw/games.csv</td><td>PASS (100.00%)</td><td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/scripts/build_prop_correlations_d.py">script</a></td></tr>
+<tr><td>QA4</td><td>2015–2024 mean team passing yards 200–300 y/g; mean points 15–30 p/g</td><td>PASS</td><td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/scripts/build_prop_correlations_d.py">script</a></td></tr>
+<tr><td>QA5</td><td>Deterministic rebuild: same 12 rows on re-run (fixed bootstrap seed 42)</td><td>PASS</td><td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/scripts/build_prop_correlations_d.py">script</a></td></tr>
 </tbody>
 </table>
 </section>
@@ -187,7 +190,7 @@ assuming dependence.</li>
 for review, not verified league facts.</li>
 </ul>
 </section>
-""".replace("@TABLE@", table(["Pair", "Scope", "Window", "n", "Estimate (95% CI)", "Status", "Notes"],
+""".replace("@TABLE@", table(["Pair", "Scope", "Window", "n", "Estimate (95% CI)", "Status", "Notes", "Source"],
             out_rows, cls="dense searchable",
             caption="r = Pearson; ρ = Spearman; lift = P(A and B)/(P(A)P(B)) with bootstrap 95% CI."))
     return page("prop-correlations.html", "Prop Correlations", body)
