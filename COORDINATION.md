@@ -776,3 +776,62 @@ Existing price/results datasets remain third-party or capture-specific; this tas
 - **Verification:** run `python3 -m unittest discover -s tests -q`, `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, and `python3 site/build.py && python3 site/verify.py`. Tests cover open/close persistence, model-version capture, idempotency, and fail-closed validation of missing source / unsupported market and phase.
 - **Sources / irregularities:** no provider was selected and no quote was inserted. NFL official sources do not publish sportsbook prices; price values stay unverified/blank until an authorized source is acquired. The store requires explicit source URL, source record identifier, phase, timestamp and originating model version, and deliberately performs no inference.
 - **Integration record:** PR https://github.com/sassnarep3-star/FL1/pull/22 merged on 2026-11-14T22:06:18Z. CI run 43646254061 passed; GitHub Pages deployment run 43646303860 passed. Pages source remains `main` / `/`.
+
+---
+
+## Session `arena/685f958d-fl1` — task claims (brief: price store, results feed, origination, leaderboard split, demotion gate, official-only correlations)
+
+**Session ID:** `arena-685f958d-fl1` · **Branch:** `arena/685f958d-fl1` (from `main` @ `9d7ca32`, PR #21 merged) · **Status:** active
+**Protocol note:** this session works only on `arena/685f958d-fl1` (Arena single-branch policy), so file-scope isolation is used, as in earlier sessions. Checked 2026-11-14 with `gh pr list --state open`: no other PR is open on the repository. The top board's per-task statuses were not re-audited in this session.
+
+| ID | Task | Status | Owner | File scope (claimed) |
+|---|---|---|---|---|
+| B1 | Price-snapshot store: opening and closing numbers for each market we originate (side, total, moneyline) | done (store built, no prices: F18) | `arena-685f958d-fl1` | `data/price_snapshots.tsv`, `tools/brief.py` |
+| B2 | Origination order (side → total → moneyline); fair line, market line and difference as separate columns | done (market blank: F18) | `arena-685f958d-fl1` | `data/model_lines.tsv`, `tools/brief.py`, `engine/originate.py` |
+| B3 | Verified results feed + walk-forward calibration backtest (ROI stays blank until prices exist) | done (Weeks 1–9 aggregate only: F22) | `arena-685f958d-fl1` | `data/results.tsv` (read only), `data/backtest_calibration.tsv`, `tools/brief.py` |
+| B4 | Leaderboard: separate signal score from staking score; staking cannot mask a bad signal | done | `arena-685f958d-fl1` | `engine/leaderboard.py`, `tests/test_engine.py` |
+| B5 | Demotion gate G-14: live strategy returns to paper on defined triggers | done (thresholds need owner: SG17) | `arena-685f958d-fl1` | `engine/gates.py`, `data/validation_gates.json`, `tests/test_engine.py` |
+| B6 | Correlations from officially sourced numbers only, with n published; third-party rho withdrawn from publication and flagged | done (F19; rule decision: SG19) | `arena-685f958d-fl1` | `data/correlations.json` (read), `tools/brief.py`, `data/flags.json` (append only) |
+| B7 | Verification of every new row (official source links, fetch-checked), verifier script | done (10/10 checks) | `arena-685f958d-fl1` | `tools/verify_brief.py`, `data/verification-brief.tsv` |
+| B8 | Integration: site nav + new pages, executive summary, suggestions, requirements status, PR, merge, Pages check | in progress | `arena-685f958d-fl1` | `tools/site.py` (NAV + page calls only), `README.md` (append), `COORDINATION.md` |
+
+**Official sources used this session (fetched and read 2026-11-14):**
+- https://www.nfl.com/schedules/2026/REG10/ — Week 10 slate (1 final, 13 upcoming; 14 games = 28 clubs playing).
+- https://www.nfl.com/schedules/2026/by-week/week-11 — Week 11 begins Thursday 19 Nov 2026 (not in the current slate).
+- Existing verified sources in `data/sources.tsv` (S01–S04, S49) remain the anchors for injuries, standings and schedule.
+
+**Known limits, recorded up front:** no official NFL source publishes betting prices (GAP-01 / Q-02 remain open), so every market line, closing price and ROI cell stays blank, and no correlation coefficient can be computed from official joint observations yet.
+
+### Session `arena/685f958d-fl1` — completion record (task board B1–B8)
+
+**Sources (all official sources fetched and read 2026-11-14; links kept per row in the data files):**
+- Week 10 2026 official schedule, all 13 pending games: https://www.nfl.com/schedules/2026/REG10/ (S51; capture in `raw/nfl-week10-2026-capture.md`).
+- Week 10 official page (1 final, 13 pending, 4 byes CHI/DEN/PHI/TB), and the Week 11 page (first game Thu 19 Nov): https://www.nfl.com/schedules/2026/by-week/week-10 and https://www.nfl.com/schedules/2026/by-week/week-11 (S50).
+- Existing verified anchors reused: S01 (injury report), S02/S03 (standings), S49 (REG10), S48 (third-party, withheld).
+
+**Verification performed:**
+- `tools/verify_brief.py`: 10/10 PASS — V1 13 games match the official capture (URL, teams, date, kickoff, network); V2 the slate equals the repo's own unplayed Week 10 games; V3 every fair value reproduces from a fresh re-run; V4 0 market cells filled, official URL on every row; V5 39 price rows, 0 prices; V6 137 results equal the played rows of the schedule feed; V7 n on every backtest row, ROI blank; V8 no withheld coefficient on any published page; V9 F18–F22 anchors; V10 standings reconciliation still passes.
+- `python3 -m unittest discover -s tests -q`: 92 tests pass (17 new in `tests/test_brief.py`).
+- `tools/build.py`, `tools/site.py`, `tools/checklinks.py` (19 pages, all reachable, all source IDs registered), `tools/verify_injuries.py` (345/345), `site/build.py` + `site/verify.py` (all checks passed).
+- CI rebuild sequence run locally in a throwaway venv: `build_availability`, `build_correlations`, `strategy_lab`, `build_week10_board`, `build_registers`, `build_site`, then `verify_site.py` (exit 0).
+
+**Results of the work (stated plainly):**
+- Fair lines are published for the 13 pending games, in order side → total → moneyline. Market and difference cells are blank.
+- Out-of-sample backtest (weeks 4–10, n = 89): side sign accuracy 67.0% (95% CI 56.7–76.0%), but side MAE 10.49 vs a constant benchmark of 10.33, and total MAE 11.07 vs 10.96. The model does not show an advantage on margin or total. ML Brier 0.2181 vs 0.2472 for 50/50. No ROI.
+- No official price source exists, so the price store holds 39 blank rows.
+- Correlations are withheld everywhere they appeared (F19); n is kept.
+
+**Irregularities flagged (Flagged for Review, F18–F22):** no official price source (F18); third-party correlations withheld (F19); the model does not beat a constant benchmark (F20); Munich home-field assumption (F21); Weeks 1–9 results only reconciled in aggregate (F22).
+
+**Owner decisions requested (suggestions register, SG16–SG19):** price source (SG16); G-14 thresholds (SG17); line-by-line check of Weeks 1–9 (SG18); the correlation rule (SG19).
+
+**Pages changed on the root site:** `schedule.html` and `prop-correlations.html` (values withheld), `index.html` (three new cards), every page (new navigation entries), `executive-summary.html` (update banner), `suggestions.html`, `flagged.html`, `sources.html`. New pages: `model-lines.html`, `results-feed.html`, `governance.html`. Sub-site `docs/pages/measured.html` carries a withdrawal banner.
+
+**Known limits:** the requirement status changes in `data/specs/requirements.json` apply to the sub-site register only; the root `requirements.html` still reads the earlier `data/requirements.json`. Weeks 1–9 per-game verification is still open (SG18).
+
+### Integration record — `arena/685f958d-fl1` (2026-11-14, merge with `main` at `d3b4f4d`)
+
+- **Concurrent work reconciled:** `main` had advanced by PRs #22–#29 (price snapshot ledger `engine/price_snapshots.py`, `engine/snapshot_store.py`, the fail-closed results feed `engine/results_feed.py`, the Week 10 `schedule.html` and `flagged.html` regenerations, and `verify_d.py` dependency checks). These overlap by topic with B1/B3, not by file. Nothing from `main` was removed. Both sides of each conflict were kept: `COORDINATION.md` (both records), `data/flags.json` (main's F01–F17 plus this session's F18–F22; no ID collision), `flagged.html` and `assets/js/data.js` (generated, regenerated from the merged data).
+- **Checks on the merged tree:** `python3 -m unittest discover -s tests -q` OK; `tools/checklinks.py` OK; `tools/verify_brief.py` PASS 10/10; `tools/verify_injuries.py` exact; `tools/verify_results.py` ran clean; `site/build.py` + `site/verify.py` all passed; `engine/demo_run.py --check` current; `engine.measure` SIG-01 n=1302. CI rebuild sequence (`verify.yml`) reproduces with no diff in `data/` or `docs/`.
+- **Refresh workflow note:** `scripts/build_prop_correlations_d.py` exits non-zero in the sandbox because `/home/user/datawork/player_stats_weekly_archive.parquet` is a workspace-only mirror. `refresh.yml` already tolerates this with `|| echo skipped`; no change made.
+- **Left open:** the price store has no official source (F18, SG16); the correlation rule (F19, SG19); Weeks 1–9 per-game verification (F22, SG18).

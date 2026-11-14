@@ -264,3 +264,98 @@ def detectable_edge_table(hurdle: float, ns: Sequence[int], alpha: float = 0.05,
                      "min_edge_pp": round((p - hurdle) * 100, 3),
                      "seasons_at_this_volume": round(stats.required_sample(hurdle, p, alpha, power) / n, 2)})
     return rows
+
+
+# ----------------------------------------------------------------------------------------
+# G-14 Demotion gate: a LIVE strategy goes back to PAPER on defined triggers (brief item).
+#
+# Thresholds below are proposals (see suggestions register); the rule shape is fixed:
+#   R1 exposure    any stake above cfg.max_stake_units while live       -> DEMOTE (immediate)
+#   R2 sample      fewer than WINDOW settled live bets                  -> NO DECISION (stay live,
+#                                                                          reported as insufficient)
+#   R3 signal      LCB95 of equal-weight per-unit return over the last
+#                  WINDOW settled bets is below zero                    -> DEMOTE
+#   R4 CLV         LCB95 of CLV over the last WINDOW bets is below zero;
+#                  if CLV is absent the rule is NOT evaluated (never imputed) -> DEMOTE
+# Paper is not a penalty box: a demoted strategy keeps accumulating paper bets, and it
+# returns to LIVE only through repromotion_decision().
+# ----------------------------------------------------------------------------------------
+
+DEMOTION_WINDOW = 100
+REPROMOTION_WINDOW = 250
+
+
+def _lcb(values, n_boot=2000):
+    if len(values) < 20:
+        return None
+    _, lo, _ = stats.bootstrap_ci(values, n_boot=n_boot)
+    return lo
+
+
+def demotion_decision(live_bets: Sequence[dict], cfg: GateConfig | None = None,
+                      window: int = DEMOTION_WINDOW) -> dict:
+    """Decide whether a LIVE strategy stays live. Input: live bets in chronological order."""
+    cfg = cfg or GateConfig()
+    reasons, checks = [], []
+    settled = [b for b in live_bets if b.get("won") is not None and not b.get("abstained")]
+
+    breaches = [b for b in live_bets if (b.get("stake") or 0) > cfg.max_stake_units]
+    if breaches:
+        return {"gate": "G-14", "decision": "DEMOTE_TO_PAPER", "state_after": "PAPER",
+                "reasons": [f"R1 exposure: {len(breaches)} live bet(s) above the {cfg.max_stake_units}-unit cap"],
+                "checks": [("R1", "exposure breach", "FAIL")], "window": window, "n_settled": len(settled)}
+    checks.append(("R1", "exposure within cap", "PASS"))
+
+    if len(settled) < window:
+        return {"gate": "G-14", "decision": "NO_DECISION_INSUFFICIENT_SAMPLE", "state_after": "LIVE",
+                "reasons": [f"R2 sample: {len(settled)} of {window} settled live bets"],
+                "checks": checks + [("R2", "sample", "BLOCKED")], "window": window, "n_settled": len(settled)}
+    last = settled[-window:]
+    unit = [float(b.get("pnl", 0.0) or 0.0) / float(b["stake"]) for b in last]
+    lo = _lcb(unit)
+    checks.append(("R2", "sample", "PASS"))
+    if lo is not None and lo < 0:
+        reasons.append(f"R3 signal: LCB95 of per-unit return {lo:.4f} < 0 over last {window} bets")
+        checks.append(("R3", "signal LCB", "FAIL"))
+    else:
+        checks.append(("R3", "signal LCB", "PASS" if lo is not None else "BLOCKED"))
+
+    clv = [float(b["clv"]) for b in last if b.get("clv") is not None]
+    if len(clv) == window:
+        clv_lo = _lcb(clv)
+        if clv_lo is not None and clv_lo < 0:
+            reasons.append(f"R4 CLV: LCB95 {clv_lo:.4f} < 0 over last {window} bets")
+            checks.append(("R4", "CLV LCB", "FAIL"))
+        else:
+            checks.append(("R4", "CLV LCB", "PASS"))
+    else:
+        checks.append(("R4", "CLV", "NOT EVALUATED: CLV present for %d of %d bets (GAP-01)" % (len(clv), window)))
+
+    if reasons:
+        return {"gate": "G-14", "decision": "DEMOTE_TO_PAPER", "state_after": "PAPER",
+                "reasons": reasons, "checks": checks, "window": window, "n_settled": len(settled)}
+    return {"gate": "G-14", "decision": "KEEP_LIVE", "state_after": "LIVE", "reasons": [],
+            "checks": checks, "window": window, "n_settled": len(settled)}
+
+
+def repromotion_decision(paper_bets: Sequence[dict], cfg: GateConfig | None = None,
+                         window: int = REPROMOTION_WINDOW) -> dict:
+    """A PAPER strategy returns to LIVE only after a full window of paper bets with a positive
+    signal lower bound and no exposure breach. Same arithmetic as the demotion gate, stricter window."""
+    cfg = cfg or GateConfig()
+    settled = [b for b in paper_bets if b.get("won") is not None and not b.get("abstained")]
+    if any((b.get("stake") or 0) > cfg.max_stake_units for b in paper_bets):
+        return {"gate": "G-14", "decision": "STAY_PAPER", "reasons": ["exposure breach on paper record"],
+                "n_settled": len(settled), "window": window}
+    if len(settled) < window:
+        return {"gate": "G-14", "decision": "STAY_PAPER",
+                "reasons": [f"{len(settled)} of {window} settled paper bets"],
+                "n_settled": len(settled), "window": window}
+    last = settled[-window:]
+    lo = _lcb([float(b.get("pnl", 0.0) or 0.0) / float(b["stake"]) for b in last])
+    if lo is not None and lo > 0:
+        return {"gate": "G-14", "decision": "ELIGIBLE_TO_REPROMOTE", "reasons": [],
+                "n_settled": len(settled), "window": window, "signal_lcb": round(lo, 5)}
+    return {"gate": "G-14", "decision": "STAY_PAPER",
+            "reasons": [f"signal LCB95 {lo:.4f} is not above zero" if lo is not None else "signal LCB not computable"],
+            "n_settled": len(settled), "window": window}
