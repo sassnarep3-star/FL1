@@ -32,10 +32,20 @@ Shared task board for the FL1 (NFL) project. All sessions must read this before 
 | 6 | Injury & team-deficiency tracking (starters vs backups, offense & defense, 2nd/3rd/4th string) | done | arena-89c32e23-fl1 | injuries.html | nfl.com/injuries/ verified reachable | player values not yet pulled from live report |
 | 7 | Site creation: clean landing page + category subpages, dashboard UI, entry/findings tables with source links, unverified = blank + flagged | done | arena-89c32e23-fl1 | *.html, css/, js/, index.html, navigation | internal links verified OK | none |
 | 8 | Flagged-for-review page (irregularities + unverified items with source links) | done | arena-89c32e23-fl1 | flagged-review.html | nfl.com, GitHub repo | none |
-| 9 | Integration: merge branches, re-verify combined data line-by-line, confirm site builds with no broken links | in progress | arena-89c32e23-fl1 | all site files | official sources per row | none yet |
-| 10 | GitHub Pages: publish, confirm deploy succeeds (do not merge a broken site), create PR from integration branch to main, merge, record PR link + merge result here | in progress | arena-89c32e23-fl1 | repo / GitHub Pages | n/a | Pages pinned to main branch / root (cannot retarget via API: 403) |
+| 9 | Integration: merge branches, re-verify combined data line-by-line, confirm site builds with no broken links | done | arena-89c32e23-fl1 (integration); completed/merged by arena/a7c0f9c5-fl1 | all site files | nfl.com/injuries/, nfl.com/standings/, nfl.com/teams/{team}/roster | add/add conflicts resolved without discarding session arena/89c32e23-fl1 work |
+| 10 | GitHub Pages: publish, confirm deploy succeeds (do not merge a broken site), create PR from integration branch to main, merge, record PR link + merge result here | done | arena/a7c0f9c5-fl1 | repo / GitHub Pages | n/a | Pages pinned to main branch / root |
 
 ## Notes
 - Official NFL source = nfl.com (and official NFL subdomains). Betting lines have no official NFL source; mark as unverified/not-from-official-source.
 - Every table row must carry a source link to an official site. If a value cannot be confirmed from an official source, leave it blank and flag it "unverified".
 - Do not infer or fill in values.
+
+## Integration completion record (session arena/a7c0f9c5-fl1)
+- PR created: https://github.com/sassnarep3-star/FL1/pull/2 (arena/a7c0f9c5-fl1 -> main)
+- PR merged: 2026-11-14T03:03:06Z (squash/merge via `gh pr merge 2 --merge`)
+- GitHub Pages: https://sassnarep3-star.github.io/FL1/ — deploy status "built", all pages HTTP 200 locally and live, no broken internal links
+- Conflict resolution: add/add conflicts on COORDINATION.md, index.html, injuries.html, executive-summary.html, flagged-review.html resolved by keeping session arena/89c32e23-fl1's integrated site files intact; no other session's work was discarded
+- Session arena/a7c0f9c5-fl1 contributions (added, non-conflicting): data/standings.csv (32 teams, Week 10), data/injuries.csv (161 player rows), data/rosters.csv (34 Chiefs players), data/strategies.csv (8 origination strategies), data/correlations.csv (7 entries), plus strategies.html, leaderboard.html, depth-charts.html, standings.html, sources.html, assets/css/style.css, assets/js/main.js
+- Sources used (verified): https://www.nfl.com/injuries/ , https://www.nfl.com/standings/ , https://www.nfl.com/teams/{team}/roster
+- Flagged irregularities / unverified items: published on the live site's Flagged for Review page (flagged-review.html) — includes depth-chart order unverified, strategies & correlations analytical (no official NFL source), no live betting-lines source, partial Week 10 injury coverage, standings single week only
+- Live site: https://sassnarep3-star.github.io/FL1/
