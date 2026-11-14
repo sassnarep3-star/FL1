@@ -30,7 +30,29 @@ its own final integration. Per the standing rule, work is **additive**: new file
 | R27 | Correlations only from officially sourced numbers, publish **n** with each value | done | arena-360ca650-fl1 | `engine/corr_official.py`, `scripts/build_correlations_official.py`, `data/correlations_official.json`, `correlation-register.html` | official results/standings/schedule/injury captures only | Third-party correlations (measured.json, prop-correlations, correlations.csv) stay on their labelled pages, excluded from this register |
 | R28 | Demotion gate — sends a live strategy back to paper | done | arena-360ca650-fl1 | `engine/demotion.py`, `data/validation_gates.json` (append G-14), `validation.html` section | design decision + engine tests | Thresholds are proposed rules, not facts; left reviewable |
 | R29 | Registers + site integration: requirements/questions/suggestions/flags/sources append, NAV, rebuild, checks, exec summary | done | arena-360ca650-fl1 | `data/{requirements,questions,suggestions,flags}.json`, `data/sources.tsv`, `tools/site.py`, `tests/test_r21_r28.py`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | tools/checklinks.py, scripts/verify_site.py, tools/verify_injuries.py, tools/verify_results.py, unittest | — |
-| R30 | Final integration: PR → main, merge, confirm Pages deploy, record result here | unclaimed | arena-360ca650-fl1 | PR only | Pages API | — |
+| R30 | Final integration: PR → main, merge, confirm Pages deploy, record result here | done | arena-360ca650-fl1 | PR only | Pages API + live fetch | PR #33 merged as `f5b6922`; Pages `built`; live pages re-fetched clean |
+
+### Integration completion record — R30 (2026-11-14T22:55Z)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/33 (`arena/360ca650-fl1` → `main`), **merged**
+  as `f5b6922` via `gh pr merge 33 --merge` after CI (`verify-research-build` / `verify`) passed and
+  GitHub reported `MERGEABLE CLEAN`.
+- **GitHub Pages:** build for `f5b6922` → status **`built`** (`gh api repos/.../pages`; source `main` `/`).
+- **Live verification (page-fetch, not curl):** `index.html` and `line-board.html` re-fetched from
+  https://sassnarep3-star.github.io/FL1/ and read — the three separate columns (fair | market |
+  difference) render with per-cell provenance badges, coefficients with n, retagged flag links
+  (F23/F25/F26/F29), S52 source chips, and the F31 cross-links to the parallel build. Dashboard cards
+  from both sessions render; KPI wording fix confirmed.
+- **Post-merge incident (logged, no damage):** `git pull --rebase` on a branch containing the
+  reconciliation merge commit attempted to flatten it and replay `arena/685f958d-fl1`'s commits on top
+  of my line — exactly the discarding-work scenario the brief forbids. The rebase stopped on conflicts
+  before writing anything, `git rebase --abort` restored `0969c58`, and the remote was already correct.
+  **Lesson for future sessions: after a merge-conflict resolution, use `git pull --ff-only` — never
+  `--rebase` across a merge commit.**
+- **Final state:** 22 pages live; 134 unit tests OK; `tools/checklinks.py` 22 pages OK;
+  `scripts/verify_site.py` 0 errors / 0 warnings; `tools/verify_brief.py` 10/10; injuries 345/345;
+  results 32/32; `verify_d.py` V5–V9 PASS. 31 flagged items published (F01–F31), 29 questions,
+  29 suggestions — the owner's decision list is Q21–Q29 on the live Open Questions page.
 
 ### R21–R29 completion record (2026-11-14)
 
