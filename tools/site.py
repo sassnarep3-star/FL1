@@ -37,8 +37,11 @@ NAV = [
     ("schedule.html", "Schedule 2026"),
     ("prop-correlations.html", "Prop Correlations"),
 
+    ("model-lines.html", "Model Lines & Price Store"),
     ("line-origination.html", "Line Origination"),
+    ("results-feed.html", "Results Feed & Backtest"),
     ("strategies.html", "Leaderboard"),
+    ("governance.html", "Signal & Demotion"),
     ("validation.html", "Validation Gates"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
@@ -237,6 +240,12 @@ def main():
   <a class="card" href="suggestions.html"><h3>Suggestions</h3>
     <p><strong>%(n_suggestions)d</strong> proposals with options, trade-offs and one recommended path. Review before
     anything is implemented.</p></a>
+  <a class="card" href="model-lines.html"><h3>Model Lines &amp; Price Store</h3>
+    <p>Our own fair side, total and moneyline for the 13 pending Week 10 games, in that order. Market and difference cells are blank: no official price source exists.</p></a>
+  <a class="card" href="results-feed.html"><h3>Results Feed &amp; Backtest</h3>
+    <p>137 final 2026 results and a strictly out-of-sample backtest. The model does not beat a constant benchmark on margin or total; ROI is blank.</p></a>
+  <a class="card" href="governance.html"><h3>Signal &amp; Demotion</h3>
+    <p>The leaderboard ranks on signal only, staking is shown beside it, the G-14 gate sends a live strategy back to paper, and correlations are withheld.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
   <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
@@ -386,6 +395,8 @@ pages contradict each other. It does not print a single performance number. Each
        depth_cov["covered"],
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
+    import brief as _brief  # session arena/685f958d-fl1
+    es = _brief.exec_banner() + es
     written.append(page("executive-summary.html", "Executive Summary", es))
 
     # ------------------------------------------------------------ requirements
@@ -1239,6 +1250,18 @@ A pairing needs many observations before an estimate means anything; below that 
 single easiest way to manufacture apparent skill, and choosing them before a benchmark price exists would be
 arbitrary. They are registered as open question Q09 and must be fixed in one commit before any grading begins.</p>
 </section>
+
+<section>
+<h2>Demotion gate — live to paper</h2>
+<p class="lead">A strategy that has been promoted to live is not entitled to stay there. The demotion gate is
+the honest counterpart to the promotion gates: it defines when a live strategy is sent back to paper
+(research) so a decaying edge never keeps running capital.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Gate</th><th>Name</th><th>Test</th><th>Action on fail</th><th>Principle</th></tr></thead><tbody><tr><td>D1</td><td>Live-decay monitor</td><td>Rolling CLV lower bound stays below zero across the monitoring window.</td><td>Auto-demote to research; no discretionary rescue.</td><td>An edge that existed and died should not run capital.</td></tr><tr><td>D2</td><td>Calibration drift</td><td>Realised hit rate falls outside the stated probability bucket band on the holdout.</td><td>Demote and re-fit; re-clear G1-G6 before returning to live.</td><td>Stated probabilities must stay well calibrated.</td></tr><tr><td>D3</td><td>Concentration breach</td><td>One season, team, opponent cluster or stadium exceeds its allowed share of net PnL.</td><td>Demote and reduce exposure; re-clear G8 before returning to live.</td><td>One lucky year against three bad teams is not an edge.</td></tr></tbody></table></div>
+<p>The demotion thresholds are fixed before the first live stake and reviewed on the same schedule as the
+promotion gates, never after a losing streak. Because D1 needs a benchmark price to measure CLV and no
+official price source exists in this repository (flag F08), D1-D3 are defined here but are not yet active.
+No strategy can be promoted to live until a price source is supplied and the demotion rule is registered.</p>
+</section>
 """ % (
         table(["Gate", "Name", "Test", "Required artefact", "Status", "Result", "Principle"], gate_rows,
               cls="dense"),
@@ -1504,6 +1527,9 @@ verification note for each one.</p>
                  esc(f["severity"]), esc(f["detail"]), links, esc(f["action"])))
     f_html.append("</section>")
     written.append(page("flagged.html", "Flagged for Review", "".join(f_html)))
+
+    import brief  # session arena/685f958d-fl1: model lines, results feed, signal/staking/demotion
+    written.extend(brief.render(sys.modules[__name__]))
 
     print("wrote %d pages:" % len(written))
     for w in written:

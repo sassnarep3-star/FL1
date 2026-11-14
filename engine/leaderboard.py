@@ -184,3 +184,89 @@ def rank(entries: Sequence[Entry], cfg: gates.GateConfig | None = None,
     for i, r in enumerate(rows, start=1):
         r["rank"] = i if r["eligible"] else None
     return rows
+
+
+# ----------------------------------------------------------------------------------------
+# Signal versus staking (brief item: "a lucky staking run cannot mask a bad signal").
+#
+# SIGNAL  = did the bets win more than their price implies? Every settled bet counts once,
+#           weighted equally, scored as its per-unit return. Stake size plays no part.
+#           Only this number ranks the leaderboard.
+# STAKING = what did the entry's actual stake sizes earn? Dollar-weighted yield (total
+#           profit over total staked). A few large stakes on lucky results move this
+#           number; that is exactly why it is shown beside the signal and never ranks it.
+#
+# A "masking" flag is raised when the staking yield looks positive while the signal lower
+# bound is not positive. Staking reward eligibility needs BOTH to pass, so a staking run can
+# add to a strong signal but can never lift a weak one.
+# ----------------------------------------------------------------------------------------
+
+def _settled_bets(bets: Sequence[dict]) -> list:
+    return [b for b in bets if b.get("won") is not None and not b.get("abstained")
+            and (b.get("stake") or 0) > 0]
+
+
+def staking_yield_bootstrap(bets: Sequence[dict], n_boot: int = 2000, seed: int = 20261114):
+    """Dollar-weighted yield with a percentile bootstrap over BETS (pairs of pnl and stake)."""
+    import random
+    pairs = [(float(b.get("pnl", 0.0) or 0.0), float(b["stake"])) for b in bets]
+    if not pairs:
+        return None, None, None
+    total_pnl = sum(p for p, _ in pairs)
+    total_stake = sum(s for _, s in pairs)
+    point = total_pnl / total_stake
+    if len(pairs) < 20:
+        return point, None, None
+    rng = random.Random(seed)
+    n = len(pairs)
+    samples = []
+    for _ in range(n_boot):
+        pnl = stake = 0.0
+        for _ in range(n):
+            p, s = pairs[rng.randrange(n)]
+            pnl += p
+            stake += s
+        samples.append(pnl / stake)
+    samples.sort()
+    lo = samples[int(0.025 * n_boot)]
+    hi = samples[min(n_boot - 1, int(0.975 * n_boot))]
+    return point, lo, hi
+
+
+def split_scores(entry: Entry, n_boot: int = 2000) -> dict:
+    """Separate signal and staking for one entry. Returns both, the gap, and the masking flag."""
+    settled = _settled_bets(entry.bets)
+    unit = [float(b.get("pnl", 0.0) or 0.0) / float(b["stake"]) for b in settled]
+    if len(unit) >= 20:
+        sig_pt, sig_lo, sig_hi = stats.bootstrap_ci(unit, n_boot=n_boot)
+    else:
+        sig_pt = stats.mean(unit) if unit else None
+        sig_lo = sig_hi = None
+    st_pt, st_lo, st_hi = staking_yield_bootstrap(settled, n_boot=n_boot)
+    masking = bool(st_pt is not None and st_pt > 0 and (sig_lo is None or sig_lo <= 0))
+    staking_reward = bool(sig_lo is not None and sig_lo > 0 and st_lo is not None and st_lo > 0)
+    return {
+        "entry_id": entry.entry_id,
+        "author": entry.author,
+        "signal_n": len(unit),
+        "signal_mean": None if sig_pt is None else round(sig_pt, 5),
+        "signal_lcb": None if sig_lo is None else round(sig_lo, 5),
+        "signal_ucb": None if sig_hi is None else round(sig_hi, 5),
+        "staking_yield": None if st_pt is None else round(st_pt, 5),
+        "staking_lcb": None if st_lo is None else round(st_lo, 5),
+        "staking_gap": None if st_pt is None or sig_pt is None else round(st_pt - sig_pt, 5),
+        "masking_flag": masking,
+        "staking_reward_eligible": staking_reward,
+        "rank_basis": "signal lower bound only; staking is reported and cannot change this rank",
+    }
+
+
+def signal_order(rows: Sequence[dict]) -> list:
+    """Rank on the signal lower bound. Entries without a signal bound sort last, never first."""
+    def key(r):
+        lcb = r.get("signal_lcb")
+        return (lcb is None, -(lcb if lcb is not None else 0.0))
+    ordered = sorted(rows, key=key)
+    for i, r in enumerate(ordered, start=1):
+        r["signal_rank"] = i if r.get("signal_lcb") is not None else None
+    return ordered

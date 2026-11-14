@@ -5177,6 +5177,26 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "'Commanders 24, Giants 21, FINAL' cross-check (V2); 14-game slate cross-check (V3)"
+  },
+  {
+   "id": "S50",
+   "title": "NFL 2026 schedule by week (official league schedule pages, weeks 1-11)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "Week 10 page fetched 2026-11-14 (its Week 10 cards and the bye list were read). Week 11 page fetched: Thursday 19 Nov is the first Week 11 game, so it is not in the current slate. Weeks 1-9 pages are linked from the Week 10 page and are NOT re-read per game in this session; their results are reconciled to the official standings in aggregate (see F22)."
+  },
+  {
+   "id": "S51",
+   "title": "Official Week 10 2026 game pages (13 pending games)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/REG10/",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "All 13 pending games (kickoff, network, teams) matched line by line against the official REG10 page; the per-game URLs in data/slate-w10-2026.tsv are the game links printed on that page. Individual game pages were not opened. The Munich game is labelled 'International Game' on the official page."
   }
  ],
  "schedule": [
@@ -32216,6 +32236,90 @@ window.DATA = {
    ],
    "recommendation": "A. It is the difference between a list of worries and a set of choices.",
    "impact": "Makes the review step actually completable."
+  },
+  {
+   "id": "SG16",
+   "title": "Choose a betting-price source before any market column or ROI is computed",
+   "category": "Data",
+   "problem": "No official NFL source publishes betting prices. The price-snapshot store, the market columns and ROI are therefore blank (F18).",
+   "proposal": "The owner names a price source. Until then the store stays empty and nothing on the site shows a market number.",
+   "evidence": "data/price_snapshots.tsv (39 blank rows); data/model_lines.tsv (market columns blank); flagged F18.",
+   "effort": "Medium",
+   "risk": "Medium (a third-party source that looks official would be a credibility risk)",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Owner decision"
+   ],
+   "options": [
+    "Keep blank (no price source) until one is chosen. (Recommended while the decision is open.)",
+    "Owner supplies a licensed feed, labelled 'licensed, not official', with its terms recorded.",
+    "Accept the third-party nflverse closing lines as a labelled non-official source (already in data/raw/closing_lines.csv)."
+   ],
+   "recommendation": "A. Nothing should be computed against prices until the owner has chosen a source and its terms. Option C would make the ROI and the difference columns real, but would sit outside the brief's official-only rule.",
+   "impact": "Decides whether the difference column and ROI can ever be filled."
+  },
+  {
+   "id": "SG17",
+   "title": "Confirm the demotion-gate thresholds (G-14) before any strategy goes live",
+   "category": "Governance",
+   "problem": "The G-14 windows (100 bets to demote, 250 to re-promote) and the 95% lower-bound rule are proposals, not facts about football.",
+   "proposal": "The owner accepts or changes the windows and the bound. The rule shape (exposure, sample, signal, CLV) stays as written.",
+   "evidence": "engine/gates.py (demotion_decision, repromotion_decision); governance.html worked examples; tests/test_brief.py.",
+   "effort": "Low",
+   "risk": "Low while no strategy is live",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Owner decision"
+   ],
+   "options": [
+    "Keep the proposed defaults (100 to demote, 250 to re-promote, 95% lower bound). (Recommended for a paper trial.)",
+    "Longer windows (250 to demote) to make demotion slower and less noisy.",
+    "Add a drawdown trigger, which needs an owner-supplied number."
+   ],
+   "recommendation": "A. The defaults are the smallest honest windows the code supports. A drawdown number is a policy choice and should come from the owner.",
+   "impact": "Sets how quickly a live strategy is returned to paper."
+  },
+  {
+   "id": "SG18",
+   "title": "Re-read the official Week 1-9 pages game by game before any backtest is quoted",
+   "category": "Verification",
+   "problem": "Only Week 10 results were re-read per game from an official page. Weeks 1-9 are reconciled to the standings in aggregate only (F22).",
+   "proposal": "Read the nine official week pages and compare every game row (a line-by-line check), recording the result in data/verification-brief.tsv.",
+   "evidence": "data/results.tsv (137 rows); S50 (official week pages); F22.",
+   "effort": "Medium (nine page reads)",
+   "risk": "Low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Repository access"
+   ],
+   "options": [
+    "Do the nine-page line-by-line check now. (Recommended.)",
+    "Accept aggregate reconciliation for now and label every backtest accordingly.",
+    "Drop Weeks 1-9 from the model inputs until they are verified."
+   ],
+   "recommendation": "A. The backtest is only as good as its inputs, and the brief asks for line-by-line verification.",
+   "impact": "Turns the results feed from aggregate-reconciled into per-game verified."
+  },
+  {
+   "id": "SG19",
+   "title": "Decide whether any third-party-derived correlation may ever be shown",
+   "category": "Governance",
+   "problem": "Brief B6 says correlations come only from official numbers, with n shown. Every existing coefficient comes from the nflverse mirror, so all are withheld (F19).",
+   "proposal": "The owner confirms the strict rule (withheld) or allows third-party values under a visible non-official label.",
+   "evidence": "prop-correlations.html (withheld, n shown); measured.html (withdrawal banner); flagged F19.",
+   "effort": "Low",
+   "risk": "Medium if a third-party coefficient were used as a bet input",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Owner decision"
+   ],
+   "options": [
+    "Keep withheld; no coefficient is published. (Recommended, and the brief's current rule.)",
+    "Show third-party coefficients with n and a 'non-official' label, and never use them to size a bet.",
+    "Find an official joint sample (for example official box scores) before computing any correlation."
+   ],
+   "recommendation": "A. The brief is explicit. Option C is the right long-term path and needs a source that has not been found yet.",
+   "impact": "Decides whether the correlation pages ever show a number."
   }
  ],
  "requirements": [
@@ -32695,14 +32799,70 @@ window.DATA = {
    "id": "F17",
    "kind": "Data provenance",
    "item": "Player-prop correlations are computed estimates from a third-party mirror",
-   "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts.",
+   "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts. The source parquet is not committed and its prior workspace-only path is absent from this checkout; therefore the prop-correlation rebuild check V9 is BLOCKED here. The existing coefficients remain third-party-derived and were not independently regenerated in this run.",
    "source": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
    "severity": "Medium",
    "sourceIds": [
     "S47",
     "S48"
    ],
-   "action": null
+   "action": "Retain the third-party label; for reproducible refreshes, fetch a pinned source artifact and record its content hash. Until that input and QA run are available, treat V9 as BLOCKED and do not claim this checkout independently reproduced the estimates."
+  },
+  {
+   "id": "F18",
+   "kind": "Missing official source (prices)",
+   "item": "Betting prices, opening and closing lines, for every market we originate (side, total, moneyline)",
+   "detail": "No official NFL source publishes betting lines or closing prices (GAP-01; Q-02). The price-snapshot store (data/price_snapshots.tsv) therefore holds no prices. The market and difference columns in data/model_lines.tsv are blank, and so is the ROI column in the backtest. Third-party prices exist in data/raw/closing_lines.csv (nflverse) and were not promoted.",
+   "sourceIds": [
+    "S51"
+   ],
+   "severity": "High",
+   "action": "Owner decision needed: an official or licensed price feed, or an explicit decision to accept a third-party feed as a labelled non-official source. Until then every market cell stays blank."
+  },
+  {
+   "id": "F19",
+   "kind": "Correlation withheld (third-party source)",
+   "item": "Correlation values computed from nflverse / third-party data (prop correlations; C-01 measured rho)",
+   "detail": "Brief B6 requires correlations to be computed only from officially sourced numbers, with n published. The prop-correlation values (for example QB pass yards vs WR receiving yards r = 0.7887, n = 5,246; QB vs TE r = 0.3729, n = 5,208; RB rush vs RB receive r = 0.3562, n = 5,246, and the 2022-2024 window values) and the measured C-01 rho = +0.00696 (95% CI -0.03324 to +0.04831, n = 6,813) come from the third-party nflverse mirror. They are withheld from the root site and the measured page carries a withdrawal banner. n is kept for each pair. The withheld values are reproduced here for review only.",
+   "sourceIds": [
+    "S48"
+   ],
+   "severity": "High",
+   "action": "Owner to decide whether any third-party-derived correlation may be re-admitted. The current rule says no. No official joint sample of this kind exists in the repo yet (n = 0 for market pairs)."
+  },
+  {
+   "id": "F20",
+   "kind": "Model does not beat a constant benchmark out of sample",
+   "item": "Own-line fair model (side, total) backtest, weeks 4-10 of 2026",
+   "detail": "Walk-forward, strictly out of sample, n = 89 games. Side: model MAE 10.49 vs constant league-average benchmark 10.33 points; sign accuracy 67.0% (95% Wilson CI 56.7%-76.0%, n = 88). Total: model MAE 11.07 vs constant 10.96 points. Moneyline Brier 0.2181 vs 0.2472 for a 50/50 forecast. The fair lines are published as model output only. They are not a validated edge, there is no market baseline, and ROI cannot be computed (F18).",
+   "sourceIds": [
+    "S50"
+   ],
+   "severity": "High",
+   "action": "Do not treat the fair lines as a recommendation. Review the calibration table before any further model work; a larger sample (more seasons of official results) is needed before any margin claim."
+  },
+  {
+   "id": "F21",
+   "kind": "Assumption: home-field term at the Munich game",
+   "item": "Patriots at Lions, 15 Nov 2026, Munich",
+   "detail": "The official Week 10 page labels this game an 'International Game' played in Munich, Germany, and lists it as 'Patriots at Lions'. The model sets the home-field term to zero for this game. That is an assumption made by this session, not an official fact. The neutral-venue flag for the 137 results comes from the third-party schedule feed (data/schedule2026-d.csv).",
+   "sourceIds": [
+    "S51"
+   ],
+   "severity": "Low",
+   "action": "Confirm the venue convention for the fair line. The effect is at most the home-field estimate of about 0.05 points on the fitted model."
+  },
+  {
+   "id": "F22",
+   "kind": "Partial per-game verification of results",
+   "item": "137 results in data/results.tsv used as model inputs",
+   "detail": "Per-game scores were re-read from an official page only for Week 10 (Commanders 24, Giants 21, FINAL). For Weeks 1-9, the 137 results were reconciled in aggregate to the official nfl.com standings (0 mismatches across 32 clubs, from the earlier results check, verify_results.py), but each game row was not re-read from the official week page in this session.",
+   "sourceIds": [
+    "S50",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Re-read the official Week 1-9 pages and compare each game row (a line-by-line check). Until then the per-game status is 'aggregate reconciled'."
   }
  ]
 };

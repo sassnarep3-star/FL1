@@ -81,8 +81,8 @@
       "category": "Modelling",
       "requirement": "Originate our own NFL lines.",
       "acceptance": "A documented model produces a total and a spread per game from non-market inputs, with an explicit release cadence and no coefficient presented as validated until it is.",
-      "status": "SPECIFIED — PENDING DATA",
-      "delivered": "data/models.json + Methodology page. Blocked by R-31 (line history) and R-32 (drive-level history); coefficients are specified as estimable, not estimated.",
+      "status": "PARTIAL — FAIR LINES PUBLISHED; NO MARKET COMPARISON",
+      "delivered": "model-lines.html: fair side, total and moneyline for the 13 pending Week 10 games, in order. Market and difference blank (F18). Backtest shows no advantage over a constant benchmark on margin or total (F20).",
       "sources": [
         "SRC-015",
         "SRC-018"
@@ -162,7 +162,7 @@
       "requirement": "Determine correlation values.",
       "acceptance": "Correlations measured from a joint outcome sample we own or license, with stated estimator, bootstrap CI and sample size — never asserted from intuition.",
       "status": "BLOCKED — NEEDS OWNER",
-      "delivered": "Table published with every rho blank and flagged. Measurement needs historical scores plus lines: scores are derivable from official results, lines are not free.",
+      "delivered": "Withheld under brief B6 (F19). governance.html publishes n for each pair and no coefficient. No official joint sample exists yet. Decision: SG19.",
       "sources": [
         "SRC-020",
         "SRC-007"
@@ -375,7 +375,7 @@
       "requirement": "Historical opening and closing lines for backtesting and CLV.",
       "acceptance": "A licensed or purchased source with point-in-time guarantees and a documented snapshot time.",
       "status": "BLOCKED — NEEDS OWNER",
-      "delivered": "No free official source exists; the league's data is distributed exclusively (SRC-020). This is the single highest-value purchase in the programme.",
+      "delivered": "data/price_snapshots.tsv holds the store (39 blank rows, one per market per game). Still no official price source (F18). Decision: SG16.",
       "sources": [
         "SRC-020",
         "SRC-007"
@@ -479,6 +479,86 @@
       "sources": [
         "SRC-024"
       ]
+    },
+    {
+      "req_id": "R-41",
+      "category": "Data",
+      "requirement": "Price-snapshot store: opening and closing numbers for every market we originate.",
+      "acceptance": "A store exists with one row per game and market, opening and closing fields, and a source on each row; no field is filled without an official source.",
+      "status": "STORE BUILT — NO DATA",
+      "delivered": "data/price_snapshots.tsv (39 rows, all blank); model-lines.html shows it. Blocked by F18.",
+      "sources": [],
+      "no_source_reason": "Internal store design. Holds no external fact: every price field is blank until an official source is chosen (F18)."
+    },
+    {
+      "req_id": "R-42",
+      "category": "Data",
+      "requirement": "Verified results feed so backtests and ROI can be computed.",
+      "acceptance": "Every result row carries an official source and a verification status; backtests publish n and leave ROI blank without prices.",
+      "status": "PARTIAL — AGGREGATE RECONCILED",
+      "delivered": "data/results.tsv: 137 results, equal to the repo schedule feed; Week 10 re-read per game; Weeks 1–9 reconciled in aggregate (F22). results-feed.html; calibration backtest; ROI blank (F18).",
+      "sources": [],
+      "no_source_reason": "Results rows cite the official week pages in data/sources.tsv (S50); this row describes the feed and its status."
+    },
+    {
+      "req_id": "R-43",
+      "category": "Modelling",
+      "requirement": "Originate the side first, then the total, then the moneyline.",
+      "acceptance": "The three steps run in that order and the order is recorded on every row.",
+      "status": "DELIVERED",
+      "delivered": "engine/originate.py (originate_game) and model-lines.html; step order recorded in data/model_lines.tsv; tests in tests/test_brief.py.",
+      "sources": [],
+      "no_source_reason": "Method rule implemented in engine/originate.py. No external fact is asserted."
+    },
+    {
+      "req_id": "R-44",
+      "category": "Modelling",
+      "requirement": "Publish the model's fair line, the market line and the difference as separate columns.",
+      "acceptance": "Three separate columns per market; market and difference are blank unless an official source supports them.",
+      "status": "DELIVERED — MARKET BLANK",
+      "delivered": "model-lines.html and data/model_lines.tsv: fair, market and difference columns for side, total and moneyline (F18).",
+      "sources": [],
+      "no_source_reason": "Presentation rule for fair, market and difference columns. No external fact is asserted."
+    },
+    {
+      "req_id": "R-45",
+      "category": "Strategy",
+      "requirement": "Separate signal from staking on the leaderboard so a lucky staking run cannot mask a bad signal.",
+      "acceptance": "Signal ranks; staking is reported beside it and cannot change the rank; a staking reward needs both to pass.",
+      "status": "DELIVERED — CODE AND TESTS",
+      "delivered": "engine/leaderboard.py (split_scores, signal_order); worked example on governance.html; tests in tests/test_brief.py. No live entries yet.",
+      "sources": [],
+      "no_source_reason": "Leaderboard design rule implemented in engine/leaderboard.py. No external fact is asserted."
+    },
+    {
+      "req_id": "R-46",
+      "category": "Injuries",
+      "requirement": "Track the depth of the replacement, not just the fact of a replacement.",
+      "acceptance": "For each unavailable starter, the next listed player and the string number at that slot are shown.",
+      "status": "DELIVERED — EXISTING",
+      "delivered": "depth.html already lists, for each charted slot, the next player the club lists at that slot (Kansas City in full; 31 of 32 charts in the league table). No snap-count replacement claim is made.",
+      "sources": [],
+      "no_source_reason": "Existing depth page; its club sources are cited there, not on this register row."
+    },
+    {
+      "req_id": "R-47",
+      "category": "Statistics",
+      "requirement": "Compute correlations only from officially sourced numbers, and publish n with each value.",
+      "acceptance": "No coefficient from a non-official source is published; n is shown for each pair.",
+      "status": "DELIVERED — WITHHELD",
+      "delivered": "prop-correlations.html and governance.html publish n and withhold every coefficient (F19). Decision on the rule: SG19.",
+      "sources": [],
+      "no_source_reason": "Statistical policy under brief B6. No external fact is asserted."
+    },
+    {
+      "req_id": "R-48",
+      "category": "Governance",
+      "requirement": "Define a demotion gate that sends a live strategy back to paper.",
+      "acceptance": "A written rule with thresholds, executed by code, with a worked example and tests.",
+      "status": "DELIVERED — THRESHOLDS PROPOSED",
+      "delivered": "engine/gates.py (demotion_decision, repromotion_decision); governance.html rules and worked examples; tests. Thresholds need owner confirmation (SG17).",
+      "sources": [],
+      "no_source_reason": "Governance rule implemented in engine/gates.py. No external fact is asserted."
     }
   ]
 }
