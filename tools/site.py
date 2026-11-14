@@ -37,8 +37,11 @@ NAV = [
     ("schedule.html", "Schedule 2026"),
     ("prop-correlations.html", "Prop Correlations"),
 
+    ("model-lines.html", "Model Lines & Price Store"),
     ("line-origination.html", "Line Origination"),
+    ("results-feed.html", "Results Feed & Backtest"),
     ("strategies.html", "Leaderboard"),
+    ("governance.html", "Signal & Demotion"),
     ("validation.html", "Validation Gates"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
@@ -237,6 +240,12 @@ def main():
   <a class="card" href="suggestions.html"><h3>Suggestions</h3>
     <p><strong>%(n_suggestions)d</strong> proposals with options, trade-offs and one recommended path. Review before
     anything is implemented.</p></a>
+  <a class="card" href="model-lines.html"><h3>Model Lines &amp; Price Store</h3>
+    <p>Our own fair side, total and moneyline for the 13 pending Week 10 games, in that order. Market and difference cells are blank: no official price source exists.</p></a>
+  <a class="card" href="results-feed.html"><h3>Results Feed &amp; Backtest</h3>
+    <p>137 final 2026 results and a strictly out-of-sample backtest. The model does not beat a constant benchmark on margin or total; ROI is blank.</p></a>
+  <a class="card" href="governance.html"><h3>Signal &amp; Demotion</h3>
+    <p>The leaderboard ranks on signal only, staking is shown beside it, the G-14 gate sends a live strategy back to paper, and correlations are withheld.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
   <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
@@ -385,6 +394,8 @@ pages contradict each other. It does not print a single performance number. Each
        depth_cov["covered"],
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
+    import brief as _brief  # session arena/685f958d-fl1
+    es = _brief.exec_banner() + es
     written.append(page("executive-summary.html", "Executive Summary", es))
 
     # ------------------------------------------------------------ requirements
@@ -1377,6 +1388,9 @@ verification note for each one.</p>
                  esc(f["severity"]), esc(f["detail"]), links, esc(f["action"])))
     f_html.append("</section>")
     written.append(page("flagged.html", "Flagged for Review", "".join(f_html)))
+
+    import brief  # session arena/685f958d-fl1: model lines, results feed, signal/staking/demotion
+    written.extend(brief.render(sys.modules[__name__]))
 
     print("wrote %d pages:" % len(written))
     for w in written:

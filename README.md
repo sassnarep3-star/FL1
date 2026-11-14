@@ -151,3 +151,25 @@ parallel registers live under `data/specs/`.
   published alongside the right one as the audit trail.
 - **Reproduce:** `python3 -m unittest discover -s tests -q` · `python3 engine/demo_run.py --check` ·
   `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
+
+---
+
+## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
+
+- **`model-lines.html`** — own fair lines for the 13 pending Week 10 games, in the order side → total → moneyline.
+  Fair, market and difference are separate columns. Every market and difference cell is blank: no official NFL
+  source publishes prices (F18). Source: `data/model_lines.tsv`, `engine/originate.py`.
+- **`data/price_snapshots.tsv`** — the opening/closing store, one row per game and market (39 rows), all blank.
+- **`results-feed.html`** — the 137 final 2026 results used as inputs, and a strictly out-of-sample walk-forward
+  backtest (weeks 4–10, n = 89). The side model's sign accuracy is above 50%, but its margin and total errors do
+  not beat a constant benchmark (F20). ROI is blank (no prices).
+- **`governance.html`** — signal ranks the leaderboard, staking is reported beside it (`engine/leaderboard.py`
+  `split_scores`); the G-14 demotion gate sends a live strategy back to paper (`engine/gates.py`
+  `demotion_decision`); correlation values are withheld, with n shown (F19).
+- **Verification** — `tools/verify_brief.py` writes `data/verification-brief.tsv` (10 checks, incl. the 13-game slate
+  against `raw/nfl-week10-2026-capture.md`, and a fresh re-run of every fair value). `tests/test_brief.py` holds 17
+  hand-checkable tests.
+- **Withheld on purpose (brief B6):** market columns on `schedule.html`; coefficients on `prop-correlations.html`
+  (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
+- **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
+  `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.

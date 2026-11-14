@@ -35,7 +35,7 @@
   {
     "id": "F04",
     "kind": "Cross-source contradiction",
-    "item": "Myles Garrett \u2014 club attribution",
+    "item": "Myles Garrett — club attribution",
     "detail": "NFL.com's Week 10 injury report lists Myles Garrett as an LB on the Los Angeles Rams with a knee designation and a 'resting player' note. NFL.com's Next Gen Stats front page carries a 2026 Rams article titled 'Rams' Sean McVay: No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article is headlined 'How does Myles Garrett fit into Rams defense?'. These agree on the Rams but the injury-row note mixes a real knee injury with a rest designation, which the site will not attempt to untangle. No resolution applied.",
     "sourceIds": [
       "S01",
@@ -47,7 +47,7 @@
   {
     "id": "F05",
     "kind": "Cross-source contradiction",
-    "item": "Aaron Donald \u2014 listed as a non-participant while shown as active",
+    "item": "Aaron Donald — listed as a non-participant while shown as active",
     "detail": "The Week 10 Rams injury table lists Aaron Donald (DT) as 'Did Not Participate In Practice' with no injury and no game status. NFL.com's own player profile for Aaron Donald shows him as an active Los Angeles Rams DE with 11 years of experience, and an NFL.com article states he unretired on Aug. 30 and planned a season debut. Both are official NFL.com pages and they cannot both be read at face value. No resolution applied.",
     "sourceIds": [
       "S01",
@@ -193,5 +193,61 @@
       "S48"
     ],
     "action": null
+  },
+  {
+    "id": "F18",
+    "kind": "Missing official source (prices)",
+    "item": "Betting prices, opening and closing lines, for every market we originate (side, total, moneyline)",
+    "detail": "No official NFL source publishes betting lines or closing prices (GAP-01; Q-02). The price-snapshot store (data/price_snapshots.tsv) therefore holds no prices. The market and difference columns in data/model_lines.tsv are blank, and so is the ROI column in the backtest. Third-party prices exist in data/raw/closing_lines.csv (nflverse) and were not promoted.",
+    "sourceIds": [
+      "S51"
+    ],
+    "severity": "High",
+    "action": "Owner decision needed: an official or licensed price feed, or an explicit decision to accept a third-party feed as a labelled non-official source. Until then every market cell stays blank."
+  },
+  {
+    "id": "F19",
+    "kind": "Correlation withheld (third-party source)",
+    "item": "Correlation values computed from nflverse / third-party data (prop correlations; C-01 measured rho)",
+    "detail": "Brief B6 requires correlations to be computed only from officially sourced numbers, with n published. The prop-correlation values (for example QB pass yards vs WR receiving yards r = 0.7887, n = 5,246; QB vs TE r = 0.3729, n = 5,208; RB rush vs RB receive r = 0.3562, n = 5,246, and the 2022-2024 window values) and the measured C-01 rho = +0.00696 (95% CI -0.03324 to +0.04831, n = 6,813) come from the third-party nflverse mirror. They are withheld from the root site and the measured page carries a withdrawal banner. n is kept for each pair. The withheld values are reproduced here for review only.",
+    "sourceIds": [
+      "S48"
+    ],
+    "severity": "High",
+    "action": "Owner to decide whether any third-party-derived correlation may be re-admitted. The current rule says no. No official joint sample of this kind exists in the repo yet (n = 0 for market pairs)."
+  },
+  {
+    "id": "F20",
+    "kind": "Model does not beat a constant benchmark out of sample",
+    "item": "Own-line fair model (side, total) backtest, weeks 4-10 of 2026",
+    "detail": "Walk-forward, strictly out of sample, n = 89 games. Side: model MAE 10.49 vs constant league-average benchmark 10.33 points; sign accuracy 67.0% (95% Wilson CI 56.7%-76.0%, n = 88). Total: model MAE 11.07 vs constant 10.96 points. Moneyline Brier 0.2181 vs 0.2472 for a 50/50 forecast. The fair lines are published as model output only. They are not a validated edge, there is no market baseline, and ROI cannot be computed (F18).",
+    "sourceIds": [
+      "S50"
+    ],
+    "severity": "High",
+    "action": "Do not treat the fair lines as a recommendation. Review the calibration table before any further model work; a larger sample (more seasons of official results) is needed before any margin claim."
+  },
+  {
+    "id": "F21",
+    "kind": "Assumption: home-field term at the Munich game",
+    "item": "Patriots at Lions, 15 Nov 2026, Munich",
+    "detail": "The official Week 10 page labels this game an 'International Game' played in Munich, Germany, and lists it as 'Patriots at Lions'. The model sets the home-field term to zero for this game. That is an assumption made by this session, not an official fact. The neutral-venue flag for the 137 results comes from the third-party schedule feed (data/schedule2026-d.csv).",
+    "sourceIds": [
+      "S51"
+    ],
+    "severity": "Low",
+    "action": "Confirm the venue convention for the fair line. The effect is at most the home-field estimate of about 0.05 points on the fitted model."
+  },
+  {
+    "id": "F22",
+    "kind": "Partial per-game verification of results",
+    "item": "137 results in data/results.tsv used as model inputs",
+    "detail": "Per-game scores were re-read from an official page only for Week 10 (Commanders 24, Giants 21, FINAL). For Weeks 1-9, the 137 results were reconciled in aggregate to the official nfl.com standings (0 mismatches across 32 clubs, from the earlier results check, verify_results.py), but each game row was not re-read from the official week page in this session.",
+    "sourceIds": [
+      "S50",
+      "S03"
+    ],
+    "severity": "Medium",
+    "action": "Re-read the official Week 1-9 pages and compare each game row (a line-by-line check). Until then the per-game status is 'aggregate reconciled'."
   }
 ]

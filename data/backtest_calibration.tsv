@@ -1,0 +1,9 @@
+scope	n_out_of_sample	side_mae_model	side_mae_constant	side_bias	side_sign_n	side_sign_hit_rate	side_sign_ci95_low	side_sign_ci95_high	total_mae_model	total_mae_constant	total_bias	ml_brier_model	ml_brier_coinflip	roi	note
+week 4	16	10.20	7.50	-3.85	16	0.750	0.505	0.898	10.75	10.62	2.04	0.1920	0.2500		
+week 5	15	14.11	11.02	3.89	14	0.571	0.326	0.786	10.64	12.25	2.64	0.2320	0.2333		
+week 6	14	6.89	6.61	-5.47	14	0.714	0.454	0.883	12.00	11.13	-3.22	0.2638	0.2500		
+week 7	14	12.51	11.20	-5.32	14	0.571	0.326	0.786	10.39	9.38	-0.69	0.2879	0.2500		
+week 8	14	12.15	13.29	5.87	14	0.643	0.388	0.837	12.46	12.08	0.86	0.2091	0.2500		
+week 9	15	7.44	13.06	-2.86	15	0.800	0.548	0.930	11.03	10.99	-2.00	0.1230	0.2500		
+week 10	1	5.77	3.00	-5.77	1	0.000	0.000	0.793	0.50	0.93	-0.50	0.3673	0.2500		
+all weeks 4-10	89	10.49	10.33	-1.36	88	0.670	0.567	0.760	11.07	10.96	-0.01	0.2181	0.2472		ROI not computed: no official betting prices exist to price the bets

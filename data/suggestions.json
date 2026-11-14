@@ -1,314 +1,398 @@
 [
- {
-  "id": "SG01",
-  "title": "Publish a fair value only, never a fake market price",
-  "category": "Trust",
-  "problem": "The brief asks to originate lines. There is no official source of market prices in this repo, so any displayed price that looks like a market quote would be invented.",
-  "proposal": "Output one number per game: our fair-value probability, with an explicit uncertainty band and a timestamp. Display the market price column as blank until the user supplies a benchmark feed.",
-  "evidence": "data/sources.tsv S03 — official standings supply team scoring, but no official price feed was found.",
-  "effort": "Low",
-  "risk": "Low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q03"
-  ],
-  "options": [
-   "Fair value only, price column blank and labelled. (Recommended)",
-   "Fair value plus a user-supplied price feed.",
-   "Wait for a price feed before publishing anything."
-  ],
-  "recommendation": "A. A blank, labelled column is honest and costs nothing. Option C delays all work on the strength of a data source that was never promised.",
-  "impact": "Protects the whole site from being built on an invented number."
- },
- {
-  "id": "SG02",
-  "title": "Grade every strategy on calibration first, profit second",
-  "category": "Method",
-  "problem": "Ranking strategies by win rate or units won rewards luck. Over a few dozen bets the noise band is wider than any realistic edge.",
-  "proposal": "Make calibration the primary gate: bucket predictions by stated probability and check that the realised hit rate matches. Rank on calibration error and sample size, and show profit only after the sample gate is met.",
-  "evidence": "data/questions.json Q09, Q10 — the season is 18 weeks and Week 10 is in progress (S05).",
-  "effort": "Medium",
-  "risk": "Low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q09",
-   "Q10",
-   "Q19"
-  ],
-  "options": [
-   "Calibration-primary ranking. (Recommended)",
-   "Profit-primary ranking with a minimum sample gate.",
-   "Rank on both and display them side by side without combining."
-  ],
-  "recommendation": "A, with C as a display layer. Profit-first ranking will surface a lucky strategy in week one and destroy the credibility of the board.",
-  "impact": "Turns the leaderboard from a lottery into a measurement."
- },
- {
-  "id": "SG03",
-  "title": "Freeze predictions before kickoff with a cryptographic seal",
-  "category": "Method",
-  "problem": "A strategy record is worthless if a prediction can be edited after the result is known. Without a seal, no reader can distinguish a genuine forecast from hindsight.",
-  "proposal": "Write each prediction to a timestamped file before kickoff and record a SHA-256 hash of the prediction set. Publish the hashes. After the game, publish the results; the hash proves the forecast did not change.",
-  "evidence": "data/questions.json Q02, Q12.",
-  "effort": "Low",
-  "risk": "Very low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q02"
-  ],
-  "options": [
-   "Hash-sealed prediction log committed before kickoff. (Recommended)",
-   "Public timestamping service.",
-   "No seal, trust the author."
-  ],
-  "recommendation": "A. It is nearly free, and it is the single cheapest thing that makes the leaderboard credible.",
-  "impact": "Converts claims into an auditable record."
- },
- {
-  "id": "SG04",
-  "title": "Split the backup-deficiency feature into 'observed absence' and 'derived depth'",
-  "category": "Injuries",
-  "problem": "The brief wants 2nd/3rd/4th-string replacements tracked. There is no league-wide official depth chart (S13 returns 404), no official snap-count feed in this repo, and club depth charts are self-labelled 'Unofficial' (S08).",
-  "proposal": "Show two clearly separated tables. (1) Observed absence: straight from the official injury report, no inference. (2) Derived depth: built from roster status codes plus each club's own published depth chart, and labelled derived everywhere it appears.",
-  "evidence": "data/sources.tsv S13 (404), S08 (club page titled 'Unofficial Depth Chart'), S07 (roster status codes), S01 (injury report).",
-  "effort": "High",
-  "risk": "Medium",
-  "reversibility": "Reversible — the derived layer can be removed without touching the observed layer.",
-  "prerequisites": [
-   "Q04",
-   "Q05"
-  ],
-  "options": [
-   "Two-layer build, observed and derived kept strictly separate. (Recommended)",
-   "Observed absence only; defer depth entirely.",
-   "Build derived depth and present it as if it were official."
-  ],
-  "recommendation": "A. Option C is the trap: it would look like the most impressive feature on the site while being the least defensible.",
-  "impact": "Delivers the requested feature without asserting something the sources cannot support."
- },
- {
-  "id": "SG05",
-  "title": "Add a Flagged for Review page as a first-class section",
-  "category": "Trust",
-  "problem": "Irregularities and unverifiable values currently have nowhere to live. The alternative is quietly filling them in, which is exactly what the brief forbids.",
-  "proposal": "A permanent page listing every unverified value, every 404 source, every cross-source contradiction, and every open question, each with the source link that was attempted and the date. Nothing is hidden and nothing is guessed.",
-  "evidence": "data/sources.tsv S12-S14 (404s), data/questions.json Q08 (cross-source contradictions).",
-  "effort": "Low",
-  "risk": "Very low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [],
-  "options": [
-   "Dedicated page, always populated, never empty. (Recommended)",
-   "A footnote at the bottom of the home page.",
-   "Leave unreviewed items out of the site entirely."
-  ],
-  "recommendation": "A. It is the mechanism that lets the rest of the site be trusted.",
-  "impact": "Makes the honesty of the dataset visible instead of asserted."
- },
- {
-  "id": "SG06",
-  "title": "Adopt walk-forward validation with a frozen, access-logged holdout",
-  "category": "Method",
-  "problem": "Tuning and scoring on the same weeks produces an optimistic number that will not survive contact with future games.",
-  "proposal": "Train on weeks 1..k, predict week k+1, roll forward. Never shuffle. Keep the final weeks in a separate frozen file and log every single time it is read.",
-  "evidence": "data/questions.json Q12.",
-  "effort": "Medium",
-  "risk": "Low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q12"
-  ],
-  "options": [
-   "Strict walk-forward with a logged holdout. (Recommended)",
-   "k-fold cross-validation on shuffled games.",
-   "Single train/test split."
-  ],
-  "recommendation": "A. Option B leaks future information into the past in a sport with strong week-to-week drift.",
-  "impact": "Prevents the most common way an in-house model exaggerates its own accuracy."
- },
- {
-  "id": "SG07",
-  "title": "Start with team totals, and defer parlays until legs are individually validated",
-  "category": "Scope",
-  "problem": "The brief asks for single bets, parlays and prop combos at once. Parlays multiply variance, so a failed parlay does not reveal which leg was wrong, and props need player-level joint data this repo does not yet have.",
-  "proposal": "Sequence the work: team-level single market first, then player props once player data exists, then 2-leg combos only after each leg independently clears its own gate, then correlation estimation.",
-  "evidence": "data/questions.json Q01, Q11.",
-  "effort": "Medium",
-  "risk": "Low",
-  "reversibility": "Fully reversible — it is an ordering, not a removal.",
-  "prerequisites": [
-   "Q01",
-   "Q11"
-  ],
-  "options": [
-   "Sequenced build. (Recommended)",
-   "All three product types in parallel.",
-   "Singles only, forever."
-  ],
-  "recommendation": "A. Option B is how projects end up with a parlay board backed by three unvalidated legs.",
-  "impact": "Keeps every published number downstream of a validated one."
- },
- {
-  "id": "SG08",
-  "title": "Require every strategy to beat a published naive baseline",
-  "category": "Method",
-  "problem": "A model that only rediscovers 'the better team usually wins' looks skilful when compared to nothing.",
-  "proposal": "Publish a named baseline, for example a points-differential rating from official season scoring. A strategy is only ranked if it beats that baseline out of sample.",
-  "evidence": "data/sources.tsv S03 — official PF/PA for all 32 clubs.",
-  "effort": "Low",
-  "risk": "Low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q19"
-  ],
-  "options": [
-   "Mandatory baseline comparison. (Recommended)",
-   "Baseline shown for information but not required.",
-   "No baseline."
-  ],
-  "recommendation": "A. Without it the leaderboard measures effort, not edge.",
-  "impact": "Makes the leaderboard's ranking mean something."
- },
- {
-  "id": "SG09",
-  "title": "Timestamp and never overwrite every injury snapshot",
-  "category": "Injuries",
-  "problem": "The injury report changes several times a week. A single undated snapshot cannot support any claim about timing, and mixing snapshots introduces look-ahead bias.",
-  "proposal": "One immutable file per capture, named by UTC timestamp. All analysis reads a specific snapshot and records which one.",
-  "evidence": "data/sources.tsv S01; data/questions.json Q06.",
-  "effort": "Low",
-  "risk": "Very low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q06"
-  ],
-  "options": [
-   "Immutable timestamped snapshots. (Recommended)",
-   "One file overwritten each week.",
-   "Capture only once, at the end of the week."
-  ],
-  "recommendation": "A. Option C discards the entire within-week signal, which is the only part that is not already in the closing price.",
-  "impact": "Preserves the ability to ask timing questions later."
- },
- {
-  "id": "SG10",
-  "title": "Make the site a static dashboard with no build step",
-  "category": "Operations",
-  "problem": "A build pipeline introduces a failure mode where the live site silently lags the repository.",
-  "proposal": "Plain HTML, one stylesheet, small scripts that read the committed data files at load time. No bundler, no framework, no server. GitHub Pages serves the repository root directly.",
-  "evidence": "GitHub Pages for this repository is already configured on the main branch root and reports a built status.",
-  "effort": "Medium",
-  "risk": "Very low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [],
-  "options": [
-   "Static, no build step. (Recommended)",
-   "Static site generator with a build action.",
-   "Single-page app with a bundler."
-  ],
-  "recommendation": "A. Nothing to break, nothing to version, and Pages serves it as-is.",
-  "impact": "The published site cannot drift from the committed data."
- },
- {
-  "id": "SG11",
-  "title": "Keep the leaderboard non-monetary until a legal review exists",
-  "category": "Legal",
-  "problem": "The brief asks for rewards. A prize pool turns a statistics page into something a gambling regulator may take an interest in, and the rules are jurisdiction-specific.",
-  "proposal": "Rewards are ranking position and a badge. No money, no entry fee, no wagering, no odds. Record the legal question openly rather than answering it.",
-  "evidence": "data/questions.json Q14.",
-  "effort": "Very low",
-  "risk": "Low if adopted; high if ignored",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q13",
-   "Q14"
-  ],
-  "options": [
-   "Non-monetary leaderboard, legal question flagged. (Recommended)",
-   "Prize pool after review.",
-   "No leaderboard at all."
-  ],
-  "recommendation": "A. It delivers the requested competitive structure with none of the exposure.",
-  "impact": "Keeps the project squarely informational."
- },
- {
-  "id": "SG12",
-  "title": "Separate 'observed' from 'derived' in every table, visibly",
-  "category": "Trust",
-  "problem": "Mixing values read directly from a source with values computed from them makes the whole table unauditable.",
-  "proposal": "Tag each row with its provenance: OBSERVED (read verbatim from a linked official page) or DERIVED (computed, with the formula stated). Blanks are never filled.",
-  "evidence": "All data files in this repo.",
-  "effort": "Low",
-  "risk": "Very low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [],
-  "options": [
-   "Visible provenance tag per table. (Recommended)",
-   "Provenance documented in a separate methodology page only.",
-   "No provenance marking."
-  ],
-  "recommendation": "A. A reader should never have to guess whether a number was read or computed.",
-  "impact": "Makes line-by-line verification possible, which is what the brief asks for."
- },
- {
-  "id": "SG13",
-  "title": "Expand depth coverage one club at a time, starting with a single worked example",
-  "category": "Injuries",
-  "problem": "32 clubs times their own depth chart format is a large, error-prone surface. Attempting all of it at once would produce 32 half-checked tables.",
-  "proposal": "Ship one club fully worked and verified, with the matchup relevance explained, then expand club by club behind the same validation.",
-  "evidence": "data/sources.tsv S08, S07; data/depth-kc.tsv.",
-  "effort": "Low per club",
-  "risk": "Low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q04"
-  ],
-  "options": [
-   "One verified club first, then expand. (Recommended)",
-   "All 32 clubs immediately.",
-   "None until all 32 are ready."
-  ],
-  "recommendation": "A. It demonstrates the method end-to-end and keeps every published cell checkable.",
-  "impact": "Proves the approach before scaling it."
- },
- {
-  "id": "SG14",
-  "title": "Reconcile contradictions by publishing them, never by choosing silently",
-  "category": "Data quality",
-  "problem": "Official pages disagree with each other in this dataset (a Rams defender's team attribution, and a Rams defender who appears both as active and as a non-participant).",
-  "proposal": "Leave both values as captured, link both sources, and list the contradiction on the Flagged for Review page with a note that no resolution was applied.",
-  "evidence": "data/questions.json Q08; data/sources.tsv S01, S10, S15.",
-  "effort": "Low",
-  "risk": "Very low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [
-   "Q08"
-  ],
-  "options": [
-   "Publish both, resolve nothing. (Recommended)",
-   "Pick the newer source.",
-   "Drop the player from the table."
-  ],
-  "recommendation": "A. Any silent choice would be an unlogged inference, which is what the brief prohibits.",
-  "impact": "Keeps the dataset honest and makes the source's own errors reviewable."
- },
- {
-  "id": "SG15",
-  "title": "Add a one-page decision brief for each open question",
-  "category": "Operations",
-  "problem": "The open-questions list is long. A decision-maker reading twenty questions has no fast way to choose a path.",
-  "proposal": "The Suggestions page groups each question with the options, the trade-off, a recommendation and the cost of being wrong, so a reviewer can approve or reject in one pass.",
-  "evidence": "This file; data/questions.json.",
-  "effort": "Low",
-  "risk": "Very low",
-  "reversibility": "Fully reversible",
-  "prerequisites": [],
-  "options": [
-   "Grouped decision brief. (Recommended)",
-   "Flat list of questions only.",
-   "Free-text memo."
-  ],
-  "recommendation": "A. It is the difference between a list of worries and a set of choices.",
-  "impact": "Makes the review step actually completable."
- }
+  {
+    "id": "SG01",
+    "title": "Publish a fair value only, never a fake market price",
+    "category": "Trust",
+    "problem": "The brief asks to originate lines. There is no official source of market prices in this repo, so any displayed price that looks like a market quote would be invented.",
+    "proposal": "Output one number per game: our fair-value probability, with an explicit uncertainty band and a timestamp. Display the market price column as blank until the user supplies a benchmark feed.",
+    "evidence": "data/sources.tsv S03 — official standings supply team scoring, but no official price feed was found.",
+    "effort": "Low",
+    "risk": "Low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q03"
+    ],
+    "options": [
+      "Fair value only, price column blank and labelled. (Recommended)",
+      "Fair value plus a user-supplied price feed.",
+      "Wait for a price feed before publishing anything."
+    ],
+    "recommendation": "A. A blank, labelled column is honest and costs nothing. Option C delays all work on the strength of a data source that was never promised.",
+    "impact": "Protects the whole site from being built on an invented number."
+  },
+  {
+    "id": "SG02",
+    "title": "Grade every strategy on calibration first, profit second",
+    "category": "Method",
+    "problem": "Ranking strategies by win rate or units won rewards luck. Over a few dozen bets the noise band is wider than any realistic edge.",
+    "proposal": "Make calibration the primary gate: bucket predictions by stated probability and check that the realised hit rate matches. Rank on calibration error and sample size, and show profit only after the sample gate is met.",
+    "evidence": "data/questions.json Q09, Q10 — the season is 18 weeks and Week 10 is in progress (S05).",
+    "effort": "Medium",
+    "risk": "Low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q09",
+      "Q10",
+      "Q19"
+    ],
+    "options": [
+      "Calibration-primary ranking. (Recommended)",
+      "Profit-primary ranking with a minimum sample gate.",
+      "Rank on both and display them side by side without combining."
+    ],
+    "recommendation": "A, with C as a display layer. Profit-first ranking will surface a lucky strategy in week one and destroy the credibility of the board.",
+    "impact": "Turns the leaderboard from a lottery into a measurement."
+  },
+  {
+    "id": "SG03",
+    "title": "Freeze predictions before kickoff with a cryptographic seal",
+    "category": "Method",
+    "problem": "A strategy record is worthless if a prediction can be edited after the result is known. Without a seal, no reader can distinguish a genuine forecast from hindsight.",
+    "proposal": "Write each prediction to a timestamped file before kickoff and record a SHA-256 hash of the prediction set. Publish the hashes. After the game, publish the results; the hash proves the forecast did not change.",
+    "evidence": "data/questions.json Q02, Q12.",
+    "effort": "Low",
+    "risk": "Very low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q02"
+    ],
+    "options": [
+      "Hash-sealed prediction log committed before kickoff. (Recommended)",
+      "Public timestamping service.",
+      "No seal, trust the author."
+    ],
+    "recommendation": "A. It is nearly free, and it is the single cheapest thing that makes the leaderboard credible.",
+    "impact": "Converts claims into an auditable record."
+  },
+  {
+    "id": "SG04",
+    "title": "Split the backup-deficiency feature into 'observed absence' and 'derived depth'",
+    "category": "Injuries",
+    "problem": "The brief wants 2nd/3rd/4th-string replacements tracked. There is no league-wide official depth chart (S13 returns 404), no official snap-count feed in this repo, and club depth charts are self-labelled 'Unofficial' (S08).",
+    "proposal": "Show two clearly separated tables. (1) Observed absence: straight from the official injury report, no inference. (2) Derived depth: built from roster status codes plus each club's own published depth chart, and labelled derived everywhere it appears.",
+    "evidence": "data/sources.tsv S13 (404), S08 (club page titled 'Unofficial Depth Chart'), S07 (roster status codes), S01 (injury report).",
+    "effort": "High",
+    "risk": "Medium",
+    "reversibility": "Reversible — the derived layer can be removed without touching the observed layer.",
+    "prerequisites": [
+      "Q04",
+      "Q05"
+    ],
+    "options": [
+      "Two-layer build, observed and derived kept strictly separate. (Recommended)",
+      "Observed absence only; defer depth entirely.",
+      "Build derived depth and present it as if it were official."
+    ],
+    "recommendation": "A. Option C is the trap: it would look like the most impressive feature on the site while being the least defensible.",
+    "impact": "Delivers the requested feature without asserting something the sources cannot support."
+  },
+  {
+    "id": "SG05",
+    "title": "Add a Flagged for Review page as a first-class section",
+    "category": "Trust",
+    "problem": "Irregularities and unverifiable values currently have nowhere to live. The alternative is quietly filling them in, which is exactly what the brief forbids.",
+    "proposal": "A permanent page listing every unverified value, every 404 source, every cross-source contradiction, and every open question, each with the source link that was attempted and the date. Nothing is hidden and nothing is guessed.",
+    "evidence": "data/sources.tsv S12-S14 (404s), data/questions.json Q08 (cross-source contradictions).",
+    "effort": "Low",
+    "risk": "Very low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [],
+    "options": [
+      "Dedicated page, always populated, never empty. (Recommended)",
+      "A footnote at the bottom of the home page.",
+      "Leave unreviewed items out of the site entirely."
+    ],
+    "recommendation": "A. It is the mechanism that lets the rest of the site be trusted.",
+    "impact": "Makes the honesty of the dataset visible instead of asserted."
+  },
+  {
+    "id": "SG06",
+    "title": "Adopt walk-forward validation with a frozen, access-logged holdout",
+    "category": "Method",
+    "problem": "Tuning and scoring on the same weeks produces an optimistic number that will not survive contact with future games.",
+    "proposal": "Train on weeks 1..k, predict week k+1, roll forward. Never shuffle. Keep the final weeks in a separate frozen file and log every single time it is read.",
+    "evidence": "data/questions.json Q12.",
+    "effort": "Medium",
+    "risk": "Low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q12"
+    ],
+    "options": [
+      "Strict walk-forward with a logged holdout. (Recommended)",
+      "k-fold cross-validation on shuffled games.",
+      "Single train/test split."
+    ],
+    "recommendation": "A. Option B leaks future information into the past in a sport with strong week-to-week drift.",
+    "impact": "Prevents the most common way an in-house model exaggerates its own accuracy."
+  },
+  {
+    "id": "SG07",
+    "title": "Start with team totals, and defer parlays until legs are individually validated",
+    "category": "Scope",
+    "problem": "The brief asks for single bets, parlays and prop combos at once. Parlays multiply variance, so a failed parlay does not reveal which leg was wrong, and props need player-level joint data this repo does not yet have.",
+    "proposal": "Sequence the work: team-level single market first, then player props once player data exists, then 2-leg combos only after each leg independently clears its own gate, then correlation estimation.",
+    "evidence": "data/questions.json Q01, Q11.",
+    "effort": "Medium",
+    "risk": "Low",
+    "reversibility": "Fully reversible — it is an ordering, not a removal.",
+    "prerequisites": [
+      "Q01",
+      "Q11"
+    ],
+    "options": [
+      "Sequenced build. (Recommended)",
+      "All three product types in parallel.",
+      "Singles only, forever."
+    ],
+    "recommendation": "A. Option B is how projects end up with a parlay board backed by three unvalidated legs.",
+    "impact": "Keeps every published number downstream of a validated one."
+  },
+  {
+    "id": "SG08",
+    "title": "Require every strategy to beat a published naive baseline",
+    "category": "Method",
+    "problem": "A model that only rediscovers 'the better team usually wins' looks skilful when compared to nothing.",
+    "proposal": "Publish a named baseline, for example a points-differential rating from official season scoring. A strategy is only ranked if it beats that baseline out of sample.",
+    "evidence": "data/sources.tsv S03 — official PF/PA for all 32 clubs.",
+    "effort": "Low",
+    "risk": "Low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q19"
+    ],
+    "options": [
+      "Mandatory baseline comparison. (Recommended)",
+      "Baseline shown for information but not required.",
+      "No baseline."
+    ],
+    "recommendation": "A. Without it the leaderboard measures effort, not edge.",
+    "impact": "Makes the leaderboard's ranking mean something."
+  },
+  {
+    "id": "SG09",
+    "title": "Timestamp and never overwrite every injury snapshot",
+    "category": "Injuries",
+    "problem": "The injury report changes several times a week. A single undated snapshot cannot support any claim about timing, and mixing snapshots introduces look-ahead bias.",
+    "proposal": "One immutable file per capture, named by UTC timestamp. All analysis reads a specific snapshot and records which one.",
+    "evidence": "data/sources.tsv S01; data/questions.json Q06.",
+    "effort": "Low",
+    "risk": "Very low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q06"
+    ],
+    "options": [
+      "Immutable timestamped snapshots. (Recommended)",
+      "One file overwritten each week.",
+      "Capture only once, at the end of the week."
+    ],
+    "recommendation": "A. Option C discards the entire within-week signal, which is the only part that is not already in the closing price.",
+    "impact": "Preserves the ability to ask timing questions later."
+  },
+  {
+    "id": "SG10",
+    "title": "Make the site a static dashboard with no build step",
+    "category": "Operations",
+    "problem": "A build pipeline introduces a failure mode where the live site silently lags the repository.",
+    "proposal": "Plain HTML, one stylesheet, small scripts that read the committed data files at load time. No bundler, no framework, no server. GitHub Pages serves the repository root directly.",
+    "evidence": "GitHub Pages for this repository is already configured on the main branch root and reports a built status.",
+    "effort": "Medium",
+    "risk": "Very low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [],
+    "options": [
+      "Static, no build step. (Recommended)",
+      "Static site generator with a build action.",
+      "Single-page app with a bundler."
+    ],
+    "recommendation": "A. Nothing to break, nothing to version, and Pages serves it as-is.",
+    "impact": "The published site cannot drift from the committed data."
+  },
+  {
+    "id": "SG11",
+    "title": "Keep the leaderboard non-monetary until a legal review exists",
+    "category": "Legal",
+    "problem": "The brief asks for rewards. A prize pool turns a statistics page into something a gambling regulator may take an interest in, and the rules are jurisdiction-specific.",
+    "proposal": "Rewards are ranking position and a badge. No money, no entry fee, no wagering, no odds. Record the legal question openly rather than answering it.",
+    "evidence": "data/questions.json Q14.",
+    "effort": "Very low",
+    "risk": "Low if adopted; high if ignored",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q13",
+      "Q14"
+    ],
+    "options": [
+      "Non-monetary leaderboard, legal question flagged. (Recommended)",
+      "Prize pool after review.",
+      "No leaderboard at all."
+    ],
+    "recommendation": "A. It delivers the requested competitive structure with none of the exposure.",
+    "impact": "Keeps the project squarely informational."
+  },
+  {
+    "id": "SG12",
+    "title": "Separate 'observed' from 'derived' in every table, visibly",
+    "category": "Trust",
+    "problem": "Mixing values read directly from a source with values computed from them makes the whole table unauditable.",
+    "proposal": "Tag each row with its provenance: OBSERVED (read verbatim from a linked official page) or DERIVED (computed, with the formula stated). Blanks are never filled.",
+    "evidence": "All data files in this repo.",
+    "effort": "Low",
+    "risk": "Very low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [],
+    "options": [
+      "Visible provenance tag per table. (Recommended)",
+      "Provenance documented in a separate methodology page only.",
+      "No provenance marking."
+    ],
+    "recommendation": "A. A reader should never have to guess whether a number was read or computed.",
+    "impact": "Makes line-by-line verification possible, which is what the brief asks for."
+  },
+  {
+    "id": "SG13",
+    "title": "Expand depth coverage one club at a time, starting with a single worked example",
+    "category": "Injuries",
+    "problem": "32 clubs times their own depth chart format is a large, error-prone surface. Attempting all of it at once would produce 32 half-checked tables.",
+    "proposal": "Ship one club fully worked and verified, with the matchup relevance explained, then expand club by club behind the same validation.",
+    "evidence": "data/sources.tsv S08, S07; data/depth-kc.tsv.",
+    "effort": "Low per club",
+    "risk": "Low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q04"
+    ],
+    "options": [
+      "One verified club first, then expand. (Recommended)",
+      "All 32 clubs immediately.",
+      "None until all 32 are ready."
+    ],
+    "recommendation": "A. It demonstrates the method end-to-end and keeps every published cell checkable.",
+    "impact": "Proves the approach before scaling it."
+  },
+  {
+    "id": "SG14",
+    "title": "Reconcile contradictions by publishing them, never by choosing silently",
+    "category": "Data quality",
+    "problem": "Official pages disagree with each other in this dataset (a Rams defender's team attribution, and a Rams defender who appears both as active and as a non-participant).",
+    "proposal": "Leave both values as captured, link both sources, and list the contradiction on the Flagged for Review page with a note that no resolution was applied.",
+    "evidence": "data/questions.json Q08; data/sources.tsv S01, S10, S15.",
+    "effort": "Low",
+    "risk": "Very low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Q08"
+    ],
+    "options": [
+      "Publish both, resolve nothing. (Recommended)",
+      "Pick the newer source.",
+      "Drop the player from the table."
+    ],
+    "recommendation": "A. Any silent choice would be an unlogged inference, which is what the brief prohibits.",
+    "impact": "Keeps the dataset honest and makes the source's own errors reviewable."
+  },
+  {
+    "id": "SG15",
+    "title": "Add a one-page decision brief for each open question",
+    "category": "Operations",
+    "problem": "The open-questions list is long. A decision-maker reading twenty questions has no fast way to choose a path.",
+    "proposal": "The Suggestions page groups each question with the options, the trade-off, a recommendation and the cost of being wrong, so a reviewer can approve or reject in one pass.",
+    "evidence": "This file; data/questions.json.",
+    "effort": "Low",
+    "risk": "Very low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [],
+    "options": [
+      "Grouped decision brief. (Recommended)",
+      "Flat list of questions only.",
+      "Free-text memo."
+    ],
+    "recommendation": "A. It is the difference between a list of worries and a set of choices.",
+    "impact": "Makes the review step actually completable."
+  },
+  {
+    "id": "SG16",
+    "title": "Choose a betting-price source before any market column or ROI is computed",
+    "category": "Data",
+    "problem": "No official NFL source publishes betting prices. The price-snapshot store, the market columns and ROI are therefore blank (F18).",
+    "proposal": "The owner names a price source. Until then the store stays empty and nothing on the site shows a market number.",
+    "evidence": "data/price_snapshots.tsv (39 blank rows); data/model_lines.tsv (market columns blank); flagged F18.",
+    "effort": "Medium",
+    "risk": "Medium (a third-party source that looks official would be a credibility risk)",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Owner decision"
+    ],
+    "options": [
+      "Keep blank (no price source) until one is chosen. (Recommended while the decision is open.)",
+      "Owner supplies a licensed feed, labelled 'licensed, not official', with its terms recorded.",
+      "Accept the third-party nflverse closing lines as a labelled non-official source (already in data/raw/closing_lines.csv)."
+    ],
+    "recommendation": "A. Nothing should be computed against prices until the owner has chosen a source and its terms. Option C would make the ROI and the difference columns real, but would sit outside the brief's official-only rule.",
+    "impact": "Decides whether the difference column and ROI can ever be filled."
+  },
+  {
+    "id": "SG17",
+    "title": "Confirm the demotion-gate thresholds (G-14) before any strategy goes live",
+    "category": "Governance",
+    "problem": "The G-14 windows (100 bets to demote, 250 to re-promote) and the 95% lower-bound rule are proposals, not facts about football.",
+    "proposal": "The owner accepts or changes the windows and the bound. The rule shape (exposure, sample, signal, CLV) stays as written.",
+    "evidence": "engine/gates.py (demotion_decision, repromotion_decision); governance.html worked examples; tests/test_brief.py.",
+    "effort": "Low",
+    "risk": "Low while no strategy is live",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Owner decision"
+    ],
+    "options": [
+      "Keep the proposed defaults (100 to demote, 250 to re-promote, 95% lower bound). (Recommended for a paper trial.)",
+      "Longer windows (250 to demote) to make demotion slower and less noisy.",
+      "Add a drawdown trigger, which needs an owner-supplied number."
+    ],
+    "recommendation": "A. The defaults are the smallest honest windows the code supports. A drawdown number is a policy choice and should come from the owner.",
+    "impact": "Sets how quickly a live strategy is returned to paper."
+  },
+  {
+    "id": "SG18",
+    "title": "Re-read the official Week 1-9 pages game by game before any backtest is quoted",
+    "category": "Verification",
+    "problem": "Only Week 10 results were re-read per game from an official page. Weeks 1-9 are reconciled to the standings in aggregate only (F22).",
+    "proposal": "Read the nine official week pages and compare every game row (a line-by-line check), recording the result in data/verification-brief.tsv.",
+    "evidence": "data/results.tsv (137 rows); S50 (official week pages); F22.",
+    "effort": "Medium (nine page reads)",
+    "risk": "Low",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Repository access"
+    ],
+    "options": [
+      "Do the nine-page line-by-line check now. (Recommended.)",
+      "Accept aggregate reconciliation for now and label every backtest accordingly.",
+      "Drop Weeks 1-9 from the model inputs until they are verified."
+    ],
+    "recommendation": "A. The backtest is only as good as its inputs, and the brief asks for line-by-line verification.",
+    "impact": "Turns the results feed from aggregate-reconciled into per-game verified."
+  },
+  {
+    "id": "SG19",
+    "title": "Decide whether any third-party-derived correlation may ever be shown",
+    "category": "Governance",
+    "problem": "Brief B6 says correlations come only from official numbers, with n shown. Every existing coefficient comes from the nflverse mirror, so all are withheld (F19).",
+    "proposal": "The owner confirms the strict rule (withheld) or allows third-party values under a visible non-official label.",
+    "evidence": "prop-correlations.html (withheld, n shown); measured.html (withdrawal banner); flagged F19.",
+    "effort": "Low",
+    "risk": "Medium if a third-party coefficient were used as a bet input",
+    "reversibility": "Fully reversible",
+    "prerequisites": [
+      "Owner decision"
+    ],
+    "options": [
+      "Keep withheld; no coefficient is published. (Recommended, and the brief's current rule.)",
+      "Show third-party coefficients with n and a 'non-official' label, and never use them to size a bet.",
+      "Find an official joint sample (for example official box scores) before computing any correlation."
+    ],
+    "recommendation": "A. The brief is explicit. Option C is the right long-term path and needs a source that has not been found yet.",
+    "impact": "Decides whether the correlation pages ever show a number."
+  }
 ]
