@@ -1038,3 +1038,47 @@ F23 (leaderboard note says "totals-first" vs mandated side-first), F24 (fair tot
 unfitted S2), F25 (market prices third-party; see also F18), F26 (replacement values derived;
 6 blanks; HOU absent per F16), F27 (requirements.txt understates scripts-layer deps: pandas/
 numpy/scipy/pyarrow — pre-existing; `scripts/` layer only).
+
+---
+
+## Session `arena/5876146b-fl1` — second merge & final id mapping (2026-11-14)
+
+PR #33 (`arena/360ca650-fl1`, R21–R28) landed while this session's PR #34 was open — a
+**third** parallel implementation of the same eight requirements. Resolved exactly like the
+first merge: preserve everything, re-issue colliding ids, cross-link duplicate pages
+(their F31 updated to record all three).
+
+### Final id map (supersedes the ids in the completion record above)
+
+| This session's artefact | Earlier id | **Final id** | Note |
+|---|---|---|---|
+| Week 1–9 official schedule pages | S50–S58, then S52–S60 | **S61–S69** | S50–S52 now held by the R21–R28/685f958d registers |
+| Leaderboard "totals-first" wording discrepancy | F18, then F23 | **F32** | cross-ref their F27 (mandated order) |
+| Fair total blank (unfitted S2) | F19, then F24 | **F33** | cross-ref their F29 |
+| Market prices third-party only | F20, then F25 | **F34** | cross-ref their F23 |
+| Replacement values derived / 6 blanks / HOU absent | F21, then F26 | **F35** | — |
+| requirements.txt understates scripts deps | F22, then F27 | **F36** | — |
+| Demotion gate (session M proposal) | G-14 | **G-16** | their G-14 (validation_gates.json) kept; two proposals, both live |
+| Signal-only promotion rule | G-15 | **G-17** | — |
+
+`data/results_feed.csv` rebuilt against S61–S69/S49 and re-verified 137/137; all page text
+and `data/origination_order.json` / `data/governance_gates.json` re-mapped.
+
+### Duplicate-page map (all preserved)
+
+| Page | Status |
+|---|---|
+| `results-feed.html` | merged superset (685f958d backtest table + this session's row-level official feed + settlement contract) |
+| `verified-results-feed.html` | R21–R28's feed page, kept as-is |
+| `replacement-depth.html` | merged (this session's 69-spot week-10 analysis + the R26 52-slot register section) |
+| `replacement-depth-r21r28.html` | R26 register standalone copy (their generator output, preserved) |
+| `originations.html` / `line-board.html` / `model-lines.html` | all three fair\|market\|difference views kept, cross-linked |
+| `signal-vs-staking.html` / `governance.html` / strategies sprint sections | all kept |
+| `official-correlations.html` / `correlation-register.html` | both kept |
+
+### Post-second-merge verification matrix
+
+`unittest discover` **151 OK** · `verify_brief` **10/10** · `verify_feed_m` **PASS 137/137** ·
+`verify_d` V5–V9 **PASS** · `verify_site` **0 errors** · `checklinks` **28 pages OK** ·
+`site/verify` **publishable** · `register_r21_r28` idempotent · `engine.results_settlement
+--check` OK · `demo_run --check` current.
