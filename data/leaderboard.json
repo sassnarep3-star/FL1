@@ -1,0 +1,88 @@
+{
+  "id": "leaderboard",
+  "title": "Leaderboard competition — ranking skill, not variance",
+  "description": "Design for the rewarded internal competition the brief asks for. The central design choice is that the leaderboard ranks a luck-adjusted statistic computed from a sealed, walk-forward bet log — not profit, not ROI, not this month's hot hand — and that rewards are conditional on gate passage. engine/leaderboard.py implements exactly the scoring written here, and its unit tests are hand-checkable.",
+  "updated": "2026-11-14",
+  "sections": [
+    {
+      "title": "A. Divisions",
+      "description": "Separated because a single table would rank a 400-bet totals strategy against a 40-bet prop combo and call the difference skill.",
+      "columns": [
+        { "key": "division", "label": "Division" },
+        { "key": "scope", "label": "What may be bet" },
+        { "key": "min_n", "label": "Min settled bets" },
+        { "key": "why_split", "label": "Why it is its own table" },
+        { "key": "status", "label": "Status", "render": "badge" },
+        { "key": "sources", "label": "Source", "render": "srclist" }
+      ],
+      "rows": [
+        { "division": "D1 — Singles: game spread", "scope": "Pre-game spread only, one club view per game", "min_n": "300", "why_split": "Highest liquidity, lowest hold assumption, the only market where a real edge is measurable at human sample sizes.", "status": "OPEN", "sources": ["SRC-015"] },
+        { "division": "D2 — Singles: game total", "scope": "Pre-game total", "min_n": "300", "why_split": "The primary output of a totals-first architecture; the published mispricing evidence clusters here.", "status": "OPEN", "sources": ["SRC-015", "SRC-018"] },
+        { "division": "D3 — Money line / first-half", "scope": "Winner and half markets", "min_n": "300", "why_split": "Different price structure (no push), and the published favourite-longshot evidence applies to this family, not to spreads.", "status": "OPEN", "sources": ["SRC-017"] },
+        { "division": "D4 — Team totals", "scope": "Either team's points", "min_n": "400", "why_split": "Thin limits and high dependence on the availability model; a good week here is often one QB-regime call.", "status": "OPEN — LIMITS UNVERIFIED", "sources": ["SRC-014"] },
+        { "division": "D5 — Player props (singles)", "scope": "Stat props, defined markets only", "min_n": "500", "why_split": "Highest model risk because settlement definitions vary; every entry must name its settlement source (Q-03).", "status": "OPEN — DEFINITIONS BLOCKED", "sources": ["SRC-014"] },
+        { "division": "D6 — Prop combos (SGP, <=3 legs)", "scope": "Same-game player prop combinations priced by the joint model", "min_n": "500", "why_split": "This is where correlation is either the whole edge or the whole error; it is scored with the dependence correction shown next to the naive product for every bet.", "status": "OPEN — NEEDS RHO", "sources": ["SRC-014", "SRC-012"] },
+        { "division": "D7 — Parlays (cross-game)", "scope": "Uncorrelated legs only, per house rule", "min_n": "600", "why_split": "Structurally a different product (Nevada requires parlay cards to be reported separately); the hurdle compounds per leg, so the sample requirement is the highest.", "status": "OPEN — HOLD BLOCKED", "sources": ["SRC-012", "SRC-014"] },
+        { "division": "D8 — Availability-specialist division", "scope": "Any permitted market where the thesis is an injury/depth event", "min_n": "250", "why_split": "Isolating the brief's injury requirement lets us see whether the availability model adds value anywhere, instead of burying it inside a general totals model.", "status": "OPEN", "sources": ["SRC-001", "SRC-002"] },
+        { "division": "X1 — Live / in-play", "scope": "not offered in v1", "min_n": "n/a", "why_split": "Latency, in-play data and video rights sit behind the exclusive distributor and live hold is widest; excluded by recommendation (Q-20, R-39), pending owner decision.", "status": "EXCLUDED — PENDING OWNER", "sources": ["SRC-020"] },
+        { "division": "X2 — Excluded market classes", "scope": "injury-subject, officiating, one-person-one-play, pre-determined", "min_n": "n/a", "why_split": "Not a competition category; the league prohibits these wager classes and our gate refuses them before scoring.", "status": "PROHIBITED", "sources": ["SRC-008"] }
+      ]
+    },
+    {
+      "title": "B. Scoring — the Luck-Adjusted Score (LAS)",
+      "description": "One scalar, computable from a bet log with no judgement calls, printed next to its inputs so a reader can disagree with the weights but not with the arithmetic.",
+      "columns": [ "term", "definition", "why it is in the score" ],
+      "rows": [
+        { "term": "EV_hat", "definition": "Mean per-dollar expected value versus the closing price (CLV-based), not versus realised PnL.", "why": "Realised PnL is where luck lives; the closing line is the only unbiased, high-frequency answer to 'was this price good'. Blocked by GAP-01, which is why the competition starts in paper mode." },
+        { "term": "LCB", "definition": "Rank on the 5th-percentile bootstrap bound of EV_hat, i.e. the pessimistic end of the estimate.", "why": "This is the anti-luck core of the design: an entrant with 20 bets and a great mean ranks below an entrant with 600 solid bets because their bound is wider. Ranking on the bound makes sample size a feature of the score, not a caveat under it." },
+        { "term": "trial_deflator", "definition": "A multiplicative haircut derived from the number of sealed entries and their pairwise overlap (Reality Check / SPA logic, implemented as a bootstrap max-T in engine/stats.py).", "why": "Twenty entrants each trying thirty ideas is six hundred searches; the correction has to be applied to the whole field, or the leaderboard's winner is the entry that happened to look best." },
+        { "term": "concentration_penalty", "definition": "Penalty proportional to the share of net PnL from the largest single season or single team cluster.", "why": "Directly implements G-8: a strategy that is really about one year of one style is worth less than one that repeats, even at the same mean." },
+        { "term": "hold_adjustment", "definition": "All EV figures net of the division's measured hold assumption (blocked at GAP-08; conservative floor until then).", "why": "Without it, a parlay entry appears to beat a singles entry on a market where the house takes three times as much — a comparison of assumptions, not of skill." },
+        { "term": "gate_veto", "definition": "Any failed hard gate sets the eligible score to zero regardless of magnitude.", "why": "Rewards are the lever that makes the gates real. A gate that can be outweighed by a good month is a caption, not a control." },
+        { "term": "displayed_together", "definition": "Every rank row shows n, EV_hat, LCB, t-statistic, abstain rate, CLV mean, and which gates failed.", "why": "A leaderboard that hides its own inputs teaches nothing; the point of the competition is to learn which mechanisms generalise, which requires the losers' detail as much as the winners'." }
+      ]
+    },
+    {
+      "title": "C. Rewards (non-cash by default)",
+      "description": "Rewards are chosen so the winning behaviour is the behaviour that grows the programme, and so that a cash prize does not arrive before a legal opinion does.",
+      "columns": [
+        { "key": "tier", "label": "Placement" },
+        { "key": "reward", "label": "Reward" },
+        { "key": "condition", "label": "Condition precedent" },
+        { "key": "why", "label": "Incentive logic" }
+      ],
+      "rows": [
+        { "tier": "1st in division", "reward": "Capital promotion: the strategy moves from paper to a real stake allocation (capped at the owner's per-unit limit), plus first call on a licensed data request.", "condition": "All hard gates passed; at least two seasons or one season plus one in-season walk-forward window; owner sign-off required (Q-01 is unanswered).", "why": "The scarcest resource in this programme is not money, it is the right to place a bet and the licence to see a dataset. Paying in those selects for durability rather than for a hot month." },
+        { "tier": "2nd-3rd in division", "reward": "Compute and storage priority for the next development cycle; named authorship on the model card.", "condition": "All hard gates except G-1 sample sufficiency (explicitly staged as 'pending sample').", "why": "Keeps promising-but-undersized work alive without funding it, and makes credit the currency." },
+        { "tier": "Best new idea (not best result)", "reward": "Fast-track review: a two-week path to sealed re-entry with the corrected specification.", "condition": "Judged on the model card and the pre-registered hypothesis, never on the PnL of the trial.", "why": "Counteracts the leaderboard's worst failure mode, which is that everyone farms last season's winner." },
+        { "tier": "Best documented dead end", "reward": "Graveyard entry with a permanent, prominent record plus the same compute priority as a 2nd place.", "condition": "Reproducible kill: the failing evidence is committed with the data snapshot and the gate that tripped.", "why": "We explicitly want the negative results, because they are the denominator that makes the multiple-comparison correction meaningful." },
+        { "tier": "cash prizes", "reward": "NOT OFFERED until legal review (Q-13, GAP-14).", "condition": "counsel opinion, free entry, published rules, jurisdictional eligibility, tax handling.", "why": "A paid-entry contest with a partly-luck ranking is the shape of a lottery; the league itself bars its personnel from daily fantasy and treats prediction markets as betting, which is a fair indication of how closely this neighbourhood is policed." }
+      ]
+    },
+    {
+      "title": "D. Anti-gaming and integrity of the competition",
+      "columns": [ "rule", "defeats" ],
+      "rows": [
+        { "rule": "Sealed entries: hash(code + config + data snapshot) submitted before the season starts; ranks computed only from the sealed version.", "defeats": "Retro-fitting the strategy to what happened, and the quiet edit after a bad week." },
+        { "rule": "Every decision is logged, including abstentions, with the modelled edge at the time.", "defeats": "Survivorship inside a single entry: showing only the bets you would still take today." },
+        { "rule": "Overlap test (Jaccard > 0.8 merges entries); max 5 live entries per author.", "defeats": "Entering the same idea twenty times and keeping the winner — the winner's-curse reintroduced at the contest level (G-13)." },
+        { "rule": "Settlement only from the pre-declared official source; the operator's own settlement is used for void/reprice effects and nothing else.", "defeats": "Stat-definition arbitrage and 'we would have won on a different definition' disputes (Q-03)." },
+        { "rule": "Price at bet time is captured from the posted line at that second, with the timestamp stored.", "defeats": "Claiming a better price than was available, which fabricates CLV — the very statistic the ranking is built on." },
+        { "rule": "No use of non-public information; inputs restricted to the source register by build-time check.", "defeats": "The one 'edge' that would end the programme and possibly more: leaked availability information (Q-23, GAP-11)." },
+        { "rule": "Stake caps are part of the rules, not advice: an entry that exceeds the exposure caps is disqualified, not penalised.", "defeats": "Winning by taking a ruinous amount of risk on a positive-variance bet." },
+        { "rule": "Independent validator: a second person (or session) re-runs the winning entry from the sealed artefacts before a reward is paid.", "defeats": "Everything the builder of a model cannot see about their own model (S-19)." }
+      ]
+    },
+    {
+      "title": "E. Promotion ladder",
+      "columns": [ "stage", "gate_set", "exposure", "exit" ],
+      "rows": [
+        { "stage": "0 — Idea", "gate_set": "pre-registered hypothesis and falsifying test written down (models.json B)", "exposure": "none", "exit": "rejected without a written test" },
+        { "stage": "1 — In-sample", "gate_set": "G-9 walk-forward discipline on the split, G-4 selectivity, G-12 compliance", "exposure": "paper", "exit": "no reproducible in-sample result" },
+        { "stage": "2 — Out-of-sample", "gate_set": "G-1 sample, G-2 hurdle, G-3 CLV, G-5 multiple comparisons, G-6 deflator", "exposure": "paper", "exit": "graveyard, documented (best-dead-end reward)" },
+        { "stage": "3 — Live trial", "gate_set": "all hard gates plus G-7 measured hold, G-10 costs and limits, G-8 concentration", "exposure": "quarter unit, capped", "exit": "auto-demote on G-11 decay" },
+        { "stage": "4 — Funded", "gate_set": "re-verified each season by an independent validator; annual re-approval", "exposure": "up to owner-set unit cap", "exit": "two consecutive failing reviews = retirement, no appeal" }
+      ]
+    }
+  ]
+}
