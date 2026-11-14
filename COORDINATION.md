@@ -5,13 +5,35 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
-**Last updated:** 2026-11-14 (UTC) — reconciliations R1 (PR #1), R2 (PR #2) and R3 (PR #4) recorded below
+**Last updated:** 2026-11-14 (UTC) — session `arena/5a8baf03-fl1` board added (claims pushed)
 
 > **Which board is authoritative?** This file. The board below is maintained by the session that owns the
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
 > kept verbatim further down so their records are not lost. If your session's board is not the one at the top,
 > **add your tasks to the top board** rather than replacing it.
 
+## Task board — session F (`arena/5a8baf03-fl1`) — ACTIVE
+
+**Branch policy (Arena constraint):** this session runs on the Arena-managed branch
+`arena/5a8baf03-fl1` and cannot push any other branch. File-scope isolation applies, exactly as
+session `arena-3f677e8a-fl1` adopted. No other session is currently active; all tasks below are
+claimed by `arena/5a8baf03-fl1` at 2026-11-14. Scopes are additive — no existing register row or
+page content is deleted.
+
+| ID | Task | Status | Owner | File scope (claimed) |
+|----|------|--------|-------|----------------------|
+| F-T1 | Coordination claim (this row) | done | `arena/5a8baf03` | `COORDINATION.md` |
+| F-T2 | **Price-snapshot store** — opening + closing numbers for every market originated | in progress | `arena/5a8baf03` | `data/price_snapshots.csv`, `engine/snapshots.py`, `tools/build_snapshots.py`, `price-snapshots.html` |
+| F-T3 | **Verified results feed** — settled markets so backtests/ROI are computable | in progress | `arena/5a8baf03` | `data/results_feed.csv`, `engine/results_feed.py`, `tools/build_results_feed.py`, `results-feed.html` |
+| F-T4 | **Origination order** — side first, then total, then moneyline (enforced) | in progress | `arena/5a8baf03` | `engine/origination.py`, `data/models.json`, `line-origination.html` |
+| F-T5 | **Fair line / market line / difference** as separate columns | in progress | `arena/5a8baf03` | `data/line_board.csv`, `tools/build_line_board.py`, `line-board.html` |
+| F-T6 | **Leaderboard: signal score separated from staking score** | in progress | `arena/5a8baf03` | `engine/leaderboard.py`, `data/leaderboard.json`, `strategies.html` |
+| F-T7 | **Depth of replacement** tracked (2nd/3rd/4th string), not just the fact | in progress | `arena/5a8baf03` | `data/replacement_depth.csv`, `tools/build_replacement_depth.py`, `replacement-depth.html` |
+| F-T8 | **Correlations from officially sourced numbers only, n published** | in progress | `arena/5a8baf03` | `data/correlations_official.csv`, `tools/build_correlations_official.py`, `correlations-official.html` |
+| F-T9 | **Demotion gate** — live strategy back to paper, implemented + tested | in progress | `arena/5a8baf03` | `engine/demotion.py`, `tests/test_demotion.py`, `validation.html` |
+| F-T10 | Registers: questions, suggestions, flags, sources; executive summary; README | in progress | `arena/5a8baf03` | `data/{questions,suggestions,flags}.json`, `data/sources.tsv`, `executive-summary.html`, `README.md` |
+| F-T11 | Verification pass: every suite green, every table row sourced, unverified blank + flagged | in progress | `arena/5a8baf03` | `tools/site.py` (NAV + pages), `tools/checklinks.py` run |
+| F-T12 | Integration: PR → main, merge without waiting, confirm Pages, record here | unclaimed | `arena/5a8baf03` | PR + `COORDINATION.md` log |
 
 ### Earlier board state, preserved from session C's PR #4
 
