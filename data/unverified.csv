@@ -1,0 +1,10 @@
+item,value,reason,source_attempted,flag
+Defensive depth order (2nd/3rd/4th string) for any 2026 team,(blank),No reachable source publishes depth order with a timestamp.,https://www.nfl.com/teams/seattle-seahawks/roster,FLAG-02
+Offensive depth order (2nd/3rd/4th string) for any 2026 team,(blank),Same as above.,https://www.nfl.com/teams/seattle-seahawks/roster,FLAG-02
+"Player-prop lines and outcomes, any season",(blank),No prop dataset was obtainable.,(none reachable),FLAG-01
+2026 injury reports for Weeks 1-9,(blank),Release CDN blocked; only Week 10 was hand-verified.,https://github.com/nflverse/nflverse-data/releases/tag/injuries,FLAG-01
+Opening-line series for the full sample,(blank),initial_lines.csv covers 2021+ only.,https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv,FLAG-08
+Numeric meaning of Questionable / Doubtful,(blank),The NFL stopped attaching numbers in 2016. Any percentage would be invented.,https://www.espn.com/nfl/story/_/id/17361111/nfl-streamlines-injured-players-game-status-removes-probable-designation,FLAG-05
+"Snap counts / snap share, any season",(blank),Release CDN blocked.,https://github.com/nflverse/nflverse-data/releases/tag/snap_counts,FLAG-01
+Exact weekly injury-report filing deadlines,(blank),The Policy page 404s and secondary summaries disagree on Thursday handling.,https://operations.nfl.com/updates/the-operations-report/nfl-policy-on-injuries/,FLAG-05
+Week 10 2026 result for the 13 Sunday/Monday games,(blank),Games had not been played when the source was pinned (2026-11-14).,https://github.com/nflverse/nfldata/blob/master/data/games.csv,FLAG-06

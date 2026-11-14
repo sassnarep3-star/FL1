@@ -65,7 +65,6 @@ Shared task board for the FL1 (NFL) project. All sessions must read this before 
 
 ## ⚠️ CONFLICT RECORD — three sessions merged to `main` in parallel
 
-<<<<<<< HEAD
 On 2026-11-14 **three** sessions built a site from the same empty repo and all three merged toward `main`.
 This section records both reconciliations.
 
@@ -210,8 +209,42 @@ returns exit code `000`. Use a page-fetch tool. **Do not report a URL as dead ba
 | 2026-11-14 | `ab4e9b05` | Cross-checked session C's 161-row injury CSV against this repo's 345-row capture: 161/161 rows present in both, 156 identical, 5 differ only where a comma inside `Ankle, Knee`-style values shifted their CSV columns. Recorded as flag F15. |
 | 2026-11-14 | `ab4e9b05` | Re-verified on the final merged tree: `verify_injuries.py` 345/345 PASS, `checklinks.py` 14 pages PASS, `build.py` clean. |
 | 2026-11-14 | `ab4e9b05` | **R3:** `main` moved again to `557ffc3` via session C's PR #4 (documentation only). Merged; single conflict in `COORDINATION.md`, resolved by keeping this board on top and preserving session C's board and integration-completion record verbatim below. No files discarded. |
+| 2026-11-14 | `ab4e9b05` | **PR #3 merged** as `eb50220` (merge commit, 2026-11-14T03:05:45Z). GitHub Pages build for `eb50220`: **built**. Live site verified. |
+| 2026-11-14 | `ab4e9b05` | Found a rendering bug by reading the live page: the dashboard's Source column printed literal `<a class=...>` text, because `src_link()` markup was passed through `cell()` which escapes it. Fixed via `raw_src()`; added an escaped-markup guard to `checklinks.py` and proved the guard fires by injecting the bug. |
+| 2026-11-14 | `ab4e9b05` | **PR #5 merged** as `d5e9cc0`. Pages build for `d5e9cc0`: **built**. Live `index.html` re-fetched and confirmed rendering real links. |
+| 2026-11-14 | `ab4e9b05` | **PR #7 merged** as `6ba143f` (review guide, deploy record, option-label tidy). Pages build: **built**. |
+| 2026-11-14 | `ab4e9b05` | Found a second rendering bug by reading the deployed page: `verification.html` printed its own TSV header line as a data row, and two page counts were stale at 13 instead of 14. **PR #8 merged** as `1c6c8ab`; Pages build **built**; live page re-fetched clean. |
+| 2026-11-14 | `ab4e9b05` | Final state: 14 pages live, `verify_injuries.py` 345/345 PASS, `checklinks.py` PASS with 0 escaped fragments, 15 flagged items published, 0 fabricated values, 0 estimated values presented as sourced. |
 
 ---
+
+## PR and deploy record
+
+| Item | Result |
+|---|---|
+| PR #3 (this session's main deliverable) | **MERGED** into `main` as merge commit `eb50220` at 2026-11-14T03:05:45Z |
+| PR #5 (escaped-link fix) | **MERGED** into `main` as merge commit `d5e9cc0` |
+| PR #7 (review guide, PR/deploy record, option labels) | **MERGED** into `main` as merge commit `6ba143f` |
+| PR #8 (verification table header fix) | **MERGED** into `main` as merge commit `1c6c8ab` |
+| GitHub Pages source | `main`, path `/`, legacy build |
+| Pages build for `eb50220` | **built** |
+| Pages build for `d5e9cc0` | **built** |
+| Pages build for `6ba143f` | **built** |
+| Pages build for `1c6c8ab` | **built** |
+| Live URL | https://sassnarep3-star.github.io/FL1/ |
+| Live verification | `index.html`, `injuries.html`, `flagged.html`, `suggestions.html`, `questions.html`, `verification.html` fetched from the live host and read; all render correctly |
+| Note on caching | GitHub Pages serves `index.html` and cached paths from a CDN. A stale read straight after a deploy is a cache artefact, not a broken deploy — re-fetch with a `?cb=<sha>` query before concluding a page is wrong. This caused one false alarm during this session. |
+| Branches merged before this one | PR #1 (`7c7ae6a`), PR #2 (`42b06f5`), PR #4 (`557ffc3`) — all preserved in `archive/` |
+
+## Verification performed on the merged `main` tree
+
+| Check | Result |
+|---|---|
+| `tools/verify_injuries.py` | PASS — 345 of 345 rows match the raw capture, same order, field for field |
+| `tools/checklinks.py` | PASS — 14 pages, every internal link and anchor resolves, every page reachable, all source IDs registered, 0 escaped fragments |
+| `tools/build.py` | PASS — 32 teams, 32 standings rows, 345 injury rows, 15 sources (12 verified), 60 depth slots, 20 questions, 15 suggestions, 20 requirements, 6 strategies, 15 flags |
+| Independent cross-transcription | 156 of 161 shared rows identical to another session's capture; the 5 differences are that CSV's comma-shift bug, not a data dispute |
+| Live deploy | Pages build `built` for the merge commit; pages re-fetched and rendered correctly |
 
 ## Requests
 
@@ -221,7 +254,9 @@ _None outstanding._
 
 All 15 items on [`flagged.html`](flagged.html). Every unverifiable value in this repo is left blank there
 with the reason and the source that was attempted.
-=======
+
+### Preserved task board and integration record from the merged branch (verbatim)
+
 | # | Task | Status | Owner | File scope | Sources / verification | Irregularities |
 |---|------|--------|-------|------------|------------------------|----------------|
 | 1 | Create COORDINATION.md task board | done | arena-89c32e23-fl1 | COORDINATION.md | n/a | none |
@@ -389,3 +424,186 @@ Status values: `unclaimed` · `in progress` · `done` · `needs review` · `bloc
   upstream configured, so `git pull` was silently rebasing onto `origin/main` — the cause of
   the first conflict. Any other session on this branch should check `git rev-parse --abbrev-ref @{u}`.
 
+---
+
+## Session record — `arena-ab82c93f` (`arena/ab82c93f-fl1`) · 2026-11-14
+
+**Scope:** a new, non-overlapping computed sub-site at `docs/computed/`, plus its own standalone
+`scripts/` and `data/` files. Shared outputs were **not** rewritten: `README.md` keeps main's text
+verbatim and appends one section, this file is appended to, and the root `index.html` gains exactly
+one nav link and one card.
+
+### Delivered
+
+| Task | Status | Files (all new) |
+|---|---|---|
+| Reproducible pipeline with SHA-256 pinning | done | `scripts/fetch_data.py`, `scripts/lib.py`, `data/raw/MANIFEST.json` |
+| Strategy lab: 16 variants × 7 pre-registered gates | done | `scripts/strategy_lab.py`, `data/strategies.csv`, `data/leaderboard*.csv` |
+| Correlation engine (same-game, cross-game, parlay economics) | done | `scripts/build_correlations.py`, `data/correlations.csv`, `data/parlay_economics.csv` |
+| Availability + QB-depth model | done | `scripts/build_availability.py`, `data/availability_2025.csv`, `data/depth_deficiency.csv` |
+| Official Week 10 2026 capture | done | `data/week10_2026_official.csv` (345 rows), `scripts/build_week10_board.py` |
+| Registers | done | `data/{requirements,questions,suggestions,irregularities,unverified}.csv`, `data/sources.json` |
+| Computed sub-site, 14 pages | done | `scripts/build_site.py`, `docs/computed/*.html` |
+| Build gate + CI | done | `scripts/verify_site.py`, `.github/workflows/verify.yml` |
+
+### Headline result
+
+**16 pre-registered strategies tested on 5,336 games (2006-2026) at real closing prices. 0 passed all
+seven gates. The reward pool pays 0 units.** A control that bets every home team returns -5.2% (the
+vig). Best raw candidate `WIND15_UNDER` (+7.2% ROI, p = 0.063) fails G3, G4 and G6 **and** is not
+implementable, because it uses post-game measured wind.
+
+This directly complements — and does not contradict — the root site's deliberate "no strategy has a
+result" position: this layer ran the tests and the answer was no.
+
+### Verification performed
+
+- Every number regenerated by script; `data/raw/MANIFEST.json` pins each input by SHA-256 + row count.
+- 345 Week-10 rows each carry the official URL **and** a verbatim quote, so transcription is auditable
+  offline.
+- `scripts/verify_site.py` enforces 19 checks and exits non-zero on: unsourced table row, broken or
+  placeholder link, missing/non-https source, malformed gate column, verdict/gate mismatch, reward
+  paid to an unapproved strategy, asymmetric correlation matrix, incomplete Week-10 join, a rendered
+  `nan`, or a root site that lost its pages.
+- CI rebuilds everything and fails if the committed result differs.
+
+### Irregularities (full detail at `docs/computed/flagged.html`)
+
+| ID | Severity | Item |
+|---|---|---|
+| FLAG-01 | Critical | nflverse release CDN unreachable → injuries limited to 2025, no depth charts, no snap counts |
+| FLAG-02 | High | No depth order in the official roster feed → 2nd/3rd/4th-string model stops at QB |
+| FLAG-03 | Medium | `closing_lines.csv` has no push outcome |
+| FLAG-04 | Medium | `rosters.csv` stops at 2019 |
+| FLAG-05 | Medium | NFL Personnel (Injury) Report Policy page 404s |
+| FLAG-06 | High | 2026 season incomplete → no 2026 out-of-sample claim |
+| FLAG-07 | Low | Mixed team-code generations (SD/LAC, STL/LA/LAR, OAK/LV) |
+| FLAG-08 | Medium | Closing prices only, no openers |
+| FLAG-09 | Low | Push exclusion shifts the gate denominator slightly |
+
+**The CDN failure (FLAG-01) was also found independently by session `kanlerxz87-cyber` in a sibling
+repository**, where it is logged as F-10; its finding F-08 (no depth order in the official roster feed)
+matches FLAG-02 here. Two independent sessions reaching the same two conclusions from different
+sources is the strongest evidence in this build that they are environmental, not mistakes.
+
+### Two real bugs my own verification step caught (recorded for honesty)
+
+1. **Vig breakeven was computed from realised returns instead of from the price**, which circularly
+   dragged it toward the observed hit rate — it reported a 105.5% breakeven for the control. Fixed to
+   `1 / mean(decimal price)`, giving ~51.3%.
+2. **The Bonferroni denominator was hand-typed as 15 while 16 variants were searched.** Fixed: it is
+   now read from the signal registry at runtime and cannot drift. G6 currently uses α/16 = 0.00313.
+
+### Integration instructions
+
+1. Adopt by merging this branch as-is. Nothing at the repo root is replaced.
+2. **Do not add a Pages deploy job to `.github/workflows/verify.yml`.** It intentionally has none. The
+   Pages source is `main` / root, so `docs/computed/` publishes under
+   `https://sassnarep3-star.github.io/FL1/docs/computed/` with no workflow. A deploy job would repoint
+   the site root and replace the integrating session's build.
+3. To adopt a finding into the root site, copy the number from `data/strategies.csv` or
+   `data/correlations.csv` and cite `scripts/strategy_lab.py` / `scripts/build_correlations.py`.
+
+### Lesson for future sessions
+
+`git fetch` at session *start* is not enough. At start `origin/main` was `e001e0a`; **eight other
+session branches and five merges to `main` appeared during the run.** Re-check `origin/main`
+immediately before the first push and again before opening a PR. Scopes here stayed non-overlapping
+only because the build wrote to new paths.
+
+---
+
+## Session record — `arena-046256d0-fl1` (`arena/046256d0-fl1`) · 2026-11-14
+
+**Scope:** built a full verification-first decision dashboard from the empty repo (README-only at start):
+landing page plus category subpages, verified Week 10 (2026) standings/schedule/injury data, decision-gate
+questions, suggestions register, strategy framework (single bet / parlay / player-prop combos, validation
+gates, correlation, luck removal, leaderboard rewards), lines page with verification-gated cells, and a
+flagged-for-review page. Sources: NFL.com standings, schedule, injury report, game center (all official).
+
+**Tasks, sources, verification (see `data/verification-log.md` in the archive):** all 32-team standings,
+16-game schedule, and the complete Week 10 injury report verified line-by-line against NFL.com on
+2026-11-14. Line values had no reachable official source (DraftKings client-rendered, FanDuel HTTP 500)
+and were left blank + flagged, per rule.
+
+**Irregularities found by this session:**
+- **IR-1 (standings freshness):** NFL.com standings do not reflect the completed Week 10 Thursday game
+  (WAS 24, NYG 21, FINAL) — WAS still 3-5-1, NYG 5-3-1. Published as-is, flagged.
+- **UNV-1 / UNV-2:** all sportsbook line and player-prop values unverifiable — left blank, flagged.
+- **IR-2 (repo hygiene):** the `main`-branch `COORDINATION.md` contained committed merge-conflict
+  markers (lines from a prior session's merge). Resolved during this integration: both conflict sides'
+  records preserved verbatim, markers removed. Flagged here for the record.
+
+**Conflict with the consolidated build on `main` (resolved, no work discarded):** this session's branch
+added site files at the same repo-root paths as the already-merged consolidating build (three earlier
+sessions had merged into `main`). `gh pr merge` failed on add/add conflicts. Resolution per the standing
+rule in this board: the consolidated site at the repo root stays live; this session's complete site is
+preserved **verbatim** in [`archive/arena-046256d0/`](archive/arena-046256d0/) (pages, stylesheet, and
+its `data/` verification records), with a README explaining the mapping. Nothing from this session was
+deleted; nothing from the consolidating build was altered.
+
+**Integration & deployment:** PR https://github.com/sassnarep3-star/FL1/pull/10 opened from
+`arena/046256d0-fl1` to `main`. Merge result and GitHub Pages deploy status recorded in the follow-up
+log entry appended below after the merge and deploy check.
+
+### Integration record — session `arena-ab82c93f` (PR #6, #12, #13)
+### Integration record — session `arena-ab82c93f` (PR #6)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/6
+- **Merged:** 2026-11-14T03:11:55Z · merge commit `457664a` · method `--merge`, no approval wait
+- **CI before merge:** `verify-research-build` **pass** (run 43550306043) — rebuild, 19-check verify
+  gate, and byte-identical-rebuild check all green
+- **Pages:** build `588fa09` → status `built`. Sub-site confirmed reachable at
+  https://sassnarep3-star.github.io/FL1/docs/computed/index.html
+- **Root site re-checked after merge:** reachable, unbroken, and its headline injury counts
+  (345 rows / 66 Out / 10 Doubtful / 84 Questionable) are **identical to this session's independent
+  count** — a useful cross-check that two separate transcriptions of the same official report agree.
+
+**Files merged:** `scripts/` (9), `data/` (17 new, 4 regenerated), `docs/computed/` (14 pages + .nojekyll),
+`.github/workflows/verify.yml`, `EXECUTIVE_SUMMARY.md`. Shared files touched additively only:
+`index.html` (+1 nav link, +1 card), `COORDINATION.md` (this appendix), `README.md` (one appended
+section, main's text byte-identical).
+
+**No deploy workflow was added on purpose** — Pages serves from `main` / root, so `docs/computed/`
+publishes with no workflow and the root build is untouched.
+
+**Rebase conflicts:** `COORDINATION.md` conflicted on all four rebases because other sessions merged to
+`main` while this branch was open (main advanced through `eb50220 → d5e9cc0 → 6ba143f → 1c6c8ab`).
+Each time it was resolved by taking `origin/main`'s file verbatim and re-appending this appendix, so
+no other session's record was ever discarded. `README.md` and `index.html` merged without conflict.
+
+**Still open for the owner (unchanged by this merge):** FLAG-01 (CDN access) and FLAG-02 (no depth
+order) remain the two items that block requirements R13/R14. Both are also recorded as F-08/F-10 by a
+sibling session, so they are independently corroborated.
+
+### Correction to this session's own log
+
+Mid-session I ran `rm -rf .git` inside the repo root while cleaning up unrelated files. That was a
+mistake and destroyed the local git directory. Recovery: re-cloned the branch from `origin` (where the
+previous commit had already been pushed) and copied the recovered `.git` back. **No committed work was
+lost**, because the branch had been pushed before the deletion. From that point the branch was rebased
+onto current `main`. Recorded here rather than omitted, since the board asks for irregularities to be
+logged including the ones a session caused itself.
+
+### Follow-up — session `arena-ab82c93f` (PRs #12 and #13)
+
+- **PR #12** (merged 2026-11-14T03:16:23Z): fixed a real rendering bug where four tables — including
+  the entire source registry, the entire Flagged-for-Review register, and all 345 Week-10 official
+  injury rows — were publishing **completely empty**. `table()` was being called with display labels
+  as column keys, so every cell looked up a non-existent column. Two defences added so it cannot recur:
+  `table()` now raises `KeyError` on an unknown column, and `verify_site.py` gains **T2** (no table may
+  render an entirely-empty row) and **T3** (every `flagged.html#ANCHOR` must resolve). T2 immediately
+  found three further instances that had not been spotted by eye.
+- **Lesson worth carrying:** the original 19-check gate verified *data*, *links* and *gate columns* but
+  never verified that a rendered table had any content. A verification suite that checks sources but
+  not output is half a suite. Any future session adding a table should run the T2 check.
+
+### Final state of this session's contribution
+
+| | |
+|---|---|
+| PRs merged | #6 (computed layer), #11 (merge record), #12 (empty-table fix) |
+| CI | `verify-research-build` green on every merge |
+| Pages | build `67adb6f` status `built`; `docs/computed/` confirmed live with populated tables |
+| Root site | untouched and verified reachable after every merge |
+| Data | 16 strategies / 0 approved / 0 reward paid; 345 verified official rows; 16 sources |

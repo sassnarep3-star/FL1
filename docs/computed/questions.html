@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Open questions · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html">Findings</a><a href="lines.html">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html" class="on">Open questions</a><a href="suggestions.html">Suggestions</a><a href="requirements.html">Requirements</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html">Methods</a></nav>
+</div></header>
+<main>
+<h1>Open questions</h1>
+<p class="lead">What must be answered before a decision is reasonable — organised by what we have and what we lack.</p>
+
+<p class="lead">These are the questions that have to be answered before a decision is reasonable.
+Each one states what we already have, what we are missing, why it blocks a decision, and the exact
+form the answer needs to take. A question with an empty "we have" column is a question we cannot
+currently reason about at all.</p>
+
+<div class="note bad"><strong>6 of 16 are critical</strong>
+and each one blocks a requirement. Answering them is the highest-value work available — more valuable
+than another backtest, because a backtest run against an unknown threshold produces a number nobody
+can act on.</div>
+
+<h2>Register</h2>
+<div class="tw"><table><thead><tr><th>ID</th><th>Area</th><th>Priority</th><th>Question</th><th>We have</th><th>We lack</th><th>Why it blocks a decision</th><th>Answer format needed</th><th>Blocks</th><th>Owner</th></tr></thead><tbody><tr><td>OQ-01</td><td>Economics</td><td><span class="pill p-bad">Critical</span></td><td>What is the cheapest realistically obtainable price for the bets we intend to place?</td><td>Closing spread/total/moneyline prices for 5,458 games (D01).</td><td>Opening lines for the full sample, and any account-specific price schedule.</td><td>Every ROI in this repo is measured against the CLOSE. If only the close is available, the maximum achievable edge is roughly half of the model-vs-close gap.</td><td>A dated price sample from the actual book(s): 20 games, open and close, spread and total, plus any reduced-juice schedule.</td><td>R05, R11, R12</td><td>Owner</td></tr><tr><td>OQ-02</td><td>Economics</td><td><span class="pill p-bad">Critical</span></td><td>What bankroll, unit size and legal jurisdiction apply?</td><td>Nothing.</td><td>Bankroll, unit definition, jurisdiction, and whether the owner can use multiple books.</td><td>Kelly-fraction sizing, drawdown gates (G7) and reward sizing all depend on it. A 3% ROI is uninvestable at 1-unit stakes if the unit is 0.1% of bankroll.</td><td>Bankroll in units, max bet as % of bankroll, list of available sportsbooks.</td><td>R07, G7</td><td>Owner</td></tr><tr><td>OQ-03</td><td>Validation</td><td><span class="pill p-bad">Critical</span></td><td>What minimum sample size and out-of-sample length is acceptable before a strategy may be called &#x27;skill&#x27;?</td><td>Pre-registered defaults: &gt;=150 bets, &gt;=60 OOS bets, 30% OOS split.</td><td>The owner&#x27;s risk appetite for false positives vs false negatives.</td><td>These thresholds are the difference between rejecting a real edge and shipping a fluke. They are currently my choice, not the owner&#x27;s.</td><td>Confirm the defaults, or state a maximum acceptable false-positive rate.</td><td>R09, R12</td><td>Owner</td></tr><tr><td>OQ-04</td><td>Validation</td><td><span class="pill p-warn">High</span></td><td>How many strategy variants may be searched before the multiple-testing penalty is unacceptable?</td><td>15 variants were tested; G6 uses Bonferroni at alpha/15 = 0.0033.</td><td>A stated search budget. Unbounded search makes any p-value meaningless.</td><td>If we search 1,000 variants, a Bonferroni-corrected alpha of 0.00005 is required and essentially nothing will pass.</td><td>A number: the maximum variants per research cycle.</td><td>G6</td><td>Owner</td></tr><tr><td>OQ-05</td><td>Data</td><td><span class="pill p-bad">Critical</span></td><td>Can the nflverse release CDN be reached from the production environment?</td><td>nflverse-data release assets are NOT reachable here (FLAG-01). Only git-hosted files were usable.</td><td>Confirmation that a different network path exists.</td><td>Without it, injuries beyond 2025, depth charts and snap counts cannot be backfilled, so R13/R14 stay partial.</td><td>Yes/no, plus an accessible mirror or credential that can reach release-assets.githubusercontent.com.</td><td>R13, R14, R15</td><td>Owner / infra</td></tr><tr><td>OQ-06</td><td>Data</td><td><span class="pill p-warn">High</span></td><td>Can the 2026 injury season be backfilled week by week?</td><td>Week 10 2026 only, hand-verified (S01).</td><td>Weeks 1-9 of 2026 in machine-readable form.</td><td>The availability signal has n = 1 week in the current season and cannot be evaluated.</td><td>Either unblock OQ-05, or authorise 9 weeks of hand transcription at ~340 rows/week.</td><td>R13</td><td>Owner</td></tr><tr><td>OQ-07</td><td>Data</td><td><span class="pill p-bad">Critical</span></td><td>Where does an authoritative offensive/defensive depth chart come from, with a timestamp?</td><td>NFL.com roster pages list ACT/RES status but NO depth order (verified, S06). nflverse depth_charts is blocked (D07).</td><td>Any depth-order feed, and the snapshot time of each chart.</td><td>R14 (2nd/3rd/4th string) is literally unanswerable without it. Without a timestamp a chart is not even usable as a pre-game signal.</td><td>A documented endpoint or dataset with (team, position, rank, as-of timestamp).</td><td>R14, R15</td><td>Owner / data vendor</td></tr><tr><td>OQ-08</td><td>Data</td><td><span class="pill p-warn">High</span></td><td>Is there a player-prop market dataset (lines + results) we may use?</td><td>Nothing. No prop dataset was obtainable.</td><td>Historical prop lines and outcomes, even for one season.</td><td>R08 asks for player prop bet combos. Correlation between prop legs cannot be measured without prop outcomes.</td><td>A licensed or open source with player, market, line, price and result.</td><td>R08</td><td>Owner / data vendor</td></tr><tr><td>OQ-09</td><td>Validation</td><td><span class="pill p-warn">High</span></td><td>Should a strategy that wins on ROI but loses on hit rate (or vice versa) be admitted?</td><td>G2 and G4 require both ROI &gt; 0 in both periods and a hit-rate lower bound above the vig breakeven.</td><td>Confirmation this conjunction is intended, since it is stricter than most published systems.</td><td>A long-odds strategy can be profitable with a 30% hit rate. G4 would reject it even if it were genuinely +EV.</td><td>Confirm strict conjunction, or allow an ROI-only path with a separate longshot gate.</td><td>G4, G5</td><td>Owner</td></tr><tr><td>OQ-10</td><td>Definition</td><td><span class="pill p-bad">Critical</span></td><td>What exactly counts as &#x27;removing luck&#x27; for sign-off?</td><td>Wilson CIs, ROI t-tests, Bonferroni deflation, seasonal-concentration cap, drawdown bound.</td><td>The owner&#x27;s acceptance threshold for each.</td><td>&#x27;Luck removed&#x27; is unfalsifiable until it is a number. Every gate here is a number; the owner must pick the bar.</td><td>A signed statement of the thresholds, e.g. &#x27;p &lt; 0.01 after deflation and OOS ROI &gt; 2%&#x27;.</td><td>R11, R12</td><td>Owner</td></tr><tr><td>OQ-11</td><td>Definition</td><td><span class="pill p-neu">Medium</span></td><td>How should the availability weights scale for starter vs backup losses?</td><td>A single fixed weight per designation (Out 1.0 / Doubtful 0.5 / Questionable 0.25).</td><td>Any evidence-based weight per position or per depth slot.</td><td>The current weights are an assumption of this model. The NFL publishes no numeric probabilities (C01).</td><td>Approve the assumption as-is, or supply a weighting study.</td><td>R13, R14</td><td>Owner</td></tr><tr><td>OQ-12</td><td>Scope</td><td><span class="pill p-neu">Medium</span></td><td>Are parlays and same-game parlays in scope for reward, or explicitly discouraged?</td><td>Measured parlay EV: a 2-leg parlay of two -110 legs is -8.9% EV if independent, and correlation does NOT rescue it.</td><td>A scope decision.</td><td>If the leaderboard rewards parlay strategies, it will be rewarding structures that are mathematically worse than singles unless a correlated SGP edge exists.</td><td>Include / exclude / include only with a per-SGP correlation proof.</td><td>R07, R08</td><td>Owner</td></tr><tr><td>OQ-13</td><td>Scope</td><td><span class="pill p-neu">Medium</span></td><td>Should in-season futures and win totals be part of the leaderboard?</td><td>A win-total market series (D09-style file: nfldata/win_totals.csv, 576 rows).</td><td>A decision on whether season-long markets are in scope.</td><td>Season-long bets settle once a year, so a 150-bet gate is unreachable within one season.</td><td>Include / exclude.</td><td>R07</td><td>Owner</td></tr><tr><td>OQ-14</td><td>Governance</td><td><span class="pill p-warn">High</span></td><td>Who signs off on a strategy moving from REJECTED to LIVE, and with what position cap?</td><td>A gate system that produces APPROVED / REJECTED.</td><td>A named approver and a position cap for a first live test.</td><td>R07 asks for rewards. Paying a reward requires someone accountable for the release.</td><td>Name + maximum live stake for the first 100 bets.</td><td>R07</td><td>Owner</td></tr><tr><td>OQ-15</td><td>Data</td><td><span class="pill p-neu">Medium</span></td><td>Does the 2026 season&#x27;s partial data permit any out-of-sample claim?</td><td>2026 results exist through Week 10 only (14 games in Week 10, 1 completed).</td><td>The rest of the 2026 season.</td><td>Any 2026 metric in this repo is descriptive, not out-of-sample evidence.</td><td>Accept that 2026 is descriptive only until Week 18 completes.</td><td>R10, R11</td><td>Owner</td></tr><tr><td>OQ-16</td><td>Governance</td><td><span class="pill p-neu">Low</span></td><td>How long should a REJECTED strategy stay on the board before it is retired?</td><td>A leaderboard that keeps every tested variant, including rejects.</td><td>A retirement rule.</td><td>Keeping rejects forever inflates the multiple-testing denominator and makes the board unreadable.</td><td>A number of seasons or a rule.</td><td>G6</td><td>Owner</td></tr></tbody></table></div>
+
+<h2>The five that matter most</h2>
+<ul>
+<li><strong>OQ-01 — what price can you actually get?</strong> Every ROI here is measured against the
+close. Without an opening-line feed or a book-specific price sample, the real edge is unknown and
+roughly half of any model-vs-close gap is fictional.</li>
+<li><strong>OQ-07 — where is a timestamped depth chart?</strong> Without it the 2nd/3rd/4th-string
+requirement is unanswerable, full stop.</li>
+<li><strong>OQ-10 — what number counts as "luck removed"?</strong> The gates are numbers. You have to
+pick the bar, or the standard is whatever the agent felt like that day.</li>
+<li><strong>OQ-05 — can the release CDN be reached?</strong> This one question unblocks injuries,
+depth charts and snap counts at once.</li>
+<li><strong>OQ-14 — who signs off on a live test?</strong> Rewards require accountability; the
+leaderboard currently has no one to release a strategy to.</li>
+</ul>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Data as of 2026-11-14 &middot; games.csv 7,548 rows, injuries_2025.csv 4,442 rows. Builds are deterministic: this stamp comes from the
+pinned inputs, not from the clock, so a rebuild is byte-identical.</footer>
+</body></html>

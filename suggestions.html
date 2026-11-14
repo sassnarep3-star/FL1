@@ -30,7 +30,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Fair value only, price column blank and labelled. (Recommended)</li><li>B. Fair value plus a user-supplied price feed.</li><li>C. Wait for a price feed before publishing anything.</li></ol>
+  <ol class="opts"><li>Fair value only, price column blank and labelled. (Recommended)</li><li>Fair value plus a user-supplied price feed.</li><li>Wait for a price feed before publishing anything.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. A blank, labelled column is honest and costs nothing. Option C delays all work on the strength of a data source that was never promised.</p></div>
   <p class="muted">Expected impact: Protects the whole site from being built on an invented number.</p>
 </section>
@@ -49,7 +49,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Calibration-primary ranking. (Recommended)</li><li>B. Profit-primary ranking with a minimum sample gate.</li><li>C. Rank on both and display them side by side without combining.</li></ol>
+  <ol class="opts"><li>Calibration-primary ranking. (Recommended)</li><li>Profit-primary ranking with a minimum sample gate.</li><li>Rank on both and display them side by side without combining.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A, with C as a display layer. Profit-first ranking will surface a lucky strategy in week one and destroy the credibility of the board.</p></div>
   <p class="muted">Expected impact: Turns the leaderboard from a lottery into a measurement.</p>
 </section>
@@ -68,7 +68,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Hash-sealed prediction log committed before kickoff. (Recommended)</li><li>B. Public timestamping service.</li><li>C. No seal, trust the author.</li></ol>
+  <ol class="opts"><li>Hash-sealed prediction log committed before kickoff. (Recommended)</li><li>Public timestamping service.</li><li>No seal, trust the author.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. It is nearly free, and it is the single cheapest thing that makes the leaderboard credible.</p></div>
   <p class="muted">Expected impact: Converts claims into an auditable record.</p>
 </section>
@@ -87,7 +87,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Two-layer build, observed and derived kept strictly separate. (Recommended)</li><li>B. Observed absence only; defer depth entirely.</li><li>C. Build derived depth and present it as if it were official.</li></ol>
+  <ol class="opts"><li>Two-layer build, observed and derived kept strictly separate. (Recommended)</li><li>Observed absence only; defer depth entirely.</li><li>Build derived depth and present it as if it were official.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. Option C is the trap: it would look like the most impressive feature on the site while being the least defensible.</p></div>
   <p class="muted">Expected impact: Delivers the requested feature without asserting something the sources cannot support.</p>
 </section>
@@ -106,7 +106,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Dedicated page, always populated, never empty. (Recommended)</li><li>B. A footnote at the bottom of the home page.</li><li>C. Leave unreviewed items out of the site entirely.</li></ol>
+  <ol class="opts"><li>Dedicated page, always populated, never empty. (Recommended)</li><li>A footnote at the bottom of the home page.</li><li>Leave unreviewed items out of the site entirely.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. It is the mechanism that lets the rest of the site be trusted.</p></div>
   <p class="muted">Expected impact: Makes the honesty of the dataset visible instead of asserted.</p>
 </section>
@@ -125,7 +125,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Strict walk-forward with a logged holdout. (Recommended)</li><li>B. k-fold cross-validation on shuffled games.</li><li>C. Single train/test split.</li></ol>
+  <ol class="opts"><li>Strict walk-forward with a logged holdout. (Recommended)</li><li>k-fold cross-validation on shuffled games.</li><li>Single train/test split.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. Option B leaks future information into the past in a sport with strong week-to-week drift.</p></div>
   <p class="muted">Expected impact: Prevents the most common way an in-house model exaggerates its own accuracy.</p>
 </section>
@@ -144,7 +144,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Sequenced build. (Recommended)</li><li>B. All three product types in parallel.</li><li>C. Singles only, forever.</li></ol>
+  <ol class="opts"><li>Sequenced build. (Recommended)</li><li>All three product types in parallel.</li><li>Singles only, forever.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. Option B is how projects end up with a parlay board backed by three unvalidated legs.</p></div>
   <p class="muted">Expected impact: Keeps every published number downstream of a validated one.</p>
 </section>
@@ -163,7 +163,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Mandatory baseline comparison. (Recommended)</li><li>B. Baseline shown for information but not required.</li><li>C. No baseline.</li></ol>
+  <ol class="opts"><li>Mandatory baseline comparison. (Recommended)</li><li>Baseline shown for information but not required.</li><li>No baseline.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. Without it the leaderboard measures effort, not edge.</p></div>
   <p class="muted">Expected impact: Makes the leaderboard&#x27;s ranking mean something.</p>
 </section>
@@ -182,7 +182,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Immutable timestamped snapshots. (Recommended)</li><li>B. One file overwritten each week.</li><li>C. Capture only once, at the end of the week.</li></ol>
+  <ol class="opts"><li>Immutable timestamped snapshots. (Recommended)</li><li>One file overwritten each week.</li><li>Capture only once, at the end of the week.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. Option C discards the entire within-week signal, which is the only part that is not already in the closing price.</p></div>
   <p class="muted">Expected impact: Preserves the ability to ask timing questions later.</p>
 </section>
@@ -201,7 +201,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Static, no build step. (Recommended)</li><li>B. Static site generator with a build action.</li><li>C. Single-page app with a bundler.</li></ol>
+  <ol class="opts"><li>Static, no build step. (Recommended)</li><li>Static site generator with a build action.</li><li>Single-page app with a bundler.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. Nothing to break, nothing to version, and Pages serves it as-is.</p></div>
   <p class="muted">Expected impact: The published site cannot drift from the committed data.</p>
 </section>
@@ -220,7 +220,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Non-monetary leaderboard, legal question flagged. (Recommended)</li><li>B. Prize pool after review.</li><li>C. No leaderboard at all.</li></ol>
+  <ol class="opts"><li>Non-monetary leaderboard, legal question flagged. (Recommended)</li><li>Prize pool after review.</li><li>No leaderboard at all.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. It delivers the requested competitive structure with none of the exposure.</p></div>
   <p class="muted">Expected impact: Keeps the project squarely informational.</p>
 </section>
@@ -239,7 +239,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Visible provenance tag per table. (Recommended)</li><li>B. Provenance documented in a separate methodology page only.</li><li>C. No provenance marking.</li></ol>
+  <ol class="opts"><li>Visible provenance tag per table. (Recommended)</li><li>Provenance documented in a separate methodology page only.</li><li>No provenance marking.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. A reader should never have to guess whether a number was read or computed.</p></div>
   <p class="muted">Expected impact: Makes line-by-line verification possible, which is what the brief asks for.</p>
 </section>
@@ -258,7 +258,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. One verified club first, then expand. (Recommended)</li><li>B. All 32 clubs immediately.</li><li>C. None until all 32 are ready.</li></ol>
+  <ol class="opts"><li>One verified club first, then expand. (Recommended)</li><li>All 32 clubs immediately.</li><li>None until all 32 are ready.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. It demonstrates the method end-to-end and keeps every published cell checkable.</p></div>
   <p class="muted">Expected impact: Proves the approach before scaling it.</p>
 </section>
@@ -277,7 +277,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Publish both, resolve nothing. (Recommended)</li><li>B. Pick the newer source.</li><li>C. Drop the player from the table.</li></ol>
+  <ol class="opts"><li>Publish both, resolve nothing. (Recommended)</li><li>Pick the newer source.</li><li>Drop the player from the table.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. Any silent choice would be an unlogged inference, which is what the brief prohibits.</p></div>
   <p class="muted">Expected impact: Keeps the dataset honest and makes the source&#x27;s own errors reviewable.</p>
 </section>
@@ -296,7 +296,7 @@
     </div>
   </div>
   <h3>Options</h3>
-  <ol class="opts"><li>A. Grouped decision brief. (Recommended)</li><li>B. Flat list of questions only.</li><li>C. Free-text memo.</li></ol>
+  <ol class="opts"><li>Grouped decision brief. (Recommended)</li><li>Flat list of questions only.</li><li>Free-text memo.</li></ol>
   <div class="callout ok"><p><strong>Recommendation.</strong> A. It is the difference between a list of worries and a set of choices.</p></div>
   <p class="muted">Expected impact: Makes the review step actually completable.</p>
 </section></section>

@@ -1251,9 +1251,9 @@ record.</p>
     # ------------------------------------------------------- verification log
     vrows = []
     with open(os.path.join(ROOT, "data", "verification.tsv"), encoding="utf-8") as fh:
-        for line in fh:
-            if not line.strip():
-                continue
+        lines = [ln for ln in fh.read().splitlines() if ln.strip()]
+        # first line is the column header, not a data row
+        for line in lines[1:]:
             parts = line.rstrip("\n").split("\t")
             parts = (parts + [""] * 5)[:5]
             vrows.append([cell(parts[0]), '<td><code>%s</code></td>' % esc(parts[1]),

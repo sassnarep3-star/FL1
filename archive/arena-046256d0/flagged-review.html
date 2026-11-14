@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flagged for Review — FL1</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">FL1</div>
+  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
+  <a class="item" href="index.html">Dashboard</a>
+  <a class="item" href="executive-summary.html">Executive Summary</a>
+  <a class="item" href="questions.html">Decisions &amp; Questions</a>
+  <a class="item" href="suggestions.html">Suggestions</a>
+  <a class="item" href="strategies.html">Strategies &amp; Leaderboard</a>
+  <a class="item" href="injury-report.html">Injury Report</a>
+  <a class="item" href="standings.html">Standings</a>
+  <a class="item" href="lines.html">Lines &amp; Market</a>
+  <a class="item active" href="flagged-review.html">Flagged for Review</a>
+  <a class="item" href="sources.html">Sources</a>
+</nav>
+<main>
+  <h1>Flagged for Review</h1>
+  <p class="lead">All irregularities and unverified items found during verification, published with their source links for manual review. Flagged items do not block the site. Review the sources, then decide how to proceed (see the <a href="suggestions.html">Suggestions</a> page).</p>
+
+  <h2>Irregularities</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Finding</th><th>Impact</th><th>Sources</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>IR-1</td>
+        <td>The official NFL.com schedule shows <strong>Washington 24, New York 21, FINAL</strong> on Thursday Nov 12 (Week 10). However, the NFL.com standings (fetched 2026-11-14) still show <strong>Washington 3-5-1</strong> and <strong>New York 5-3-1</strong> — the result is not reflected in the records. The standings module embedded on the official game page shows the same records.</td>
+        <td>Standings on this site publish the official values as shown; PPG/PPA computations use games played as displayed.</td>
+        <td class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10">Game center</a> · <a href="https://www.nfl.com/standings/league/2026/reg">Standings</a></td>
+        <td><span class="badge b-needsreview">Needs review</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Unverified items</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Finding</th><th>Impact</th><th>Designated verification sources</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>UNV-1</td>
+        <td>No official source could be reached to verify Week 10 betting lines. NFL.com does not publish lines. DraftKings' NFL market is client-rendered (fetch returns the generic landing page) and FanDuel returned HTTP 500 on fetch.</td>
+        <td>All spread / total / moneyline cells on the Lines &amp; Market page are blank and marked UNVERIFIED.</td>
+        <td class="src"><a href="https://sportsbook.draftkings.com/">DraftKings</a> · <a href="https://sports.fanduel.com/">FanDuel</a> · <a href="https://sports.betmgm.com/">BetMGM</a> · <a href="https://sports.caesars.com/">Caesars</a></td>
+        <td><span class="badge b-needsreview">Needs review</span></td>
+      </tr>
+      <tr>
+        <td>UNV-2</td>
+        <td>Player prop lines are published only by sportsbooks; none could be verified from an official source through this session's fetch tools.</td>
+        <td>No prop line values are published; the player-prop strategy framework requires manual verification before use.</td>
+        <td class="src">Official sportsbook player-props markets (e.g. <a href="https://sportsbook.draftkings.com/">DraftKings</a>)</td>
+        <td><span class="badge b-needsreview">Needs review</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Closed notes (checked, no discrepancy)</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Finding</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>NOTE-1</td>
+        <td>The NFL.com injury report page is titled "Week 10 of the 2026 Season" and displays the Week 10 slate (Nov 12-16). Consistent with the official Week 10 schedule — no discrepancy.</td>
+        <td><span class="badge b-verified">Closed — verified consistent</span></td>
+      </tr>
+      <tr>
+        <td>NOTE-2</td>
+        <td>Some listed "Out" players carry the designation "Not injury related - resting player" (e.g. JAX Jessie Bates, JAX Jordan Davis, LAR Myles Garrett). These are planned absences, not injuries, and are labeled exactly as the official report states.</td>
+        <td><span class="badge b-verified">Closed — presented as published</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Review workflow</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li><strong>IR-1:</strong> re-check the official standings after the Thursday game settles; if the records update, refresh the Standings page and close the flag. Proposal: <a href="suggestions.html">IDS-3</a>.</li>
+      <li><strong>UNV-1 / UNV-2:</strong> verify current lines and player props on an official sportsbook, record values with timestamps, then fill the Lines page cells and un-flag. Proposals: <a href="suggestions.html">IDS-1</a>, <a href="suggestions.html">IDS-2</a>, <a href="suggestions.html">S-04</a>.</li>
+      <li>Per the project rule, flagged items do not block the site or any merge; they are published here for review after the site is live.</li>
+    </ul>
+  </div>
+
+  <div class="footer"><a href="index.html">Back to dashboard</a></div>
+</main>
+</div>
+</body>
+</html>

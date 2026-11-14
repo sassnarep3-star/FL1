@@ -1,0 +1,7 @@
+parlay_legs,correlation_assumption,pairwise_phi,price_at_-110_each_decimal,implied_prob_at_that_price,true_joint_prob,ev_per_unit_if_priced_independent
+2,independent,0.0,3.6446,0.27438,0.25,-0.08884
+2,measured_home_cover_over,-0.0001,3.6446,0.27438,0.24998,-0.08893
+3,independent,0.0,6.9579,0.14372,0.125,-0.13026
+3,measured_home_cover_over,-0.0001,6.9579,0.14372,0.12496,-0.13052
+4,independent,0.0,13.2833,0.07528,0.0625,-0.16979
+4,measured_home_cover_over,-0.0001,13.2833,0.07528,0.06246,-0.17037

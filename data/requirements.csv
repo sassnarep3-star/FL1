@@ -1,0 +1,25 @@
+id,requirement,status,evidence,note
+R01,"Collect, organize and analyze a full list of requirements",DONE,data/requirements.csv (this file),All 24 requirements tracked with a status and evidence pointer.
+R02,Suggest improvements to the site to improve decision-making,DONE,data/suggestions.csv,"12 ranked suggestions, each with cost, evidence and the decision it unlocks."
+R03,Create a dedicated Suggestions section so a reviewer can choose a path before implementing,DONE,docs/suggestions.html,Ranked board with gate (adopt now / needs data / do not adopt) and review owner.
+R04,"Clear list of questions, information and answers needed before a decision",DONE,"data/questions.csv, docs/questions.html","16 open questions, each with what we HAVE, what we LACK, and the answer format required."
+R05,Originate my own NFL lines,PARTIAL,"data/strategy_results.csv, docs/lines.html","A reproducible line-origination model (Elo -> spread/total) exists and is priced against real closes. It is NOT yet an independent line: it uses only result history, and its disagreement with the market is inside the market's own error band (see Q-LINE-02)."
+R06,Research and develop strategies for generating useful signals,DONE,data/strategies.csv,15 pre-registered signal families tested walk-forward over 2006-2026.
+R07,Treat it as a leaderboard competition with rewards for top strategies,DONE,"data/leaderboard.csv, docs/leaderboard.html","Reward only released if all 7 gates pass. On current evidence zero strategies qualify, so zero reward is paid. This is the honest outcome, not a failure of the leaderboard."
+R08,"Cover single bets, parlays, and player prop bet combos",PARTIAL,"data/correlations.csv, data/parlay_economics.csv",Singles and parlays fully measured. Player props are NOT measurable here: no prop-level dataset was obtainable (FLAG-01) -> OQ-PROP-01.
+R09,Each strategy must pass validation gates,DONE,data/strategies.csv (G1..G7),"Seven gates, all pre-registered before results were seen."
+R10,Determine correlation values,DONE,"data/correlations.csv, data/correlation_matrix.csv","Measured with bootstrap CIs on 5,336 games."
+R11,Remove luck from the equation,PARTIAL,"data/strategies.csv (p_value, CI, G6)","Multiple-testing deflation, Wilson intervals and a no-single-season-dependency gate are in place. Luck cannot be fully removed from a finite sample; the gates bound it."
+R12,Build strategies that are selectively skill-based,REJECTED-ON-EVIDENCE,data/strategies.csv,"No candidate survived. The closest (WIND15_UNDER, WIND_COLD_UNDER, DIV_AWAY_DOG) all failed significance or stability."
+R13,Track injuries,PARTIAL,"data/week10_2026_official.csv, data/availability_2025.csv",Current week is hand-verified from NFL.com. History is 2025 only because the release CDN is blocked. A 2026 backfill is OQ-06.
+R14,Know deficiencies when 2nd/3rd/4th string replace starters on defence,BLOCKED,"data/depth_deficiency.csv, COORDINATION.md FLAG-02",The official roster feed has no depth order and nflverse depth_charts is unreachable. Only QB changes are attributable from game data. Nothing is inferred.
+R15,Same for offences using starters vs backups,PARTIAL,data/depth_deficiency.csv,"QB only, and only as 'different starter' (start-sequence rank), never as a claimed depth-chart slot."
+R16,Create an executive summary,DONE,"EXECUTIVE_SUMMARY.md, docs/index.html","One page, numbers only, every claim linked."
+R17,No manual input from the owner,DONE,scripts/,Every artefact is produced by a script from pinned inputs (data/raw/MANIFEST.json).
+R18,Verify line by line from official/trusted sources with links,PARTIAL,data/unverified.csv,All 345 Week-10 rows carry the official URL and a verbatim quote. Rows that could not be confirmed are blank and listed in data/unverified.csv.
+R19,Flag irregularities for review,DONE,"data/irregularities.csv, docs/flagged.html","9 flagged items, each with impact and the fix required."
+R20,Create a GitHub Pages site with a clean landing page and category subpages,DONE,docs/,"Static, no build step, no external JS or fonts."
+R21,All entries and findings in simple tables with analysis,DONE,docs/*.html,Every table is generated from a CSV in data/ by scripts/build_site.py.
+R22,"Every table row must link to an official source, else blank + flagged",DONE,data/unverified.csv,"Enforced by scripts/verify_site.py, which fails the build on a row without a source."
+R23,Coordinate with parallel sessions via COORDINATION.md,DONE,COORDINATION.md,"Board claimed, scopes recorded, all claims and handoffs logged."
+R24,"Open a PR, merge it, and confirm GitHub Pages deploys",DONE,COORDINATION.md (PR + merge log),Recorded in the log after merge.
