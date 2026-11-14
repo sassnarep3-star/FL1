@@ -736,3 +736,13 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Measured, from committed in-repo data (labelled third-party, not promoted to the registers):** C-01 rho **+0.00696** [-0.03324, +0.04831], n=6,813; parlay price penalty **-2.07 pp** (joint hit 24.35% vs 26.42% break-even at the legs' own closing prices); SIG-01 refuted (45.8% over 1,302 bets, ROI −11.6%, gate G-2b fails).
 - **Checks to re-run anything:** `python3 -m unittest discover -s tests -q` (75) · `python3 engine/demo_run.py --check` · `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 - **Left for the owner (deliberately undecided):** F-11 — whether third-party-derived values may be published as sourced (promoting C-01's rho is then a one-line change); the licence confirmation for the added MIT LICENSE; and the two-layer structure decision (F-10: `data/specs/` research registers vs `data/*.json` published registers, and `docs/pages/` beside the root site).
+
+---
+
+## Additive follow-up — price snapshot storage
+
+- **Session/branch:** `arena/f1e4deb7-fl1` (active current branch; repository branch is Arena-managed, so no alternate session branch was created).
+- **Scope:** `engine/price_snapshots.py`, `tests/test_price_snapshots.py`, README documentation, this log.
+- **Status:** done; implementation is a local append-only SQLite schema/API, not a populated feed.
+- **Verification:** run `python3 -m unittest discover -s tests -q`, `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, and `python3 site/build.py && python3 site/verify.py`. Tests cover open/close persistence, model-version capture, idempotency, and fail-closed validation of missing source / unsupported market and phase.
+- **Sources / irregularities:** no provider was selected and no quote was inserted. NFL official sources do not publish sportsbook prices; price values stay unverified/blank until an authorized source is acquired. The store requires explicit source URL, source record identifier, phase, timestamp and originating model version, and deliberately performs no inference.
