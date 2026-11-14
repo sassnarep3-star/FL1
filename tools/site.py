@@ -34,6 +34,9 @@ NAV = [
     ("injuries.html", "Injuries"),
     ("depth.html", "Backup Depth"),
     ("standings.html", "Standings"),
+    ("schedule.html", "Schedule 2026"),
+    ("prop-correlations.html", "Prop Correlations"),
+
     ("line-origination.html", "Line Origination"),
     ("strategies.html", "Leaderboard"),
     ("validation.html", "Validation Gates"),
