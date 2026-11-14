@@ -741,6 +741,14 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| T21 | Add append-only market opening/closing snapshot persistence and a fail-closed verified final-results import interface; do not populate unverified facts or change shared site/data/navigation | in progress | `arena/0669d4cf-fl1` | `engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`, this claim/verification record only |
+| T21 | Add append-only market opening/closing snapshot persistence and a fail-closed verified final-results import interface; do not populate unverified facts or change shared site/data/navigation | done — library only; no records imported | `arena/0669d4cf-fl1` | `engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`, `docs/market-results-store.md`, this claim/verification record only |
 
 Existing price/results datasets remain third-party or capture-specific; this task adds a persistence and provenance boundary, not a claim that those inputs are official NFL data. The existing active claim at T03–T16 is not touched.
+
+### T21 completion / verification record
+
+- `SnapshotStore` requires an opening event, allows one closing event, stores fair value, market value and signed difference separately, verifies the caller-supplied source digest against the exact captured bytes, and keeps numeric fields blank on unverified events. It reports markets without both verified snapshots.
+- `ResultsFeed` accepts only explicit `FINAL` records with an HTTPS `nfl.com` host URL, timestamp and captured bytes whose SHA-256 matches. It is append-only, idempotent for the same game/payload, and retains corrections as new events. It validates provenance shape; it does not fetch pages or independently validate transcription, so callers must check every score against the cited source before setting `verified=True`. Evidence payload archival remains the collector's responsibility.
+- Official-source check: fetched [NFL 2026 Week 10 schedule](https://www.nfl.com/schedules/2026/REG10/) and observed “Commanders 24, Giants 21, FINAL”. This verifies the cited source page and an example official result only; **no result was imported**, and this is not a complete results feed or ROI dataset.
+- Checks: `python3 -m unittest discover -s tests -q` — 87 tests passed; `python3 tools/verify_results.py` — 137 captured games reconcile to all 32 standings records (excluding Week 10 Thursday gives 2 mismatches); `python3 tools/verify_injuries.py` — 345/345 captured rows match; `python3 tools/checklinks.py` — 16 pages / 0 broken internal links; `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, `python3 site/build.py`, and `python3 site/verify.py` all passed; `git diff --check` clean.
+- Limitation: the new libraries are not yet wired to an automated bookmaker collector or linked into the published site navigation. This requires a selected/licensed quote feed and integration-scope site changes. No unverified prices or unverified results were added.
