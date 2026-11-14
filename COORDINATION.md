@@ -1046,3 +1046,45 @@ python3 tools/verify_replacement.py                    # gate, rewrites the TSV
 python3 tools/checklinks.py
 python3 -m unittest discover -s tests -q
 ```
+
+---
+
+## Session `arena/2fa09442-fl1` — D2 completion record (PR, merge, Pages)
+
+| Item | Result |
+|---|---|
+| PR | https://github.com/sassnarep3-star/FL1/pull/36 (branch `arena/2fa09442-fl1` → `main`) |
+| CI before merge | `verify-research-build` run 43650935714 → **pass** (31s) |
+| Merge | **MERGED** as `20bb8d0` (`gh pr merge 36 --merge`), 2026-11-14 |
+| Pages | `gh api repos/sassnarep3-star/FL1/pages` → **status: built**, source `main` / `/` |
+| Live verification | `depth.html` re-fetched from the live host: replacement-depth section present (71 ladders, KC row = 28 slots after the fold fix, TEN blanks with reasons). `index.html?cb=20bb8d0` re-fetched with a cache-buster: corrected schedule card **"All 272 regular-season games, 137 results in so far"** is live. (A first read without the cache-buster showed the pre-merge card — the documented CDN cache artefact, not a broken deploy.) |
+| Merges in-session | `origin/main` merged twice (PRs #22–#32, then #33); `COORDINATION.md` conflict resolved by keeping both sides' records; no work discarded |
+| Post-merge follow-up | cross-check of the two replacement-depth implementations, committed as `3afdcb2` and shipped in the follow-up PR below |
+
+### Cross-check of the two replacement-depth implementations (R26 / D1)
+
+Session `arena/360ca650-fl1` shipped `data/replacement_depth.tsv` (PR #33) from an independent code path.
+`tools/verify_replacement.py` now compares it against this session's ladder walk on every run:
+
+- **35 core rows: 31 agree exactly** — including the two Titans ladders (Barton LB, Skoronski LG) where *both*
+  implementations return blank (the club publishes no deeper name: confirmed against the live
+  [Titans chart](https://www.tennesseetitans.com/team/depth-chart)).
+- **17 contingent rows == 17 non-KC thin ladders**, set-equal.
+- **4 accepted divergences, enumerated in the code and failing the gate if they grow:**
+  1. *Definitional (flagged for review, not an error):* Dallas S and Dallas TE publish **two names at first
+     string**. This site reports ladder-level depth (a not-ruled-out name exists at string 1 → depth 1, with the
+     ruled-Out name still shown in the trail); their file reports per-missing-starter depth (Locke Out → Thomas,
+     depth 2). **Decision needed: which definition is canonical?** Both are published today, on different pages.
+  2. *Superseded:* their two KC rows were built from the **pre-fix fold** (each KC row its own ladder), so they
+     read "no charted player left"; the fold fix shipped in PR #36 resolves KC RT to depth 2 (Ezeudu) and KC DT to
+     a thin ladder. Their file should be regenerated from the fixed fold by whoever owns it next.
+- Negative-tested: corrupting one cell in their TSV fails the gate.
+
+### Status
+
+- **D1: done** — replacement-depth tracking published on `depth.html`, verified cell-by-cell by an independent
+  walker, cross-checked against a second independent implementation, spot-checked against two live official pages.
+- **D2: done** — PR #36 merged, CI green, Pages built, live site verified.
+- Open items for the integration session (non-blocking, logged above): the R26/D1 claim race, the Dallas
+  dual-first-string definition choice, and regenerating `data/replacement_depth.tsv` from the fixed KC fold.
+- Open PRs from other sessions at time of writing: #34 (`arena/5876146b-fl1`), #35 (already merged), #37+ as they appear.
