@@ -120,6 +120,10 @@ activity in any jurisdiction. No regulator or tax source was verified.
 
 ---
 
+## Price-snapshot store (2026-11-14)
+
+`engine/price_snapshots.py` provides an append-only SQLite store for point-in-time quotes attached to an originated model version. It records explicit `open`, `close`, or `intermediate` phase, market/side/line/odds, UTC capture time, source URL and vendor record ID; duplicate deliveries are idempotent. The store does not fetch quotes or manufacture missing values. Use only a licensed feed and preserve its terms. The repository contains no verified official NFL betting-price feed; therefore this is an implementation capability, not evidence that price history is currently populated. Run `python3 -m unittest tests.test_price_snapshots -v` for its checks.
+
 ## Session E additions (2026-11-14) — registers, engine, and a measured result
 
 Branch `arena/c80caab4-fl1`, integrated into the published site rather than replacing it. Everything here is
@@ -154,18 +158,37 @@ parallel registers live under `data/specs/`.
 
 ---
 
+## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
+
+- **`model-lines.html`** — own fair lines for the 13 pending Week 10 games, in the order side → total → moneyline.
+  Fair, market and difference are separate columns. Every market and difference cell is blank: no official NFL
+  source publishes prices (F18). Source: `data/model_lines.tsv`, `engine/originate.py`.
+- **`data/price_snapshots.tsv`** — the opening/closing store, one row per game and market (39 rows), all blank.
+- **`results-feed.html`** — the 137 final 2026 results used as inputs, and a strictly out-of-sample walk-forward
+  backtest (weeks 4–10, n = 89). The side model's sign accuracy is above 50%, but its margin and total errors do
+  not beat a constant benchmark (F20). ROI is blank (no prices).
+- **`governance.html`** — signal ranks the leaderboard, staking is reported beside it (`engine/leaderboard.py`
+  `split_scores`); the G-14 demotion gate sends a live strategy back to paper (`engine/gates.py`
+  `demotion_decision`); correlation values are withheld, with n shown (F19).
+- **Verification** — `tools/verify_brief.py` writes `data/verification-brief.tsv` (10 checks, incl. the 13-game slate
+  against `raw/nfl-week10-2026-capture.md`, and a fresh re-run of every fair value). `tests/test_brief.py` holds 17
+  hand-checkable tests.
+- **Withheld on purpose (brief B6):** market columns on `schedule.html`; coefficients on `prop-correlations.html`
+  (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
+- **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
+  `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
 ## Session M additions (2026-11-14)
 
 - **`results-feed.html`** — the verified results feed: all 137 played 2026 games, finals verified
   row-by-row against official nfl.com week pages (`raw/official-finals-2026.tsv`, sources
   S49–S58) and cross-checked three ways (`scripts/verify_feed_m.py`, 137/137 PASS).
-  `engine/results_feed.py` settles side/total/ML and computes ROI **fail-closed** on price
-  provenance; 17 unit tests.
+  `engine/results_settlement.py` settles side/total/ML and computes ROI **fail-closed** on price
+  provenance (17 unit tests); the verified-ingestion boundary is `engine/results_feed.py`.
 - **`originations.html`** — origination in the mandated order (**side → total → moneyline**), and
   for all 272 markets of 2026 the three separate columns: model fair line | market line |
   difference. Fair-line engine proved identical to the Computed Research Layer's engine
   (5,336/5,336 Elo values) and reproduces its published calibration. Fair TOTAL deliberately
-  blank (S2 unfitted, flag F19).
+  blank (S2 unfitted, flag F24).
 - **`signal-vs-staking.html`** — leaderboard split: signal (flat-stake) ranks and rewards;
   staking is risk telemetry only. Three entries found where a positive staking run would mask a
   non-positive signal (MASKED flag). Also the **demotion gate G-14** (live → paper: signal decay,
@@ -179,4 +202,4 @@ parallel registers live under `data/specs/`.
 - **`data/governance_gates.json`** — G-14/G-15 register; **`data/origination_order.json`** —
   the order register; **`scripts/fetch_prop_mirror_m.py`** — pinned-blob fetch (sha-verified)
   that restores session D's V9 input in a fresh workspace.
-- Sources S50–S58 (official week pages) and flags F18–F22 added to the registries.
+- Sources S50–S58 (official week pages) and flags F23–F27 added to the registries.

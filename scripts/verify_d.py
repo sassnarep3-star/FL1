@@ -21,9 +21,12 @@ V8  Spread-sign convention: for every Week 10 game with a market line and
     = home favored) agrees with the moneyline direction. 13/13 expected.
 V9  prop-correlations QA gate re-run: scripts/build_prop_correlations_d.py must
     exit 0 (all QA gates pass) and output the same row count as committed.
+    If the external parquet mirror or required Python packages are absent, mark
+    BLOCKED rather than FAIL/PASS; a blocked check is not independently verified.
 """
 import csv
 import hashlib
+import importlib.util
 import os
 import subprocess
 import sys
@@ -73,25 +76,31 @@ def main():
     before = {a: digest(a) for a in arts if os.path.exists(os.path.join(ROOT, a))}
     scripts = ["scripts/build_correlations.py", "scripts/strategy_lab.py",
                "scripts/build_week10_board.py"]
+    missing_v6_modules = [m for m in ("numpy", "pandas", "scipy")
+                          if importlib.util.find_spec(m) is None]
     ran = []
     failed = None
-    for s in scripts:
-        try:
-            r = subprocess.run([sys.executable, s], cwd=ROOT, capture_output=True,
-                               text=True, timeout=900)
-            ran.append(f"{os.path.basename(s)}:{'ok' if r.returncode == 0 else 'rc=' + str(r.returncode)}")
-            if r.returncode != 0:
-                failed = s
+    if missing_v6_modules:
+        ran.append("not run: missing Python packages " + ", ".join(missing_v6_modules))
+    else:
+        for s in scripts:
+            try:
+                r = subprocess.run([sys.executable, s], cwd=ROOT, capture_output=True,
+                                   text=True, timeout=900)
+                ran.append(f"{os.path.basename(s)}:{'ok' if r.returncode == 0 else 'rc=' + str(r.returncode)}")
+                if r.returncode != 0:
+                    failed = s
+                    break
+            except Exception as e:  # noqa
+                failed = f"{s}: {e}"
                 break
-        except Exception as e:  # noqa
-            failed = f"{s}: {e}"
-            break
     after = {a: digest(a) for a in arts if os.path.exists(os.path.join(ROOT, a))}
     same = before == after and failed is None
+    v6_status = "BLOCKED" if missing_v6_modules else ("PASS" if same else "FAIL")
     add("V6", "computed research layer rebuild is deterministic and reproducible",
         f"rebuild: {'; '.join(ran)}; artefact digests {'identical' if before == after else 'CHANGED: ' + str({k: (before.get(k), after.get(k)) for k in set(before) | set(after) if before.get(k) != after.get(k)})}",
-        "PASS" if same else "CHECK", NFLVERSE,
-        "fresh rebuild in this session's environment vs committed artefacts")
+        v6_status, NFLVERSE,
+        "BLOCKED means dependencies were absent; PASS requires a successful fresh rebuild and matching artefact digests")
 
     # ---------- V7 ----------
     sample = [
@@ -172,15 +181,33 @@ def main():
 
     # ---------- V9 ----------
     prop_rows = list(csv.DictReader(open(PROPC)))
-    r = subprocess.run([sys.executable, "scripts/build_prop_correlations_d.py"],
-                       cwd=ROOT, capture_output=True, text=True, timeout=600)
-    re_rows = list(csv.DictReader(open(PROPC)))
-    ok = r.returncode == 0 and len(re_rows) == len(prop_rows)
+    parquet = os.environ.get(
+        "PROP_PARQUET", "/home/user/datawork/player_stats_weekly_archive.parquet")
+    missing_modules = [m for m in ("numpy", "pandas", "scipy")
+                       if importlib.util.find_spec(m) is None]
+    parquet_engines = [m for m in ("pyarrow", "fastparquet")
+                       if importlib.util.find_spec(m) is not None]
+    if not os.path.isfile(parquet):
+        status = "BLOCKED"
+        result = f"not rerun: required player_stats parquet input unavailable ({parquet})"
+    elif missing_modules:
+        status = "BLOCKED"
+        result = "not rerun: required Python packages unavailable: " + ", ".join(missing_modules)
+    elif not parquet_engines:
+        status = "BLOCKED"
+        result = "not rerun: no parquet reader installed (need pyarrow or fastparquet)"
+    else:
+        r = subprocess.run([sys.executable, "scripts/build_prop_correlations_d.py"],
+                           cwd=ROOT, capture_output=True, text=True, timeout=600)
+        re_rows = list(csv.DictReader(open(PROPC)))
+        ok = r.returncode == 0 and len(re_rows) == len(prop_rows)
+        status = "PASS" if ok else "FAIL"
+        result = (f"rc={r.returncode}; rows committed {len(prop_rows)} "
+                  f"== rows rebuilt {len(re_rows)}; "
+                  f"stdout={r.stdout.strip()[:120]}; stderr={r.stderr.strip()[:120]}")
     add("V9", "prop-correlations QA gates re-run (V6-style reproducibility)",
-        f"rc={r.returncode}; rows committed {len(prop_rows)} == rows rebuilt {len(re_rows)}; "
-        f"stdout={r.stdout.strip()[:120]}",
-        "PASS" if ok else "FAIL", NFLVERSE,
-        "player_stats mirror 1999-2024; join rate 1.0000; 13,384 team-games")
+        result, status, "https://github.com/Beexly/Sports/tree/main/data/nflverse",
+        "player_stats mirror 1999-2024; a BLOCKED result is not independent verification")
 
     # ---------- rewrite with per-check-id dedupe (latest wins) ----------
     existing = [r for r in csv.reader(open(VER, encoding="utf-8"), delimiter="\t") if r]
@@ -188,7 +215,7 @@ def main():
     new_ids = {r[0] for r in rows}
     kept = [r for r in prev if r[0] not in new_ids]
     with open(VER, "w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh, delimiter="\t")
+        w = csv.writer(fh, delimiter="\t", lineterminator="\n")
         w.writerow(header)
         w.writerows(kept)
         w.writerows(rows)

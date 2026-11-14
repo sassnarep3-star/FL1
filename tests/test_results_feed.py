@@ -1,4 +1,4 @@
-"""Tests for engine.results_feed — the verified results feed and ROI contract."""
+"""Tests for engine.results_settlement — the verified results feed and ROI contract."""
 import os
 import sys
 import tempfile
@@ -6,7 +6,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from engine.results_feed import (  # noqa: E402
+from engine.results_settlement import (  # noqa: E402
     Bet, FeedError, ProvenanceError, american_profit, load_feed, roi, settle,
 )
 

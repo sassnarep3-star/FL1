@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="validation.html" class="on">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html" class="on">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main" class="wide">
 
@@ -49,6 +49,18 @@ A pairing needs many observations before an estimate means anything; below that 
 <p>The numeric thresholds are deliberately not set on this page. Setting them after seeing a result is the
 single easiest way to manufacture apparent skill, and choosing them before a benchmark price exists would be
 arbitrary. They are registered as open question Q09 and must be fixed in one commit before any grading begins.</p>
+</section>
+
+<section>
+<h2>Demotion gate — live to paper</h2>
+<p class="lead">A strategy that has been promoted to live is not entitled to stay there. The demotion gate is
+the honest counterpart to the promotion gates: it defines when a live strategy is sent back to paper
+(research) so a decaying edge never keeps running capital.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Gate</th><th>Name</th><th>Test</th><th>Action on fail</th><th>Principle</th></tr></thead><tbody><tr><td>D1</td><td>Live-decay monitor</td><td>Rolling CLV lower bound stays below zero across the monitoring window.</td><td>Auto-demote to research; no discretionary rescue.</td><td>An edge that existed and died should not run capital.</td></tr><tr><td>D2</td><td>Calibration drift</td><td>Realised hit rate falls outside the stated probability bucket band on the holdout.</td><td>Demote and re-fit; re-clear G1-G6 before returning to live.</td><td>Stated probabilities must stay well calibrated.</td></tr><tr><td>D3</td><td>Concentration breach</td><td>One season, team, opponent cluster or stadium exceeds its allowed share of net PnL.</td><td>Demote and reduce exposure; re-clear G8 before returning to live.</td><td>One lucky year against three bad teams is not an edge.</td></tr></tbody></table></div>
+<p>The demotion thresholds are fixed before the first live stake and reviewed on the same schedule as the
+promotion gates, never after a losing streak. Because D1 needs a benchmark price to measure CLV and no
+official price source exists in this repository (flag F08), D1-D3 are defined here but are not yet active.
+No strategy can be promoted to live until a price source is supplied and the demotion rule is registered.</p>
 </section>
 
 </main>

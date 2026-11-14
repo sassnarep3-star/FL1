@@ -78,6 +78,34 @@ def link(href, label):
 
 
 # ---------------------------------------------------------------------------
+def backtest_table():
+    """Walk-forward backtest table (values preserved from data/backtest_calibration.tsv,
+    computed by tools/brief.py — session arena/685f958d-fl1; merged here at integration)."""
+    with open(os.path.join(DATA, "backtest_calibration.tsv"), newline="", encoding="utf-8") as fh:
+        rows = list(csv.DictReader(fh, delimiter="\t"))
+    trs = []
+    for r in rows:
+        roi_cell = ('<td class="blank" title="ROI needs official prices (F18)">&mdash;</td>'
+                    if not r["roi"] else "<td>%s</td>" % esc(r["roi"]))
+        total = "total" in r["scope"]
+        label = "%s <em>(total)</em>" % esc(r["scope"]) if total else esc(r["scope"])
+        trs.append("<tr><td>%s</td><td class=\"num\">%s</td><td class=\"num\">%s</td>"
+                   "<td class=\"num\">%s</td><td class=\"num\">%s</td><td class=\"num\">%s&ndash;%s</td>"
+                   "<td class=\"num\">%s</td><td class=\"num\">%s</td><td class=\"num\">%s</td>"
+                   "<td class=\"num\">%s</td>%s</tr>"
+                   % (label, r["n_out_of_sample"], r["side_mae_model"], r["side_mae_constant"],
+                      r["side_sign_hit_rate"], r["side_sign_ci95_low"], r["side_sign_ci95_high"],
+                      r["total_mae_model"], r["total_mae_constant"], r["ml_brier_model"],
+                      r["ml_brier_coinflip"], roi_cell))
+    return table(["Scope", "n (out of sample)", "Side MAE (model)", "Side MAE (constant)",
+                  "Sign hit rate", "95% CI", "Total MAE (model)", "Total MAE (constant)",
+                  "ML Brier (model)", "ML Brier (50/50)", "ROI"], trs,
+                 caption="Walk-forward backtest. Each week is predicted only from earlier weeks. "
+                         "n is shown on every row. ROI is blank: it needs official prices, and "
+                         "none exist (F18).")
+
+
+# ---------------------------------------------------------------------------
 def results_feed_page(sources_by_id):
     rows = load_csv("results_feed.csv")
     week_src = {}
@@ -118,10 +146,22 @@ The same files were previously reconciled to the official standings (records + P
 clubs) &mdash; see <a href="verification.html">Verification</a> and
 <a href="schedule.html">Schedule 2026</a>.</div>
 
+<h2>What a backtest can and cannot show</h2>
+<div class="note"><ul>
+<li><strong>Calibration and error:</strong> yes &mdash; walk-forward, each week predicted only
+from earlier weeks, n on every row (below).</li>
+<li><strong>ROI against <em>official</em> prices:</strong> no &mdash; no official league source
+prices betting lines (F18, F25). ROI columns against third-party snapshots are published on the
+strategy pages, labelled third-party throughout.</li>
+<li><strong>Own-line honesty (F20):</strong> the own-line fair model does <strong>not</strong>
+beat a constant benchmark out of sample on side or total MAE. Published because negative results
+are part of the record.</li>
+</ul></div>
+__BT_TABLE__
 <h2>Why a feed, and what it makes computable</h2>
 <ul>
 <li><strong>Settlement.</strong> Side, total and moneyline bets settle against these scores only.
-<code>engine/results_feed.py</code> refuses to settle or compute ROI on a price whose provenance
+<code>engine/results_settlement.py</code> refuses to settle or compute ROI on a price whose provenance
 is not declared &mdash; market prices are NOT in the feed; they arrive from the price-snapshot
 store or a declared third-party snapshot with a source id.</li>
 <li><strong>ROI and backtests.</strong> <code>roi()</code> computes stake-normalised profit with
@@ -142,10 +182,11 @@ counts. Blanks stay blank; nothing is inferred.</li>
 <h2>Reproduce</h2>
 <pre>python3 scripts/verify_feed_m.py         # three-way line-by-line check
 python3 scripts/build_results_feed_m.py  # rebuild the feed from the raw capture
-python3 -m engine.results_feed --check   # loader contract check
+python3 -m engine.results_settlement --check   # loader contract check
 python3 -m unittest tests.test_results_feed</pre>
 """
-    page("results-feed.html", "Verified Results Feed", html)
+    html = html.replace("__BT_TABLE__", backtest_table())
+    page("results-feed.html", "Verified Results Feed &amp; Backtest", html)
 
 
 # ---------------------------------------------------------------------------
@@ -176,7 +217,7 @@ def originations_page(sources_by_id):
                 cell(None),                       # fair total: never invented
                 cell(num(r["total_market"], 1), "n"),
                 cell(None),
-                cell("S2 parameters unfitted (F19)"),
+                cell("S2 parameters unfitted (F24)"),
             ])
         return out
 
@@ -234,7 +275,7 @@ margin first stops dependent markets from leaking information back into it.</p>
 <code>""" + esc(cal["model_version"]) + """</code>.</li>
 <li><strong>Market line &mdash; SOURCE.</strong> The pinned third-party snapshot
 <code>data/raw/games.csv</code> (nflverse/nfldata, <a href="sources.html#S47">S47</a>), flagged
-&mdash; no official NFL price source exists (flag F20).</li>
+&mdash; no official NFL price source exists (flag F25).</li>
 <li><strong>Difference &mdash; COMPUTED.</strong> Fair minus market. Spread columns use the
 away-posted unit of the snapshot (positive = away underdog / home favoured):
 <em>negative difference = the market gives the away side more points than the model says is fair
@@ -264,7 +305,7 @@ calibration:</p>
 slightly worse version of the market, not an independent one: mean absolute disagreement 2.89
 points, sd of disagreement 3.56. It publishes a number &mdash; beating the close needs information
 the market does not already have. Totals are deliberately blank (S2 parameters unfitted, flag
-F19). Future games carry the fair basis &ldquo;Elo snapshot&rdquo; (re-originated weekly before
+F24). Future games carry the fair basis &ldquo;Elo snapshot&rdquo; (re-originated weekly before
 release).</div>
 
 <h2>Stage 1 &mdash; Side (spread): fair | market | difference</h2>
@@ -278,7 +319,7 @@ release).</div>
             total_rows(), cls="wide",
             caption="The columns are published; the fair and difference cells stay BLANK "
                     "because the totals model has no fitted parameter. A number here would be "
-                    "a fabrication (flag F19).") + """
+                    "a fabrication (flag F24).") + """
 <h2>Stage 3 &mdash; Moneyline: fair | market | difference</h2>
 """ + table(["Wk", "Away", "Home",
              "Fair home (Am)", "Market home (Am)", "Home diff (prob pts)",

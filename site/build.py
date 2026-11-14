@@ -340,6 +340,14 @@ rel="noopener" target="_blank">NCPG helpline</a>).</p>
 </footer>"""
 
 
+WITHDRAWN_BANNER = (
+    '<div class="callout" style="border-left:4px solid #b42318"><p><strong>Withdrawn as a correlation claim '
+    '(brief B6, 2026-11-14).</strong> Correlations may be computed only from officially sourced numbers. '
+    'Every value on this page comes from the third-party nflverse mirror, so none of them may be used as a '
+    'correlation, and the headline rho is no longer a result. The numbers are kept below for audit only. '
+    'See <a href="../../flagged.html#F19">Flagged for Review, F19</a>.</p></div>')
+
+
 def page(pid: str, title: str, nav_label: str, body: str, updated: str, extra_meta: str = "",
          blurb: str = "") -> str:
     return f"""<!doctype html>
@@ -355,6 +363,7 @@ def page(pid: str, title: str, nav_label: str, body: str, updated: str, extra_me
 <div class="meta" style="margin-left:auto">data as of {esc(updated)}{esc(' · ' + extra_meta) if extra_meta else ''}</div>
 </div><nav class="main" aria-label="Sections">{nav_html(pid)}</nav></header>
 <main id="main" class="wrap">
+{WITHDRAWN_BANNER if pid == "measured" else ""}
 {body}
 {FOOTER.format(note=esc(GENERATED_NOTE) + " · " + esc(nav_label))}
 </main>

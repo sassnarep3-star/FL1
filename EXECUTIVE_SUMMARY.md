@@ -121,7 +121,7 @@ verified and live on the site; every number is reproducible from the committed s
 
 1. **Price-snapshot store** — an append-only, provenance-requiring observation store for opening
    and closing numbers of every market we originate (`engine/price_snapshots.py`, PR #22). Storage
-   capability is real; publishable prices remain blocked on an authorized feed (Q-02, flag F20) —
+   capability is real; publishable prices remain blocked on an authorized feed (Q-02, flag F25) —
    no official NFL source prices betting lines.
 2. **Verified results feed** ([results-feed.html](results-feed.html)) — 137 games of 2026, every
    final verified row-by-row against official nfl.com week pages (S49–S58) and cross-checked
@@ -133,7 +133,7 @@ verified and live on the site; every number is reproducible from the committed s
    line, the market line and the difference as three separate columns**. The fair-line engine is
    proved identical to the Computed Research Layer's engine (5,336/5,336 pre-game Elo values)
    and reproduces its calibration (MAE 2.89, corr 0.828, n=5,336). The fair TOTAL is deliberately
-   blank (flag F19) because its model has no fitted parameter.
+   blank (flag F24) because its model has no fitted parameter.
 4. **Signal vs staking** ([signal-vs-staking.html](signal-vs-staking.html)) — the leaderboard
    ranks, rewards and promotes on the SIGNAL ledger (flat stakes) only; staking is risk
    telemetry. The split immediately earned its keep: **three candidate entries show a positive
@@ -159,7 +159,7 @@ verified and live on the site; every number is reproducible from the committed s
 | # | Decision | Unblocks | Question |
 |---|----------|----------|----------|
 | 1 | Authorize a price feed behind the price-snapshot store | CLV, hold realism (G-7), live origination comparison | Q-02 |
-| 2 | Fit the totals model (S2) on official drive data | the blank fair-total column (F19), total origination | GAP-05 |
+| 2 | Fit the totals model (S2) on official drive data | the blank fair-total column (F24), total origination | GAP-05 |
 | 3 | Rule on third-party-derived values (F-11) | promoting measured correlation/edge values into the registers | F-11 |
 | 4 | Confirm cash-reward legality review | reward structure beyond compute/capital promotion | Q-13 |
 | 5 | Acquire machine-readable depth charts (Houston) | 32/32 replacement-depth coverage (F16) | — |
