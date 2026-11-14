@@ -1,0 +1,364 @@
+# FL1 raw source snapshots
+#
+# Format: pipe-delimited. One header line at top, then one row per published line on the
+# official page. Columns are named exactly as the source labels them.
+#
+#   game_slug      official nfl.com game page slug for the matchup  (https://www.nfl.com/games/<slug>)
+#   team           club abbreviation as printed on the official report
+#   player         player name exactly as printed on the official report
+#   pos            position exactly as printed
+#   injury         injury description exactly as printed (empty = source printed no injury)
+#   practice       full | limited | dnp   (Full / Limited / Did Not Participate In Practice)
+#   status         OUT | DOUBTFUL | QUESTIONABLE | (empty = no game designation published)
+#   player_path    path of the player's official nfl.com profile page, as linked from the report
+#
+# Source: https://www.nfl.com/injuries/ — "Official Latest NFL Injury Report for Players -
+# Week 10 of the 2026 Season | NFL.com". Read 2026-11-14T02:52Z, all 8 rendered chunks.
+# An empty `status` is not "available": it means the club reported the player during the
+# week without a final Out/Doubtful/Questionable designation being published on this page.
+game_slug|team|player|pos|injury|practice|status|player_path
+commanders-at-giants-2026-reg-10|WAS|John Bates|TE||full||/players/john-bates/
+commanders-at-giants-2026-reg-10|WAS|Treylon Burks|WR||dnp||/players/treylon-burks/
+commanders-at-giants-2026-reg-10|WAS|Jayden Daniels|QB||full||/players/jayden-daniels/
+commanders-at-giants-2026-reg-10|WAS|Matt Gulbin|C||full||/players/matt-gulbin/
+commanders-at-giants-2026-reg-10|WAS|Chig Okonkwo|TE||full||/players/chigoziem-okonkwo/
+commanders-at-giants-2026-reg-10|WAS|Lucas Patrick|C|Concussion|dnp|OUT|/players/lucas-patrick/
+commanders-at-giants-2026-reg-10|WAS|Amik Robertson|CB||limited||/players/amik-robertson/
+commanders-at-giants-2026-reg-10|WAS|Shy Tuttle|DT||full||/players/shy-tuttle/
+commanders-at-giants-2026-reg-10|WAS|Colson Yankoff|TE|Knee|dnp|OUT|/players/colson-yankoff/
+commanders-at-giants-2026-reg-10|NYG|Abdul Carter|LB||full||/players/abdul-carter/
+commanders-at-giants-2026-reg-10|NYG|Jermaine Eluemunor|T||full||/players/jermaine-eluemunor/
+commanders-at-giants-2026-reg-10|NYG|Malik Harrison|LB|Groin|limited|QUESTIONABLE|/players/malik-harrison/
+commanders-at-giants-2026-reg-10|NYG|Colton Hood|CB||full||/players/colton-hood/
+commanders-at-giants-2026-reg-10|NYG|Theo Johnson|TE||full||/players/theo-johnson/
+commanders-at-giants-2026-reg-10|NYG|Charlie Jones|WR||full||/players/charlie-jones-3/
+commanders-at-giants-2026-reg-10|NYG|J.J. McCarthy|QB||full||/players/j-j-mccarthy/
+commanders-at-giants-2026-reg-10|NYG|Darnell Mooney|WR||full||/players/darnell-mooney/
+commanders-at-giants-2026-reg-10|NYG|Malik Nabers|WR||full||/players/malik-nabers/
+commanders-at-giants-2026-reg-10|NYG|Cam Skattebo|RB||full||/players/cam-skattebo/
+commanders-at-giants-2026-reg-10|NYG|Andrew Thomas|T||full||/players/andrew-thomas/
+patriots-at-lions-2026-reg-10|NE|Ben Brown|C|Knee|dnp|OUT|/players/ben-brown-2/
+patriots-at-lions-2026-reg-10|NE|A.J. Brown|WR|Ankle, Knee|limited|QUESTIONABLE|/players/a-j-brown/
+patriots-at-lions-2026-reg-10|NE|Kevin Byard|S|Chest|full|QUESTIONABLE|/players/kevin-byard/
+patriots-at-lions-2026-reg-10|NE|Carlton Davis III|CB|Knee|dnp|OUT|/players/carlton-davis/
+patriots-at-lions-2026-reg-10|NE|Reggie Gilliam|FB|Knee|limited|QUESTIONABLE|/players/reggie-gilliam/
+patriots-at-lions-2026-reg-10|NE|TreVeyon Henderson|RB|Illness|dnp|OUT|/players/treveyon-henderson/
+patriots-at-lions-2026-reg-10|NE|Hunter Henry|TE||limited||/players/hunter-henry/
+patriots-at-lions-2026-reg-10|NE|Cameron Latu|TE|Back|limited|QUESTIONABLE|/players/cameron-latu/
+patriots-at-lions-2026-reg-10|NE|Drake Maye|QB||full||/players/drake-maye/
+patriots-at-lions-2026-reg-10|NE|Morgan Moses|T||full||/players/morgan-moses/
+patriots-at-lions-2026-reg-10|NE|Walter Rouse|T|Concussion|limited|QUESTIONABLE|/players/walter-rouse/
+patriots-at-lions-2026-reg-10|NE|Brenden Schooler|S|Hamstring|limited|QUESTIONABLE|/players/brenden-schooler/
+patriots-at-lions-2026-reg-10|NE|Rhamondre Stevenson|RB|Knee|limited|QUESTIONABLE|/players/rhamondre-stevenson/
+patriots-at-lions-2026-reg-10|NE|Greg Van Roten|G|Hamstring|full|QUESTIONABLE|/players/greg-van-roten/
+patriots-at-lions-2026-reg-10|NE|Charles Woods|CB|Hamstring|full|QUESTIONABLE|/players/charles-woods/
+patriots-at-lions-2026-reg-10|DET|Brian Branch|S||full||/players/brian-branch/
+patriots-at-lions-2026-reg-10|DET|Jared Goff|QB||full||/players/jared-goff/
+patriots-at-lions-2026-reg-10|DET|Kerby Joseph|S|Knee|dnp|OUT|/players/kerby-joseph/
+patriots-at-lions-2026-reg-10|DET|Cade Mays|C|Ankle|dnp|OUT|/players/cade-mays/
+patriots-at-lions-2026-reg-10|DET|D.J. Reed|CB|Hip|dnp|OUT|/players/d-j-reed/
+patriots-at-lions-2026-reg-10|DET|Jacob Saylors|RB||full||/players/jacob-saylors/
+patriots-at-lions-2026-reg-10|DET|Amon-Ra St. Brown|WR|Rib|limited|QUESTIONABLE|/players/amon-ra-st-brown/
+patriots-at-lions-2026-reg-10|DET|Sione Vaki|RB|Ankle|limited|QUESTIONABLE|/players/sione-vaki/
+patriots-at-lions-2026-reg-10|DET|DJ Wonnum|DE||full||/players/d-j-wonnum/
+chiefs-at-falcons-2026-reg-10|KC|Jeffrey Bassa|LB||full||/players/jeffrey-bassa/
+chiefs-at-falcons-2026-reg-10|KC|Mansoor Delane|CB|Shoulder|full|QUESTIONABLE|/players/mansoor-delane/
+chiefs-at-falcons-2026-reg-10|KC|Justin Fields|QB||full||/players/justin-fields/
+chiefs-at-falcons-2026-reg-10|KC|Jaden Hicks|S||full||/players/jaden-hicks/
+chiefs-at-falcons-2026-reg-10|KC|Travis Kelce|TE||full||/players/travis-kelce/
+chiefs-at-falcons-2026-reg-10|KC|Patrick Mahomes|QB||full||/players/patrick-mahomes/
+chiefs-at-falcons-2026-reg-10|KC|Jaylon Moore|T|Ankle|dnp|OUT|/players/jaylon-moore-2/
+chiefs-at-falcons-2026-reg-10|KC|Omarr Norman-Lott|DT|Knee|limited|OUT|/players/omarr-norman-lott/
+chiefs-at-falcons-2026-reg-10|KC|Jaydn Ott|RB|Hamstring|limited|QUESTIONABLE|/players/jaydn-ott/
+chiefs-at-falcons-2026-reg-10|KC|Rashee Rice|WR||full||/players/rashee-rice/
+chiefs-at-falcons-2026-reg-10|KC|Kenneth Walker III|RB|Groin|dnp|QUESTIONABLE|/players/kenneth-walker-iii/
+chiefs-at-falcons-2026-reg-10|KC|Peter Woods|DT|Neck|dnp|OUT|/players/peter-woods/
+chiefs-at-falcons-2026-reg-10|KC|Xavier Worthy|WR||full||/players/xavier-worthy/
+chiefs-at-falcons-2026-reg-10|ATL|Zachariah Branch|WR|Hamstring|dnp|OUT|/players/zachariah-branch/
+chiefs-at-falcons-2026-reg-10|ATL|Kendal Daniels|LB||full||/players/kendal-daniels/
+chiefs-at-falcons-2026-reg-10|ATL|Divine Deablo|LB|Forearm|dnp|DOUBTFUL|/players/divine-deablo/
+chiefs-at-falcons-2026-reg-10|ATL|Gervon Dexter Sr.|DT|Illness|limited|QUESTIONABLE|/players/gervon-dexter/
+chiefs-at-falcons-2026-reg-10|ATL|Jake Matthews|T||limited||/players/jake-matthews/
+chiefs-at-falcons-2026-reg-10|ATL|Liam McCullough|LS||dnp||/players/liam-mccullough/
+chiefs-at-falcons-2026-reg-10|ATL|James Pearce Jr.|DE|Back|limited|QUESTIONABLE|/players/james-pearce-jr/
+chiefs-at-falcons-2026-reg-10|ATL|Za'Darius Smith|DE||full||/players/za-darius-smith/
+chiefs-at-falcons-2026-reg-10|ATL|Jawaan Taylor|T||limited||/players/jawaan-taylor/
+chiefs-at-falcons-2026-reg-10|ATL|Cameron Thomas|DE||full||/players/cameron-thomas/
+chiefs-at-falcons-2026-reg-10|ATL|Josh Woods|LB|Ankle|full|QUESTIONABLE|/players/josh-woods/
+vikings-at-packers-2026-reg-10|MIN|Jordan Addison|WR|Thumb|limited|QUESTIONABLE|/players/jordan-addison/
+vikings-at-packers-2026-reg-10|MIN|Blake Cashman|LB|Concussion|limited|OUT|/players/blake-cashman/
+vikings-at-packers-2026-reg-10|MIN|Christian Darrisaw|T||dnp||/players/christian-darrisaw/
+vikings-at-packers-2026-reg-10|MIN|T.J. Hockenson|TE|Wrist, Chest|dnp|OUT|/players/t-j-hockenson/
+vikings-at-packers-2026-reg-10|MIN|Tyrion Ingram-Dawkins|DT|Ankle|dnp|OUT|/players/tyrion-ingram-dawkins/
+vikings-at-packers-2026-reg-10|MIN|Theo Jackson|S||full||/players/theo-jackson/
+vikings-at-packers-2026-reg-10|MIN|Jauan Jennings|WR|Calf|dnp|OUT|/players/jauan-jennings/
+vikings-at-packers-2026-reg-10|MIN|Josh Metellus|S|Shoulder|limited|QUESTIONABLE|/players/josh-metellus/
+vikings-at-packers-2026-reg-10|MIN|Kyler Murray|QB|Hamstring|dnp|OUT|/players/kyler-murray/
+vikings-at-packers-2026-reg-10|MIN|Harrison Smith|S||limited||/players/harrison-smith/
+vikings-at-packers-2026-reg-10|MIN|Kyle Van Noy|LB|Calf|limited|QUESTIONABLE|/players/kyle-van-noy/
+vikings-at-packers-2026-reg-10|MIN|Jay Ward|S||full||/players/jay-ward/
+vikings-at-packers-2026-reg-10|MIN|Carson Wentz|QB||full||/players/carson-wentz/
+vikings-at-packers-2026-reg-10|GB|Aaron Banks|G||limited||/players/aaron-banks/
+vikings-at-packers-2026-reg-10|GB|Chris Brooks|RB|Ankle|limited|QUESTIONABLE|/players/christopher-brooks/
+vikings-at-packers-2026-reg-10|GB|Javon Bullard|S|Ankle, Knee|limited|QUESTIONABLE|/players/javon-bullard/
+vikings-at-packers-2026-reg-10|GB|Zaire Franklin|LB|Shin|dnp|DOUBTFUL|/players/zaire-franklin/
+vikings-at-packers-2026-reg-10|GB|Travis Glover|G|Knee|limited|QUESTIONABLE|/players/travis-glover/
+vikings-at-packers-2026-reg-10|GB|Ty'Ron Hopper|LB||full||/players/ty-ron-hopper/
+vikings-at-packers-2026-reg-10|GB|Josh Jacobs|RB|Finger|dnp|OUT|/players/josh-jacobs-x3315/
+vikings-at-packers-2026-reg-10|GB|Xavier McKinney|S|Foot|limited|QUESTIONABLE|/players/xavier-mckinney/
+vikings-at-packers-2026-reg-10|GB|Bo Melton|WR||full||/players/bo-melton/
+vikings-at-packers-2026-reg-10|GB|Skyy Moore|WR|Ankle|limited|QUESTIONABLE|/players/skyy-moore/
+vikings-at-packers-2026-reg-10|GB|Micah Parsons|LB|Knee, Illness|limited|OUT|/players/micah-parsons/
+vikings-at-packers-2026-reg-10|GB|Sean Rhyan|C|Ankle|dnp|OUT|/players/sean-rhyan/
+vikings-at-packers-2026-reg-10|GB|Trey Smack|K||full||/players/trey-smack/
+vikings-at-packers-2026-reg-10|GB|Lukas Van Ness|LB|Back|limited|QUESTIONABLE|/players/lukas-van-ness/
+vikings-at-packers-2026-reg-10|GB|Josh Whyle|TE|Concussion|dnp|OUT|/players/josh-whyle/
+vikings-at-packers-2026-reg-10|GB|Savion Williams|WR||limited||/players/savion-williams/
+vikings-at-packers-2026-reg-10|GB|Kevin Zeitler|G|Ankle, Triceps|dnp|QUESTIONABLE|/players/kevin-zeitler/
+jaguars-at-titans-2026-reg-10|JAX|Jessie Bates|S|Not injury related - resting player|limited|OUT|/players/jessie-bates/
+jaguars-at-titans-2026-reg-10|JAX|Ezra Cleveland|G||full||/players/ezra-cleveland/
+jaguars-at-titans-2026-reg-10|JAX|Branson Combs|LB||full||/players/branson-combs/
+jaguars-at-titans-2026-reg-10|JAX|Jordan Davis|DT|Not injury related - resting player|limited|OUT|/players/jordan-davis/
+jaguars-at-titans-2026-reg-10|JAX|BJ Green II|DE|Forearm|full|OUT|/players/bj-green-ii/
+jaguars-at-titans-2026-reg-10|JAX|Robert Hainsey|C|Concussion|limited|QUESTIONABLE|/players/robert-hainsey/
+jaguars-at-titans-2026-reg-10|JAX|Antonio Johnson|S||limited||/players/antonio-johnson-3/
+jaguars-at-titans-2026-reg-10|JAX|Jakobi Meyers|WR||limited||/players/jakobi-meyers/
+jaguars-at-titans-2026-reg-10|JAX|Chris Rodriguez Jr.|RB||full||/players/chris-rodriguez-jr/
+jaguars-at-titans-2026-reg-10|JAX|Bhayshul Tuten|RB||limited||/players/bhayshul-tuten/
+jaguars-at-titans-2026-reg-10|JAX|Travon Walker|DE||limited||/players/travon-walker/
+jaguars-at-titans-2026-reg-10|TEN|Cody Barton|LB|Concussion|dnp|OUT|/players/cody-barton/
+jaguars-at-titans-2026-reg-10|TEN|John Franklin-Myers|DE||full||/players/john-franklin-myers/
+jaguars-at-titans-2026-reg-10|TEN|Marcus Harris|CB||full||/players/marcus-harris-4/
+jaguars-at-titans-2026-reg-10|TEN|Anthony Hill Jr.|LB|Neck|dnp|OUT|/players/anthony-hill-jr/
+jaguars-at-titans-2026-reg-10|TEN|Jaylon Jones|CB||full||/players/jaylon-jones-2/
+jaguars-at-titans-2026-reg-10|TEN|JC Latham|T||full||/players/jc-latham/
+jaguars-at-titans-2026-reg-10|TEN|Tony Pollard|RB||full||/players/tony-pollard/
+jaguars-at-titans-2026-reg-10|TEN|Peter Skoronski|G|Hamstring|dnp|OUT|/players/peter-skoronski/
+jaguars-at-titans-2026-reg-10|TEN|Tyjae Spears|RB|Knee|full|QUESTIONABLE|/players/tyjae-spears/
+jaguars-at-titans-2026-reg-10|TEN|Carnell Tate|WR|Shoulder|dnp|OUT|/players/carnell-tate/
+jaguars-at-titans-2026-reg-10|TEN|Tommy Townsend|P|Knee, Achilles|dnp|OUT|/players/tommy-townsend/
+jaguars-at-titans-2026-reg-10|TEN|Kevin Winston Jr.|S||full||/players/kevin-winston-jr/
+bills-at-jets-2026-reg-10|BUF|Alec Anderson|G||full||/players/alec-anderson-2/
+bills-at-jets-2026-reg-10|BUF|Christian Benford|CB|Wrist|full|QUESTIONABLE|/players/christian-benford/
+bills-at-jets-2026-reg-10|BUF|Terrel Bernard|LB||dnp||/players/terrel-bernard/
+bills-at-jets-2026-reg-10|BUF|Spencer Brown|T|Ankle|dnp|DOUBTFUL|/players/spencer-brown/
+bills-at-jets-2026-reg-10|BUF|Dion Dawkins|T||full||/players/dion-dawkins/
+bills-at-jets-2026-reg-10|BUF|Sam Franklin Jr.|S|Shoulder|limited|QUESTIONABLE|/players/sam-franklin/
+bills-at-jets-2026-reg-10|BUF|Greg Gaines|DT||full||/players/greg-gaines/
+bills-at-jets-2026-reg-10|BUF|Jordan Hancock|CB|Hamstring|full|QUESTIONABLE|/players/jordan-hancock/
+bills-at-jets-2026-reg-10|BUF|Dalton Kincaid|TE||full||/players/dalton-kincaid/
+bills-at-jets-2026-reg-10|BUF|Connor McGovern|C||full||/players/connor-mcgovern-2/
+bills-at-jets-2026-reg-10|BUF|Ed Oliver|DE||dnp||/players/ed-oliver/
+bills-at-jets-2026-reg-10|BUF|Ar'maj Reed-Adams|G||full||/players/ar-maj-reed-adams/
+bills-at-jets-2026-reg-10|BUF|T.J. Sanders|DE||full||/players/t-j-sanders/
+bills-at-jets-2026-reg-10|BUF|Tyrell Shavers|WR|Knee|full|QUESTIONABLE|/players/tyrell-shavers/
+bills-at-jets-2026-reg-10|NYJ|Jarvis Brownlee Jr.|CB|Illness|limited|QUESTIONABLE|/players/jarvis-brownlee-jr/
+bills-at-jets-2026-reg-10|NYJ|Omar Cooper Jr.|WR|Ankle|full|QUESTIONABLE|/players/omar-cooper-jr/
+bills-at-jets-2026-reg-10|NYJ|Adonai Mitchell|WR|Knee|full|QUESTIONABLE|/players/adonai-mitchell/
+bills-at-jets-2026-reg-10|NYJ|Joseph Ossai|DE|Ankle|full|QUESTIONABLE|/players/joseph-ossai/
+bills-at-jets-2026-reg-10|NYJ|VJ Payne|S|Knee|full|QUESTIONABLE|/players/vj-payne/
+bills-at-jets-2026-reg-10|NYJ|Harrison Phillips|DT|Ankle|full|QUESTIONABLE|/players/harrison-phillips/
+bills-at-jets-2026-reg-10|NYJ|Trevin Wallace|LB|Groin|dnp|OUT|/players/trevin-wallace/
+bills-at-jets-2026-reg-10|NYJ|Garrett Wilson|WR|Concussion|full|QUESTIONABLE|/players/garrett-wilson/
+bills-at-jets-2026-reg-10|NYJ|Nahshon Wright|CB|Back|full|QUESTIONABLE|/players/nahshon-wright/
+dolphins-at-colts-2026-reg-10|MIA|Tucker Addington|LS||limited||/players/tucker-addington/
+dolphins-at-colts-2026-reg-10|MIA|Kaytron Allen|RB||full||/players/kaytron-allen/
+dolphins-at-colts-2026-reg-10|MIA|Darrell Baker Jr.|CB|Knee|full|QUESTIONABLE|/players/darrell-baker-jr/
+dolphins-at-colts-2026-reg-10|MIA|Chris Bell|WR|Knee|dnp|DOUBTFUL|/players/chris-bell-2/
+dolphins-at-colts-2026-reg-10|MIA|Aaron Brewer|C|Concussion|dnp|OUT|/players/aaron-brewer-2/
+dolphins-at-colts-2026-reg-10|MIA|Malik Herring|DE||full||/players/malik-herring/
+dolphins-at-colts-2026-reg-10|MIA|Will Kacmarek|TE||full||/players/will-kacmarek/
+dolphins-at-colts-2026-reg-10|MIA|Michael Taaffe|S||full||/players/michael-taaffe/
+dolphins-at-colts-2026-reg-10|MIA|Dante Trader Jr.|S||full||/players/dante-trader-jr/
+dolphins-at-colts-2026-reg-10|MIA|Jared Wayne|WR|Quadricep|dnp|OUT|/players/jared-wayne/
+dolphins-at-colts-2026-reg-10|MIA|Jaylen Wright|RB||full||/players/jaylen-wright/
+dolphins-at-colts-2026-reg-10|IND|Mo Alie-Cox|TE|Groin|dnp|OUT|/players/mo-alie-cox/
+dolphins-at-colts-2026-reg-10|IND|CJ Allen|LB||full||/players/cj-allen/
+dolphins-at-colts-2026-reg-10|IND|Jaylon Carlies|LB|Neck|dnp|OUT|/players/jaylon-carlies/
+dolphins-at-colts-2026-reg-10|IND|Akeem Davis-Gaither|LB|Knee|dnp|OUT|/players/akeem-davis-gaither/
+dolphins-at-colts-2026-reg-10|IND|A.J. Haulcy|S||full||/players/a-j-haulcy/
+dolphins-at-colts-2026-reg-10|IND|Arden Key|DE|Hamstring|full|QUESTIONABLE|/players/arden-key/
+dolphins-at-colts-2026-reg-10|IND|Will Mallory|TE|Hamstring|limited|QUESTIONABLE|/players/will-mallory/
+dolphins-at-colts-2026-reg-10|IND|Luke Rhodes|LS|Hamstring|dnp|OUT|/players/luke-rhodes/
+dolphins-at-colts-2026-reg-10|IND|Grover Stewart|DT||full||/players/grover-stewart/
+dolphins-at-colts-2026-reg-10|IND|Jonathan Taylor|RB||full||/players/jonathan-taylor/
+dolphins-at-colts-2026-reg-10|IND|Jerry Tillery|DT|Calf|dnp|OUT|/players/jerry-tillery/
+dolphins-at-colts-2026-reg-10|IND|Jalen Travis|T|Knee|dnp|OUT|/players/jalen-travis/
+dolphins-at-colts-2026-reg-10|IND|Justin Walley|CB||full||/players/justin-walley/
+dolphins-at-colts-2026-reg-10|IND|Charvarius Ward|CB||full||/players/charvarius-ward/
+panthers-at-saints-2026-reg-10|CAR|Jonathon Brooks|RB|Groin|limited|DOUBTFUL|/players/jonathon-brooks/
+panthers-at-saints-2026-reg-10|CAR|Brady Christensen|G|Hamstring|full|QUESTIONABLE|/players/brady-christensen/
+panthers-at-saints-2026-reg-10|CAR|Trevor Etienne|RB||full||/players/trevor-etienne/
+panthers-at-saints-2026-reg-10|CAR|Chuba Hubbard|RB||full||/players/chuba-hubbard/
+panthers-at-saints-2026-reg-10|CAR|Lee Hunter|DT||full||/players/lee-hunter/
+panthers-at-saints-2026-reg-10|CAR|Mike Jackson|CB|Groin|limited|DOUBTFUL|/players/mike-jackson/
+panthers-at-saints-2026-reg-10|CAR|Will Lee III|CB|Hamstring|limited|QUESTIONABLE|/players/will-lee-iii/
+panthers-at-saints-2026-reg-10|CAR|Xavier Legette|WR|Knee|full|QUESTIONABLE|/players/xavier-legette/
+panthers-at-saints-2026-reg-10|CAR|Damien Lewis|G||full||/players/damien-lewis/
+panthers-at-saints-2026-reg-10|CAR|Bobby Okereke|LB|Foot|dnp|OUT|/players/bobby-okereke/
+panthers-at-saints-2026-reg-10|CAR|Jaelan Phillips|LB|Hamstring|full|QUESTIONABLE|/players/jaelan-phillips/
+panthers-at-saints-2026-reg-10|CAR|Torricelli Simpkins III|G||full||/players/torricelli-simpkins-iii/
+panthers-at-saints-2026-reg-10|NO|Kelvin Banks Jr.|T||full||/players/kelvin-banks-jr/
+panthers-at-saints-2026-reg-10|NO|CJ Donaldson|RB|Shoulder|dnp|OUT|/players/cj-donaldson/
+panthers-at-saints-2026-reg-10|NO|David Edwards|G||full||/players/david-edwards-x1290/
+panthers-at-saints-2026-reg-10|NO|Martin Emerson|CB|Shin|limited|QUESTIONABLE|/players/martin-emerson/
+panthers-at-saints-2026-reg-10|NO|Travis Etienne|RB|Hamstring|full|QUESTIONABLE|/players/travis-etienne/
+panthers-at-saints-2026-reg-10|NO|Noah Fant|TE||full||/players/noah-fant-x4946/
+panthers-at-saints-2026-reg-10|NO|Taliese Fuaga|T|Knee|dnp|OUT|/players/taliese-fuaga/
+panthers-at-saints-2026-reg-10|NO|Alvin Kamara|RB||full||/players/alvin-kamara/
+panthers-at-saints-2026-reg-10|NO|Erik McCoy|C|Biceps|dnp|OUT|/players/erik-mccoy/
+panthers-at-saints-2026-reg-10|NO|Christen Miller|DT|Knee|dnp|OUT|/players/christen-miller/
+panthers-at-saints-2026-reg-10|NO|Asim Richards|T||full||/players/asim-richards/
+panthers-at-saints-2026-reg-10|NO|Quincy Riley|CB||full||/players/quincy-riley/
+texans-at-browns-2026-reg-10|HOU|Azeez Al-Shaair|LB|Groin, Not injury related - personal matter|dnp|OUT|/players/azeez-al-shaair/
+texans-at-browns-2026-reg-10|HOU|Will Anderson Jr.|DE|Ankle|dnp|QUESTIONABLE|/players/will-anderson-jr/
+texans-at-browns-2026-reg-10|HOU|Reed Blankenship|S||full||/players/reed-blankenship/
+texans-at-browns-2026-reg-10|HOU|Trent Brown|T|Wrist, Illness|dnp|QUESTIONABLE|/players/trent-brown/
+texans-at-browns-2026-reg-10|HOU|Tank Dell|WR||full||/players/tank-dell/
+texans-at-browns-2026-reg-10|HOU|Blake Fisher|T||full||/players/blake-fisher/
+texans-at-browns-2026-reg-10|HOU|Marvin Harrison Jr.|WR|Hamstring|dnp|OUT|/players/marvin-harrison-jr/
+texans-at-browns-2026-reg-10|HOU|Jacob Hummel|LB|Groin|full|QUESTIONABLE|/players/jake-hummel/
+texans-at-browns-2026-reg-10|HOU|Danielle Hunter|DE|Hamstring|dnp|OUT|/players/danielle-hunter/
+texans-at-browns-2026-reg-10|HOU|Brevin Jordan|TE|Finger, Foot|dnp|OUT|/players/brevin-jordan/
+texans-at-browns-2026-reg-10|HOU|Woody Marks|RB||full||/players/woody-marks/
+texans-at-browns-2026-reg-10|HOU|David Montgomery|RB|Groin|full|QUESTIONABLE|/players/david-montgomery/
+texans-at-browns-2026-reg-10|HOU|Keylan Rutledge|G|Neck, Shoulder|dnp|OUT|/players/keylan-rutledge/
+texans-at-browns-2026-reg-10|HOU|Jaylin Smith|CB|Hamstring|full|QUESTIONABLE|/players/jaylin-smith/
+texans-at-browns-2026-reg-10|HOU|Wyatt Teller|G|Illness, Back|limited|QUESTIONABLE|/players/wyatt-teller/
+texans-at-browns-2026-reg-10|HOU|Tommy Togiai|DT||full||/players/tommy-togiai/
+texans-at-browns-2026-reg-10|CLE|Austin Barber|T||full||/players/austin-barber/
+texans-at-browns-2026-reg-10|CLE|Denzel Boston|WR|Toe|limited|QUESTIONABLE|/players/denzel-boston/
+texans-at-browns-2026-reg-10|CLE|Michael Burton|FB|Calf|dnp|OUT|/players/michael-burton/
+texans-at-browns-2026-reg-10|CLE|Maliek Collins|DT||full||/players/maliek-collins/
+texans-at-browns-2026-reg-10|CLE|Harold Fannin Jr.|TE||full||/players/harold-fannin-jr/
+texans-at-browns-2026-reg-10|CLE|Ronnie Hickman Jr.|S|Concussion|dnp|OUT|/players/ronnie-hickman-jr/
+texans-at-browns-2026-reg-10|CLE|Tytus Howard|T||full||/players/tytus-howard-x1979/
+texans-at-browns-2026-reg-10|CLE|Elgton Jenkins|C||full||/players/elgton-jenkins/
+texans-at-browns-2026-reg-10|CLE|Donovan McMillon|S||limited||/players/donovan-mcmillon-2/
+texans-at-browns-2026-reg-10|CLE|Carson Schwesinger|LB||full||/players/carson-schwesinger/
+texans-at-browns-2026-reg-10|CLE|Denzel Ward|CB||limited||/players/denzel-ward/
+texans-at-browns-2026-reg-10|CLE|Quincy Williams|LB||full||/players/quincy-williams/
+rams-at-cardinals-2026-reg-10|LAR|Davis Allen|TE|Oblique|limited|QUESTIONABLE|/players/davis-allen/
+rams-at-cardinals-2026-reg-10|LAR|Steve Avila|G|Hamstring|dnp|OUT|/players/steve-avila/
+rams-at-cardinals-2026-reg-10|LAR|Joe Cardona|LS|Ankle|limited|QUESTIONABLE|/players/joe-cardona/
+rams-at-cardinals-2026-reg-10|LAR|Kam Curl|S|Toe|limited|QUESTIONABLE|/players/kamren-curl/
+rams-at-cardinals-2026-reg-10|LAR|Aaron Donald|DT||dnp||/players/aaron-donald/
+rams-at-cardinals-2026-reg-10|LAR|Terrance Ferguson|TE|Ankle, Hamstring|dnp|OUT|/players/terrance-ferguson-2/
+rams-at-cardinals-2026-reg-10|LAR|Braden Fiske|DT||dnp||/players/braden-fiske/
+rams-at-cardinals-2026-reg-10|LAR|Myles Garrett|LB|Knee, Not injury related - resting player|dnp|QUESTIONABLE|/players/myles-garrett/
+rams-at-cardinals-2026-reg-10|LAR|Tyler Higbee|TE||limited||/players/tyler-higbee/
+rams-at-cardinals-2026-reg-10|LAR|Trent McDuffie|CB|Back|limited|QUESTIONABLE|/players/trent-mcduffie/
+rams-at-cardinals-2026-reg-10|LAR|Puka Nacua|WR||dnp||/players/puka-nacua/
+rams-at-cardinals-2026-reg-10|LAR|Colby Parkinson|TE||full||/players/colby-parkinson/
+rams-at-cardinals-2026-reg-10|LAR|Matthew Stafford|QB||full||/players/matthew-stafford/
+rams-at-cardinals-2026-reg-10|LAR|Byron Young|LB||dnp||/players/byron-young-2/
+rams-at-cardinals-2026-reg-10|AZ|Budda Baker|S||full||/players/budda-baker/
+rams-at-cardinals-2026-reg-10|AZ|Zachary Carter|DT|Knee|limited|OUT|/players/zachary-carter-x9168/
+rams-at-cardinals-2026-reg-10|AZ|Hjalte Froholdt|C|Concussion|dnp|OUT|/players/hjalte-froholdt/
+rams-at-cardinals-2026-reg-10|AZ|Jon Gaines II|G|Ankle|dnp|OUT|/players/jon-gaines-ii/
+rams-at-cardinals-2026-reg-10|AZ|Bam Knight|RB||full||/players/bam-knight/
+rams-at-cardinals-2026-reg-10|AZ|Hunter Long|TE|Knee|limited|QUESTIONABLE|/players/hunter-long/
+rams-at-cardinals-2026-reg-10|AZ|Roy Lopez|DT|Toe, Ankle|limited|QUESTIONABLE|/players/roy-lopez/
+rams-at-cardinals-2026-reg-10|AZ|Max Melton|CB|Knee, Hand|limited|QUESTIONABLE|/players/max-melton/
+rams-at-cardinals-2026-reg-10|AZ|Darius Robinson|DT|Wrist|limited|QUESTIONABLE|/players/darius-robinson-2/
+rams-at-cardinals-2026-reg-10|AZ|Isaac Seumalo|G||full||/players/isaac-seumalo/
+rams-at-cardinals-2026-reg-10|AZ|Dante Stills|DT||full||/players/dante-stills/
+rams-at-cardinals-2026-reg-10|AZ|Josh Sweat|LB||full||/players/josh-sweat/
+rams-at-cardinals-2026-reg-10|AZ|Jayden Williams|T|Knee|limited|QUESTIONABLE|/players/jayden-williams/
+rams-at-cardinals-2026-reg-10|AZ|Mack Wilson|LB||full||/players/mack-wilson/
+rams-at-cardinals-2026-reg-10|AZ|Andrew Wingard|S|Groin|dnp|QUESTIONABLE|/players/andrew-wingard/
+seahawks-at-raiders-2026-reg-10|SEA|AJ Barner|TE||full||/players/aj-barner/
+seahawks-at-raiders-2026-reg-10|SEA|Anthony Bradford|G||full||/players/anthony-bradford/
+seahawks-at-raiders-2026-reg-10|SEA|Charles Cross|T|Ankle|dnp|OUT|/players/charles-cross-2/
+seahawks-at-raiders-2026-reg-10|SEA|Sam Darnold|QB|Ribs, Quadricep|dnp|OUT|/players/sam-darnold/
+seahawks-at-raiders-2026-reg-10|SEA|Derick Hall|LB||dnp||/players/derick-hall/
+seahawks-at-raiders-2026-reg-10|SEA|Drew Lock|QB||limited||/players/drew-lock/
+seahawks-at-raiders-2026-reg-10|SEA|Quenton Nelson|G|Knee|dnp|OUT|/players/quenton-nelson/
+seahawks-at-raiders-2026-reg-10|SEA|Uchenna Nwosu|LB||full||/players/uchenna-nwosu/
+seahawks-at-raiders-2026-reg-10|SEA|Patrick O'Connell|LB||full||/players/patrick-o-connell/
+seahawks-at-raiders-2026-reg-10|SEA|Connor O'Toole|LB||full||/players/connor-o-toole/
+seahawks-at-raiders-2026-reg-10|SEA|Brandon Pili|DT||full||/players/brandon-pili/
+seahawks-at-raiders-2026-reg-10|SEA|Jarran Reed|DT||full||/players/jarran-reed/
+seahawks-at-raiders-2026-reg-10|SEA|Rashid Shaheed|WR||full||/players/rashid-shaheed/
+seahawks-at-raiders-2026-reg-10|SEA|Jaxon Smith-Njigba|WR||full||/players/jaxon-smith-njigba/
+seahawks-at-raiders-2026-reg-10|SEA|Leonard Williams|DT|Stinger|dnp|OUT|/players/leonard-williams/
+seahawks-at-raiders-2026-reg-10|LV|Thomas Booker|DT|Ankle|full|QUESTIONABLE|/players/thomas-booker/
+seahawks-at-raiders-2026-reg-10|LV|Foley Fatukasi|DT||full||/players/foley-fatukasi/
+seahawks-at-raiders-2026-reg-10|LV|Ian Thomas|TE||full||/players/ian-thomas/
+seahawks-at-raiders-2026-reg-10|LV|Dont'e Thornton Jr.|WR|Back|dnp|QUESTIONABLE|/players/dont-e-thornton-jr/
+seahawks-at-raiders-2026-reg-10|LV|Trey Zuhn III|C||full||/players/trey-zuhn-iii/
+49ers-at-cowboys-2026-reg-10|SF|Mike Evans|WR|Achilles|dnp|OUT|/players/mike-evans/
+49ers-at-cowboys-2026-reg-10|SF|Renardo Green|CB|Back|limited|QUESTIONABLE|/players/renardo-green/
+49ers-at-cowboys-2026-reg-10|SF|Dre Greenlaw|LB|Knee|limited|QUESTIONABLE|/players/dre-greenlaw-x9042/
+49ers-at-cowboys-2026-reg-10|SF|Nate Hobbs|CB|Groin|full|QUESTIONABLE|/players/nate-hobbs/
+49ers-at-cowboys-2026-reg-10|SF|Deommodore Lenoir|CB|Foot|limited|QUESTIONABLE|/players/deommodore-lenoir/
+49ers-at-cowboys-2026-reg-10|SF|Christian McCaffrey|RB||full||/players/christian-mccaffrey/
+49ers-at-cowboys-2026-reg-10|SF|Siran Neal|S||full||/players/siran-neal/
+49ers-at-cowboys-2026-reg-10|SF|Demarcus Robinson|WR||full||/players/demarcus-robinson/
+49ers-at-cowboys-2026-reg-10|SF|Deebo Samuel Sr.|WR||full||/players/deebo-samuel/
+49ers-at-cowboys-2026-reg-10|SF|Upton Stout|CB|Shoulder, Neck|limited|QUESTIONABLE|/players/upton-stout/
+49ers-at-cowboys-2026-reg-10|SF|C.J. West|DT|Knee|full|QUESTIONABLE|/players/cj-west/
+49ers-at-cowboys-2026-reg-10|SF|Trent Williams|T|Shoulder|dnp|QUESTIONABLE|/players/trent-williams/
+49ers-at-cowboys-2026-reg-10|DAL|DaRon Bland|CB|Ankle|limited|QUESTIONABLE|/players/daron-bland/
+49ers-at-cowboys-2026-reg-10|DAL|Jonathan Bullard|DT|Calf|full|QUESTIONABLE|/players/jonathan-bullard/
+49ers-at-cowboys-2026-reg-10|DAL|Alijah Clark|S|Illness|dnp|QUESTIONABLE|/players/alijah-clark/
+49ers-at-cowboys-2026-reg-10|DAL|Donovan Ezeiruaku|LB|Ankle|dnp|OUT|/players/donovan-ezeiruaku/
+49ers-at-cowboys-2026-reg-10|DAL|Jake Ferguson|TE|Knee, Ankle|dnp|OUT|/players/jake-ferguson/
+49ers-at-cowboys-2026-reg-10|DAL|Tyler Goodson|RB|Ankle, Knee|dnp|OUT|/players/tyler-goodson/
+49ers-at-cowboys-2026-reg-10|DAL|Malik Hooker|S||dnp||/players/malik-hooker/
+49ers-at-cowboys-2026-reg-10|DAL|Marist Liufau|LB||full||/players/marist-liufau/
+49ers-at-cowboys-2026-reg-10|DAL|P.J. Locke|S|Concussion|dnp|OUT|/players/p-j-locke/
+49ers-at-cowboys-2026-reg-10|DAL|Von Miller|LB||dnp||/players/von-miller/
+49ers-at-cowboys-2026-reg-10|DAL|Jonathan Mingo|WR|Ankle|dnp|OUT|/players/jonathan-mingo/
+49ers-at-cowboys-2026-reg-10|DAL|Devin Moore|CB|Hip|full|QUESTIONABLE|/players/devin-moore-2/
+49ers-at-cowboys-2026-reg-10|DAL|DeMarvion Overshown|LB||full||/players/demarvion-overshown/
+49ers-at-cowboys-2026-reg-10|DAL|George Pickens|WR||full||/players/george-pickens/
+49ers-at-cowboys-2026-reg-10|DAL|Joey Porter Jr.|CB|Ankle, Foot|limited|QUESTIONABLE|/players/joey-porter-jr/
+49ers-at-cowboys-2026-reg-10|DAL|Luke Schoonmaker|TE||full||/players/luke-schoonmaker/
+49ers-at-cowboys-2026-reg-10|DAL|Brevyn Spann-Ford|TE||full||/players/brevyn-spann-ford/
+49ers-at-cowboys-2026-reg-10|DAL|Juanyeh Thomas|S|Hamstring|dnp|DOUBTFUL|/players/juanyeh-thomas/
+49ers-at-cowboys-2026-reg-10|DAL|KaVontae Turpin|WR||full||/players/kavontae-turpin/
+steelers-at-bengals-2026-reg-10|PIT|Brandin Echols|CB||full||/players/brandin-echols/
+steelers-at-bengals-2026-reg-10|PIT|DeShon Elliott|S||full||/players/deshon-elliott/
+steelers-at-bengals-2026-reg-10|PIT|Derrick Harmon|DT|Foot|full|QUESTIONABLE|/players/derrick-harmon-2/
+steelers-at-bengals-2026-reg-10|PIT|Cameron Heyward|DT||full||/players/cameron-heyward/
+steelers-at-bengals-2026-reg-10|PIT|Ben Skowronek|WR||full||/players/ben-skowronek/
+steelers-at-bengals-2026-reg-10|PIT|Doneiko Slaughter|CB||full||/players/doneiko-slaughter/
+steelers-at-bengals-2026-reg-10|PIT|Darnell Washington|TE||full||/players/darnell-washington/
+steelers-at-bengals-2026-reg-10|PIT|T.J. Watt|LB||full||/players/t-j-watt/
+steelers-at-bengals-2026-reg-10|CIN|Jonathan Allen|DT||limited||/players/jonathan-allen/
+steelers-at-bengals-2026-reg-10|CIN|Jalen Davis|CB|Hamstring|full|DOUBTFUL|/players/jalen-davis/
+steelers-at-bengals-2026-reg-10|CIN|Kyle Dugger|S|Quadricep|dnp|OUT|/players/kyle-dugger/
+steelers-at-bengals-2026-reg-10|CIN|Dylan Fairchild|G||full||/players/dylan-fairchild/
+steelers-at-bengals-2026-reg-10|CIN|B.J. Hill|DT||dnp||/players/b-j-hill/
+steelers-at-bengals-2026-reg-10|CIN|Andrei Iosivas|WR|Thumb|full|DOUBTFUL|/players/andrei-iosivas/
+steelers-at-bengals-2026-reg-10|CIN|Dexter Lawrence|DT||dnp||/players/dexter-lawrence/
+steelers-at-bengals-2026-reg-10|CIN|Brian Parker II|G|Knee|full|DOUBTFUL|/players/brian-parker-ii/
+steelers-at-bengals-2026-reg-10|CIN|DJ Turner II|CB||full||/players/dj-turner-2/
+chargers-at-ravens-2026-reg-10|LAC|Kayode Awosika|G||limited||/players/kayode-awosika/
+chargers-at-ravens-2026-reg-10|LAC|Bud Dupree|DE||dnp||/players/bud-dupree/
+chargers-at-ravens-2026-reg-10|LAC|Justin Eboigbe|DE||limited||/players/justin-eboigbe/
+chargers-at-ravens-2026-reg-10|LAC|Alex Harkey|G||full||/players/alex-harkey/
+chargers-at-ravens-2026-reg-10|LAC|Tre Harris|WR||full||/players/tre-harris/
+chargers-at-ravens-2026-reg-10|LAC|Cam Hart|CB||full||/players/cam-hart/
+chargers-at-ravens-2026-reg-10|LAC|Daiyan Henley|LB||full||/players/daiyan-henley/
+chargers-at-ravens-2026-reg-10|LAC|Deane Leonard|CB||full||/players/deane-leonard/
+chargers-at-ravens-2026-reg-10|LAC|Khalil Mack|LB||full||/players/khalil-mack/
+chargers-at-ravens-2026-reg-10|LAC|Ladd McConkey|WR||dnp||/players/ladd-mcconkey/
+chargers-at-ravens-2026-reg-10|LAC|Keaton Mitchell|RB||limited||/players/keaton-mitchell/
+chargers-at-ravens-2026-reg-10|LAC|David Njoku|TE||limited||/players/david-njoku/
+chargers-at-ravens-2026-reg-10|LAC|Denzel Perryman|LB||full||/players/denzel-perryman/
+chargers-at-ravens-2026-reg-10|LAC|Trey Pipkins|T||dnp||/players/trey-pipkins/
+chargers-at-ravens-2026-reg-10|LAC|Rodney Shelley|CB||limited||/players/rodney-shelley/
+chargers-at-ravens-2026-reg-10|LAC|Branson Taylor|G||dnp||/players/branson-taylor/
+chargers-at-ravens-2026-reg-10|LAC|Brenen Thompson|WR||dnp||/players/brenen-thompson/
+chargers-at-ravens-2026-reg-10|LAC|Isas Waxter|CB||dnp||/players/isas-waxter/
+chargers-at-ravens-2026-reg-10|LAC|Kendall Williamson|S||dnp||/players/kendall-williamson/
+chargers-at-ravens-2026-reg-10|BAL|Rasheen Ali|RB||full||/players/rasheen-ali/
+chargers-at-ravens-2026-reg-10|BAL|Rashod Bateman|WR||full||/players/rashod-bateman/
+chargers-at-ravens-2026-reg-10|BAL|Kyle Hamilton|S||full||/players/kyle-hamilton/
+chargers-at-ravens-2026-reg-10|BAL|Jaylinn Hawkins|S||limited||/players/jaylinn-hawkins/
+chargers-at-ravens-2026-reg-10|BAL|Matthew Hibner|TE||full||/players/matthew-hibner/
+chargers-at-ravens-2026-reg-10|BAL|Olaivavega Ioane|G||full||/players/olaivavega-ioane/
+chargers-at-ravens-2026-reg-10|BAL|Adam Randall|RB||full||/players/adam-randall/
+chargers-at-ravens-2026-reg-10|BAL|Nate Wiggins|CB||full||/players/nate-wiggins/

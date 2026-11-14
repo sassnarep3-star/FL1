@@ -1,0 +1,177 @@
+{
+  "dataset": "Official NFL.com news items on the Week 10 report page",
+  "items": [
+    {
+      "headline_exactly_as_printed": "NFL news roundup: Browns to start QB Deshaun Watson vs. Texans; Cardinals' Carson Beck to start vs. Rams",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+      "club": "CLE",
+      "confirmed_fact": "Browns confirm Watson as starting QB vs HOU (the same headline also names Arizona's change)",
+      "confirms": "starter_replacement",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL news roundup: Browns to start QB Deshaun Watson vs. Texans; Cardinals' Carson Beck to start vs. Rams",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+      "club": "AZ",
+      "confirmed_fact": "Cardinals confirm Beck as starting QB vs LAR",
+      "confirms": "starter_replacement",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again",
+      "url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+      "club": "SEA",
+      "confirmed_fact": "Darnold OUT for Week 10; Lock expected to start",
+      "confirms": "starter_replacement",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Drew Lock (elbow/oblique) has no injury designation, will start for Seahawks vs. Raiders",
+      "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+      "club": "SEA",
+      "confirmed_fact": "Lock confirmed as Seahawks starter, no designation",
+      "confirms": "starter_replacement",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Rams WR Puka Nacua likely to be placed on injured reserve with turf toe, sprained MCL and PCL",
+      "url": "https://www.nfl.com/news/rams-wr-puka-nacua-likely-to-be-placed-on-injured-reserve-with-turf-toe-sprained-mcl-and-pcl",
+      "club": "LAR",
+      "confirmed_fact": "Nacua likely to IR; \"likely\", so not a confirmed absence",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Packers RB Josh Jacobs to undergo surgery on finger this week; timeline to return TBD",
+      "url": "https://www.nfl.com/news/packers-rb-josh-jacobs-to-undergo-surgery-on-finger-this-week",
+      "club": "GB",
+      "confirmed_fact": "Jacobs finger surgery this week, return TBD",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start",
+      "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+      "club": "MIA",
+      "confirmed_fact": "Willis to IR; McCord \"in line for\" first start (not confirmed)",
+      "confirms": "starter_replacement",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL news roundup: Ravens confirm Lamar Jackson expected to miss 6-10 weeks; Kenneth Walker questionable",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+      "club": "BAL",
+      "confirmed_fact": "Ravens confirm Jackson out 6-10 weeks",
+      "confirms": "starter_absence",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL news roundup: J.J. McCarthy expected to play Week 10; Justin Herbert avoids finger fracture",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-monday-nov-9",
+      "club": "NYG",
+      "confirmed_fact": "McCarthy expected to play in Week 10",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL news roundup: Bills acquire S Amani Hooker; Broncos trade for Chargers' Daiyan Henley",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10",
+      "club": "LAC",
+      "confirmed_fact": "Reported Broncos-for-Chargers Henley trade",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Report: Ravens QB Tyler Huntley out for season with turf toe injury",
+      "url": "https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury",
+      "club": "BAL",
+      "confirmed_fact": "Huntley out for season (\"Report:\")",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL Network: Ravens' Lamar Jackson (right thumb) out 6-9 weeks, expects to return this season",
+      "url": "https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season",
+      "club": "BAL",
+      "confirmed_fact": "Jackson out 6-9 weeks (NFL Network) — conflicts with the 6-10 week figure",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Deshaun Watson enters concussion protocol ahead of Browns' Week 9 game vs. Saints",
+      "url": "https://www.nfl.com/news/deshaun-watson-concussion-protocol-browns-week-9-shedeur-sanders",
+      "club": "CLE",
+      "confirmed_fact": "Watson in protocol ahead of Week 9",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Ravens QB Lamar Jackson (ankle) will return Sunday vs. Bills after three-game absence",
+      "url": "https://www.nfl.com/news/ravens-qb-lamar-jackson-ankle-play-bills-three-game-absence",
+      "club": "BAL",
+      "confirmed_fact": "Jackson returned vs BUF after 3 games out (ankle)",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL news roundup: Ravens officially place Lamar Jackson on injured reserve",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5",
+      "club": "BAL",
+      "confirmed_fact": "Jackson placed on IR",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Commanders 24, Giants 21, FINAL",
+      "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "club": "WAS",
+      "confirmed_fact": "Week 10 Thursday game final score on the official game page",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "Notable injuries, news from Sunday's Week 9 games: Rams WR Puka Nacua to undergo testing on knee injury",
+      "url": "https://www.nfl.com/news/notable-injuries-news-sunday-week-9-games-2026",
+      "club": "LAR",
+      "confirmed_fact": "Nacua knee testing after Week 9",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL news roundup: Saints waive Kendre Miller; Cowboys place Malachi Lawrence on IR",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-saturday-nov-7",
+      "club": "NO",
+      "confirmed_fact": "Saints waived Miller; Cowboys placed Lawrence on IR",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    },
+    {
+      "headline_exactly_as_printed": "NFL news roundup: Jets' Garrett Wilson ruled out; Falcons RB Brian Robinson out for Madrid game",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-6",
+      "club": "NYJ",
+      "confirmed_fact": "Wilson ruled out for Week 9; Robinson out for the Madrid game",
+      "confirms": "none",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z"
+    }
+  ],
+  "row_count": 19
+}

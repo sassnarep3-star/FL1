@@ -1,0 +1,64 @@
+{
+  "dataset": "Confirmed absences missing from the weekly injury report",
+  "why": "A player on IR is not submitted on the weekly report, so a report-only availability layer silently scores him as available. This file is the correction.",
+  "rows": [
+    {
+      "club": "BAL",
+      "player": "Lamar Jackson",
+      "pos": "QB",
+      "absence_as_stated": "Ravens confirm Lamar Jackson expected to miss 6-10 weeks",
+      "basis": "club-confirmed via league news",
+      "news_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z",
+      "position_group": "qb",
+      "unit": "offense"
+    },
+    {
+      "club": "BAL",
+      "player": "Tyler Huntley",
+      "pos": "QB",
+      "absence_as_stated": "Report: Ravens QB Tyler Huntley out for season with turf toe injury",
+      "basis": "report via league news",
+      "news_url": "https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z",
+      "position_group": "qb",
+      "unit": "offense"
+    },
+    {
+      "club": "MIA",
+      "player": "Malik Willis",
+      "pos": "QB",
+      "absence_as_stated": "Dolphins place QB Malik Willis (groin) on injured reserve",
+      "basis": "transaction via league news",
+      "news_url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z",
+      "position_group": "qb",
+      "unit": "offense"
+    },
+    {
+      "club": "SEA",
+      "player": "Sam Darnold",
+      "pos": "QB",
+      "absence_as_stated": "Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders",
+      "basis": "club-confirmed via league news",
+      "news_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+      "source_tier": "T0",
+      "fetched_at_utc": "2026-11-14T02:53:00Z",
+      "position_group": "qb",
+      "unit": "offense"
+    }
+  ],
+  "affected_clubs": [
+    "BAL",
+    "MIA",
+    "SEA"
+  ],
+  "check": {
+    "BAL_rows_on_report": 8,
+    "BAL_qb_rows_on_report": 0,
+    "note": "compared programmatically in pipelines.validate V13"
+  }
+}

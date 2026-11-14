@@ -1,0 +1,79 @@
+{
+  "dataset": "Parameter-stability sweep (gate G8 evidence)",
+  "method": "re-run every eligible game with each prior moved 20%",
+  "sweeps": [
+    {
+      "param": "shrink_to_mean",
+      "perturbation_pct": -20.0,
+      "value_used": 0.576,
+      "max_spread_shift_pts": 3.0,
+      "max_total_shift_pts": 2.0,
+      "mean_spread_shift_pts": 1.154,
+      "signalled_side_flips": 1,
+      "games": 13,
+      "signal_set_overlap": 0.9231
+    },
+    {
+      "param": "shrink_to_mean",
+      "perturbation_pct": 20.0,
+      "value_used": 0.864,
+      "max_spread_shift_pts": 2.5,
+      "max_total_shift_pts": 2.0,
+      "mean_spread_shift_pts": 1.077,
+      "signalled_side_flips": 1,
+      "games": 13,
+      "signal_set_overlap": 0.9231
+    },
+    {
+      "param": "home_field",
+      "perturbation_pct": -20.0,
+      "value_used": 1.12,
+      "max_spread_shift_pts": 0.5,
+      "max_total_shift_pts": 0.5,
+      "mean_spread_shift_pts": 0.231,
+      "signalled_side_flips": 1,
+      "games": 13,
+      "signal_set_overlap": 0.9231
+    },
+    {
+      "param": "home_field",
+      "perturbation_pct": 20.0,
+      "value_used": 1.68,
+      "max_spread_shift_pts": 0.5,
+      "max_total_shift_pts": 0.5,
+      "mean_spread_shift_pts": 0.308,
+      "signalled_side_flips": 0,
+      "games": 13,
+      "signal_set_overlap": 1.0
+    },
+    {
+      "param": "sigma_game_points",
+      "perturbation_pct": -20.0,
+      "value_used": 9.6,
+      "max_spread_shift_pts": 0.0,
+      "max_total_shift_pts": 0.0,
+      "mean_spread_shift_pts": 0.0,
+      "signalled_side_flips": 0,
+      "games": 13,
+      "signal_set_overlap": 1.0
+    },
+    {
+      "param": "sigma_game_points",
+      "perturbation_pct": 20.0,
+      "value_used": 14.4,
+      "max_spread_shift_pts": 0.0,
+      "max_total_shift_pts": 0.0,
+      "mean_spread_shift_pts": 0.0,
+      "signalled_side_flips": 0,
+      "games": 13,
+      "signal_set_overlap": 1.0
+    }
+  ],
+  "verdict": {
+    "gate": "G8",
+    "threshold": "line shift <= 0.5 pts and signal overlap >= 0.80 under +/-20% of each prior",
+    "observed": "max spread shift 3.00 pts; worst signal overlap 0.92",
+    "result": "FAIL",
+    "interpretation": "sigma_game_points moves probabilities but not the published line, so the spread shift comes from shrink_to_mean and home_field. A FAIL here would mean the slate's lines are a product of the priors rather than of the standings."
+  }
+}

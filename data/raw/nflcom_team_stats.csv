@@ -1,0 +1,91 @@
+# Official club statistics pages, "VS. OPPONENTS / 2026 Regular Season Statistics" block.
+# Source URL per row: https://www.nfl.com/teams/<club>/stats | NFL.com — read 2026-11-14T02:54Z.
+#
+# PUBLISHING RULE APPLIED HERE
+#   Only lines the page prints as a single number per column are recorded. Lines the page
+#   renders as a concatenation of a value and its sub-values (for example the official text
+#   "4814.4" under "OFFENSE Plays Average Yards", or "3810" under
+#   "TOUCHDOWNS Rushing Passing Returns Defensive", or "13722556.4" under
+#   "PASSING Comp Completions Att Attempts Int Interceptions Avg Average") cannot be split
+#   without guessing, so those lines are NOT recorded at all. See flags.json F-05.
+#
+# col1 = the club's own line, col2 = the "OPPONENTS" column, both exactly as printed.
+# `sacks` is recorded but its meaning is ambiguous on the page (sacks taken vs sacks
+# recorded is not labelled) -> it is published for reference only and never used as a
+# model input. See flags.json F-06.
+club|abbr|url|field|col1_club|col2_opponents|note
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|total_first_downs|118|125|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|third_down_conversions|36 / 108|34 / 109|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|fourth_down_conversions|4 / 8|6 / 12|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|total_offensive_yards|2134|2240|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|total_rushing_yards|848|951|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|total_passing_yards|1437|1495|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|sacks|23|29|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|field_goals|20 / 22|14 / 18|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|total_touchdowns|12|11|
+minnesota-vikings|MIN|https://www.nfl.com/teams/minnesota-vikings/stats|turnover_ratio|5|5|printed once, shared
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|total_first_downs|166|187|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|third_down_conversions|45 / 119|50 / 120|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|fourth_down_conversions|10 / 16|8 / 19|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|total_offensive_yards|3131|2906|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|total_rushing_yards|614|981|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|total_passing_yards|2618|2087|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|sacks|17|26|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|field_goals|14 / 19|8 / 9|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|total_touchdowns|25|24|
+green-bay-packers|GB|https://www.nfl.com/teams/green-bay-packers/stats|turnover_ratio|8|8|printed once, shared
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|total_first_downs|184|139|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|third_down_conversions|43 / 115|37 / 121|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|fourth_down_conversions|5 / 10|11 / 13|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|total_offensive_yards|2950|2194|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|total_rushing_yards|997|802|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|total_passing_yards|2089|1519|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|sacks|19|21|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|field_goals|16 / 18|12 / 15|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|total_touchdowns|22|18|
+seattle-seahawks|SEA|https://www.nfl.com/teams/seattle-seahawks/stats|turnover_ratio|-1|-1|printed once, shared
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|total_first_downs|182|208|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|third_down_conversions|49 / 112|48 / 109|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|fourth_down_conversions|6 / 15|6 / 10|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|total_offensive_yards|2979|3469|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|total_rushing_yards|642|1361|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|total_passing_yards|2401|2238|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|sacks|11|19|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|field_goals|19 / 21|13 / 15|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|total_touchdowns|26|33|
+las-vegas-raiders|LV|https://www.nfl.com/teams/las-vegas-raiders/stats|turnover_ratio|1|1|printed once, shared
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|total_first_downs|182|181|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|third_down_conversions|52 / 137|44 / 108|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|fourth_down_conversions|9 / 15|6 / 14|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|total_offensive_yards|2862|3036|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|total_rushing_yards|924|1097|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|total_passing_yards|2080|2076|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|sacks|23|19|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|field_goals|20 / 22|14 / 15|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|total_touchdowns|17|31|
+arizona-cardinals|AZ|https://www.nfl.com/teams/arizona-cardinals/stats|turnover_ratio|0|0|printed once, shared
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|total_first_downs|176|139|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|third_down_conversions|46 / 89|42 / 104|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|fourth_down_conversions|8 / 11|6 / 13|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|total_offensive_yards|3014|2335|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|total_rushing_yards|1082|647|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|total_passing_yards|1980|1783|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|sacks|8|15|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|field_goals|7 / 10|17 / 19|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|total_touchdowns|31|15|
+san-francisco-49ers|SF|https://www.nfl.com/teams/san-francisco-49ers/stats|turnover_ratio|1|1|printed once, shared
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|total_first_downs|206|198|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|third_down_conversions|53 / 117|57 / 118|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|fourth_down_conversions|7 / 12|4 / 9|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|total_offensive_yards|3244|3354|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|total_rushing_yards|932|1327|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|total_passing_yards|2381|2133|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|sacks|14|17|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|field_goals|17 / 22|16 / 17|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|total_touchdowns|28|27|
+dallas-cowboys|DAL|https://www.nfl.com/teams/dallas-cowboys/stats|turnover_ratio|-1|-1|printed once, shared
+# 7 of 32 clubs read this session (MIN, GB, SEA, LV, AZ, SF, DAL). The remaining 25 clubs
+# are recorded as `unavailable` coverage rows — never as zeros. Re-run
+# `python3 -m pipelines.fetch_nfl_sources team-stats` from a networked host to complete them.
+# One roster page was also read to cross-check club assignment:
+# https://www.nfl.com/teams/minnesota-vikings/roster (see data/raw/nflcom_roster_check.csv).

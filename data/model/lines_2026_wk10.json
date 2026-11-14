@@ -1,0 +1,1445 @@
+{
+  "dataset": "Week 10 2026 originated lines (model v0 ADD-PTS)",
+  "generated_from": "data/verified/*.json snapshot 2026-11-14T02:52Z",
+  "model_version": "v0-addpts",
+  "eligibility": "research output; not a bet recommendation - no validation gate set can pass until a market source and a multi-season corpus exist",
+  "games": [
+    {
+      "game_slug": "commanders-at-giants-2026-reg-10",
+      "away": "WAS",
+      "home": "NYG",
+      "date": "2026-11-12",
+      "kickoff_et": "8:15 PM EST",
+      "networks": "Prime Video",
+      "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "status": "EXCLUDED_ALREADY_PLAYED",
+      "reason": "official page printed 'FINAL WAS 24 NYG 21' before this pregame snapshot was taken (flag F-15)",
+      "published": null,
+      "market": {
+        "spread": null,
+        "total": null
+      }
+    },
+    {
+      "game_slug": "bills-at-jets-2026-reg-10",
+      "away": "BUF",
+      "home": "NYJ",
+      "date": "2026-11-15",
+      "kickoff_et": "1:00 PM EST",
+      "networks": "CBS",
+      "source_url": "https://www.nfl.com/games/bills-at-jets-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 30.78,
+          "scoring_rate_shrunk": 29.469,
+          "allowed_rate_shrunk": 24.269,
+          "games_played": 8,
+          "raw_ppg": 32.0,
+          "raw_papg": 23.375,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 22.69,
+          "scoring_rate_shrunk": 20.989,
+          "allowed_rate_shrunk": 23.259,
+          "games_played": 9,
+          "raw_ppg": 20.2222,
+          "raw_papg": 24.7778,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": 8.0,
+        "spread_home_text": "NYJ -8.0",
+        "total": 53.5,
+        "projected_margin_home": -8.09,
+        "fair_prob_home_win": 0.3168,
+        "fair_prob_home_cover": 0.4979,
+        "fair_prob_over": 0.4992,
+        "fair_american_home": "+216",
+        "fair_american_away": "-216",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": 9.5,
+        "total": 55.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "chiefs-at-falcons-2026-reg-10",
+      "away": "KC",
+      "home": "ATL",
+      "date": "2026-11-15",
+      "kickoff_et": "1:00 PM EST",
+      "networks": "CBS",
+      "source_url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 25.92,
+          "scoring_rate_shrunk": 24.609,
+          "allowed_rate_shrunk": 24.269,
+          "games_played": 8,
+          "raw_ppg": 25.25,
+          "raw_papg": 17.875,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 19.21,
+          "scoring_rate_shrunk": 21.469,
+          "allowed_rate_shrunk": 19.299,
+          "games_played": 9,
+          "raw_ppg": 20.8889,
+          "raw_papg": 24.7778,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": 6.5,
+        "spread_home_text": "ATL -6.5",
+        "total": 45.0,
+        "projected_margin_home": -6.71,
+        "fair_prob_home_win": 0.3463,
+        "fair_prob_home_cover": 0.4951,
+        "fair_prob_over": 0.5029,
+        "fair_american_home": "+189",
+        "fair_american_away": "-189",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": 6.5,
+        "total": 45.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "dolphins-at-colts-2026-reg-10",
+      "away": "MIA",
+      "home": "IND",
+      "date": "2026-11-15",
+      "kickoff_et": "1:00 PM EST",
+      "networks": "CBS",
+      "source_url": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 17.66,
+          "scoring_rate_shrunk": 17.769,
+          "allowed_rate_shrunk": 26.349,
+          "games_played": 8,
+          "raw_ppg": 15.75,
+          "raw_papg": 25.0,
+          "availability_applied_points": -3.5,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 3.5,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 3.5,
+            "position_absence_counts": {
+              "qb": 1
+            },
+            "players": [
+              {
+                "player": "Malik Willis",
+                "position": "QB",
+                "unit": "offense",
+                "game_status": "OUT",
+                "injury": "Dolphins place QB Malik Willis (groin) on injured reserve",
+                "absence_probability": 1.0,
+                "points_impact": 3.5,
+                "starter_confirmation": "transaction via league news - https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+                "source_url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+                "player_page_url": "https://www.nfl.com/search/?query=Malik-Willis"
+              }
+            ]
+          }
+        },
+        "home": {
+          "expected_points": 24.02,
+          "scoring_rate_shrunk": 21.149,
+          "allowed_rate_shrunk": 24.429,
+          "games_played": 9,
+          "raw_ppg": 20.4444,
+          "raw_papg": 27.6667,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": -6.5,
+        "spread_home_text": "IND +6.5",
+        "total": 41.5,
+        "projected_margin_home": 6.36,
+        "fair_prob_home_win": 0.6461,
+        "fair_prob_home_cover": 0.4967,
+        "fair_prob_over": 0.5041,
+        "fair_american_home": "-183",
+        "fair_american_away": "+183",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": -4.0,
+        "total": 40.5,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "jaguars-at-titans-2026-reg-10",
+      "away": "JAX",
+      "home": "TEN",
+      "date": "2026-11-15",
+      "kickoff_et": "1:00 PM EST",
+      "networks": "FOX",
+      "source_url": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 28.42,
+          "scoring_rate_shrunk": 27.039,
+          "allowed_rate_shrunk": 24.339,
+          "games_played": 8,
+          "raw_ppg": 28.625,
+          "raw_papg": 15.125,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 15.15,
+          "scoring_rate_shrunk": 19.389,
+          "allowed_rate_shrunk": 17.319,
+          "games_played": 8,
+          "raw_ppg": 18.0,
+          "raw_papg": 24.875,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": 13.5,
+        "spread_home_text": "TEN -13.5",
+        "total": 43.5,
+        "projected_margin_home": -13.27,
+        "fair_prob_home_win": 0.2171,
+        "fair_prob_home_cover": 0.5054,
+        "fair_prob_over": 0.5015,
+        "fair_american_home": "+361",
+        "fair_american_away": "-361",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": 13.5,
+        "total": 45.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "panthers-at-saints-2026-reg-10",
+      "away": "CAR",
+      "home": "NO",
+      "date": "2026-11-15",
+      "kickoff_et": "1:00 PM EST",
+      "networks": "FOX",
+      "source_url": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 27.25,
+          "scoring_rate_shrunk": 24.339,
+          "allowed_rate_shrunk": 25.869,
+          "games_played": 8,
+          "raw_ppg": 24.875,
+          "raw_papg": 27.375,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 27.66,
+          "scoring_rate_shrunk": 23.079,
+          "allowed_rate_shrunk": 26.139,
+          "games_played": 8,
+          "raw_ppg": 23.125,
+          "raw_papg": 27.0,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": -0.5,
+        "spread_home_text": "NO +0.5",
+        "total": 55.0,
+        "projected_margin_home": 0.41,
+        "fair_prob_home_win": 0.5096,
+        "fair_prob_home_cover": 0.4979,
+        "fair_prob_over": 0.4978,
+        "fair_american_home": "-104",
+        "fair_american_away": "+104",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": 0.0,
+        "total": 53.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "texans-at-browns-2026-reg-10",
+      "away": "HOU",
+      "home": "CLE",
+      "date": "2026-11-15",
+      "kickoff_et": "1:00 PM EST",
+      "networks": "FOX",
+      "source_url": "https://www.nfl.com/games/texans-at-browns-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 24.39,
+          "scoring_rate_shrunk": 25.239,
+          "allowed_rate_shrunk": 22.109,
+          "games_played": 8,
+          "raw_ppg": 26.125,
+          "raw_papg": 24.0,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 21.46,
+          "scoring_rate_shrunk": 19.309,
+          "allowed_rate_shrunk": 23.709,
+          "games_played": 9,
+          "raw_ppg": 17.8889,
+          "raw_papg": 21.7778,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": 3.0,
+        "spread_home_text": "CLE -3.0",
+        "total": 46.0,
+        "projected_margin_home": -2.93,
+        "fair_prob_home_win": 0.4315,
+        "fair_prob_home_cover": 0.5016,
+        "fair_prob_over": 0.4964,
+        "fair_american_home": "+132",
+        "fair_american_away": "-132",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": 1.0,
+        "total": 44.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "vikings-at-packers-2026-reg-10",
+      "away": "MIN",
+      "home": "GB",
+      "date": "2026-11-15",
+      "kickoff_et": "1:00 PM EST",
+      "networks": "FOX",
+      "source_url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 18.32,
+          "scoring_rate_shrunk": 19.569,
+          "allowed_rate_shrunk": 21.709,
+          "games_played": 8,
+          "raw_ppg": 18.25,
+          "raw_papg": 14.5,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 19.02,
+          "scoring_rate_shrunk": 23.709,
+          "allowed_rate_shrunk": 16.869,
+          "games_played": 9,
+          "raw_ppg": 24.0,
+          "raw_papg": 21.2222,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": -0.5,
+        "spread_home_text": "GB +0.5",
+        "total": 37.5,
+        "projected_margin_home": 0.7,
+        "fair_prob_home_win": 0.5165,
+        "fair_prob_home_cover": 0.5047,
+        "fair_prob_over": 0.4961,
+        "fair_american_home": "-107",
+        "fair_american_away": "+107",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": -4.0,
+        "total": 34.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "rams-at-cardinals-2026-reg-10",
+      "away": "LAR",
+      "home": "AZ",
+      "date": "2026-11-15",
+      "kickoff_et": "4:05 PM EST",
+      "networks": "CBS",
+      "source_url": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 27.42,
+          "scoring_rate_shrunk": 23.549,
+          "allowed_rate_shrunk": 26.829,
+          "games_played": 9,
+          "raw_ppg": 23.7778,
+          "raw_papg": 20.1111,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 20.02,
+          "scoring_rate_shrunk": 20.669,
+          "allowed_rate_shrunk": 20.909,
+          "games_played": 9,
+          "raw_ppg": 19.7778,
+          "raw_papg": 28.3333,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": 7.5,
+        "spread_home_text": "AZ -7.5",
+        "total": 47.5,
+        "projected_margin_home": -7.4,
+        "fair_prob_home_win": 0.3314,
+        "fair_prob_home_cover": 0.5024,
+        "fair_prob_over": 0.4985,
+        "fair_american_home": "+202",
+        "fair_american_away": "-202",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": 8.0,
+        "total": 47.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "seahawks-at-raiders-2026-reg-10",
+      "away": "SEA",
+      "home": "LV",
+      "date": "2026-11-15",
+      "kickoff_et": "4:05 PM EST",
+      "networks": "CBS",
+      "source_url": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 24.0,
+          "scoring_rate_shrunk": 22.589,
+          "allowed_rate_shrunk": 27.869,
+          "games_played": 9,
+          "raw_ppg": 22.4444,
+          "raw_papg": 18.0,
+          "availability_applied_points": -3.5,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 3.5,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 3.5,
+            "position_absence_counts": {
+              "qb": 1
+            },
+            "players": [
+              {
+                "player": "Sam Darnold",
+                "position": "QB",
+                "unit": "offense",
+                "game_status": "OUT",
+                "injury": "Ribs, Quadricep",
+                "absence_probability": 1.0,
+                "points_impact": 3.5,
+                "starter_confirmation": "official news: https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+                "source_url": "https://www.nfl.com/injuries/",
+                "player_page_url": "https://www.nfl.com/players/sam-darnold/"
+              }
+            ]
+          }
+        },
+        "home": {
+          "expected_points": 23.3,
+          "scoring_rate_shrunk": 25.469,
+          "allowed_rate_shrunk": 19.389,
+          "games_played": 9,
+          "raw_ppg": 26.4444,
+          "raw_papg": 29.7778,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": 0.5,
+        "spread_home_text": "LV -0.5",
+        "total": 47.5,
+        "projected_margin_home": -0.7,
+        "fair_prob_home_win": 0.4835,
+        "fair_prob_home_cover": 0.4953,
+        "fair_prob_over": 0.4952,
+        "fair_american_home": "+107",
+        "fair_american_away": "-107",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": -0.5,
+        "total": 47.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "49ers-at-cowboys-2026-reg-10",
+      "away": "SF",
+      "home": "DAL",
+      "date": "2026-11-15",
+      "kickoff_et": "4:25 PM EST",
+      "networks": "FOX (+1)",
+      "source_url": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 29.93,
+          "scoring_rate_shrunk": 27.579,
+          "allowed_rate_shrunk": 25.309,
+          "games_played": 8,
+          "raw_ppg": 29.375,
+          "raw_papg": 19.5,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 25.02,
+          "scoring_rate_shrunk": 26.109,
+          "allowed_rate_shrunk": 20.469,
+          "games_played": 9,
+          "raw_ppg": 27.3333,
+          "raw_papg": 26.2222,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": 5.0,
+        "spread_home_text": "DAL -5.0",
+        "total": 55.0,
+        "projected_margin_home": -4.91,
+        "fair_prob_home_win": 0.3862,
+        "fair_prob_home_cover": 0.5021,
+        "fair_prob_over": 0.4987,
+        "fair_american_home": "+159",
+        "fair_american_away": "-159",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": 8.0,
+        "total": 54.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "steelers-at-bengals-2026-reg-10",
+      "away": "PIT",
+      "home": "CIN",
+      "date": "2026-11-15",
+      "kickoff_et": "8:20 PM EST",
+      "networks": "NBC (+1)",
+      "source_url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 21.85,
+          "scoring_rate_shrunk": 22.629,
+          "allowed_rate_shrunk": 22.179,
+          "games_played": 8,
+          "raw_ppg": 22.5,
+          "raw_papg": 18.0,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 25.86,
+          "scoring_rate_shrunk": 28.029,
+          "allowed_rate_shrunk": 19.389,
+          "games_played": 8,
+          "raw_ppg": 30.0,
+          "raw_papg": 21.875,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": -4.0,
+        "spread_home_text": "CIN +4.0",
+        "total": 47.5,
+        "projected_margin_home": 4.01,
+        "fair_prob_home_win": 0.5934,
+        "fair_prob_home_cover": 0.5002,
+        "fair_prob_over": 0.5048,
+        "fair_american_home": "-146",
+        "fair_american_away": "+146",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": -1.5,
+        "total": 48.5,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "patriots-at-lions-2026-reg-10",
+      "away": "NE",
+      "home": "DET",
+      "date": "2026-11-15",
+      "kickoff_et": "9:30 AM EST",
+      "networks": "FOX (+1)",
+      "source_url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 23.79,
+          "scoring_rate_shrunk": 23.309,
+          "allowed_rate_shrunk": 23.439,
+          "games_played": 9,
+          "raw_ppg": 23.4444,
+          "raw_papg": 23.0,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 27.84,
+          "scoring_rate_shrunk": 26.409,
+          "allowed_rate_shrunk": 22.989,
+          "games_played": 8,
+          "raw_ppg": 27.75,
+          "raw_papg": 23.625,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        }
+      },
+      "published": {
+        "spread_home": -4.0,
+        "spread_home_text": "DET +4.0",
+        "total": 51.5,
+        "projected_margin_home": 4.05,
+        "fair_prob_home_win": 0.5943,
+        "fair_prob_home_cover": 0.5012,
+        "fair_prob_over": 0.5029,
+        "fair_american_home": "-146",
+        "fair_american_away": "+146",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": -4.5,
+        "total": 51.0,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    },
+    {
+      "game_slug": "chargers-at-ravens-2026-reg-10",
+      "away": "LAC",
+      "home": "BAL",
+      "date": "2026-11-16",
+      "kickoff_et": "8:15 PM EST",
+      "networks": "ESPN (+2)",
+      "source_url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+      "projections": {
+        "away": {
+          "expected_points": 19.67,
+          "scoring_rate_shrunk": 17.319,
+          "allowed_rate_shrunk": 25.309,
+          "games_played": 8,
+          "raw_ppg": 15.125,
+          "raw_papg": 27.375,
+          "availability_applied_points": 0.0,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 0.0,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 0.0,
+            "position_absence_counts": {},
+            "players": []
+          }
+        },
+        "home": {
+          "expected_points": 21.75,
+          "scoring_rate_shrunk": 21.549,
+          "allowed_rate_shrunk": 26.139,
+          "games_played": 9,
+          "raw_ppg": 21.0,
+          "raw_papg": 26.2222,
+          "availability_applied_points": -4.38,
+          "availability_source": "applied",
+          "injured_ledger": {
+            "offence_points": 4.375,
+            "defence_points": 0.0,
+            "special_teams_points": 0.0,
+            "total_points": 4.375,
+            "position_absence_counts": {
+              "qb": 2
+            },
+            "players": [
+              {
+                "player": "Lamar Jackson",
+                "position": "QB",
+                "unit": "offense",
+                "game_status": "OUT",
+                "injury": "Ravens confirm Lamar Jackson expected to miss 6-10 weeks",
+                "absence_probability": 1.0,
+                "points_impact": 3.5,
+                "starter_confirmation": "club-confirmed via league news - https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+                "source_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+                "player_page_url": "https://www.nfl.com/search/?query=Lamar-Jackson"
+              },
+              {
+                "player": "Tyler Huntley",
+                "position": "QB",
+                "unit": "offense",
+                "game_status": "OUT",
+                "injury": "Report: Ravens QB Tyler Huntley out for season with turf toe injury",
+                "absence_probability": 1.0,
+                "points_impact": 0.875,
+                "starter_confirmation": "report via league news - https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury",
+                "source_url": "https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury",
+                "player_page_url": "https://www.nfl.com/search/?query=Tyler-Huntley"
+              }
+            ]
+          }
+        }
+      },
+      "published": {
+        "spread_home": -2.0,
+        "spread_home_text": "BAL +2.0",
+        "total": 41.5,
+        "projected_margin_home": 2.09,
+        "fair_prob_home_win": 0.5489,
+        "fair_prob_home_cover": 0.502,
+        "fair_prob_over": 0.4981,
+        "fair_american_home": "-122",
+        "fair_american_away": "+122",
+        "price_note": "fair, no vig - derived from the model, NOT a sportsbook quote"
+      },
+      "market": {
+        "spread": null,
+        "total": null,
+        "moneyline": null,
+        "edge_spread": null,
+        "edge_total": null,
+        "reason": "No official source for market lines exists (flag F-02); edge and CLV cannot be computed. Left blank, never filled in."
+      },
+      "status": "OK",
+      "inputs": {
+        "scoring_rates": "data/verified/standings_2026.json <- https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+        "availability": "data/verified/injury_report_week10.json <- https://www.nfl.com/injuries/",
+        "starter_confirmation": "data/verified/news_week10.json + data/verified/unreported_absences.json <- https://www.nfl.com/news/"
+      },
+      "assumptions": [
+        {
+          "key": "shrink_to_mean",
+          "value": 0.72,
+          "unit": "fraction",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "home_field",
+          "value": 1.4,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        },
+        {
+          "key": "sigma_game_points",
+          "value": 12.0,
+          "unit": "points",
+          "status": "PRIOR - uncalibrated"
+        }
+      ],
+      "shadow_scenario": {
+        "spread_home": -2.0,
+        "total": 41.5,
+        "note": "What the line would be if EVERY player the club listed as Out/Doubtful were treated as a missing starter. Displayed to size the unverified signal; not applied, because no depth chart confirms starter status."
+      },
+      "availability_policy": "Availability adjustments are APPLIED only where an official NFL.com news item names the replacement or confirms the absence (data/verified/news_week10.json, confirms column). Every other row is reported as a SHADOW adjustment - computed, displayed, never applied - because with no depth chart (flag F-01) 'is this player a starter' is unverifiable."
+    }
+  ],
+  "position_impact_table": {
+    "qb": {
+      "value": 3.5,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "Regress team points on an indicator for 'named starter unavailable, next named replacement starts', 5+ seasons."
+    },
+    "backfield": {
+      "value": 1.8,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "skill_position": {
+      "value": 1.2,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "offensive_line": {
+      "value": 0.9,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same, with the unit total as the dependent variable"
+    },
+    "edge": {
+      "value": 1.5,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "interior_dl": {
+      "value": 0.8,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "linebacker": {
+      "value": 1.0,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "corner": {
+      "value": 1.2,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "safety": {
+      "value": 0.9,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "secondary_other": {
+      "value": 0.4,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    },
+    "special_teams": {
+      "value": 0.1,
+      "unit": "pts/g",
+      "status": "PRIOR - uncalibrated",
+      "calibrate_by": "same"
+    }
+  },
+  "league_baseline": {
+    "sum_points_for": 6291,
+    "sum_points_against": 6291,
+    "sum_matches": true,
+    "club_games_total": 274,
+    "implied_games": 137.0,
+    "league_avg_ppg": 22.9599,
+    "league_avg_game_total_points": 45.9197
+  }
+}

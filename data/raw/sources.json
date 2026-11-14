@@ -1,0 +1,100 @@
+{
+  "note": "Every dataset below was read through an HTTP fetch of the live official page on the stated date. The transcription in data/raw/*.csv is the record of what the page said; pipelines/validate.py re-checks internal consistency and cross-file agreement. 'chunk' is the chunk index of the rendered page that was read, so a reviewer can land on the same text.",
+  "fetched_at_utc": "2026-11-14T02:52:00Z",
+  "datasets": [
+    {
+      "id": "injuries_wk10",
+      "raw": "data/raw/nflcom_injuries_week10.csv",
+      "verified": "data/verified/injury_report_week10.json",
+      "source_url": "https://www.nfl.com/injuries/",
+      "source_title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+      "tier": "T0",
+      "chunks_read": [0, 1, 2, 3, 4, 5, 6, 7],
+      "rows": 345,
+      "expected_clubs": 28,
+      "notes": "All 8 rendered chunks. Rows with an empty Game Status are printed on the official page that way and stay empty here."
+    },
+    {
+      "id": "standings_wk10",
+      "raw": "data/raw/nflcom_standings_wk10.csv",
+      "verified": "data/verified/standings_2026.json",
+      "source_url": "https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+      "source_title": "2026 NFL Division Standings | NFL.com",
+      "tier": "T0",
+      "chunks_read": [0, 1],
+      "rows": 32,
+      "notes": "Two of the page's 16 positional columns could not be mapped to a Legend label; those columns are not published (flags F-07)."
+    },
+    {
+      "id": "schedule_wk10",
+      "raw": "data/raw/nflcom_schedule_wk10.csv",
+      "verified": "data/verified/schedule_week10.json",
+      "source_url": "https://www.nfl.com/schedules",
+      "source_title": "NFL Schedules: Games, Times, Matchups & Tickets | NFL.com (2026, Week 10)",
+      "tier": "T0",
+      "chunks_read": [0, 1, 2],
+      "rows": 14
+    },
+    {
+      "id": "byes_wk10",
+      "raw": "data/raw/nflcom_byes_wk10.csv",
+      "verified": "data/verified/schedule_week10.json",
+      "source_url": "https://www.nfl.com/schedules",
+      "tier": "T0",
+      "chunks_read": [2],
+      "rows": 4
+    },
+    {
+      "id": "team_stats_wk10",
+      "raw": "data/raw/nflcom_team_stats.csv",
+      "verified": "data/verified/team_stats_snapshot.json",
+      "source_url": "https://www.nfl.com/teams/{club}/stats",
+      "tier": "T0",
+      "chunks_read": [0],
+      "clubs_read": ["minnesota-vikings", "green-bay-packers", "seattle-seahawks", "las-vegas-raiders", "arizona-cardinals", "san-francisco-49ers", "dallas-cowboys"],
+      "notes": "Composite lines that render as concatenated digits are not transcribed (flags F-05)."
+    },
+    {
+      "id": "news_wk10",
+      "raw": "data/raw/nflcom_news_wk10.csv",
+      "verified": "data/verified/news_week10.json",
+      "source_url": "https://www.nfl.com/injuries/",
+      "tier": "T0",
+      "chunks_read": [6, 7],
+      "rows": 18
+    },
+    {
+      "id": "roster_check",
+      "raw": "data/raw/nflcom_roster_check.csv",
+      "verified": "data/verified/roster_crosscheck.json",
+      "source_url": "https://www.nfl.com/teams/minnesota-vikings/roster",
+      "source_title": "Minnesota Vikings 2026 Player Roster | NFL.com",
+      "tier": "T0",
+      "chunks_read": [0],
+      "notes": "One club roster page read as an independent confirmation of club assignment. 8 of 9 spot-checks could not be confirmed because the matching club roster pages were not read this session; they stay UNCONFIRMED."
+    },
+    {
+      "id": "depth_chart_probe",
+      "raw": null,
+      "verified": "data/verified/gaps.json",
+      "source_url": "https://www.nfl.com/teams/minnesota-vikings/depth-charts/",
+      "tier": "T0",
+      "result": "HTTP 404 - Flag on the Play.",
+      "secondary_probe": {
+        "url": "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/23/depthchart",
+        "result": "200 with body {} (no depth chart published)",
+        "tier": "T2"
+      },
+      "notes": "No free, official, machine-readable depth chart exists. This is the single most consequential gap in the project (flags F-01)."
+    },
+    {
+      "id": "odds_probe",
+      "raw": null,
+      "verified": "data/verified/gaps.json",
+      "source_url": null,
+      "tier": "n/a",
+      "result": "No official NFL source for betting lines exists. The NFL does not publish spreads, totals, moneylines or player-prop prices.",
+      "notes": "Market columns are therefore blank on every data page and flagged (flags F-02)."
+    }
+  ]
+}

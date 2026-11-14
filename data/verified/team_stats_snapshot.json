@@ -1,0 +1,457 @@
+{
+  "dataset": "Official club stat pages, VS-OPPONENTS block (partial coverage)",
+  "fetched_at_utc": "2026-11-14T02:54:00Z",
+  "coverage": {
+    "clubs_published": [
+      "AZ",
+      "DAL",
+      "GB",
+      "LV",
+      "MIN",
+      "SEA",
+      "SF"
+    ],
+    "clubs_total": 32,
+    "clubs_unavailable": [
+      "atlanta-falcons",
+      "baltimore-ravens",
+      "buffalo-bills",
+      "carolina-panthers",
+      "chicago-bears",
+      "cincinnati-bengals",
+      "cleveland-browns",
+      "denver-broncos",
+      "detroit-lions",
+      "houston-texans",
+      "indianapolis-colts",
+      "jacksonville-jaguars",
+      "kansas-city-chiefs",
+      "los-angeles-chargers",
+      "los-angeles-rams",
+      "miami-dolphins",
+      "new-england-patriots",
+      "new-orleans-saints",
+      "new-york-giants",
+      "new-york-jets",
+      "philadelphia-eagles",
+      "pittsburgh-steelers",
+      "tampa-bay-buccaneers",
+      "tennessee-titans",
+      "washington-commanders"
+    ]
+  },
+  "clubs": {
+    "MIN": {
+      "abbr": "MIN",
+      "club_slug": "minnesota-vikings",
+      "fields": {
+        "total_first_downs": {
+          "club": "118",
+          "opponents": "125",
+          "note": null
+        },
+        "third_down_conversions": {
+          "club": "36 / 108",
+          "opponents": "34 / 109",
+          "note": null
+        },
+        "fourth_down_conversions": {
+          "club": "4 / 8",
+          "opponents": "6 / 12",
+          "note": null
+        },
+        "total_offensive_yards": {
+          "club": "2134",
+          "opponents": "2240",
+          "note": null
+        },
+        "total_rushing_yards": {
+          "club": "848",
+          "opponents": "951",
+          "note": null
+        },
+        "total_passing_yards": {
+          "club": "1437",
+          "opponents": "1495",
+          "note": null
+        },
+        "sacks": {
+          "club": "23",
+          "opponents": "29",
+          "note": null
+        },
+        "field_goals": {
+          "club": "20 / 22",
+          "opponents": "14 / 18",
+          "note": null
+        },
+        "total_touchdowns": {
+          "club": "12",
+          "opponents": "11",
+          "note": null
+        },
+        "turnover_ratio": {
+          "club": "5",
+          "opponents": "5",
+          "note": "printed once, shared"
+        }
+      },
+      "source_url": "https://www.nfl.com/teams/minnesota-vikings/stats",
+      "source_tier": "T0"
+    },
+    "GB": {
+      "abbr": "GB",
+      "club_slug": "green-bay-packers",
+      "fields": {
+        "total_first_downs": {
+          "club": "166",
+          "opponents": "187",
+          "note": null
+        },
+        "third_down_conversions": {
+          "club": "45 / 119",
+          "opponents": "50 / 120",
+          "note": null
+        },
+        "fourth_down_conversions": {
+          "club": "10 / 16",
+          "opponents": "8 / 19",
+          "note": null
+        },
+        "total_offensive_yards": {
+          "club": "3131",
+          "opponents": "2906",
+          "note": null
+        },
+        "total_rushing_yards": {
+          "club": "614",
+          "opponents": "981",
+          "note": null
+        },
+        "total_passing_yards": {
+          "club": "2618",
+          "opponents": "2087",
+          "note": null
+        },
+        "sacks": {
+          "club": "17",
+          "opponents": "26",
+          "note": null
+        },
+        "field_goals": {
+          "club": "14 / 19",
+          "opponents": "8 / 9",
+          "note": null
+        },
+        "total_touchdowns": {
+          "club": "25",
+          "opponents": "24",
+          "note": null
+        },
+        "turnover_ratio": {
+          "club": "8",
+          "opponents": "8",
+          "note": "printed once, shared"
+        }
+      },
+      "source_url": "https://www.nfl.com/teams/green-bay-packers/stats",
+      "source_tier": "T0"
+    },
+    "SEA": {
+      "abbr": "SEA",
+      "club_slug": "seattle-seahawks",
+      "fields": {
+        "total_first_downs": {
+          "club": "184",
+          "opponents": "139",
+          "note": null
+        },
+        "third_down_conversions": {
+          "club": "43 / 115",
+          "opponents": "37 / 121",
+          "note": null
+        },
+        "fourth_down_conversions": {
+          "club": "5 / 10",
+          "opponents": "11 / 13",
+          "note": null
+        },
+        "total_offensive_yards": {
+          "club": "2950",
+          "opponents": "2194",
+          "note": null
+        },
+        "total_rushing_yards": {
+          "club": "997",
+          "opponents": "802",
+          "note": null
+        },
+        "total_passing_yards": {
+          "club": "2089",
+          "opponents": "1519",
+          "note": null
+        },
+        "sacks": {
+          "club": "19",
+          "opponents": "21",
+          "note": null
+        },
+        "field_goals": {
+          "club": "16 / 18",
+          "opponents": "12 / 15",
+          "note": null
+        },
+        "total_touchdowns": {
+          "club": "22",
+          "opponents": "18",
+          "note": null
+        },
+        "turnover_ratio": {
+          "club": "-1",
+          "opponents": "-1",
+          "note": "printed once, shared"
+        }
+      },
+      "source_url": "https://www.nfl.com/teams/seattle-seahawks/stats",
+      "source_tier": "T0"
+    },
+    "LV": {
+      "abbr": "LV",
+      "club_slug": "las-vegas-raiders",
+      "fields": {
+        "total_first_downs": {
+          "club": "182",
+          "opponents": "208",
+          "note": null
+        },
+        "third_down_conversions": {
+          "club": "49 / 112",
+          "opponents": "48 / 109",
+          "note": null
+        },
+        "fourth_down_conversions": {
+          "club": "6 / 15",
+          "opponents": "6 / 10",
+          "note": null
+        },
+        "total_offensive_yards": {
+          "club": "2979",
+          "opponents": "3469",
+          "note": null
+        },
+        "total_rushing_yards": {
+          "club": "642",
+          "opponents": "1361",
+          "note": null
+        },
+        "total_passing_yards": {
+          "club": "2401",
+          "opponents": "2238",
+          "note": null
+        },
+        "sacks": {
+          "club": "11",
+          "opponents": "19",
+          "note": null
+        },
+        "field_goals": {
+          "club": "19 / 21",
+          "opponents": "13 / 15",
+          "note": null
+        },
+        "total_touchdowns": {
+          "club": "26",
+          "opponents": "33",
+          "note": null
+        },
+        "turnover_ratio": {
+          "club": "1",
+          "opponents": "1",
+          "note": "printed once, shared"
+        }
+      },
+      "source_url": "https://www.nfl.com/teams/las-vegas-raiders/stats",
+      "source_tier": "T0"
+    },
+    "AZ": {
+      "abbr": "AZ",
+      "club_slug": "arizona-cardinals",
+      "fields": {
+        "total_first_downs": {
+          "club": "182",
+          "opponents": "181",
+          "note": null
+        },
+        "third_down_conversions": {
+          "club": "52 / 137",
+          "opponents": "44 / 108",
+          "note": null
+        },
+        "fourth_down_conversions": {
+          "club": "9 / 15",
+          "opponents": "6 / 14",
+          "note": null
+        },
+        "total_offensive_yards": {
+          "club": "2862",
+          "opponents": "3036",
+          "note": null
+        },
+        "total_rushing_yards": {
+          "club": "924",
+          "opponents": "1097",
+          "note": null
+        },
+        "total_passing_yards": {
+          "club": "2080",
+          "opponents": "2076",
+          "note": null
+        },
+        "sacks": {
+          "club": "23",
+          "opponents": "19",
+          "note": null
+        },
+        "field_goals": {
+          "club": "20 / 22",
+          "opponents": "14 / 15",
+          "note": null
+        },
+        "total_touchdowns": {
+          "club": "17",
+          "opponents": "31",
+          "note": null
+        },
+        "turnover_ratio": {
+          "club": "0",
+          "opponents": "0",
+          "note": "printed once, shared"
+        }
+      },
+      "source_url": "https://www.nfl.com/teams/arizona-cardinals/stats",
+      "source_tier": "T0"
+    },
+    "SF": {
+      "abbr": "SF",
+      "club_slug": "san-francisco-49ers",
+      "fields": {
+        "total_first_downs": {
+          "club": "176",
+          "opponents": "139",
+          "note": null
+        },
+        "third_down_conversions": {
+          "club": "46 / 89",
+          "opponents": "42 / 104",
+          "note": null
+        },
+        "fourth_down_conversions": {
+          "club": "8 / 11",
+          "opponents": "6 / 13",
+          "note": null
+        },
+        "total_offensive_yards": {
+          "club": "3014",
+          "opponents": "2335",
+          "note": null
+        },
+        "total_rushing_yards": {
+          "club": "1082",
+          "opponents": "647",
+          "note": null
+        },
+        "total_passing_yards": {
+          "club": "1980",
+          "opponents": "1783",
+          "note": null
+        },
+        "sacks": {
+          "club": "8",
+          "opponents": "15",
+          "note": null
+        },
+        "field_goals": {
+          "club": "7 / 10",
+          "opponents": "17 / 19",
+          "note": null
+        },
+        "total_touchdowns": {
+          "club": "31",
+          "opponents": "15",
+          "note": null
+        },
+        "turnover_ratio": {
+          "club": "1",
+          "opponents": "1",
+          "note": "printed once, shared"
+        }
+      },
+      "source_url": "https://www.nfl.com/teams/san-francisco-49ers/stats",
+      "source_tier": "T0"
+    },
+    "DAL": {
+      "abbr": "DAL",
+      "club_slug": "dallas-cowboys",
+      "fields": {
+        "total_first_downs": {
+          "club": "206",
+          "opponents": "198",
+          "note": null
+        },
+        "third_down_conversions": {
+          "club": "53 / 117",
+          "opponents": "57 / 118",
+          "note": null
+        },
+        "fourth_down_conversions": {
+          "club": "7 / 12",
+          "opponents": "4 / 9",
+          "note": null
+        },
+        "total_offensive_yards": {
+          "club": "3244",
+          "opponents": "3354",
+          "note": null
+        },
+        "total_rushing_yards": {
+          "club": "932",
+          "opponents": "1327",
+          "note": null
+        },
+        "total_passing_yards": {
+          "club": "2381",
+          "opponents": "2133",
+          "note": null
+        },
+        "sacks": {
+          "club": "14",
+          "opponents": "17",
+          "note": null
+        },
+        "field_goals": {
+          "club": "17 / 22",
+          "opponents": "16 / 17",
+          "note": null
+        },
+        "total_touchdowns": {
+          "club": "28",
+          "opponents": "27",
+          "note": null
+        },
+        "turnover_ratio": {
+          "club": "-1",
+          "opponents": "-1",
+          "note": "printed once, shared"
+        }
+      },
+      "source_url": "https://www.nfl.com/teams/dallas-cowboys/stats",
+      "source_tier": "T0"
+    }
+  },
+  "not_published": [
+    "OFFENSE Plays / Average Yards",
+    "RUSHING Plays / Average Yards",
+    "PASSING Comp / Att / Int / Average",
+    "TOUCHDOWNS Rushing / Passing / Returns / Defensive"
+  ]
+}

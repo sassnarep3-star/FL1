@@ -1,0 +1,80 @@
+{
+  "dataset": "Club-assignment cross-check against an official roster page",
+  "fetched_at_utc": "2026-11-14T02:53:00Z",
+  "checks": [
+    {
+      "player": "Kyler Murray",
+      "pos": "QB",
+      "club_on_injury_report": "MIN",
+      "club_on_official_roster_page": "MIN",
+      "roster_page_url": "https://www.nfl.com/teams/minnesota-vikings/roster",
+      "match": "YES"
+    },
+    {
+      "player": "Carson Wentz",
+      "pos": "QB",
+      "club_on_injury_report": "MIN",
+      "club_on_official_roster_page": "not in the first roster chunk read",
+      "roster_page_url": "https://www.nfl.com/teams/minnesota-vikings/roster",
+      "match": "UNCONFIRMED"
+    },
+    {
+      "player": "Kirk Cousins",
+      "pos": "QB",
+      "club_on_injury_report": "not on the Week 10 report",
+      "club_on_official_roster_page": "MIN",
+      "roster_page_url": "https://www.nfl.com/teams/minnesota-vikings/roster",
+      "match": "N/A"
+    },
+    {
+      "player": "J.J. McCarthy",
+      "pos": "QB",
+      "club_on_injury_report": "NYG",
+      "club_on_official_roster_page": "not checked (Giants roster page not read)",
+      "roster_page_url": "https://www.nfl.com/teams/new-york-giants/roster",
+      "match": "UNCONFIRMED"
+    },
+    {
+      "player": "Myles Garrett",
+      "pos": "LB",
+      "club_on_injury_report": "LAR",
+      "club_on_official_roster_page": "not checked (Rams roster page not read)",
+      "roster_page_url": "https://www.nfl.com/teams/los-angeles-rams/roster",
+      "match": "UNCONFIRMED"
+    },
+    {
+      "player": "Mike Evans",
+      "pos": "WR",
+      "club_on_injury_report": "SF",
+      "club_on_official_roster_page": "not checked (49ers roster page not read)",
+      "roster_page_url": "https://www.nfl.com/teams/san-francisco-49ers/roster",
+      "match": "UNCONFIRMED"
+    },
+    {
+      "player": "Aaron Donald",
+      "pos": "DT",
+      "club_on_injury_report": "LAR",
+      "club_on_official_roster_page": "not checked (Rams roster page not read)",
+      "roster_page_url": "https://www.nfl.com/teams/los-angeles-rams/roster",
+      "match": "UNCONFIRMED"
+    },
+    {
+      "player": "Von Miller",
+      "pos": "LB",
+      "club_on_injury_report": "DAL",
+      "club_on_official_roster_page": "not checked (Cowboys roster page not read)",
+      "roster_page_url": "https://www.nfl.com/teams/dallas-cowboys/roster",
+      "match": "UNCONFIRMED"
+    },
+    {
+      "player": "Daiyan Henley",
+      "pos": "LB",
+      "club_on_injury_report": "LAC",
+      "club_on_official_roster_page": "not checked (Chargers roster page not read)",
+      "roster_page_url": "https://www.nfl.com/teams/los-angeles-chargers/roster",
+      "match": "UNCONFIRMED"
+    }
+  ],
+  "confirmed": 1,
+  "unconfirmed": 7
+}

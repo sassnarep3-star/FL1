@@ -1,0 +1,226 @@
+{
+  "gates": [
+    {
+      "id": "G0",
+      "name": "Data integrity",
+      "threshold": "0 FAIL from pipelines.validate; every published row has an official source link; 0 blank cells without a flag",
+      "data_required": "data/verified/validation.json",
+      "blocks": "everything - a broken table breaks every decision",
+      "blocked_by_flag": null
+    },
+    {
+      "id": "G1",
+      "name": "Sample size",
+      "threshold": "n >= 300 settled bets, >= 2 distinct seasons, >= 30 bets in each",
+      "data_required": "bet ledger + settled results",
+      "blocks": "any claim that a strategy is skill rather than luck",
+      "blocked_by_flag": "F-11"
+    },
+    {
+      "id": "G2",
+      "name": "Post-vig edge",
+      "threshold": "mean edge >= 2.0% AND >= 55% of bets with edge > 0",
+      "data_required": "origination output + a market price to subtract",
+      "blocks": "bet sizing and the leaderboard score",
+      "blocked_by_flag": "F-02"
+    },
+    {
+      "id": "G3",
+      "name": "Closing-line value",
+      "threshold": "mean CLV >= +0.5 pts on spread/total, >= 1.5% on ML/props",
+      "data_required": "opening and closing market prices per bet",
+      "blocks": "whether any edge is real or an artefact",
+      "blocked_by_flag": "F-02"
+    },
+    {
+      "id": "G4",
+      "name": "Luck-adjusted return",
+      "threshold": "95% block-bootstrap CI (blocks = weeks) of mean PnL/100 excludes 0",
+      "data_required": "settled bets with week ids",
+      "blocks": "reward eligibility, tier 1 and 2",
+      "blocked_by_flag": "F-11"
+    },
+    {
+      "id": "G5",
+      "name": "Drawdown control",
+      "threshold": "max drawdown <= 25% of starting bankroll at the declared fractional-Kelly stake",
+      "data_required": "settled bets + staking rule",
+      "blocks": "bankroll policy",
+      "blocked_by_flag": null
+    },
+    {
+      "id": "G6",
+      "name": "Correlation cap",
+      "threshold": "max |rho| over all leg pairs <= 0.35; every rho measured, none assumed; parlays with an unknown rho are not priced",
+      "data_required": "leg-pair correlation matrix (model/correlation.py)",
+      "blocks": "every multi-leg product",
+      "blocked_by_flag": "F-16"
+    },
+    {
+      "id": "G7",
+      "name": "Regime robustness",
+      "threshold": "no single season carries > 40% of total edge; every season's PnL/100 > -2.0",
+      "data_required": ">= 3 seasons of settled bets",
+      "blocks": "whether the edge survives a rule change",
+      "blocked_by_flag": "F-11"
+    },
+    {
+      "id": "G8",
+      "name": "Parameter stability",
+      "threshold": "under +/-20% perturbation of each prior: published line moves <= 0.5 pts and the signalled bet set overlaps >= 80%",
+      "data_required": "model/config priors + the origination run",
+      "blocks": "whether the model is a machine or a coin",
+      "blocked_by_flag": "F-05"
+    },
+    {
+      "id": "G9",
+      "name": "Capacity / liquidity",
+      "threshold": "stake <= 1% of the posted limit; expected handle <= 0.5% of the market pool",
+      "data_required": "market limits per market",
+      "blocks": "whether the strategy scales past paper",
+      "blocked_by_flag": "F-02"
+    },
+    {
+      "id": "G10",
+      "name": "Timing and leakage",
+      "threshold": "every input row fetched strictly before that game's kickoff; 0 rows where the official page already printed a final score",
+      "data_required": "fetch timestamps + kickoff times",
+      "blocks": "every accuracy claim",
+      "blocked_by_flag": "F-12"
+    }
+  ],
+  "evaluated": [
+    {
+      "id": "G0",
+      "name": "Data integrity",
+      "threshold": "0 FAIL from pipelines.validate; every published row has an official source link; 0 blank cells without a flag",
+      "result": "PASS",
+      "observed": "0 FAIL rows in validation.json",
+      "data_required": "data/verified/validation.json",
+      "blocks": "everything - a broken table breaks every decision",
+      "blocked_by_flag": null
+    },
+    {
+      "id": "G1",
+      "name": "Sample size",
+      "threshold": "n >= 300 settled bets, >= 2 distinct seasons, >= 30 bets in each",
+      "result": "HOLD",
+      "observed": "no settled bet ledger",
+      "data_required": "bet ledger + settled results",
+      "blocks": "any claim that a strategy is skill rather than luck",
+      "blocked_by_flag": "F-11"
+    },
+    {
+      "id": "G2",
+      "name": "Post-vig edge",
+      "threshold": "mean edge >= 2.0% AND >= 55% of bets with edge > 0",
+      "result": "HOLD",
+      "observed": "mean edge None% / positive-edge share None%",
+      "data_required": "origination output + a market price to subtract",
+      "blocks": "bet sizing and the leaderboard score",
+      "blocked_by_flag": "F-02"
+    },
+    {
+      "id": "G3",
+      "name": "Closing-line value",
+      "threshold": "mean CLV >= +0.5 pts on spread/total, >= 1.5% on ML/props",
+      "result": "HOLD",
+      "observed": "mean CLV None vs threshold 0.5",
+      "data_required": "opening and closing market prices per bet",
+      "blocks": "whether any edge is real or an artefact",
+      "blocked_by_flag": "F-02"
+    },
+    {
+      "id": "G4",
+      "name": "Luck-adjusted return",
+      "threshold": "95% block-bootstrap CI (blocks = weeks) of mean PnL/100 excludes 0",
+      "result": "HOLD",
+      "observed": "95% CI of mean PnL/100 = None (bootstrap not run)",
+      "data_required": "settled bets with week ids",
+      "blocks": "reward eligibility, tier 1 and 2",
+      "blocked_by_flag": "F-11"
+    },
+    {
+      "id": "G5",
+      "name": "Drawdown control",
+      "threshold": "max drawdown <= 25% of starting bankroll at the declared fractional-Kelly stake",
+      "result": "HOLD",
+      "observed": "max drawdown None%",
+      "data_required": "settled bets + staking rule",
+      "blocks": "bankroll policy",
+      "blocked_by_flag": null
+    },
+    {
+      "id": "G6",
+      "name": "Correlation cap",
+      "threshold": "max |rho| over all leg pairs <= 0.35; every rho measured, none assumed; parlays with an unknown rho are not priced",
+      "result": "HOLD",
+      "observed": "max |rho|=None, unknown leg pairs=0",
+      "data_required": "leg-pair correlation matrix (model/correlation.py)",
+      "blocks": "every multi-leg product",
+      "blocked_by_flag": "F-16"
+    },
+    {
+      "id": "G7",
+      "name": "Regime robustness",
+      "threshold": "no single season carries > 40% of total edge; every season's PnL/100 > -2.0",
+      "result": "HOLD",
+      "observed": "largest season share None, worst season PnL/100 None",
+      "data_required": ">= 3 seasons of settled bets",
+      "blocks": "whether the edge survives a rule change",
+      "blocked_by_flag": "F-11"
+    },
+    {
+      "id": "G8",
+      "name": "Parameter stability",
+      "threshold": "under +/-20% perturbation of each prior: published line moves <= 0.5 pts and the signalled bet set overlaps >= 80%",
+      "result": "HOLD",
+      "observed": "max line shift None pts, signal overlap None",
+      "data_required": "model/config priors + the origination run",
+      "blocks": "whether the model is a machine or a coin",
+      "blocked_by_flag": "F-05"
+    },
+    {
+      "id": "G9",
+      "name": "Capacity / liquidity",
+      "threshold": "stake <= 1% of the posted limit; expected handle <= 0.5% of the market pool",
+      "result": "HOLD",
+      "observed": "stake None% of posted limit",
+      "data_required": "market limits per market",
+      "blocks": "whether the strategy scales past paper",
+      "blocked_by_flag": "F-02"
+    },
+    {
+      "id": "G10",
+      "name": "Timing and leakage",
+      "threshold": "every input row fetched strictly before that game's kickoff; 0 rows where the official page already printed a final score",
+      "result": "HOLD",
+      "observed": "no fetch timestamps recorded",
+      "data_required": "fetch timestamps + kickoff times",
+      "blocks": "every accuracy claim",
+      "blocked_by_flag": "F-12"
+    }
+  ],
+  "summary": {
+    "counts": {
+      "PASS": 1,
+      "FAIL": 0,
+      "HOLD": 10
+    },
+    "admissible": false,
+    "failing": [],
+    "on_hold": [
+      "G1",
+      "G2",
+      "G3",
+      "G4",
+      "G5",
+      "G6",
+      "G7",
+      "G8",
+      "G9",
+      "G10"
+    ]
+  },
+  "note": "With an empty bet ledger the honest verdict is HOLD on 9 of 10 gates. That is the gate set working, not failing."
+}

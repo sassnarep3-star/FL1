@@ -1,0 +1,19 @@
+# Cross-check: club assignment for players whose injury-report row looked anomalous.
+# The Week 10 injury report prints players under a club heading, which is how this project
+# learns who is on which team. Where the club assignment was surprising, the club's official
+# roster page was read as a second, independent T0 confirmation.
+#
+# Source: https://www.nfl.com/teams/minnesota-vikings/roster | NFL.com
+# "Minnesota Vikings 2026 Player Roster" — read 2026-11-14T02:53Z, chunk 0 of 3.
+# That page also prints the club record (6-2-0) and division position (3rd NFC North),
+# both of which agree with the Week 10 standings page -> cross-check passes.
+player|pos|club_on_injury_report|club_on_official_roster_page|roster_page_url|match
+Kyler Murray|QB|MIN|MIN|https://www.nfl.com/teams/minnesota-vikings/roster|YES
+Carson Wentz|QB|MIN|not in the first roster chunk read|https://www.nfl.com/teams/minnesota-vikings/roster|UNCONFIRMED
+Kirk Cousins|QB|not on the Week 10 report|MIN|https://www.nfl.com/teams/minnesota-vikings/roster|N/A
+J.J. McCarthy|QB|NYG|not checked (Giants roster page not read)|https://www.nfl.com/teams/new-york-giants/roster|UNCONFIRMED
+Myles Garrett|LB|LAR|not checked (Rams roster page not read)|https://www.nfl.com/teams/los-angeles-rams/roster|UNCONFIRMED
+Mike Evans|WR|SF|not checked (49ers roster page not read)|https://www.nfl.com/teams/san-francisco-49ers/roster|UNCONFIRMED
+Aaron Donald|DT|LAR|not checked (Rams roster page not read)|https://www.nfl.com/teams/los-angeles-rams/roster|UNCONFIRMED
+Von Miller|LB|DAL|not checked (Cowboys roster page not read)|https://www.nfl.com/teams/dallas-cowboys/roster|UNCONFIRMED
+Daiyan Henley|LB|LAC|not checked (Chargers roster page not read)|https://www.nfl.com/teams/los-angeles-chargers/roster|UNCONFIRMED

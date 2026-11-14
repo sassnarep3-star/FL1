@@ -1,0 +1,90 @@
+{
+  "tool": "pipelines.validate",
+  "ran_at_utc": "2026-11-14T03:15:00Z",
+  "checks": [
+    {
+      "id": "V01",
+      "title": "every published row links to an official league/club URL",
+      "result": "PASS",
+      "detail": "0 non-official or missing source links"
+    },
+    {
+      "id": "V02",
+      "title": "status/practice values are inside the closed vocabulary",
+      "result": "PASS",
+      "detail": "0 rows with unrecognised values"
+    },
+    {
+      "id": "V03",
+      "title": "standings: net == PF-PA and published pct == (W+.5T)/GP, all 32 clubs",
+      "result": "PASS",
+      "detail": "32 clubs read, 0 arithmetic mismatches []"
+    },
+    {
+      "id": "V04",
+      "title": "league balance: sum(PF) == sum(PA)",
+      "result": "PASS",
+      "detail": "sum PF 6291 vs sum PA 6291; 274 club-games => 137 games; league avg 22.9599 PPG per club"
+    },
+    {
+      "id": "V05",
+      "title": "injury report covers exactly the clubs playing this week",
+      "result": "PASS",
+      "detail": "report has 28 clubs, schedule has 28; missing=[] extra=[]"
+    },
+    {
+      "id": "V06",
+      "title": "bye records on the schedule page agree with the standings page",
+      "result": "PASS",
+      "detail": "4 byes cross-checked; mismatches: none"
+    },
+    {
+      "id": "V07",
+      "title": "club records on the injury-report page match the standings page (two independent official sources)",
+      "result": "PASS",
+      "detail": "28 clubs compared; mismatches: none"
+    },
+    {
+      "id": "V08",
+      "title": "designation counts sum to the rows reported, per club",
+      "result": "PASS",
+      "detail": "28 clubs; mismatches: none"
+    },
+    {
+      "id": "V09",
+      "title": "every flag carries id/observed/official link/blocked decision/path",
+      "result": "PASS",
+      "detail": "17 flags; problems: none"
+    },
+    {
+      "id": "V10",
+      "title": "official stat pages reconcile with official standings points (<=8 pts, covers missed PATs / 2-pt tries / safeties)",
+      "result": "PASS",
+      "detail": "7 clubs reconciled; largest residual 4 pts. Reconstruction assumes every TD carries one PAT; residuals are therefore a check on transcription, not on the league."
+    },
+    {
+      "id": "V11",
+      "title": "every published line names its verified inputs; blanks only with a status that says why",
+      "result": "PASS",
+      "detail": "14 games; problems: none"
+    },
+    {
+      "id": "V12",
+      "title": "club-assignment spot checks fully confirmed against club roster pages",
+      "result": "WARN",
+      "detail": "1 confirmed, 7 UNCONFIRMED -> those rows stay flagged (F-03/F-09/F-14) and are never trusted as club-verified. Warn-only by design: closing it needs roster fetches, not a code change."
+    },
+    {
+      "id": "V13",
+      "title": "IR-absence correction is live and never double-counts a player",
+      "result": "PASS",
+      "detail": "4 official-news absences outside the report, 3 genuinely invisible to it, 1 overlapping (deduped by the model); see flags F-17"
+    }
+  ],
+  "failures": [],
+  "warnings": [
+    "V12"
+  ],
+  "raw_dir": "data/raw",
+  "verified_dir": "data/verified"
+}

@@ -1,0 +1,194 @@
+{
+  "dataset": "Flagged for review — irregularities observed while reading official sources, and structural gaps that block a decision",
+  "policy": "A flag never blocks publication. It blocks a DECISION. Values tied to an open flag are left blank on the data pages, never filled in.",
+  "count": 17,
+  "flags": [
+    {
+      "id": "F-01",
+      "kind": "structural gap",
+      "severity": "blocking",
+      "title": "No official depth-chart source exists, so 'which string replaces the starter' cannot be verified",
+      "observed": "https://www.nfl.com/teams/minnesota-vikings/depth-charts/ returns the site's 404 page ('404 - Flag on the Play.'). A third-party structured endpoint (ESPN club depthchart) answers 200 with an empty body {}. The injury report prints a status but never names a replacement.",
+      "official_link": "https://www.nfl.com/teams/minnesota-vikings/depth-charts/",
+      "decision_blocked": "Any '2nd / 3rd / 4th string' deficiency rating, and any availability adjustment that is not explicitly named in an official news item.",
+      "recommended_path": "Pick one: (a) license a depth-chart feed (NFL News/ROTOWIRE tier, SportsDataIO, OTS); (b) derive an effective-starter table from official club game-book/next-game participation pages each Monday; (c) accept a reduced model that only adjusts for officially named replacements (what this repo does today).",
+      "status": "open"
+    },
+    {
+      "id": "F-02",
+      "kind": "structural gap",
+      "severity": "blocking",
+      "title": "The NFL does not publish betting lines — there is no official source for a spread, total, moneyline or prop price",
+      "observed": "No page on nfl.com exposes odds. The only lines visible anywhere this session were third-party pages quoting a sportsbook, which is a Tier-2 source and therefore not usable as a model input or as ground truth.",
+      "official_link": "https://www.nfl.com/",
+      "decision_blocked": "Edge, closing-line value, hold, and every gate that compares an originated number with a market number — i.e. the core of the leaderboard.",
+      "recommended_path": "Adopt one licensed closing-line source and record it as a dataset with a timestamp; until then market columns stay blank by design.",
+      "status": "open"
+    },
+    {
+      "id": "F-03",
+      "kind": "data irregularity",
+      "severity": "review",
+      "title": "Myles Garrett is printed on the Los Angeles Rams Week 10 report",
+      "observed": "Row reads: 'Myles Garrett | LB | Knee, Not injury related - resting player | Did Not Participate In Practice | Questionable' under the Rams heading on the official injury report for Rams at Cardinals. The club's roster page was not read this session, so the club assignment is unconfirmed here.",
+      "official_link": "https://www.nfl.com/injuries/",
+      "decision_blocked": "Using that row as a Rams availability input, and any trade/roster claim about Garrett.",
+      "recommended_path": "Confirm at https://www.nfl.com/teams/los-angeles-rams/roster before the row enters the model. Do not resolve it from memory.",
+      "status": "open"
+    },
+    {
+      "id": "F-04",
+      "kind": "data irregularity",
+      "severity": "review",
+      "title": "Two unexplained 'Did Not Participate, no designation' rows: Aaron Donald (LAR) and Von Miller (DAL)",
+      "observed": "Both appear on the official Week 10 report with practice status 'Did Not Participate In Practice' and an empty Game Status column. The page publishes no explanation, and no designation means the player was not officially ruled out.",
+      "official_link": "https://www.nfl.com/injuries/",
+      "decision_blocked": "Treating either row as an absence; treating DNP-without-designation as an absence for any club.",
+      "recommended_path": "Check the club's official transaction list for the same week; until then the row is published with a blank replacement and an 'unexplained' note.",
+      "status": "open"
+    },
+    {
+      "id": "F-05",
+      "kind": "data irregularity",
+      "severity": "review",
+      "title": "Official club stat pages render multi-value lines as concatenated digits, so several fields cannot be transcribed safely",
+      "observed": "The extracted text prints '4814.4' under 'OFFENSE Plays Average Yards' and '13722556.4' under 'PASSING Comp Completions Att Attempts Int Interceptions Avg Average'. Any split into components is a guess. Those lines were therefore not recorded.",
+      "official_link": "https://www.nfl.com/teams/minnesota-vikings/stats",
+      "decision_blocked": "Per-play efficiency metrics (yards per play, success rate, pressure rate) that a proper line-origination model wants.",
+      "recommended_path": "Read the structured JSON the same page is built from instead of the rendered table, or pull NFL Next Gen Stats / the league stats API.",
+      "status": "open"
+    },
+    {
+      "id": "F-06",
+      "kind": "data irregularity",
+      "severity": "review",
+      "title": "Total offensive yards do not equal rushing + passing on the official club stat pages",
+      "observed": "For the 7 clubs read: MIN 848+1437=2285 vs 2134 printed (delta 151); GB delta 101; SEA 136; LV 64; AZ 142; SF 48; DAL 69. The deltas track each club's own 'SACKS' figure (MIN 23, GB 17, SEA 19, LV 11, AZ 23, SF 8, DAL 14), which is consistent with sacks being charged against total offense but not against the passing line — but the page does not label it that way, and 'SACKS' itself is not labelled as taken-versus-recorded.",
+      "official_link": "https://www.nfl.com/teams/green-bay-packers/stats",
+      "decision_blocked": "Any derived efficiency number mixing those three lines, and any use of the sacks field.",
+      "recommended_path": "Confirm the definition in the league's official stat definitions, then either publish a documented derived field or drop it. Each line is published here exactly as printed, uncombined.",
+      "status": "open"
+    },
+    {
+      "id": "F-07",
+      "kind": "data irregularity",
+      "severity": "minor",
+      "title": "The standings page prints 16 positional columns but its Legend lists 14 labels",
+      "observed": "Two columns between 'NET PTS' and 'STRK' could not be mapped to a label without guessing, so division / home / road / conference records are not published anywhere in this repo even though they exist on the source page.",
+      "official_link": "https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+      "decision_blocked": "Home/road splits as a model feature, and divisional-record tiebreak analysis.",
+      "recommended_path": "Use the standings 'Detailed View' table (which carries column headers) or the structured endpoint; alternatively derive home/road from the official per-game schedule pages.",
+      "status": "open"
+    },
+    {
+      "id": "F-08",
+      "kind": "data irregularity",
+      "severity": "minor",
+      "title": "The streak column is positional, not header-keyed",
+      "observed": "'4W', '1L', '8L' etc. are published here as the streak because that is the Legend label adjacent to the column position, but the mapping is inferred from layout rather than from a header cell.",
+      "official_link": "https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+      "decision_blocked": "Using streak as a feature ('rest after a long win streak', 'team coming off a blowout loss').",
+      "recommended_path": "Re-derive streak from the official per-club game log before any strategy conditions on it.",
+      "status": "open"
+    },
+    {
+      "id": "F-09",
+      "kind": "data irregularity",
+      "severity": "review",
+      "title": "Daiyan Henley is on the Chargers' Week 10 report the same week the league reported a trade to Denver",
+      "observed": "Official news, Nov 10: 'NFL news roundup: Bills acquire S Amani Hooker; Broncos trade for Chargers' Daiyan Henley'. The Nov 13/14 Week 10 report still prints 'Daiyan Henley | LB | Full Participation' under the Los Angeles Chargers heading.",
+      "official_link": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10",
+      "decision_blocked": "Any club-attribution logic that assumes the injury report is current with transactions.",
+      "recommended_path": "Reconcile against the official transaction ledger for both clubs; if the report lags, availability must be keyed on player id + a transaction overlay, not on the report's club heading.",
+      "status": "open"
+    },
+    {
+      "id": "F-10",
+      "kind": "data irregularity",
+      "severity": "review",
+      "title": "Two official pages give different absence windows for Lamar Jackson",
+      "observed": "'NFL Network: Ravens' Lamar Jackson (right thumb) out 6-9 weeks, expects to return this season' vs the Nov 13 roundup 'Ravens confirm Lamar Jackson expected to miss 6-10 weeks'. Both are official; they disagree. A separate earlier item covers a different injury (ankle, returned vs Buffalo after three games out), so the two windows may not even describe the same injury.",
+      "official_link": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+      "decision_blocked": "Any season-length model or 'return timeline' feature; any statement about which week Jackson returns.",
+      "recommended_path": "Publish both with their links (done here) and treat the field as contested; do not average them.",
+      "status": "open"
+    },
+    {
+      "id": "F-11",
+      "kind": "cross-source discrepancy",
+      "severity": "review",
+      "title": "Implied games played (137) does not match third-party per-week game counts (136)",
+      "observed": "The official Week 10 standings imply 274 club-games (sum of W+L+T across 32 clubs), i.e. 137 games, and sum(PF) equals sum(PA) at 6291 exactly — internally consistent. A Tier-2 schedule aggregator lists Weeks 1-9 as 16+16+16+16+15+14+14+14+15 = 136 games. The official standings are used; the third-party weekly counts are not.",
+      "official_link": "https://www.nfl.com/standings/?season=2026&week=10&sort=division",
+      "decision_blocked": "Per-game rates are divided by each club's own games played, so nothing here is distorted; but 'league average points per game' changes by ~0.2 if the denominator is wrong.",
+      "recommended_path": "Confirm with the official per-week schedule pages (one fetch) before publishing league averages as a headline number.",
+      "status": "open"
+    },
+    {
+      "id": "F-12",
+      "kind": "provenance gap",
+      "severity": "review",
+      "title": "The injury report page does not print its own effective timestamp",
+      "observed": "The rendered page shows statuses and the report's week, and the club rows link to news items dated Nov 11-13, but there is no 'as of' timestamp on the table itself. This repo therefore records when the page was fetched (2026-11-14T02:52Z), not when the league last edited it.",
+      "official_link": "https://www.nfl.com/injuries/",
+      "decision_blocked": "Timing-sensitive claims: 'this row reflects the final Saturday designation' and any statement about line movement versus report timing.",
+      "recommended_path": "Snapshot the report on the official Wed/Thu/Fri cadence with a hash per snapshot, and publish the diff between snapshots.",
+      "status": "open"
+    },
+    {
+      "id": "F-13",
+      "kind": "interpretation risk",
+      "severity": "review",
+      "title": "Empty Game Status is not 'available'",
+      "observed": "185 of 345 rows print a practice status with no game designation, including 7 of the 19 Los Angeles Chargers rows ('Did Not Participate In Practice', no designation). Across the whole report there are 21 DNP-without-designation rows. On the official page an empty Game Status means no designation was published - not that a player was cleared.",
+      "official_link": "https://www.nfl.com/injuries/",
+      "decision_blocked": "Any 'players practised fully = available' inference, and any count of absences that treats a blank as a non-absence without saying so.",
+      "recommended_path": "Join to the official inactive list (published ~90-120 min before kickoff) for the ground truth on who actually could play.",
+      "status": "open"
+    },
+    {
+      "id": "F-14",
+      "kind": "data irregularity",
+      "severity": "minor",
+      "title": "Display names on the official report do not match canonical player ids",
+      "observed": "Four rows: 'Chig Okonkwo' links to /players/chigoziem-okonkwo/, 'Jacob Hummel' to /players/jake-hummel/, 'Kam Curl' to /players/kamren-curl/, 'Chris Brooks' to /players/christopher-brooks/. Also 'Darius Robinson' is printed at DT and 'Patrick O'Connell' at LB, positions that do not match the player pages linked from the same row.",
+      "official_link": "https://www.nfl.com/players/chigoziem-okonkwo/",
+      "decision_blocked": "Joining this dataset to any other dataset by player name.",
+      "recommended_path": "Key all joins on the official player-page id; treat the printed position as the club's report field, not as a verified position. Position/roster anomalies to be re-checked on the player page.",
+      "status": "open"
+    },
+    {
+      "id": "F-15",
+      "kind": "state risk",
+      "severity": "review",
+      "title": "The Week 10 slate is already partly played, so 'pregame' data is stale for one of 14 games",
+      "observed": "The official schedule shows Commanders 24, Giants 21 FINAL for the Nov 12 game while the injury report for that same game still prints Thursday's practice designations. This dataset is a pregame snapshot of a week in progress.",
+      "official_link": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "decision_blocked": "Any accuracy claim on the Week 10 slate, and any leaderboard row that mixes pregame inputs with already-decided games.",
+      "recommended_path": "Stamp every snapshot with the kickoff it precedes and refuse to score a strategy on a game whose inputs were captured after kickoff.",
+      "status": "open"
+    },
+    {
+      "id": "F-16",
+      "kind": "structural gap",
+      "severity": "blocking",
+      "title": "No play-level or snap-level source is wired in, so prop lines cannot be originated at all",
+      "observed": "Player props need per-player snap shares, route counts, target share and red-zone share. Nothing in data/raw/ contains any of it, and the club stat pages that would be the natural official source do not break down by player in the block that was read.",
+      "official_link": "https://www.nfl.com/teams/minnesota-vikings/stats",
+      "decision_blocked": "Every player-prop signal, prop combo, and the correlation between two legs inside one player's line.",
+      "recommended_path": "Add an official/next-gen-sports participation feed as a dataset, then build the prop layer on snap-weighted usage rather than season totals.",
+      "status": "open"
+    },
+    {
+      "id": "F-17",
+      "kind": "structural gap",
+      "severity": "review",
+      "title": "The weekly injury report cannot see injured-reserve players, so IR absences silently vanish from availability",
+      "observed": "Baltimore's Week 10 report lists 8 players and none of them is a quarterback, while the league's own news feed has the Ravens' franchise QB confirmed out 6-10 weeks and his backup out for the season. Same for Miami (QB on IR, no QB row on the report). The report is a practice-window document, not a roster document.",
+      "official_link": "https://www.nfl.com/injuries/",
+      "decision_blocked": "Any absence model built only from the report understates the effect for every IR'd player - which is most of the season's biggest names.",
+      "recommended_path": "Wire the official transaction ledger (IR/active/PR placements) into the availability layer as a first-class dataset, not a hand-maintained correction file like data/raw/nflcom_confirmed_absences_wk10.csv.",
+      "status": "open"
+    }
+  ]
+}

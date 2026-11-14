@@ -1,0 +1,166 @@
+{
+  "dataset": "Correlation study - measured, specified and missing",
+  "fetched_at_utc": "2026-11-14T03:20:00Z",
+  "method": {
+    "measured": "Pearson rho with Fisher-z 95% interval, computed on the 32-club verified aggregates",
+    "specified": "analytic rho from the model's error structure (iid normal team points, sigma = declared prior)",
+    "missing": "left blank on purpose; needs play-by-play (flag F-16)"
+  },
+  "measured": [
+    {
+      "pair": "club points-per-game vs club points-allowed-per-game",
+      "n": 32,
+      "rho": -0.2041,
+      "ci95": [
+        -0.516,
+        0.1557
+      ],
+      "reads": "How much of 'good offence' is really 'good defence'. A strongly negative value would mean quality teams also allow fewer points, so spread and total legs would inherit that coupling.",
+      "implication_for_parlays": "Near zero means the static model does not itself create extra dependence between a side and a total; any real dependence must come from game flow."
+    },
+    {
+      "pair": "net points per game vs win percentage",
+      "n": 32,
+      "rho": 0.8781,
+      "ci95": [
+        0.763,
+        0.9392
+      ],
+      "reads": "Whether the standings are internally coherent as a rating.",
+      "implication_for_parlays": "Validation that PF/PA is a usable strength signal at all; a weak value would condemn the whole v0 model."
+    },
+    {
+      "pair": "games played vs net points per game",
+      "n": 32,
+      "rho": -0.265,
+      "ci95": [
+        -0.5618,
+        0.0923
+      ],
+      "reads": "Does a short season (bye taken) line up with quality?",
+      "implication_for_parlays": "If games-played correlated with strength, per-game rates would carry a schedule-size artefact."
+    },
+    {
+      "pair": "club projected absences (Out+Doubtful) vs net points per game",
+      "n": 28,
+      "rho": 0.0615,
+      "ci95": [
+        -0.3189,
+        0.4248
+      ],
+      "reads": "Is availability injury-driven, quality-driven or noise? This is the single most important check before letting injury data move a line: a strong negative value means the two signals overlap and an additive injury penalty double-counts weakness.",
+      "implication_for_parlays": "Sets the ceiling on how much an availability adjustment should be trusted."
+    },
+    {
+      "pair": "club projected absences vs points per game",
+      "n": 28,
+      "rho": 0.0302,
+      "ci95": [
+        -0.3467,
+        0.3988
+      ],
+      "reads": "Same test on the offence side only.",
+      "implication_for_parlays": "If offence-side absences track scoring, part of the injury 'signal' is already inside PPG."
+    },
+    {
+      "pair": "club projected absences vs points allowed per game",
+      "n": 28,
+      "rho": -0.066,
+      "ci95": [
+        -0.4285,
+        0.3149
+      ],
+      "reads": "Same test on the defence side only.",
+      "implication_for_parlays": "If defensive absences track points allowed, an adjustment on OUT defensive players double-counts."
+    },
+    {
+      "pair": "offence absences vs defence absences, same club",
+      "n": 28,
+      "rho": 0.3346,
+      "ci95": [
+        -0.0439,
+        0.6292
+      ],
+      "reads": "Do clubs lose hitters on both sides at once (poor depth, poor medical staff, small roster)?",
+      "implication_for_parlays": "High value means a 'both sides thin' bucket exists, which is a total-market signal, not a spread one."
+    }
+  ],
+  "leg_pairs": [
+    {
+      "pair": "Home spread + away spread, same game",
+      "rho": -1.0,
+      "how": "identical statistic, opposite sign - one leg wins exactly when the other loses",
+      "needs_data": null
+    },
+    {
+      "pair": "Home spread + game total (either side)",
+      "rho": 0.0,
+      "how": "margin = H-A and total = H+A are orthogonal when both teams carry the same variance; under the model's iid normal errors the correlation is exactly zero",
+      "needs_data": "the zero result depends on equal variances and on ignoring game flow; a trailing team passing more makes over + dog-spread positively dependent in reality - that term needs play-by-play"
+    },
+    {
+      "pair": "Team A spread + Team A team total",
+      "rho": 0.7071,
+      "how": "cov(H, H-A) = Var(H) -> rho = 1/sqrt(2)",
+      "needs_data": null
+    },
+    {
+      "pair": "Team A spread + Team B spread (same game)",
+      "rho": -1.0,
+      "how": "same leg written twice",
+      "needs_data": null
+    },
+    {
+      "pair": "Two legs from two different games",
+      "rho": 0.0,
+      "how": "no shared term in a static model; cross-game dependence in practice is small and not modelled",
+      "needs_data": null
+    },
+    {
+      "pair": "Player prop + that player's team spread",
+      "rho": null,
+      "how": "not computable here - requires snap-weighted usage and game-state response",
+      "needs_data": "play-by-play + participation data (flag F-16)"
+    },
+    {
+      "pair": "Two props on the same player (e.g. pass yards + completions)",
+      "rho": null,
+      "how": "not computable here - requires the joint distribution of one player's game",
+      "needs_data": "player game-level history (flag F-16)"
+    },
+    {
+      "pair": "Same-player props on the same side of a high-total game",
+      "rho": null,
+      "how": "not computable here - the coupling is exactly the game-flow term",
+      "needs_data": "play-by-play (flag F-16)"
+    }
+  ],
+  "parlay_pricing_rule": "A parlay is priced from the JOINT probability, never from the product of legs. For k legs with the correlation matrix R above, P(all win) is evaluated with the bivariate/multivariate normal integral using R; where an entry of R is blank the parlay is not priced at all (gate G6 returns HOLD).",
+  "bvn_examples": [
+    {
+      "legs": 2,
+      "each_leg_win_prob": 0.55,
+      "rho": 0.0,
+      "joint": 0.55002
+    },
+    {
+      "legs": 2,
+      "each_leg_win_prob": 0.55,
+      "rho": 0.35,
+      "joint": 0.55002
+    },
+    {
+      "legs": 2,
+      "each_leg_win_prob": 0.55,
+      "rho": 0.7071,
+      "joint": 0.55002
+    },
+    {
+      "legs": 2,
+      "each_leg_win_prob": 0.55,
+      "rho": -1.0,
+      "joint": "0 (impossible for both sides of one game to win)",
+      "note": "exact, by construction"
+    }
+  ]
+}

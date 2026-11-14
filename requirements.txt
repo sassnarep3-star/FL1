@@ -1,0 +1,5 @@
+# FL1 runtime deps
+# The verified data layer and the model use the Python standard library only,
+# so a fresh clone can ingest, validate, score and rebuild the site with no installs.
+# Optional:
+pytest>=7  # test suite

@@ -1,0 +1,16 @@
+# Absences that are REAL but INVISIBLE to the weekly injury report.
+#
+# WHY THIS FILE HAS TO EXIST. The official Week 10 report lists only players a club submitted
+# during that week's practice-window cadence. A player on injured reserve is not submitted, so
+# he never appears on the report - and an availability layer built only from the report silently
+# treats him as no-absence. Verified against the Week 10 report: Baltimore's report carries 8
+# rows and none of them is a quarterback, while the league's own news feed has the Ravens'
+# franchise QB confirmed out for 6-10 weeks. See flags.json F-17.
+#
+# Each row below is transcribed from an official NFL.com news headline. `pos` is only recorded
+# where the headline itself states the position; that keeps the row sourced rather than inferred.
+club|player|pos|absence_as_stated|basis|news_url
+BAL|Lamar Jackson|QB|"Ravens confirm Lamar Jackson expected to miss 6-10 weeks"|club-confirmed via league news|https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13
+BAL|Tyler Huntley|QB|"Report: Ravens QB Tyler Huntley out for season with turf toe injury"|report via league news|https://www.nfl.com/news/ravens-qb-tyler-huntley-out-for-season-turf-toe-injury
+MIA|Malik Willis|QB|"Dolphins place QB Malik Willis (groin) on injured reserve"|transaction via league news|https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start
+SEA|Sam Darnold|QB|"Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders"|club-confirmed via league news|https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again
