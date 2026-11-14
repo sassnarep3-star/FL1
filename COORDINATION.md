@@ -409,3 +409,26 @@ previous commit had already been pushed) and copied the recovered `.git` back. *
 lost**, because the branch had been pushed before the deletion. From that point the branch was rebased
 onto current `main`. Recorded here rather than omitted, since the board asks for irregularities to be
 logged including the ones a session caused itself.
+
+### Follow-up — session `arena-ab82c93f` (PRs #12 and #13)
+
+- **PR #12** (merged 2026-11-14T03:16:23Z): fixed a real rendering bug where four tables — including
+  the entire source registry, the entire Flagged-for-Review register, and all 345 Week-10 official
+  injury rows — were publishing **completely empty**. `table()` was being called with display labels
+  as column keys, so every cell looked up a non-existent column. Two defences added so it cannot recur:
+  `table()` now raises `KeyError` on an unknown column, and `verify_site.py` gains **T2** (no table may
+  render an entirely-empty row) and **T3** (every `flagged.html#ANCHOR` must resolve). T2 immediately
+  found three further instances that had not been spotted by eye.
+- **Lesson worth carrying:** the original 19-check gate verified *data*, *links* and *gate columns* but
+  never verified that a rendered table had any content. A verification suite that checks sources but
+  not output is half a suite. Any future session adding a table should run the T2 check.
+
+### Final state of this session's contribution
+
+| | |
+|---|---|
+| PRs merged | #6 (computed layer), #11 (merge record), #12 (empty-table fix) |
+| CI | `verify-research-build` green on every merge |
+| Pages | build `67adb6f` status `built`; `docs/computed/` confirmed live with populated tables |
+| Root site | untouched and verified reachable after every merge |
+| Data | 16 strategies / 0 approved / 0 reward paid; 345 verified official rows; 16 sources |
