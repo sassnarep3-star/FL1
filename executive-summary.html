@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="prop-correlations.html">Prop Correlations</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed</a><a href="price-snapshots.html">Price Snapshots</a><a href="line-board.html">Origination Board</a><a href="prop-correlations.html">Prop Correlations</a><a href="correlations-official.html">Official Correlations</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main">
 
@@ -103,6 +103,38 @@ answering it.</li>
 club has a bye, because no official bye table was verified. It does not resolve two places where official NFL.com
 pages contradict each other. It does not print a single performance number. Each of those is listed with links on
 <a href="flagged.html">Flagged for Review</a>.</p>
+</section>
+
+<section>
+<h2>7. Second pass &mdash; the eight requirement items</h2>
+<p>The brief's eight bolded requirements now have concrete artefacts. Each is re-runnable, and each states
+what is still missing instead of hiding it:</p>
+<ul class="tight">
+<li><strong>Price-snapshot store</strong> &mdash; <code>engine/price_snapshots.py</code> (append-only, sourced
+quotes) and the Week 10 export on <a href="price-snapshots.html">Price Snapshots</a>: 56 market rows with
+opening and closing columns. Openings are blank &mdash; no verified opener source exists (F18).</li>
+<li><strong>Verified results feed</strong> &mdash; <a href="results-feed.html">Results Feed</a>: 137 verified
+2026 games, 548 settled market rows in origination order, push-aware, so backtests and ROI are computable
+today.</li>
+<li><strong>Origination order</strong> &mdash; side first, then total, then moneyline, enforced in
+<code>engine/origination.py</code>; the queue raises on anything else.</li>
+<li><strong>Fair / market / difference</strong> &mdash; three separate columns on
+<a href="line-board.html">Origination Board</a>. Fair is blank until a model is fitted (F19); difference never
+computes from one arm.</li>
+<li><strong>Signal separated from staking</strong> &mdash; the <a href="strategies.html">Leaderboard</a> scores
+selection quality and sizing independently and ranks on signal only; a lucky staking run carries a masking
+warning instead of a rank.</li>
+<li><strong>Depth of replacement</strong> &mdash; <a href="replacement-depth.html">Replacement Depth</a>:
+112 charted players carry an official game status; 91 name the club&rsquo;s next man and record his string
+(48 second-string, 17 third, 11 fourth &mdash; the brief&rsquo;s case &mdash; 13 fifth, 2 sixth), 21 publish no
+further name at the slot, and Houston stays blank (F21).</li>
+<li><strong>Correlations from official numbers with n</strong> &mdash;
+<a href="correlations-official.html">Official Correlations</a>: four measured values (n = 160, 32, 32, 137)
+and three blocked rows that stay blank until officially sourced inputs exist.</li>
+<li><strong>Demotion gate</strong> &mdash; D1-D3 implemented in <code>engine/demotion.py</code> and defined on
+<a href="validation.html">Validation Gates</a>; paper-to-live promotion is a function call, and thresholds wait
+on open question Q24.</li>
+</ul>
 </section>
 
 </main>

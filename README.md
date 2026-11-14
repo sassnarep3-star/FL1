@@ -155,3 +155,35 @@ parallel registers live under `data/specs/`.
   published alongside the right one as the audit trail.
 - **Reproduce:** `python3 -m unittest discover -s tests -q` · `python3 engine/demo_run.py --check` ·
   `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
+
+## Session F additions (2026-11-14) — the eight requirement items
+
+Branch `arena/5a8baf03-fl1`. This pass implements the brief's eight bolded requirements as tested
+code plus generated tables, and adds the row-level source audit. New engine modules are standard
+library only, per the dependency policy above:
+
+- `engine/origination.py` — the mandated origination order (side, total, moneyline) as an executable
+  queue, and fair/market/difference as three separate columns with the difference convention fixed
+  before any result.
+- `engine/results_feed.py` — push-aware settlement of side/total/moneyline from verified scores and
+  per-unit PnL at American prices; missing prices are reported, never imputed.
+- `engine/demotion.py` — the live-to-paper demotion gate (D1 decay, D2 calibration drift, D3
+  concentration) plus the paper-to-live promotion check. INSUFFICIENT_DATA is a first-class outcome.
+- `engine/leaderboard.py` (extended) — signal score and staking score computed separately; overall
+  rank follows the signal, so a lucky staking run cannot mask a bad signal (unit-tested).
+- `tools/build_{results_feed,snapshots,line_board,replacement_depth,correlations_official}.py` —
+  deterministic builders for `data/results_feed.csv` (548 settled rows), `data/price_snapshots.csv`
+  (56 rows, opens blank — F18), `data/line_board.csv` (56 rows, fair blank — F19),
+  `data/replacement_depth.csv` (112 affected players; 4th-string-or-deeper replacements: 26),
+  `data/correlations_official.csv` (4 measured values with n; 3 blocked rows kept blank).
+- `tools/checkrows.py` — the row-level verification gate: every data row on every page either carries
+  a source link or publishes nothing (3,724 rows audited).
+- Registers: flags F18-F23, questions Q21-Q25, suggestions SG16-SG20. Five new site pages:
+  `results-feed.html`, `price-snapshots.html`, `line-board.html`, `replacement-depth.html`,
+  `correlations-official.html`.
+
+All checks green at hand-off: 95 unit tests, `tools/{build,site,checklinks,checkrows,verify_injuries,
+verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
+`scripts/verify_site.py` (0 errors), `scripts/verify_d.py` (V5-V9 PASS), `site/build.py` +
+`site/verify.py`. See `COORDINATION.md` for the full sources/verification/irregularities record.
+

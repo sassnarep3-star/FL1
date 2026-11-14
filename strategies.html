@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="prop-correlations.html">Prop Correlations</a><a href="line-origination.html">Line Origination</a><a href="strategies.html" class="on">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed</a><a href="price-snapshots.html">Price Snapshots</a><a href="line-board.html">Origination Board</a><a href="prop-correlations.html">Prop Correlations</a><a href="correlations-official.html">Official Correlations</a><a href="line-origination.html">Line Origination</a><a href="strategies.html" class="on">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main" class="wide">
 
@@ -48,8 +48,24 @@ The reason is set out as open question Q14 and suggestion SG11 rather than answe
 </section>
 
 <section>
+<h2>Signal and staking are scored separately</h2>
+<p>The brief is explicit: a lucky staking run must not be able to mask a bad signal. The board therefore
+publishes two independent scores, computed in <code>engine/leaderboard.py</code>:</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Score</th><th>What it measures</th><th>Stake-weighted?</th><th>Can it lift a failing entry?</th><th>Source</th></tr></thead><tbody><tr><td>Signal score</td><td>Selection quality: LCB of equal-weight per-bet returns, hurdle test, CLV</td><td>No — every bet counts 1</td><td>No — it IS the rank</td><td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/engine/leaderboard.py">engine</a></td></tr><tr><td>Staking score</td><td>Execution: ROI on staked units, max drawdown of the staked path</td><td>Yes</td><td>No — reported beside the rank, never under it</td><td><a class="src" href="https://github.com/sassnarep3-star/FL1/blob/main/engine/leaderboard.py">engine</a></td></tr></tbody></table></div>
+<ol class="tight">
+<li><strong>Signal</strong> is stake-independent selection quality: the 95% lower bound of equal-weight
+per-bet returns, the hit rate tested against the break-even hurdle at the price taken, and closing-line value
+where it exists. Signal gates G2, G2b, G3, G4 and G9 are veto gates: a FAIL zeroes the signal score.</li>
+<li><strong>Staking</strong> is execution and sizing only: ROI on staked units and the maximum drawdown of the
+staked PnL path. It is reported beside the signal, never under it.</li>
+<li><strong>Overall rank follows the signal.</strong> Where a row's staking rank is better than its signal
+rank, the row carries a visible masking warning &mdash; that gap is sizing luck until proven otherwise.</li>
+</ol>
+</section>
+
+<section>
 <h2>Product types and the extra gate each one carries</h2>
-<div class="twrap"><table class="dense"><thead><tr><th>Product</th><th>Extra requirement</th><th>Status today</th></tr></thead><tbody><tr><td>Single bet</td><td>A benchmark price to define edge</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Parlay</td><td>Every leg validated independently, plus joint correlation</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop</td><td>Player-level historical logs</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Player prop combo</td><td>Prop legs plus pairwise joint outcomes</td><td><span class="pill bad">BLOCKED</span></td></tr></tbody></table></div>
+<div class="twrap"><table class="dense"><thead><tr><th>Product</th><th>Extra requirement</th><th>Status today</th><th>Source</th></tr></thead><tbody><tr><td>Single bet</td><td>A benchmark price to define edge</td><td><span class="pill bad">BLOCKED</span></td><td><a class="src" href="validation.html">gates</a></td></tr><tr><td>Parlay</td><td>Every leg validated independently, plus joint correlation</td><td><span class="pill bad">BLOCKED</span></td><td><a class="src" href="validation.html">gates</a></td></tr><tr><td>Player prop</td><td>Player-level historical logs</td><td><span class="pill bad">BLOCKED</span></td><td><a class="src" href="validation.html">gates</a></td></tr><tr><td>Player prop combo</td><td>Prop legs plus pairwise joint outcomes</td><td><span class="pill bad">BLOCKED</span></td><td><a class="src" href="validation.html">gates</a></td></tr></tbody></table></div>
 </section>
 
 </main>
