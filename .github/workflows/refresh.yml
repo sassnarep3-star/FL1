@@ -1,0 +1,75 @@
+name: weekly-data-refresh
+
+# Scheduled data refresh (session D scope). Removes manual input from data upkeep:
+# re-fetches the nflverse games feed, rebuilds every session-D artefact from raw
+# inputs, re-runs all verification checks, and commits ONLY when every check
+# passes and at least one tracked artefact changed.
+#
+# This workflow never deploys Pages. GitHub Pages is pinned to the `main` branch
+# root (legacy builder) and rebuilds automatically when main moves, per the
+# repo's existing policy (see .github/workflows/verify.yml comments).
+
+on:
+  schedule:
+    - cron: "0 13 * * 4"  # Thursdays 13:00 UTC — before each week's games
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: pip install pandas numpy scipy pyarrow
+
+      - name: Fetch nflverse games feed (auto-updated upstream)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/nflverse/nfldata/contents/data/games.csv \
+            -H "Accept: application/vnd.github.raw" > raw/games-nfldata.csv
+          echo "games.csv bytes: $(wc -c < raw/games-nfldata.csv)"
+
+      - name: Fetch player_stats mirror for prop correlations (optional)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/Beexly/Sports/contents/data/nflverse/player_stats_weekly_archive.parquet \
+            -H "Accept: application/vnd.github.raw" > "$RUNNER_TEMP/prop_archive.parquet" \
+            && echo "PROP_PARQUET=$RUNNER_TEMP/prop_archive.parquet" >> "$GITHUB_ENV" \
+            || echo "mirror unavailable this run; prop correlations will not be rebuilt"
+
+      - name: Rebuild session-D artefacts
+        run: |
+          python3 scripts/build_schedule_d.py
+          python3 scripts/verify_d.py
+          python3 scripts/build_prop_correlations_d.py || echo "prop correlations skipped (no mirror this run)"
+          python3 scripts/build_pages_d.py
+          python3 tools/site.py
+          python3 tools/checklinks.py
+
+      - name: Commit refreshed data (only if changed)
+        run: |
+          git config user.name "fl1-refresh-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add raw/games-nfldata.csv data/schedule2026-d.csv \
+                  data/verification-d.tsv data/prop-correlations-d.csv \
+                  schedule.html prop-correlations.html
+          if git diff --cached --quiet; then
+            echo "No changes to refresh."
+          else
+            git commit -m "refresh: weekly data refresh — rebuilt schedule/results, verification and prop correlations from upstream feed"
+            git push
+          fi

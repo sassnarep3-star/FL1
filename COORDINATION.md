@@ -607,3 +607,17 @@ logged including the ones a session caused itself.
 | Pages | build `67adb6f` status `built`; `docs/computed/` confirmed live with populated tables |
 | Root site | untouched and verified reachable after every merge |
 | Data | 16 strategies / 0 approved / 0 reward paid; 345 verified official rows; 16 sources |
+
+---
+
+## Session D — `arena-34db7d1d-fl1` (completion record; merged through PR below)
+
+- Work delivered on branch `arena/34db7d1d-fl1` (single-session branch per Arena constraint; claim first pushed ~03:20 UTC):
+  1. **Q-PROP-01 closed**: `data/prop-correlations-d.csv` + `scripts/build_prop_correlations_d.py` — empirical player-level correlations from nflverse player_stats 1999–2024 (13,384 team-games, 100% score join vs games.csv after canonicalizing SD/STL/OAK/LA); QA-gated (schema/coverage/join/sanity/determinism); binary lifts with bootstrap CIs. Pages: `prop-correlations.html`.
+  2. **Full-season schedule**: `data/schedule2026-d.csv` (272 rows) + `raw/games-nfldata.csv` snapshot + `schedule.html`; strict V1 reconciliation 32/32 clubs (records+PF+PA) vs official standings capture; V2 Thursday final vs official schedule page; V3 slate equality; V4 internal consistency.
+  3. **Independent verification V5–V9** (`data/verification-d.tsv`, `scripts/verify_d.py`): bye-club completeness; deterministic byte-identical rebuild of the merged computed layer; 18/18 injury transcription fidelity vs `week10_2026_official.csv`; spread-sign convention 13/13 vs moneylines; prop-correlations reproducibility.
+  4. **Weekly refresh workflow** `.github/workflows/refresh.yml` — scheduled cron; rebuilds + re-verifies; commits only on all-green; deploys nothing (per verify.yml policy).
+  5. Integration edits: NAV +2 entries in `tools/site.py`; sources S47–S49; flags F16–F17; README addendum.
+- Sources: S47 (nflverse games feed), S48 (player_stats mirror), S49 (official W10 schedule page), plus S01–S03 official captures.
+- Irregularities logged: F16 (Mike Evans listed under 49ers while TB on bye — published verbatim), F17 (prop correlations are computed estimates, not official stats).
+- Conflict log: rebase/merge conflicts on COORDINATION.md and registries with sessions ab4e9b05/ab82c93f/3f677e8a resolved by taking origin/main's board and re-appending; registries unioned by id (my S16–S18 re-issued as S47–S49 after id collision); no other session's work discarded.

@@ -34,6 +34,9 @@ NAV = [
     ("injuries.html", "Injuries"),
     ("depth.html", "Backup Depth"),
     ("standings.html", "Standings"),
+    ("schedule.html", "Schedule 2026"),
+    ("prop-correlations.html", "Prop Correlations"),
+
     ("line-origination.html", "Line Origination"),
     ("strategies.html", "Leaderboard"),
     ("validation.html", "Validation Gates"),
@@ -236,6 +239,12 @@ def main():
     anything is implemented.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
+  <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
+    <p>All 272 regular-season games with results, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
+  <a class="card" href="prop-correlations.html"><h3>Prop Correlations</h3>
+    <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
+  <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
+    <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a>
 </section>
 """ % (depth_cov["covered"], depth_cov["total"], depth_tot["rows"],
        depth_tot["startersWithStatus"],
