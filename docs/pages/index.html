@@ -9,26 +9,26 @@
 <header class="top"><div class="inner">
 <div class="brand">FL1 <span>NFL line origination · validation · injury-deficiency tracking</span></div>
 <div class="meta" style="margin-left:auto">data as of 2026-11-14</div>
-</div><nav class="main" aria-label="Sections"><a href="index.html" aria-current="page">Dashboard</a><a href="summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="methodology.html">Line origination</a><a href="validation.html">Validation gates</a><a href="correlation.html">Correlation & parlays</a><a href="injuries.html">Injuries &amp; depth</a><a href="injury-snapshot.html">Injury report A</a><a href="injury-snapshot-b.html">Injury report B</a><a href="leaderboard.html">Leaderboard</a><a href="missing.html">Missing information</a><a href="audit.html">Repo audit</a><a href="demo.html">Engine demo</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a></nav></header>
+</div><nav class="main" aria-label="Sections"><a href="index.html" aria-current="page">Dashboard</a><a href="summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="methodology.html">Line origination</a><a href="validation.html">Validation gates</a><a href="correlation.html">Correlation & parlays</a><a href="measured.html">Measured (in-repo data)</a><a href="injuries.html">Injuries &amp; depth</a><a href="injury-snapshot.html">Injury report A</a><a href="injury-snapshot-b.html">Injury report B</a><a href="leaderboard.html">Leaderboard</a><a href="missing.html">Missing information</a><a href="audit.html">Repo audit</a><a href="demo.html">Engine demo</a><a href="sources.html">Sources</a><a href="flagged.html">Flagged for review</a></nav></header>
 <main id="main" class="wrap">
 
 <h1>NFL line origination, validation and injury-deficiency tracking</h1>
 <p class="lede">A decision-support system for originating NFL numbers instead of following them:
-24 registered sources, 40 requirements, 24 questions that
+25 registered sources, 40 requirements, 24 questions that
 must be answered before a decision is defensible, 24 suggestions awaiting your review,
 19 named data gaps with an acquisition path each, and 13 validation gates
 that a strategy must clear before it is trusted. Every table row links to an official source; anything
 that could not be confirmed from one is left blank and flagged rather than estimated.</p>
 
 <div class="grid">
-<div class="kpi"><b>24</b><small>registered sources, each labelled with how it was verified</small></div>
+<div class="kpi"><b>25</b><small>registered sources, each labelled with how it was verified</small></div>
 <div class="kpi"><b>24</b><small>open questions — 15 of them block a decision outright</small></div>
 <div class="kpi"><b>24</b><small>suggestions with your decision field left open</small></div>
 <div class="kpi"><b>19</b><small>missing datasets, each with a discovery action</small></div>
 <div class="kpi"><b>13</b><small>validation gates, most of them hard (profit cannot override)</small></div>
 <div class="kpi"><b>12 / 15</b><small>correlation coefficients deliberately blank until measured</small></div>
 <div class="kpi"><b>92</b><small>injury-report rows transcribed verbatim from the official file, across two real captures one hour apart</small></div>
-<div class="kpi"><b>25</b><small>items on the flagged-for-review page</small></div>
+<div class="kpi"><b>27</b><small>items on the flagged-for-review page</small></div>
 </div>
 
 <div class="card">
@@ -42,6 +42,7 @@ that could not be confirmed from one is left blank and flagged rather than estim
 <div><h3>Model</h3><ul class="tight">
 <li><a href="methodology.html">Line origination</a> — totals-first, availability-adjusted</li>
 <li><a href="correlation.html">Correlation, parlays, prop combos</a></li>
+<li><a href="measured.html">Measured rho from in-repo data</a> — with its plausibility failures</li>
 <li><a href="injuries.html">Injury &amp; depth-deficiency model</a></li>
 <li><a href="injury-snapshot.html">Official injury report, capture A</a> ·
 <a href="injury-snapshot-b.html">capture B</a></li>
@@ -71,12 +72,12 @@ decision (a licensed line history) unblocks more than any engineering work avail
 <div class="kv"><div>Official source</div><div>nfl.com and its subdomains for league facts; state gaming
 regulators for market facts; peer-reviewed publications for method. Club-published documents are official
 for that club and labelled as such.</div></div>
-<div class="kv"><div>Levels in use now</div><div><span class="badge b-warn">INDEX-MEANS</span><span class="meta">10</span> <span class="badge b-ok">FETCHED</span><span class="meta">9</span> <span class="badge b-ok">FETCHED-VIA-SEARCH-SNIPPET</span><span class="meta">2</span> <span class="badge b-info">LINKED</span><span class="meta">2</span> <span class="badge b-bad">UNREACHABLE</span><span class="meta">1</span></div></div>
+<div class="kv"><div>Levels in use now</div><div><span class="badge b-warn">INDEX-MEANS</span><span class="meta">10</span> <span class="badge b-ok">FETCHED</span><span class="meta">9</span> <span class="badge b-ok">FETCHED-VIA-SEARCH-SNIPPET</span><span class="meta">2</span> <span class="badge b-info">LINKED</span><span class="meta">2</span> <span class="badge b-bad">UNREACHABLE</span><span class="meta">1</span> <span class="badge b-dim">THIRD-PARTY-IN-REPO</span><span class="meta">1</span></div></div>
 <div class="kv"><div>Unconfirmable value</div><div>Rendered <span class="unverified">—</span> with an
 unverified flag. Never inferred, never interpolated, never carried over from "everyone knows".</div></div>
 <div class="kv"><div>Build guarantee</div><div><code>site/verify.py</code> fails on an unregistered source
 id, a missing source link on a factual row, a dead internal link, or a stale generated page.</div></div>
-<div class="kv"><div>Flagged items</div><div>25 of them, published on
+<div class="kv"><div>Flagged items</div><div>27 of them, published on
 <a href="flagged.html">Flagged for review</a>; they do not block deployment and they do not disappear.</div></div>
 </div>
 

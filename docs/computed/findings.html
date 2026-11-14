@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Findings · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html" class="on">Findings</a><a href="lines.html">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="requirements.html">Requirements</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html">Methods</a></nav>
+</div></header>
+<main>
+<h1>Findings</h1>
+<p class="lead">Six findings, each with the number behind it and the source it came from.</p>
+
+<h2>1. The market is hard, and the test says so</h2>
+<p>Sixteen variants across six families (market-divergence, situational, weather, conjunction,
+availability, control) were run over 2006–2026 with a fixed 70/30 time split. The out-of-sample
+window starts at 2020. Results are in
+<a href="strategies.html">Strategies &amp; gates</a>.</p>
+<div class="cards">
+<div class="card"><div class="k">Variants tested</div><div class="v">16</div></div>
+<div class="card"><div class="k">Passed all 7 gates</div><div class="v">0</div></div>
+<div class="card"><div class="k">Best in-sample ROI</div><div class="v">7.2%</div>
+<div class="s">WIND15_UNDER</div></div>
+<div class="card"><div class="k">Best p-value</div><div class="v">0.0358</div>
+<div class="s">needs &lt; 0.05/N after deflation</div></div>
+</div>
+
+<h2>2. What the control proves</h2>
+<p>Betting every home team at the close, 5,067 settled bets, returned -5.2% with a
+hit rate of 48.6% against a breakeven of 105%.
+That gap is the vig. Any strategy that lands within about ±3% of zero is doing nothing but paying it.
+This control is the reason the leaderboard reports rejections rather than ranking noise.</p>
+
+<h2>3. Correlation is not a free lunch</h2>
+<p>Measured on 5,336 games: home ATS cover vs the total is &lt;bound method Series.corr of leg_a                                                          home_cover
+leg_b                                                                over
+scope                                                           SAME-GAME
+label                                              Home ATS cover vs over
+note                    The classic &#x27;good team scores, bad team scores...
+seasons                                                         2006-2026
+n                                                                    5336
+corr                                                              -0.0001
+p_value                                                           0.99664
+ci_low                                                            -0.0282
+ci_high                                                            0.0285
+observed_joint                                                        NaN
+independence_product                                                  NaN
+Name: 0, dtype: object&gt;
+(95% CI -0.0282 to 0.0285) — statistically indistinguishable
+from zero. Home cover vs home moneyline is &lt;bound method Series.corr of leg_a                                                          home_cover
+leg_b                                                            home_win
+scope                                                           SAME-GAME
+label                                    Home ATS cover vs home moneyline
+note                    Structurally positive: covering a spread almos...
+seasons                                                         2006-2026
+n                                                                    5336
+corr                                                               0.7948
+p_value                                                               0.0
+ci_low                                                             0.7777
+ci_high                                                            0.8113
+observed_joint                                                        NaN
+independence_product                                                  NaN
+Name: 1, dtype: object&gt;, which is structural, not an edge.
+Cross-game legs are independent (&lt;bound method Series.corr of leg_a                                                       home_cover(t)
+leg_b                                                     home_cover(t+1)
+scope                                                        ACROSS-GAMES
+label                                       Sequential games, home covers
+note                    Observed joint rate vs the product of marginal...
+seasons                                                         2006-2026
+n                                                                    5335
+corr                                                            -0.003104
+p_value                                                               NaN
+ci_low                                                                NaN
+ci_high                                                               NaN
+observed_joint                                                   0.328772
+independence_product                                             0.331876
+Name: 5, dtype: object&gt; residual).</p>
+<div class="note warn">The practical consequence: a 2-leg parlay of two −110 legs is
+<strong>-8.88% EV</strong>, a 3-leg is
+-13.03%, a 4-leg is
+-16.98%. The measured correlation moves these
+numbers by less than 0.1 percentage points. Parlays are a worse version of the same bet.
+See <a href="correlations.html">Correlations</a>.</div>
+
+<h2>4. Availability is measurable; depth is not</h2>
+<p>The official Week 10 2026 report was read row by row: 345 player rows across 28 clubs,
+66 Out, 10 Doubtful, 84 Questionable, each with the official URL and a verbatim quote.
+The injury picture joins cleanly to the 14 games. What does <em>not</em> exist is a depth order:
+the official roster feed lists status and jersey number, not a sequence
+(<a href="flagged.html">FLAG-02</a>). So the system reports QB changes by start sequence and refuses
+to call anyone a “3rd string” without a source. See <a href="availability.html">Injuries &amp; depth</a>.</p>
+
+<h2>5. Data access is the binding constraint</h2>
+<p>The single highest-value fix is not a model, it is an allowlist entry
+(<a href="flagged.html">FLAG-01</a>). Five of six planned datasets were unreachable, which is why
+the availability history is one season and there are no props or snap counts. Every downstream gap
+on this site traces back to that one item.</p>
+
+<h2>6. What would change the answer</h2>
+<p>Not a better formula. Three things, in order: an opening-line feed (so an edge can be measured
+against a price we can actually get), a depth-order feed with timestamps (so the requirement can be
+met at all), and a signed gate config (so “skill” stops being a matter of opinion). All three are
+in <a href="suggestions.html">Suggestions</a> as SG-01 to SG-05.</p>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Data as of 2026-11-14 &middot; games.csv 7,548 rows, injuries_2025.csv 4,442 rows. Builds are deterministic: this stamp comes from the
+pinned inputs, not from the clock, so a rebuild is byte-identical.</footer>
+</body></html>

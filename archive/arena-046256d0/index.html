@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FL1 — NFL Decision Dashboard</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">FL1</div>
+  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
+  <a class="item active" href="index.html">Dashboard</a>
+  <a class="item" href="executive-summary.html">Executive Summary</a>
+  <a class="item" href="questions.html">Decisions &amp; Questions</a>
+  <a class="item" href="suggestions.html">Suggestions</a>
+  <a class="item" href="strategies.html">Strategies &amp; Leaderboard</a>
+  <a class="item" href="injury-report.html">Injury Report</a>
+  <a class="item" href="standings.html">Standings</a>
+  <a class="item" href="lines.html">Lines &amp; Market</a>
+  <a class="item" href="flagged-review.html">Flagged for Review</a>
+  <a class="item" href="sources.html">Sources</a>
+</nav>
+<main>
+  <h1>NFL Decision Dashboard</h1>
+  <p class="lead">Verification-first line origination and strategy research. Current week: <strong>Week 10, 2026 season</strong> (games Nov 12–16, 2026). Every data row links to an official source; unverified values are flagged and never filled in.</p>
+
+  <div class="cards">
+    <div class="card"><div class="k">Current week</div><div class="v">Week 10</div><div class="note">2026 season · 16 games</div></div>
+    <div class="card"><div class="k">Top records</div><div class="v">7-1</div><div class="note">Bills · 49ers <span class="src">[NFL.com](https://www.nfl.com/standings/league/2026/reg)</span></div></div>
+    <div class="card"><div class="k">Stingiest defense</div><div class="v">JAX</div><div class="note">121 PA in 8 games <span class="src">[NFL.com](https://www.nfl.com/standings/league/2026/reg)</span></div></div>
+    <div class="card"><div class="k">Line values</div><div class="v" style="color:var(--bad)">UNVERIFIED</div><div class="note">No official book source reachable</div></div>
+    <div class="card"><div class="k">Items flagged</div><div class="v">3</div><div class="note">1 irregularity · 2 unverified <span class="src">[Flagged page](flagged-review.html)</span></div></div>
+  </div>
+
+  <h2>Latest verified findings</h2>
+  <div class="panel">
+    <ul class="clean">
+      <li><strong>Week 10 slate (16 games) verified</strong> from the official NFL.com schedule, including the Munich international game (NE at DET, Sun 9:30 AM) and the completed Thursday game: <strong>Washington 24, New York 21</strong>. Bye: CHI, DEN, PHI, TB. <span class="src">[NFL.com schedule](https://www.nfl.com/schedules/2026/by-week/week-10)</span></li>
+      <li><strong>Week 10 injury report fully captured</strong> from NFL.com. Major availability signals: Vikings QB <strong>Kyler Murray OUT</strong> (hamstring); Seahawks QB <strong>Sam Darnold OUT</strong>; Ravens QB <strong>Lamar Jackson out 6–10 weeks</strong> (IR); Packers RB <strong>Josh Jacobs OUT</strong> (finger, surgery); 49ers WR <strong>Mike Evans OUT</strong> (Achilles). <span class="src">[NFL.com injury report](https://www.nfl.com/injuries/)</span></li>
+      <li><strong>Irregularity flagged (IR-1):</strong> NFL.com standings do not yet reflect the completed Thursday WAS 24–21 NYG result (WAS still 3-5-1, NYG 5-3-1). Published as-is and flagged. <span class="src">[Game center](https://www.nfl.com/games/commanders-at-giants-2026-reg-10) · [Standings](https://www.nfl.com/standings/league/2026/reg)</span></li>
+      <li><strong>Lines unverified (UNV-1 / UNV-2):</strong> no sportsbook line or player-prop value could be confirmed from an official source; all line cells are blank and flagged. <span class="src">[Flagged page](flagged-review.html)</span></li>
+    </ul>
+  </div>
+
+  <h2>Navigate by category</h2>
+  <div class="grid2">
+    <div class="panel"><h3>Read first</h3>
+      <ul class="clean">
+        <li><a href="executive-summary.html">Executive Summary</a> — key details and current status.</li>
+        <li><a href="questions.html">Decisions &amp; Questions</a> — questions, required info, and answers before any decision.</li>
+        <li><a href="suggestions.html">Suggestions</a> — reviewable proposals before implementing changes.</li>
+      </ul>
+    </div>
+    <div class="panel"><h3>Work</h3>
+      <ul class="clean">
+        <li><a href="strategies.html">Strategies &amp; Leaderboard</a> — signals, validation gates, correlation, luck removal.</li>
+        <li><a href="injury-report.html">Injury Report</a> — Week 10 designations and deficiency watchlist.</li>
+        <li><a href="standings.html">Standings</a> — full 32-team verified table.</li>
+        <li><a href="lines.html">Lines &amp; Market</a> — Week 10 slate with verification-gated line cells.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">Data verified line-by-line against official sources on 2026-11-14. See <a href="sources.html">Sources</a> and <a href="flagged-review.html">Flagged for Review</a>.</div>
+</main>
+</div>
+</body>
+</html>

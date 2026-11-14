@@ -65,6 +65,9 @@ PAGES = [
      "What we do not have, why it blocks us, and the action that would obtain it."),
     ("sources", "sources", "Source register", "Sources",
      "Every source behind this site, with its verification level and its caveats."),
+    ("measured", "measured", "Measured values from in-repo data", "Measured (in-repo data)",
+     "Correlation and market measurements computed from the third-party dataset committed in-repo, "
+     "published together with the plausibility checks it fails."),
     ("audit", "audit", "Repository audit, line by line", "Repo audit",
      "What the repo contained, what failed verification, and how to re-check it."),
     ("summary", "exec_summary", "Executive summary", "Executive summary",
@@ -151,8 +154,23 @@ def esc(x) -> str:
     return html.escape("" if x is None else str(x))
 
 
+SPECS = os.path.join(DATA, "specs")
+
+# This session's registers. `sources`, `requirements`, `questions`, `suggestions` and
+# `flags` also exist at data/*.json belonging to the published dashboard, with a
+# different schema; the merge kept those untouched and moved ours under data/specs/.
+OWNED = ("sources requirements questions suggestions flags audit measured exec_summary models "
+         "validation_gates correlations injury_model injury_snapshot injury_snapshot_b "
+         "leaderboard missing_data demo_results").split()
+
+
+def path_for(name: str) -> str:
+    spec = os.path.join(SPECS, f"{name}.json")
+    return spec if os.path.exists(spec) else os.path.join(DATA, f"{name}.json")
+
+
 def load(name: str) -> dict:
-    with open(os.path.join(DATA, f"{name}.json"), encoding="utf-8") as fh:
+    with open(path_for(name), encoding="utf-8") as fh:
         return json.load(fh)
 
 
@@ -294,13 +312,14 @@ def nav_html(pid: str) -> str:
 
 
 NAV_ORDER = ["index", "summary", "requirements", "questions", "suggestions", "methodology",
-             "validation", "correlation", "injuries", "injury-snapshot", "injury-snapshot-b", "leaderboard",
+             "validation", "correlation", "measured", "injuries", "injury-snapshot",
+             "injury-snapshot-b", "leaderboard",
              "missing", "audit", "demo", "sources", "flagged"]
 
 NAV_LABEL = {
     "index": "Dashboard", "summary": "Executive summary", "audit": "Repo audit",
     "demo": "Engine demo", "flagged": "Flagged for review", "sources": "Sources",
-    "missing": "Missing information", "injuries": "Injuries &amp; depth",
+    "missing": "Missing information", "injuries": "Injuries &amp; depth", "measured": "Measured (in-repo data)",
     "injury-snapshot": "Injury report A", "injury-snapshot-b": "Injury report B",
 }
 
@@ -354,7 +373,7 @@ def stats_tokens() -> dict:
     from engine import pricing, stats
 
     hurdle = pricing.break_even_probability(-110)
-    demo_path = os.path.join(DATA, "demo_results.json")
+    demo_path = path_for("demo_results")
     demo = json.load(open(demo_path, encoding="utf-8")) if os.path.exists(demo_path) else {}
     ar = demo.get("arithmetic", {})
     corr_rows = [r for s in load("correlations")["sections"] if s.get("rows") and "pair_id" in s["rows"][0]
@@ -647,6 +666,12 @@ def build() -> dict:
 
     for pid, datafile, title, nav_label, blurb in PAGES:
         doc = inject(load(datafile), tokens)
+        # a document may ship its page shape as a "view" computed by the code that produced
+        # the numbers, so the rendering cannot drift from the measurement
+        if "view" in doc:
+            doc = {**doc, **doc["view"]}
+        doc.setdefault("editorial", True)
+        doc.setdefault("description", None)
         editorial = bool(doc.get("editorial"))
         updated = doc.get("updated", "")
         blocks = doc.get("sections") or [{"title": None, "description": None,
@@ -732,6 +757,7 @@ that could not be confirmed from one is left blank and flagged rather than estim
 <div><h3>Model</h3><ul class="tight">
 <li><a href="methodology.html">Line origination</a> — totals-first, availability-adjusted</li>
 <li><a href="correlation.html">Correlation, parlays, prop combos</a></li>
+<li><a href="measured.html">Measured rho from in-repo data</a> — with its plausibility failures</li>
 <li><a href="injuries.html">Injury &amp; depth-deficiency model</a></li>
 <li><a href="injury-snapshot.html">Official injury report, capture A</a> ·
 <a href="injury-snapshot-b.html">capture B</a></li>

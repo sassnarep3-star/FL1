@@ -22,6 +22,9 @@ Checks:
 from __future__ import annotations
 
 import json
+import sys as _sys
+
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))) if False else None
 import os
 import re
 import subprocess
@@ -118,16 +121,24 @@ def check_placeholders(fails: list) -> None:
 
 def check_row_sources(fails: list) -> dict:
     """V4/V5/V6 over the registers themselves (the single source of truth)."""
-    src_path = os.path.join(DATA, "sources.json")
-    sources = json.load(open(src_path, encoding="utf-8"))
+    _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from build import OWNED, path_for
+
+    sources = json.load(open(path_for("sources"), encoding="utf-8"))
     known = {r["src_id"] for r in sources["rows"]}
     stats = {"rows": 0, "sourced": 0, "editorial": 0, "blanks": 0, "unknown_ids": 0,
              "declared_unsourced": 0}
 
-    for name in sorted(os.listdir(DATA)):
-        if not name.endswith(".json") or name == "demo_results.json":
+    # Only this subsystem's registers are checked. The published dashboard keeps its own
+    # data/*.json registers with a different schema; validating them against ours would
+    # report someone else's correct file as broken.
+    _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from build import OWNED, path_for  # same resolution the builder uses
+    for name in OWNED:
+        path = path_for(name)
+        if not os.path.exists(path) or name == "demo_results":
             continue
-        doc = json.load(open(os.path.join(DATA, name), encoding="utf-8"))
+        doc = json.load(open(path, encoding="utf-8"))
         editorial = bool(doc.get("editorial"))
         blocks = doc.get("sections") or [{"columns": doc.get("columns", []), "rows": doc.get("rows", [])}]
         for b in blocks:
@@ -156,12 +167,13 @@ def check_row_sources(fails: list) -> dict:
                     v = row.get(c["key"])
                     if v in ("", None) and c.get("key") != "sources":
                         stats["blanks"] += 1
-        if name == "sources.json":
+        if name == "sources":
             for r in sources["rows"]:
                 if not re.match(r"^https?://", r.get("url", "")):
                     fail(f"V5 {r['src_id']} has no http(s) url", fails)
                 if r.get("verification") not in ("FETCHED", "FETCHED-VIA-SEARCH-SNIPPET",
-                                                 "INDEX-MEANS", "LINKED", "UNREACHABLE"):
+                                                 "INDEX-MEANS", "LINKED", "UNREACHABLE",
+                                                 "THIRD-PARTY-IN-REPO"):
                     fail(f"V5 {r['src_id']} has an unknown verification level "
                          f"{r.get('verification')!r}", fails)
     return stats

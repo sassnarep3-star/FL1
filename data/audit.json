@@ -6,8 +6,8 @@
   "editorial": true,
   "sections": [
     {
-      "title": "A. The repository as received",
-      "description": "Evidence gathered with git in this workspace; no inference.",
+      "title": "A. The repository at this branch's starting point — and what it is now",
+      "description": "Two facts, both verified with git in this workspace. (1) At commit e001e0a, the commit this branch was created from, the repository held exactly one tracked file. (2) By the time this branch was finished, main had been advanced by six merged pull requests from parallel sessions and now carries a published site, generated data files and its own set of registers. This audit reports both, because 'the repo was empty' is true of my base commit and false of main, and a reader needs to know which one a given claim describes.",
       "columns": [
         "item",
         {
@@ -33,76 +33,46 @@
       ],
       "rows": [
         {
-          "item": "Tracked files",
-          "finding": "Exactly one: README.md, 6 bytes, contents `# FL1` (no trailing newline beyond the header).",
-          "evidence": "`git ls-tree -r --name-only HEAD` at e001e0a; byte count via `ls -la`",
-          "consequence": "There is no existing data, schema, code, or site to review. Every requirement in the brief is therefore greenfield, and 'verify line by line' applies to new content rather than to corrections of old content.",
-          "sources": [
-            "SRC-024"
-          ]
+          "item": "Tracked files at branch base (e001e0a)",
+          "finding": "Exactly one: README.md, 6 bytes, contents `# FL1`.",
+          "evidence": "`git ls-tree -r --name-only e001e0a`; byte count via `wc -c`",
+          "consequence": "Nothing pre-existing constrained this session's design; every file under data/specs, engine, site and tests here is new work, not a modification of someone else's."
         },
         {
-          "item": "Commit history",
-          "finding": "One commit: e001e0a24c2ca5a432f6bd39cea3b5e6fcc035a2, 'Initial commit', authored 2026-11-14 11:47:48 +0900 by sassnix321-star <sassnix321@gmail.com>.",
-          "evidence": "`git log --format='%H %an %ae %ad %s'`",
-          "consequence": "No prior verification trail, no review history, no conventions to inherit. The registers in data/ are the first structure this repo has.",
-          "sources": [
-            "SRC-024"
-          ]
+          "item": "Commit history at branch base",
+          "finding": "One commit, 'Initial commit', 2026-11-14 11:47:48 +0900, author sassnarep3-star.",
+          "evidence": "`git log --format='%H %an %ae %ad %s' e001e0a`",
+          "consequence": "No prior verification trail to inherit or to check against."
         },
         {
-          "item": "Branches",
-          "finding": "Local `main` and `arena/c80caab4-fl1`; remote `origin/main` plus three further `arena/*-fl1` branches pushed by concurrent sessions while this session was working.",
-          "evidence": "`git branch -a`; `git ls-remote origin`",
-          "consequence": "The parallel-session protocol in the brief is live, not theoretical: see the coordination table below.",
-          "sources": [
-            "SRC-024"
-          ]
+          "item": "State of main when this branch was merged forward",
+          "finding": "154 tracked files: a published site at the repo root, `data/` registers and datasets, `scripts/`, `tools/`, `docs/computed/`, `.github/workflows/refresh.yml` and `verify.yml`, an `archive/` tree of superseded site versions, and 152 KB of fetched NFL data (games, closing lines, rosters, injuries) under `data/raw/`.",
+          "evidence": "`git ls-tree -r --name-only origin/main | wc -l`; `git show origin/main:data/raw/MANIFEST.json`",
+          "consequence": "This branch is an *addition* to a working project, not the project itself. Its audit therefore reports what it found and built, and defers to main on anything already published."
+        },
+        {
+          "item": "Licence at branch base",
+          "finding": "Absent. Still absent on main after six merges.",
+          "evidence": "`git ls-tree -r --name-only origin/main | grep -i license` returns nothing",
+          "consequence": "An MIT LICENSE was added on this branch. Since a repo with fetched third-party data and a strategy competition has real reuse and liability questions, the choice deserves an owner decision — see the flagged register."
+        },
+        {
+          "item": "Two register families now coexist",
+          "finding": "main carries `data/{sources,requirements,questions,suggestions,flags}.json` in its own schema (id style `S12`, `R01`, `F01`) feeding the published site; this branch carries the same five names plus eleven more under `data/specs/` (id style `SRC-012`, `R-13`, `F-1`) feeding the generated sub-site.",
+          "evidence": "`git show origin/main:data/requirements.json | head`; this branch's `data/specs/`",
+          "consequence": "Deliberate and reversible: the merge kept main's files byte-for-byte untouched and moved this branch's under `data/specs/` rather than overwriting a published register. The two sets are not yet reconciled; that reconciliation is listed as a decision for you, not something done silently in a merge commit."
         },
         {
           "item": "GitHub Pages",
-          "finding": "Not configured at start: `gh api repos/sassnix321/FL1/pages` returned 404 (\"Not Found\"), and the repository has no homepageUrl.",
-          "evidence": "`gh api repos/sassnix321/FL1/pages`; `gh repo view --json homepageUrl`",
-          "consequence": "Publication is part of the deliverable, not a pre-existing property; enabling it is the integration step.",
-          "sources": [
-            "SRC-024"
-          ]
+          "finding": "Configured and `built`, source `main` path `/`, legacy build, at https://sassnarep3-star.github.io/FL1/",
+          "evidence": "`gh api repos/sassnarep3-star/FL1/pages`",
+          "consequence": "Publication already works; this branch's contribution is a generated sub-site under `docs/pages/` plus the engine and registers, so no Pages configuration change was needed or attempted."
         },
         {
-          "item": "Licence",
-          "finding": "Absent — no LICENSE, LICENSE.md or COPYING at any path.",
-          "evidence": "`find . -path ./.git -prune -o -iname 'LICENSE*' -print` returned nothing",
-          "consequence": "Without a licence, default copyright applies and reuse by collaborators is legally unclear. An MIT LICENSE was added in this branch to unblock review and reuse; if a different licence (or none) is intended, say so and it will be changed.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "item": ".gitignore",
-          "finding": "Absent.",
-          "evidence": "`ls -a`",
-          "consequence": "A static site build plus Python would otherwise commit __pycache__, editor droppings and duplicated build output. Added in this branch.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "item": "CI / build",
-          "finding": "No workflows, no package manifest, no build script, no tests.",
-          "evidence": "No .github/, package.json, requirements.txt, Makefile or tests/ in the tree",
-          "consequence": "Everything the brief calls 'verification' had to be created from scratch: the build, the checker, and the tests that make the claims re-runnable.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "item": "Project identity",
-          "finding": "The repository is named FL1 with no description; nothing in it mentions NFL, betting, or analytics.",
-          "evidence": "`gh repo view` description field empty",
-          "consequence": "A reader arriving at the repo cannot tell what it is for. The landing page and README of this branch carry that purpose explicitly.",
-          "sources": [
-            "SRC-024"
-          ]
+          "item": "Real data now exists in the repo, fetched by another session",
+          "finding": "`data/raw/` holds games.csv (7,548 rows), closing_lines.csv (20,490), rosters.csv (28,617), win_totals.csv, injuries_2025.csv (4,442) with sha256s and a manifest naming nflverse/nfldata as the source and one mirror substitution.",
+          "evidence": "`git show origin/main:data/raw/MANIFEST.json`",
+          "consequence": "This changes what is *possible*: line history and results are now in-repo, so the correlation table and the closing-line gate are no longer blocked on a purchase — they are blocked on a licensing decision about a third-party source, which is a different and smaller question. See GAP-01 and the new flag below."
         }
       ]
     },
@@ -205,12 +175,19 @@
           "sources": [
             "SRC-024"
           ]
+        },
+        {
+          "check": "Collision with main's registers",
+          "expected": "Five register filenames unique to this branch",
+          "actual": "main had already published `data/{sources,requirements,questions,suggestions,flags}.json` with a different schema and different id vocabulary",
+          "how_it_was_confirmed": "`git ls-tree -r origin/main`; direct read of both versions during the merge",
+          "action_taken": "Main's files kept byte-for-byte; this branch's moved to `data/specs/` and the generator and verifier repointed to resolve from there first. Nothing deleted, nothing overwritten, and the divergence is flagged for you rather than averaged away."
         }
       ]
     },
     {
       "title": "C. Parallel-session coordination",
-      "description": "Four independent sessions were branched from the same commit and each wrote a task board claiming everything, because each could see only itself at claim time. This is the reconciliation actually performed.",
+      "description": "Six parallel sessions branched from the same commit and each wrote a board claiming everything, because each could see only itself at claim time. Main absorbed five of them through merged pull requests before this branch landed. This is the reconciliation actually performed, with nothing discarded.",
       "columns": [
         "branch",
         "what_it_contains",
@@ -229,39 +206,33 @@
       "rows": [
         {
           "branch": "arena/68fb582e-fl1",
-          "what_it_contains": "COORDINATION.md only (one commit): claims the site, scripts/, .github/, README.md and a source/verification framework.",
-          "content_overlap_with_this_branch": "Scope overlap on docs/ and verification; no file collisions (it touches no other file).",
-          "resolution": "Its claim to README.md is respected — this branch does not modify README.md. Its verification rule matches ours. No content to merge.",
-          "sources": [
-            "SRC-024"
-          ]
+          "what_it_contains": "COORDINATION.md and README.md (claims to site/, scripts/, .github/).",
+          "content_overlap_with_this_branch": "Scope overlap; no file collisions with this branch.",
+          "resolution": "Its README is on main and was not modified here. Its verification rule matches this branch's; nothing to merge."
         },
         {
           "branch": "arena/a7c0f9c5-fl1",
-          "what_it_contains": "COORDINATION.md only (one commit): nine tasks TASK-1…TASK-9 with an explicit rule that betting lines have no official NFL source and must be flagged unverified.",
-          "content_overlap_with_this_branch": "Same scope claim, no files beyond the board.",
-          "resolution": "Its TASK-3 caveat is the same conclusion our audit reached independently; retained in the merged board. No content to merge.",
-          "sources": [
-            "SRC-024"
-          ]
+          "what_it_contains": "A first site attempt plus depth-chart, leaderboard and five injury/standings CSVs; its independent 161-row transcription of the same Week 10 report.",
+          "content_overlap_with_this_branch": "Overlapping subject (injuries, leaderboard, depth charts) at different paths.",
+          "resolution": "Already merged to main (PR #2) and archived under `archive/v2/`. Main's board records that its 161 rows were cross-checked against a 345-row capture with 156 exact matches. This branch's own injury captures are a third, independent sample of the same file."
         },
         {
           "branch": "arena/89c32e23-fl1",
-          "what_it_contains": "A complete static site under docs/ (index, executive summary, injuries, strategies, suggestions, flagged review) plus a task board; two commits, last at 02:53 UTC.",
-          "content_overlap_with_this_branch": "Overlapping *subject matter*; deliberately different paths — its pages live in docs/, this branch's generated site lives in docs/pages/. No byte-level collision, so the union merge is clean.",
-          "resolution": "Merged without discarding it. Its pages are re-checked at integration; anything in them that lacks an official source is added to the Flagged-for-review register rather than deleted or rewritten. See F-8.",
-          "sources": [
-            "SRC-024"
-          ]
+          "what_it_contains": "A complete static site (index, executive summary, injuries, strategies, suggestions, flagged review).",
+          "content_overlap_with_this_branch": "Overlapping subject matter; its pages live at the repo root and under `archive/v1/`, this branch's generated pages live under `docs/pages/`.",
+          "resolution": "Merged (PR #1) and archived. Its label of 'Verified (source reachable)' for nfl.com/injuries is a weaker standard than this branch uses; recorded as a flag, not corrected in place."
+        },
+        {
+          "branch": "arena/3f677e8a-fl1, arena/ab82c93f-fl1, arena/34db7d1d-fl1",
+          "what_it_contains": "Depth charts for 31 of 32 clubs, 137 verified game results, a computed sub-site under docs/computed, a prop-correlations page, a weekly refresh workflow.",
+          "content_overlap_with_this_branch": "Substantial overlap on injuries, correlations and validation — solved differently and published first.",
+          "resolution": "Merged before this branch (PRs #13, #14, #16, #17). This branch adds no conflicting root page; its engine and registers sit beside theirs. Where its registers duplicate theirs in name, this branch's copy lives under `data/specs/`."
         },
         {
           "branch": "arena/c80caab4-fl1 (this one)",
-          "what_it_contains": "The registers, the engine, the generated site, the build and verify scripts, the tests, the licence and the ignore file.",
+          "what_it_contains": "Registers, a stdlib engine with 70 tests, a compliance veto, a generated 17-page sub-site with a publish gate, two independent injury captures, and the licence.",
           "content_overlap_with_this_branch": "n/a",
-          "resolution": "Acts as integrator: the three sibling branches above are merged into this branch before the pull request, and the merged tree is re-verified (links, sourcing, tests) before publication.",
-          "sources": [
-            "SRC-024"
-          ]
+          "resolution": "Merges origin/main in with `--no-commit`, resolves the five register collisions in main's favour, appends its own section to the authoritative board, and opens one pull request."
         }
       ]
     },

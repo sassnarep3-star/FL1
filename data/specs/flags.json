@@ -1,0 +1,396 @@
+{
+  "id": "flags",
+  "title": "Flagged for review",
+  "description": "Irregularities, unresolved verification items and open decisions. Nothing here blocks deployment — the brief is explicit that flagged items are published for after-the-fact review — and nothing here is a to-do we quietly did anyway. Each item says what a reviewer must decide or verify, and links the official source that settles it.",
+  "updated": "2026-11-14 (post-merge)",
+  "editorial": true,
+  "sections": [
+    {
+      "title": "A. Repository and process",
+      "columns": [
+        {
+          "key": "flag_id",
+          "label": "ID"
+        },
+        {
+          "key": "item",
+          "label": "Item"
+        },
+        {
+          "key": "detail",
+          "label": "What was found",
+          "html": true
+        },
+        {
+          "key": "severity",
+          "label": "Severity",
+          "render": "badge"
+        },
+        {
+          "key": "status",
+          "label": "Status",
+          "render": "badge"
+        },
+        {
+          "key": "reviewer_action",
+          "label": "What the reviewer must do",
+          "html": true
+        },
+        {
+          "key": "sources",
+          "label": "Source",
+          "render": "srclist"
+        }
+      ],
+      "rows": [
+        {
+          "flag_id": "F-1",
+          "item": "Repository contained no data, code, schema or tests",
+          "detail": "At this branch's base commit the repository held one 6-byte file. Since then main has been advanced by six merged pull requests and now carries a published site, its own registers, CI workflows and 20,490 fetched closing lines under data/raw/. Whether 'review line by line' should also cover that larger body of work is your call; this branch audited its own base and its own additions.",
+          "severity": "HIGH",
+          "status": "NEEDS REVIEW",
+          "reviewer_action": "Confirm no earlier repository or branch was intended to be the starting point; if one exists, this project should be re-scoped against it.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-2",
+          "item": "No licence",
+          "detail": "No LICENSE at branch base, and still none on main after six merges — a project-wide gap, not just this branch's. MIT was added here to unblock review and reuse.",
+          "severity": "MEDIUM",
+          "status": "RESOLVED — CONFIRM INTENT",
+          "reviewer_action": "Keep MIT, or name the licence you want (or none) and it will be replaced.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-3",
+          "item": "No .gitignore",
+          "detail": "Absent, so a static build plus Python would commit __pycache__, duplicate build output and editor files. Added in this branch.",
+          "severity": "LOW",
+          "status": "RESOLVED",
+          "reviewer_action": "None.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-4",
+          "item": "GitHub Pages not configured",
+          "detail": "GitHub Pages is configured and reporting `built`: source branch main, path /, legacy build, at https://sassnarep3-star.github.io/FL1/. Confirmed with `gh api repos/sassnarep3-star/FL1/pages` during this merge.",
+          "severity": "MEDIUM",
+          "status": "RESOLVED — verified live",
+          "reviewer_action": "After deployment, confirm the published URL and the source branch shown in Settings → Pages.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-5",
+          "item": "No live NFL data existed anywhere in the repo",
+          "detail": "There was no ingestion pipeline, so any 'finding' written into a table would necessarily have been an invention. This is why the site's tables are registers of sourced rules, gaps and methods rather than numbers.",
+          "severity": "HIGH",
+          "status": "MITIGATED BY DESIGN",
+          "reviewer_action": "Accept that the first numbers arrive with the first licensed data, or fund that licence (S-01).",
+          "sources": [
+            "SRC-020",
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-6",
+          "item": "Git author identity differs from the repository owner handle",
+          "detail": "Commits are authored by sassnix321-star <sassnix321@gmail.com> in a repo owned by sassnix321. Cosmetic, but it is the kind of mismatch worth a five-second check that no other identity is involved.",
+          "severity": "LOW",
+          "status": "OPEN — INFORMATIONAL",
+          "reviewer_action": "Confirm the git author and the GitHub account are both you.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-7",
+          "item": "Four sessions claimed the same scope",
+          "detail": "Six parallel sessions claimed the same scope; five were merged to main before this branch landed. This branch merged main in, kept main's five colliding registers untouched, and moved its own to data/specs/. The scope collision is resolved; the duplication of purpose is not — two register families and two site layers now coexist and need an owner decision on consolidation.",
+          "severity": "MEDIUM",
+          "status": "RESOLVED BY MERGE — DUPLICATION REMAINS",
+          "reviewer_action": "Decide the intended division of labour. This branch merged all three siblings additively rather than overwriting them; a different split can be re-cut without losing any of it.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-8",
+          "item": "Sibling site uses a weaker verification standard than the brief",
+          "detail": "The published site on main labels rows 'Verified (source reachable)' for nfl.com/injuries and nfl.com/standings. Reachability is not verification of a value. This branch's registers keep four levels (FETCHED, INDEX-MEANS, LINKED, UNREACHABLE) and label every source with the one that applies. No sibling file was edited to make that point.",
+          "severity": "MEDIUM",
+          "status": "NEEDS REVIEW — NOT CORRECTED IN PLACE",
+          "reviewer_action": "Accept the merge as-is and treat 'reachable' as a weaker tier, or ask that their two 'Verified (source reachable)' rows be relabelled. Nothing was deleted and no value was invented.",
+          "sources": [
+            "SRC-001",
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-9",
+          "item": "Sibling site states 'no manual data input' while no ingestion exists",
+          "detail": "Main now has real fetch scripts, a weekly refresh workflow and a data/raw manifest with sha256s, so 'no manual input' is now substantially true of the published site. This branch adds an engine that consumes committed registers instead of hand-maintained HTML. What remains true: neither this sandbox nor the CI workflow can reach nfl.com, so the collector has still never run against a live page here.",
+          "severity": "LOW",
+          "status": "NEEDS REVIEW",
+          "reviewer_action": "Either add the collector (blocked on a host: Q-19, GAP-18) or soften the claim.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-10",
+          "item": "Two register families, two site layers, one repository",
+          "detail": "The published dashboard reads data/*.json in its own schema; this branch's generated sub-site reads data/specs/*.json in a different one. The same fact may appear as S12 there and SRC-012 here, and the two registers disagree about what has been verified. Nothing was unioned mechanically: merging two incompatible schemas would have destroyed information on both sides.",
+          "severity": "MEDIUM",
+          "status": "NEEDS REVIEW",
+          "reviewer_action": "Choose one: (a) keep two layers, treating data/specs as the research register and data/*.json as the published one with a mapping table; (b) migrate this branch's rows into main's schema; or (c) adopt this branch's schema and write a converter. Option (b) is cheapest and recommended.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-11",
+          "item": "Third-party data now exists in-repo, with a licence question attached",
+          "detail": "data/raw/ contains closing_lines.csv (20,490 rows), games.csv (7,548) and injuries_2025.csv (4,422) fetched from nflverse/nfldata with sha256s in data/raw/MANIFEST.json. This session ran its engine on that data: engine/measure.py now publishes a measured C-01 correlation (rho +0.00696, 95% CI [-0.03324, +0.04831], n=6,813), the parlay-pricing gap it implies (joint hit rate 24.35% against a 26.42% break-even: 2.07 points of loss), and a real-data test of the peer-reviewed underdog hypothesis (hit rate 45.8% over 1,302 bets, ROI -11.6%, gate G-2b fails). Along the way it caught and resolved a sign-convention ambiguity using a sibling session's verification record (data/verification-d.tsv V8). Caveats that remain: third-party provenance, and one file taken from a mirror because the upstream CDN was unreachable (recorded in the manifest).",
+          "severity": "HIGH",
+          "status": "EXECUTED INTERNALLY — PROMOTION AWAITING YOUR DECISION",
+          "reviewer_action": "Decide whether values computed from in-repo third-party data may be published as sourced numbers. Promotion of C-01 from 'measured internally' to a published rho is then a one-line change plus a provenance label; the engine, the interval and the plausibility checks already exist.",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "flag_id": "F-12",
+          "item": "This branch does not modify the published site",
+          "detail": "Everything here is additive: new files under data/specs, engine, site, tests and docs/pages, plus append-only edits to COORDINATION.md and .gitignore. The root landing page, the sibling sub-site and the CI workflows are untouched; the generated pages link to them only where those files exist in the tree.",
+          "severity": "LOW",
+          "status": "RESOLVED — BY DESIGN",
+          "reviewer_action": "None, unless you want docs/pages folded into the main navigation — a small integration task.",
+          "sources": [
+            "SRC-024"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "B. Verification items: official paths that do not exist",
+      "description": "Each of these was an expected official source that is not where the internet says it is. Recorded because a later session will otherwise repeat the search, and because the absence changes the design.",
+      "columns": [
+        {
+          "key": "check_id",
+          "label": "ID"
+        },
+        {
+          "key": "expected",
+          "label": "Expected source"
+        },
+        {
+          "key": "found",
+          "label": "What was actually returned",
+          "html": true
+        },
+        {
+          "key": "impact",
+          "label": "Design impact",
+          "html": true
+        },
+        {
+          "key": "needs",
+          "label": "What would settle it",
+          "html": true
+        },
+        {
+          "key": "sources",
+          "label": "Source",
+          "render": "srclist"
+        }
+      ],
+      "rows": [
+        {
+          "check_id": "V-1",
+          "expected": "https://www.nfl.com/teams/new-england-patriots/depth-chart — the official depth chart",
+          "found": "The league's '404 - Flag on the Play' page, fetched in this session",
+          "impact": "The brief's 2nd/3rd/4th-string requirement cannot be sourced from the league site as assumed. The deficiency index now derives the replacement from roster-eligibility rules plus our own snap-share estimate, labelled as an estimate.",
+          "needs": "Either 32 club-site parsers, or a documented decision to use the derived shadow chart permanently.",
+          "sources": [
+            "SRC-009",
+            "SRC-003",
+            "SRC-024"
+          ]
+        },
+        {
+          "check_id": "V-2",
+          "expected": "https://www.nfl.com/teams/transactions — the official transaction log",
+          "found": "Redirects to the club directory (all 32 teams, no transactions)",
+          "impact": "Roster-move evidence must be taken from club pages or the league's news feed, with per-club parsing rather than one endpoint.",
+          "needs": "Locate the current transactions endpoint and record it in the source register.",
+          "sources": [
+            "SRC-009",
+            "SRC-024"
+          ]
+        },
+        {
+          "check_id": "V-3",
+          "expected": "https://operations.nfl.com/the-rules and https://operations.nfl.com/the-rules/nfl-injury-rules",
+          "found": "Both return the NFL 404 page; the operations homepage instead exposes a '2026 NFL RULEBOOK' entry point",
+          "impact": "Rules citations must be rebuilt from live navigation. The injury-report *definitions* were sourced from the league's Competition Committee release instead, which is citable.",
+          "needs": "Pin the 2026 rulebook URL and the current injury-report policy text into the register.",
+          "sources": [
+            "SRC-004",
+            "SRC-002",
+            "SRC-024"
+          ]
+        },
+        {
+          "check_id": "V-4",
+          "expected": "Nevada Gaming Control Board revenue-report landing pages",
+          "found": "Two plausible paths on gaming.nv.gov returned a plain '404 Not Found'; only a direct monthly-report PDF path is evidenced, and only via a search index",
+          "impact": "No Nevada hold percentage is published anywhere in this project, including the widely-quoted parlay-card figures. The hold gate (G-7) is therefore BLOCKED, not passed.",
+          "needs": "Open the monthly report PDF (or the correct landing page) and record the sports and parlay-card win percentages with the report period.",
+          "sources": [
+            "SRC-013",
+            "SRC-012",
+            "SRC-024"
+          ]
+        },
+        {
+          "check_id": "V-5",
+          "expected": "An official league endpoint for the final inactive list",
+          "found": "Not identified in this pass; the game-status report is verified, the Sunday list is not",
+          "impact": "The Sunday re-price step of the model is specified but unverified; our committed number is the Friday report until this is settled.",
+          "needs": "Find the official gameday-operations reference for inactive-list timing, then instrument a timestamped capture job.",
+          "sources": [
+            "SRC-001",
+            "SRC-002",
+            "SRC-024"
+          ]
+        },
+        {
+          "check_id": "V-6",
+          "expected": "A canonical URL for Kelly (1956)",
+          "found": "Bibliographic record confirmed across three independent reference lists (Bell System Technical Journal 35(4):917-926); no publisher URL was confirmed, and one guessed domain does not exist",
+          "impact": "The staking section cites the citation, not a link. Deliberate: a dead or invented DOI on a page whose standard is 'no hallucinations' would be worse than no DOI.",
+          "needs": "Locate the publisher's archival link and update the register row.",
+          "sources": [
+            "SRC-019",
+            "SRC-024"
+          ]
+        },
+        {
+          "check_id": "V-7",
+          "expected": "Verification of the academic papers cited for market inefficiency",
+          "found": "Most were verified at abstract or reference-list level through publisher pages (Springer link fetched in full for one); paywalled bodies were not read",
+          "impact": "Those findings are used as *motivation* for signals, never as coefficients or thresholds. Each is labelled accordingly in the source register.",
+          "needs": "Read the papers properly before any of their effect sizes is used to set a gate threshold.",
+          "sources": [
+            "SRC-015",
+            "SRC-017",
+            "SRC-018",
+            "SRC-016",
+            "SRC-024"
+          ]
+        },
+        {
+          "check_id": "V-8",
+          "expected": "Roster rules current for the 2026 league year",
+          "found": "The official roster-FAQ article is written around the 2022 league year (it still discusses suspended COVID protocols)",
+          "impact": "Every roster constant (four-game IR minimum, eight designations, 47/48 gameday active) is marked 'as-described 2022' and must be re-confirmed before it is coded.",
+          "needs": "Read the 2026 rulebook and the current CBA summary; update the register.",
+          "sources": [
+            "SRC-003",
+            "SRC-005",
+            "SRC-004",
+            "SRC-024"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "C. Decisions that are not ours to make",
+      "description": "The brief says there should be no manual input from you. These are the items where stopping is the correct behaviour: each one requires money, a licence, a legal opinion, or an account, and an agent that 'decided' them would be manufacturing a mandate.",
+      "columns": [
+        "decision_id",
+        "decision",
+        "why_an_agent_cannot_make_it",
+        "linked_item",
+        {
+          "key": "sources",
+          "label": "Official source",
+          "render": "srclist"
+        }
+      ],
+      "rows": [
+        {
+          "decision_id": "D-1",
+          "decision": "Buy a licensed historical lines feed",
+          "why_an_agent_cannot_make_it": "It is a purchase with recurring cost and a contract that limits what we may publish. Everything analytical is blocked behind it.",
+          "linked_item": "S-01, Q-02, GAP-01",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "decision_id": "D-2",
+          "decision": "Real money or paper",
+          "why_an_agent_cannot_make_it": "It changes the legal, tax and safety profile of the entire project. The repo has no bankroll policy or jurisdiction, so there is nothing to infer from.",
+          "linked_item": "Q-01, R-18",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "decision_id": "D-3",
+          "decision": "Cash prizes for the leaderboard",
+          "why_an_agent_cannot_make_it": "Prize, chance and consideration is a regulated combination. The design is ready with non-cash rewards; the legal question belongs to counsel.",
+          "linked_item": "Q-13, GAP-14, S-24",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "decision_id": "D-4",
+          "decision": "Risk limits and staking caps",
+          "why_an_agent_cannot_make_it": "They encode loss tolerance. The engine ships conservative defaults (quarter-Kelly, 2% cap, exposure clustering) precisely so that no one has to guess on your behalf.",
+          "linked_item": "Q-05, R-13",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "decision_id": "D-5",
+          "decision": "Provision a host for the collector",
+          "why_an_agent_cannot_make_it": "Requires credentials and a bill. This sandbox has no outbound access to the league or the regulators, which is why ingestion is written and unit-tested but has never run against a live page.",
+          "linked_item": "Q-19, GAP-18",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "decision_id": "D-6",
+          "decision": "Scraping policy for club and league pages",
+          "why_an_agent_cannot_make_it": "The league's data estate is exclusively distributed, so 'just scrape it' is a legal and durability question, not an engineering preference.",
+          "linked_item": "Q-09, S-01",
+          "sources": [
+            "SRC-024"
+          ]
+        },
+        {
+          "decision_id": "D-7",
+          "decision": "Reconcile the four parallel sessions",
+          "why_an_agent_cannot_make_it": "It is an organisational decision about who owns the published site. This session merged additively and changed no sibling file; the alternative splits are yours to choose.",
+          "linked_item": "F-7, F-10, Q-18",
+          "sources": [
+            "SRC-024"
+          ]
+        }
+      ]
+    }
+  ]
+}

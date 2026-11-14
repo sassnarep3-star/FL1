@@ -7,58 +7,381 @@
     {
       "title": "A. What we are measuring",
       "description": "Not 'are these events related' — they obviously are — but 'how much does treating them as independent overstate the combined price'.",
-      "columns": [ "key", "definition", "note" ],
+      "columns": [
+        "key",
+        "definition",
+        "note"
+      ],
       "rows": [
-        { "key": "rho (pair)", "definition": "Pearson correlation of the two leg win indicators, on the population of games both legs were offered on, at the moment of pricing (pre-game).", "note": "This is the quantity a parlay price actually depends on, not the correlation of underlying stat lines. Computed as corr(I_A, I_B) over our settled sample; reported with a bootstrap interval and an n." },
-        { "key": "Odds product error", "definition": "fair_parlay_prob / (p_A x p_B) - 1, i.e. how wrong multiplying single-leg probabilities is.", "note": "For positively correlated legs this is positive: the true combined probability is higher than the product, so a bettor multiplying singles believes they have more value than they do. For negatively correlated legs it inverts. This ratio, not rho, is what a parlay decision should read." },
-        { "key": "Joint-vs-marginal model", "definition": "Simulate the game (score process, drive outcomes, player stat generation), evaluate both legs inside one simulation, and read the joint probability directly.", "note": "Preferred to analytic correlation because props are non-linear functions of the same simulated game (a QB's yards and his receiver's catches share drives, possessions and game script, not a linear factor). The simulator is engine/correlation.py; its inputs are our own distributions, and it inherits S2's unverified parameters honestly." },
-        { "key": "Break-even (singles)", "definition": "1 / (1 + decimal payout); at -110 that is 52.38%.", "note": "Derived, and cross-checked against the note in the fetched academic source; used as the hurdle in G-2." },
-        { "key": "Parlay hurdle", "definition": "Product of the individual legs' break-evens, corrected by the measured dependence.", "note": "The reason parlays are dangerous even when each leg has an edge: if the operator's combined price already reflects the dependence, our apparent 'extra value from correlation' is not extra." },
-        { "key": "House-rule constraint", "definition": "A non-SGP parlay may never contain two offers whose outcomes might be related; if they slip through, the operator may void the affected legs; an SGP with a void or pushed leg is repriced from the odds available at bet placement.", "note": "Verified from operator house rules as filed with a state regulator, and mirrored on a licensed property's own rules document. Version-stamped, so re-check before coding settlement." },
-        { "key": "Regulator footnote", "definition": "Nevada requires books to maintain win-to-write percentages for each sport and for sports parlay cards as a separate line.", "note": "The regulatory framework itself treats parlays as a structurally different product. What the actual percentage is, we have not verified, so no number is published (GAP-08)." }
+        {
+          "key": "rho (pair)",
+          "definition": "Pearson correlation of the two leg win indicators, on the population of games both legs were offered on, at the moment of pricing (pre-game).",
+          "note": "This is the quantity a parlay price actually depends on, not the correlation of underlying stat lines. Computed as corr(I_A, I_B) over our settled sample; reported with a bootstrap interval and an n."
+        },
+        {
+          "key": "Odds product error",
+          "definition": "fair_parlay_prob / (p_A x p_B) - 1, i.e. how wrong multiplying single-leg probabilities is.",
+          "note": "For positively correlated legs this is positive: the true combined probability is higher than the product, so a bettor multiplying singles believes they have more value than they do. For negatively correlated legs it inverts. This ratio, not rho, is what a parlay decision should read."
+        },
+        {
+          "key": "Joint-vs-marginal model",
+          "definition": "Simulate the game (score process, drive outcomes, player stat generation), evaluate both legs inside one simulation, and read the joint probability directly.",
+          "note": "Preferred to analytic correlation because props are non-linear functions of the same simulated game (a QB's yards and his receiver's catches share drives, possessions and game script, not a linear factor). The simulator is engine/correlation.py; its inputs are our own distributions, and it inherits S2's unverified parameters honestly."
+        },
+        {
+          "key": "Break-even (singles)",
+          "definition": "1 / (1 + decimal payout); at -110 that is 52.38%.",
+          "note": "Derived, and cross-checked against the note in the fetched academic source; used as the hurdle in G-2."
+        },
+        {
+          "key": "Parlay hurdle",
+          "definition": "Product of the individual legs' break-evens, corrected by the measured dependence.",
+          "note": "The reason parlays are dangerous even when each leg has an edge: if the operator's combined price already reflects the dependence, our apparent 'extra value from correlation' is not extra."
+        },
+        {
+          "key": "House-rule constraint",
+          "definition": "A non-SGP parlay may never contain two offers whose outcomes might be related; if they slip through, the operator may void the affected legs; an SGP with a void or pushed leg is repriced from the odds available at bet placement.",
+          "note": "Verified from operator house rules as filed with a state regulator, and mirrored on a licensed property's own rules document. Version-stamped, so re-check before coding settlement."
+        },
+        {
+          "key": "Regulator footnote",
+          "definition": "Nevada requires books to maintain win-to-write percentages for each sport and for sports parlay cards as a separate line.",
+          "note": "The regulatory framework itself treats parlays as a structurally different product. What the actual percentage is, we have not verified, so no number is published (GAP-08)."
+        }
       ]
     },
     {
       "title": "B. Pair table — rho deliberately blank, sign prior labelled as a prior",
       "columns": [
-        { "key": "pair_id", "label": "ID" },
-        { "key": "leg_a", "label": "Leg A" },
-        { "key": "leg_b", "label": "Leg B" },
-        { "key": "mechanism", "label": "Dependence mechanism" },
-        { "key": "rho", "label": "rho", "render": "blankflag" },
-        { "key": "prior_sign", "label": "Prior direction (not a measurement)" },
-        { "key": "treatment", "label": "Treatment rule in our system" },
-        { "key": "measure", "label": "How we will measure it" },
-        { "key": "sources", "label": "Source", "render": "srclist" }
+        {
+          "key": "pair_id",
+          "label": "ID"
+        },
+        {
+          "key": "leg_a",
+          "label": "Leg A"
+        },
+        {
+          "key": "leg_b",
+          "label": "Leg B"
+        },
+        {
+          "key": "mechanism",
+          "label": "Dependence mechanism"
+        },
+        {
+          "key": "rho",
+          "label": "rho",
+          "render": "blankflag"
+        },
+        {
+          "key": "prior_sign",
+          "label": "Prior direction (not a measurement)"
+        },
+        {
+          "key": "treatment",
+          "label": "Treatment rule in our system"
+        },
+        {
+          "key": "measure",
+          "label": "How we will measure it"
+        },
+        {
+          "key": "sources",
+          "label": "Source",
+          "render": "srclist"
+        }
       ],
       "rows": [
-        { "pair_id": "C-01", "leg_a": "Home spread -3.5", "leg_b": "Game total O 44.5", "mechanism": "Both driven by the same scoring process; a high-scoring script raises the favourite's win probability and the Over's simultaneously.", "rho": "", "prior_sign": "positive, magnitude to be measured", "treatment": "SGP only; never allow as a plain parlay leg pair — the house rules bar related outcomes outside an SGP.", "measure": "corr of settled indicators over every season we have prices for; bootstrap 2000 resamples", "sources": ["SRC-014"] },
-        { "pair_id": "C-02", "leg_a": "1H spread", "leg_b": "Game spread", "mechanism": "Nearly the same event: a first-half lead is a large share of a game win, especially for a heavy favourite.", "rho": "", "prior_sign": "strongly positive", "treatment": "Treat as one exposure for bankroll purposes regardless of how it prices; this is the clearest 'two bets, one position' case in the book.", "measure": "corr plus the conditional P(win game | win half) on our own results", "sources": ["SRC-014", "SRC-012"] },
-        { "pair_id": "C-03", "leg_a": "Team A team total O", "leg_b": "Team B team total O", "mechanism": "Shared pace and shared scoring environment, offset by the zero-sum element of a closer game; sign is genuinely ambiguous a priori.", "rho": "", "prior_sign": "UNVERIFIED — do not assume sign", "treatment": "Priced only from the joint simulation, never from multiplication.", "measure": "the pair that best tests whether our simulation reproduces the operator's SGP price", "sources": ["SRC-014"] },
-        { "pair_id": "C-04", "leg_a": "Game total O", "leg_b": "Team A team total O", "mechanism": "Arithmetic containment: Team A's points are part of the total.", "rho": "", "prior_sign": "strongly positive", "treatment": "Allowed in SGP; flagged as high-dependence in the exposure cluster so it cannot silently double a view.", "measure": "immediate, from historical score pairs", "sources": ["SRC-014"] },
-        { "pair_id": "C-05", "leg_a": "QB passing yards O", "leg_b": "WR1 receiving yards O", "mechanism": "Same drives, same targets, and game-script dependence: a trailing QB throws more to his top option.", "rho": "", "prior_sign": "strongly positive", "treatment": "The canonical prop-combo pair: priced only jointly; singles remain independent bets.", "measure": "joint simulation from our own possession model, validated against settled data once we have it", "sources": ["SRC-014"] },
-        { "pair_id": "C-06", "leg_a": "RB rushing attempts U", "leg_b": "that team's total U", "mechanism": "Shared play-action view of the game script rather than a mechanical link.", "rho": "", "prior_sign": "positive if the view is 'run the ball, keep it low'", "treatment": "Allowed; must be shown as one view with one budget, since the two legs are the same bet in different clothes.", "measure": "conditional distribution of team points given attempt volume in our logs", "sources": ["SRC-014"] },
-        { "pair_id": "C-07", "leg_a": "Defensive-player sack O", "leg_b": "Opponent QB completion attempts U", "mechanism": "Common cause: pressure reduces dropbacks and completions; but sacks can also come on obvious-passing long downs, which cuts the other way.", "rho": "", "prior_sign": "UNVERIFIED — plausible both ways", "treatment": "Refuse in parlays until measured; this pair is where a 'sack + under' narrative becomes a coin flip dressed as a thesis.", "measure": "measure both the marginal and the script-conditioned correlation before allowing it", "sources": ["SRC-014"] },
-        { "pair_id": "C-08", "leg_a": "Player prop A (any player)", "leg_b": "Prop on that player's availability-driven usage (e.g. backup RB attempts)", "mechanism": "Our deficiency index creates the dependency: if the starter is Out, the usage leg becomes both more likely and better priced by us than by the market.", "rho": "", "prior_sign": "positive by construction of the feature", "treatment": "This is the one place where correlation is generated by our own information edge rather than by market mechanics — so it must be disclosed as model-derived, not measured from prices.", "measure": "compare the pair's joint probability under our availability scenarios versus the base case", "sources": ["SRC-001", "SRC-014"] },
-    { "pair_id": "C-09", "leg_a": "Cross-game: two same-day spreads", "leg_b": "Cross-game: same slate", "mechanism": "Weak but non-zero: shared weather systems, shared officiating philosophy slate, shared rest patterns and identical market hours.", "rho": "", "prior_sign": "near zero, but not exactly zero", "treatment": "Cross-game parlays priced as independent, with a residual dependence allowance; do not market the independence as a feature.", "measure": "test on the slate-level residual correlation of our CLV, not on outcomes", "sources": ["SRC-016"] },
-        { "pair_id": "C-10", "leg_a": "Same-team, opposite-direction legs (e.g. team total O and opponent spread U)", "leg_b": "within one SGP", "mechanism": "Negatively dependent through margin; also a common accidental hedge that looks like two edges.", "rho": "", "prior_sign": "negative", "treatment": "Flag and net the exposures: a negative-correlation pair can be an unintended partial refund of a bad bet rather than a second bet.", "measure": "corr on settled indicators; publish the net exposure view", "sources": ["SRC-014"] },
-        { "pair_id": "C-11", "leg_a": "Player prop leg that is an injury-status proxy", "leg_b": "any leg", "mechanism": "The league asks operators not to offer wagers whose subject is a player injury, and treats a single person's one-play decision as prohibited.", "rho": "n/a", "prior_sign": "excluded", "treatment": "Hard refuse at the compliance gate before correlation is even considered.", "measure": "n/a", "sources": ["SRC-008"] },
-        { "pair_id": "C-12", "leg_a": "Both teams' 'to score first'", "leg_b": "plus game total", "mechanism": "Score-first is a script marker: it correlates with the eventual winner and weakly with the total.", "rho": "", "prior_sign": "positive with the winner leg", "treatment": "Allowed in SGP only; check whether the operator's SGP price already captures it before claiming value.", "measure": "event-level resimulation from our drive model", "sources": ["SRC-014"] },
-        { "pair_id": "C-13", "leg_a": "Any two legs from the same game in a plain (non-SGP) parlay", "leg_b": "—", "mechanism": "Prohibited by house rule, so the question is academic outside an SGP.", "rho": "n/a", "prior_sign": "n/a", "treatment": "Reject at bet construction. If the offer somehow exists, we assume it will be voided on settlement, and we score it that way in any backtest.", "measure": "n/a", "sources": ["SRC-014"] },
-        { "pair_id": "C-14", "leg_a": "Prop-combo with a voidable leg (player ruled out after bet placement)", "leg_b": "—", "mechanism": "Settlement mechanic, not statistical dependence — but it dominates realised parlay value because the operator reprices rather than pays.", "rho": "n/a", "prior_sign": "n/a", "treatment": "Model the void-and-reprice path explicitly in backtests; a combo built on a Friday designation is a bet on the reprice rule as much as on the player.", "measure": "read the current filed rule version and encode the exact repricing convention", "sources": ["SRC-014"] },
-        { "pair_id": "C-15", "leg_a": "Parlay of 4+ positively correlated SGP legs", "leg_b": "—", "mechanism": "Error amplification: an rho estimate that is wrong by 0.05 compounds across legs, so the combined 'edge' can be pure model error.", "rho": "", "prior_sign": "n/a", "treatment": "Cap SGP legs at 3 in v1 and require the joint price to be quoted, not derived from our singles.", "measure": "sensitivity of combined fair value to +/-0.05 perturbations of each pairwise rho, published per bet", "sources": ["SRC-016", "SRC-014"] }
+        {
+          "pair_id": "C-01",
+          "leg_a": "Home spread -3.5",
+          "leg_b": "Game total O 44.5",
+          "mechanism": "Both driven by the same scoring process; a high-scoring script raises the favourite's win probability and the Over's simultaneously.",
+          "rho": "",
+          "prior_sign": "positive, magnitude to be measured",
+          "treatment": "SGP only; never allow as a plain parlay leg pair — the house rules bar related outcomes outside an SGP.",
+          "measure": "corr of settled indicators over every season we have prices for; bootstrap 2000 resamples",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-02",
+          "leg_a": "1H spread",
+          "leg_b": "Game spread",
+          "mechanism": "Nearly the same event: a first-half lead is a large share of a game win, especially for a heavy favourite.",
+          "rho": "",
+          "prior_sign": "strongly positive",
+          "treatment": "Treat as one exposure for bankroll purposes regardless of how it prices; this is the clearest 'two bets, one position' case in the book.",
+          "measure": "corr plus the conditional P(win game | win half) on our own results",
+          "sources": [
+            "SRC-014",
+            "SRC-012"
+          ]
+        },
+        {
+          "pair_id": "C-03",
+          "leg_a": "Team A team total O",
+          "leg_b": "Team B team total O",
+          "mechanism": "Shared pace and shared scoring environment, offset by the zero-sum element of a closer game; sign is genuinely ambiguous a priori.",
+          "rho": "",
+          "prior_sign": "UNVERIFIED — do not assume sign",
+          "treatment": "Priced only from the joint simulation, never from multiplication.",
+          "measure": "the pair that best tests whether our simulation reproduces the operator's SGP price",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-04",
+          "leg_a": "Game total O",
+          "leg_b": "Team A team total O",
+          "mechanism": "Arithmetic containment: Team A's points are part of the total.",
+          "rho": "",
+          "prior_sign": "strongly positive",
+          "treatment": "Allowed in SGP; flagged as high-dependence in the exposure cluster so it cannot silently double a view.",
+          "measure": "immediate, from historical score pairs",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-05",
+          "leg_a": "QB passing yards O",
+          "leg_b": "WR1 receiving yards O",
+          "mechanism": "Same drives, same targets, and game-script dependence: a trailing QB throws more to his top option.",
+          "rho": "",
+          "prior_sign": "strongly positive",
+          "treatment": "The canonical prop-combo pair: priced only jointly; singles remain independent bets.",
+          "measure": "joint simulation from our own possession model, validated against settled data once we have it",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-06",
+          "leg_a": "RB rushing attempts U",
+          "leg_b": "that team's total U",
+          "mechanism": "Shared play-action view of the game script rather than a mechanical link.",
+          "rho": "",
+          "prior_sign": "positive if the view is 'run the ball, keep it low'",
+          "treatment": "Allowed; must be shown as one view with one budget, since the two legs are the same bet in different clothes.",
+          "measure": "conditional distribution of team points given attempt volume in our logs",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-07",
+          "leg_a": "Defensive-player sack O",
+          "leg_b": "Opponent QB completion attempts U",
+          "mechanism": "Common cause: pressure reduces dropbacks and completions; but sacks can also come on obvious-passing long downs, which cuts the other way.",
+          "rho": "",
+          "prior_sign": "UNVERIFIED — plausible both ways",
+          "treatment": "Refuse in parlays until measured; this pair is where a 'sack + under' narrative becomes a coin flip dressed as a thesis.",
+          "measure": "measure both the marginal and the script-conditioned correlation before allowing it",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-08",
+          "leg_a": "Player prop A (any player)",
+          "leg_b": "Prop on that player's availability-driven usage (e.g. backup RB attempts)",
+          "mechanism": "Our deficiency index creates the dependency: if the starter is Out, the usage leg becomes both more likely and better priced by us than by the market.",
+          "rho": "",
+          "prior_sign": "positive by construction of the feature",
+          "treatment": "This is the one place where correlation is generated by our own information edge rather than by market mechanics — so it must be disclosed as model-derived, not measured from prices.",
+          "measure": "compare the pair's joint probability under our availability scenarios versus the base case",
+          "sources": [
+            "SRC-001",
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-09",
+          "leg_a": "Cross-game: two same-day spreads",
+          "leg_b": "Cross-game: same slate",
+          "mechanism": "Weak but non-zero: shared weather systems, shared officiating philosophy slate, shared rest patterns and identical market hours.",
+          "rho": "",
+          "prior_sign": "near zero, but not exactly zero",
+          "treatment": "Cross-game parlays priced as independent, with a residual dependence allowance; do not market the independence as a feature.",
+          "measure": "test on the slate-level residual correlation of our CLV, not on outcomes",
+          "sources": [
+            "SRC-016"
+          ]
+        },
+        {
+          "pair_id": "C-10",
+          "leg_a": "Same-team, opposite-direction legs (e.g. team total O and opponent spread U)",
+          "leg_b": "within one SGP",
+          "mechanism": "Negatively dependent through margin; also a common accidental hedge that looks like two edges.",
+          "rho": "",
+          "prior_sign": "negative",
+          "treatment": "Flag and net the exposures: a negative-correlation pair can be an unintended partial refund of a bad bet rather than a second bet.",
+          "measure": "corr on settled indicators; publish the net exposure view",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-11",
+          "leg_a": "Player prop leg that is an injury-status proxy",
+          "leg_b": "any leg",
+          "mechanism": "The league asks operators not to offer wagers whose subject is a player injury, and treats a single person's one-play decision as prohibited.",
+          "rho": "n/a",
+          "prior_sign": "excluded",
+          "treatment": "Hard refuse at the compliance gate before correlation is even considered.",
+          "measure": "n/a",
+          "sources": [
+            "SRC-008"
+          ]
+        },
+        {
+          "pair_id": "C-12",
+          "leg_a": "Both teams' 'to score first'",
+          "leg_b": "plus game total",
+          "mechanism": "Score-first is a script marker: it correlates with the eventual winner and weakly with the total.",
+          "rho": "",
+          "prior_sign": "positive with the winner leg",
+          "treatment": "Allowed in SGP only; check whether the operator's SGP price already captures it before claiming value.",
+          "measure": "event-level resimulation from our drive model",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-13",
+          "leg_a": "Any two legs from the same game in a plain (non-SGP) parlay",
+          "leg_b": "—",
+          "mechanism": "Prohibited by house rule, so the question is academic outside an SGP.",
+          "rho": "n/a",
+          "prior_sign": "n/a",
+          "treatment": "Reject at bet construction. If the offer somehow exists, we assume it will be voided on settlement, and we score it that way in any backtest.",
+          "measure": "n/a",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-14",
+          "leg_a": "Prop-combo with a voidable leg (player ruled out after bet placement)",
+          "leg_b": "—",
+          "mechanism": "Settlement mechanic, not statistical dependence — but it dominates realised parlay value because the operator reprices rather than pays.",
+          "rho": "n/a",
+          "prior_sign": "n/a",
+          "treatment": "Model the void-and-reprice path explicitly in backtests; a combo built on a Friday designation is a bet on the reprice rule as much as on the player.",
+          "measure": "read the current filed rule version and encode the exact repricing convention",
+          "sources": [
+            "SRC-014"
+          ]
+        },
+        {
+          "pair_id": "C-15",
+          "leg_a": "Parlay of 4+ positively correlated SGP legs",
+          "leg_b": "—",
+          "mechanism": "Error amplification: an rho estimate that is wrong by 0.05 compounds across legs, so the combined 'edge' can be pure model error.",
+          "rho": "",
+          "prior_sign": "n/a",
+          "treatment": "Cap SGP legs at 3 in v1 and require the joint price to be quoted, not derived from our singles.",
+          "measure": "sensitivity of combined fair value to +/-0.05 perturbations of each pairwise rho, published per bet",
+          "sources": [
+            "SRC-016",
+            "SRC-014"
+          ]
+        }
       ]
     },
     {
       "title": "C. Reading the blank rho column",
       "description": "Why the most valuable thing this table does is refuse to fill itself in.",
-      "columns": [ "item", "explanation" ],
+      "columns": [
+        "item",
+        "explanation"
+      ],
       "rows": [
-        { "item": "The blank is the finding", "explanation": "We were asked to determine correlation values. The determination is that the values require a joint sample of prices and settled outcomes we do not yet hold, and that the estimate cannot be sourced from any official NFL or regulator page — the league does not publish betting lines at all. A number written here today would be decoration." },
-        { "item": "What we can compute without any purchase", "explanation": "Correlations between two markets whose outcomes are determined by official game results (spreads, totals, team totals, stat props) can be measured from historical scores alone, and score history is derivable from official game data we are permitted to collect for internal use. That is the first thing to build after the collection decision (Q-09) is made: it closes C-01, C-02, C-04, C-10 and most of the prop pairs at zero cost. It gives outcome correlation, but not correlation-at-the-priced-moment, which is what parlay value actually needs." },
-        { "item": "What needs money", "explanation": "The pricing side: the operator's posted SGP price against its own singles at the same second. That is the only way to test whether the operator has already taken the correlation, and it is the difference between an edge and an artefact. Hence S-01." },
-        { "item": "Practical rule until then", "explanation": "Singles only. A parlay built on an assumed correlation is a bet whose variance we cannot bound, and a strategy whose variance we cannot bound cannot be sized, which means it fails G-1 and G-10 by construction regardless of its hit rate." }
+        {
+          "item": "The blank is the finding",
+          "explanation": "We were asked to determine correlation values. The determination is that the values require a joint sample of prices and settled outcomes we do not yet hold, and that the estimate cannot be sourced from any official NFL or regulator page — the league does not publish betting lines at all. A number written here today would be decoration."
+        },
+        {
+          "item": "What we can compute without any purchase",
+          "explanation": "Correlations between two markets whose outcomes are determined by official game results (spreads, totals, team totals, stat props) can be measured from historical scores alone, and score history is derivable from official game data we are permitted to collect for internal use. That is the first thing to build after the collection decision (Q-09) is made: it closes C-01, C-02, C-04, C-10 and most of the prop pairs at zero cost. It gives outcome correlation, but not correlation-at-the-priced-moment, which is what parlay value actually needs."
+        },
+        {
+          "item": "What needs money",
+          "explanation": "The pricing side: the operator's posted SGP price against its own singles at the same second. That is the only way to test whether the operator has already taken the correlation, and it is the difference between an edge and an artefact. Hence S-01."
+        },
+        {
+          "item": "Practical rule until then",
+          "explanation": "Singles only. A parlay built on an assumed correlation is a bet whose variance we cannot bound, and a strategy whose variance we cannot bound cannot be sized, which means it fails G-1 and G-10 by construction regardless of its hit rate."
+        }
+      ]
+    },
+    {
+      "title": "E. C-01 measured from the in-repo third-party dataset (published value still blank)",
+      "description": "engine/measure.py computed C-01 (over the total versus home covering the spread) on 6,813 games from data/raw/games.csv: rho = +0.00696, 95% CI [-0.03324, +0.04831]. The sign convention was settled by a parallel session's check (data/verification-d.tsv V8: spread direction matches moneyline direction 13/13, so spread_line is the AWAY line), and under that convention every plausibility check passes. Read the number as the refutation of the folklore: for this pair, marginal dependence is indistinguishable from zero, so multiplying the two singles is nearly harmless — the cost is in the price. The pair's own joint hit rate is 24.35% against a 26.42% break-even implied by the two closing leg prices, i.e. 2.07 points of a loss. The published rho column stays blank because the source is third-party and the policy decision (F-11) is yours, not because we could not compute it.",
+      "columns": [
+        {
+          "key": "pair",
+          "label": "Pair"
+        },
+        {
+          "key": "measured",
+          "label": "Measured rho (internal)"
+        },
+        {
+          "key": "ci",
+          "label": "95% CI"
+        },
+        {
+          "key": "n",
+          "label": "Games",
+          "render": "num"
+        },
+        {
+          "key": "published_rho",
+          "label": "Published rho",
+          "render": "blankflag"
+        },
+        {
+          "key": "why_not_published",
+          "label": "Why the register stays blank"
+        }
+      ],
+      "rows": [
+        {
+          "pair": "C-01 over × home covers (resolved convention: away-line)",
+          "measured": "+0.00696",
+          "ci": "[-0.03324, +0.04831]",
+          "n": 6813,
+          "published_rho": "",
+          "why_not_published": "Computed and reproducible, but from third-party data; F-11 is the outstanding decision. Convention is no longer the obstacle — it was settled by V8.",
+          "no_source_reason": "Internal computation from a checksummed third-party dataset; no official source publishes these prices."
+        },
+        {
+          "pair": "C-01 over × home covers (documentation's convention A) — audit trail only",
+          "measured": "-0.00897",
+          "ci": "[-0.05253, +0.03553]",
+          "n": 6868,
+          "published_rho": "",
+          "why_not_published": "Rejected reading: it implies a 59.96% home-cover rate, which is not a market feature. Kept so the reader can see the wrong reading was tested rather than ignored.",
+          "no_source_reason": "Internal computation."
+        },
+        {
+          "pair": "C-02…C-15 (all other pairs)",
+          "measured": "",
+          "ci": "",
+          "n": "",
+          "published_rho": "",
+          "why_not_published": "Need player-level and per-leg price history that no committed file contains; the acquisition decision (GAP-01, F-11) still governs.",
+          "no_source_reason": "Not computable from any committed file."
+        }
       ]
     }
+  ],
+  "notes": [
+    "Status: C-01 is measured (+0.00696 [-0.03324, +0.04831], n=6,813) with the sign convention settled by an independent check already in the repo. The rho column remains blank pending your decision on whether third-party-derived values may be published as sourced (flag F-11); promoting it is a one-line change plus a provenance label."
   ]
 }

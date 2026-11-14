@@ -490,5 +490,78 @@ def _bets_seq(n, hit, price=-110):
     return out
 
 
+class TestMeasureOnRealData(unittest.TestCase):
+    """Tests over the third-party dataset another session committed, if it is present.
+
+    These are skipped rather than failed when data/raw/games.csv is absent, because the file
+    is not produced by this subsystem — but when it is here, they pin three things: the
+    measurement is deterministic, the sign-convention ambiguity is detected rather than
+    silently resolved, and a peer-reviewed signal is refuted rather than accepted.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from engine import measure
+        cls.measure = measure
+        cls.csv = os.path.join(os.path.dirname(__file__), "..", "data", "raw", "games.csv")
+        if not os.path.exists(cls.csv):
+            raise unittest.SkipTest("third-party dataset not present")
+        cls.games = measure.load_games(cls.csv)
+
+    def test_loader_keeps_only_playable_games(self):
+        self.assertGreater(len(self.games), 5000)
+        for g in self.games[:200]:
+            self.assertIsInstance(g["margin"], int)
+            self.assertIsInstance(g["points_total"], int)
+
+    def test_rho_roundtrips_through_the_joint_probability(self):
+        m = self.measure.measure_over_cover(self.games)
+        self.assertEqual(m["status"], "MEASURED")
+        self.assertGreater(m["n"], 5000)
+        back = self.measure.correlation.joint_prob_from_rho(
+            m["p_over"], m["p_home_covers"], m["rho"])
+        self.assertAlmostEqual(back, m["p_both_observed"], places=3)
+
+    def test_resolved_convention_passes_and_the_documented_one_does_not(self):
+        """The convention question is settled by evidence, and the test pins both halves.
+
+        Reading B (spread_line is the away line) is what the repo's own V8 check supports and it is
+        the reading under which the plausibility range holds. Reading A is what the file's docs
+        imply and produces a 60% home-cover rate. If someone re-derives the default from the docs
+        instead of the check, this test fails loudly — which is the point.
+        """
+        a = self.measure.measure_over_cover(self.games, convention="A")
+        b = self.measure.measure_over_cover(self.games, convention="B")
+        self.assertNotEqual(a["p_home_covers"], b["p_home_covers"])
+        self.assertGreater(a["p_home_covers"], 0.55)        # implausible
+        self.assertTrue(0.45 <= b["p_home_covers"] <= 0.55)  # plausible, and the default
+        self.assertEqual(self.measure.CONVENTION["resolved"], "B")
+        pc = self.measure.plausibility_checks(self.games)
+        self.assertTrue(all(c["verdict"] == "PASS" for c in pc["checks"]))
+        self.assertIn("ALL PASS", pc["verdict"])
+
+    def test_published_hypothesis_is_refuted_not_accepted(self):
+        r = self.measure.home_underdog_after_miss(self.games)
+        self.assertEqual(r["status"], "MEASURED")
+        self.assertGreater(r["n"], 500)
+        self.assertFalse(r["lower_bound_clears_hurdle"])
+        self.assertLess(r["hit_rate"], r["hurdle_at_-110"])
+        self.assertGreater(r["n"], 1000)   # a refutation on 1,300 bets is a refutation
+
+    def test_view_is_generated_for_the_site(self):
+        payload = self.measure.run_all(write=False)
+        sections = payload["view"]["sections"]
+        self.assertGreaterEqual(len(sections), 6)
+        for sec in sections:
+            cols = sec.get("columns") or []
+            has_src = any(c.get("render") == "srclist" for c in cols)
+            for row in sec.get("rows", []):
+                if has_src:
+                    # every measured row cites the dataset it was measured from
+                    self.assertEqual(row.get("sources"), ["SRC-025"], sec["title"])
+                else:
+                    self.assertTrue(row.get("no_source_reason"), sec["title"])
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

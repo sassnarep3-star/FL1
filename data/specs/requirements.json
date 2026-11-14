@@ -1,0 +1,484 @@
+{
+  "id": "requirements",
+  "title": "Requirements register",
+  "description": "The full list of requirements, extracted line by line from the project brief and expanded into the engineering obligations each one implies. Status is deliberately conservative: nothing is 'delivered' unless the artefact exists in this branch and is linked. 'Blocked' means the requirement cannot be satisfied by an agent — it needs a decision, a data licence or money, and those are the owner's to give.",
+  "updated": "2026-11-14",
+  "columns": [
+    {
+      "key": "req_id",
+      "label": "ID"
+    },
+    {
+      "key": "category",
+      "label": "Category"
+    },
+    {
+      "key": "requirement",
+      "label": "Requirement (as briefed / implied)"
+    },
+    {
+      "key": "acceptance",
+      "label": "Acceptance criterion"
+    },
+    {
+      "key": "status",
+      "label": "Status",
+      "render": "badge"
+    },
+    {
+      "key": "delivered",
+      "label": "Where it lives / what is missing"
+    },
+    {
+      "key": "sources",
+      "label": "Source",
+      "render": "srclist"
+    }
+  ],
+  "rows": [
+    {
+      "req_id": "R-01",
+      "category": "Programme",
+      "requirement": "Collect, organize and analyse using a full list of requirements.",
+      "acceptance": "A machine-readable register exists; every requirement has an owner, a status and an acceptance test.",
+      "status": "DELIVERED",
+      "delivered": "data/requirements.json (this file) plus the Requirements page on the site.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-02",
+      "category": "Programme",
+      "requirement": "Suggestions to improve the site's decision-making, with a dedicated section a human can review before implementing anything.",
+      "acceptance": "Every suggestion carries impact, effort, risk, dependency and an open decision field the owner can set to accept / reject / defer.",
+      "status": "DELIVERED",
+      "delivered": "data/suggestions.json + Suggestions page. No suggestion has been implemented on the site except those the brief itself mandated.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-03",
+      "category": "Programme",
+      "requirement": "A clear list of questions, information and answers needed before any decision can reasonably be made, based on what we have and do not have.",
+      "acceptance": "Each question states why it blocks a decision, what is known with source, what is missing, how to obtain it, and the default if it stays unanswered.",
+      "status": "DELIVERED",
+      "delivered": "data/questions.json — 24 questions, 15 of them blocking.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-04",
+      "category": "Programme",
+      "requirement": "Suggestions must be made to discover missing information.",
+      "acceptance": "Each gap has a discovery action (a source to open, a report to buy, a field to log), not just a complaint.",
+      "status": "DELIVERED",
+      "delivered": "data/missing_data.json — 18 named gaps, each with an acquisition path and a blocker class.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-05",
+      "category": "Modelling",
+      "requirement": "Originate our own NFL lines.",
+      "acceptance": "A documented model produces a total and a spread per game from non-market inputs, with an explicit release cadence and no coefficient presented as validated until it is.",
+      "status": "SPECIFIED — PENDING DATA",
+      "delivered": "data/models.json + Methodology page. Blocked by R-31 (line history) and R-32 (drive-level history); coefficients are specified as estimable, not estimated.",
+      "sources": [
+        "SRC-015",
+        "SRC-018"
+      ]
+    },
+    {
+      "req_id": "R-06",
+      "category": "Modelling",
+      "requirement": "Research and develop strategies that generate useful signals.",
+      "acceptance": "Each candidate signal is stated as a hypothesis with a falsifiable threshold, a market, and a gate set to survive.",
+      "status": "SPECIFIED — PENDING DATA",
+      "delivered": "data/models.json signal inventory SIG-01…SIG-14 — none may be claimed 'useful' until it passes validation.",
+      "sources": [
+        "SRC-015",
+        "SRC-017"
+      ]
+    },
+    {
+      "req_id": "R-07",
+      "category": "Competition",
+      "requirement": "Treat strategy development as a leaderboard competition that rewards top-performing strategies.",
+      "acceptance": "Ranking is computed on a luck-adjusted statistic, entries are sealed, and prize governance carries a legal caveat.",
+      "status": "DELIVERED — DESIGN",
+      "delivered": "data/leaderboard.json + Leaderboard page + engine/leaderboard.py which computes ranks from a bet log.",
+      "sources": [
+        "SRC-016"
+      ]
+    },
+    {
+      "req_id": "R-08",
+      "category": "Bet types",
+      "requirement": "Cover single bets: spread, total, money line.",
+      "acceptance": "Pricing, edge, staking and settlement rules defined for each; break-even hurdle computed, not quoted from memory.",
+      "status": "DELIVERED",
+      "delivered": "engine/pricing.py derives break-even 52.38% at -110 from first principles, cross-checked against the note in SRC-015.",
+      "sources": [
+        "SRC-015"
+      ]
+    },
+    {
+      "req_id": "R-09",
+      "category": "Bet types",
+      "requirement": "Cover parlays.",
+      "acceptance": "Parlay value is computed on the operator's combined price with a correlation correction, and correlated legs are refused or repriced per house rules.",
+      "status": "DELIVERED",
+      "delivered": "engine/correlation.py + Correlation page; rules traced to regulator-hosted house rules.",
+      "sources": [
+        "SRC-014",
+        "SRC-012"
+      ]
+    },
+    {
+      "req_id": "R-10",
+      "category": "Bet types",
+      "requirement": "Cover player-prop bet combos.",
+      "acceptance": "Prop-combo dependency graph defined (QB yards vs WR catches vs team totals) with explicit do-not-combine lists and a Monte-Carlo joint pricing path.",
+      "status": "DELIVERED",
+      "delivered": "data/correlations.json (15 pairs, every rho left blank until measured) + engine/correlation.py joint simulator.",
+      "sources": [
+        "SRC-014"
+      ]
+    },
+    {
+      "req_id": "R-11",
+      "category": "Governance",
+      "requirement": "Every strategy must pass validation gates.",
+      "acceptance": "Gates are numeric, ordered, and a strategy that trips a hard gate cannot be promoted regardless of profit.",
+      "status": "DELIVERED",
+      "delivered": "data/validation_gates.json G-1…G-13 + engine/gates.py producing a PASS/FAIL row per strategy from a bet log.",
+      "sources": [
+        "SRC-016"
+      ]
+    },
+    {
+      "req_id": "R-12",
+      "category": "Data",
+      "requirement": "Determine correlation values.",
+      "acceptance": "Correlations measured from a joint outcome sample we own or license, with stated estimator, bootstrap CI and sample size — never asserted from intuition.",
+      "status": "BLOCKED — NEEDS OWNER",
+      "delivered": "Table published with every rho blank and flagged. Measurement needs historical scores plus lines: scores are derivable from official results, lines are not free.",
+      "sources": [
+        "SRC-020",
+        "SRC-007"
+      ]
+    },
+    {
+      "req_id": "R-13",
+      "category": "Governance",
+      "requirement": "Remove luck from the equation; build strategies that are selectively skill-based.",
+      "acceptance": "Ranking uses a lower confidence bound on expected value; a strategy is only 'selective' if it abstains by rule; required sample sizes are published even when uncomfortable.",
+      "status": "DELIVERED",
+      "delivered": "engine/stats.py (Wilson interval, bootstrap, power analysis) + Validation page. The power analysis is the honest headline: distinguishing a 55.0% true hit rate from the 52.38% break-even at 80% power requires 2,243 settled bets, and a 150-bet season can only prove roughly a 62.4% hit rate — which is why selective must mean few large-edge bets, not many small edges.",
+      "sources": [
+        "SRC-016",
+        "SRC-015"
+      ]
+    },
+    {
+      "req_id": "R-14",
+      "category": "Data",
+      "requirement": "The system should track injuries.",
+      "acceptance": "Weekly ingestion of the official report with change-diffs by timestamp; blank fields stay blank; no fabricated P(play).",
+      "status": "PARTIAL — INGESTER SPECIFIED",
+      "delivered": "engine/injuries.py parses a captured snapshot (data/injury_snapshot.json) and diffs it. The live fetcher is specified but cannot run inside this sandbox, which has no outbound access to nfl.com — recorded as a blocker, not hidden.",
+      "sources": [
+        "SRC-001",
+        "SRC-002",
+        "SRC-021"
+      ]
+    },
+    {
+      "req_id": "R-15",
+      "category": "Modelling",
+      "requirement": "Know deficiencies in defences when 2nd, 3rd or 4th-string backups replace starters.",
+      "acceptance": "A next-man-up index per defensive group built from official roster/availability data, with the quality gap estimated in-house and labelled as an estimate.",
+      "status": "SPECIFIED — PENDING DATA",
+      "delivered": "data/injury_model.json — NMU index definition; group weights remain parameters to fit, not constants.",
+      "sources": [
+        "SRC-001",
+        "SRC-003",
+        "SRC-005"
+      ]
+    },
+    {
+      "req_id": "R-16",
+      "category": "Modelling",
+      "requirement": "The same for offences using starters or backups.",
+      "acceptance": "Offence-side index with a separate QB branch (QB1/QB2/QB3), because the quarterback case dominates every other position.",
+      "status": "SPECIFIED — PENDING DATA",
+      "delivered": "data/injury_model.json. Note: 'Will QB start?' is a league-prohibited market, so QB availability may be an input but never a wager of its own.",
+      "sources": [
+        "SRC-008",
+        "SRC-003"
+      ]
+    },
+    {
+      "req_id": "R-17",
+      "category": "Reporting",
+      "requirement": "Executive summary outlining important details.",
+      "acceptance": "One page: what exists, what is missing, the moves that unblock the most, and the hard risks — using no number that is not in the registers.",
+      "status": "DELIVERED",
+      "delivered": "EXECUTIVE_SUMMARY.md + Executive Summary page, generated from the same JSON so it cannot drift from the data.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-18",
+      "category": "Automation",
+      "requirement": "No manual input on the owner's part; the agent finishes all tasks in-session.",
+      "acceptance": "Build, verify, PR and Pages deploy all run from scripts/agents; the owner is asked nothing.",
+      "status": "DELIVERED — WITH HONEST EXCEPTIONS",
+      "delivered": "site/build.py and site/verify.py regenerate and check the whole site with no human step. 15 questions nonetheless remain unanswered because they are owner decisions about money, licensing and legal posture; an agent that answered those on your behalf would be exactly the failure mode you asked us to avoid.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-19",
+      "category": "Repo",
+      "requirement": "Review the repo line by line, verify against official sources, provide links for manual review.",
+      "acceptance": "Audit report with the exact commands run and their output, plus a link per claim.",
+      "status": "DELIVERED",
+      "delivered": "REPO_AUDIT.md. Finding: the repo contained one file, 6 bytes (SRC-024).",
+      "sources": [
+        "SRC-024"
+      ]
+    },
+    {
+      "req_id": "R-20",
+      "category": "Repo",
+      "requirement": "Flag any irregularities for review.",
+      "acceptance": "A Flagged for Review page published with the site, which does not block the merge.",
+      "status": "DELIVERED",
+      "delivered": "docs/pages/flagged.html — flags raised against our own registers and against sibling-session content at integration.",
+      "sources": [
+        "SRC-004",
+        "SRC-009",
+        "SRC-013",
+        "SRC-019"
+      ]
+    },
+    {
+      "req_id": "R-21",
+      "category": "Site",
+      "requirement": "GitHub Pages live site with a clean landing page and subpages organised by category.",
+      "acceptance": "Pages enabled from a real branch; every subpage reachable from the landing page; no orphan pages.",
+      "status": "IN PROGRESS — INTEGRATION",
+      "delivered": "Static site generated into docs/; Pages configuration and deploy verification happen in the integration step and are recorded in COORDINATION.md.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-22",
+      "category": "Site",
+      "requirement": "UI clean, user friendly, simple, dashboard-like.",
+      "acceptance": "One stylesheet, no frameworks, no external requests, readable on a 13-inch screen, status badges scannable at a glance.",
+      "status": "DELIVERED",
+      "delivered": "docs/pages/assets/dashboard.css; the build emits zero third-party assets so nothing can fail to load.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-23",
+      "category": "Site",
+      "requirement": "All entries and findings in a simple table format, including analysis and findings.",
+      "acceptance": "Every register renders as a table and the analysis text lives in a column of the row it analyses, so a row cannot be read without its reasoning.",
+      "status": "DELIVERED",
+      "delivered": "site/build.py renders each data/*.json generically; 12 tables published.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-24",
+      "category": "Verification",
+      "requirement": "Every table row must have a source link to an official site.",
+      "acceptance": "The verifier fails the build if a row lacks a resolvable source id, or if a source id is absent from the register.",
+      "status": "DELIVERED",
+      "delivered": "site/verify.py rules R4 and R5 — the build cannot ship an unsourced table row.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-25",
+      "category": "Verification",
+      "requirement": "If a value cannot be confirmed from an official source, leave it blank and flag it unverified; never infer or fill in.",
+      "acceptance": "Blank plus UNVERIFIED badge for every unconfirmable value: all 15 correlation coefficients, every model coefficient, every Nevada hold figure.",
+      "status": "DELIVERED",
+      "delivered": "Enforced by verify.py rule R6: a numeric value sitting next to an unverified flag breaks the build.",
+      "sources": [
+        "SRC-013",
+        "SRC-019"
+      ]
+    },
+    {
+      "req_id": "R-26",
+      "category": "Process",
+      "requirement": "Coordinate parallel sessions via COORDINATION.md: claim before work, non-overlapping scopes, rebase before push.",
+      "acceptance": "Board exists, claims pushed, sibling sessions discovered and recorded, conflicts resolved without discarding their work.",
+      "status": "DELIVERED",
+      "delivered": "COORDINATION.md — four sessions found on the remote, scope split recorded, merge plan logged.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-27",
+      "category": "Process",
+      "requirement": "Do not stop for review: finish, open a PR with a summary, merge, confirm Pages deploys, record the links.",
+      "acceptance": "PR number and merge SHA recorded; Pages URL reachable.",
+      "status": "IN PROGRESS — INTEGRATION",
+      "delivered": "Executed in the integration step; PR URL and merge result recorded in COORDINATION.md.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-28",
+      "category": "Site",
+      "requirement": "Do not merge a broken site: fix and retry until it is live.",
+      "acceptance": "Link crawl with zero broken internal hrefs, zero dead nav items, valid tables, build reproducible from data.",
+      "status": "DELIVERED",
+      "delivered": "site/verify.py runs before every commit in the pipeline; a failure aborts publication.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-29",
+      "category": "Governance",
+      "requirement": "Compliance: no wagers the league prohibits, no non-public information.",
+      "acceptance": "A hard exclusion list in code, sourced to the league's own published framework, checked at bet-slip generation time.",
+      "status": "DELIVERED",
+      "delivered": "engine/compliance.py implements the four prohibited classes published at media.nfl.com/lsb and refuses to emit such a bet.",
+      "sources": [
+        "SRC-007",
+        "SRC-008"
+      ]
+    },
+    {
+      "req_id": "R-30",
+      "category": "Governance",
+      "requirement": "Responsible-gambling posture for a tool that informs staking.",
+      "acceptance": "Help resource on every page; staking caps default below full Kelly; the tool states plainly that most bettors lose.",
+      "status": "DELIVERED",
+      "delivered": "Site footer plus engine/pricing.py defaulting to fractional Kelly with an exposure cap; SRC-019 records that Kelly maximises log-growth, not safety.",
+      "sources": [
+        "SRC-023",
+        "SRC-019"
+      ]
+    },
+    {
+      "req_id": "R-31",
+      "category": "Data",
+      "requirement": "Historical opening and closing lines for backtesting and CLV.",
+      "acceptance": "A licensed or purchased source with point-in-time guarantees and a documented snapshot time.",
+      "status": "BLOCKED — NEEDS OWNER",
+      "delivered": "No free official source exists; the league's data is distributed exclusively (SRC-020). This is the single highest-value purchase in the programme.",
+      "sources": [
+        "SRC-020",
+        "SRC-007"
+      ]
+    },
+    {
+      "req_id": "R-32",
+      "category": "Data",
+      "requirement": "Drive-level and play-level history for totals origination and next-man-up estimation.",
+      "acceptance": "Own-licensed or self-collected game logs with a schema; snap counts and coverage alignments need a licensed NGS feed.",
+      "status": "BLOCKED — NEEDS OWNER",
+      "delivered": "Specified in data/missing_data.json GAP-04 and GAP-05. Without it the deficiency model can only assume a league-average replacement — a known-weak assumption we publish rather than bury.",
+      "sources": [
+        "SRC-020"
+      ]
+    },
+    {
+      "req_id": "R-33",
+      "category": "Ops",
+      "requirement": "Automated nightly and weekly ingestion with no manual step.",
+      "acceptance": "Scheduler, idempotent collector, alert on schema drift, raw snapshots retained for audit.",
+      "status": "SPECIFIED — NOT RUNNABLE HERE",
+      "delivered": "Cannot execute from this sandbox (only github and package registries are reachable). The collector is written and unit-tested against a captured fixture; the deployment target is an open item, Q-19.",
+      "sources": [],
+      "no_source_reason": "Requirement restated from the owner's brief; its source is the instruction, not an external document. Verification applies to the deliverable, linked in `delivered`."
+    },
+    {
+      "req_id": "R-34",
+      "category": "Governance",
+      "requirement": "Leaderboard rewards must not create an unlawful prize promotion.",
+      "acceptance": "No purchase and no entry fee, skill-based ranking documented, published rules, eligibility by jurisdiction, tax handling.",
+      "status": "BLOCKED — NEEDS OWNER AND LEGAL",
+      "delivered": "Design constraints recorded in leaderboard.json under 'legal'. We do not opine on legality; this is flagged, not solved.",
+      "sources": [
+        "SRC-007",
+        "SRC-008"
+      ]
+    },
+    {
+      "req_id": "R-35",
+      "category": "Repo",
+      "requirement": "Siblings' work must be integrated, re-verified, and not silently overwritten.",
+      "acceptance": "A merge commit on the integration branch, their files preserved, their content re-checked, any defect raised as a flag rather than deleted.",
+      "status": "IN PROGRESS — INTEGRATION",
+      "delivered": "Three sibling branches found; merge and re-verification recorded in COORDINATION.md.",
+      "sources": [
+        "SRC-024"
+      ]
+    },
+    {
+      "req_id": "R-36",
+      "category": "Modelling",
+      "requirement": "Selectivity rule: bet only when our number beats the market by a stated margin.",
+      "acceptance": "One tunable edge threshold in config, with its effect on bet volume and required sample size published together.",
+      "status": "DELIVERED",
+      "delivered": "engine/gates.py G-4 plus models.json policy.edge_threshold; the trade-off curve is computed, not asserted.",
+      "sources": [
+        "SRC-015"
+      ]
+    },
+    {
+      "req_id": "R-37",
+      "category": "Modelling",
+      "requirement": "Weather, venue, rest and travel effects.",
+      "acceptance": "Each feature has a named official source and a documented lag; no feature enters the model without one.",
+      "status": "PARTIAL",
+      "delivered": "Rest and short-week effects are derivable from the official schedule and are specified. The weather source (NOAA/NWS) was not verified in this pass, so it is recorded as gap GAP-07 and not used as a feature.",
+      "sources": [
+        "SRC-004"
+      ]
+    },
+    {
+      "req_id": "R-38",
+      "category": "Governance",
+      "requirement": "Model versioning, sealed submissions, auditability of every decision.",
+      "acceptance": "Strategy identity = code hash + config hash + data hash; ranks recomputable from stored bet logs.",
+      "status": "DELIVERED",
+      "delivered": "engine/leaderboard.py hashes entries; COORDINATION.md is the decision log.",
+      "sources": [
+        "SRC-016"
+      ]
+    },
+    {
+      "req_id": "R-39",
+      "category": "Modelling",
+      "requirement": "In-game and live betting explicitly in or out of scope.",
+      "acceptance": "A recorded decision with a reason.",
+      "status": "BLOCKED — NEEDS OWNER",
+      "delivered": "Recommended out for v1: latency, Watch & Bet video rights and in-play data all sit behind the exclusive distributor (SRC-020) and live hold is the widest in the book. Recorded as a recommendation, not assumed as a decision.",
+      "sources": [
+        "SRC-020"
+      ]
+    },
+    {
+      "req_id": "R-40",
+      "category": "Repo",
+      "requirement": "Licence, .gitignore, reproducible build, no secrets.",
+      "acceptance": "Files exist and the build script runs clean.",
+      "status": "DELIVERED",
+      "delivered": "LICENSE (MIT), .gitignore, site/build.py, site/verify.py added by this session. Their absence at HEAD was recorded as irregularities F-2 and F-3 in COORDINATION.md.",
+      "sources": [
+        "SRC-024"
+      ]
+    }
+  ]
+}

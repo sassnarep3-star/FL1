@@ -44,14 +44,15 @@
       "gap_id": "GAP-01",
       "dataset": "Historical opening and closing NFL point spreads, totals and money lines, point-in-time",
       "needed_for": "Backtest of origination, CLV measurement, detectable-edge calculation, parlay correlation vs market price",
-      "status": "NOT-ATTEMPTED",
+      "status": "PARTIAL — third-party history in-repo; publishing decision outstanding",
       "why_gap": "Betting lines are not NFL-published content and there is no free official archive; the league's official betting data feed is exclusively distributed.",
       "action": "Request quotes from two licensed line vendors; require point-in-time snapshots, a documented close definition, and the right to retain and compute derived statistics.",
       "owner_class": "Owner (money + contract)",
       "sources": [
         "SRC-020",
         "SRC-007"
-      ]
+      ],
+      "note": "Update at merge time: main carries data/raw/closing_lines.csv (20,490 rows) and games.csv (7,548 rows) fetched from nflverse/nfldata with sha256s in data/raw/MANIFEST.json. Measurement is therefore possible from committed files, and this gap is no longer blocked on obtaining data but on deciding whether third-party data may be published as a sourced value. engine/correlation.py and engine/gates.py already accept that shape."
     },
     {
       "gap_id": "GAP-02",

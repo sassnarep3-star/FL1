@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suggestions — FL1</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">FL1</div>
+  <div class="sub">NFL Lines &amp; Decision Dashboard</div>
+  <a class="item" href="index.html">Dashboard</a>
+  <a class="item" href="executive-summary.html">Executive Summary</a>
+  <a class="item" href="questions.html">Decisions &amp; Questions</a>
+  <a class="item active" href="suggestions.html">Suggestions</a>
+  <a class="item" href="strategies.html">Strategies &amp; Leaderboard</a>
+  <a class="item" href="injury-report.html">Injury Report</a>
+  <a class="item" href="standings.html">Standings</a>
+  <a class="item" href="lines.html">Lines &amp; Market</a>
+  <a class="item" href="flagged-review.html">Flagged for Review</a>
+  <a class="item" href="sources.html">Sources</a>
+</nav>
+<main>
+  <h1>Suggestions</h1>
+  <p class="lead">A dedicated section for review. Nothing here is implemented automatically. Each suggestion is <strong>Proposed — Pending Review</strong>: review it, choose the best path, then mark it Approved / Rejected / Amended before any change is implemented.</p>
+
+  <h2>A. Site &amp; decision-making improvements</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Suggestion</th><th>Why it matters</th><th>Priority</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>S-01</td><td><strong>Define the bankroll and unit-sizing policy.</strong> Total bankroll, unit size per bet, max exposure per game and per slate, stop-loss / cool-off rules for drawdowns.</td><td>Needed to size any strategy and normalize leaderboard results (Q8).</td><td><span class="badge b-needsreview">Critical</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-02</td><td><strong>Confirm legality and licensing before any real-money step.</strong> Jurisdiction rules, sportsbook licensing, compliance constraints.</td><td>Legal gate before funding or placing bets (Q9).</td><td><span class="badge b-needsreview">Critical</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-03</td><td><strong>Source verified historical closing lines and results.</strong> Official book APIs where available or licensed providers; verify data lineage before trusting it.</td><td>Required for backtesting and closing-line value (Q10); no official league source exists.</td><td><span class="badge b-needsreview">Critical</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-04</td><td><strong>Add a live lines snapshot with timestamps.</strong> Record spread/total/moneyline per game with an exact timestamp and book name in every row.</td><td>Fixes UNV-1; makes every line decision auditable and comparable.</td><td><span class="badge b-open">High</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-05</td><td><strong>Add a strategy leaderboard page with eligibility rules.</strong> Rank by verified ROI with minimum bet-count eligibility, z-score tie-breakers, and reward tiers.</td><td>Delivers the leaderboard competition with rewards for top strategies.</td><td><span class="badge b-open">High</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-06</td><td><strong>Add automated injury-to-impact scoring.</strong> Per-team availability score from the injury report (starters out/questionable by unit).</td><td>Injuries are the core signal source; scoring makes signals comparable.</td><td><span class="badge b-open">High</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-07</td><td><strong>Add correlation heatmap output.</strong> Visual correlation matrix of strategy legs on the strategies page.</td><td>Supports the correlation-value requirement visually before validation.</td><td><span class="badge b-open">Medium</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-08</td><td><strong>Add a review workflow for flagged items.</strong> Status controls (Open / Resolved / Accepted-as-published) with notes.</td><td>Makes the review loop explicit for irregularities and unverified items.</td><td><span class="badge b-open">Medium</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>S-09</td><td><strong>Add a weekly refresh schedule.</strong> Repeatable weekly refresh of standings, schedule, injuries, verified lines; re-run gates; update leaderboard.</td><td>Keeps the site current without manual rework.</td><td><span class="badge b-open">Medium</span></td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2>B. Information-discovery suggestions (find the missing information)</h2>
+  <p class="note">These suggestions exist to discover missing information identified on the <a href="questions.html">Questions</a> page. Each closes a specific open question.</p>
+  <table>
+    <thead><tr><th>ID</th><th>Suggestion</th><th>Closes</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>IDS-1</td><td><strong>Manually verify current Week 10 lines on an official sportsbook.</strong> Capture spread, total, and moneyline for all 16 games with timestamps, then fill the blank cells on the Lines page and un-flag UNV-1.</td><td>Q5 / UNV-1</td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>IDS-2</td><td><strong>Manually verify player prop lines.</strong> Capture props (passing/rushing/receiving yards, TDs) for key Week 10 players from an official sportsbook.</td><td>Q6 / UNV-2</td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>IDS-3</td><td><strong>Confirm the standings freshness question.</strong> Check official NFL.com standings after the Thursday game settles and confirm whether WAS/NYG records update to include the 24–21 result.</td><td>Q4 / IR-1</td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+      <tr><td>IDS-4</td><td><strong>Evaluate historical-data vendors.</strong> Request sample data and lineage documentation; verify a sample of closing lines against official books before committing.</td><td>Q10</td><td><span class="badge b-proposed">Proposed — Pending Review</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="footer">Reviewer action: pick the best path per item, then mark Approved / Rejected / Amended. <a href="index.html">Back to dashboard</a></div>
+</main>
+</div>
+</body>
+</html>

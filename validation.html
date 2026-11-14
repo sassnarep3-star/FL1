@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation Gates · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="prop-correlations.html">Prop Correlations</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html" class="on">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main" class="wide">
+
+<section>
+<h1>Validation Gates</h1>
+<p class="lead">Eight gates. A strategy must pass every one that applies to it before it can be ranked.
+The gates are defined here, before any strategy exists, precisely so they cannot be rewritten to fit a result.</p>
+</section>
+
+<section>
+<h2>The gates</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>Gate</th><th>Name</th><th>Test</th><th>Required artefact</th><th>Status</th><th>Result</th><th>Principle</th></tr></thead><tbody><tr><td>G1</td><td>Source completeness</td><td>Every input the strategy needs resolves to a verified official source record.</td><td>Input registry with no BLOCKED rows</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Chosen before the model is fitted</td></tr><tr><td>G2</td><td>Data sufficiency</td><td>Enough observations exist to estimate the parameters without overfitting.</td><td>Stated minimum sample, met</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Chosen before the model is fitted</td></tr><tr><td>G3</td><td>Baseline comparison</td><td>The strategy beats a named, published naive baseline out of sample.</td><td>Out-of-sample score above baseline</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Beat a points-differential baseline</td></tr><tr><td>G4</td><td>Calibration</td><td>Stated probabilities match realised frequencies across probability buckets.</td><td>Brier score and bucket table</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Stated probabilities must be well calibrated</td></tr><tr><td>G5</td><td>Out-of-sample persistence</td><td>The edge survives a walk-forward test it was not tuned on.</td><td>Holdout result within tolerance of in-sample</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Time-ordered splits only</td></tr><tr><td>G6</td><td>Price-based edge</td><td>Edge is measured against a benchmark price, not against nothing.</td><td>Benchmark price feed</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Never compare a model to zero</td></tr><tr><td>G7</td><td>Joint-sample adequacy</td><td>For parlays and combos: the pair has enough repeated joint observations.</td><td>Pairwise observation count, evidenced</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Never assume independence or dependence</td></tr><tr><td>G8</td><td>Reproducibility</td><td>A third party can re-run the strategy from committed inputs and get the same output.</td><td>Deterministic script, seeds committed</td><td><span class="pill ok">DEFINED</span></td><td><span class="pill bad">NOT RUN</span></td><td>Same inputs must yield the same number</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Removing luck: three separate tests, never one blended score</h2>
+<p>The brief asks to remove luck from the equation. That is only meaningful if it is operational, so it is
+defined as three tests that must each hold. They are reported side by side and are <em>never</em> averaged,
+because averaging lets a strong result on one hide a failure on another.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Control</th><th>Question it answers</th><th>Measured by</th><th>Status</th></tr></thead><tbody><tr><td>Calibration</td><td>When we say 60%, does it happen 60% of the time?</td><td>Brier score plus a reliability table by probability bucket</td><td><span class="pill bad">NOT RUN</span></td></tr><tr><td>Closing-line value</td><td>Did the market move toward our number or away from it?</td><td>Fair value versus closing price, signed</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Persistence</td><td>Does the edge hold on data the model never saw?</td><td>Walk-forward holdout, frozen and access-logged</td><td><span class="pill bad">NOT RUN</span></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Correlation</h2>
+<p>A parlay's price depends on the joint probability of its legs. If two legs are positively correlated,
+multiplying their individual probabilities understates the joint probability and misstates the edge.
+The reverse is true for negatively correlated legs.</p>
+<p>Correlation is therefore estimated from repeated joint outcomes of the same pairing, and never assumed.
+A pairing needs many observations before an estimate means anything; below that threshold the value stays blank.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Correlation target</th><th>Data required</th><th>Status</th></tr></thead><tbody><tr><td>Team totals, same game</td><td>Joint team scoring across many games</td><td><span class="pill warn">METHOD READY</span></td></tr><tr><td>Player prop pairs, same game</td><td>Player-level joint game logs</td><td><span class="pill bad">BLOCKED</span></td></tr><tr><td>Props across different games</td><td>Only if a shared driver exists, else near zero</td><td><span class="pill bad">BLOCKED</span></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Acceptance thresholds</h2>
+<p>The numeric thresholds are deliberately not set on this page. Setting them after seeing a result is the
+single easiest way to manufacture apparent skill, and choosing them before a benchmark price exists would be
+arbitrary. They are registered as open question Q09 and must be fixed in one commit before any grading begins.</p>
+</section>
+
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

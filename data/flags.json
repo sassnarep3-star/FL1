@@ -1,374 +1,197 @@
-{
-  "id": "flags",
-  "title": "Flagged for review",
-  "description": "Irregularities, unresolved verification items and open decisions. Nothing here blocks deployment — the brief is explicit that flagged items are published for after-the-fact review — and nothing here is a to-do we quietly did anyway. Each item says what a reviewer must decide or verify, and links the official source that settles it.",
-  "updated": "2026-11-14",
-  "editorial": true,
-  "sections": [
-    {
-      "title": "A. Repository and process",
-      "columns": [
-        {
-          "key": "flag_id",
-          "label": "ID"
-        },
-        {
-          "key": "item",
-          "label": "Item"
-        },
-        {
-          "key": "detail",
-          "label": "What was found",
-          "html": true
-        },
-        {
-          "key": "severity",
-          "label": "Severity",
-          "render": "badge"
-        },
-        {
-          "key": "status",
-          "label": "Status",
-          "render": "badge"
-        },
-        {
-          "key": "reviewer_action",
-          "label": "What the reviewer must do",
-          "html": true
-        },
-        {
-          "key": "sources",
-          "label": "Source",
-          "render": "srclist"
-        }
-      ],
-      "rows": [
-        {
-          "flag_id": "F-1",
-          "item": "Repository contained no data, code, schema or tests",
-          "detail": "At the commit this branch started from, the repo held exactly one file: README.md, 6 bytes, contents '# FL1'. The brief reads as though a data project existed; it did not. Every requirement is therefore greenfield, and there was no prior work to verify.",
-          "severity": "HIGH",
-          "status": "NEEDS REVIEW",
-          "reviewer_action": "Confirm no earlier repository or branch was intended to be the starting point; if one exists, this project should be re-scoped against it.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-2",
-          "item": "No licence",
-          "detail": "No LICENSE file existed, so default copyright applied and any reuse or collaboration was legally undefined. An MIT LICENSE was added in this branch.",
-          "severity": "MEDIUM",
-          "status": "RESOLVED — CONFIRM INTENT",
-          "reviewer_action": "Keep MIT, or name the licence you want (or none) and it will be replaced.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-3",
-          "item": "No .gitignore",
-          "detail": "Absent, so a static build plus Python would commit __pycache__, duplicate build output and editor files. Added in this branch.",
-          "severity": "LOW",
-          "status": "RESOLVED",
-          "reviewer_action": "None.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-4",
-          "item": "GitHub Pages not configured",
-          "detail": "GET repos/sassnix321/FL1/pages returned 404 at claim time; the repo had no homepage URL.",
-          "severity": "MEDIUM",
-          "status": "RESOLVED AT INTEGRATION",
-          "reviewer_action": "After deployment, confirm the published URL and the source branch shown in Settings → Pages.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-5",
-          "item": "No live NFL data existed anywhere in the repo",
-          "detail": "There was no ingestion pipeline, so any 'finding' written into a table would necessarily have been an invention. This is why the site's tables are registers of sourced rules, gaps and methods rather than numbers.",
-          "severity": "HIGH",
-          "status": "MITIGATED BY DESIGN",
-          "reviewer_action": "Accept that the first numbers arrive with the first licensed data, or fund that licence (S-01).",
-          "sources": [
-            "SRC-020",
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-6",
-          "item": "Git author identity differs from the repository owner handle",
-          "detail": "Commits are authored by sassnix321-star <sassnix321@gmail.com> in a repo owned by sassnix321. Cosmetic, but it is the kind of mismatch worth a five-second check that no other identity is involved.",
-          "severity": "LOW",
-          "status": "OPEN — INFORMATIONAL",
-          "reviewer_action": "Confirm the git author and the GitHub account are both you.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-7",
-          "item": "Four sessions claimed the same scope",
-          "detail": "This branch plus three sibling branches were all created from the same commit, and each wrote a COORDINATION.md claiming every task — because when each wrote its board, it could see only itself. Two siblings have a board and nothing else; one built a complete site.",
-          "severity": "MEDIUM",
-          "status": "NEEDS REVIEW",
-          "reviewer_action": "Decide the intended division of labour. This branch merged all three siblings additively rather than overwriting them; a different split can be re-cut without losing any of it.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-8",
-          "item": "Sibling site uses a weaker verification standard than the brief",
-          "detail": "The site built on arena/89c32e23-fl1 labels rows 'Verified (source reachable)' for nfl.com/injuries and nfl.com/standings. Reachability is not verification of a value: the brief requires a source per row, meaning the row's content was read at the source. Their tables are otherwise correctly left blank, and their flagged page honestly lists the gaps (U-01…U-07).",
-          "severity": "MEDIUM",
-          "status": "NEEDS REVIEW",
-          "reviewer_action": "Accept the merge as-is and treat 'reachable' as a weaker tier, or ask that their two 'Verified (source reachable)' rows be relabelled. Nothing was deleted and no value was invented.",
-          "sources": [
-            "SRC-001",
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-9",
-          "item": "Sibling site states 'no manual data input' while no ingestion exists",
-          "detail": "Its landing page says 'Built without manual data input'. The site is hand-authored HTML with deliberately blank tables; no pipeline ingests anything, so the sentence describes intent rather than mechanism.",
-          "severity": "LOW",
-          "status": "NEEDS REVIEW",
-          "reviewer_action": "Either add the collector (blocked on a host: Q-19, GAP-18) or soften the claim.",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "flag_id": "F-10",
-          "item": "Two generated sites, one root",
-          "detail": "Both the sibling site and this build publish an index at docs/. Resolved additively: the sibling site stays at the Pages root as the narrative front door, this build's pages live under docs/pages/, and both are cross-linked. It is not a duplicate of content — one is prose-and-blanks, the other is generated from the registers — but two indexes is a decision, not an accident.",
-          "severity": "MEDIUM",
-          "status": "NEEDS REVIEW",
-          "reviewer_action": "Choose one: keep the two-tier structure, or promote docs/pages/index.html to the root and retire the other index to a section page.",
-          "sources": [
-            "SRC-024"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "B. Verification items: official paths that do not exist",
-      "description": "Each of these was an expected official source that is not where the internet says it is. Recorded because a later session will otherwise repeat the search, and because the absence changes the design.",
-      "columns": [
-        {
-          "key": "check_id",
-          "label": "ID"
-        },
-        {
-          "key": "expected",
-          "label": "Expected source"
-        },
-        {
-          "key": "found",
-          "label": "What was actually returned",
-          "html": true
-        },
-        {
-          "key": "impact",
-          "label": "Design impact",
-          "html": true
-        },
-        {
-          "key": "needs",
-          "label": "What would settle it",
-          "html": true
-        },
-        {
-          "key": "sources",
-          "label": "Source",
-          "render": "srclist"
-        }
-      ],
-      "rows": [
-        {
-          "check_id": "V-1",
-          "expected": "https://www.nfl.com/teams/new-england-patriots/depth-chart — the official depth chart",
-          "found": "The league's '404 - Flag on the Play' page, fetched in this session",
-          "impact": "The brief's 2nd/3rd/4th-string requirement cannot be sourced from the league site as assumed. The deficiency index now derives the replacement from roster-eligibility rules plus our own snap-share estimate, labelled as an estimate.",
-          "needs": "Either 32 club-site parsers, or a documented decision to use the derived shadow chart permanently.",
-          "sources": [
-            "SRC-009",
-            "SRC-003",
-            "SRC-024"
-          ]
-        },
-        {
-          "check_id": "V-2",
-          "expected": "https://www.nfl.com/teams/transactions — the official transaction log",
-          "found": "Redirects to the club directory (all 32 teams, no transactions)",
-          "impact": "Roster-move evidence must be taken from club pages or the league's news feed, with per-club parsing rather than one endpoint.",
-          "needs": "Locate the current transactions endpoint and record it in the source register.",
-          "sources": [
-            "SRC-009",
-            "SRC-024"
-          ]
-        },
-        {
-          "check_id": "V-3",
-          "expected": "https://operations.nfl.com/the-rules and https://operations.nfl.com/the-rules/nfl-injury-rules",
-          "found": "Both return the NFL 404 page; the operations homepage instead exposes a '2026 NFL RULEBOOK' entry point",
-          "impact": "Rules citations must be rebuilt from live navigation. The injury-report *definitions* were sourced from the league's Competition Committee release instead, which is citable.",
-          "needs": "Pin the 2026 rulebook URL and the current injury-report policy text into the register.",
-          "sources": [
-            "SRC-004",
-            "SRC-002",
-            "SRC-024"
-          ]
-        },
-        {
-          "check_id": "V-4",
-          "expected": "Nevada Gaming Control Board revenue-report landing pages",
-          "found": "Two plausible paths on gaming.nv.gov returned a plain '404 Not Found'; only a direct monthly-report PDF path is evidenced, and only via a search index",
-          "impact": "No Nevada hold percentage is published anywhere in this project, including the widely-quoted parlay-card figures. The hold gate (G-7) is therefore BLOCKED, not passed.",
-          "needs": "Open the monthly report PDF (or the correct landing page) and record the sports and parlay-card win percentages with the report period.",
-          "sources": [
-            "SRC-013",
-            "SRC-012",
-            "SRC-024"
-          ]
-        },
-        {
-          "check_id": "V-5",
-          "expected": "An official league endpoint for the final inactive list",
-          "found": "Not identified in this pass; the game-status report is verified, the Sunday list is not",
-          "impact": "The Sunday re-price step of the model is specified but unverified; our committed number is the Friday report until this is settled.",
-          "needs": "Find the official gameday-operations reference for inactive-list timing, then instrument a timestamped capture job.",
-          "sources": [
-            "SRC-001",
-            "SRC-002",
-            "SRC-024"
-          ]
-        },
-        {
-          "check_id": "V-6",
-          "expected": "A canonical URL for Kelly (1956)",
-          "found": "Bibliographic record confirmed across three independent reference lists (Bell System Technical Journal 35(4):917-926); no publisher URL was confirmed, and one guessed domain does not exist",
-          "impact": "The staking section cites the citation, not a link. Deliberate: a dead or invented DOI on a page whose standard is 'no hallucinations' would be worse than no DOI.",
-          "needs": "Locate the publisher's archival link and update the register row.",
-          "sources": [
-            "SRC-019",
-            "SRC-024"
-          ]
-        },
-        {
-          "check_id": "V-7",
-          "expected": "Verification of the academic papers cited for market inefficiency",
-          "found": "Most were verified at abstract or reference-list level through publisher pages (Springer link fetched in full for one); paywalled bodies were not read",
-          "impact": "Those findings are used as *motivation* for signals, never as coefficients or thresholds. Each is labelled accordingly in the source register.",
-          "needs": "Read the papers properly before any of their effect sizes is used to set a gate threshold.",
-          "sources": [
-            "SRC-015",
-            "SRC-017",
-            "SRC-018",
-            "SRC-016",
-            "SRC-024"
-          ]
-        },
-        {
-          "check_id": "V-8",
-          "expected": "Roster rules current for the 2026 league year",
-          "found": "The official roster-FAQ article is written around the 2022 league year (it still discusses suspended COVID protocols)",
-          "impact": "Every roster constant (four-game IR minimum, eight designations, 47/48 gameday active) is marked 'as-described 2022' and must be re-confirmed before it is coded.",
-          "needs": "Read the 2026 rulebook and the current CBA summary; update the register.",
-          "sources": [
-            "SRC-003",
-            "SRC-005",
-            "SRC-004",
-            "SRC-024"
-          ]
-        }
-      ]
-    },
-    {
-      "title": "C. Decisions that are not ours to make",
-      "description": "The brief says there should be no manual input from you. These are the items where stopping is the correct behaviour: each one requires money, a licence, a legal opinion, or an account, and an agent that 'decided' them would be manufacturing a mandate.",
-      "columns": [
-        "decision_id",
-        "decision",
-        "why_an_agent_cannot_make_it",
-        "linked_item",
-        {
-          "key": "sources",
-          "label": "Official source",
-          "render": "srclist"
-        }
-      ],
-      "rows": [
-        {
-          "decision_id": "D-1",
-          "decision": "Buy a licensed historical lines feed",
-          "why_an_agent_cannot_make_it": "It is a purchase with recurring cost and a contract that limits what we may publish. Everything analytical is blocked behind it.",
-          "linked_item": "S-01, Q-02, GAP-01",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "decision_id": "D-2",
-          "decision": "Real money or paper",
-          "why_an_agent_cannot_make_it": "It changes the legal, tax and safety profile of the entire project. The repo has no bankroll policy or jurisdiction, so there is nothing to infer from.",
-          "linked_item": "Q-01, R-18",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "decision_id": "D-3",
-          "decision": "Cash prizes for the leaderboard",
-          "why_an_agent_cannot_make_it": "Prize, chance and consideration is a regulated combination. The design is ready with non-cash rewards; the legal question belongs to counsel.",
-          "linked_item": "Q-13, GAP-14, S-24",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "decision_id": "D-4",
-          "decision": "Risk limits and staking caps",
-          "why_an_agent_cannot_make_it": "They encode loss tolerance. The engine ships conservative defaults (quarter-Kelly, 2% cap, exposure clustering) precisely so that no one has to guess on your behalf.",
-          "linked_item": "Q-05, R-13",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "decision_id": "D-5",
-          "decision": "Provision a host for the collector",
-          "why_an_agent_cannot_make_it": "Requires credentials and a bill. This sandbox has no outbound access to the league or the regulators, which is why ingestion is written and unit-tested but has never run against a live page.",
-          "linked_item": "Q-19, GAP-18",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "decision_id": "D-6",
-          "decision": "Scraping policy for club and league pages",
-          "why_an_agent_cannot_make_it": "The league's data estate is exclusively distributed, so 'just scrape it' is a legal and durability question, not an engineering preference.",
-          "linked_item": "Q-09, S-01",
-          "sources": [
-            "SRC-024"
-          ]
-        },
-        {
-          "decision_id": "D-7",
-          "decision": "Reconcile the four parallel sessions",
-          "why_an_agent_cannot_make_it": "It is an organisational decision about who owns the published site. This session merged additively and changed no sibling file; the alternative splits are yours to choose.",
-          "linked_item": "F-7, F-10, Q-18",
-          "sources": [
-            "SRC-024"
-          ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": "F01",
+    "kind": "Unreachable source",
+    "item": "2017 NFL Personnel (Injury) Report Policy PDF",
+    "detail": "The policy document that every secondary source cites for injury-designation definitions returned HTTP 404 ('FLAG ON THE PLAY') from operations.nfl.com on 2026-11-14. Consequently this site does not quote the policy text and does not assert what 'Questionable' or 'Doubtful' officially mean. Only the categories observed on the live report are recorded.",
+    "sourceIds": [
+      "S12"
+    ],
+    "severity": "Medium",
+    "action": "No definition text published. Category labels reproduced exactly as observed."
+  },
+  {
+    "id": "F02",
+    "kind": "Unreachable source",
+    "item": "League-wide depth charts page",
+    "detail": "https://www.nfl.com/depth-charts/ returns HTTP 404. There is no league-wide official depth chart at that address. All depth information on this site therefore comes from club sites or from roster status codes, and is labelled DERIVED.",
+    "sourceIds": [
+      "S13"
+    ],
+    "severity": "High",
+    "action": "Depth presented as a derived layer only, never as official."
+  },
+  {
+    "id": "F03",
+    "kind": "Unreachable source",
+    "item": "Football Operations injury-report landing page",
+    "detail": "https://operations.nfl.com/health-safety/injury-report/ returns HTTP 404. An official policy landing page could not be located at this path.",
+    "sourceIds": [
+      "S14"
+    ],
+    "severity": "Low",
+    "action": "None. Recorded for completeness."
+  },
+  {
+    "id": "F04",
+    "kind": "Cross-source contradiction",
+    "item": "Myles Garrett \u2014 club attribution",
+    "detail": "NFL.com's Week 10 injury report lists Myles Garrett as an LB on the Los Angeles Rams with a knee designation and a 'resting player' note. NFL.com's Next Gen Stats front page carries a 2026 Rams article titled 'Rams' Sean McVay: No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article is headlined 'How does Myles Garrett fit into Rams defense?'. These agree on the Rams but the injury-row note mixes a real knee injury with a rest designation, which the site will not attempt to untangle. No resolution applied.",
+    "sourceIds": [
+      "S01",
+      "S10"
+    ],
+    "severity": "Medium",
+    "action": "Row published verbatim as captured. Both sources linked."
+  },
+  {
+    "id": "F05",
+    "kind": "Cross-source contradiction",
+    "item": "Aaron Donald \u2014 listed as a non-participant while shown as active",
+    "detail": "The Week 10 Rams injury table lists Aaron Donald (DT) as 'Did Not Participate In Practice' with no injury and no game status. NFL.com's own player profile for Aaron Donald shows him as an active Los Angeles Rams DE with 11 years of experience, and an NFL.com article states he unretired on Aug. 30 and planned a season debut. Both are official NFL.com pages and they cannot both be read at face value. No resolution applied.",
+    "sourceIds": [
+      "S01",
+      "S15"
+    ],
+    "severity": "Medium",
+    "action": "Row published verbatim. Profile linked alongside."
+  },
+  {
+    "id": "F06",
+    "kind": "Coverage gap",
+    "item": "Four clubs absent from the Week 10 injury snapshot",
+    "detail": "The captured Week 10 injury report covers 28 of 32 clubs. Chicago, Denver, Tampa Bay and Philadelphia are absent. All 28 clubs that do appear also appear in the 14-game Week 10 schedule capture. Whether those four clubs are on a bye or their reports were simply not posted at capture time could not be confirmed, because no official 2026 bye-week table was verified in this session.",
+    "sourceIds": [
+      "S01",
+      "S04"
+    ],
+    "severity": "Low",
+    "action": "Counts are always stated as 'x of 28 captured clubs', never as a league total."
+  },
+  {
+    "id": "F07",
+    "kind": "Method hazard",
+    "item": "One Week 10 game was already final at capture time",
+    "detail": "Washington at New York Giants kicked off Thursday 2026-11-12 and finished 24-21. Their injury tables are still shown in the Week 10 report. Using those rows as a pre-game signal would be look-ahead bias. They are the completed game's report, not a forecast input.",
+    "sourceIds": [
+      "S01",
+      "S04"
+    ],
+    "severity": "Medium",
+    "action": "Flagged so no analysis treats the completed game's rows as forward-looking."
+  },
+  {
+    "id": "F08",
+    "kind": "Verification limit",
+    "item": "No benchmark price source exists in this repository",
+    "detail": "The league publishes results, statistics and schedules but not betting prices. No odds feed, historical closing line, or graded result set is present or was licensed for this session. Every edge, expected-value and closing-line-value field on this site is therefore blank. Nothing has been estimated or imputed to fill them.",
+    "sourceIds": [
+      "S03"
+    ],
+    "severity": "High",
+    "action": "All price, edge and EV fields left blank and labelled. See question Q03 and suggestion SG01."
+  },
+  {
+    "id": "F09",
+    "kind": "Coverage gap",
+    "item": "No official snap counts available",
+    "detail": "Determining that a second- or third-string player actually replaced a starter requires snap share. No snap-count feed was located or verified. The deficiency model therefore reports official absence designations only, and does not claim that any specific backup played.",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "High",
+    "action": "Deficiency magnitude left blank. See question Q05 and suggestion SG04."
+  },
+  {
+    "id": "F10",
+    "kind": "Source qualification",
+    "item": "Club depth charts are self-described as unofficial",
+    "detail": "The one club depth chart captured in full is headed 'Kansas City Chiefs Unofficial Depth Chart' by the club itself. Its ordering is reproduced exactly, but it is not an official league ranking and must not be presented as one.",
+    "sourceIds": [
+      "S08"
+    ],
+    "severity": "Medium",
+    "action": "Labelled DERIVED / UNOFFICIAL wherever it appears."
+  },
+  {
+    "id": "F11",
+    "kind": "Data hazard",
+    "item": "Player-name collisions make name joins unsafe",
+    "detail": "Two different players named Marcus Harris appear in the captured data: a Tennessee cornerback and a Kansas City defensive tackle. NFL player URLs disambiguate them with numeric suffixes, but plain names do not. Any join performed on player name alone will silently merge distinct people.",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "Medium",
+    "action": "Rows kept separate. Any future join must key on the player URL, not the display name."
+  },
+  {
+    "id": "F12",
+    "kind": "Verification limit",
+    "item": "Legal and regulatory sources not verified",
+    "detail": "No gambling-regulator, tax or gaming-commission source was loaded or verified during this session. The site therefore makes no statement about legality, licensing or tax treatment in any jurisdiction, including the user's location. Nothing on this site is a bet, an offer to wager, or bookmaking.",
+    "sourceIds": [],
+    "severity": "Medium",
+    "action": "Legal question recorded as open (Q14) and left unanswered. Leaderboard rewards kept non-monetary (SG11)."
+  },
+  {
+    "id": "F13",
+    "kind": "Verification limit",
+    "item": "Terms of use for automated fetching not reviewed",
+    "detail": "Every capture in this session was a single page load. The terms of use and robots policy of nfl.com and of the 32 club sites were not reviewed, so no statement is made about whether scheduled automated collection would be permitted.",
+    "sourceIds": [
+      "S01",
+      "S07",
+      "S08"
+    ],
+    "severity": "Medium",
+    "action": "No scheduled collector was built. See question Q18."
+  },
+  {
+    "id": "F14",
+    "kind": "Verification limit",
+    "item": "Single-season, single-snapshot dataset",
+    "detail": "All data here comes from one 2026 season and, for injuries, one capture on one day. Nothing on this site has a multi-season history, so no claim of persistence over time can be made and no backtest has been run.",
+    "sourceIds": [
+      "S01",
+      "S03"
+    ],
+    "severity": "High",
+    "action": "Every strategy is marked NOT RUN or BLOCKED. No performance figure is displayed."
+  },
+  {
+    "id": "F15",
+    "kind": "Cross-check finding",
+    "item": "A parallel session's injury CSV had a column-shift bug on multi-injury cells",
+    "detail": "A concurrent session independently transcribed the same Week 10 report into data/injuries.csv. Comparing the two transcriptions row by row: all 161 rows it contains also appear in this repo's 345-row capture, with no row present only in theirs. 156 of 161 rows match field for field, which is a useful independent confirmation of the capture. The 5 that differed all involve a player with two listed body parts: 'Ankle, Knee', 'Wrist, Chest', 'Knee, Achilles', 'Ankle, Triceps' and 'Ankle, Knee'. Because that CSV was comma-delimited and the injury field was unquoted, the second body part shifted into the adjacent columns, so the practice and game status fields were displaced. This repo's capture preserves the full published value and the correct game status, and the raw page capture confirms it (e.g. A.J. Brown 'Ankle, Knee / Limited Participation / Questionable').",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "Low",
+    "action": "This repo keeps its own capture, which was verified line by line against the raw page. The other session's files are preserved in archive/v2/ for reference. Any future CSV export must quote every field containing a comma."
+  },
+  {
+    "id": "F16",
+    "kind": "Source not machine-readable",
+    "item": "Houston Texans depth chart published as an image",
+    "detail": "https://www.houstontexans.com/team/depth-chart loads, but the chart itself is rendered as an image inside a photo-gallery widget rather than as a position table. No player names are machine-readable. Houston is therefore the only club of 32 with no depth chart on this site. The Texans roster page does publish a readable table, but it is ordered alphabetically, not by depth, so it cannot be substituted without inventing the string ordering. Depth is an ordering, and the ordering is the fact being reported.",
+    "sourceIds": [
+      "S01",
+      "S49"
+    ],
+    "severity": "Medium",
+    "action": "Houston is absent from the Backup Depth page and counted as uncovered. Nothing inferred in its place."
+  },
+  {
+    "id": "F17",
+    "kind": "Data provenance",
+    "item": "Player-prop correlations are computed estimates from a third-party mirror",
+    "detail": "data/prop-correlations-d.csv coefficients are computed from nflverse player_stats 1999-2024 via the Beexly/Sports mirror (file commit 2026-11-07), QA-gated (schema, coverage, 100% score join vs games.csv, distribution sanity, deterministic rebuild). They are model inputs, NOT official NFL statistics, and must not be presented as verified league facts.",
+    "source": "https://github.com/Beexly/Sports/tree/main/data/nflverse",
+    "severity": "Medium",
+    "sourceIds": [
+      "S47",
+      "S48"
+    ],
+    "action": null
+  }
+]

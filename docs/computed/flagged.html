@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for review · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html">Findings</a><a href="lines.html">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html">Open questions</a><a href="suggestions.html">Suggestions</a><a href="requirements.html">Requirements</a><a href="flagged.html" class="on">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html">Methods</a></nav>
+</div></header>
+<main>
+<h1>Flagged for review</h1>
+<p class="lead">Nine irregularities and nine values left deliberately blank, each with impact and the fix required.</p>
+
+<p class="lead">Everything that could not be verified, could not be obtained, or is a known weakness
+in the data or the method. Flagged items do not block publication — they block <em>trust</em> in the
+specific thing they describe, so each one names its own blast radius.</p>
+
+<div class="note bad"><strong>1 critical, 
+2 high, 4 medium,
+2 low.</strong> The single highest-leverage fix is
+<a href="flagged.html#FLAG-01">FLAG-01</a>; four other items are consequences of it.</div>
+
+<h2>Irregularities</h2>
+<div class="tw"><table><thead><tr><th>ID</th><th>Severity</th><th>Area</th><th>Issue</th><th>Impact</th><th>Mitigation applied</th><th>Fix required</th><th>Source</th></tr></thead><tbody><tr id="FLAG-01"><td><strong>FLAG-01</strong></td><td><span class="pill p-bad">Critical</span></td><td>Data access</td><td><strong>nflverse release CDN unreachable from this environment</strong><br><span class="src">Every asset under github.com/nflverse/nflverse-data/releases redirects to release-assets.githubusercontent.com, which is outside the egress allowlist. injuries_2026, depth_charts_* and snap_counts_* could not be downloaded.</span></td><td>Injury history limited to 2025; no depth charts; no snap shares. Blocks R14 and weakens R13.</td><td>Used the 2025 injury file via a third-party mirror (D06) and stated it everywhere it is used.</td><td>Allowlist the host, or add a scheduled action that mirrors the releases into this repo.</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/injuries" rel="noopener">source</a></td></tr><tr id="FLAG-02"><td><strong>FLAG-02</strong></td><td><span class="pill p-warn">High</span></td><td>Depth</td><td><strong>No authoritative depth order in the official roster feed</strong><br><span class="src">nfl.com/teams/&lt;team&gt;/roster lists players with status ACT/RES and a jersey number, but no depth sequence. Verified on the Seahawks page (S06).</span></td><td>The 2nd/3rd/4th-string requirement cannot be met from any source reachable here.</td><td>Reported QB changes only, labelled &#x27;different starter&#x27; by start sequence, never as a claimed depth slot.</td><td>Vendor a timestamped depth-chart feed (OQ-07).</td><td><a href="https://www.nfl.com/teams/seattle-seahawks/roster" rel="noopener">source</a></td></tr><tr id="FLAG-03"><td><strong>FLAG-03</strong></td><td><span class="pill p-neu">Medium</span></td><td>Data quality</td><td><strong>closing_lines.csv records no push outcome</strong><br><span class="src">The outcome column is 0/1 only. A bet landing exactly on the number is recorded as a loss, which biases any hit rate computed from that file.</span></td><td>Would have overstated vig and understated hit rates.</td><td>All push-aware math uses games.csv raw margins instead. Pushes are excluded from both numerator and denominator.</td><td>None needed for this repo; note it for any future use of that file.</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv" rel="noopener">source</a></td></tr><tr id="FLAG-04"><td><strong>FLAG-04</strong></td><td><span class="pill p-neu">Medium</span></td><td>Data quality</td><td><strong>rosters.csv stops at the 2019 season</strong><br><span class="src">The roster file contains 2006-2019 only, despite living in the current nfldata repo.</span></td><td>Starter/backup identification by games-started share is impossible for 2020 onward.</td><td>Not used for any 2020+ claim. Reported here rather than substituted with an estimate.</td><td>Use weekly_rosters (release asset, blocked by FLAG-01) or a licensed source.</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/rosters.csv" rel="noopener">source</a></td></tr><tr id="FLAG-05"><td><strong>FLAG-05</strong></td><td><span class="pill p-neu">Medium</span></td><td>Official source</td><td><strong>NFL Personnel (Injury) Report Policy full text is a 404</strong><br><span class="src">operations.nfl.com/updates/the-operations-report/nfl-policy-on-injuries/ returns a 404 page. Several secondary sources cite it. Multiple guessed paths also 404.</span></td><td>The exact reporting deadlines could not be confirmed from an official page in this session.</td><td>The status definitions used here are supported by S01 (observed data) and C01 (the 2016 policy change), not by the missing policy text.</td><td>Locate the current canonical URL, or obtain the PDF from NFL Communications.</td><td><a href="https://operations.nfl.com/updates/the-operations-report/nfl-policy-on-injuries/" rel="noopener">source</a></td></tr><tr id="FLAG-06"><td><strong>FLAG-06</strong></td><td><span class="pill p-warn">High</span></td><td>Sample</td><td><strong>2026 season is incomplete in the source</strong><br><span class="src">games.csv has 2026 spreads through Week 11 but results only through Week 10, and Week 10 has only the Thursday game completed (1 of 14).</span></td><td>No 2026 out-of-sample result is possible. Any 2026 number is descriptive.</td><td>Every performance figure on the site is labelled with its season range and the split date.</td><td>Re-run after Week 18.</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr id="FLAG-07"><td><strong>FLAG-07</strong></td><td><span class="pill p-neu">Low</span></td><td>Data quality</td><td><strong>Mixed team-code generations in the source</strong><br><span class="src">SD/LAC, STL/LA/LAR, OAK/LV and WAS all appear across seasons.</span></td><td>A naive join silently drops or duplicates matchups.</td><td>Normalised in scripts/lib.py::norm_team and in every merge key.</td><td>None needed.</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/teams.csv" rel="noopener">source</a></td></tr><tr id="FLAG-08"><td><strong>FLAG-08</strong></td><td><span class="pill p-neu">Medium</span></td><td>Method</td><td><strong>Only closing prices are available, not openers</strong><br><span class="src">games.csv carries the closing line. initial_lines.csv covers 2021+ only and is not a full-sample opening series.</span></td><td>Model-vs-market edges are measured against the price we would have to beat, which understates any real opening-line edge and cannot test line-movement strategies at all.</td><td>Every ROI is labelled &#x27;vs close&#x27;. No steam or closing-line-value strategy is claimed.</td><td>OQ-01: obtain an opening-line feed.</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv" rel="noopener">source</a></td></tr><tr id="FLAG-09"><td><strong>FLAG-09</strong></td><td><span class="pill p-neu">Low</span></td><td>Method</td><td><strong>&#x27;Removed from both numerator and denominator&#x27; changes the gate denominator</strong><br><span class="src">Pushes are excluded from ROI denominators. For spreads at whole numbers this can shift the breakeven hit rate slightly upward relative to a raw average.</span></td><td>Small, but it makes the reported breakeven marginally conservative rather than generous.</td><td>Documented here and in every script docstring.</td><td>None needed.</td><td><a href="methods.html" rel="noopener">source</a></td></tr></tbody></table></div>
+
+<h2>Unverified and left blank</h2>
+<p>These values were requested or would be useful, and are deliberately empty. They were not
+estimated, interpolated or recalled from memory.</p>
+<div class="tw"><table><thead><tr><th>Item</th><th>Value</th><th>Why it is blank</th><th>Source attempted</th><th>Flag</th></tr></thead><tbody><tr><td>Defensive depth order (2nd/3rd/4th string) for any 2026 team</td><td>(blank)</td><td>No reachable source publishes depth order with a timestamp.</td><td><a href="https://www.nfl.com/teams/seattle-seahawks/roster" rel="noopener">https://www.nfl.com/teams/seattle-seahawks/roster</a></td><td>FLAG-02</td></tr><tr><td>Offensive depth order (2nd/3rd/4th string) for any 2026 team</td><td>(blank)</td><td>Same as above.</td><td><a href="https://www.nfl.com/teams/seattle-seahawks/roster" rel="noopener">https://www.nfl.com/teams/seattle-seahawks/roster</a></td><td>FLAG-02</td></tr><tr><td>Player-prop lines and outcomes, any season</td><td>(blank)</td><td>No prop dataset was obtainable.</td><td>(none reachable)</td><td>FLAG-01</td></tr><tr><td>2026 injury reports for Weeks 1-9</td><td>(blank)</td><td>Release CDN blocked; only Week 10 was hand-verified.</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/injuries" rel="noopener">https://github.com/nflverse/nflverse-data/release…</a></td><td>FLAG-01</td></tr><tr><td>Opening-line series for the full sample</td><td>(blank)</td><td>initial_lines.csv covers 2021+ only.</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv" rel="noopener">https://github.com/nflverse/nfldata/blob/master/d…</a></td><td>FLAG-08</td></tr><tr><td>Numeric meaning of Questionable / Doubtful</td><td>(blank)</td><td>The NFL stopped attaching numbers in 2016. Any percentage would be invented.</td><td><a href="https://www.espn.com/nfl/story/_/id/17361111/nfl-streamlines-injured-players-game-status-removes-probable-designation" rel="noopener">https://www.espn.com/nfl/story/_/id/17361111/nfl-…</a></td><td>FLAG-05</td></tr><tr><td>Snap counts / snap share, any season</td><td>(blank)</td><td>Release CDN blocked.</td><td><a href="https://github.com/nflverse/nflverse-data/releases/tag/snap_counts" rel="noopener">https://github.com/nflverse/nflverse-data/release…</a></td><td>FLAG-01</td></tr><tr><td>Exact weekly injury-report filing deadlines</td><td>(blank)</td><td>The Policy page 404s and secondary summaries disagree on Thursday handling.</td><td><a href="https://operations.nfl.com/updates/the-operations-report/nfl-policy-on-injuries/" rel="noopener">https://operations.nfl.com/updates/the-operations…</a></td><td>FLAG-05</td></tr><tr><td>Week 10 2026 result for the 13 Sunday/Monday games</td><td>(blank)</td><td>Games had not been played when the source was pinned (2026-11-14).</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">https://github.com/nflverse/nfldata/blob/master/d…</a></td><td>FLAG-06</td></tr></tbody></table></div>
+
+<h2>What to check first</h2>
+<ol>
+<li><a href="flagged.html#FLAG-02">FLAG-02</a> — the 2nd/3rd/4th-string requirement. If you have a licensed depth-chart
+feed, this closes and the availability model becomes usable.</li>
+<li><a href="flagged.html#FLAG-01">FLAG-01</a> — the CDN. One allowlist entry adds injuries 2026, depth charts and snap
+counts, which unblocks four other items.</li>
+<li><a href="flagged.html#FLAG-06">FLAG-06</a> — the 2026 season is one completed game into Week 10. Nothing on this site
+claims a 2026 out-of-sample result, and it should stay that way until Week 18.</li>
+<li><a href="flagged.html#FLAG-08">FLAG-08</a> — closing-only prices. If you have an opening-line feed, the entire
+line-origination question changes, because a real edge can then be measured against a price you can
+actually get.</li>
+</ol>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Data as of 2026-11-14 &middot; games.csv 7,548 rows, injuries_2025.csv 4,442 rows. Builds are deterministic: this stamp comes from the
+pinned inputs, not from the clock, so a rebuild is byte-identical.</footer>
+</body></html>

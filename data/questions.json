@@ -1,379 +1,262 @@
-{
-  "id": "questions",
-  "title": "Questions that must be answered before a reasonable decision",
-  "description": "The information ledger the brief asked for: what we know, what we do not know, and precisely what has to be true before a decision is defensible. Blocking means a decision downstream of this question is unsafe to make. Where 'what we know' cites a source, the source is the league's or a regulator's own page, not a summary of it.",
-  "updated": "2026-11-14",
-  "columns": [
-    {
-      "key": "q_id",
-      "label": "ID"
-    },
-    {
-      "key": "question",
-      "label": "Question to be answered"
-    },
-    {
-      "key": "blocks",
-      "label": "Blocking?",
-      "render": "badge"
-    },
-    {
-      "key": "why",
-      "label": "Why it blocks the decision"
-    },
-    {
-      "key": "known",
-      "label": "What we already know (with source)"
-    },
-    {
-      "key": "lack",
-      "label": "What we do not have"
-    },
-    {
-      "key": "obtain",
-      "label": "How to obtain the answer"
-    },
-    {
-      "key": "default",
-      "label": "Default if it stays unanswered"
-    },
-    {
-      "key": "sources",
-      "label": "Source",
-      "render": "srclist"
-    }
-  ],
-  "rows": [
-    {
-      "q_id": "Q-01",
-      "question": "Is this a paper (model-only) programme, or are real wagers intended?",
-      "blocks": "YES",
-      "why": "Everything else — staking, legal review, prize structure, record retention, responsible-gambling copy — changes character the moment money moves. An agent must not assume the answer.",
-      "known": "The brief asks for origination, gates and a rewarded leaderboard, which implies real stake allocation, but the repo contains no bankroll policy, no operator agreement and no jurisdiction.",
-      "lack": "Explicit intent, bankroll size and the risk mandate.",
-      "obtain": "Owner decision; record it in COORDINATION.md as a one-line mandate.",
-      "default": "Treat as paper until stated otherwise, and generate no bet slips with monetary stakes.",
-      "sources": [],
-      "no_source_reason": "Owner-decision question: no external source can answer what only the owner can decide. Every external fact this question depends on is cited separately."
-    },
-    {
-      "q_id": "Q-02",
-      "question": "What is the source of truth for opening and closing NFL lines, and do we have a licence to store it?",
-      "blocks": "YES",
-      "why": "Without line history there is no backtest, no closing-line value metric, no way to measure correlation against market prices, and no proof our number beats theirs. It is the largest single gap in the programme.",
-      "known": "The NFL's real-time official play-by-play, Next Gen Stats and official betting data feed are distributed exclusively by Genius Sports under a deal extended through the end of the 2029 season; the three official operator partners receive access through that arrangement.",
-      "lack": "Any point-in-time historical line dataset (openers, mid-week ticks, closers) plus the storage and derived-works rights that come with it.",
-      "obtain": "Purchase a licensed historical lines feed or negotiate operator data-sharing; check the licence permits retention and derived publication.",
-      "default": "No validated claim of market-beating ability; the leaderboard stays in research mode with paper stakes.",
-      "sources": [
-        "SRC-020",
-        "SRC-007"
-      ]
-    },
-    {
-      "q_id": "Q-03",
-      "question": "What is the authoritative settlement source for player props, and where do operators differ from it?",
-      "blocks": "YES",
-      "why": "A prop edge is worthless if the operator settles on a different stat definition than the one we model; a genuine statistical edge disappears into official-scoring-judgment variance.",
-      "known": "House rules filed with regulators define settlement sources and void or reprice behaviour per market family, and they are version-stamped documents.",
-      "lack": "A per-market matrix of our stat source versus each operator's settlement source, maintained against the current rule version.",
-      "obtain": "Build the matrix from each operator's filed house rules, reconciled against official league statistics, and diff it on every rule-version bump.",
-      "default": "Trade only spreads and totals, where settlement is unambiguous.",
-      "sources": [
-        "SRC-014"
-      ]
-    },
-    {
-      "q_id": "Q-04",
-      "question": "Which jurisdictions do we operate in, and at what age and product availability?",
-      "blocks": "YES",
-      "why": "Legality, tax treatment, promo availability and even which markets exist differ by state; a strategy that assumes a market the state bans cannot be executed at all.",
-      "known": "Regulated state markets exist and each publishes its own revenue and reporting returns, which we already cite for hold calibration.",
-      "lack": "Our operator/account jurisdictions, geolocation settings and each state's market restrictions.",
-      "obtain": "Owner states jurisdiction; then pull that state regulator's rules page directly.",
-      "default": "Assume research-only: no placement, no automation of wagering.",
-      "sources": [
-        "SRC-010",
-        "SRC-011"
-      ]
-    },
-    {
-      "q_id": "Q-05",
-      "question": "What are the risk limits: unit size, weekly exposure, per-game and per-cluster caps, and the drawdown that triggers a stop?",
-      "blocks": "YES",
-      "why": "Staking rules are the difference between a positive-expectation model and a ruined bankroll. Kelly is a growth optimum, not a safety rule, and full Kelly is unusable on estimated probabilities.",
-      "known": "The standard remedy is fractional Kelly with parameter uncertainty folded in; a leaderboard that scores raw return rewards the same ruin risk it is supposed to filter.",
-      "lack": "The owner's loss tolerance and the correlated-exposure constraints that make a per-bet cap insufficient.",
-      "obtain": "Owner sets three numbers: unit, weekly cap, kill-switch drawdown. Everything else is derivable from those.",
-      "default": "Quarter-Kelly on our own probability estimate, 1 unit per single, 2 units per game cluster, 0.5 units per prop combo, no live betting.",
-      "sources": [
-        "SRC-019",
-        "SRC-016"
-      ]
-    },
-    {
-      "q_id": "Q-06",
-      "question": "Which designation-to-availability mapping do we use, and how is it estimated rather than inherited from folklore?",
-      "blocks": "YES",
-      "why": "The injury model's entire magnitude flows from P(play | designation, practice history). A hard-coded 50% for Questionable is the most common and least defended assumption in this space.",
-      "known": "The league's official definitions are qualitative: Questionable means it is uncertain whether the player will play, Doubtful means it is unlikely, Out means he will not play. Probable was eliminated precisely because roughly 95% of players so labelled played, and a player certain to play is not listed in the Game Status Report at all.",
-      "lack": "Our own empirical table of P(play) by designation, practice trajectory, position and game day, plus P(active but limited snaps), which no designation describes.",
-      "obtain": "Ingest the league's report archive (the public page exposes season and week selectors back to 1965), join to final inactive lists and snap data we own, then fit per-position hazard tables.",
-      "default": "Use designation as a categorical feature only; converting a tag to a probability in production is a code-review reject until a fitted table exists.",
-      "sources": [
-        "SRC-002",
-        "SRC-001"
-      ]
-    },
-    {
-      "q_id": "Q-07",
-      "question": "Where and when does the final inactive list officially appear, and can we capture it programmatically?",
-      "blocks": "YES",
-      "why": "The swing between Friday's report and the Sunday inactive list is the largest single information event of the week; if we cannot capture it at the right time, our model is systematically stale at release.",
-      "known": "Game-status designations are filed on the practice-report cadence, and club-side documents mark status changes explicitly.",
-      "lack": "A verified official endpoint and deadline for inactive lists. Secondary sources say about 90 minutes before kickoff; no official confirmation was found in this pass.",
-      "obtain": "Verify against the league's gameday operations documentation and club pages, then instrument a Sunday capture job with a timestamp log and record the finding.",
-      "default": "Friday 4pm ET is the last committed number; hold no position into Sunday until inactives are verified from an official source.",
-      "sources": [
-        "SRC-001",
-        "SRC-002",
-        "SRC-021"
-      ]
-    },
-    {
-      "q_id": "Q-08",
-      "question": "Do we have the depth-chart and next-man-up inputs, given no official league depth-chart endpoint could be found?",
-      "blocks": "YES",
-      "why": "The brief's core requirement — knowing when a second, third or fourth-stringer replaces a starter — is a depth-chart problem, not an injury-report problem. The report says who is out; only the chart says who is in.",
-      "known": "Roster architecture is officially documented: 53-man active/inactive, 54 or 55 via practice-squad elevation, a 47 or 48 gameday roster, IR four-game minimum with up to eight designations to return, PUP and NFI clearing after four games. That lets us derive the set of eligible replacements.",
-      "lack": "A verified official NFL.com depth-chart endpoint: the expected path returned the league's 404 page and the transactions path redirected. Depth charts appear to live on club-operated pages, in 32 different layouts.",
-      "obtain": "Either build 32 club-page parsers, or derive a shadow depth chart from our own snap-share logs joined to the official availability file — we recommend the second because it is source-stable.",
-      "default": "Use the derived shadow chart and label every deficiency number 'estimated, not official'.",
-      "sources": [
-        "SRC-009",
-        "SRC-003",
-        "SRC-005"
-      ]
-    },
-    {
-      "q_id": "Q-09",
-      "question": "What data are we permitted to collect, and under what terms?",
-      "blocks": "YES",
-      "why": "An architecture built on scraping an exclusively distributed feed is not a footnote, it is a rebuild risk: it can invalidate the pipeline, the site's public claims and the prize competition at once.",
-      "known": "One distributor holds exclusive rights to official real-time play-by-play, NGS and the official betting feed for media and operators; the league's own terms govern use of its public pages; several state regulators publish operator house rules and market data openly.",
-      "lack": "A reviewed position on our collection methods (league terms, robots policy, licensed feeds, operator APIs) and the redistribution rights for anything the site publishes.",
-      "obtain": "Legal review of the collection plan against the league's terms and the distributor's licence, then encode the resulting allowlist in the collector config and enforce it in CI.",
-      "default": "Read only the sources registered in data/sources.json; quote with links; buy nothing without approval.",
-      "sources": [
-        "SRC-020",
-        "SRC-007",
-        "SRC-010"
-      ]
-    },
-    {
-      "q_id": "Q-10",
-      "question": "What hold and vig do we assume per market family, and is that number measured or folklore?",
-      "blocks": "YES",
-      "why": "The hold assumption sets the break-even hurdle, which sets the edge threshold, which sets how many bets we should ever take. It compounds violently inside parlays.",
-      "known": "Regulators publish the raw material: Illinois exposes monthly sports wagering reports with CSV and a Sport Detail Report; New York publishes statewide and per-operator weekly and monthly Excel files; Nevada's control standards require books to report wagers accepted, amounts paid, taxable win and win-to-write percentage per sport and for parlay cards separately.",
-      "lack": "The actual figures, opened and parsed. Two plausible Nevada landing paths returned 404, so we publish no Nevada number, and the widely repeated 'parlay hold in the 30s' remains unverified by us.",
-      "obtain": "A one-time scripted download of the Illinois and New York report sets into data/market_hold.csv, refreshed monthly with the regulator's own publication lag.",
-      "default": "Model singles at -110 using the 4.55% theoretical hold on turnover (a 4.76% overround), and treat any parlay as strictly worse by an unmeasured additive, so parlays must clear a higher hurdle.",
-      "sources": [
-        "SRC-010",
-        "SRC-011",
-        "SRC-012",
-        "SRC-013"
-      ]
-    },
-    {
-      "q_id": "Q-11",
-      "question": "How do we price a Same Game Parlay: our own joint distribution, or the operator's combined price?",
-      "blocks": "YES",
-      "why": "Correlation is exactly why naive multiplication of single-leg prices overstates parlay value. Whose price we benchmark against determines whether our apparent edge is real or an artefact of ignoring the operator's correlation model.",
-      "known": "House rules permit correlated legs only inside a Same Game Parlay and reprice the SGP when a leg is void or pushed; a parlay outside the SGP may never contain related outcomes. Nevada requires parlay-card win percentages to be reported separately from straight sports wagering.",
-      "lack": "A comparison of our joint-priced SGP fair value against posted SGP prices across a sample, to see how much of our edge the operator has already taken.",
-      "obtain": "Snapshot SGP prices with their component singles for a full season, then measure the implied correlation and the residual edge.",
-      "default": "Claim no parlay edge; treat singles as the only market that can be validated by design in v1.",
-      "sources": [
-        "SRC-014",
-        "SRC-012"
-      ]
-    },
-    {
-      "q_id": "Q-12",
-      "question": "What counts as a skill strategy on the leaderboard, and what kills an entrant's claim?",
-      "blocks": "YES",
-      "why": "A rewarded leaderboard without a skill definition rewards the luckiest entrant and turns the programme into a variance lottery — the failure the brief names directly.",
-      "known": "The forecasting literature provides the tooling: White's Reality Check, Hansen's Superior Predictive Ability test, Romano and Wolf's stepwise extension, deflated Sharpe ratios and paired stationary bootstraps all exist to answer whether the best of many candidates truly beats a benchmark once how-many-you-tried is accounted for.",
-      "lack": "Our thresholds: minimum bet count, minimum seasons, adopted multiple-testing correction, concentration cap and promotion rule.",
-      "obtain": "Adopt data/validation_gates.json as the competition constitution and freeze it before entries open.",
-      "default": "Rank on the 95% lower confidence bound of expected value; no promotion without passing G-1 to G-13; prizes deferred until gates pass.",
-      "sources": [
-        "SRC-016"
-      ]
-    },
-    {
-      "q_id": "Q-13",
-      "question": "What prize or reward structure is lawful for a strategy competition with money at stake?",
-      "blocks": "YES",
-      "why": "Entry fee plus chance plus prize is the lottery shape. A competition whose ranking is partly luck and whose entry is paid sits on the wrong side of several lines, including the league's own posture on contests.",
-      "known": "The league requires betting partners to observe strict integrity rules, prohibits its personnel from betting and from daily fantasy, and treats prediction markets as sports betting — a fair indicator of how tightly the surrounding product space is policed.",
-      "lack": "Counsel's view on free-to-enter skill-based contest rules, eligibility, disclosure, tax reporting and payout rails.",
-      "obtain": "Legal opinion, published official rules, free entry, skill-based ranking, prizes kept away from the operator accounts we bet through.",
-      "default": "Rewards are non-cash: compute credits, staking allocation and internal capital promotion.",
-      "sources": [
-        "SRC-007",
-        "SRC-008"
-      ]
-    },
-    {
-      "q_id": "Q-14",
-      "question": "How much sample do our bankroll and calendar actually allow, given the required n is enormous?",
-      "blocks": "YES",
-      "why": "This arithmetic decides whether the programme is plausible. An edge too small to detect within a decade of NFL Sundays is not an edge we can act on, whatever the backtest says.",
-      "known": "Break-even at -110 is 52.38%. Distinguishing a 55.0% strategy from that hurdle with 80% power at a one-sided 5% test requires 2,243 bets; a 57% strategy needs 719 (computed by engine/stats.required_sample, published on the Validation page). Inverting it: a strategy that takes 150 bets a season can only prove a true hit rate of about 62.4%.",
-      "lack": "Our realistic bet volume per season under a defensible edge threshold, and therefore our minimum detectable edge.",
-      "obtain": "Simulate the trade-off curve, pick the edge threshold that yields an acceptable sample per season, or accept multi-season validation.",
-      "default": "Two promotions per season maximum, pre-registered expected bet volume per entrant, and the detectable-edge curve published on the site.",
-      "sources": [
-        "SRC-015",
-        "SRC-016"
-      ]
-    },
-    {
-      "q_id": "Q-15",
-      "question": "Which non-market inputs do we trust at v1: schedule, availability, rest, venue, or none?",
-      "blocks": "NO",
-      "why": "This sets the size of the first release, not its validity: a totals model can start from priors plus availability and add features later.",
-      "known": "The official schedule and operations calendar give rest days, short weeks and venues; availability comes from the injury report.",
-      "lack": "A verified weather source (NOAA/NWS not checked in this pass), a dome/outdoor classification list, and travel or timezone effects we are willing to code with citations.",
-      "obtain": "A short verification pass on the federal weather endpoint and the schedule fields; write each into the feature register with its source and update cadence.",
-      "default": "Ship v1 with schedule plus availability only, and state that limitation on the model card.",
-      "sources": [
-        "SRC-004",
-        "SRC-001"
-      ]
-    },
-    {
-      "q_id": "Q-16",
-      "question": "Do we use referee-crew information at all, given officiating-linked markets are prohibited?",
-      "blocks": "NO",
-      "why": "A tempting feature that pulls the model toward markets the league refuses to offer and toward data we cannot source officially. It needs a policy decision, not a data source.",
-      "known": "The league prohibits Officiating-Related markets as a class, including assignments, penalties and replays.",
-      "lack": "Whether crew tendencies may inform a legal market (spread or total) even though no officiating market may be offered.",
-      "obtain": "Adopt the conservative internal line — no crew feature, documented in the model card — and revisit only with legal input.",
-      "default": "Excluded by design.",
-      "sources": [
-        "SRC-008"
-      ]
-    },
-    {
-      "q_id": "Q-17",
-      "question": "How stale is our information at release, and what lag between an official update and our re-price is acceptable?",
-      "blocks": "NO",
-      "why": "Sets the ingestion architecture (event-triggered polling versus streaming) and whether we can credibly claim a Friday-close advantage.",
-      "known": "The official report is published on a practice-day cadence and club documents mark status changes, so minute-level polling is unnecessary but event-triggered polling is essential.",
-      "lack": "Measured publish-to-price latency once the collector runs in production.",
-      "obtain": "Instrument the collector with a publish-to-price stopwatch and publish the p95 on the site.",
-      "default": "Re-price on each official report drop and on any transaction event, with a hard stop 30 minutes before our bet cut-off.",
-      "sources": [
-        "SRC-001",
-        "SRC-021"
-      ]
-    },
-    {
-      "q_id": "Q-18",
-      "question": "Which sibling branches do we merge, and who arbitrates overlapping claims?",
-      "blocks": "NO",
-      "why": "A coordination decision, not a modelling one — but it decides whether the published site is one coherent system or four competing ones.",
-      "known": "Four sessions each branched from the same commit and each wrote a COORDINATION.md claiming all tasks; one already published a full static site under docs/, two published only claims.",
-      "lack": "A designated integration owner with authority to merge and publish.",
-      "obtain": "This session nominated itself as integrator on the open-remote evidence, preserved every sibling's files, and logged the handoff. If another session objects, the fix is a rebase and re-verification, not a deletion.",
-      "default": "Merge all non-conflicting files from all four branches, resolve COORDINATION.md by union, publish the union.",
-      "sources": [
-        "SRC-024"
-      ]
-    },
-    {
-      "q_id": "Q-19",
-      "question": "Where does the automation run, and who owns the credentials and the schedule?",
-      "blocks": "NO",
-      "why": "'No manual input' is an infrastructure claim. Without a host, ingestion, gate evaluation and rebuilds silently stop, and a stale dashboard is worse than none.",
-      "known": "Everything in this repo runs on the Python standard library plus a static build, so one small VM or a scheduled GitHub Action is enough for a weekly cadence.",
-      "lack": "A target environment, service account, alerting channel and a retention policy for raw snapshots, which audit requires.",
-      "obtain": "Owner provisions a runner and storage for raw captures; then wire a nightly job with a dead-man switch.",
-      "default": "Site rebuilds on push only; the as-of date is printed on every page so staleness is visible.",
-      "sources": [],
-      "no_source_reason": "Owner-decision question: no external source can answer what only the owner can decide. Every external fact this question depends on is cited separately."
-    },
-    {
-      "q_id": "Q-20",
-      "question": "What is our stance on prediction markets as an execution venue or benchmark?",
-      "blocks": "NO",
-      "why": "They price the same events with different rules and different hold, inside a live regulatory argument; using one changes both the edge estimate and the compliance surface.",
-      "known": "The league treats prediction markets on sports outcomes as sports betting under its policy, prohibits personnel participation, restricts their advertising in broadcasts, has written to them about prohibited wagers, and omitted them from its 2026 operator partnerships.",
-      "lack": "Whether we may execute there, and whether their quotes are usable as a closing benchmark for CLV.",
-      "obtain": "Owner decision plus counsel; if used for execution, exclude their prices from the CLV benchmark or document why not.",
-      "default": "Not an execution venue, not part of the closing-line benchmark.",
-      "sources": [
-        "SRC-008",
-        "SRC-007"
-      ]
-    },
-    {
-      "q_id": "Q-21",
-      "question": "What is our tradable market universe after the league's prohibited classes are subtracted?",
-      "blocks": "YES",
-      "why": "The injury-derived feature set is legitimate as an input, but a bet whose subject is an injury, or a one-person one-play outcome, is one the league asks operators not to offer. The universe must be fixed before any strategy is scored.",
-      "known": "The league's published prohibited classes: Inherently Objectionable (including player injuries, fan safety, misconduct), Officiating-Related (assignments, penalties, replays), Determinable by One Person in One Play (kicker to miss, QB's first pass incomplete), and Pre-Determined outcomes (will the QB start this week).",
-      "lack": "Our exclusion list as a matcher over market names, and a test that it cannot be bypassed by a renamed market.",
-      "obtain": "engine/compliance.py already encodes the four classes; extend with per-operator market-name tests and re-run every ingestion cycle.",
-      "default": "Game spread, game total, team totals and player stat markets that are not injury, officiating or single-play proxies; refuse everything else.",
-      "sources": [
-        "SRC-008"
-      ]
-    },
-    {
-      "q_id": "Q-22",
-      "question": "What happens when the numbers stop beating the close: what is the demotion rule?",
-      "blocks": "NO",
-      "why": "Pre-committing a kill rule is the cheapest defence against the sunk-cost drift that keeps losing strategies funded.",
-      "known": "A live CLV monitor with a trip threshold and a demotion ladder, using the same multiple-comparison machinery that promotes.",
-      "lack": "The threshold, who flips the switch, and the review cadence.",
-      "obtain": "Adopt G-11's decay test as the demotion rule and report it in the executive summary every week.",
-      "default": "Auto-demote to research mode when the rolling CLV lower bound stays below zero for 250 bets.",
-      "sources": [
-        "SRC-016"
-      ]
-    },
-    {
-      "q_id": "Q-23",
-      "question": "How do we prove no non-public information entered the model?",
-      "blocks": "YES",
-      "why": "Using leaked lineup or injury information would be precisely the conduct the league, its partners and regulators are built to detect, and it would destroy the programme and possibly more.",
-      "known": "The league requires personnel to sign an annual gambling policy prohibiting the sharing of inside information, monitors betting patterns through its partners, assigns an integrity representative to every club, and states that unusual patterns may indicate a leak of non-public information.",
-      "lack": "A written data-provenance attestation per input and an access policy that makes non-public channels unreachable by construction.",
-      "obtain": "The source register is the input allowlist; make CI fail on any input not listed in it.",
-      "default": "Only sources in data/sources.json may be read, enforced in the collector config rather than by convention.",
-      "sources": [
-        "SRC-007",
-        "SRC-008"
-      ]
-    },
-    {
-      "q_id": "Q-24",
-      "question": "What must the site show about itself to stay honest?",
-      "blocks": "NO",
-      "why": "A dashboard that hides its unverified cells will be trusted like a live model, which is how an empty field turns into a decision.",
-      "known": "The brief requires unconfirmable values to be left blank and flagged; we enforce that at build time, and every source carries a verification level so a reader can see that INDEX-MEANS is not FETCHED.",
-      "lack": "Whether the owner wants the as-of timestamps, the review page and the 'no Nevada number published' stance presented that prominently.",
-      "obtain": "Owner reviews the Flagged for Review page after deployment and adjusts prominence, not substance.",
-      "default": "Keep the current prominence: blanks, flags and verification levels stay on the surface of every table.",
-      "sources": [
-        "SRC-013",
-        "SRC-019"
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": "Q01",
+    "category": "Scope",
+    "priority": "Critical",
+    "question": "What exactly is being priced — the full-game winner, the spread, the total, or a specific prop — and for which market type first?",
+    "why_it_matters": "Every downstream choice (data needed, sample size, validation test) differs by market. A spread needs a margin model; a winner market needs only a probability. A total needs a pace model. Picking all of them at once guarantees none reaches statistical significance this season.",
+    "what_we_know": "The brief asks for single bets, parlays and player-prop combos. Official NFL data supplies team scoring (PF/PA), records and game status, which is enough to specify a spread or total model.",
+    "what_we_dont_know": "Which market the user wants first, and whether the goal is to beat a specific book's price or to produce an independent fair-value number.",
+    "missing_data": "A target market. A benchmark price source to compare against.",
+    "source": "S03",
+    "blocking": "Yes",
+    "recommended_path": "Start with a single market we can fully specify from official data (team spread), reach a validated result, then extend. Do not start with parlays: they multiply variance and hide which leg failed."
+  },
+  {
+    "id": "Q02",
+    "category": "Scope",
+    "priority": "Critical",
+    "question": "Is the objective a single published line per game, or a repeatable pipeline that regenerates lines weekly?",
+    "why_it_matters": "A one-off line cannot be validated. Only a pipeline that emits a number before kickoff, for many games, produces a record that can be judged against outcomes.",
+    "what_we_know": "Official NFL schedules give kickoff times and matchups, so a pre-kickoff timestamp can be attached to every generated line.",
+    "what_we_dont_know": "Whether the user wants historical backtesting, live forward-testing, or both.",
+    "missing_data": "Historical closing lines and results to backtest against are not present in this repository and are not published as a bulk official dataset by the NFL.",
+    "source": "S04",
+    "blocking": "Yes",
+    "recommended_path": "Forward-testing with a sealed, timestamped record. Every prediction is written to disk before kickoff with a hash, so results cannot be edited afterwards."
+  },
+  {
+    "id": "Q03",
+    "category": "Data availability",
+    "priority": "Critical",
+    "question": "What is the official source for a *market* price to measure our own line against?",
+    "why_it_matters": "Without a benchmark price there is no way to compute edge, closing-line value, or whether a strategy is profitable. A strategy graded only on 'did it win' cannot separate skill from luck.",
+    "what_we_know": "Official league sources publish results, stats and schedules, but not betting prices. Sportsbook prices are commercial data.",
+    "what_we_dont_know": "Which price source the user will accept as the benchmark, and whether they have access to one.",
+    "missing_data": "A licensed or user-supplied odds feed. Nothing of the kind exists in this repo.",
+    "source": "S03",
+    "blocking": "Yes",
+    "recommended_path": "Do not invent prices. Until a benchmark feed is supplied, output only a fair-value probability and a stated uncertainty, and grade strategies on calibration (predicted vs realised) rather than profit."
+  },
+  {
+    "id": "Q04",
+    "category": "Data availability",
+    "priority": "Critical",
+    "question": "Is there an official league-wide depth chart, or must depth come from each of the 32 club sites?",
+    "why_it_matters": "The brief asks which 2nd/3rd/4th-string players are replacing starters. Ranking depth requires a depth ordering. If there is no league-wide feed, the build is 32 separate scrapers with 32 different formats, and inconsistency becomes the main error source.",
+    "what_we_know": "https://www.nfl.com/depth-charts/ returns 404 (S13). Individual club sites do publish depth charts, and the Chiefs page is explicitly titled 'Unofficial Depth Chart' (S08). NFL.com rosters do carry a status code (ACT/RES/CUT/DEV/PUP/TRD) per player (S07).",
+    "what_we_dont_know": "Whether every club publishes a machine-readable depth chart, and whether any of them agree with each other on the same date.",
+    "missing_data": "A league-wide official depth feed. Full 32-club depth chart capture.",
+    "source": "S08, S13, S07",
+    "blocking": "Yes — for the backup-deficiency feature",
+    "recommended_path": "Treat 'official depth chart' as unavailable. Rank depth explicitly from roster status codes plus published club depth charts, and label every derived rank as *derived*, never as official."
+  },
+  {
+    "id": "Q05",
+    "category": "Data availability",
+    "priority": "High",
+    "question": "Are official snap counts published, so a starter's replacement can be measured rather than guessed?",
+    "why_it_matters": "The only rigorous way to say a backup 'had to replace a starter' is to show the starter's snap share fell and the backup's rose. Without snap counts the claim is narrative, not measurement.",
+    "what_we_know": "The official injury report tells us who is Out/Doubtful/Questionable but not how many snaps anyone played.",
+    "what_we_dont_know": "Whether snap counts are available to this project from an official or licensed source.",
+    "missing_data": "Snap-count data. Not present in this repo and not retrievable from the pages verified here.",
+    "source": "S01",
+    "blocking": "No, but it caps the ceiling on the deficiency model",
+    "recommended_path": "Mark the deficiency model as specification-only until snap data exists. Do not fabricate snap shares."
+  },
+  {
+    "id": "Q06",
+    "category": "Injury tracking",
+    "priority": "High",
+    "question": "How is the injury report snapped and versioned, given that it changes several times per week?",
+    "why_it_matters": "A player can be Full on Wednesday and Out on Saturday. If snapshots are not timestamped, any model trained on the report is using information that did not exist at the time — a look-ahead bias that manufactures fake skill.",
+    "what_we_know": "The Week 10 report captured here (S01) is a single point-in-time snapshot taken 2026-11-14, and it is already partly final: e.g. Sam Darnold is listed Out and a same-page NFL news item confirms he was ruled out.",
+    "what_we_dont_know": "The exact publication cadence per club, and whether earlier-week versions are archived anywhere official and free.",
+    "missing_data": "A time series of injury reports. This repo holds one snapshot only.",
+    "source": "S01",
+    "blocking": "Yes — for any injury-based signal",
+    "recommended_path": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now."
+  },
+  {
+    "id": "Q07",
+    "category": "Injury tracking",
+    "priority": "High",
+    "question": "What do the practice and game-status designations officially mean, and can the definitions be quoted from an official source?",
+    "why_it_matters": "'Questionable' has a specific league meaning. Treating Doubtful and Questionable as equally likely to play would corrupt any availability model.",
+    "what_we_know": "The verified pages show four practice states (Full Participation, Limited Participation, Did Not Participate) and four game statuses (Out, Doubtful, Questionable, blank).",
+    "what_we_dont_know": "The official definition text. The 2017 policy PDF cited everywhere on the web returns 404 from operations.nfl.com (S12), and the operations injury-report landing page also 404s (S14).",
+    "missing_data": "A retrievable official definition of each designation.",
+    "source": "S12, S14, S01",
+    "blocking": "No, but it is a flagged gap",
+    "recommended_path": "Record the observed categories as observed, and put the definition gap on the Flagged for Review page rather than paraphrasing a policy we could not retrieve."
+  },
+  {
+    "id": "Q08",
+    "category": "Data quality",
+    "priority": "High",
+    "question": "How should the cross-source irregularities found in this repo be handled?",
+    "why_it_matters": "Two official pages disagree. If the build silently picks one, every downstream number inherits an unstated choice.",
+    "what_we_know": "Case 1: NFL.com's Week 10 injury page lists Myles Garrett as a Rams LB, while NFL.com's own Next Gen Stats page carries a Rams article titled 'No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article places Garrett in the Rams defense. Case 2: Aaron Donald is listed as a Did Not Participate on the Rams injury table and NFL.com's player profile shows him active with the Rams, consistent with a same-season NFL.com report that he unretired on Aug. 30 and planned a season debut. Case 3: the injury page header reads 'Week 10 of the 2026 Season' while the article slug for the same week is dated 2026 — consistent — but the Commanders' sideline game is shown as FINAL 24-21 on Nov 12 while the injury page still lists them.",
+    "what_we_dont_know": "Whether these are data-entry errors at the source, stale cached rows, or genuinely correct and our reading is wrong.",
+    "missing_data": "An authoritative roster-move log to reconcile against.",
+    "source": "S01, S10, S15",
+    "blocking": "No",
+    "recommended_path": "Do not reconcile by hand. Publish the discrepancy verbatim with both source links on the Flagged for Review page and leave the affected cells as captured."
+  },
+  {
+    "id": "Q09",
+    "category": "Methodology",
+    "priority": "Critical",
+    "question": "What sample size would make a strategy's result distinguishable from luck, and how long is one NFL season?",
+    "why_it_matters": "A season is short. At roughly 272 regular-season games, even a genuinely good model produces results well inside noise over a few weeks. Claiming skill from a 20-bet record is arithmetic, not opinion: the confidence interval swallows the edge.",
+    "what_we_know": "A 2026 regular season runs 18 weeks; Week 10 is in progress and the league calendar shows Week 18 on Jan 9-10, 2027, with Super Bowl LXI on Feb 14, 2027 (S05). Division standings confirm clubs have played 8-9 games (S02).",
+    "what_we_dont_know": "The effect size any strategy will actually achieve, which is what determines the sample needed.",
+    "missing_data": "Historical graded results to estimate variance.",
+    "source": "S05, S02",
+    "blocking": "Yes — for the leaderboard",
+    "recommended_path": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate."
+  },
+  {
+    "id": "Q10",
+    "category": "Methodology",
+    "priority": "High",
+    "question": "How is 'luck removed' defined operationally, rather than as a slogan?",
+    "why_it_matters": "The brief asks to remove luck. That needs a testable definition or it becomes an untestable claim.",
+    "what_we_know": "Three measurable proxies exist with data we can actually get: (a) calibration — do 60% predictions win 60% of the time; (b) closing-line value — did the fair value move toward our number; (c) persistence — does the edge hold out of sample and across seasons.",
+    "what_we_dont_know": "Which proxy the user will accept as the definition.",
+    "missing_data": "A benchmark price feed for the CLV test.",
+    "source": "S03",
+    "blocking": "No",
+    "recommended_path": "Adopt all three as separate gates. A strategy must pass calibration first; CLV and persistence are additional. Never average them into one score."
+  },
+  {
+    "id": "Q11",
+    "category": "Methodology",
+    "priority": "High",
+    "question": "How are correlation values computed for parlays and prop combos, and from what joint data?",
+    "why_it_matters": "Parlay pricing depends entirely on the joint distribution. If two legs are positively correlated, multiplying their probabilities underprices the parlay and misstates the edge.",
+    "what_we_know": "Correlation requires repeated joint observations of the same pairing. Team-level scoring is available from official standings (S03), so team totals can supply joint observations.",
+    "what_we_dont_know": "Whether player-level joint outcomes can be assembled at all from official sources at the depth needed, and how many observations per pair are required.",
+    "missing_data": "Player game logs sufficient to estimate pairwise prop correlations.",
+    "source": "S03",
+    "blocking": "Yes — for parlay and combo products",
+    "recommended_path": "Start correlations at the team-total level where data exists. For player props, publish the method and mark correlations blank until the joint sample is adequate."
+  },
+  {
+    "id": "Q12",
+    "category": "Methodology",
+    "priority": "High",
+    "question": "What counts as out-of-sample, and how is the holdout protected from repeated peeking?",
+    "why_it_matters": "If the same data is used to choose a model and to score it, the score is optimistic. Repeatedly checking the holdout while tuning destroys it.",
+    "what_we_know": "Official data is organised by season and week, so strict time-based splits are natural: train on earlier weeks, test on later ones.",
+    "what_we_dont_know": "Whether enough seasons are available to the project for a meaningful multi-season holdout.",
+    "missing_data": "Multiple completed seasons of the same official fields.",
+    "source": "S03, S05",
+    "blocking": "Yes",
+    "recommended_path": "Walk-forward validation only, no random shuffling. Freeze the holdout in a separate file and log every access to it."
+  },
+  {
+    "id": "Q13",
+    "category": "Rewards",
+    "priority": "Medium",
+    "question": "What exactly is rewarded on the leaderboard, and is anything of value actually paid out?",
+    "why_it_matters": "The brief asks for rewards for top strategies. If rewards are not defined, the leaderboard ranks on whatever metric happens to be convenient, and that metric will be gamed.",
+    "what_we_know": "Rewards can be defined entirely in-repo as ranking position and a badge, with no monetary component.",
+    "what_we_dont_know": "Whether the user intends real money, and if so the legal and tax position.",
+    "missing_data": "A decision from the user on any monetary component.",
+    "source": "S03",
+    "blocking": "No",
+    "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14."
+  },
+  {
+    "id": "Q14",
+    "category": "Legal and compliance",
+    "priority": "High",
+    "question": "Does producing lines and publishing them raise any legal issue, and does the responsible regulator need to be identified?",
+    "why_it_matters": "Publishing prices or running a contest with entry fees touches gambling regulation in the United States, and the rules differ by state. The user is located in Mexico City, which adds a second jurisdiction question.",
+    "what_we_know": "Nothing in this repo constitutes a bet, a bookmaking service, or an offer to wager. No money changes hands.",
+    "what_we_dont_know": "Whether a public leaderboard with prizes would be treated as a contest of skill or of chance in any relevant jurisdiction, and which regulator applies.",
+    "missing_data": "Legal review. Regulator sources were not verified in this session.",
+    "source": "S03",
+    "blocking": "Only if money or prizes are introduced",
+    "recommended_path": "Keep the site informational and non-monetary. Put the open legal question on the Flagged for Review page and do not assert a legal conclusion."
+  },
+  {
+    "id": "Q15",
+    "category": "Data quality",
+    "priority": "Medium",
+    "question": "Which Week 10 games have no injury report in the captured snapshot, and is that because the report is not yet due?",
+    "why_it_matters": "The snapshot covers 28 of 32 clubs. Anyone averaging 'injuries per team' over the wrong denominator gets a biased number.",
+    "what_we_know": "Four clubs are absent from the Week 10 injury tables: CHI, DEN, TB and PHI. By contrast, every one of the 28 clubs in the snapshot is one of the 28 clubs appearing in the Week 10 schedule capture (S04), which has 14 games.",
+    "what_we_dont_know": "Whether those four clubs have a bye in Week 10 or their reports simply were not yet posted at capture time.",
+    "missing_data": "An official 2026 bye-week table.",
+    "source": "S01, S04",
+    "blocking": "No",
+    "recommended_path": "Report the count as 28 of 32 clubs present, never as a league total, and flag the four missing clubs as an open question."
+  },
+  {
+    "id": "Q16",
+    "category": "Data quality",
+    "priority": "Medium",
+    "question": "How are 'not injury related' entries handled so they do not pollute an injury signal?",
+    "why_it_matters": "The report mixes injury with rest and personal absence. Counting 'resting player' as an injury inflates the injury rate and misclassifies the reason a starter is missing.",
+    "what_we_know": "The captured report contains explicit non-injury entries: 'Not injury related - resting player' (two Jaguars) and 'Not injury related - personal matter' (one Texan). These are recorded verbatim.",
+    "what_we_dont_know": "Whether other absences with an empty injury field are also non-injury.",
+    "missing_data": "A definitive presence/absence reason per player.",
+    "source": "S01",
+    "blocking": "No",
+    "recommended_path": "Never bucket an empty injury field as an injury. Tag non-injury rows explicitly and exclude them from injury-rate denominators."
+  },
+  {
+    "id": "Q17",
+    "category": "Scope",
+    "priority": "Medium",
+    "question": "Which additional inputs are officially obtainable, and which require a licensed vendor?",
+    "why_it_matters": "Weather, travel, rest days and officiating crew all plausibly move a line. If any of them requires a paid feed, it belongs on the open-questions list rather than in the model.",
+    "what_we_know": "Official and free: local forecasts from the National Weather Service (S11), schedules with kickoff times (S04), and tracking-derived metrics from Next Gen Stats (S10).",
+    "what_we_dont_know": "Officiating crew assignments, exact rest-day differentials, and any sourced stadium/roof database.",
+    "missing_data": "Crew assignments; a roof and surface registry.",
+    "source": "S10, S11, S04",
+    "blocking": "No",
+    "recommended_path": "Use only the free official inputs first. Add each new input only after the base model is validated, one at a time, so its contribution can be measured."
+  },
+  {
+    "id": "Q18",
+    "category": "Operations",
+    "priority": "Medium",
+    "question": "How does an automated pipeline stay within acceptable use of official sites?",
+    "why_it_matters": "The brief requires no manual input, so scheduled fetching is implied. Hammering league or club sites can get the project blocked and is not a lawful-by-default practice.",
+    "what_we_know": "All captures here were single page loads, and the data volume is small.",
+    "what_we_dont_know": "The terms of use and robots policy of nfl.com and the 32 club sites, which were not reviewed in this session.",
+    "missing_data": "A terms-of-use review.",
+    "source": "S01",
+    "blocking": "Yes — before any scheduled fetching",
+    "recommended_path": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached."
+  },
+  {
+    "id": "Q19",
+    "category": "Methodology",
+    "priority": "High",
+    "question": "How is a strategy's edge tested against a naive baseline, so that the model gets credit only for what it actually adds?",
+    "why_it_matters": "A model that reproduces 'good teams beat bad teams' is not skill. Without a baseline, any strategy looks impressive against zero.",
+    "what_we_know": "Official standings give season-to-date scoring and records for all 32 clubs (S03), enough to build a simple baseline such as a points-differential rating.",
+    "what_we_dont_know": "The baseline the user considers fair.",
+    "missing_data": "A stated baseline.",
+    "source": "S03",
+    "blocking": "Yes — for the leaderboard",
+    "recommended_path": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy."
+  },
+  {
+    "id": "Q20",
+    "category": "Operations",
+    "priority": "Low",
+    "question": "Who owns each task when several sessions run at once, and what happens on a stale claim?",
+    "why_it_matters": "Shared files edited by two sessions create silent overwrites and duplicated work.",
+    "what_we_know": "COORDINATION.md in this repo defines the board, the status vocabulary, a 60-minute stale-claim takeover rule, and a rule that shared outputs are changed only by the final integration session.",
+    "what_we_dont_know": "Whether other sessions are actually active.",
+    "missing_data": "None.",
+    "source": "COORDINATION.md",
+    "blocking": "No",
+    "recommended_path": "Keep the board current. Log every claim and every handoff with a UTC timestamp."
+  }
+]

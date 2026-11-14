@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions · FL1 NFL Line Lab</title>
+<meta name="description" content="Verified NFL line origination, strategy validation and availability research.">
+<style>
+:root{--bg:#0b1220;--panel:#111b2e;--panel2:#16233a;--line:#22334f;--txt:#e6edf7;
+--mut:#8ea3c0;--ok:#2ecc71;--warn:#f2b33d;--bad:#ef5a5a;--acc:#4da3ff}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:20;background:rgba(11,18,32,.96);
+border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;gap:16px;
+align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.4px}
+.brand span{color:var(--mut);font-weight:400;font-size:12px;display:block;letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:12.5px;padding:5px 9px;border-radius:6px;color:var(--mut)}
+nav a:hover{background:var(--panel2);color:var(--txt);text-decoration:none}
+nav a.on{background:var(--panel2);color:var(--txt);box-shadow:inset 0 0 0 1px var(--line)}
+main{max-width:1180px;margin:0 auto;padding:26px 18px 70px}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.2px}
+h2{font-size:18px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--txt)}
+p{margin:0 0 12px;color:#cbd7e8}
+.lead{color:var(--mut);margin:0 0 22px;max-width:78ch}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:18px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card .k{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut)}
+.card .v{font-size:24px;font-weight:700;margin-top:4px;letter-spacing:-.5px}
+.card .s{font-size:12px;color:var(--mut);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.7px}
+th,td{padding:7px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{background:var(--panel2);font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+color:var(--mut);position:sticky;top:0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#14203a}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;
+font-weight:600;white-space:nowrap;border:1px solid transparent}
+.p-ok{color:#0b1220;background:var(--ok)}
+.p-warn{color:#241a00;background:var(--warn)}
+.p-bad{color:#2a0000;background:var(--bad)}
+.p-neu{color:var(--mut);background:var(--panel2);border-color:var(--line)}
+.note{background:var(--panel);border-left:3px solid var(--acc);padding:12px 14px;
+border-radius:0 8px 8px 0;margin:16px 0;color:#cbd7e8;font-size:13.5px}
+.warn{border-left-color:var(--warn)}
+.bad{border-left-color:var(--bad)}
+code{background:var(--panel2);padding:1px 5px;border-radius:4px;font-size:12px}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;
+max-width:1180px;margin:0 auto;padding:18px}
+.src{font-size:11px;color:var(--mut)}
+ul{margin:0 0 12px;padding-left:20px;color:#cbd7e8}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><div class="bar">
+<div class="brand">FL1 <span>NFL line lab</span></div>
+<nav><a href="../../index.html" title="Back to the main FL1 site">&larr; Main site</a><a href="index.html">Overview</a><a href="findings.html">Findings</a><a href="lines.html">Line origination</a><a href="leaderboard.html">Leaderboard</a><a href="strategies.html">Strategies &amp; gates</a><a href="correlations.html">Correlations</a><a href="availability.html">Injuries &amp; depth</a><a href="week10.html">Week 10 board</a><a href="questions.html">Open questions</a><a href="suggestions.html" class="on">Suggestions</a><a href="requirements.html">Requirements</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="methods.html">Methods</a></nav>
+</div></header>
+<main>
+<h1>Suggestions</h1>
+<p class="lead">Twelve ranked decision paths with evidence, cost, risk and what is still missing.</p>
+
+<p class="lead">This is the review board. Each suggestion carries the evidence for it, what it
+unblocks, what it costs, the risk of doing it, and what is still missing before it can be adopted.
+Pick a path and the row tells you what you are committing to.</p>
+
+<div class="note"><strong>How to choose.</strong> Take every <em>Adopt now</em> row — they are low
+cost, low risk and do not depend on any unanswered question. Take <em>Needs data</em> rows only after
+the question they depend on is answered. A <em>Do not adopt</em> row is a finding, not a to-do: the
+evidence says the path loses money.</div>
+
+<h2>Ranked suggestions</h2>
+<div class="tw"><table><thead><tr><th class="n">#</th><th>ID</th><th>Gate</th><th>Area</th><th>Suggestion</th><th>Evidence</th><th>Unblocks</th><th>Cost</th><th>Risk</th><th>Still missing</th></tr></thead><tbody><tr><td class='n'>1</td><td>SG-01</td><td><span class="pill p-ok">Adopt now</span></td><td>Data</td><td>Unblock the nflverse release CDN (or vendor the injuries/depth_charts/snap_counts releases into this repo).</td><td>FLAG-01: 5 of 6 planned datasets came back unreachable; only git-hosted files worked.</td><td>R13, R14, R15, OQ-05, OQ-06, OQ-07</td><td>Low (infra). One allowlist entry or a scheduled mirror job.</td><td>Low. Data is MIT-licensed open data.</td><td>Confirmation of network policy.</td></tr><tr><td class='n'>2</td><td>SG-02</td><td><span class="pill p-ok">Adopt now</span></td><td>Validation</td><td>Freeze the gate thresholds in a signed config file before the next research cycle, and version it.</td><td>OQ-03 and OQ-10 are unanswered; the current defaults are the agent&#x27;s, not the owner&#x27;s.</td><td>R09, R11, R12</td><td>Low. One commit.</td><td>Low. Makes future claims auditable.</td><td>Owner sign-off on the numbers.</td></tr><tr><td class='n'>3</td><td>SG-03</td><td><span class="pill p-ok">Adopt now</span></td><td>Evidence</td><td>Treat every ROI as &#x27;vs the close&#x27; and publish the implied half-edge haircut next to it.</td><td>Only closing prices are available for the full sample (OQ-01). A model-vs-close gap of X is worth at most X/2 in practice.</td><td>R05, R11</td><td>Low. Already computed in data/strategies.csv.</td><td>None. It only makes the reported numbers more conservative.</td><td>Nothing.</td></tr><tr><td class='n'>4</td><td>SG-04</td><td><span class="pill p-warn">Needs data</span></td><td>Data</td><td>Backfill 2026 weeks 1-9 injury reports, then re-run the availability model on a full season before trusting it.</td><td>Availability model currently has 388 team-weeks, all 2025; the 2026 signal has n = 1 week.</td><td>R13, OQ-06</td><td>Medium. ~3,000 rows, or free once SG-01 lands.</td><td>Medium if hand-transcribed: transcription error.</td><td>SG-01 or an authorisation to transcribe.</td></tr><tr><td class='n'>5</td><td>SG-05</td><td><span class="pill p-warn">Needs data</span></td><td>Depth</td><td>Adopt a depth-order source with a timestamp, and only then build the 2nd/3rd/4th-string model.</td><td>Official roster pages carry no depth order (S06). nflverse depth_charts is blocked (D07).</td><td>R14, R15, OQ-07</td><td>Medium. Vendor integration + timestamp handling.</td><td>High if skipped: any depth claim without a timestamp is unfalsifiable.</td><td>OQ-07 answer.</td></tr><tr><td class='n'>6</td><td>SG-06</td><td><span class="pill p-warn">Needs data</span></td><td>Props</td><td>Do not build prop-combo pricing until a prop line/result dataset exists; keep the team-level correlation engine as the proxy.</td><td>data/correlations.csv measures same-game team correlations only. Player props are unmeasured (OQ-08).</td><td>R08</td><td>High (licensing).</td><td>High: shipping prop combos on a team-level proxy would be a fabricated edge.</td><td>OQ-08 answer.</td></tr><tr><td class='n'>7</td><td>SG-07</td><td><span class="pill p-ok">Adopt now</span></td><td>Site</td><td>Keep the &#x27;zero strategies approved&#x27; headline prominent; do not soften it.</td><td>0 of 15 variants passed all 7 gates. The control (bet every home team) returned -5.2% ROI, which is the vig, as expected.</td><td>R07, R12</td><td>None.</td><td>None. This is the finding.</td><td>Nothing.</td></tr><tr><td class='n'>8</td><td>SG-08</td><td><span class="pill p-warn">Needs data</span></td><td>Signals</td><td>Prioritise building an independent line from non-result data (pace, EPA, injuries) before adding more price-based variants.</td><td>Every price-based variant (Elo vs close, prob gap) returned |ROI| &lt; 3.5% and failed significance. The information is already in the close.</td><td>R05</td><td>High.</td><td>Medium: result-history Elo is already known to underperform the market.</td><td>Play-by-play and charting data (reachable, but large).</td></tr><tr><td class='n'>9</td><td>SG-09</td><td><span class="pill p-bad">Do not adopt</span></td><td>Parlays</td><td>Do not add parlays to the reward board on current evidence.</td><td>A 2-leg -110 parlay is -8.9% EV, 3-leg -13.0%, 4-leg -17.0% (data/parlay_economics.csv). Measured correlation does not flip the sign.</td><td>R07, R08, OQ-12</td><td>None.</td><td>None.</td><td>Only revisit if a per-SGP correlation edge is proven.</td></tr><tr><td class='n'>10</td><td>SG-10</td><td><span class="pill p-ok">Adopt now</span></td><td>Process</td><td>Publish the rejected list, not just the approved list, and keep the search count in the repo.</td><td>G6 (Bonferroni) is only meaningful if the number of searched variants is public. It currently is (15).</td><td>R11, OQ-04</td><td>None.</td><td>None.</td><td>Nothing.</td></tr><tr><td class='n'>11</td><td>SG-11</td><td><span class="pill p-ok">Adopt now</span></td><td>Site</td><td>Add a per-row &#x27;verified at&#x27; timestamp and a build-failing link checker to every future data drop.</td><td>scripts/verify_site.py already fails the build on a table row without a source link; extend it to check HTTP status on every source.</td><td>R18, R22</td><td>Low.</td><td>Low: link rot will cause occasional build failures by design.</td><td>Nothing.</td></tr><tr><td class='n'>12</td><td>SG-12</td><td><span class="pill p-warn">Needs data</span></td><td>Weather</td><td>Investigate WIND15_UNDER properly rather than promoting it.</td><td>Best raw candidate: 425 bets, 55.1% hit, +7.2% ROI, p = 0.063 — fails G3 (p &lt; 0.05) and G6 (p &lt; 0.0033). OOS ROI +5.7%.</td><td>R06, R12</td><td>Medium. Needs a wind forecaster and an opening-line feed.</td><td>High. At p = 0.063 across 15 searches, this is exactly what noise looks like.</td><td>Opening lines and forecast-time wind, not post-game measured wind.</td></tr></tbody></table></div>
+
+<h2>Site and decision-making improvements</h2>
+<ul>
+<li><strong>Keep the rejected list public.</strong> A leaderboard that shows only winners is a
+leaderboard you cannot audit; the deflation gate only means something if the search count is visible.</li>
+<li><strong>Put the gate config under version control and sign it.</strong> The current thresholds are
+the agent's defaults, not the owner's decision (<a href="questions.html">OQ-03</a>).</li>
+<li><strong>Label every ROI with the price it is measured against.</strong> "ROI" without "vs close"
+is the most common way a betting backtest misleads its reader.</li>
+<li><strong>Fail the build on an unsourced row.</strong> <code>scripts/verify_site.py</code> already does
+this for table rows; extend it to HTTP-status checks on every source.</li>
+<li><strong>Show the season ledger next to every headline ROI.</strong> One good season hides inside a
+good average, which is exactly what gate G5 exists to catch.</li>
+<li><strong>Keep the Week 10 board as inputs, not picks.</strong> Publishing picks before the gates are
+satisfied would be the one thing that turns a research repo into a tout sheet.</li>
+</ul>
+
+</main>
+<footer>Computed research layer, built by Arena session <code>arena-ab82c93f</code>. Every figure is computed from a pinned source in
+<a href="sources.html">Sources</a>. Nothing is estimated. Data as of 2026-11-14 &middot; games.csv 7,548 rows, injuries_2025.csv 4,442 rows. Builds are deterministic: this stamp comes from the
+pinned inputs, not from the clock, so a rebuild is byte-identical.</footer>
+</body></html>

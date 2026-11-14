@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Line Origination · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="prop-correlations.html">Prop Correlations</a><a href="line-origination.html" class="on">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main">
+
+<section>
+<h1>Line Origination</h1>
+<p class="lead">How a line would be produced here, and precisely where the production stops because a source
+is missing. This is a specification, not a forecast.</p>
+<div class="callout bad">
+  <p><strong>There is no line on this page.</strong> Not because the method is unclear, but because a fair-value
+  number requires two things this repository does not have: a fitted model and a benchmark price to compare
+  against. Publishing a number without those would be an invention, and an invented number is worse than a blank
+  one because it looks finished. See <a href="flagged.html#F08">F08</a>.</p>
+</div>
+</section>
+
+<section>
+<h2>The four stages</h2>
+<ol class="tight stages">
+<li><strong>Input</strong> — only officially sourced fields enter the model. Each input is registered with the
+source that supplies it and the date it was captured. An input without a source is not an input.</li>
+<li><strong>Estimate</strong> — a marginal strength estimate per club, converted to an expected margin and an
+expected total. The first, mandatory estimator is the naive baseline: season points differential per game.</li>
+<li><strong>Price</strong> — convert the expected margin into a probability distribution over outcomes. Report
+the fair-value probability and an explicit uncertainty band. Report no price if no market price exists to
+compare with.</li>
+<li><strong>Seal</strong> — hash the full prediction set and publish the hash before kickoff. The seal is what
+makes the record auditable rather than anecdotal.</li>
+</ol>
+</section>
+
+<section>
+<h2>Input registry</h2>
+<div class="twrap"><p class="caption">An input is only usable if a source is named and the capture date is recorded.</p><table class="dense"><thead><tr><th>Input</th><th>Field</th><th>Available today?</th><th>Source</th><th>Note</th></tr></thead><tbody><tr><td>Scoring margin per game</td><td>PF, PA, games played</td><td><span class="pill ok">AVAILABLE</span></td><td><a class="src" href="sources.html#S03" title="NFL League Standings 2026 (regular season)">S03</a></td><td>All 32 clubs, season to date</td></tr><tr><td>Availability</td><td>Game status per player</td><td><span class="pill ok">AVAILABLE</span></td><td><a class="src" href="sources.html#S01" title="Official NFL Injury Report — Week 10, 2026 season">S01</a></td><td>28 clubs in the Week 10 snapshot only</td></tr><tr><td>Depth ordering</td><td>Position slot and string</td><td><span class="pill warn">PARTIAL</span></td><td><a class="src" href="sources.html#S08" title="Kansas City Chiefs Unofficial Depth Chart">S08</a> <a class="src" href="sources.html#S07" title="Kansas City Chiefs 2026 Roster">S07</a></td><td>Club-level, self-labelled unofficial</td></tr><tr><td>Snap counts</td><td>Snap share per player</td><td><span class="pill bad">BLOCKED</span></td><td class="blank" title="Not confirmed by an official source">—</td><td>No official feed verified</td></tr><tr><td>Weather</td><td>Wind, precipitation, temperature</td><td><span class="pill warn">PARTIAL</span></td><td><a class="src" href="sources.html#S11" title="National Weather Service — local forecasts">S11</a></td><td>Forecast available; roof/surface registry not verified</td></tr><tr><td>Market price</td><td>Benchmark line and price</td><td><span class="pill bad">BLOCKED</span></td><td class="blank" title="Not confirmed by an official source">—</td><td>League does not publish prices; no feed supplied</td></tr><tr><td>Historical results</td><td>Prior-season outcomes</td><td><span class="pill bad">BLOCKED</span></td><td class="blank" title="Not confirmed by an official source">—</td><td>Not captured; blocks any backtest</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>What a published line would look like</h2>
+<p>The schema below is fixed now, before any result exists, so the reporting format cannot be chosen after the
+fact to flatter the outcome. Every field is either filled from a source or left blank.</p>
+<div class="twrap"><table class="dense"><thead><tr><th>Field</th><th>Status</th><th>Why</th></tr></thead><tbody><tr><td>Game identifier</td><td><span class="pill ok">READY</span></td><td>Official schedule provides it</td></tr><tr><td>Kickoff timestamp (UTC)</td><td><span class="pill ok">READY</span></td><td>Needed for the pre-kickoff seal</td></tr><tr><td>Fair-value probability</td><td><span class="pill warn">BLANK</span></td><td>Requires a fitted model; none has been run</td></tr><tr><td>Uncertainty band</td><td><span class="pill warn">BLANK</span></td><td>Same dependency</td></tr><tr><td>Market price</td><td><span class="pill bad">BLANK</span></td><td>No official source exists</td></tr><tr><td>Edge / expected value</td><td><span class="pill bad">BLANK</span></td><td>Arithmetic requires a market price</td></tr><tr><td>Closing-line value</td><td><span class="pill bad">BLANK</span></td><td>Requires closing prices</td></tr><tr><td>Prediction hash</td><td><span class="pill ok">READY</span></td><td>Computable locally right now</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Why uncertainty is a required output, not a disclaimer</h2>
+<p>A single number implies a precision the data does not have. With eight or nine games played per club, the
+standard error on a scoring-margin estimate is large enough that two plausible models can differ by more than the
+gap between them and the market. Reporting a band makes that visible; reporting a point estimate hides it.
+The correct response to wide uncertainty is a smaller stake or no position, not a tighter number.</p>
+</section>
+
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
