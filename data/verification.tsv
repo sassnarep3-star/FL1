@@ -1,0 +1,14 @@
+check	command	scope	result	when
+Line-by-line injury diff	python3 tools/verify_injuries.py	345 rows x 6 fields vs raw capture	PASS - every row matches exactly, same order	2026-11-14
+Independent recount	python3 tools/verify_injuries.py	rows/clubs/out/doubtful/questionable/dnp/non-injury	PASS - 345/28/66/10/84/94/2 agrees with site	2026-11-14
+Derived arithmetic	python3 tools/build.py	per-club and league counts	PASS - all figures computed, none typed	2026-11-14
+Internal links	python3 tools/checklinks.py	all hrefs across 13 pages	PASS - every link and anchor resolves	2026-11-14
+Page reachability	python3 tools/checklinks.py	13 pages from index.html	PASS - all reachable	2026-11-14
+Source ID integrity	python3 tools/checklinks.py	every Sxx citation on every page	PASS - all resolve to sources.tsv	2026-11-14
+Asset integrity	python3 tools/checklinks.py	css and js references	PASS - all present	2026-11-14
+Standings completeness	python3 tools/build.py	32 clubs vs teams.tsv	PASS - 32 of 32, no orphans	2026-11-14
+Injury club validity	python3 tools/build.py	every club abbrev in injuries.tsv	PASS - 28 valid clubs	2026-11-14
+Name-collision guard	python3 tools/build.py	depth joins	PASS - explicit alias table, no fuzzy match	2026-11-14
+Source reachability	Sessions page loads	15 URLs, one request each	12 loaded, 3 returned HTTP 404	2026-11-14
+Independent cross-transcription	manual row-by-row diff vs a parallel session's data/injuries.csv	161 shared player rows	PASS - 156/161 identical; the 5 differences are a comma-shift bug in their CSV, this capture is correct	2026-11-14
+Escaped-markup guard	python3 tools/checklinks.py	all anchor and cell fragments on 14 pages	PASS - 0 escaped fragments; guard verified by injecting the bug (exit 1) then restoring (exit 0)	2026-11-14

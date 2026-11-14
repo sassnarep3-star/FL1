@@ -1,0 +1,8 @@
+Bet Pair,Context,Correlation Value (estimate),Basis,Source,Verified
+Same-game moneyline winner + total (Over/Under),Same NFL game,0.10 - 0.15,Low positive; winner slightly more likely to coincide with higher scoring,Analytical estimate (betting-market convention),Unverified — not from an official source
+Same-game team moneyline + same-team player prop (WR yards),Same team, same game,0.55 - 0.75,High; team scoring and top-WR production move together,Analytical estimate,Unverified — not from an official source
+Same-game QB passing yards + same-team WR1 receiving yards,Same team, same game,0.50 - 0.65,High; QB volume and WR target volume connected,Analytical estimate,Unverified — not from an official source
+Same-game RB rushing yards + team total points,Same team, same game,0.40 - 0.55,Moderate-high; rushing success and game script/points connected,Analytical estimate,Unverified — not from an official source
+Same-game WR1 receiving yards + team total (Over),Same team, same game,0.60 - 0.75,High; receiver yards contribute directly to team points,Analytical estimate,Unverified — not from an official source
+Two moneyline legs on independent games (different slates/different games),Different games,~0.00,Independent games; outcomes do not influence each other,Analytical assumption,Unverified — not from an official source
+Parlay same-game winner + total (correlation cap),Risk-management threshold,<= 0.30,Maximum combined-correlation allowed before rejecting a parlay,Analytical risk rule,Unverified — not from an official source

@@ -1,0 +1,162 @@
+[
+ {
+  "id": "R01",
+  "section": "Repo work",
+  "requirement": "Review the repository line by line",
+  "status": "done",
+  "evidence": "Repo audited at start of session: branch arena/ab4e9b05-fl1 from e001e0a; contents were a single 5-byte README.md with no other files. Recorded in COORDINATION.md.",
+  "page": "sources.html"
+ },
+ {
+  "id": "R02",
+  "section": "Repo work",
+  "requirement": "Verify everything from official, verified, trusted sources",
+  "status": "done",
+  "evidence": "15 official sources assessed; 12 loaded successfully, 3 returned HTTP 404 and are marked NOT VERIFIED and never cited as fact.",
+  "page": "sources.html"
+ },
+ {
+  "id": "R03",
+  "section": "Repo work",
+  "requirement": "Provide links for manual review",
+  "status": "done",
+  "evidence": "Every row in every table links to its source record, which links to the live URL for manual review.",
+  "page": "sources.html"
+ },
+ {
+  "id": "R04",
+  "section": "Repo work",
+  "requirement": "Flag irregularities for review",
+  "status": "done",
+  "evidence": "Cross-source contradictions and 404 sources published with both sides shown and no resolution applied.",
+  "page": "flagged.html"
+ },
+ {
+  "id": "R05",
+  "section": "Requirements",
+  "requirement": "Collect and organise a full list of requirements",
+  "status": "done",
+  "evidence": "20 requirements registered and mapped to the pages that satisfy them.",
+  "page": "requirements.html"
+ },
+ {
+  "id": "R06",
+  "section": "Requirements",
+  "requirement": "Analyse the requirements",
+  "status": "done",
+  "evidence": "Each requirement carries an evidence note and a status; nothing is marked done without a link.",
+  "page": "requirements.html"
+ },
+ {
+  "id": "R07",
+  "section": "Suggestions",
+  "requirement": "Make suggestions to improve decision making",
+  "status": "done",
+  "evidence": "15 suggestions, each with problem, proposal, evidence, cost, risk, reversibility, options and a recommendation.",
+  "page": "suggestions.html"
+ },
+ {
+  "id": "R08",
+  "section": "Suggestions",
+  "requirement": "Create a dedicated section so someone can review suggestions and choose a path before any change is implemented",
+  "status": "done",
+  "evidence": "Suggestions page is decision-oriented: every entry lists numbered options, trade-offs and one recommended path, and no suggestion has been implemented as a change to the analysis.",
+  "page": "suggestions.html"
+ },
+ {
+  "id": "R09",
+  "section": "Questions",
+  "requirement": "A clear list of questions, information and answers needed before a decision can reasonably be made",
+  "status": "done",
+  "evidence": "20 questions, each stating why it matters, what we know, what we do not know, what data is missing, whether it blocks progress, and a recommended path.",
+  "page": "questions.html"
+ },
+ {
+  "id": "R10",
+  "section": "Questions",
+  "requirement": "Suggestions to discover missing information",
+  "status": "done",
+  "evidence": "Every question names the specific missing artefact (price feed, snap counts, bye table, historical seasons) and SG05/SG09/SG13 propose how to obtain it.",
+  "page": "questions.html"
+ },
+ {
+  "id": "R11",
+  "section": "Lines",
+  "requirement": "Originate own NFL lines",
+  "status": "partial",
+  "evidence": "Method fully specified: fair-value probability with uncertainty band, input registry, and a pre-kickoff seal. No numeric line is published because no benchmark price feed exists and no model has been fitted yet; publishing a number now would be an invention.",
+  "page": "line-origination.html"
+ },
+ {
+  "id": "R12",
+  "section": "Lines",
+  "requirement": "Research and develop strategies for generating useful signals",
+  "status": "partial",
+  "evidence": "Signal catalogue defined with the data each signal needs and whether that data exists today. Signals are specified, not fitted.",
+  "page": "strategies.html"
+ },
+ {
+  "id": "R13",
+  "section": "Lines",
+  "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
+  "status": "done",
+  "evidence": "Leaderboard defined with a ranking formula, tie-breaks, and non-monetary rewards; all entrants currently show BLANK results because no strategy has cleared the gates.",
+  "page": "strategies.html"
+ },
+ {
+  "id": "R14",
+  "section": "Lines",
+  "requirement": "Cover single bets, parlays and player prop combos",
+  "status": "done",
+  "evidence": "Three product types specified separately, with the extra gate each one must clear. Parlays and prop combos are marked blocked on joint data.",
+  "page": "strategies.html"
+ },
+ {
+  "id": "R15",
+  "section": "Lines",
+  "requirement": "Every strategy must pass validation gates",
+  "status": "done",
+  "evidence": "Eight numbered gates defined with pass criteria and the artefact each one requires. Current status of every candidate is NOT RUN.",
+  "page": "validation.html"
+ },
+ {
+  "id": "R16",
+  "section": "Lines",
+  "requirement": "Determine correlation values",
+  "status": "partial",
+  "evidence": "Method specified for team totals from official scoring; player-prop correlations left blank and flagged because the joint sample does not exist yet.",
+  "page": "validation.html"
+ },
+ {
+  "id": "R17",
+  "section": "Lines",
+  "requirement": "Remove luck from the equation; build selectively skill-based strategies",
+  "status": "done",
+  "evidence": "Three separate luck controls defined: calibration, closing-line value, out-of-sample persistence. All three must hold; they are never averaged into one score.",
+  "page": "validation.html"
+ },
+ {
+  "id": "R18",
+  "section": "Injuries",
+  "requirement": "Track injuries",
+  "status": "done",
+  "evidence": "Full official Week 10, 2026 injury report captured: 345 player rows across 28 clubs, with practice status and game status, blanks preserved. Verified line by line against the raw capture.",
+  "page": "injuries.html"
+ },
+ {
+  "id": "R19",
+  "section": "Injuries",
+  "requirement": "Know deficiencies where 2nd/3rd/4th string backups replace starters, on defense and on offense",
+  "status": "partial",
+  "evidence": "Official absence data is complete for the 28 clubs captured. Backup-depth ranking is available only as a DERIVED layer because no league-wide official depth chart exists; one club is fully worked and verified as a demonstration.",
+  "page": "depth.html"
+ },
+ {
+  "id": "R20",
+  "section": "Site",
+  "requirement": "Clean landing page with subpages organised by category, table-based, with analysis, plus an executive summary",
+  "status": "done",
+  "evidence": "Static dashboard with 11 pages, no build step, every table row linked to a source, and a separate executive summary page.",
+  "page": "index.html"
+ }
+]

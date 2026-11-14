@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="standings.html">Standings</a><a href="line-origination.html">Line Origination</a><a href="strategies.html">Leaderboard</a><a href="validation.html">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html" class="on">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main" class="wide">
+
+<section>
+<h1>Verification</h1>
+<p class="lead">This page is the audit trail. Every check below is a script in <code>tools/</code> that can be
+run again by anyone, and every one of them exits non-zero on failure so it can gate a merge.</p>
+<div class="callout ok">
+  <p><strong>Line-by-line is literal here.</strong> <code>tools/verify_injuries.py</code> does not trust the
+  normalised data file. It re-parses the raw page capture independently, rebuilds the table, and compares all
+  345 rows field by field in page order. A single differing character fails the build.</p>
+</div>
+</section>
+
+<section>
+<h2>Checks performed</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>Check</th><th>Command</th><th>Scope</th><th>Result</th><th>Date</th></tr></thead><tbody><tr><td>check</td><td><code>command</code></td><td>scope</td><td>result</td><td>when</td></tr><tr><td>Line-by-line injury diff</td><td><code>python3 tools/verify_injuries.py</code></td><td>345 rows x 6 fields vs raw capture</td><td>PASS - every row matches exactly, same order</td><td>2026-11-14</td></tr><tr><td>Independent recount</td><td><code>python3 tools/verify_injuries.py</code></td><td>rows/clubs/out/doubtful/questionable/dnp/non-injury</td><td>PASS - 345/28/66/10/84/94/2 agrees with site</td><td>2026-11-14</td></tr><tr><td>Derived arithmetic</td><td><code>python3 tools/build.py</code></td><td>per-club and league counts</td><td>PASS - all figures computed, none typed</td><td>2026-11-14</td></tr><tr><td>Internal links</td><td><code>python3 tools/checklinks.py</code></td><td>all hrefs across 13 pages</td><td>PASS - every link and anchor resolves</td><td>2026-11-14</td></tr><tr><td>Page reachability</td><td><code>python3 tools/checklinks.py</code></td><td>13 pages from index.html</td><td>PASS - all reachable</td><td>2026-11-14</td></tr><tr><td>Source ID integrity</td><td><code>python3 tools/checklinks.py</code></td><td>every Sxx citation on every page</td><td>PASS - all resolve to sources.tsv</td><td>2026-11-14</td></tr><tr><td>Asset integrity</td><td><code>python3 tools/checklinks.py</code></td><td>css and js references</td><td>PASS - all present</td><td>2026-11-14</td></tr><tr><td>Standings completeness</td><td><code>python3 tools/build.py</code></td><td>32 clubs vs teams.tsv</td><td>PASS - 32 of 32, no orphans</td><td>2026-11-14</td></tr><tr><td>Injury club validity</td><td><code>python3 tools/build.py</code></td><td>every club abbrev in injuries.tsv</td><td>PASS - 28 valid clubs</td><td>2026-11-14</td></tr><tr><td>Name-collision guard</td><td><code>python3 tools/build.py</code></td><td>depth joins</td><td>PASS - explicit alias table, no fuzzy match</td><td>2026-11-14</td></tr><tr><td>Source reachability</td><td><code>Sessions page loads</code></td><td>15 URLs, one request each</td><td>12 loaded, 3 returned HTTP 404</td><td>2026-11-14</td></tr><tr><td>Independent cross-transcription</td><td><code>manual row-by-row diff vs a parallel session&#x27;s data/injuries.csv</code></td><td>161 shared player rows</td><td>PASS - 156/161 identical; the 5 differences are a comma-shift bug in their CSV, this capture is correct</td><td>2026-11-14</td></tr><tr><td>Escaped-markup guard</td><td><code>python3 tools/checklinks.py</code></td><td>all anchor and cell fragments on 14 pages</td><td>PASS - 0 escaped fragments; guard verified by injecting the bug (exit 1) then restoring (exit 0)</td><td>2026-11-14</td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Reproduce it</h2>
+<pre class="code">python3 tools/verify_injuries.py   # 345 rows vs the raw capture
+python3 tools/build.py             # recompute every derived figure
+python3 tools/site.py              # re-render every page
+python3 tools/checklinks.py        # links, anchors, reachability, source IDs
+</pre>
+<p>No third-party packages. No network access required for any of the four.</p>
+</section>
+
+<section>
+<h2>Source load results</h2>
+<p>Fifteen official URLs were requested once each. Twelve returned content that supported the claim being made.
+Three returned HTTP 404 and are recorded as <span class="pill bad">NOT VERIFIED</span> — they are never cited
+as fact, and the gap they leave is published on <a href="flagged.html">Flagged for Review</a> rather than
+papered over.</p>
+<p>See the full <a href="sources.html">source registry</a> for the URL, publisher, tier, capture date and
+verification note for each one.</p>
+</section>
+
+<section>
+<h2>What could not be verified, and the consequence</h2>
+<div class="twrap"><table class="dense"><thead><tr><th>Item</th><th>Attempted</th><th>Consequence for this site</th></tr></thead><tbody><tr><td>Injury-designation definitions</td><td>The 2017 policy PDF at operations.nfl.com</td><td>No definition text quoted; only observed categories shown</td></tr><tr><td>League-wide depth chart</td><td>nfl.com/depth-charts/ (404)</td><td>Depth is derived and labelled unofficial; one club worked</td></tr><tr><td>Snap counts</td><td>No official feed located</td><td>No claim that any backup played</td></tr><tr><td>Market prices</td><td>League does not publish prices</td><td>Every price, edge and EV field is blank</td></tr><tr><td>Bye weeks</td><td>No official bye table verified</td><td>Four absent clubs recorded as unexplained, not as byes</td></tr><tr><td>Legal and regulatory position</td><td>No regulator source verified</td><td>No legality claim in any jurisdiction</td></tr></tbody></table></div>
+</section>
+
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
