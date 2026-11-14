@@ -747,6 +747,22 @@ python3 site/build.py && python3 site/verify.py   # 17 pages + publish gate
 - **Checks to re-run anything:** `python3 -m unittest discover -s tests -q` (75) · `python3 engine/demo_run.py --check` · `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
 - **Left for the owner (deliberately undecided):** F-11 — whether third-party-derived values may be published as sourced (promoting C-01's rho is then a one-line change); the licence confirmation for the added MIT LICENSE; and the two-layer structure decision (F-10: `data/specs/` research registers vs `data/*.json` published registers, and `docs/pages/` beside the root site).
 
+## Current Arena session claim — `arena/0669d4cf-fl1` (2026-11-14)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| T21 | Add fair-vs-market opening/closing snapshots and a fail-closed verified final-results import interface; complement the raw quote ledger; do not populate unverified facts | done — library only; no records imported | `arena/0669d4cf-fl1` | `engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`, `docs/market-results-store.md`, this claim/verification record only |
+
+Existing price/results datasets remain third-party or capture-specific; this task adds a persistence and provenance boundary, not a claim that those inputs are official NFL data. The existing active claim at T03–T16 is not touched.
+
+### T21 completion / verification record
+
+- `SnapshotStore` requires an opening event, allows one closing event, stores fair value, market value and signed difference separately, verifies the caller-supplied source digest against the exact captured bytes, and keeps numeric fields blank on unverified events. It reports markets without both verified snapshots. This is an analytical paired-value ledger complementing (not replacing) the simpler raw quote-event store `engine/price_snapshots.py`, merged to main in PR #22.
+- `ResultsFeed` accepts only explicit `FINAL` records with an HTTPS `nfl.com` host URL, timestamp and captured bytes whose SHA-256 matches. It is append-only, idempotent for the same game/payload, and retains corrections as new events. It validates provenance shape; it does not fetch pages or independently validate transcription, so callers must check every score against the cited source before setting `verified=True`. Evidence payload archival remains the collector's responsibility.
+- Official-source check: fetched [NFL 2026 Week 10 schedule](https://www.nfl.com/schedules/2026/REG10/) and observed “Commanders 24, Giants 21, FINAL”. This verifies the cited source page and an example official result only; **no result was imported**, and this is not a complete results feed or ROI dataset.
+- Checks: after integrating the concurrent main branch, `python3 -m unittest discover -s tests -q` — 90 tests passed; `python3 tools/verify_results.py` — 137 captured games reconcile to all 32 standings records (excluding Week 10 Thursday gives 2 mismatches); `python3 tools/verify_injuries.py` — 345/345 captured rows match; `python3 tools/checklinks.py` — 16 pages / 0 broken internal links; `python3 engine/demo_run.py --check`, `python3 -m engine.measure`, `python3 site/build.py`, and `python3 site/verify.py` all passed; `git diff --check` clean.
+- Limitation: the new libraries are not yet wired to an automated bookmaker collector or linked into the published site navigation. This requires a selected/licensed quote feed and integration-scope site changes. No unverified prices or unverified results were added.
+- **Concurrent merge reconciliation:** PR #25 initially could not merge because `main` advanced (including PR #22's raw quote ledger and PR #24's demotion gate). Merged that `origin/main` into this branch; the only content conflict was this coordination log and both session records were retained. Before the next push, `git pull --rebase` tried to replay already-merged main history and conflicted in the same log; aborted that rebase, then merged the newer `origin/main` (PR #26) cleanly. README and validation-page additions from main were retained; no other session files were edited or discarded. This branch's fair-value/results extension remains separate by design.
 ---
 
 ## Additive follow-up — price snapshot storage
