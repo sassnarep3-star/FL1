@@ -286,12 +286,28 @@ def analyse_depth_league(depth, depth_sources, injuries, teams, aliases, extra=(
     # source-documented alias table) are folded in so the league view is honest
     # about how many clubs it actually covers.
     for team_abbr, kc_rows in extra:
-        for i, r in enumerate(kc_rows, start=1):
+        # data/depth-kc.tsv is a FLAT capture with no line column: under one
+        # slot label the club can publish more than one ladder (two DT groups,
+        # three LB groups, ...), recorded as a sequence whose string numbering
+        # restarts at 1. A new ladder therefore begins exactly where the
+        # club's own numbering restarts (rank drops below the previous rank).
+        # Nothing is reordered and no player is matched across ladders; the
+        # rule is arithmetic on the published ordering only.
+        ladder_no = {}
+        last_rank = {}
+        for r in kc_rows:
+            slot_key = (r["unit"], r["slot"])
+            rank = int(r["rank"])
+            if slot_key not in ladder_no:
+                ladder_no[slot_key] = 1
+            elif rank < last_rank[slot_key]:
+                ladder_no[slot_key] += 1
+            last_rank[slot_key] = rank
             rows.append(OrderedDict([
                 ("team", team_abbr),
                 ("unit", r["unit"]),
                 ("slot", r["slot"]),
-                ("line", str(i)),
+                ("line", str(ladder_no[slot_key])),
                 ("rank", r["rank"]),
                 ("player", r["player"]),
                 ("note", ("official roster spelling: %s" % r["officialName"])
@@ -429,6 +445,117 @@ def analyse_depth_league(depth, depth_sources, injuries, teams, aliases, extra=(
             ("blankSlots", sum(1 for r in rows if not r["player"])),
         ])),
     ])
+
+
+def replacement_depth(rows):
+    """Replacement depth: how deep a club's OWN published chart must be read,
+    on each ladder, to reach the first name the league has not ruled Out.
+
+    Pure document arithmetic: a chart ladder (team, unit, slot, line) joined to
+    that club's official injury-report game status. It never asserts who will
+    play — no snap-count source was verified (flag F09).
+
+    Population: ladders whose first string carries at least one official game
+    status — the same population as next_up in analyse_depth_league(), so the
+    two tables on the page can be read against each other.
+
+    Two depths are reported per ladder, each walking the club's own string
+    order from string 1:
+
+    * depthOut   — string number of the first charted name whose game status is
+                   not "Out". String 1 counts, so a Questionable or Doubtful
+                   first string gives depth 1 (no replacement past the first
+                   string is required by the documents). Blank with a reason
+                   when the club publishes no name at an earlier string, or
+                   when every charted name on the ladder is ruled Out.
+    * depthClear — string number of the first charted name with NO game status
+                   listed at all. Blank with a reason when none exists.
+
+    A ladder where a DEEPER string is ruled Out while the first string is not
+    ("thin": a deeper replacement is already unavailable) is returned
+    separately, whether or not the ladder is in the population.
+
+    Returns an OrderedDict with two lists: "ladders" (population) and "thin".
+    """
+    ladders = defaultdict(list)
+    for r in rows:
+        if r["player"]:
+            ladders[(r["team"], r["unit"], r["slot"], r["line"])].append(r)
+
+    def walk(group, excluded, excluded_label):
+        """First string on the ladder that is not fully excluded.
+        Returns (depth, row, reason): depth/row are None when unresolvable."""
+        ranks = sorted({r["rank"] for r in group})
+        if not ranks or ranks[0] != 1:
+            return None, None, "the club publishes no first string on this ladder"
+        for k in range(1, max(ranks) + 1):
+            level = [r for r in group if r["rank"] == k]
+            if not level:
+                return None, None, "the club publishes no name at string %d" % k
+            for r in level:
+                if not excluded(r):
+                    return k, r, ""
+        return None, None, "every charted name on this ladder is %s" % excluded_label
+
+    def sort_key(k):
+        return (k[0], k[1], k[2], int(k[3]) if k[3].isdigit() else 99)
+
+    def fmt(r):
+        st = r["gameStatus"].strip()
+        return "%s (%s)" % (r["player"], st if st else "no designation")
+
+    population = []
+    thin = []
+    for key in sorted(ladders, key=sort_key):
+        team, unit, slot, line = key
+        # stable sort: within one string, the club's own chart order is kept
+        group = sorted(ladders[key], key=lambda r: r["rank"])
+        first = [r for r in group if r["rank"] == 1]
+        if not first:
+            continue
+
+        is_out = lambda r: r["gameStatus"].strip().lower() == "out"
+        has_status = lambda r: r["gameStatus"].strip() != ""
+
+        # --- thin: an available first string, but a deeper string ruled Out
+        deeper_out = [r for r in group if r["rank"] > 1 and is_out(r)]
+        if deeper_out and any(not is_out(r) for r in first):
+            thin.append(OrderedDict([
+                ("team", team),
+                ("unit", unit),
+                ("slot", slot),
+                ("line", line),
+                ("firstString", "; ".join(fmt(r) for r in first)),
+                ("deeperOut", "; ".join("string %d %s" % (r["rank"], r["player"])
+                                        for r in deeper_out)),
+                ("source", group[0]["source"]),
+            ]))
+
+        if not any(has_status(r) for r in first):
+            continue  # not in the replacement-depth population
+
+        depth_out, row_out, reason_out = walk(group, is_out, "ruled Out")
+        depth_clear, row_clear, reason_clear = walk(
+            group, has_status, "listed with a game status")
+
+        population.append(OrderedDict([
+            ("team", team),
+            ("unit", unit),
+            ("slot", slot),
+            ("line", line),
+            ("firstString", "; ".join(fmt(r) for r in first)),
+            ("ruledOut", "; ".join("string %d %s" % (r["rank"], r["player"])
+                                   for r in group if is_out(r))),
+            ("depthOut", depth_out if depth_out is not None else ""),
+            ("depthOutReason", reason_out),
+            ("firstNotOut", fmt(row_out) if row_out else ""),
+            ("depthClear", depth_clear if depth_clear is not None else ""),
+            ("depthClearReason", reason_clear),
+            ("firstClear", fmt(row_clear) if row_clear else ""),
+            ("source", group[0]["source"]),
+        ]))
+
+    return OrderedDict([("ladders", population), ("thin", thin)])
 
 
 def main():
