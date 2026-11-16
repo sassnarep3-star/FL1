@@ -559,6 +559,15 @@ def ledger_page(ctx):
             ctx["raw_src"]('<a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">S01</a>'),
         ])
 
+    # results / standings side of the ledger
+    res_rows = [
+        [ctx["cell"]("2026-11-14"), ctx["cell"]("137"), ctx["cell"]("data/results.tsv"),
+         ctx["cell"]("the frozen pre-registration corpus — never overwritten"),
+         ctx["raw_src"]('<a class="src" href="https://www.nfl.com/schedules/2026/REG10/" target="_blank" rel="noopener">S49</a>')],
+        [ctx["cell"]("2026-11-16"), ctx["cell"]("148"), ctx["cell"]("data/results_2026-11-16.tsv"),
+         ctx["cell"]("eleven further finals; reconciled 32/32 against the standings read the same day"),
+         ctx["raw_src"]('<a class="src" href="https://www.nfl.com/schedules/2026/REG10/" target="_blank" rel="noopener">S49</a>')],
+    ]
     ver_rows = []
     for row in ver:
         if len(row) < 5:
@@ -595,7 +604,18 @@ would inject lookahead into any backtest that uses it.</p>
 </section>
 
 <section>
-<h2>What changed</h2>
+<h2>Results and standings reads</h2>
+<p class="caption">The same rule applies to results: the frozen corpus keeps its
+date and is never silently grown, and a newer read is published beside it. The
+2026-11-16 read reproduces the official standings of the same day for all 32 clubs
+on wins, losses, ties, points for and points against (check G-R1) &mdash; eleven
+transcribed scores have to be right for that to hold, so it is a stronger check than
+it looks.</p>
+%s
+</section>
+
+<section>
+<h2>What changed &mdash; injuries</h2>
 <p class="caption">Produced by <code>scripts/verify_recapture_g.py</code>, which exits
 non-zero if any row present on 11-14 is missing from 11-16 &mdash; that would mean the
 earlier table held an invented row. Rows added later, and fields that moved later,
@@ -610,6 +630,8 @@ are recorded, not treated as failures.</p>
 """ % (added, changed,
        ctx["table"](["Captured (UTC)", "Rows", "Clubs", "File", "Note", "Source"],
                     capture_rows),
+       ctx["table"](["Captured (UTC)", "Results", "File", "Note", "Source"],
+                    res_rows),
        ctx["table"](["Change", "Club", "Player", "Field", "2026-11-14", "2026-11-16",
                      "Source"], diff_rows, cls="searchable"),
        ctx["table"](["Check", "Description", "Result", "Detail", "Source"], ver_rows)),

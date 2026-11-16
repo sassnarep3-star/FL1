@@ -9,3 +9,7 @@ G-V6out	count of Out designations	INFO	70	https://www.nfl.com/injuries/
 G-V6dou	count of Doubtful designations	INFO	11	https://www.nfl.com/injuries/
 G-V6que	count of Questionable designations	INFO	90	https://www.nfl.com/injuries/
 G-V7	clubs present on the official Week 10 page	INFO	28 clubs: ARI,ATL,BAL,BUF,CAR,CIN,CLE,DAL,DET,GB,HOU,IND,JAX,KC,LAC,LAR,LV,MIA,MIN,NE,NO,NYG,NYJ,PIT,SEA,SF,TEN,WAS	https://www.nfl.com/injuries/
+G-R1	new results reproduce the new official standings for all 32 clubs	PASS	32 clubs checked, 0 mismatches	https://www.nfl.com/schedules/2026/REG10/
+G-R2	the frozen 137-game corpus is unchanged inside the newer read	PASS	137 corpus rows, drift: False	https://www.nfl.com/schedules/2026/REG10/
+G-R3	games played per club equals W+L+T for every club	PASS	0 clubs with a count mismatch	https://www.nfl.com/schedules/2026/REG10/
+G-R4	games added since the 2026-11-14 corpus	INFO	11 new finals (148 results now); SNF PIT@CIN was in progress and MNF LAC@BAL had not kicked off at capture, so neither is recorded	https://www.nfl.com/schedules/2026/REG10/

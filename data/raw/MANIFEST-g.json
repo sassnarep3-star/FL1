@@ -1,4 +1,5 @@
 {
+  "_results_retrieved": "2026-11-16",
   "_retrieved": "2026-11-16T01:19:16Z",
   "_source": "https://www.nfl.com/injuries/",
   "injuries-week10-2026-recapture-2026-11-16.md": {
@@ -8,5 +9,17 @@
   "injuries-week10-2026-recapture-2026-11-16.tsv": {
     "bytes": 12424,
     "sha256": "c507c23251e7b56fd8eb73fb1281dbd80539b9db6880d77c96eec54c0b4786da"
+  },
+  "results-week10-2026-2026-11-16.md": {
+    "bytes": 974,
+    "sha256": "787fa6c3e25619215778c3119097fccfb219d8a80608fec6d9d420bd501a3b95"
+  },
+  "results_2026-11-16.tsv": {
+    "bytes": 3919,
+    "sha256": "4a91837d0f4562c28ff9a5500e98e46ee026e4a7ed09259176c2db7839d7eb54"
+  },
+  "standings_2026-11-16.tsv": {
+    "bytes": 2503,
+    "sha256": "c8e3b35c8719ee44dc9a8608bb50171753c51c65e177fa3665aa1f20ccac8818"
   }
 }

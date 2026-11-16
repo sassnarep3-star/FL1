@@ -33975,6 +33975,30 @@ window.DATA = {
    ],
    "severity": "Medium",
    "action": "Recorded as requirement R35 on the backlog with the schema change it needs. No output was retro-fitted to look complete."
+  },
+  {
+   "id": "F49",
+   "kind": "Stale published snapshot",
+   "item": "The published standings and results predate eleven finals that the official site has since published",
+   "detail": "data/standings.tsv and data/results.tsv were captured on 2026-11-14 and hold 137 results. Reading the official league standings page and the official Week 10 schedule page on 2026-11-16 returned eleven further finals, taking the season to 148 results, and the standings had moved accordingly (for example Miami and Tennessee from 1-7 to 1-8, Kansas City from 6-2 to 7-2). The newer read was transcribed and reconciled: it reproduces the newer standings for all 32 clubs on W, L, T, PF and PA (check G-R1). The frozen corpus was NOT overwritten, because a backtest corpus that silently grows is not a corpus.",
+   "sourceIds": [
+    "S03",
+    "S49"
+   ],
+   "severity": "Medium",
+   "action": "Newer dated snapshots published beside the frozen ones (data/results_2026-11-16.tsv, data/standings_2026-11-16.tsv) with hashes, and the diff shown on the Snapshot Ledger page. Promoting the latest read to the headline requires the scheduling work in SG36."
+  },
+  {
+   "id": "F50",
+   "kind": "Identifier collision between two registers",
+   "item": "Two source registers use the same S-numbers for different sources",
+   "detail": "data/sources.tsv (64 rows, the registry the published site renders) and data/sources.json (16 rows, used by another session's generator at scripts/build_site.py) both allocate S01-S06, and only S01 means the same thing in both. In the TSV, S02 is the official division standings and S03 the official league standings; in the JSON, S02 is the 2026 rulebook and S03 the official playing rules. A reader who follows an S03 chip from one layer to the other is sent to a different document. Both registers are correct on their own; the collision is in the shared id space.",
+   "sourceIds": [
+    "S02",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Flagged, not silently renumbered: renumbering either register would break the links already published in the other layer. The backlog records the fix (a namespaced id such as REG-S03) for when both layers are next regenerated together."
   }
  ]
 };
