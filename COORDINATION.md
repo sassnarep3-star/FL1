@@ -1,5 +1,13 @@
 # COORDINATION — Shared Task Board
 
+## Current Arena session claim — `arena/4501cbb9-fl1` (2026-11-16)
+
+**Branch policy:** work stays on the Arena-managed branch `arena/4501cbb9-fl1`; no other branch is created or checked out. Earlier task boards below record completed work. This follow-up is additive and does not edit files owned by an active session.
+
+| ID | Task | Status | Owner | File scope (claimed) |
+|---|---|---|---|---|
+| A-01 | Audit the integrated site for stale/contradictory headline claims; add a landing-page decision-readiness table mapping each requirement to its blocking gate and a sourced clearance criterion; reconcile executive summary and reading guide; run site and data checks. | in progress | `arena/4501cbb9-fl1` | `COORDINATION.md`, `data/readiness.json`, `tools/site.py`, generated `index.html`, `executive-summary.html`, `EXECUTIVE_SUMMARY.md`, `README.md`, `REVIEW.md`, `tests/test_readiness.py` |
+
 > Read this **before** starting. Claim a task by writing your session ID and file scope, then commit
 > and push that claim immediately. Never start a task another session has claimed.
 
