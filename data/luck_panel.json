@@ -1,0 +1,187 @@
+{
+  "id": "luck_panel",
+  "title": "Removal of luck",
+  "updated": "2026-11-16",
+  "note": "Every figure below is computed by scripts/build_luck_g.py from data/results.tsv (137 official 2026 results) using engine/luck.py. No market price is used anywhere in this panel: a luck band needs a base rate and a sample size, not a price. Where a base rate cannot be measured from an official source the row is blank and says why.",
+  "headline": {
+    "games": 137,
+    "home_wins": 67,
+    "away_wins": 69,
+    "ties": 1,
+    "home_win_rate": 0.48905109489051096,
+    "home_win_rate_wilson": [
+      0.40679317813935306,
+      0.5719062756640947
+    ],
+    "exact_p_vs_coin": 0.8644049750099486,
+    "luck_band_95_at_n": [
+      0.4162744880479575,
+      0.5837255119520425
+    ],
+    "verdict": "The home-team hit rate over 137 official games is 48.9%. Its 95% interval is 40.7% to 57.2%, which contains 50%. On this sample, backing the home team every time is indistinguishable from a coin flip \u2014 which is exactly the point: a season is not long enough for a small edge to become visible."
+  },
+  "brier": {
+    "constant_forecast_at_home_rate": 0.2498801214769031,
+    "constant_forecast_at_coin": 0.25,
+    "brier_skill_score_vs_coin": 0.00047951409238755627,
+    "note": "Both forecasts are constants: they say the same number for every game. The skill score of 0.0005 is what 'no skill' looks like on a proper score. Any strategy must beat this, not beat zero."
+  },
+  "base_rates": [
+    {
+      "label": "Home team wins the game (official 2026 results)",
+      "k": 67,
+      "n": 137,
+      "rate": 0.48905109489051096,
+      "wilson_lo": 0.40679317813935306,
+      "wilson_hi": 0.5719062756640947,
+      "exact_p_vs_coin": 0.8644049750099486,
+      "measurable": true,
+      "source": "S49"
+    },
+    {
+      "label": "Away team wins the game (official 2026 results)",
+      "k": 69,
+      "n": 137,
+      "rate": 0.5036496350364964,
+      "wilson_lo": 0.42097642170800376,
+      "wilson_hi": 0.5861237603575137,
+      "exact_p_vs_coin": 1.0,
+      "measurable": true,
+      "source": "S49"
+    },
+    {
+      "label": "Game goes over the total",
+      "k": null,
+      "n": null,
+      "rate": null,
+      "wilson_lo": null,
+      "wilson_hi": null,
+      "exact_p_vs_coin": null,
+      "measurable": false,
+      "source": "",
+      "note": "No official source publishes a total for a game, so the base rate for an over/under decision cannot be measured. Left blank rather than assumed to be 0.5."
+    },
+    {
+      "label": "A named player prop goes over",
+      "k": null,
+      "n": null,
+      "rate": null,
+      "wilson_lo": null,
+      "wilson_hi": null,
+      "exact_p_vs_coin": null,
+      "measurable": false,
+      "source": "",
+      "note": "No official player-prop outcome source is captured, so no base rate and no sample size can be stated for props."
+    }
+  ],
+  "luck_bands": [
+    {
+      "n": 50,
+      "lo": 0.36140961756503226,
+      "hi": 0.6385903824349677,
+      "half_width_pp": 13.859038243496771
+    },
+    {
+      "n": 100,
+      "lo": 0.4020018007729973,
+      "hi": 0.5979981992270027,
+      "half_width_pp": 9.79981992270027
+    },
+    {
+      "n": 137,
+      "lo": 0.4162744880479575,
+      "hi": 0.5837255119520425,
+      "half_width_pp": 8.372551195204247
+    },
+    {
+      "n": 250,
+      "lo": 0.43802049676954385,
+      "hi": 0.5619795032304561,
+      "half_width_pp": 6.197950323045612
+    },
+    {
+      "n": 500,
+      "lo": 0.45617387297117096,
+      "hi": 0.543826127028829,
+      "half_width_pp": 4.382612702882904
+    },
+    {
+      "n": 1000,
+      "lo": 0.46901024838477195,
+      "hi": 0.5309897516152281,
+      "half_width_pp": 3.0989751615228074
+    }
+  ],
+  "sizing": [
+    {
+      "edge_pp": 10.0,
+      "n_alpha05_power80": 197,
+      "n_at_icc_0.00_m2": 197,
+      "n_at_icc_0.10_m2": 217,
+      "n_at_icc_0.30_m2": 256,
+      "n_at_icc_0.50_m2": 296
+    },
+    {
+      "edge_pp": 5.0,
+      "n_alpha05_power80": 785,
+      "n_at_icc_0.00_m2": 785,
+      "n_at_icc_0.10_m2": 864,
+      "n_at_icc_0.30_m2": 1020,
+      "n_at_icc_0.50_m2": 1178
+    },
+    {
+      "edge_pp": 4.0,
+      "n_alpha05_power80": 1227,
+      "n_at_icc_0.00_m2": 1227,
+      "n_at_icc_0.10_m2": 1350,
+      "n_at_icc_0.30_m2": 1595,
+      "n_at_icc_0.50_m2": 1840
+    },
+    {
+      "edge_pp": 3.0,
+      "n_alpha05_power80": 2181,
+      "n_at_icc_0.00_m2": 2181,
+      "n_at_icc_0.10_m2": 2399,
+      "n_at_icc_0.30_m2": 2835,
+      "n_at_icc_0.50_m2": 3272
+    },
+    {
+      "edge_pp": 2.0,
+      "n_alpha05_power80": 4906,
+      "n_at_icc_0.00_m2": 4906,
+      "n_at_icc_0.10_m2": 5397,
+      "n_at_icc_0.30_m2": 6378,
+      "n_at_icc_0.50_m2": 7359
+    },
+    {
+      "edge_pp": 1.0,
+      "n_alpha05_power80": 19623,
+      "n_at_icc_0.00_m2": 19623,
+      "n_at_icc_0.10_m2": 21585,
+      "n_at_icc_0.30_m2": 25510,
+      "n_at_icc_0.50_m2": 29434
+    }
+  ],
+  "multiplicity": {
+    "strategies_registered": 6,
+    "family_alpha": 0.05,
+    "per_comparison_alpha": 0.008333333333333333,
+    "n_required_at_5pp_edge": 1211,
+    "note": "Ranking the best of 6 strategies without adjusting the threshold is how a lucky run gets mistaken for a method. With the Bonferroni-adjusted threshold the 5pp-edge sample rises from 785 to 1211 decisions."
+  },
+  "clustering": {
+    "icc_measured": null,
+    "icc_note": "The intra-cluster correlation between legs of the same game is NOT measured in this repository \u2014 no joint-outcome source has been captured. The grid below is therefore a sensitivity, not an estimate: it shows how fast the required sample grows if legs inside one game are correlated at all.",
+    "icc_grid": [
+      0.0,
+      0.1,
+      0.3,
+      0.5
+    ],
+    "legs_per_game_example": 2
+  },
+  "sources": [
+    "S49",
+    "S50"
+  ]
+}

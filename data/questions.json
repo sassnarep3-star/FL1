@@ -3,7 +3,7 @@
     "id": "Q01",
     "category": "Scope",
     "priority": "Critical",
-    "question": "What exactly is being priced — the full-game winner, the spread, the total, or a specific prop — and for which market type first?",
+    "question": "What exactly is being priced \u2014 the full-game winner, the spread, the total, or a specific prop \u2014 and for which market type first?",
     "why_it_matters": "Every downstream choice (data needed, sample size, validation test) differs by market. A spread needs a margin model; a winner market needs only a probability. A total needs a pace model. Picking all of them at once guarantees none reaches statistical significance this season.",
     "what_we_know": "The brief asks for single bets, parlays and player-prop combos. Official NFL data supplies team scoring (PF/PA), records and game status, which is enough to specify a spread or total model.",
     "what_we_dont_know": "Which market the user wants first, and whether the goal is to beat a specific book's price or to produce an independent fair-value number.",
@@ -48,7 +48,7 @@
     "what_we_dont_know": "Whether every club publishes a machine-readable depth chart, and whether any of them agree with each other on the same date.",
     "missing_data": "A league-wide official depth feed. Full 32-club depth chart capture.",
     "source": "S08, S13, S07",
-    "blocking": "Yes — for the backup-deficiency feature",
+    "blocking": "Yes \u2014 for the backup-deficiency feature",
     "recommended_path": "Treat 'official depth chart' as unavailable. Rank depth explicitly from roster status codes plus published club depth charts, and label every derived rank as *derived*, never as official."
   },
   {
@@ -69,12 +69,12 @@
     "category": "Injury tracking",
     "priority": "High",
     "question": "How is the injury report snapped and versioned, given that it changes several times per week?",
-    "why_it_matters": "A player can be Full on Wednesday and Out on Saturday. If snapshots are not timestamped, any model trained on the report is using information that did not exist at the time — a look-ahead bias that manufactures fake skill.",
+    "why_it_matters": "A player can be Full on Wednesday and Out on Saturday. If snapshots are not timestamped, any model trained on the report is using information that did not exist at the time \u2014 a look-ahead bias that manufactures fake skill.",
     "what_we_know": "The Week 10 report captured here (S01) is a single point-in-time snapshot taken 2026-11-14, and it is already partly final: e.g. Sam Darnold is listed Out and a same-page NFL news item confirms he was ruled out.",
     "what_we_dont_know": "The exact publication cadence per club, and whether earlier-week versions are archived anywhere official and free.",
     "missing_data": "A time series of injury reports. This repo holds one snapshot only.",
     "source": "S01",
-    "blocking": "Yes — for any injury-based signal",
+    "blocking": "Yes \u2014 for any injury-based signal",
     "recommended_path": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now."
   },
   {
@@ -96,7 +96,7 @@
     "priority": "High",
     "question": "How should the cross-source irregularities found in this repo be handled?",
     "why_it_matters": "Two official pages disagree. If the build silently picks one, every downstream number inherits an unstated choice.",
-    "what_we_know": "Case 1: NFL.com's Week 10 injury page lists Myles Garrett as a Rams LB, while NFL.com's own Next Gen Stats page carries a Rams article titled 'No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article places Garrett in the Rams defense. Case 2: Aaron Donald is listed as a Did Not Participate on the Rams injury table and NFL.com's player profile shows him active with the Rams, consistent with a same-season NFL.com report that he unretired on Aug. 30 and planned a season debut. Case 3: the injury page header reads 'Week 10 of the 2026 Season' while the article slug for the same week is dated 2026 — consistent — but the Commanders' sideline game is shown as FINAL 24-21 on Nov 12 while the injury page still lists them.",
+    "what_we_know": "Case 1: NFL.com's Week 10 injury page lists Myles Garrett as a Rams LB, while NFL.com's own Next Gen Stats page carries a Rams article titled 'No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article places Garrett in the Rams defense. Case 2: Aaron Donald is listed as a Did Not Participate on the Rams injury table and NFL.com's player profile shows him active with the Rams, consistent with a same-season NFL.com report that he unretired on Aug. 30 and planned a season debut. Case 3: the injury page header reads 'Week 10 of the 2026 Season' while the article slug for the same week is dated 2026 \u2014 consistent \u2014 but the Commanders' sideline game is shown as FINAL 24-21 on Nov 12 while the injury page still lists them.",
     "what_we_dont_know": "Whether these are data-entry errors at the source, stale cached rows, or genuinely correct and our reading is wrong.",
     "missing_data": "An authoritative roster-move log to reconcile against.",
     "source": "S01, S10, S15",
@@ -113,7 +113,7 @@
     "what_we_dont_know": "The effect size any strategy will actually achieve, which is what determines the sample needed.",
     "missing_data": "Historical graded results to estimate variance.",
     "source": "S05, S02",
-    "blocking": "Yes — for the leaderboard",
+    "blocking": "Yes \u2014 for the leaderboard",
     "recommended_path": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate."
   },
   {
@@ -122,7 +122,7 @@
     "priority": "High",
     "question": "How is 'luck removed' defined operationally, rather than as a slogan?",
     "why_it_matters": "The brief asks to remove luck. That needs a testable definition or it becomes an untestable claim.",
-    "what_we_know": "Three measurable proxies exist with data we can actually get: (a) calibration — do 60% predictions win 60% of the time; (b) closing-line value — did the fair value move toward our number; (c) persistence — does the edge hold out of sample and across seasons.",
+    "what_we_know": "Three measurable proxies exist with data we can actually get: (a) calibration \u2014 do 60% predictions win 60% of the time; (b) closing-line value \u2014 did the fair value move toward our number; (c) persistence \u2014 does the edge hold out of sample and across seasons.",
     "what_we_dont_know": "Which proxy the user will accept as the definition.",
     "missing_data": "A benchmark price feed for the CLV test.",
     "source": "S03",
@@ -139,7 +139,7 @@
     "what_we_dont_know": "Whether player-level joint outcomes can be assembled at all from official sources at the depth needed, and how many observations per pair are required.",
     "missing_data": "Player game logs sufficient to estimate pairwise prop correlations.",
     "source": "S03",
-    "blocking": "Yes — for parlay and combo products",
+    "blocking": "Yes \u2014 for parlay and combo products",
     "recommended_path": "Start correlations at the team-total level where data exists. For player props, publish the method and mark correlations blank until the joint sample is adequate."
   },
   {
@@ -166,7 +166,7 @@
     "missing_data": "A decision from the user on any monetary component.",
     "source": "S03",
     "blocking": "No",
-    "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14."
+    "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first \u2014 see Q14."
   },
   {
     "id": "Q14",
@@ -230,7 +230,7 @@
     "what_we_dont_know": "The terms of use and robots policy of nfl.com and the 32 club sites, which were not reviewed in this session.",
     "missing_data": "A terms-of-use review.",
     "source": "S01",
-    "blocking": "Yes — before any scheduled fetching",
+    "blocking": "Yes \u2014 before any scheduled fetching",
     "recommended_path": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached."
   },
   {
@@ -243,7 +243,7 @@
     "what_we_dont_know": "The baseline the user considers fair.",
     "missing_data": "A stated baseline.",
     "source": "S03",
-    "blocking": "Yes — for the leaderboard",
+    "blocking": "Yes \u2014 for the leaderboard",
     "recommended_path": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy."
   },
   {
@@ -505,5 +505,57 @@
     "source": "S74",
     "blocking": "no - the standing rule answers it for now",
     "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
+  },
+  {
+    "id": "Q40",
+    "category": "Data",
+    "priority": "High",
+    "question": "Which dated read of the injury report is the canonical pre-kickoff snapshot for backtests?",
+    "why_it_matters": "This session proved the report moves: two reads two days apart differ by two rows and 32 fields. A backtest that trains on the Monday read has seen designations that did not exist before kickoff, which is lookahead leakage and will flatter any availability strategy.",
+    "what_we_know": "Two dated captures exist (2026-11-14, 345 rows; 2026-11-16, 347 rows), both hash-pinned. The Chargers played Monday night, so their game-day designations only exist in the later read.",
+    "what_we_dont_know": "Which read is closest to the information available before each game kicked off, and therefore which one a backtest is allowed to use.",
+    "missing_data": "A rule, written before the backtest runs, pinning the capture per game.",
+    "source": "availability-ledger.html",
+    "blocking": "Yes",
+    "recommended_path": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff."
+  },
+  {
+    "id": "Q41",
+    "category": "Data",
+    "priority": "Medium",
+    "question": "Should designations published after the earlier read be back-filled into the published table, or kept as a separate dated snapshot?",
+    "why_it_matters": "Back-filling makes one tidy table that no longer corresponds to anything the league published at a single moment. Keeping separate snapshots is less tidy but is the only version that can be audited.",
+    "what_we_know": "The 2026-11-14 read is the pre-kickoff snapshot for 13 of the 14 Week 10 games and predates the Chargers' designations entirely.",
+    "what_we_dont_know": "Whether the site's readers need one table or the series.",
+    "missing_data": "A presentation decision, not data.",
+    "source": "availability-ledger.html",
+    "blocking": "No",
+    "recommended_path": "Keep the snapshots separate and publish the diff, as the ledger page does now."
+  },
+  {
+    "id": "Q42",
+    "category": "Operations",
+    "priority": "Medium",
+    "question": "May the injury report be captured at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is answered?",
+    "why_it_matters": "Three requirements (R32, R41, R73) depend on a multi-day series. None can be met without automated repeated fetching, and the acceptable-use question (Q18) is still open.",
+    "what_we_know": "The page publishes a season and week selector and returns the full report; two manual reads were taken this session without incident.",
+    "what_we_dont_know": "The terms of use for automated fetching, and the acceptable cadence.",
+    "missing_data": "A read of the site's terms, or a licensed alternative.",
+    "source": "availability-ledger.html",
+    "blocking": "Yes",
+    "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear."
+  },
+  {
+    "id": "Q43",
+    "category": "Competition",
+    "priority": "High",
+    "question": "Should the leaderboard adopt the removal-of-luck numbers as its qualification bar?",
+    "why_it_matters": "The leaderboard ranks strategies. Without a sample-size bar it will rank whoever had the best short run. The panel shows that 785 independent decisions are needed to detect a 5pp edge at all, and 1,211 once six strategies are tried.",
+    "what_we_know": "137 official results exist. A single NFL season offers roughly 270 team-game decisions, which is a third of the sample needed for a 5pp edge.",
+    "what_we_dont_know": "Whether the competition accepts that no strategy can qualify inside one season, or wants a lower bar with an explicit warning.",
+    "missing_data": "A decision on the bar, frozen before any result exists (SG37).",
+    "source": "removal-of-luck.html",
+    "blocking": "Yes",
+    "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it."
   }
 ]

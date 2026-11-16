@@ -35,7 +35,7 @@
   {
     "id": "F04",
     "kind": "Cross-source contradiction",
-    "item": "Myles Garrett — club attribution",
+    "item": "Myles Garrett \u2014 club attribution",
     "detail": "NFL.com's Week 10 injury report lists Myles Garrett as an LB on the Los Angeles Rams with a knee designation and a 'resting player' note. NFL.com's Next Gen Stats front page carries a 2026 Rams article titled 'Rams' Sean McVay: No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article is headlined 'How does Myles Garrett fit into Rams defense?'. These agree on the Rams but the injury-row note mixes a real knee injury with a rest designation, which the site will not attempt to untangle. No resolution applied.",
     "sourceIds": [
       "S01",
@@ -47,7 +47,7 @@
   {
     "id": "F05",
     "kind": "Cross-source contradiction",
-    "item": "Aaron Donald — listed as a non-participant while shown as active",
+    "item": "Aaron Donald \u2014 listed as a non-participant while shown as active",
     "detail": "The Week 10 Rams injury table lists Aaron Donald (DT) as 'Did Not Participate In Practice' with no injury and no game status. NFL.com's own player profile for Aaron Donald shows him as an active Los Angeles Rams DE with 11 years of experience, and an NFL.com article states he unretired on Aug. 30 and planned a season debut. Both are official NFL.com pages and they cannot both be read at face value. No resolution applied.",
     "sourceIds": [
       "S01",
@@ -248,7 +248,7 @@
       "S03"
     ],
     "severity": "Low",
-    "action": "closed — row-level official capture supersedes aggregate reconciliation"
+    "action": "closed \u2014 row-level official capture supersedes aggregate reconciliation"
   },
   {
     "id": "F23",
@@ -366,7 +366,7 @@
   {
     "id": "F33",
     "kind": "Deliberate blank",
-    "item": "Fair TOTAL line is blank for all 272 markets — the totals model has no fitted parameter",
+    "item": "Fair TOTAL line is blank for all 272 markets \u2014 the totals model has no fitted parameter",
     "detail": "Stage S2 (possessions x efficiency) parameters are deliberately unfitted in this repository; the rule is to leave the cell blank rather than invent one. The total market columns (fair | market | difference) are published as structure with the fair and difference cells empty. Filling them requires the official drive/efficiency inputs (GAP-05) and a fitted model. Distinct from F19 (which withholds third-party correlation values). see also F29 (fair-line provenance) and F25.",
     "source": "https://sassnarep3-star.github.io/FL1/originations.html",
     "severity": "Medium",
@@ -378,7 +378,7 @@
   {
     "id": "F34",
     "kind": "Data provenance",
-    "item": "Market lines in data/fair_lines.csv are third-party (nflverse snapshot) — no official NFL price source exists",
+    "item": "Market lines in data/fair_lines.csv are third-party (nflverse snapshot) \u2014 no official NFL price source exists",
     "detail": "Every market column (spread, total, moneyline) behind the fair-line comparison comes from data/raw/games.csv (nflverse/nfldata, S47), flagged third-party. The league publishes results and schedules, not betting prices. Difference columns therefore compare the model against a third-party close, not an official one. A licensed/official price feed landing behind the price-snapshot store is the only way past this (Q-02). See also F18 (same gap registered by the price-store session). same gap registered as F23 by the R21-R28 sprint.",
     "source": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
     "severity": "High",
@@ -391,7 +391,7 @@
     "id": "F35",
     "kind": "Derived value",
     "item": "Replacement-depth values are derived (rule published per row), and 6 spots have no listed replacement at all",
-    "detail": "data/replacement_depth.csv derives each replacement from official inputs (Week 10 injury report S01 + club depth charts) using the published rule: first listed player at the same spot whose official game status is not Out; string = published rank. Houston has no machine-readable chart (F16) so no rows exist for it. Six spots show every listed player Out — those replacement cells are blank and flagged, never filled. One NE RB replacement comes from 3rd string with one player Out above him.",
+    "detail": "data/replacement_depth.csv derives each replacement from official inputs (Week 10 injury report S01 + club depth charts) using the published rule: first listed player at the same spot whose official game status is not Out; string = published rank. Houston has no machine-readable chart (F16) so no rows exist for it. Six spots show every listed player Out \u2014 those replacement cells are blank and flagged, never filled. One NE RB replacement comes from 3rd string with one player Out above him.",
     "source": "https://www.nfl.com/injuries/",
     "severity": "Medium",
     "sourceIds": [
@@ -404,7 +404,7 @@
     "id": "F36",
     "kind": "Dependency note",
     "item": "requirements.txt declares stdlib-only while scripts/ require pandas, numpy and scipy",
-    "detail": "engine/ and tools/ are standard-library only as documented. scripts/ (strategy_lab.py, fetch_data.py, and session M's builders) require pandas/numpy/scipy — this was already true before this session; the requirements note understates it. Recorded per the repo's own rule that a dependency is a supply-chain decision. Session M added no NEW dependency beyond what scripts/ already used. Scripts-layer parquet support additionally requires pyarrow (pandas read_parquet engine) for scripts/build_prop_correlations_d.py; scripts/fetch_prop_mirror_m.py restores its out-of-repo pinned input (git blob sha adc42c07f2befa3e984a8c123d2861ba9bfb6f1f) in a fresh workspace.",
+    "detail": "engine/ and tools/ are standard-library only as documented. scripts/ (strategy_lab.py, fetch_data.py, and session M's builders) require pandas/numpy/scipy \u2014 this was already true before this session; the requirements note understates it. Recorded per the repo's own rule that a dependency is a supply-chain decision. Session M added no NEW dependency beyond what scripts/ already used. Scripts-layer parquet support additionally requires pyarrow (pandas read_parquet engine) for scripts/build_prop_correlations_d.py; scripts/fetch_prop_mirror_m.py restores its out-of-repo pinned input (git blob sha adc42c07f2befa3e984a8c123d2861ba9bfb6f1f) in a fresh workspace.",
     "source": "https://github.com/sassnarep3-star/FL1/blob/main/requirements.txt",
     "severity": "Low",
     "sourceIds": [],
@@ -599,5 +599,97 @@
     ],
     "severity": "Low",
     "action": "Refreshed file committed with its new sha256 in the manifest and the previous hash recorded alongside it, so the change is auditable rather than silent."
+  },
+  {
+    "id": "F53",
+    "kind": "Cross-source contradiction",
+    "item": "Week 10 injury row count: the review says 254 rows published against 279 live; both of this session's official reads are larger",
+    "detail": "An earlier review recorded the published injury table as 254 rows and the live page as 279 rows, with four 'no injuries reported' sections. This session read the same official URL twice: the 2026-11-14 capture in the repository parses to 345 rows across 28 clubs, and a fresh 2026-11-16 re-capture parses to 347 rows across the same 28 clubs, with no 'no injuries reported' section on the page in either read. Both raw captures are committed with sha256 hashes so the discrepancy can be re-checked line by line. No number was altered to make the figures agree.",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "Medium",
+    "action": "Both dated captures published on the Snapshot Ledger page with their hashes; the diff between them is published too. The 254/279 figures could not be reproduced and are left as recorded, not corrected."
+  },
+  {
+    "id": "F54",
+    "kind": "Not found in an official source",
+    "item": "Announced-starter evidence for Brissett (Arizona) \u2014 named in the brief, not found on any official page read",
+    "detail": "The brief lists Brissett among the starters the NFL has announced. The dated official roundup of 2026-11-11 announces Carson Beck as Arizona's Week 10 starter, and Brissett appears on neither the Week 10 injury report nor any article read this session. The cell is left blank on the Announced Starters page with this reason, rather than filled from a depth chart or from memory.",
+    "sourceIds": [
+      "S70"
+    ],
+    "severity": "Low",
+    "action": "Row published blank with the reason and the source link. If an official page naming Brissett exists, the fix is to add the link."
+  },
+  {
+    "id": "F55",
+    "kind": "Source changed between two dated reads",
+    "item": "The official Week 10 injury report is not a single fact: it moved between 2026-11-14 and 2026-11-16",
+    "detail": "Re-reading nfl.com/injuries two days later returned 347 rows where the earlier read had 345. Two rows were added (BAL Calais Campbell, BAL Ronnie Stanley) and 32 fields moved. 22 of the 32 are Chargers rows: Los Angeles played on Monday night, so its game-day designations were published after the earlier read. Indianapolis's Arden Key moved the other way \u2014 Questionable with a hamstring injury on 11-14, no designation at all on 11-16.",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "Medium",
+    "action": "The 2026-11-14 read is kept as the pre-kickoff snapshot and is never overwritten; the later read is published beside it with a diff. Backtests must pin the capture they used."
+  },
+  {
+    "id": "F56",
+    "kind": "Coverage gap",
+    "item": "The depth-chart register carries no capture date on 31 of 31 rows",
+    "detail": "data/depth-sources.tsv records club, source id and URL for 31 clubs, but its chartDate column is empty on every row. Without a capture date, a depth chart cannot be checked for staleness against the roster events the brief asks us to track, and two captures of the same chart are indistinguishable.",
+    "sourceIds": [
+      "S08"
+    ],
+    "severity": "Medium",
+    "action": "Register left as-is with the gap stated; filling the column is requirement R62 on the backlog. No date was invented."
+  },
+  {
+    "id": "F57",
+    "kind": "Data provenance",
+    "item": "Venue, roof and surface are captured only from a third-party feed; the official transcription covers 1 of 272 fixtures",
+    "detail": "data/schedule2026-d.csv carries stadium, roof and surface for all 272 games, but every one of those rows is attributed to a third-party aggregation. The official schedule transcription in data/schedule.tsv has a venue on 1 row of 272 (the Munich international game). The brief asks for the venue to be transcribed from the official game centre.",
+    "sourceIds": [
+      "S04",
+      "S47"
+    ],
+    "severity": "Medium",
+    "action": "Third-party venue fields are recorded in the store with their provenance label and are not presented as official. Official transcription is requirement R43 on the backlog."
+  },
+  {
+    "id": "F58",
+    "kind": "Model provenance",
+    "item": "Published model outputs record a line, not a probability with its input vector",
+    "detail": "The brief asks that every model output be stored as a probability plus the inputs that produced it. The current origination artefacts store a fair line and a difference column, and the fair column is blank because the model is unfitted (F38). Even when fitted, a line without its input vector cannot be audited or reproduced after the fact.",
+    "sourceIds": [
+      "S02",
+      "S03"
+    ],
+    "severity": "Medium",
+    "action": "Recorded as requirement R35 on the backlog with the schema change it needs. No output was retro-fitted to look complete."
+  },
+  {
+    "id": "F59",
+    "kind": "Stale published snapshot",
+    "item": "The published standings and results predate eleven finals that the official site has since published",
+    "detail": "data/standings.tsv and data/results.tsv were captured on 2026-11-14 and hold 137 results. Reading the official league standings page and the official Week 10 schedule page on 2026-11-16 returned eleven further finals, taking the season to 148 results, and the standings had moved accordingly (for example Miami and Tennessee from 1-7 to 1-8, Kansas City from 6-2 to 7-2). The newer read was transcribed and reconciled: it reproduces the newer standings for all 32 clubs on W, L, T, PF and PA (check G-R1). The frozen corpus was NOT overwritten, because a backtest corpus that silently grows is not a corpus.",
+    "sourceIds": [
+      "S03",
+      "S49"
+    ],
+    "severity": "Medium",
+    "action": "Newer dated snapshots published beside the frozen ones (data/results_2026-11-16.tsv, data/standings_2026-11-16.tsv) with hashes, and the diff shown on the Snapshot Ledger page. Promoting the latest read to the headline requires the scheduling work in SG36."
+  },
+  {
+    "id": "F60",
+    "kind": "Identifier collision between two registers",
+    "item": "Two source registers use the same S-numbers for different sources",
+    "detail": "data/sources.tsv (64 rows, the registry the published site renders) and data/sources.json (16 rows, used by another session's generator at scripts/build_site.py) both allocate S01-S06, and only S01 means the same thing in both. In the TSV, S02 is the official division standings and S03 the official league standings; in the JSON, S02 is the 2026 rulebook and S03 the official playing rules. A reader who follows an S03 chip from one layer to the other is sent to a different document. Both registers are correct on their own; the collision is in the shared id space.",
+    "sourceIds": [
+      "S02",
+      "S03"
+    ],
+    "severity": "Medium",
+    "action": "Flagged, not silently renumbered: renumbering either register would break the links already published in the other layer. The backlog records the fix (a namespaced id such as REG-S03) for when both layers are next regenerated together."
   }
 ]

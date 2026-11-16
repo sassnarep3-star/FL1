@@ -1,0 +1,139 @@
+{
+  "id": "announced_starters",
+  "title": "Announced starters \u2014 official evidence, not inferred replacements",
+  "note": "Each row quotes an official NFL.com page and links it. A replacement that no official page names is left out of this table entirely; the depth-chart walking on the Team Availability page is labelled as derived and is not reproduced here.",
+  "updated": "2026-11-16",
+  "announced": [
+    {
+      "team": "ARI",
+      "player": "Carson Beck",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "Announced starter",
+      "quote": "QB Carson Beck will start Sunday's game against the Rams, per head coach Mike LaFleur. This will be Beck's first career start in the NFL after he was selected in the third round of the 2026 draft.",
+      "date": "2026-11-11",
+      "kind": "DEPTH CHART NEWS",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+    },
+    {
+      "team": "CLE",
+      "player": "Deshaun Watson",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "Announced starter",
+      "quote": "QB Deshaun Watson will start Sunday against the Texans, the team announced Wednesday. Watson cleared concussion protocol before Cleveland's Week 9 game but was inactive as Shedeur Sanders got the start in the loss to New Orleans.",
+      "date": "2026-11-11",
+      "kind": "DEPTH CHART NEWS",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+    },
+    {
+      "team": "KC",
+      "player": "Harrison Butker",
+      "pos": "K",
+      "slot": "K",
+      "status": "Confirmed in role",
+      "quote": "K Harrison Butker will continue to handle kicking duties for Kansas City for its Week 10 game against the Falcons, head coach Andy Reid said. Butker missed a 51-yard field goal in Week 9 and is 12 of 19 on field goal attempts this season.",
+      "date": "2026-11-11",
+      "kind": "DEPTH CHART NEWS",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+    },
+    {
+      "team": "MIN",
+      "player": "Kirk Cousins",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "Not committed",
+      "quote": "Head coach Kevin O'Connell told reporters on Wednesday that it is \"too early\" to commit to Kirk Cousins as their starting quarterback for Sunday's game against the Packers. The Vikings traded a 2027 third-round draft pick to the Raiders on Tuesday for Cousins.",
+      "date": "2026-11-11",
+      "kind": "DEPTH CHART NEWS",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+    },
+    {
+      "team": "SEA",
+      "player": "Drew Lock",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "Announced starter",
+      "quote": "Drew Lock has no injury designation and will start Sunday for the Seahawks against the host Las Vegas Raiders, coach Mike Macdonald said Friday. Lock is filling in for the injured Sam Darnold and set to make his second straight start and his third overall this season.",
+      "date": "2026-11-13",
+      "kind": "Article",
+      "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders"
+    },
+    {
+      "team": "SEA",
+      "player": "Jalen Milroe",
+      "pos": "QB",
+      "slot": "QB2",
+      "status": "Announced backup",
+      "quote": "Jalen Milroe will be Seattle's backup.",
+      "date": "2026-11-13",
+      "kind": "Article",
+      "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders"
+    },
+    {
+      "team": "SEA",
+      "player": "Sam Darnold",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "Ruled out",
+      "quote": "QB Sam Darnold (ribs/quadricep) did not practice on Wednesday. Darnold has been ruled out for Sunday's game against the Raiders. (Official Week 10 injury report game status: Out.)",
+      "date": "2026-11-11",
+      "kind": "DEPTH CHART NEWS + injury report",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+    },
+    {
+      "team": "MIA",
+      "player": "Kyle McCord",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "Announced starter",
+      "quote": "Willis was placed on injured reserve Tuesday due to a groin injury. With Willis shelved, second-year quarterback Kyle McCord will fill in, beginning Sunday on the road against the Indianapolis Colts.",
+      "date": "2026-11-10",
+      "kind": "Article",
+      "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+    },
+    {
+      "team": "MIA",
+      "player": "Malik Willis",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "On injured reserve (absent from the weekly report)",
+      "quote": "Willis was placed on injured reserve Tuesday due to a groin injury. \u2026 Willis will miss games at the Colts, at the Buffalo Bills, versus the New York Jets and at the Denver Broncos from Weeks 10-13.",
+      "date": "2026-11-10",
+      "kind": "Article",
+      "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+    },
+    {
+      "team": "NE",
+      "player": "TreVeyon Henderson",
+      "pos": "RB",
+      "slot": "RB",
+      "status": "On injured reserve (listed Out on the weekly report)",
+      "quote": "NFL news roundup: Patriots place RB TreVeyon Henderson (illness) on injured reserve.",
+      "date": "2026-11-14",
+      "kind": "News roundup headline",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-saturday-nov-14"
+    },
+    {
+      "team": "BAL",
+      "player": "Lamar Jackson",
+      "pos": "QB",
+      "slot": "QB",
+      "status": "On injured reserve (absent from the weekly report)",
+      "quote": "NFL news roundup: Ravens officially place Lamar Jackson on injured reserve. (NFL Network: Lamar Jackson, right thumb, out 6-9 weeks.)",
+      "date": "2026-11-05",
+      "kind": "News roundup headline",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-05"
+    }
+  ],
+  "notFound": [
+    {
+      "team": "ARI",
+      "player": "Brissett",
+      "pos": "QB",
+      "slot": "QB",
+      "note": "The brief names Brissett as an announced Arizona starter. No official page read in this session names Brissett: the dated NFL.com roundup of 2026-11-11 announces Carson Beck as Arizona's starter, and Brissett does not appear on the Week 10 injury report. Left blank rather than inferred.",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+    }
+  ]
+}

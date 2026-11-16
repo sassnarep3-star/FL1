@@ -5367,6 +5367,36 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "27 TSV/JSON artefacts under data/market/, every one written by scripts/build_market_spine.py from the captures in S47 and S70-S73 plus S01-S04/S49; rebuilt byte-identically by 'python3 scripts/build_market_spine.py --check'. No file in that directory is typed by hand."
+  },
+  {
+   "id": "S77",
+   "title": "NFL.com news roundup, Wednesday Nov. 11 2026 (DEPTH CHART NEWS and Wednesday practice designations)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Loaded in full (4 chunks). Carries a per-club 'DEPTH CHART NEWS' section that names announced starters: Carson Beck (ARI) will start Sunday against the Rams per head coach Mike LaFleur; Deshaun Watson (CLE) will start Sunday against the Texans, the team announced Wednesday; Harrison Butker (KC) will continue to handle kicking duties per Andy Reid; Kevin O'Connell (MIN) said it is 'too early' to commit to Kirk Cousins. Also carries Wednesday practice designations for 28 clubs — a third dated read of the same week, earlier than either injury-report capture."
+  },
+  {
+   "id": "S78",
+   "title": "Drew Lock (elbow/oblique) has no injury designation, will start for Seahawks vs. Raiders",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Loaded in full. Quoted: 'Drew Lock has no injury designation and will start Sunday for the Seahawks against the host Las Vegas Raiders, coach Mike Macdonald said Friday.' Also states 'Jalen Milroe will be Seattle's backup.' Dated by the surrounding rail to Friday Nov. 13."
+  },
+  {
+   "id": "S79",
+   "title": "Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Loaded in full. Quoted: 'Willis was placed on injured reserve Tuesday due to a groin injury. With Willis shelved, second-year quarterback Kyle McCord will fill in, beginning Sunday on the road against the Indianapolis Colts.' Confirms that Willis's absence from the weekly injury report means injured reserve, not health."
   }
  ],
  "schedule": [
@@ -32339,6 +32369,58 @@ window.DATA = {
    "source": "S74",
    "blocking": "no - the standing rule answers it for now",
    "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
+  },
+  {
+   "id": "Q40",
+   "category": "Data",
+   "priority": "High",
+   "question": "Which dated read of the injury report is the canonical pre-kickoff snapshot for backtests?",
+   "why_it_matters": "This session proved the report moves: two reads two days apart differ by two rows and 32 fields. A backtest that trains on the Monday read has seen designations that did not exist before kickoff, which is lookahead leakage and will flatter any availability strategy.",
+   "what_we_know": "Two dated captures exist (2026-11-14, 345 rows; 2026-11-16, 347 rows), both hash-pinned. The Chargers played Monday night, so their game-day designations only exist in the later read.",
+   "what_we_dont_know": "Which read is closest to the information available before each game kicked off, and therefore which one a backtest is allowed to use.",
+   "missing_data": "A rule, written before the backtest runs, pinning the capture per game.",
+   "source": "availability-ledger.html",
+   "blocking": "Yes",
+   "recommended_path": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff."
+  },
+  {
+   "id": "Q41",
+   "category": "Data",
+   "priority": "Medium",
+   "question": "Should designations published after the earlier read be back-filled into the published table, or kept as a separate dated snapshot?",
+   "why_it_matters": "Back-filling makes one tidy table that no longer corresponds to anything the league published at a single moment. Keeping separate snapshots is less tidy but is the only version that can be audited.",
+   "what_we_know": "The 2026-11-14 read is the pre-kickoff snapshot for 13 of the 14 Week 10 games and predates the Chargers' designations entirely.",
+   "what_we_dont_know": "Whether the site's readers need one table or the series.",
+   "missing_data": "A presentation decision, not data.",
+   "source": "availability-ledger.html",
+   "blocking": "No",
+   "recommended_path": "Keep the snapshots separate and publish the diff, as the ledger page does now."
+  },
+  {
+   "id": "Q42",
+   "category": "Operations",
+   "priority": "Medium",
+   "question": "May the injury report be captured at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is answered?",
+   "why_it_matters": "Three requirements (R32, R41, R73) depend on a multi-day series. None can be met without automated repeated fetching, and the acceptable-use question (Q18) is still open.",
+   "what_we_know": "The page publishes a season and week selector and returns the full report; two manual reads were taken this session without incident.",
+   "what_we_dont_know": "The terms of use for automated fetching, and the acceptable cadence.",
+   "missing_data": "A read of the site's terms, or a licensed alternative.",
+   "source": "availability-ledger.html",
+   "blocking": "Yes",
+   "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear."
+  },
+  {
+   "id": "Q43",
+   "category": "Competition",
+   "priority": "High",
+   "question": "Should the leaderboard adopt the removal-of-luck numbers as its qualification bar?",
+   "why_it_matters": "The leaderboard ranks strategies. Without a sample-size bar it will rank whoever had the best short run. The panel shows that 785 independent decisions are needed to detect a 5pp edge at all, and 1,211 once six strategies are tried.",
+   "what_we_know": "137 official results exist. A single NFL season offers roughly 270 team-game decisions, which is a third of the sample needed for a 5pp edge.",
+   "what_we_dont_know": "Whether the competition accepts that no strategy can qualify inside one season, or wants a lower bar with an explicit warning.",
+   "missing_data": "A decision on the bar, frozen before any result exists (SG37).",
+   "source": "removal-of-luck.html",
+   "blocking": "Yes",
+   "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it."
   }
  ],
  "suggestions": [
@@ -33128,6 +33210,88 @@ window.DATA = {
    ],
    "recommendation": "A. It is the version of the rule that cannot be satisfied by a run of coin flips.",
    "impact": "The competition becomes a measurement rather than a leaderboard with a prize attached."
+  },
+  {
+   "id": "SG39",
+   "title": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "category": "Site",
+   "problem": "The site publishes the injury report as one table. This session showed the official page moves between reads: two days, two added rows, 32 moved fields. A static table hides exactly the movement the availability signal depends on.",
+   "proposal": "Publish, every week, a diff between consecutive dated reads: rows added, rows removed, and each field that moved, with both capture hashes on the page.",
+   "evidence": "availability-ledger.html; data/injury_diff_g.tsv (35 change records between 2026-11-14 and 2026-11-16).",
+   "effort": "Low",
+   "risk": "Very low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Q41"
+   ],
+   "options": [
+    "Diff published weekly for the whole league. (Recommended)",
+    "Diff published only for clubs with a moved designation.",
+    "Keep the static table and store the series privately."
+   ],
+   "recommendation": "A. The diff is the product; the table is just the latest frame.",
+   "impact": "Turns the injury layer from a snapshot into the series the brief asks for (R80, R74)."
+  },
+  {
+   "id": "SG40",
+   "title": "Promote the two dated captures into a scheduled, append-only ledger",
+   "category": "Data",
+   "problem": "Two captures exist only because a session took them by hand. The brief asks for Wednesday, Thursday and Friday reads with retained hashes; nothing in the repository schedules that.",
+   "proposal": "Add a scheduled job that appends each read to an append-only store with its sha256 and UTC timestamp, and alerts when a read does not arrive or when the page's schema changes.",
+   "evidence": "data/raw/MANIFEST-g.json; .github/workflows/refresh.yml (currently refreshes a third-party games feed only).",
+   "effort": "Medium",
+   "risk": "Low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Q42"
+   ],
+   "options": [
+    "Scheduled append-only capture with hashes and an alert. (Recommended)",
+    "Manual capture each week, stored with hashes.",
+    "Wait for a licensed feed and skip official capture."
+   ],
+   "recommendation": "A, once Q37 is answered. Until then, option B.",
+   "impact": "Makes R41, R48, R49 and R73 achievable instead of aspirational."
+  },
+  {
+   "id": "SG41",
+   "title": "Adopt the removal-of-luck thresholds as the leaderboard's qualification bar",
+   "category": "Competition",
+   "problem": "The leaderboard has a ranking rule but no sample-size bar, so a short lucky run would top it. The luck panel publishes what the bar would have to be.",
+   "proposal": "Freeze a qualification rule now: a strategy is ranked only with n decisions at or above the panel's requirement for the edge it claims, with the multiplicity adjustment applied for the number of entries tried, and with n published on every row.",
+   "evidence": "removal-of-luck.html; engine/luck.py; data/luck_panel.json.",
+   "effort": "Low",
+   "risk": "Low",
+   "reversibility": "Fully reversible until the first result lands",
+   "prerequisites": [
+    "Q43"
+   ],
+   "options": [
+    "Adopt 785 (5pp edge, unadjusted) and 1,211 (adjusted for six entries) as published. (Recommended)",
+    "Adopt a lower bar with a warning badge on every qualifying row.",
+    "Set no bar and rank whatever appears."
+   ],
+   "recommendation": "A. Option C is how a lottery gets mistaken for a method.",
+   "impact": "Converts 'remove luck' from a slogan into a gate that can be checked (R57, R78)."
+  },
+  {
+   "id": "SG42",
+   "title": "Add random-pick and favourites-only controls to every leaderboard run",
+   "category": "Competition",
+   "problem": "Every registered strategy is a candidate and none is a control, so a candidate can only be compared against other candidates. The brief asks for controls explicitly.",
+   "proposal": "Add two control rows to the register — one that picks at random, one that always takes the favourite — scored with the same proper score as the candidates, and require a candidate to beat both.",
+   "evidence": "data/strategies.json (six strategies, none is a control); removal-of-luck.html.",
+   "effort": "Low",
+   "risk": "Very low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [],
+   "options": [
+    "Both controls in every run, candidates must beat both. (Recommended)",
+    "Random control only.",
+    "No controls; rely on the fair-line baseline alone."
+   ],
+   "recommendation": "A. A control costs nothing and is the cheapest lie detector available.",
+   "impact": "Closes requirement R76 and gives every future result something to be compared against."
   }
  ],
  "requirements": [
@@ -34085,6 +34249,98 @@ window.DATA = {
    ],
    "severity": "Low",
    "action": "Refreshed file committed with its new sha256 in the manifest and the previous hash recorded alongside it, so the change is auditable rather than silent."
+  },
+  {
+   "id": "F53",
+   "kind": "Cross-source contradiction",
+   "item": "Week 10 injury row count: the review says 254 rows published against 279 live; both of this session's official reads are larger",
+   "detail": "An earlier review recorded the published injury table as 254 rows and the live page as 279 rows, with four 'no injuries reported' sections. This session read the same official URL twice: the 2026-11-14 capture in the repository parses to 345 rows across 28 clubs, and a fresh 2026-11-16 re-capture parses to 347 rows across the same 28 clubs, with no 'no injuries reported' section on the page in either read. Both raw captures are committed with sha256 hashes so the discrepancy can be re-checked line by line. No number was altered to make the figures agree.",
+   "sourceIds": [
+    "S01"
+   ],
+   "severity": "Medium",
+   "action": "Both dated captures published on the Snapshot Ledger page with their hashes; the diff between them is published too. The 254/279 figures could not be reproduced and are left as recorded, not corrected."
+  },
+  {
+   "id": "F54",
+   "kind": "Not found in an official source",
+   "item": "Announced-starter evidence for Brissett (Arizona) — named in the brief, not found on any official page read",
+   "detail": "The brief lists Brissett among the starters the NFL has announced. The dated official roundup of 2026-11-11 announces Carson Beck as Arizona's Week 10 starter, and Brissett appears on neither the Week 10 injury report nor any article read this session. The cell is left blank on the Announced Starters page with this reason, rather than filled from a depth chart or from memory.",
+   "sourceIds": [
+    "S70"
+   ],
+   "severity": "Low",
+   "action": "Row published blank with the reason and the source link. If an official page naming Brissett exists, the fix is to add the link."
+  },
+  {
+   "id": "F55",
+   "kind": "Source changed between two dated reads",
+   "item": "The official Week 10 injury report is not a single fact: it moved between 2026-11-14 and 2026-11-16",
+   "detail": "Re-reading nfl.com/injuries two days later returned 347 rows where the earlier read had 345. Two rows were added (BAL Calais Campbell, BAL Ronnie Stanley) and 32 fields moved. 22 of the 32 are Chargers rows: Los Angeles played on Monday night, so its game-day designations were published after the earlier read. Indianapolis's Arden Key moved the other way — Questionable with a hamstring injury on 11-14, no designation at all on 11-16.",
+   "sourceIds": [
+    "S01"
+   ],
+   "severity": "Medium",
+   "action": "The 2026-11-14 read is kept as the pre-kickoff snapshot and is never overwritten; the later read is published beside it with a diff. Backtests must pin the capture they used."
+  },
+  {
+   "id": "F56",
+   "kind": "Coverage gap",
+   "item": "The depth-chart register carries no capture date on 31 of 31 rows",
+   "detail": "data/depth-sources.tsv records club, source id and URL for 31 clubs, but its chartDate column is empty on every row. Without a capture date, a depth chart cannot be checked for staleness against the roster events the brief asks us to track, and two captures of the same chart are indistinguishable.",
+   "sourceIds": [
+    "S08"
+   ],
+   "severity": "Medium",
+   "action": "Register left as-is with the gap stated; filling the column is requirement R62 on the backlog. No date was invented."
+  },
+  {
+   "id": "F57",
+   "kind": "Data provenance",
+   "item": "Venue, roof and surface are captured only from a third-party feed; the official transcription covers 1 of 272 fixtures",
+   "detail": "data/schedule2026-d.csv carries stadium, roof and surface for all 272 games, but every one of those rows is attributed to a third-party aggregation. The official schedule transcription in data/schedule.tsv has a venue on 1 row of 272 (the Munich international game). The brief asks for the venue to be transcribed from the official game centre.",
+   "sourceIds": [
+    "S04",
+    "S47"
+   ],
+   "severity": "Medium",
+   "action": "Third-party venue fields are recorded in the store with their provenance label and are not presented as official. Official transcription is requirement R43 on the backlog."
+  },
+  {
+   "id": "F58",
+   "kind": "Model provenance",
+   "item": "Published model outputs record a line, not a probability with its input vector",
+   "detail": "The brief asks that every model output be stored as a probability plus the inputs that produced it. The current origination artefacts store a fair line and a difference column, and the fair column is blank because the model is unfitted (F38). Even when fitted, a line without its input vector cannot be audited or reproduced after the fact.",
+   "sourceIds": [
+    "S02",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Recorded as requirement R35 on the backlog with the schema change it needs. No output was retro-fitted to look complete."
+  },
+  {
+   "id": "F59",
+   "kind": "Stale published snapshot",
+   "item": "The published standings and results predate eleven finals that the official site has since published",
+   "detail": "data/standings.tsv and data/results.tsv were captured on 2026-11-14 and hold 137 results. Reading the official league standings page and the official Week 10 schedule page on 2026-11-16 returned eleven further finals, taking the season to 148 results, and the standings had moved accordingly (for example Miami and Tennessee from 1-7 to 1-8, Kansas City from 6-2 to 7-2). The newer read was transcribed and reconciled: it reproduces the newer standings for all 32 clubs on W, L, T, PF and PA (check G-R1). The frozen corpus was NOT overwritten, because a backtest corpus that silently grows is not a corpus.",
+   "sourceIds": [
+    "S03",
+    "S49"
+   ],
+   "severity": "Medium",
+   "action": "Newer dated snapshots published beside the frozen ones (data/results_2026-11-16.tsv, data/standings_2026-11-16.tsv) with hashes, and the diff shown on the Snapshot Ledger page. Promoting the latest read to the headline requires the scheduling work in SG36."
+  },
+  {
+   "id": "F60",
+   "kind": "Identifier collision between two registers",
+   "item": "Two source registers use the same S-numbers for different sources",
+   "detail": "data/sources.tsv (64 rows, the registry the published site renders) and data/sources.json (16 rows, used by another session's generator at scripts/build_site.py) both allocate S01-S06, and only S01 means the same thing in both. In the TSV, S02 is the official division standings and S03 the official league standings; in the JSON, S02 is the 2026 rulebook and S03 the official playing rules. A reader who follows an S03 chip from one layer to the other is sent to a different document. Both registers are correct on their own; the collision is in the shared id space.",
+   "sourceIds": [
+    "S02",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Flagged, not silently renumbered: renumbering either register would break the links already published in the other layer. The backlog records the fix (a namespaced id such as REG-S03) for when both layers are next regenerated together."
   }
  ]
 };
