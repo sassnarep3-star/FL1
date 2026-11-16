@@ -125,7 +125,7 @@ class TestN04Week10Extension(unittest.TestCase):
     def test_shape(self):
         self.assertEqual(len(self.ext["finals"]), 12)
         self.assertEqual(len(self.ext["pending"]), 2)
-        self.assertEqual(self.ext["source_id"], "S78")  # re-issued from S71 at merge
+        self.assertEqual(self.ext["source_id"], "S81")  # re-issued twice: S71->S78->S81 at merges
 
     def test_tnf_corroborates_feed(self):
         tnf = [f for f in self.ext["finals"] if f["away"] == "WAS"]
@@ -160,7 +160,7 @@ class TestN04Week10Extension(unittest.TestCase):
 
 class TestN05LuckPanel(unittest.TestCase):
     def setUp(self):
-        self.panel = load("luck_panel.json")
+        self.panel = load("luck_panel_signal.json")  # renamed at 2nd merge; main session owns luck_panel.json
         self.src = load("leaderboard_signal_staking.json")
 
     def test_rows_match_register(self):
@@ -197,7 +197,7 @@ class TestSourcesS70S72(unittest.TestCase):
         with open(os.path.join(ROOT, "data", "sources.tsv"), encoding="utf-8") as fh:
             rows = {ln.split("\t")[0]: ln.split("\t")
                     for ln in fh.read().splitlines() if ln.strip() and not ln.startswith("#")}
-        for sid in ("S77", "S78", "S79"):
+        for sid in ("S80", "S81", "S82"):
             self.assertIn(sid, rows)
             self.assertEqual(rows[sid][6], "VERIFIED", sid)
             self.assertNotIn("nflverse", rows[sid][2], sid)
@@ -207,8 +207,8 @@ class TestSourcesS70S72(unittest.TestCase):
         with open(os.path.join(ROOT, "data", "sources.tsv"), encoding="utf-8") as fh:
             rows = [ln for ln in fh.read().splitlines()
                     if ln.strip() and not ln.startswith("#")]
-        # 68 rows from main (S01-S76) + this session's S77-S79
-        self.assertEqual(len(rows), 71)
+        # main (S01-S79, S53-S60 unused) + this session's S80-S82
+        self.assertEqual(len(rows), 74)
 
 
 if __name__ == "__main__":

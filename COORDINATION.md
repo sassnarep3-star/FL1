@@ -1,3 +1,102 @@
+## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
+
+**Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
+**Claimed:** 2026-11-16 (UTC) · **Status:** complete — merged to `main`, Pages deploy confirmed
+(record at the end of this block).
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| G0 | Coordination claim + immediate push | done | `arena-dbf11de0` | `COORDINATION.md` |
+| G1 | Live official re-capture of the Week 10 2026 injury report, line-by-line diff, plus a dated results/standings read | done | `arena-dbf11de0` | `raw/injuries-week10-2026-recapture-2026-11-16.md`, `raw/results-week10-2026-2026-11-16.md`, `data/injuries_2026-11-16.tsv`, `data/results_2026-11-16.tsv`, `data/standings_2026-11-16.tsv`, `data/injury_diff_g.tsv`, `data/verification-g.tsv`, `scripts/verify_recapture_g.py`, `scripts/verify_results_g.py` |
+| G2 | Requirement backlog: every brief line registered with the gate that blocks it and the number that clears it | done | `arena-dbf11de0` | `data/requirements_backlog.{csv,json}`, `scripts/build_backlog_g.py`, `requirements-backlog.html` |
+| G3 | Decision-readiness table on the landing page (one row per requirement) | done | `arena-dbf11de0` | `tools/site_g.py`, `index.html` (section `#decision`) |
+| G4 | Removal-of-luck panel | done | `arena-dbf11de0` | `engine/luck.py`, `tests/test_luck_g.py`, `scripts/build_luck_g.py`, `data/luck_panel.json`, `removal-of-luck.html` |
+| G5 | Per-team availability view: starters out, replacement named, net injury count | done | `arena-dbf11de0` | `scripts/build_availability_g.py`, `data/team_availability.csv`, `data/starters_out_detail.csv`, `team-availability.html` |
+| G6 | Announced-starter evidence field + registers | done | `arena-dbf11de0` | `data/announced_starters.{csv,json}`, `announced-starters.html`, `availability-ledger.html`, `scripts/register_g.py`, `data/{flags,questions,suggestions}.json`, `data/sources.tsv` |
+| G7 | Final integration: PR → `main`, merge, Pages confirmed | done | `arena-dbf11de0` | PR + this record |
+
+### What the official sources said (each claim links to the page)
+
+| Check | Result | Source |
+|---|---|---|
+| Injury report re-read two days later | 345 rows (2026-11-14) → 347 rows (2026-11-16); 2 rows added, 32 fields moved | https://www.nfl.com/injuries/ |
+| No published row missing from the later read | 0 missing (so the published table holds no invented row) | https://www.nfl.com/injuries/ |
+| Kerby Joseph / Cade Mays / D.J. Reed game status | all three published **Out** on the official page | https://www.nfl.com/injuries/ |
+| Results and standings re-read | 137 → 148 results; the new read reproduces the new official standings for 32/32 clubs on W, L, T, PF, PA | https://www.nfl.com/schedules/2026/REG10/ , https://www.nfl.com/standings/league/2026/REG |
+| Announced starters (quoted, dated, linked) | 11 rows from 3 official pages | S77, S78, S79 (`sources.html`) |
+
+Two games were deliberately **not** recorded: the Sunday-night game (PIT at CIN) was in the first
+quarter at capture time and the Monday-night game (LAC at BAL) had not kicked off. A partial score
+is not a result.
+
+### Verification performed at completion (all re-runnable, all green)
+
+`python3 -m unittest discover -s tests -q` → **267 OK** · `tools/build.py` clean ·
+`tools/verify_injuries.py` → 345/345 · `tools/verify_results.py` → PASS 32/32 ·
+`tools/checklinks.py` → **41 pages**, every link and anchor resolves ·
+`tools/checkrows.py` → **41 pages, 5,963 rows**, every row sourced ·
+`scripts/verify_recapture_g.py` → GATE PASS (G-V1..G-V7) ·
+`scripts/verify_results_g.py` → PASS (G-R1..G-R4).
+
+### Irregularities this session found (published on Flagged for Review)
+
+F53 injury row-count discrepancy (254/279 claimed; 345 and 347 measured) · F54 Brissett
+announced-starter evidence not found · F55 the official report moved between two dated reads ·
+F56 depth-chart register carries no capture date on 31/31 rows · F57 venue/roof/surface only from a
+third-party feed · F58 model outputs store a line, not a probability with inputs · F59 published
+standings/results predate eleven finals · F60 two source registers share the S-number space with
+different meanings.
+
+### Merge reconciliation with `origin/main` (140 commits, PRs up to #42)
+
+`main` had moved 140 commits ahead while this session worked. The merge conflicted in 27 files.
+Nothing from either side was discarded:
+
+- **Generated pages (23 HTML files + `assets/js/data.js`)** — resolved to `main`'s version and then
+  regenerated from the merged sources, because they are build artefacts, not hand-edited content.
+- **`tools/site.py`** — auto-merged cleanly; this session's five NAV entries and its `site_g`
+  wiring are intact.
+- **Registers (`flags`, `questions`, `suggestions`, `sources.tsv`)** — `main` had independently
+  allocated ids that collided with this session's (`F43`–`F50`, `Q35`–`Q38`, `SG36`–`SG38`,
+  `S70`–`S72`). Rather than overwrite either side, this session's rows were **renumbered** to
+  `F53`–`F60`, `Q40`–`Q43`, `SG39`–`SG42`, `S77`–`S79` and appended. Their content is unrelated to
+  mine (theirs concern price feeds and line vintages; mine concern official availability data), so
+  both sets stand. Cross-references inside my rows were updated to the new ids.
+- **`COORDINATION.md`** — `main`'s version taken as the base and this block prepended, so no other
+  session's record was lost.
+
+### Integration record (G7)
+
+**PR:** https://github.com/sassnarep3-star/FL1/pull/44 (`arena/dbf11de0-fl1` → `main`) —
+**merged** with `gh pr merge 44 --merge` at merge commit
+`4f6ee975b6534f17c230a5b1afb35e0bd3ff7e36` on 2026-11-16T01:49:46Z, after both
+`verify-research-build` checks reported SUCCESS and GitHub reported `MERGEABLE / CLEAN`.
+
+**GitHub Pages:** build triggered 2026-11-16T01:49:47Z → status **`built`**
+(`gh api repos/sassnarep3-star/FL1/pages`; source `main`, path `/`). The site is live at
+https://sassnarep3-star.github.io/FL1/ .
+
+**Live re-fetch after deploy (page fetch, not curl):** `removal-of-luck.html` and
+`availability-ledger.html` were re-read from the live origin and render correctly — headline
+numbers, the luck bands by sample size, the sizing grid, the two dated captures with the 347-row
+sha256, the 35-row diff, and every check row with its own official source link.
+
+**Post-merge follow-up:** one small PR corrected the verification table so each check row links to
+its own official URL rather than a shared one (the G-R* checks now point at the schedule/standings
+page instead of the injury page).
+
+**Final state on `main`:** 41 pages; 267 unit tests OK; `tools/build.py` clean;
+`tools/verify_injuries.py` 345/345; `tools/verify_results.py` PASS 32/32; `tools/checklinks.py`
+41 pages; `tools/checkrows.py` 41 pages / 5,963 rows; `scripts/verify_recapture_g.py` GATE PASS;
+`scripts/verify_results_g.py` PASS (G-R1..G-R4). 60 flags, 43 questions, 42 suggestions,
+71 sources, 87 requirement rows.
+
+**Open items, all published on Flagged for Review and none blocking:** F53–F60 as listed above.
+The decisions that would unblock the most work are **Q40** (which dated read a backtest may pin),
+**Q43** (the leaderboard's sample-size bar) and **Q42** (whether the injury report may be captured
+at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is
+answered).
+
 # COORDINATION — Shared Task Board
 
 > Read this **before** starting. Claim a task by writing your session ID and file scope, then commit

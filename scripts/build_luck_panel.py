@@ -23,7 +23,7 @@ import os
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "data", "luck_panel.json")
+OUT = os.path.join(ROOT, "data", "luck_panel_signal.json")  # renamed at 2nd merge: main session dbf11de0 owns data/luck_panel.json (base-rate/Brier view); this file is the signal-vs-variance view
 
 
 def main():

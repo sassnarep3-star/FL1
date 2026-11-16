@@ -23,7 +23,7 @@
    "delivered": "data/sources.tsv register; only VERIFIED rows are citable",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "65 of 71 source records VERIFIED (page loaded and read this session)"
+   "clears": "68 of 74 source records VERIFIED (page loaded and read this session)"
   },
   {
    "id": "R03",
@@ -43,7 +43,7 @@
    "delivered": "flagged.html — Flagged for Review",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "52 irregularities published with source links (F01..F52)"
+   "clears": "60 irregularities published with source links (F01..F60)"
   },
   {
    "id": "R05",
@@ -93,7 +93,7 @@
    "delivered": "data/questions.json + questions.html",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "40 questions with what-we-know / what-we-miss / how-to-find-it"
+   "clears": "44 questions with what-we-know / what-we-miss / how-to-find-it"
   },
   {
    "id": "R10",
@@ -292,8 +292,8 @@
    "S01",
    "S03",
    "S52",
-   "S77",
-   "S78"
+   "S80",
+   "S81"
   ],
   "inputs": [
    "data/requirements.json",

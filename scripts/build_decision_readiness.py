@@ -225,7 +225,7 @@ def main():
                  "numbers are this repo's own verification counts; where a threshold is "
                  "a proposal it is marked proposed.",
         "rows": out_rows,
-        "provenance": {"tier": "DERIVED", "source_ids": ["S01", "S03", "S52", "S77", "S78"],
+        "provenance": {"tier": "DERIVED", "source_ids": ["S01", "S03", "S52", "S80", "S81"],
                        "inputs": ["data/requirements.json", "data/questions.json",
                                   "data/flags.json", "data/sources.tsv"]},
     }

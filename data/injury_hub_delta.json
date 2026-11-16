@@ -19,7 +19,7 @@
    "read_window_utc": "after 2026-11-16T01:14:56Z, before 2026-11-16T01:25:00Z",
    "rows": 347,
    "week_shown": "WEEK 10",
-   "source_id": "S77"
+   "source_id": "S80"
   }
  ],
  "delta": {
@@ -426,7 +426,7 @@
   "tier": "OFFICIAL",
   "source_ids": [
    "S01",
-   "S77"
+   "S80"
   ],
   "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted here, independently of tools/verify_injuries.py); read 2 parsed with the same grammar; all practice/game values map to known designations"
  }

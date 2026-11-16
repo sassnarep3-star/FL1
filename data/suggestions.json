@@ -788,6 +788,88 @@
  },
  {
   "id": "SG39",
+  "title": "Publish a weekly 'what changed' diff instead of a static snapshot",
+  "category": "Site",
+  "problem": "The site publishes the injury report as one table. This session showed the official page moves between reads: two days, two added rows, 32 moved fields. A static table hides exactly the movement the availability signal depends on.",
+  "proposal": "Publish, every week, a diff between consecutive dated reads: rows added, rows removed, and each field that moved, with both capture hashes on the page.",
+  "evidence": "availability-ledger.html; data/injury_diff_g.tsv (35 change records between 2026-11-14 and 2026-11-16).",
+  "effort": "Low",
+  "risk": "Very low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [
+   "Q41"
+  ],
+  "options": [
+   "Diff published weekly for the whole league. (Recommended)",
+   "Diff published only for clubs with a moved designation.",
+   "Keep the static table and store the series privately."
+  ],
+  "recommendation": "A. The diff is the product; the table is just the latest frame.",
+  "impact": "Turns the injury layer from a snapshot into the series the brief asks for (R80, R74)."
+ },
+ {
+  "id": "SG40",
+  "title": "Promote the two dated captures into a scheduled, append-only ledger",
+  "category": "Data",
+  "problem": "Two captures exist only because a session took them by hand. The brief asks for Wednesday, Thursday and Friday reads with retained hashes; nothing in the repository schedules that.",
+  "proposal": "Add a scheduled job that appends each read to an append-only store with its sha256 and UTC timestamp, and alerts when a read does not arrive or when the page's schema changes.",
+  "evidence": "data/raw/MANIFEST-g.json; .github/workflows/refresh.yml (currently refreshes a third-party games feed only).",
+  "effort": "Medium",
+  "risk": "Low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [
+   "Q42"
+  ],
+  "options": [
+   "Scheduled append-only capture with hashes and an alert. (Recommended)",
+   "Manual capture each week, stored with hashes.",
+   "Wait for a licensed feed and skip official capture."
+  ],
+  "recommendation": "A, once Q37 is answered. Until then, option B.",
+  "impact": "Makes R41, R48, R49 and R73 achievable instead of aspirational."
+ },
+ {
+  "id": "SG41",
+  "title": "Adopt the removal-of-luck thresholds as the leaderboard's qualification bar",
+  "category": "Competition",
+  "problem": "The leaderboard has a ranking rule but no sample-size bar, so a short lucky run would top it. The luck panel publishes what the bar would have to be.",
+  "proposal": "Freeze a qualification rule now: a strategy is ranked only with n decisions at or above the panel's requirement for the edge it claims, with the multiplicity adjustment applied for the number of entries tried, and with n published on every row.",
+  "evidence": "removal-of-luck.html; engine/luck.py; data/luck_panel.json.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "Fully reversible until the first result lands",
+  "prerequisites": [
+   "Q43"
+  ],
+  "options": [
+   "Adopt 785 (5pp edge, unadjusted) and 1,211 (adjusted for six entries) as published. (Recommended)",
+   "Adopt a lower bar with a warning badge on every qualifying row.",
+   "Set no bar and rank whatever appears."
+  ],
+  "recommendation": "A. Option C is how a lottery gets mistaken for a method.",
+  "impact": "Converts 'remove luck' from a slogan into a gate that can be checked (R57, R78)."
+ },
+ {
+  "id": "SG42",
+  "title": "Add random-pick and favourites-only controls to every leaderboard run",
+  "category": "Competition",
+  "problem": "Every registered strategy is a candidate and none is a control, so a candidate can only be compared against other candidates. The brief asks for controls explicitly.",
+  "proposal": "Add two control rows to the register — one that picks at random, one that always takes the favourite — scored with the same proper score as the candidates, and require a candidate to beat both.",
+  "evidence": "data/strategies.json (six strategies, none is a control); removal-of-luck.html.",
+  "effort": "Low",
+  "risk": "Very low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [],
+  "options": [
+   "Both controls in every run, candidates must beat both. (Recommended)",
+   "Random control only.",
+   "No controls; rely on the fair-line baseline alone."
+  ],
+  "recommendation": "A. A control costs nothing and is the cheapest lie detector available.",
+  "impact": "Closes requirement R76 and gives every future result something to be compared against."
+ },
+ {
+  "id": "SG43",
   "title": "Automate the weekly results promotion (extension register -> canonical feed)  (pairs with Q35)",
   "category": "Automation",
   "problem": "The verified results feed stops at its capture state (137 rows through Week 10 TNF). Finals verified later live in a separate extension register, so a reader must consult two tables and a backtest run against the feed silently misses the newest settled games.",

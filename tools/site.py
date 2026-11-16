@@ -19,9 +19,11 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
 import build  # noqa: E402  (shares the loaders and derived analysis)
+import site_g  # noqa: E402  (session arena/dbf11de0-fl1: backlog, luck, availability, ledger)
 
 E = html.escape
 
@@ -32,7 +34,11 @@ NAV = [
     ("index.html", "Dashboard"),
     ("executive-summary.html", "Executive Summary"),
     ("requirements.html", "Requirements"),
+    ("requirements-backlog.html", "Requirement Backlog"),
     ("injuries.html", "Injuries"),
+    ("team-availability.html", "Team Availability"),
+    ("announced-starters.html", "Announced Starters"),
+    ("availability-ledger.html", "Snapshot Ledger"),
     ("depth.html", "Backup Depth"),
     ("replacement-depth.html", "Replacement Depth"),
     ("standings.html", "Standings"),
@@ -52,6 +58,7 @@ NAV = [
     ("signal-vs-staking.html", "Signal vs Staking"),
     ("governance.html", "Signal & Demotion"),
     ("validation.html", "Validation Gates"),
+    ("removal-of-luck.html", "Removal of Luck"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
     ("sources.html", "Sources"),
@@ -754,7 +761,7 @@ official, so they cannot enter this register. They live on their own labelled pa
 
     # ---------------------------------------------- N01-N05 sprint (2026-11-16)
     dec = build.load_json("decision_readiness.json")
-    luck = build.load_json("luck_panel.json")
+    luck = build.load_json("luck_panel_signal.json")
     delta = build.load_json("injury_hub_delta.json")
     w10x = build.load_json("week10_results_extension.json")
     strat_j = build.load_json("strategies.json")
@@ -1051,6 +1058,15 @@ def main():
     # Requirements sprint (R21-R28): all sprint pages and cross-page sections.
     sprint = sprint_sections(sources_by_id)
 
+    # Session arena/dbf11de0-fl1: requirement backlog, decision readiness,
+    # removal of luck, team availability, announced starters, snapshot ledger.
+    g_ctx = {
+        "page": page, "table": table, "cell": cell, "pill": pill,
+        "raw_src": raw_src, "src_link": src_link, "esc": esc,
+        "sources_by_id": sources_by_id,
+    }
+    g_pages, g_sections = site_g.build(g_ctx)
+
     written = []
 
     # ------------------------------------------------------------------ index
@@ -1195,7 +1211,8 @@ def main():
     )
 
     written.append(page("index.html", "Dashboard",
-                        cards + kpis + sprint["decision_readiness"] + sprint["luck_panel"]))
+                        cards + kpis + sprint["decision_readiness"]
+                        + sprint["luck_panel"] + g_sections))
 
     # ------------------------------------------------------- executive summary
     total_out_def = sum(t["defOut"] for t in by_team)
@@ -1295,7 +1312,7 @@ pages contradict each other. It does not print a single performance number. Each
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
     import brief as _brief  # session arena/685f958d-fl1
-    es = _brief.exec_banner() + es
+    es = _brief.exec_banner() + site_g.exec_section(g_ctx) + es
     written.append(page("executive-summary.html", "Executive Summary",
                         es + sprint["exec_summary"]))
 
@@ -2459,6 +2476,8 @@ verification note for each one.</p>
     # They live in tools/pages_market.py so this file stays the single owner of the
     # site shell; the numbers here are counts, not new claims.
     written.extend(pages_market.render_all())
+
+    written.extend(g_pages)
 
     print("wrote %d pages:" % len(written))
     for w in written:
