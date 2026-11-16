@@ -1,0 +1,607 @@
+{
+  "id": "requirements_backlog",
+  "title": "Full requirement backlog \u2014 the brief, line by line",
+  "note": "Every requirement line from the project brief, including the 28 already registered in data/requirements.json (R01-R28) and the lines added by this session (R29-R87). Each row names the gate that blocks it and the number that would clear it.",
+  "updated": "2026-11-16",
+  "counts": {
+    "done": 6,
+    "partial": 19,
+    "blocked": 11,
+    "not-started": 20,
+    "decision-open": 1,
+    "rejected": 2,
+    "duplicate": 0
+  },
+  "rows": [
+    {
+      "id": "R40",
+      "category": "Prices",
+      "requirement": "Decide the price-data policy before any backtest is published",
+      "status": "decision-open",
+      "blocking_gate": "Two sessions resolved the same question oppositely (F23/F39): one withholds third-party prices from every published cell, one labels and shows them",
+      "clears_when": "1 written policy, recorded in COORDINATION.md, applied to 100% of published tables (0 rows contradicting it)",
+      "evidence": "data/settled_markets.csv (store) vs published blank cells",
+      "sources": "S47"
+    },
+    {
+      "id": "R79",
+      "category": "Prices",
+      "requirement": "Vig-free market consensus vs originated fair-line decomposition view",
+      "status": "blocked",
+      "blocking_gate": "Decomposing vig needs a market price with a known margin structure; no official league source prices NFL lines (F18/F23)",
+      "clears_when": "1 price feed with both sides quoted, so the overround is computable, for 272 markets x 1 season",
+      "evidence": "data/line_board.csv (market column blank)",
+      "sources": "S47"
+    },
+    {
+      "id": "R38",
+      "category": "Prices",
+      "requirement": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+      "status": "blocked",
+      "blocking_gate": "No approved market price source; a residual needs two numbers and one is missing (F37/F38)",
+      "clears_when": "residual published for every originated market within 24h of origination, cadence >= 1/week, 0 missing rows",
+      "evidence": "data/line_board.csv, line-board.html",
+      "sources": "S47"
+    },
+    {
+      "id": "R29",
+      "category": "Governance",
+      "requirement": "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard",
+      "status": "partial",
+      "blocking_gate": "No per-strategy registration anchored to a commit hash; demotion thresholds Q33/SG31 are not frozen",
+      "clears_when": "1 commit per strategy holding frozen rule text + sample window + gates, hash published on its row; 0 leaderboard rows carrying a backtest number",
+      "evidence": "data/strategies.json (no results), engine/paper_gate.py, engine/demotion.py",
+      "sources": "S01"
+    },
+    {
+      "id": "R87",
+      "category": "Governance",
+      "requirement": "Split data into train, validation and final holdout seasons",
+      "status": "not-started",
+      "blocking_gate": "One season only (2026, 137 games); a three-way split needs multiple seasons archived",
+      "clears_when": ">= 3 seasons archived and split, with the final holdout untouched until a pre-registered date",
+      "evidence": "data/results.tsv (137 games, 2026 only)",
+      "sources": "S49"
+    },
+    {
+      "id": "R39",
+      "category": "Governance",
+      "requirement": "Turn the 136-game log into the pre-registered backtest corpus",
+      "status": "partial",
+      "blocking_gate": "Corpus exists (137 results) but is not frozen by a commit, and train/val/holdout membership is not declared",
+      "clears_when": "1 commit freezing the corpus + the split + the evaluation window, hash published; reproducibility re-run clean",
+      "evidence": "data/results.tsv, data/results_feed.csv",
+      "sources": "S49;S50"
+    },
+    {
+      "id": "R37",
+      "category": "Governance",
+      "requirement": "Add a two-sided 'what would change our mind' field to every strategy entry",
+      "status": "not-started",
+      "blocking_gate": "data/strategies.json has no such field on any row",
+      "clears_when": "2 frozen free-text fields (evidence-for / evidence-against) on 6 of 6 strategy rows, written before any result exists",
+      "evidence": "data/strategies.json (ST01-ST06)",
+      "sources": "S01"
+    },
+    {
+      "id": "R76",
+      "category": "Governance",
+      "requirement": "Add a control baseline (random picks; favourites only) to every leaderboard run",
+      "status": "not-started",
+      "blocking_gate": "No random-pick or favourites-only control row exists in the register",
+      "clears_when": "2 control rows in every leaderboard run, scored with the same proper score; a candidate must beat both",
+      "evidence": "data/strategies.json (6 strategies, none is a control)",
+      "sources": "S01"
+    },
+    {
+      "id": "R81",
+      "category": "Governance",
+      "requirement": "Publish every model total twice until one wins",
+      "status": "not-started",
+      "blocking_gate": "Only one totals estimator is specified, and it is unfitted (F33/F38)",
+      "clears_when": "2 estimators published side by side with a gap column for >= 1 full season, collapsed only after a pre-registered walk-forward comparison",
+      "evidence": "data/models.json, data/fair_lines.csv",
+      "sources": "S02;S03"
+    },
+    {
+      "id": "R36",
+      "category": "Methodology",
+      "requirement": "Compute and publish the 'removal of luck' panel on the site dashboard",
+      "status": "done",
+      "blocking_gate": "\u2014",
+      "clears_when": "\u2014 (panel published; see removal-of-luck.html)",
+      "evidence": "engine/luck.py, scripts/build_luck_g.py, removal-of-luck.html",
+      "sources": "S01;S49"
+    },
+    {
+      "id": "R57",
+      "category": "Methodology",
+      "requirement": "Rank with proper scores and uncertainty, not win rate",
+      "status": "partial",
+      "blocking_gate": "Ranking is signal-only, but not yet benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity adjustment",
+      "clears_when": "every ranked row publishes benchmark-relative Brier skill, a game-cluster bootstrap lower bound, n, and the multiplicity adjustment; 0 rows ranked on win rate alone",
+      "evidence": "engine/leaderboard.py, data/leaderboard_signal_staking.json",
+      "sources": "S49"
+    },
+    {
+      "id": "R56",
+      "category": "Methodology",
+      "requirement": "Use proper-score leaderboard divisions (singles, game parlays, SGPs, prop combos)",
+      "status": "partial",
+      "blocking_gate": "Divisions are described in the design document but no division table is published or populated",
+      "clears_when": "4 divisions, each with its own benchmark and eligibility rule, published as separate tables",
+      "evidence": "data/leaderboard.json section A",
+      "sources": "S49"
+    },
+    {
+      "id": "R78",
+      "category": "Methodology",
+      "requirement": "Two-stage skill leaderboard: proper-score qualification, then prospective CLV/ROI escrow",
+      "status": "not-started",
+      "blocking_gate": "Stage two needs closing-line values, which need a price feed (F37), and a prospective window that has not opened",
+      "clears_when": "stage 1: proper-score qualification on >= 1 season; stage 2: >= 8 consecutive weeks of prospective, pre-kickoff-recorded marks",
+      "evidence": "\u2014",
+      "sources": "S47"
+    },
+    {
+      "id": "R55",
+      "category": "Methodology",
+      "requirement": "Keep parlays and prop combos behind a joint-evidence gate",
+      "status": "not-started",
+      "blocking_gate": "No directly validated joint probability and no operator void/push rules are stored; marginals cannot be multiplied under dependence",
+      "clears_when": "for each combo family: a joint probability validated on historical data + the operator's void/push rule stored; otherwise the combo is unranked",
+      "evidence": "data/parlay_economics.csv, prop-correlations.html (third-party, labelled F19)",
+      "sources": "S48"
+    },
+    {
+      "id": "R47",
+      "category": "Methodology",
+      "requirement": "Add injury and personnel ablations instead of fixed penalties (test the same model with and without the features, report the difference with uncertainty)",
+      "status": "not-started",
+      "blocking_gate": "No ablation harness, and the personnel features themselves are blocked by the unverified depth source (R71)",
+      "clears_when": "identical model fit twice on >= 3 chronological holdouts, difference reported with a 95% interval",
+      "evidence": "\u2014",
+      "sources": "S01"
+    },
+    {
+      "id": "R84",
+      "category": "Methodology",
+      "requirement": "Reject: ranking strategies by season-long ROI",
+      "status": "rejected",
+      "blocking_gate": "Rejected as a ranking key: ROI over one season cannot separate skill from variance at these sample sizes",
+      "clears_when": "\u2014 (recorded so the shortcut is not re-proposed; ranking stays on proper scores, R57)",
+      "evidence": "data/leaderboard.json sections B and D",
+      "sources": "S49"
+    },
+    {
+      "id": "R86",
+      "category": "Methodology",
+      "requirement": "2026 kickoff and declared onside-kick regime priors filter",
+      "status": "not-started",
+      "blocking_gate": "No captured source of the 2026 kickoff rule text or of club-declared onside-kick intent",
+      "clears_when": "official rule text captured and linked; priors applied only where the rule is quoted, never assumed",
+      "evidence": "\u2014",
+      "sources": "S02"
+    },
+    {
+      "id": "R77",
+      "category": "Methodology",
+      "requirement": "Stadium roof/surface and NWS hourly wind/precipitation overlay",
+      "status": "not-started",
+      "blocking_gate": "No stadium roof/surface register and no per-fixture forecast capture; the 90-minute roof designation is not captured anywhere",
+      "clears_when": "32/32 venues with surface + roof type captured, and an hourly NWS grid forecast captured per fixture at T-24h and T-90min",
+      "evidence": "S11 (NWS, verified available), data/schedule.tsv (venue column, 1 of 272 filled)",
+      "sources": "S11;S04"
+    },
+    {
+      "id": "R74",
+      "category": "Injuries",
+      "requirement": "Treat the injury report as a timestamped series, not a weekly snapshot",
+      "status": "partial",
+      "blocking_gate": "Only two dated reads exist (2026-11-14 and 2026-11-16); a series needs at least three points per week",
+      "clears_when": ">= 3 timed captures per week for >= 4 consecutive weeks (Wed, Thu, Fri plus game day) = >= 12 captures",
+      "evidence": "raw/injuries-week10-2026.md, raw/injuries-week10-2026-recapture-2026-11-16.md, data/injury_diff_g.tsv",
+      "sources": "S01"
+    },
+    {
+      "id": "R73",
+      "category": "Injuries",
+      "requirement": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
+      "status": "not-started",
+      "blocking_gate": "No scheduled job captures the injury report; the only scheduler in the repo refreshes a third-party games feed",
+      "clears_when": "a scheduled append-only capture on Wed, Thu and Fri, proven over >= 1 full week, with hashes retained",
+      "evidence": ".github/workflows/refresh.yml (games feed only, Thursdays)",
+      "sources": "S01"
+    },
+    {
+      "id": "R41",
+      "category": "Injuries",
+      "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level",
+      "status": "partial",
+      "blocking_gate": "Captures are dated but carry no clock time; with two reads the delta is publishable for one interval only",
+      "clears_when": "UTC clock time + sha256 on every read; delta published for >= 3 reads per week per player",
+      "evidence": "data/raw/MANIFEST-g.json, data/injury_diff_g.tsv (35 change records)",
+      "sources": "S01"
+    },
+    {
+      "id": "R32",
+      "category": "Injuries",
+      "requirement": "Make the injury signal a surprise, never a level",
+      "status": "partial",
+      "blocking_gate": "A surprise needs a prior read to difference against; two reads exist, so one delta is computable (R74)",
+      "clears_when": ">= 4 consecutive weeks of multi-day reads, then the model consumes only the delta",
+      "evidence": "data/injury_diff_g.tsv",
+      "sources": "S01"
+    },
+    {
+      "id": "R63",
+      "category": "Injuries",
+      "requirement": "Calibrate what 'Questionable' means empirically instead of using old percentages",
+      "status": "blocked",
+      "blocking_gate": "Calibration needs designations joined to official inactive lists; no inactive list is captured (R50) and no past-season archive exists (R85)",
+      "clears_when": ">= 2 seasons x 32 clubs of designation-to-play joins; play rate per designation with a 95% interval",
+      "evidence": "\u2014 (no official percentage is quoted anywhere on this site)",
+      "sources": "S01"
+    },
+    {
+      "id": "R72",
+      "category": "Injuries",
+      "requirement": "Score injury-designation reliability before using it as a feature",
+      "status": "blocked",
+      "blocking_gate": "Same missing join as R63: designation rows cannot be scored without the actual play/inactive outcome",
+      "clears_when": "reliability table published per designation with n and interval before the label enters any model",
+      "evidence": "\u2014",
+      "sources": "S01"
+    },
+    {
+      "id": "R85",
+      "category": "Injuries",
+      "requirement": "Archive weekly injury reports for past seasons (for Q06)",
+      "status": "not-started",
+      "blocking_gate": "The nfl.com injuries URL exposes season and week selectors, but no archive has been captured and no redistribution terms were read",
+      "clears_when": ">= 2 past seasons captured week by week, with hashes, after the terms question is answered",
+      "evidence": "\u2014",
+      "sources": "S01"
+    },
+    {
+      "id": "R83",
+      "category": "Injuries",
+      "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+      "status": "not-started",
+      "blocking_gate": "No reserve/injured-reserve capture per club; absence from the weekly report is currently ambiguous",
+      "clears_when": "32/32 clubs with a dated reserve list captured weekly, so every 'not listed' row carries a reason",
+      "evidence": "nfl.com news: Patriots place TreVeyon Henderson on IR; Dolphins place Malik Willis on IR (linked on the Snapshot Ledger page)",
+      "sources": "S01"
+    },
+    {
+      "id": "R67",
+      "category": "Injuries",
+      "requirement": "Populate the three missing Lions game-status designations (Kerby Joseph, Cade Mays, D.J. Reed)",
+      "status": "done",
+      "blocking_gate": "\u2014",
+      "clears_when": "\u2014 (re-verified on the official page 2026-11-16: all three are published Out; check G-V5)",
+      "evidence": "data/injuries.tsv DET rows; data/verification-g.tsv G-V5 PASS",
+      "sources": "S01"
+    },
+    {
+      "id": "R68",
+      "category": "Injuries",
+      "requirement": "Re-capture and republish the Week 10 injury tables",
+      "status": "done",
+      "blocking_gate": "\u2014 (re-captured 2026-11-16: 347 rows; published 2026-11-14: 345 rows)",
+      "clears_when": "\u2014 (the review's 254/279 row figures match neither capture; see flag F43)",
+      "evidence": "raw/injuries-week10-2026-recapture-2026-11-16.md, data/injuries_2026-11-16.tsv",
+      "sources": "S01"
+    },
+    {
+      "id": "R66",
+      "category": "Availability",
+      "requirement": "Point-in-Time Snapshot Ledger for injuries, depth charts and inactives",
+      "status": "partial",
+      "blocking_gate": "Injuries ledger started (2 dated reads with hashes); depth and inactives are not yet in the ledger",
+      "clears_when": "one ledger covering 3 evidence types x 32 clubs x >= 3 reads/week, each row carrying hash, timestamp and conflict flag",
+      "evidence": "data/raw/MANIFEST-g.json, availability-ledger.html",
+      "sources": "S01"
+    },
+    {
+      "id": "R48",
+      "category": "Availability",
+      "requirement": "Automate immutable multi-day availability snapshots",
+      "status": "partial",
+      "blocking_gate": "Captures are manual; the only scheduled workflow does not touch the injury report or depth charts",
+      "clears_when": "scheduled append-only capture on Wed, Thu, Fri and game day, proven over >= 1 week with hashes retained",
+      "evidence": ".github/workflows/refresh.yml, raw/",
+      "sources": "S01"
+    },
+    {
+      "id": "R49",
+      "category": "Availability",
+      "requirement": "Build immutable official availability snapshots (injury reports, club depth pages, inactive evidence: raw hashes, timestamps, conflict flags)",
+      "status": "partial",
+      "blocking_gate": "Injury and depth captures exist; inactives are not captured (R50) and conflict flags are prose notes rather than row fields",
+      "clears_when": "store covering 3 evidence types, every row with sha256 + UTC timestamp + conflict flag",
+      "evidence": "data/raw/MANIFEST.json, data/raw/MANIFEST-g.json",
+      "sources": "S01"
+    },
+    {
+      "id": "R50",
+      "category": "Availability",
+      "requirement": "Capture official inactive lists and snap counts",
+      "status": "blocked",
+      "blocking_gate": "No machine-readable official inactives or snap-count source has been identified; only a prose news article (Week 9 inactives) was seen",
+      "clears_when": "32/32 clubs' inactives available pre-kickoff, and snap counts for 100% of players in >= 1 season",
+      "evidence": "nfl.com news 'NFL Week 9 inactives' (article exists, prose not table)",
+      "sources": "S01"
+    },
+    {
+      "id": "R30",
+      "category": "Availability",
+      "requirement": "Build the availability graph as a first-class dataset (who was expected to start, who actually did)",
+      "status": "blocked",
+      "blocking_gate": "Actual starters are not captured anywhere; the only official evidence found is prose news, and no snap counts exist (F09)",
+      "clears_when": "official Game Book or snap-count capture for 1 season: 32 clubs x 17 weeks = 544 team-games, expected-vs-actual join rate >= 0.98",
+      "evidence": "data/availability_2025.csv (derived from a third-party mirror, flagged)",
+      "sources": "S01"
+    },
+    {
+      "id": "R45",
+      "category": "Availability",
+      "requirement": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+      "status": "not-started",
+      "blocking_gate": "No Game Book capture pipeline exists",
+      "clears_when": "1 Game Book fetched per completed game, starters and inactives parsed, 32/32 clubs covered",
+      "evidence": "\u2014",
+      "sources": "S01"
+    },
+    {
+      "id": "R31",
+      "category": "Depth",
+      "requirement": "Do not model depth from jersey order; model it from playing time",
+      "status": "blocked",
+      "blocking_gate": "No official snap counts (F09); the club charts in use are self-described 'unofficial' (F10)",
+      "clears_when": "official snap-share source covering 32/32 clubs, with the starter threshold pre-registered before use",
+      "evidence": "data/depth.tsv (1,540 rows, club-published order)",
+      "sources": "S16"
+    },
+    {
+      "id": "R75",
+      "category": "Depth",
+      "requirement": "Use snap counts as the starter proxy when the depth chart is unavailable",
+      "status": "blocked",
+      "blocking_gate": "Same missing source as R31",
+      "clears_when": "snap-share proxy evaluated against the club chart on >= 1 season; agreement rate published",
+      "evidence": "\u2014",
+      "sources": "S01"
+    },
+    {
+      "id": "R69",
+      "category": "Depth",
+      "requirement": "Reject: deriving depth order from jersey number, experience or salary",
+      "status": "rejected",
+      "blocking_gate": "Rejected: an inferred order is not evidence, and two clubs in this dataset already break it (shared slots, empty slots)",
+      "clears_when": "\u2014 (recorded so the shortcut is not re-proposed; see R52 and R70)",
+      "evidence": "data/depth.tsv (149 slots list more than one rank-1 player)",
+      "sources": "S16"
+    },
+    {
+      "id": "R71",
+      "category": "Depth",
+      "requirement": "Resolve the depth-order source before building the backup-deficiency feature",
+      "status": "blocked",
+      "blocking_gate": "Route (a) club pages: 31 of 32 captured, Houston publishes an image (F16); route (b) snap counts: no official source (F09)",
+      "clears_when": "one route verified for all 32 clubs (32/32 parse with >= 0.98 slot coverage) before the feature is built",
+      "evidence": "data/depth.tsv (31 clubs), data/depth-sources.tsv",
+      "sources": "S46"
+    },
+    {
+      "id": "R51",
+      "category": "Depth",
+      "requirement": "Fix the two depth-parsing failures before widening coverage (Houston image; Green Bay jersey numbers)",
+      "status": "partial",
+      "blocking_gate": "Green Bay rows parse (numbers stripped) but the raw string is not stored; Houston publishes its chart as an image and yields 0 rows",
+      "clears_when": "32/32 clubs parse; Houston replaced by an authorised structured source, not transcription by eye",
+      "evidence": "data/depth.tsv (GB rows present, HOU 0 rows)",
+      "sources": "S46;S27"
+    },
+    {
+      "id": "R52",
+      "category": "Depth",
+      "requirement": "Model depth slots as groups, not a single starter",
+      "status": "not-started",
+      "blocking_gate": "data/depth.tsv is a ranked list; 149 club/unit/position slots list more than one rank-1 player",
+      "clears_when": "schema change to (club, unit, slot, rank, players[]) with a shared-rank flag",
+      "evidence": "data/depth.tsv",
+      "sources": "S16"
+    },
+    {
+      "id": "R70",
+      "category": "Depth",
+      "requirement": "Represent shared and empty depth slots faithfully",
+      "status": "not-started",
+      "blocking_gate": "Same schema limitation as R52: shared and empty slots are currently indistinguishable from a ranked list",
+      "clears_when": "shared-slot and empty-slot flags in the schema, verified against the two known cases (Seattle, Washington)",
+      "evidence": "data/depth.tsv",
+      "sources": "S21"
+    },
+    {
+      "id": "R62",
+      "category": "Depth",
+      "requirement": "Add an official depth-chart register with date and source per row",
+      "status": "partial",
+      "blocking_gate": "data/depth-sources.tsv carries club, source id and URL for 31 clubs, but the capture-date column is empty on 31 of 31 rows",
+      "clears_when": "capture date on 32/32 rows",
+      "evidence": "data/depth-sources.tsv",
+      "sources": "S08"
+    },
+    {
+      "id": "R53",
+      "category": "Depth",
+      "requirement": "Treat roster turnover as a first-class data event",
+      "status": "not-started",
+      "blocking_gate": "No transactions log is captured; depth and availability rows are not versioned against roster events",
+      "clears_when": "dated roster-event table; every depth/availability row versioned against the last official event",
+      "evidence": "nfl.com news roundup, Tuesday Nov 10 (Bills acquire Hooker; Broncos trade for Henley)",
+      "sources": "S01"
+    },
+    {
+      "id": "R65",
+      "category": "Depth",
+      "requirement": "Flag stale depth rows against the official transactions log",
+      "status": "blocked",
+      "blocking_gate": "Depends on R53 (transactions capture); the Baltimore case is already visible in the news but not machine-readable",
+      "clears_when": "dated transactions feed + a staleness rule evaluated weekly on 32/32 clubs",
+      "evidence": "nfl.com news: Ravens officially place Lamar Jackson on injured reserve (2026-11-05)",
+      "sources": "S18"
+    },
+    {
+      "id": "R33",
+      "category": "Depth",
+      "requirement": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+      "status": "not-started",
+      "blocking_gate": "Only one club roster page is captured as a worked example; no IR sweep exists",
+      "clears_when": "32/32 clubs with a dated roster + reserve capture, re-run on every roster transaction",
+      "evidence": "data/raw/rosters.csv (third-party, labelled), S07 (KC sample)",
+      "sources": "S07"
+    },
+    {
+      "id": "R64",
+      "category": "Depth",
+      "requirement": "Interactive Offense vs Defense matchup deficiency matrix (1st-4th string)",
+      "status": "blocked",
+      "blocking_gate": "Depends on R52 (group slots) and R71 (depth source verified for 32/32 clubs)",
+      "clears_when": "depth source verified 32/32 + group-slot schema shipped, then one matrix per game",
+      "evidence": "replacement-depth.html (string numbers, club-chart order, labelled unofficial)",
+      "sources": "S16"
+    },
+    {
+      "id": "R61",
+      "category": "Availability",
+      "requirement": "Add an announced-starter evidence field (not an inferred replacement)",
+      "status": "done",
+      "blocking_gate": "\u2014",
+      "clears_when": "\u2014 (field published; every row links the official article that names the starter)",
+      "evidence": "scripts/build_announced_starters_g.py, announced-starters.html",
+      "sources": "S01"
+    },
+    {
+      "id": "R60",
+      "category": "Availability",
+      "requirement": "Add a per-team view: starters out, replacements named, net injury count",
+      "status": "done",
+      "blocking_gate": "\u2014",
+      "clears_when": "\u2014 (view published for all 28 clubs on the Week 10 report)",
+      "evidence": "scripts/build_team_availability_g.py, team-availability.html",
+      "sources": "S01"
+    },
+    {
+      "id": "R35",
+      "category": "Origination",
+      "requirement": "Store every model output as a probability plus its inputs, not just a pick",
+      "status": "partial",
+      "blocking_gate": "The fair-line model is unfitted (F38), so the stored outputs are lines, not probability + input-vector records",
+      "clears_when": "every origination row stores p, the input vector, the model id and the coefficient version",
+      "evidence": "data/fair_lines.csv, data/models.json, data/line_board.json",
+      "sources": "S02;S03"
+    },
+    {
+      "id": "R46",
+      "category": "Origination",
+      "requirement": "Ingest game-level results to make the ratings opponent-aware",
+      "status": "partial",
+      "blocking_gate": "137 results are ingested and reconciled 32/32, but no opponent-adjusted rating is published",
+      "clears_when": "a published rating with its adjustment formula and n, re-fit on the frozen split (R87)",
+      "evidence": "data/results.tsv, engine/fairline.py",
+      "sources": "S49"
+    },
+    {
+      "id": "R54",
+      "category": "Origination",
+      "requirement": "Start with a singles-only shadow baseline (pre-registered, frozen versions, forecasts recorded before kickoff)",
+      "status": "partial",
+      "blocking_gate": "A baseline exists for 13 Week 10 games, but no frozen-version pre-kickoff record has been produced for a full week",
+      "clears_when": ">= 1 full week of pre-kickoff forecasts, each with model version + UTC timestamp, published before kickoff",
+      "evidence": "data/fair_lines.csv, data/model_lines.tsv",
+      "sources": "S02;S03"
+    },
+    {
+      "id": "R34",
+      "category": "Origination",
+      "requirement": "Add a fixture-context feature set built only from published schedule facts",
+      "status": "partial",
+      "blocking_gate": "Schedule facts are captured, but no fixture-context feature set is defined or published, and venue is filled on 1 of 272 rows",
+      "clears_when": "a published feature list where every feature traces to a schedule field (rest days, bye, travel, kickoff time, divisional)",
+      "evidence": "data/schedule.tsv (venue column: 1 of 272 filled), data/schedule2026-d.csv",
+      "sources": "S04"
+    },
+    {
+      "id": "R43",
+      "category": "Origination",
+      "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
+      "status": "partial",
+      "blocking_gate": "Venue column exists but is populated for the international game only",
+      "clears_when": "272/272 fixtures with venue string + official game-centre URL",
+      "evidence": "data/schedule.tsv",
+      "sources": "S04"
+    },
+    {
+      "id": "R44",
+      "category": "Origination",
+      "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
+      "status": "not-started",
+      "blocking_gate": "No dated announcement document has been captured or linked",
+      "clears_when": "the official announcement URL + publication date captured and shown beside schedule.html",
+      "evidence": "\u2014",
+      "sources": "S04"
+    },
+    {
+      "id": "R42",
+      "category": "Site",
+      "requirement": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it",
+      "status": "done",
+      "blocking_gate": "\u2014",
+      "clears_when": "\u2014 (table published; 87 rows, one per requirement, this page)",
+      "evidence": "tools/site_g.py, index.html",
+      "sources": "S01"
+    },
+    {
+      "id": "R80",
+      "category": "Site",
+      "requirement": "Publish a weekly 'what changed' diff instead of a static snapshot",
+      "status": "partial",
+      "blocking_gate": "One diff interval exists (2026-11-14 to 2026-11-16, 35 change records); a weekly cadence needs a scheduler (R73)",
+      "clears_when": "a published diff for every week of the season, each with the capture hashes on both sides",
+      "evidence": "data/injury_diff_g.tsv, availability-ledger.html",
+      "sources": "S01"
+    },
+    {
+      "id": "R58",
+      "category": "Operations",
+      "requirement": "Add durable snapshot storage and alerts (store captures outside the static site, monitor freshness, alert on source/schema change)",
+      "status": "not-started",
+      "blocking_gate": "Snapshots live in the public repository; there is no freshness monitor and no schema alarm",
+      "clears_when": "off-site append-only store, a freshness SLO of < 6h after publication, and an alert that fires on any schema change",
+      "evidence": "data/raw/MANIFEST.json (in-repo only)",
+      "sources": "S01"
+    },
+    {
+      "id": "R82",
+      "category": "Operations",
+      "requirement": "Add a drift alarm to every scraper",
+      "status": "partial",
+      "blocking_gate": "Row-count and per-row-source gates run at build time (tools/checkrows.py, tools/checklinks.py) but they are not monitors and do not page anyone",
+      "clears_when": "every parser pinned to an expected row count and required field list, failing loudly in CI and alerting on drift",
+      "evidence": "tools/checkrows.py, tools/checklinks.py",
+      "sources": "S01"
+    },
+    {
+      "id": "R59",
+      "category": "Operations",
+      "requirement": "Split the site into a public analysis layer and a private data layer",
+      "status": "not-started",
+      "blocking_gate": "Row-level official data is currently published in the public site, and the redistribution terms have not been read",
+      "clears_when": "terms read and recorded, then raw row-level data moved to a private store with the public site keeping derived analysis + links only",
+      "evidence": "raw/ (published), data/ (published)",
+      "sources": "S01"
+    }
+  ]
+}

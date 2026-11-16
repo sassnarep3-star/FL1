@@ -474,5 +474,73 @@
     "sourceIds": [],
     "severity": "Medium",
     "action": "Demotion section now generated; full regeneration + link check re-run green. Any future page change must go through tools/site.py."
+  },
+  {
+    "id": "F43",
+    "kind": "Cross-source contradiction",
+    "item": "Week 10 injury row count: the review says 254 rows published against 279 live; both of this session's official reads are larger",
+    "detail": "An earlier review recorded the published injury table as 254 rows and the live page as 279 rows, with four 'no injuries reported' sections. This session read the same official URL twice: the 2026-11-14 capture in the repository parses to 345 rows across 28 clubs, and a fresh 2026-11-16 re-capture parses to 347 rows across the same 28 clubs, with no 'no injuries reported' section on the page in either read. Both raw captures are committed with sha256 hashes so the discrepancy can be re-checked line by line. No number was altered to make the figures agree.",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "Medium",
+    "action": "Both dated captures published on the Snapshot Ledger page with their hashes; the diff between them is published too. The 254/279 figures could not be reproduced and are left as recorded, not corrected."
+  },
+  {
+    "id": "F44",
+    "kind": "Not found in an official source",
+    "item": "Announced-starter evidence for Brissett (Arizona) \u2014 named in the brief, not found on any official page read",
+    "detail": "The brief lists Brissett among the starters the NFL has announced. The dated official roundup of 2026-11-11 announces Carson Beck as Arizona's Week 10 starter, and Brissett appears on neither the Week 10 injury report nor any article read this session. The cell is left blank on the Announced Starters page with this reason, rather than filled from a depth chart or from memory.",
+    "sourceIds": [
+      "S70"
+    ],
+    "severity": "Low",
+    "action": "Row published blank with the reason and the source link. If an official page naming Brissett exists, the fix is to add the link."
+  },
+  {
+    "id": "F45",
+    "kind": "Source changed between two dated reads",
+    "item": "The official Week 10 injury report is not a single fact: it moved between 2026-11-14 and 2026-11-16",
+    "detail": "Re-reading nfl.com/injuries two days later returned 347 rows where the earlier read had 345. Two rows were added (BAL Calais Campbell, BAL Ronnie Stanley) and 32 fields moved. 22 of the 32 are Chargers rows: Los Angeles played on Monday night, so its game-day designations were published after the earlier read. Indianapolis's Arden Key moved the other way \u2014 Questionable with a hamstring injury on 11-14, no designation at all on 11-16.",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "Medium",
+    "action": "The 2026-11-14 read is kept as the pre-kickoff snapshot and is never overwritten; the later read is published beside it with a diff. Backtests must pin the capture they used."
+  },
+  {
+    "id": "F46",
+    "kind": "Coverage gap",
+    "item": "The depth-chart register carries no capture date on 31 of 31 rows",
+    "detail": "data/depth-sources.tsv records club, source id and URL for 31 clubs, but its chartDate column is empty on every row. Without a capture date, a depth chart cannot be checked for staleness against the roster events the brief asks us to track, and two captures of the same chart are indistinguishable.",
+    "sourceIds": [
+      "S08"
+    ],
+    "severity": "Medium",
+    "action": "Register left as-is with the gap stated; filling the column is requirement R62 on the backlog. No date was invented."
+  },
+  {
+    "id": "F47",
+    "kind": "Data provenance",
+    "item": "Venue, roof and surface are captured only from a third-party feed; the official transcription covers 1 of 272 fixtures",
+    "detail": "data/schedule2026-d.csv carries stadium, roof and surface for all 272 games, but every one of those rows is attributed to a third-party aggregation. The official schedule transcription in data/schedule.tsv has a venue on 1 row of 272 (the Munich international game). The brief asks for the venue to be transcribed from the official game centre.",
+    "sourceIds": [
+      "S04",
+      "S47"
+    ],
+    "severity": "Medium",
+    "action": "Third-party venue fields are recorded in the store with their provenance label and are not presented as official. Official transcription is requirement R43 on the backlog."
+  },
+  {
+    "id": "F48",
+    "kind": "Model provenance",
+    "item": "Published model outputs record a line, not a probability with its input vector",
+    "detail": "The brief asks that every model output be stored as a probability plus the inputs that produced it. The current origination artefacts store a fair line and a difference column, and the fair column is blank because the model is unfitted (F38). Even when fitted, a line without its input vector cannot be audited or reproduced after the fact.",
+    "sourceIds": [
+      "S02",
+      "S03"
+    ],
+    "severity": "Medium",
+    "action": "Recorded as requirement R35 on the backlog with the schema change it needs. No output was retro-fitted to look complete."
   }
 ]

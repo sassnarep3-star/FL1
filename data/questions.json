@@ -440,5 +440,57 @@
     "source": "results-feed.html",
     "blocking": "No",
     "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
+  },
+  {
+    "id": "Q35",
+    "category": "Data",
+    "priority": "High",
+    "question": "Which dated read of the injury report is the canonical pre-kickoff snapshot for backtests?",
+    "why_it_matters": "This session proved the report moves: two reads two days apart differ by two rows and 32 fields. A backtest that trains on the Monday read has seen designations that did not exist before kickoff, which is lookahead leakage and will flatter any availability strategy.",
+    "what_we_know": "Two dated captures exist (2026-11-14, 345 rows; 2026-11-16, 347 rows), both hash-pinned. The Chargers played Monday night, so their game-day designations only exist in the later read.",
+    "what_we_dont_know": "Which read is closest to the information available before each game kicked off, and therefore which one a backtest is allowed to use.",
+    "missing_data": "A rule, written before the backtest runs, pinning the capture per game.",
+    "source": "availability-ledger.html",
+    "blocking": "Yes",
+    "recommended_path": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff."
+  },
+  {
+    "id": "Q36",
+    "category": "Data",
+    "priority": "Medium",
+    "question": "Should designations published after the earlier read be back-filled into the published table, or kept as a separate dated snapshot?",
+    "why_it_matters": "Back-filling makes one tidy table that no longer corresponds to anything the league published at a single moment. Keeping separate snapshots is less tidy but is the only version that can be audited.",
+    "what_we_know": "The 2026-11-14 read is the pre-kickoff snapshot for 13 of the 14 Week 10 games and predates the Chargers' designations entirely.",
+    "what_we_dont_know": "Whether the site's readers need one table or the series.",
+    "missing_data": "A presentation decision, not data.",
+    "source": "availability-ledger.html",
+    "blocking": "No",
+    "recommended_path": "Keep the snapshots separate and publish the diff, as the ledger page does now."
+  },
+  {
+    "id": "Q37",
+    "category": "Operations",
+    "priority": "Medium",
+    "question": "May the injury report be captured at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is answered?",
+    "why_it_matters": "Three requirements (R32, R41, R73) depend on a multi-day series. None can be met without automated repeated fetching, and the acceptable-use question (Q18) is still open.",
+    "what_we_know": "The page publishes a season and week selector and returns the full report; two manual reads were taken this session without incident.",
+    "what_we_dont_know": "The terms of use for automated fetching, and the acceptable cadence.",
+    "missing_data": "A read of the site's terms, or a licensed alternative.",
+    "source": "availability-ledger.html",
+    "blocking": "Yes",
+    "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear."
+  },
+  {
+    "id": "Q38",
+    "category": "Competition",
+    "priority": "High",
+    "question": "Should the leaderboard adopt the removal-of-luck numbers as its qualification bar?",
+    "why_it_matters": "The leaderboard ranks strategies. Without a sample-size bar it will rank whoever had the best short run. The panel shows that 785 independent decisions are needed to detect a 5pp edge at all, and 1,211 once six strategies are tried.",
+    "what_we_know": "137 official results exist. A single NFL season offers roughly 270 team-game decisions, which is a third of the sample needed for a 5pp edge.",
+    "what_we_dont_know": "Whether the competition accepts that no strategy can qualify inside one season, or wants a lower bar with an explicit warning.",
+    "missing_data": "A decision on the bar, frozen before any result exists (SG37).",
+    "source": "removal-of-luck.html",
+    "blocking": "Yes",
+    "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it."
   }
 ]
