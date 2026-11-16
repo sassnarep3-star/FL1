@@ -1080,10 +1080,12 @@ pages contradict each other. It does not print a single performance number. Each
     req_html = ['<section><h1>Requirements</h1>',
                 '<p class="lead">Every line of the brief, decomposed, with the evidence that satisfies it and '
                 'the page where it can be checked. A requirement is only marked done when there is a link.</p>',
-                '<p class="note">%d of %d requirements are complete. The rest are marked '
-                '<span class="pill warn">partial</span> on purpose — a partial status means the method is '
-                'specified and the number is withheld because no source supports it.</p></section>'
-                % (n_req_done, len(requirements))]
+                '<p class="note">%d of %d requirements are complete.'
+                '%s</p></section>'
+                % (n_req_done, len(requirements),
+                   ("" if n_req_done == len(requirements) else
+                    ' The rest are marked <span class="pill warn">partial</span> on purpose &mdash; a partial '
+                    'status means the method is specified and the number is withheld because no source supports it.'))]
     for section, items in by_section.items():
         rows = []
         for r in items:
