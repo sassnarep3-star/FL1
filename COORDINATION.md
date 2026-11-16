@@ -16,12 +16,12 @@ touched (`tools/site.py`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `COORDINAT
 
 | # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
 |---|------|--------|-------|----------------------|------------------------|----------------|
-| N01 | Decision-readiness table on the landing page — one row per requirement R01–R28, the gate that blocks it, the number that would clear it | claimed | arena-38a78804-fl1 | `data/decision_readiness.json`, `tools/site.py` (index section only), generated `index.html` | derived from `data/requirements.json`, `data/questions.json`, `data/flags.json`, `data/validation_gates.json`; no external claims | none expected |
-| N02 | Two-sided "what would change our mind" field on every strategy entry | claimed | arena-38a78804-fl1 | `data/strategies.json` (append field to all 6 entries), `tools/site.py` (strategies section only), generated `strategies.html` | design decision per brief; each field states what raises and what lowers confidence with the data it needs | none expected |
-| N03 | Fresh injury-hub read with clock time + published delta vs the 2026-11-14 read (delta, never the level) | claimed | arena-38a78804-fl1 | `raw/injuries-week10-2026-read2-*.md` (new capture), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py`, `data/sources.tsv` (append), generated `injuries.html` (appended section) | official nfl.com/injuries page fetched in this session, transcribed with UTC clock time | if the live page no longer shows Week 10, that fact itself is recorded |
-| N04 | Week 10 finals capture — the games that are FINAL at capture time (SNF live / MNF pending left blank and flagged) | claimed | arena-38a78804-fl1 | `raw/schedule-results-2026-week10-finals.tsv` (new), `data/week10_results_extension.json`, `scripts/build_week10_extension.py`, `data/sources.tsv` (append), generated `schedule.html` (appended section) | official nfl.com week-10 schedule page fetched in this session; per-row official link | standings reconciliation stays pinned to its capture state; extension labelled per-row |
-| N05 | "Removal of luck" panel on the site dashboard (derived from existing computed/official numbers only) | claimed | arena-38a78804-fl1 | `data/luck_panel.json`, `scripts/build_luck_panel.py`, `tools/site.py` (index section only), generated `index.html` | engine/leaderboard.py + data/leaderboard_signal_staking.json + data/correlations_official.json; no new claims | none expected |
-| N06 | Registers append, tests, link checks, rebuild, exec-summary update, coordination completion record, PR → main, merge, confirm Pages | claimed | arena-38a78804-fl1 | `data/{flags,questions,suggestions}.json` (append only), `data/sources.tsv` (append only), `tests/test_n01_n05.py`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`, PR | tools/checklinks.py, scripts/verify_site.py, unittest | — |
+| N01 | Decision-readiness table on the landing page — one row per requirement R01–R28, the gate that blocks it, the number that would clear it | done | arena-38a78804-fl1 | `data/decision_readiness.json`, `scripts/build_decision_readiness.py`, `tools/site.py` (index section only), generated `index.html` | derived from `data/requirements.json`, `data/questions.json`, `data/flags.json`, `data/sources.tsv`; builder asserts 28/28 coverage and register-id validity | none found |
+| N02 | Two-sided "what would change our mind" field on every strategy entry | done | arena-38a78804-fl1 | `data/strategies.json` (field appended to all 6 entries), `scripts/append_change_my_mind.py`, `tools/site.py` (strategies section), generated `strategies.html` | idempotent appender; blocked entries must name the gate | none found |
+| N03 | Fresh injury-hub read with clock time + published delta vs the 2026-11-14 read (delta, never the level) | done | arena-38a78804-fl1 | `raw/injuries-week10-2026-read2.md`, `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py`, `data/sources.tsv` (S70), generated `injuries.html` | read 1 still re-parses to data/injuries.tsv 345/345 (asserted in the builder AND tools/verify_injuries.py); hub still showed WEEK 10; delta = 32 changed, 2 added (both BAL), 0 removed | Colts Arden Key row cleared between reads (published as a removal-free delta: it is a field change, not a removed row) |
+| N04 | Week 10 finals capture — the games FINAL at read time (SNF live / MNF pending left blank and flagged) | done | arena-38a78804-fl1 | `raw/schedule-results-2026-week10-finals.tsv`, `raw/standings-2026-20261116.tsv` (corroborating evidence), `data/week10_results_extension.json`, `scripts/build_week10_extension.py`, `data/sources.tsv` (S71, S72), generated `verified-results-feed.html` | V1 TNF corroborates the feed; V2 fixture match vs published schedule; V3 record arithmetic 32/32 vs page cards; V4 W/L/T **and** PF/PA 32/32 vs fresh official standings. Scope note: the section landed on `verified-results-feed.html`, not `schedule.html` (schedule.html is generated by session D's builder; no overlap) | none found; standings capture is labelled corroborating evidence, does not replace data/standings.tsv |
+| N05 | "Removal of luck" panel on the site dashboard | done | arena-38a78804-fl1 | `data/luck_panel.json`, `scripts/build_luck_panel.py`, `tools/site.py` (index section), generated `index.html` | derived read-only from data/leaderboard_signal_staking.json; edge = CI-low − hurdle asserted in tests | dataset is the flagged computed layer (F19/F23/F30 warnings carried verbatim onto the panel) |
+| N06 | Registers append, tests, link checks, rebuild, exec-summary update, coordination completion record, PR → main, merge, confirm Pages | done | arena-38a78804-fl1 | `data/{questions,suggestions}.json` (Q35, SG35), `data/sources.tsv` (S70–S72), `tests/test_n01_n05.py` (24 tests), `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`, PR | 192 tests OK; checklinks 28 pages OK; verify_site 0/0; injuries 345/345; results PASS; verify_d V5–V8 PASS + V9 PASS (mirror fetched to /home/user/datawork, outside the repo); demo_run --check current; docs sub-site 18 pages 0 unsourced | V9 required fetching the parquet mirror again — recorded for future sessions |
 
 
 
@@ -29,6 +29,47 @@ touched (`tools/site.py`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `COORDINAT
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
 > kept verbatim further down so their records are not lost. If your session's board is not the one at the top,
 > **add your tasks to the top board** rather than replacing it.
+
+### Session `arena-38a78804-fl1` — completion record (2026-11-16)
+
+**Sources used (all appended to `data/sources.tsv`, all VERIFIED in this session):**
+- **S70** — https://www.nfl.com/injuries/ — second dated read, 2026-11-16, window bracketed by
+  sandbox clock readings (after 01:14:56Z, before 01:25:00Z), 8 content chunks. Page still showed
+  *WEEK 10*; captured verbatim to `raw/injuries-week10-2026-read2.md`.
+- **S71** — https://www.nfl.com/schedules/2026/by-week/week-10 — finals read, same window, 2 chunks.
+  12 of 13 games printed FINAL; SNF in progress (no score printed; pre-game records 6-2/6-2);
+  MNF unplayed. Captured to `raw/schedule-results-2026-week10-finals.tsv`.
+- **S72** — https://www.nfl.com/standings/league/2026/REG — corroborating standings read (W/L/T
+  and PF/PA for all 32 clubs), captured to `raw/standings-2026-20261116.tsv`. Explicitly NOT a
+  replacement for `data/standings.tsv`.
+
+**Verification performed (all passing at completion):**
+- `python3 -m unittest discover -s tests -q` → **192 tests OK** (24 new in `tests/test_n01_n05.py`).
+- `tools/checklinks.py` → **28 pages OK** (every internal link/anchor resolves; per-question anchors
+  added to the questions page so Q-deep links work).
+- `scripts/verify_site.py` → **0 errors / 0 warnings**. `tools/verify_injuries.py` → 345/345.
+- `tools/verify_results.py` → PASS. `scripts/verify_d.py` → V5–V8 PASS, V7a FLAGGED by design,
+  **V9 PASS** (Beexly/Sports parquet mirror fetched to `/home/user/datawork`, outside the repo —
+  same procedure as the R21–R28 session; the file is not committed).
+- `engine/demo_run.py --check` → current. `site/build.py` + `site/verify.py` → 18 pages, 0 rows
+  without a source, "publishable".
+- Rebuild determinism: `verify_d.py` V6 re-ran the computed-layer builds with identical artefacts.
+
+**What was delivered:** landing-page **decision-readiness table** (28 rows: blocker + clearing
+number per requirement); landing-page **removal-of-luck panel** (0 of 16 proven; all 7 positive-ROI
+entries rejected on signal; control baseline −5.19%/5,067 bets; 16-trial multiplicity);
+**two-sided change-our-mind field** on all 6 strategy entries; **dated injury-hub read 2 + delta
+register** (32 changed / 2 added / 0 removed — all on clubs whose report was still evolving);
+**Week 10 finals extension** (11 new finals, V1–V4 verified; SNF/MNF published as pending with
+blank scores); **Q35 + SG35** (feed-promotion policy, owner decision pending); footer timestamp
+updated to include the 2026-11-16 reads.
+
+**Irregularities:** none new. Two operational notes recorded instead: (1) the live hub still showed
+Week 10 on Monday — expected, logged in the capture header; (2) V9 needed the external parquet
+mirror refetched in this checkout (file lives outside the repo by design).
+
+**Integration:** PR from `arena/38a78804-fl1` → `main`, merged without waiting for approval, Pages
+deploy confirmed — record appended below after the merge.
 
 ## Task board — session `arena/360ca650-fl1` (requirements sprint R21–R28)
 

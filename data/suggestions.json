@@ -5,7 +5,7 @@
   "category": "Trust",
   "problem": "The brief asks to originate lines. There is no official source of market prices in this repo, so any displayed price that looks like a market quote would be invented.",
   "proposal": "Output one number per game: our fair-value probability, with an explicit uncertainty band and a timestamp. Display the market price column as blank until the user supplies a benchmark feed.",
-  "evidence": "data/sources.tsv S03 \u2014 official standings supply team scoring, but no official price feed was found.",
+  "evidence": "data/sources.tsv S03 — official standings supply team scoring, but no official price feed was found.",
   "effort": "Low",
   "risk": "Low",
   "reversibility": "Fully reversible",
@@ -26,7 +26,7 @@
   "category": "Method",
   "problem": "Ranking strategies by win rate or units won rewards luck. Over a few dozen bets the noise band is wider than any realistic edge.",
   "proposal": "Make calibration the primary gate: bucket predictions by stated probability and check that the realised hit rate matches. Rank on calibration error and sample size, and show profit only after the sample gate is met.",
-  "evidence": "data/questions.json Q09, Q10 \u2014 the season is 18 weeks and Week 10 is in progress (S05).",
+  "evidence": "data/questions.json Q09, Q10 — the season is 18 weeks and Week 10 is in progress (S05).",
   "effort": "Medium",
   "risk": "Low",
   "reversibility": "Fully reversible",
@@ -73,7 +73,7 @@
   "evidence": "data/sources.tsv S13 (404), S08 (club page titled 'Unofficial Depth Chart'), S07 (roster status codes), S01 (injury report).",
   "effort": "High",
   "risk": "Medium",
-  "reversibility": "Reversible \u2014 the derived layer can be removed without touching the observed layer.",
+  "reversibility": "Reversible — the derived layer can be removed without touching the observed layer.",
   "prerequisites": [
    "Q04",
    "Q05"
@@ -135,7 +135,7 @@
   "evidence": "data/questions.json Q01, Q11.",
   "effort": "Medium",
   "risk": "Low",
-  "reversibility": "Fully reversible \u2014 it is an ordering, not a removal.",
+  "reversibility": "Fully reversible — it is an ordering, not a removal.",
   "prerequisites": [
    "Q01",
    "Q11"
@@ -154,7 +154,7 @@
   "category": "Method",
   "problem": "A model that only rediscovers 'the better team usually wins' looks skilful when compared to nothing.",
   "proposal": "Publish a named baseline, for example a points-differential rating from official season scoring. A strategy is only ranked if it beats that baseline out of sample.",
-  "evidence": "data/sources.tsv S03 \u2014 official PF/PA for all 32 clubs.",
+  "evidence": "data/sources.tsv S03 — official PF/PA for all 32 clubs.",
   "effort": "Low",
   "risk": "Low",
   "reversibility": "Fully reversible",
@@ -633,7 +633,7 @@
   "reversibility": "Reversible only by a later pre-registered amendment, never silently.",
   "prerequisites": [
    "Q24",
-   "SG17 (G-14 thresholds \u2014 same decision family)"
+   "SG17 (G-14 thresholds — same decision family)"
   ],
   "options": [
    "Freeze now with the documented defaults. (Recommended)",
@@ -703,5 +703,26 @@
   ],
   "recommendation": "A. Option C is how invented numbers enter a site that promised never to publish them.",
   "impact": "Keeps the board's blank-cell promise intact once the model exists."
+ },
+ {
+  "id": "SG35",
+  "title": "Automate the weekly results promotion (extension register -> canonical feed)  (pairs with Q35)",
+  "category": "Automation",
+  "problem": "The verified results feed stops at its capture state (137 rows through Week 10 TNF). Finals verified later live in a separate extension register, so a reader must consult two tables and a backtest run against the feed silently misses the newest settled games.",
+  "proposal": "One promotion script: after a week's last game is FINAL, re-capture the week page and league standings, re-run the V1-V4 checks (TNF corroboration, fixture match, record arithmetic, points arithmetic 32/32), then append the finals to data/results.tsv, replace the standings capture, and rebuild the feed. The extension register remains as the dated audit trail of what was captured live.",
+  "evidence": "scripts/build_week10_extension.py already implements checks V1-V4 and passes 32/32 on the 2026-11-16 captures; scripts/build_results_feed.py already hard-fails unless the feed reproduces the standings exactly.",
+  "effort": "Low",
+  "risk": "Low — promotion fails loudly rather than publishing a bad row.",
+  "reversibility": "Fully reversible (git history holds every capture).",
+  "prerequisites": [
+   "Q35"
+  ],
+  "options": [
+   "Promote after the week's last final with 32/32 points arithmetic. (Recommended)",
+   "Keep feed and extension permanently separate.",
+   "Promote weekly without re-capturing standings (NOT acceptable — loses the reconciliation)."
+  ],
+  "recommendation": "A. The two existing builders already compose into the promotion; the only new decision is when it runs.",
+  "impact": "Backtests and ROI compute against the newest verified finals with no manual re-tabulation and no silent staleness."
  }
 ]

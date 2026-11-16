@@ -5297,6 +5297,36 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "2026 Week 9 schedule page; 15 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S70",
+   "title": "Official NFL Injury Report hub — read 2 (dated delta read)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/injuries/",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Second dated read of the same hub, 2026-11-16 between 01:15Z and 01:25Z (8 content chunks). Page still displayed WEEK 10. Transcribed verbatim to raw/injuries-week10-2026-read2.md; delta vs read 1 published by scripts/build_injury_hub_delta.py (32 field changes, 2 added rows, 0 removed). Read 1 (S01) still re-parses to data/injuries.tsv exactly."
+  },
+  {
+   "id": "S71",
+   "title": "Official 2026 Week 10 schedule page — finals read",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-16 between 01:15Z and 01:25Z (2 content chunks). 12 of 13 Week 10 games printed FINAL with scores; SNF (PIT at CIN) was in progress with no score printed (pre-game records 6-2/6-2) and MNF (LAC at BAL) unplayed. Finals transcribed to raw/schedule-results-2026-week10-finals.tsv; the 11 new finals verified V1-V4 in scripts/build_week10_extension.py (including points arithmetic against S72)."
+  },
+  {
+   "id": "S72",
+   "title": "Official 2026 NFL league standings — read 2 (corroborating evidence)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-16 between 01:15Z and 01:30Z (2 content chunks). All 32 clubs' W/L/T/PF/PA captured to raw/standings-2026-20261116.tsv. Purpose: corroborating evidence for the Week 10 finals extension (V4: feed + 11 new finals reproduce this capture exactly, 32/32). Does NOT replace data/standings.tsv (canonical capture behind published registers)."
   }
  ],
  "schedule": [
@@ -32204,6 +32234,19 @@ window.DATA = {
    "source": "results-feed.html",
    "blocking": "No",
    "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
+  },
+  {
+   "id": "Q35",
+   "category": "Data policy",
+   "priority": "High",
+   "question": "When a week's games all reach FINAL, who promotes the captured finals into the canonical verified results feed (data/results.tsv) and re-captures the official standings — and what acceptance checks must pass first?",
+   "why_it_matters": "The 2026-11-16 session published the 11 new Week 10 finals as a dated, verified EXTENSION register (V1-V4 checks) instead of editing the canonical feed, because the feed's standings reconciliation is pinned to its capture state and the two Monday/Sunday-night games were not final at read time. Without a promotion policy the canonical feed lags the live record and every downstream backtest silently uses stale data.",
+   "what_we_know": "The extension register and its four verification checks are re-runnable (scripts/build_week10_extension.py); the fresh standings capture (S72) is corroborating evidence, not a replacement for the canonical capture.",
+   "what_we_do_not_know": "Whether the owner wants promotion to be manual (a session task), automated after the last kickoff, or gated on a fresh standings re-capture passing 32/32 — and whether the pinned reconciliation should roll forward with it.",
+   "what_would_help": "A decision recorded here plus one promotion script run after each week's final whistle.",
+   "discovery_step": "Re-run the two builders with fresh official captures after MNF finalizes; if V4 passes 32/32 against a new standings read, promotion is mechanically safe.",
+   "blocking": "no",
+   "owner": "unassigned"
   }
  ],
  "suggestions": [
@@ -32911,6 +32954,27 @@ window.DATA = {
    ],
    "recommendation": "A. Option C is how invented numbers enter a site that promised never to publish them.",
    "impact": "Keeps the board's blank-cell promise intact once the model exists."
+  },
+  {
+   "id": "SG35",
+   "title": "Automate the weekly results promotion (extension register -> canonical feed)  (pairs with Q35)",
+   "category": "Automation",
+   "problem": "The verified results feed stops at its capture state (137 rows through Week 10 TNF). Finals verified later live in a separate extension register, so a reader must consult two tables and a backtest run against the feed silently misses the newest settled games.",
+   "proposal": "One promotion script: after a week's last game is FINAL, re-capture the week page and league standings, re-run the V1-V4 checks (TNF corroboration, fixture match, record arithmetic, points arithmetic 32/32), then append the finals to data/results.tsv, replace the standings capture, and rebuild the feed. The extension register remains as the dated audit trail of what was captured live.",
+   "evidence": "scripts/build_week10_extension.py already implements checks V1-V4 and passes 32/32 on the 2026-11-16 captures; scripts/build_results_feed.py already hard-fails unless the feed reproduces the standings exactly.",
+   "effort": "Low",
+   "risk": "Low — promotion fails loudly rather than publishing a bad row.",
+   "reversibility": "Fully reversible (git history holds every capture).",
+   "prerequisites": [
+    "Q35"
+   ],
+   "options": [
+    "Promote after the week's last final with 32/32 points arithmetic. (Recommended)",
+    "Keep feed and extension permanently separate.",
+    "Promote weekly without re-capturing standings (NOT acceptable — loses the reconciliation)."
+   ],
+   "recommendation": "A. The two existing builders already compose into the promotion; the only new decision is when it runs.",
+   "impact": "Backtests and ROI compute against the newest verified finals with no manual re-tabulation and no silent staleness."
   }
  ],
  "requirements": [
@@ -33157,7 +33221,9 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN. No backtest has been executed; no numeric result is claimed.",
-   "reason": "Published as the mandatory comparison for every other entry, per SG08 and Q19."
+   "reason": "Published as the mandatory comparison for every other entry, per SG08 and Q19.",
+   "raises_confidence": "Using the official results feed (S52, 137 settled games, extended weekly), backtest both predictors walk-forward: if margin-based picks beat record-based picks at equal sample with a confidence interval excluding zero, the baseline earns its place.",
+   "lowers_confidence": "If the walk-forward gap between the two estimators stays inside its confidence interval across the whole 2026 season, margin adds no usable information at this sample size and the baseline is downgraded to the record model."
   },
   {
    "id": "ST02",
@@ -33178,7 +33244,9 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G2 and G6.",
-   "reason": "Cannot be sized without snap data and cannot be tested for edge without a price feed."
+   "reason": "Cannot be sized without snap data and cannot be tested for edge without a price feed.",
+   "raises_confidence": "A price source (Q21/Q30) letting us compare the market move on games with an official Out designation against the same games' fair line, with the replacement string published per slot (replacement-depth register); a persistent, correctly-signed residual would support the hypothesis.",
+   "lowers_confidence": "If games with and without an Out starter show no residual difference once opponent quality is controlled for, or if the derived depth rank layer (flagged unofficial, F10) proves unstable week to week, the signal has no evidence beyond the level effect already public."
   },
   {
    "id": "ST03",
@@ -33199,7 +33267,9 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN.",
-   "reason": "Needs a full season of prior-game dates plus a price feed. A well-known effect, so G4 against baseline will be the hard test."
+   "reason": "Needs a full season of prior-game dates plus a price feed. A well-known effect, so G4 against baseline will be the hard test.",
+   "raises_confidence": "The official-register correlation C-A3 (rest edge vs home margin, n=121, r=0.426, CI 0.268..0.562) holding or strengthening as weekly official captures grow n, with the travel component separable from rest.",
+   "lowers_confidence": "If C-A3's interval widens to include zero as n grows, or if adding the international/short-week fixtures reverses the sign, the asymmetry is a small-sample artefact and the strategy is dropped."
   },
   {
    "id": "ST04",
@@ -33220,7 +33290,9 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN.",
-   "reason": "Blocked on a sourced roof registry and on a price feed."
+   "reason": "Blocked on a sourced roof registry and on a price feed.",
+   "raises_confidence": "An official roof/surface registry (the brief's stadium-overlay requirement) joined to NWS point forecasts and to official game totals: a wind-conditioned total estimator that beats the unconditioned one out-of-sample on the official feed.",
+   "lowers_confidence": "If the roof registry cannot be verified officially (determinations are published 90 minutes before kickoff, S-note pending), the outdoor determination stays inferred and the feature is dropped rather than guessed; a fitted model that only helps in-sample would also sink it."
   },
   {
    "id": "ST05",
@@ -33242,7 +33314,9 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G7.",
-   "reason": "Correlation cannot be estimated from one game. Must wait until each leg has independently cleared every gate (SG07)."
+   "reason": "Correlation cannot be estimated from one game. Must wait until each leg has independently cleared every gate (SG07).",
+   "raises_confidence": "A directly validated joint probability for a specific two-leg pairing (the joint-evidence gate) plus the operator's void/push rules, both available before any combo is ranked.",
+   "lowers_confidence": "If the joint dataset cannot be built (pairing observed too rarely), the gate stays closed permanently for that combo; multiplying marginals remains invalid under dependence and no workaround is permitted."
   },
   {
    "id": "ST06",
@@ -33264,7 +33338,9 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G1 and G7.",
-   "reason": "Cannot even confirm an official player-log source for the required fields in this session."
+   "reason": "Cannot even confirm an official player-log source for the required fields in this session.",
+   "raises_confidence": "A player-level official or licensed log (snap share, target/carry share — Q17) large enough to estimate the same-script joint frequency for at least one pairing with usable uncertainty.",
+   "lowers_confidence": "If only third-party estimates exist (F17), the strategy stays BLOCKED behind the joint-evidence gate; a marginal-only build would fail G-12 provenance and is not attempted."
   }
  ],
  "flags": [

@@ -1,0 +1,327 @@
+{
+ "id": "decision_readiness",
+ "title": "Decision-readiness — one row per requirement",
+ "updated": "2026-11-16",
+ "requirement": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it.",
+ "notes": "Identity and status come from data/requirements.json (asserted at build time). Blockers cite published question/flag/gate ids. Clearing numbers are this repo's own verification counts; where a threshold is a proposal it is marked proposed.",
+ "rows": [
+  {
+   "id": "R01",
+   "requirement": "Review the repository line by line",
+   "status": "done",
+   "page": "sources.html",
+   "delivered": "25 generated pages; tools/checklinks.py link-checks every internal link and anchor",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "0 broken internal links across all pages (checklinks run per build)"
+  },
+  {
+   "id": "R02",
+   "requirement": "Verify everything from official, verified, trusted sources",
+   "status": "done",
+   "page": "sources.html",
+   "delivered": "data/sources.tsv register; only VERIFIED rows are citable",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "57 of 61 source records VERIFIED (page loaded and read this session)"
+  },
+  {
+   "id": "R03",
+   "requirement": "Provide links for manual review",
+   "status": "done",
+   "page": "sources.html",
+   "delivered": "every table row carries a source cell, auto-added by the page generator sweep",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "0 rows without a source pointer (generator + checklinks)"
+  },
+  {
+   "id": "R04",
+   "requirement": "Flag irregularities for review",
+   "status": "done",
+   "page": "flagged.html",
+   "delivered": "flagged.html — Flagged for Review",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "42 irregularities published with source links (F01..F42)"
+  },
+  {
+   "id": "R05",
+   "requirement": "Collect and organise a full list of requirements",
+   "status": "done",
+   "page": "requirements.html",
+   "delivered": "data/requirements.json register",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "28 requirements registered, one row each on requirements.html"
+  },
+  {
+   "id": "R06",
+   "requirement": "Analyse the requirements",
+   "status": "done",
+   "page": "requirements.html",
+   "delivered": "EXECUTIVE_SUMMARY + per-requirement pages",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "24 of 28 requirements verified done at the last count"
+  },
+  {
+   "id": "R07",
+   "requirement": "Make suggestions to improve decision making",
+   "status": "done",
+   "page": "suggestions.html",
+   "delivered": "data/suggestions.json register",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "every proposal reviewed before implementation (suggestions.html)"
+  },
+  {
+   "id": "R08",
+   "requirement": "Create a dedicated section so someone can review suggestions and choose a path before any change is implemented",
+   "status": "done",
+   "page": "suggestions.html",
+   "delivered": "suggestions.html — dedicated review section",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "each suggestion states options, trade-offs and one recommended path"
+  },
+  {
+   "id": "R09",
+   "requirement": "A clear list of questions, information and answers needed before a decision can reasonably be made",
+   "status": "done",
+   "page": "questions.html",
+   "delivered": "data/questions.json + questions.html",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "34 questions with what-we-know / what-we-miss / how-to-find-it"
+  },
+  {
+   "id": "R10",
+   "requirement": "Suggestions to discover missing information",
+   "status": "done",
+   "page": "questions.html",
+   "delivered": "Q-rows each name the missing data and how to obtain it",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "every blocking question lists a concrete discovery step"
+  },
+  {
+   "id": "R11",
+   "requirement": "Originate own NFL lines",
+   "status": "partial",
+   "page": "line-origination.html",
+   "delivered": "line-origination.html — method specified, no number published",
+   "blocker": "G-1 source completeness: no benchmark price source exists, so no originated number can be measured against anything",
+   "blocker_refs": [
+    "F23",
+    "F37",
+    "F08",
+    "Q21",
+    "Q30"
+   ],
+   "clears": ">=1 licensed source captured OPEN+CLOSE for every originated market on >=2 consecutive slates (proposed — Q30 owner decision)"
+  },
+  {
+   "id": "R12",
+   "requirement": "Research and develop strategies for generating useful signals",
+   "status": "partial",
+   "page": "strategies.html",
+   "delivered": "strategies.html — signal catalogue specified, not fitted",
+   "blocker": "G-1..G-6: no entry has a settled, sealed walk-forward bet log yet; best computed entry is NOT PROVEN",
+   "blocker_refs": [
+    "F19",
+    "F23",
+    "Q19",
+    "Q25"
+   ],
+   "clears": "an entry with signal_edge_lcb > 0 on a sample meeting G-1 (n>=300 AND >=3 seasons, or power-analysis n) — today 0 of 16 entries proven; best n=936, edge LCB -1.31pp"
+  },
+  {
+   "id": "R13",
+   "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
+   "status": "done",
+   "page": "strategies.html",
+   "delivered": "engine/leaderboard.py + signal-vs-staking split + reward eligibility rules",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "ranking rule frozen before results; 0 ranked entries until a gate is passed (by design)"
+  },
+  {
+   "id": "R14",
+   "requirement": "Cover single bets, parlays and player prop combos",
+   "status": "done",
+   "page": "strategies.html",
+   "delivered": "leaderboard divisions: singles, game parlays, SGP, prop combos",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "each division lists its min settled bets and why it is separate"
+  },
+  {
+   "id": "R15",
+   "requirement": "Every strategy must pass validation gates",
+   "status": "done",
+   "page": "validation.html",
+   "delivered": "validation.html — 14 gates G-1..G-14 incl. demotion",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "every strategy row lists the gates it must clear before ranking"
+  },
+  {
+   "id": "R16",
+   "requirement": "Determine correlation values",
+   "status": "partial",
+   "page": "validation.html",
+   "delivered": "correlation-register.html — official values with n; prop pairs blank",
+   "blocker": "no joint sample exists for player-prop combos, and which official pairs to keep growing weekly is an open decision",
+   "blocker_refs": [
+    "F17",
+    "F19",
+    "Q11",
+    "Q28"
+   ],
+   "clears": "official pairs C-A1..C-A5 today hold n=32..137; growth plan frozen weekly (proposed n>=30 minimum per published pair)"
+  },
+  {
+   "id": "R17",
+   "requirement": "Remove luck from the equation; build selectively skill-based strategies",
+   "status": "done",
+   "page": "validation.html",
+   "delivered": "rank by luck-removed edge (CI lower bound vs price hurdle), control baseline, multiplicity adjustment",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "0 of 16 computed entries proven — the metric rejects them all; see the dashboard luck panel"
+  },
+  {
+   "id": "R18",
+   "requirement": "Track injuries",
+   "status": "done",
+   "page": "injuries.html",
+   "delivered": "injuries.html — official Week 10 report, 345 rows + a second dated read with published delta",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "2 dated reads (2026-11-14, 2026-11-16); 34 row-level changes published as a delta, never a level"
+  },
+  {
+   "id": "R19",
+   "requirement": "Know deficiencies where 2nd/3rd/4th string backups replace starters, on defense and on offense",
+   "status": "partial",
+   "page": "depth.html",
+   "delivered": "depth.html + replacement-depth.html — derived backup layer, one club fully verified",
+   "blocker": "no league-wide official depth chart exists; club charts are self-described unofficial and one club publishes an image; who actually replaces a starter is not verifiable from the report alone",
+   "blocker_refs": [
+    "F02",
+    "F10",
+    "F16",
+    "Q04",
+    "Q27"
+   ],
+   "clears": "a verified depth route for 32 of 32 clubs (either per-club official charts or an official snap-count source) plus official inactive lists for a full slate (proposed)"
+  },
+  {
+   "id": "R20",
+   "requirement": "Clean landing page with subpages organised by category, table-based, with analysis, plus an executive summary",
+   "status": "done",
+   "page": "index.html",
+   "delivered": "25 pages live on GitHub Pages from main /",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "Pages build reported 'built'; live pages re-fetched clean"
+  },
+  {
+   "id": "R21",
+   "requirement": "Add a price-snapshot store that records opening and closing numbers for every market we originate",
+   "status": "done",
+   "page": "price-snapshots.html",
+   "delivered": "price-snapshots store records open+close per originated market",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "close cells populated from the captured board; open cells stay blank because no source exists (F37) — not invented"
+  },
+  {
+   "id": "R22",
+   "requirement": "Add a verified results feed so backtests and ROI can be computed at all",
+   "status": "done",
+   "page": "verified-results-feed.html",
+   "delivered": "verified-results-feed.html — 137 settled 2026 games",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "recomputing all 32 clubs' W/L/T and PF/PA reproduces the official standings exactly (32/32); Week 10 finals extension verified V1-V4 on 2026-11-16"
+  },
+  {
+   "id": "R23",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "status": "done",
+   "page": "line-board.html",
+   "delivered": "side, then total, then moneyline — fixed order published",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "order logged as a design change (F27), not made silently"
+  },
+  {
+   "id": "R24",
+   "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
+   "status": "done",
+   "page": "line-board.html",
+   "delivered": "line-board.html — fair | market | difference as separate columns",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "market cells carry the third-party badge and flag (F23) instead of a silent estimate"
+  },
+  {
+   "id": "R25",
+   "requirement": "Separate 'signal' from 'staking' in the leaderboard so a lucky staking run cannot mask a bad signal",
+   "status": "done",
+   "page": "strategies.html",
+   "delivered": "signal-vs-staking.html — rank computed from the signal block only",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "staking block reported beside, cannot move the rank; demo: the best-ROI entry is rejected on signal"
+  },
+  {
+   "id": "R26",
+   "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "done",
+   "page": "replacement-depth.html",
+   "delivered": "replacement-depth.html — string number of the replacement, not just the fact",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "69 affected Week 10 spots published with the next available string per slot"
+  },
+  {
+   "id": "R27",
+   "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "status": "done",
+   "page": "correlation-register.html",
+   "delivered": "correlation-register.html — official-only values, n published with every value",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "5 official pairs (n=32..137; one pair blank by rule with n=1); third-party correlations excluded by engine rule"
+  },
+  {
+   "id": "R28",
+   "requirement": "Define a demotion gate that sends a live strategy back to paper",
+   "status": "done",
+   "page": "validation.html",
+   "delivered": "validation gate G-14 + engine/demotion.py",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "thresholds are proposed rules (F28) pending Q24/Q33 freeze; 0 live entries to demote yet"
+  }
+ ],
+ "provenance": {
+  "tier": "DERIVED",
+  "source_ids": [
+   "S01",
+   "S03",
+   "S52",
+   "S70",
+   "S71"
+  ],
+  "inputs": [
+   "data/requirements.json",
+   "data/questions.json",
+   "data/flags.json",
+   "data/sources.tsv"
+  ]
+ }
+}
