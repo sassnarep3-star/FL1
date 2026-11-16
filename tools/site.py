@@ -885,7 +885,9 @@ own breakeven column is circular (flag <a href="flagged.html#F30">F30</a>) and i
 is the computed layer&rsquo;s third-party ledger (flags <a href="flagged.html#F34">F34</a>/
 <a href="flagged.html#F39">F39</a>). The control anchor: betting every home team at the close returned
 &minus;5.2&#37; over 5,067 bets &mdash; the vig itself; any edge must clear that bar, not zero.
-Full panel: <a href="readiness.html#luck">Decision Readiness &rarr; Luck</a>.</p>
+Full panel: <a href="readiness.html#luck">Decision Readiness &rarr; Luck</a>. The companion
+official-results view &mdash; luck bands and required-n arithmetic computed only from the 137 official
+2026 results &mdash; lives on <a href="removal-of-luck.html">Removal of Luck</a>.</p>
 </section>
 """ % {
         "n_eval": fw["strategies_evaluated"],
