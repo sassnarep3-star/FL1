@@ -277,7 +277,6 @@ verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
 `scripts/verify_site.py` (0 errors), `scripts/verify_d.py` (V5-V9 PASS), `site/build.py` +
 `site/verify.py`. See `COORDINATION.md` for the full sources/verification/irregularities record.
 
-=======
 ---
 
 ## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
@@ -299,7 +298,6 @@ verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
   (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
 - **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
   `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
->>>>>>> origin/main
 
 **Merge note (same day):** sessions `arena-685f958d-fl1` and `arena-5876146b-fl1` independently built
 parallel second-pass deliverables and both landed on `main` first. The integration keeps main's canonical
@@ -312,3 +310,25 @@ settlement audit), `engine/origination.py`, `engine/paper_gate.py` (D1–D3 + pr
 regenerate. This session's register entries are numbered F37–F42 / Q30–Q34 / SG30–SG34 with
 cross-references to the overlapping entries from the other sessions. Full log in `COORDINATION.md`.
 
+
+---
+
+## Final integration (2026-11-16, session `arena-a4c5a1de-fl1`)
+
+- **Stale-PR takeover:** PRs #38 (market-data spine) and #39 (replacement-depth cross-check) — both
+  complete and CI-green with inactive sessions — were integrated without discarding anything.
+  Spine engine modules renamed `engine/backtest_spine.py` / `engine/originate_spine.py`; spine page
+  outputs re-issued as `price-store.html`, `origination.html`, `results-feed-market.html`,
+  `signal-vs-staking-market.html`, `replacement-depth-market.html`, `correlation-gate.html`,
+  `demotion-gate.html`, `decision-desk.html`; register ids re-issued (F43–F52, Q35–Q39, SG35–SG38,
+  S70–S76) with references retagged inside the spine's own files only.
+- **All 28 tracked requirements show `done` on `requirements.html`** — the last four partials
+  (R11 own lines, R12 fitted signals, R16 correlations, R19 replacement-depth deficiencies) were
+  closed with published, page-linked evidence; the honest negative findings (no signal beats the
+  recorded market number; 0 rewards payable; CLV unmeasurable) stay published rather than hidden.
+- **Fixed on the way:** a committed stray conflict-marker pair in this README (`=======` /
+  `>>>>>>> origin/main` around the 685f958d record) — both records preserved, markers removed.
+- **Rebuild & gates:** `python3 tools/build.py && python3 tools/site.py` (36 pages),
+  `tools/checklinks.py` OK, `tools/checkrows.py` 5,604 rows OK, 242 unit tests OK,
+  `scripts/build_market_spine.py --check` byte-identical, `scripts/verify_feed_m.py` 137/137,
+  `scripts/verify_site.py` 0 errors / 0 warnings, `site/build.py` + `site/verify.py` publishable.

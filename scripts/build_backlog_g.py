@@ -233,7 +233,7 @@ R = [
          req="Re-capture and republish the Week 10 injury tables",
          status="done",
          gate="— (re-captured 2026-11-16: 347 rows; published 2026-11-14: 345 rows)",
-         clears="— (the review's 254/279 row figures match neither capture; see flag F43)",
+         clears="— (the review's 254/279 row figures match neither capture; see flag F53)",
          ev="raw/injuries-week10-2026-recapture-2026-11-16.md, data/injuries_2026-11-16.tsv",
          src=["S01"]),
     # -------------------------------------------------------- availability

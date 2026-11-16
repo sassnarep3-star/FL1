@@ -1,0 +1,108 @@
+team	unit	phase	slot	position	absent_player	absent_rank	absent_line	game_status	practice_status	injury	replacement_player	replacement_rank	replacement_line	depth_levels_lost	depth_remaining	chain_broken	no_replacement	replacement_status	roster_starts_prior	roster_years	chart_source	source_url
+ARI	Defense	defence	CB	CB	Max Melton	1	2	Questionable	LIMITED	Knee, Hand	Kei'Trel Clark	2	2	0	2						S16	https://www.azcardinals.com/team/depth-chart
+ARI	Defense	defence	DT	DT	Darius Robinson	2	1	Questionable	LIMITED	Wrist	Walter Nolen III	1	2	1	1						S16	https://www.azcardinals.com/team/depth-chart
+ARI	Defense	defence	NT	DT	Roy Lopez	1	1	Questionable	LIMITED	Toe, Ankle	Andrew Billings	2	1	0	0						S16	https://www.azcardinals.com/team/depth-chart
+ARI	Defense	defence	S	S	Andrew Wingard	1	1	Questionable	DNP	Groin	Kitan Crawford	2	1	0	2						S16	https://www.azcardinals.com/team/depth-chart
+ARI	Offense	offence	C	C	Hjalte Froholdt	1	1	Out	DNP	Concussion	Kingsley Eguakun	2	1	0	0						S16	https://www.azcardinals.com/team/depth-chart
+ARI	Offense	offence	LT	T	Jayden Williams	1	1	Questionable	LIMITED	Knee	Jedrick Wills	2	1	0	0						S16	https://www.azcardinals.com/team/depth-chart
+ARI	Offense	offence	RG	G	Jon Gaines II	2	1	Out	DNP	Ankle					0		YES - nobody is listed behind this slot				S16	https://www.azcardinals.com/team/depth-chart
+ATL	Defense	defence	DE	DE	James Pearce Jr.	3	2	Questionable	LIMITED	Back					0		YES - nobody is listed behind this slot				S17	https://www.atlantafalcons.com/team/depth-chart
+ATL	Defense	defence	DL	DT	Gervon Dexter Sr.	2	1	Questionable	LIMITED	Illness	LaCale London	1	2	1	1						S17	https://www.atlantafalcons.com/team/depth-chart
+ATL	Defense	defence	ILB	LB	Divine Deablo	1	1	Doubtful	DNP	Forearm	Christian Harris	2	1	0	3						S17	https://www.atlantafalcons.com/team/depth-chart
+ATL	Defense	defence	ILB	LB	Josh Woods	3	1	Questionable	FULL	Ankle	Harold Perkins Jr.	2	2	1	0	YES - the next man up is also on the report					S17	https://www.atlantafalcons.com/team/depth-chart
+ATL	Offense	offence	WR	WR	Zachariah Branch	2	2	Out	DNP	Hamstring	Jahan Dotson	1	3	1	1						S17	https://www.atlantafalcons.com/team/depth-chart
+BUF	Defense	defence	CB	CB	Christian Benford	1	1	Questionable	FULL	Wrist	Dee Alford	2	1	0	2						S19	https://www.buffalobills.com/team/depth-chart
+BUF	Defense	defence	S	S	Sam Franklin Jr.	2	1	Questionable	LIMITED	Shoulder	Cole Bishop	1	2	1	1						S19	https://www.buffalobills.com/team/depth-chart
+BUF	Offense	offence	RT	T	Spencer Brown	1	1	Doubtful	DNP	Ankle	Tylan Grable	2	1	0	0						S19	https://www.buffalobills.com/team/depth-chart
+CAR	Defense	defence	CB	CB	Will Lee III	1	2	Questionable	LIMITED	Hamstring					0		YES - nobody is listed behind this slot				S20	https://www.panthers.com/team/depth-chart
+CAR	Defense	defence	LB	LB	Bobby Okereke	1	2	Out	DNP	Foot	Tyrel Dodson	2	2	0	0						S20	https://www.panthers.com/team/depth-chart
+CAR	Defense	defence	OLB	LB	Jaelan Phillips	1	2	Questionable	FULL	Hamstring	Princely Umanmielen	2	2	0	0						S20	https://www.panthers.com/team/depth-chart
+CIN	Defense	defence	S	S	Kyle Dugger	2	2	Out	DNP	Quadricep	Russ Yeast	3	2	0	0						S22	https://www.bengals.com/team/depth-chart
+CLE	Offense	offence	RB	FB	Michael Burton	3	1	Out	DNP	Calf	Jaleel McLaughlin	4	1	0	0						S23	https://www.clevelandbrowns.com/team/depth-chart
+CLE	Offense	offence	WR	WR	Denzel Boston	1	2	Questionable	LIMITED	Toe	Malachi Corley	2	2	0	2						S23	https://www.clevelandbrowns.com/team/depth-chart
+DAL	Defense	defence	CB	CB	Joey Porter Jr.	1	1	Questionable	LIMITED	Ankle, Foot	Shavon Revel Jr.	2	1	0	3						S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Defense	defence	CB	CB	DaRon Bland	1	2	Questionable	LIMITED	Ankle	Cobie Durant	2	2	0	0						S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Defense	defence	OLB	LB	Donovan Ezeiruaku	1	1	Out	DNP	Ankle	James Houston	2	1	0	4						S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Defense	defence	S	S	P.J. Locke	1	1	Out	DNP	Concussion	Juanyeh Thomas	2	1	0	2	YES - the next man up is also on the report		Doubtful			S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Defense	defence	S	S	Juanyeh Thomas	2	1	Doubtful	DNP	Hamstring	Malik Hooker	1	2	1	1	YES - the next man up is also on the report					S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Defense	defence	S	S	Alijah Clark	2	2	Questionable	DNP	Illness					0		YES - nobody is listed behind this slot				S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Offense	offence	RB	RB	Tyler Goodson	2	1	Out	DNP	Ankle, Knee					0		YES - nobody is listed behind this slot				S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Offense	offence	TE	TE	Jake Ferguson	1	1	Out	DNP	Knee, Ankle	Luke Schoonmaker	2	1	0	0	YES - the next man up is also on the report					S24	https://www.dallascowboys.com/team/depth-chart
+DAL	Offense	offence	WR	WR	Jonathan Mingo	2	3	Out	DNP	Ankle					0		YES - nobody is listed behind this slot				S24	https://www.dallascowboys.com/team/depth-chart
+DET	Defense	defence	CB	CB	D.J. Reed	1	1	Out	DNP	Hip	Rock Ya-Sin	2	1	0	5						S26	https://www.detroitlions.com/team/depth-chart
+DET	Offense	offence	C	C	Cade Mays	1	1	Out	DNP	Ankle	Juice Scruggs	2	1	0	0						S26	https://www.detroitlions.com/team/depth-chart
+DET	Offense	offence	RB	RB	Sione Vaki	2	1	Questionable	LIMITED	Ankle	Jacob Saylors	3	1	0	0	YES - the next man up is also on the report					S26	https://www.detroitlions.com/team/depth-chart
+DET	Offense	offence	WR	WR	Amon-Ra St. Brown	1	2	Questionable	LIMITED	Rib	DeAndre Carter	2	2	0	2						S26	https://www.detroitlions.com/team/depth-chart
+GB	Defense	defence	EDGE	LB	Lukas Van Ness	1	1	Questionable	LIMITED	Back	Brenton Cox Jr.	2	1	0	2						S27	https://www.packers.com/team/depth-chart
+GB	Defense	defence	LB	LB	Zaire Franklin	1	1	Doubtful	DNP	Shin	Kristian Welch	3	1	0	2	YES - the next man up is also on the report					S27	https://www.packers.com/team/depth-chart
+GB	Defense	defence	NB	S	Javon Bullard	1	1	Questionable	LIMITED	Ankle, Knee	Kamal Hadden	2	1	0	0						S27	https://www.packers.com/team/depth-chart
+GB	Defense	defence	S	S	Xavier McKinney	1	1	Questionable	LIMITED	Foot	Kitan Oladapo	2	1	0	2						S27	https://www.packers.com/team/depth-chart
+GB	Offense	offence	C	C	Sean Rhyan	1	1	Out	DNP	Ankle	Jager Burton	2	1	0	0						S27	https://www.packers.com/team/depth-chart
+GB	Offense	offence	LG	G	Travis Glover	2	1	Questionable	LIMITED	Knee	Donovan Jennings	3	1	0	0						S27	https://www.packers.com/team/depth-chart
+GB	Offense	offence	RB	RB	Josh Jacobs	1	1	Out	DNP	Finger	MarShawn Lloyd	2	1	0	2						S27	https://www.packers.com/team/depth-chart
+GB	Offense	offence	RG	G	Kevin Zeitler	2	1	Questionable	DNP	Ankle, Triceps					0		YES - nobody is listed behind this slot				S27	https://www.packers.com/team/depth-chart
+GB	Offense	offence	TE	TE	Josh Whyle	3	1	Out	DNP	Concussion	Mark Redman	3	1	0	0						S27	https://www.packers.com/team/depth-chart
+IND	Defense	defence	MLB	LB	Akeem Davis-Gaither	1	1	Out	DNP	Knee	Austin Ajiake	3	1	0	0	YES - the next man up is also on the report					S28	https://www.colts.com/team/depth-chart
+IND	Defense	defence	NT	DT	Jerry Tillery	2	1	Out	DNP	Calf	Tim Smith	3	1	0	0						S28	https://www.colts.com/team/depth-chart
+IND	Defense	defence	WLB	LB	Jaylon Carlies	1	1	Out	DNP	Neck	Bryce Boettcher	2	1	0	1						S28	https://www.colts.com/team/depth-chart
+IND	Offense	offence	RT	T	Jalen Travis	1	1	Out	DNP	Knee	Luke Tenuta	2	1	0	0						S28	https://www.colts.com/team/depth-chart
+IND	Offense	offence	TE	TE	Mo Alie-Cox	2	1	Out	DNP	Groin	Drew Ogletree	3	1	0	2						S28	https://www.colts.com/team/depth-chart
+IND	Offense	offence	TE	TE	Will Mallory	4	1	Questionable	LIMITED	Hamstring					0		YES - nobody is listed behind this slot				S28	https://www.colts.com/team/depth-chart
+JAX	Defense	defence	NT	DT	Jordan Davis	1	1	Out	LIMITED	Not injury related - resting player	Davon Godchaux	2	1	0	1						S29	https://www.jaguars.com/team/depth-chart
+JAX	Offense	offence	C	C	Robert Hainsey	1	1	Questionable	LIMITED	Concussion	Jonah Monheim	2	1	0	0						S29	https://www.jaguars.com/team/depth-chart
+LAR	Defense	defence	CB	CB	Trent McDuffie	1	1	Questionable	LIMITED	Back	Cam Lampkin	2	1	0	2						S31	https://www.therams.com/team/depth-chart
+LAR	Defense	defence	OLB	LB	Myles Garrett	1	2	Questionable	DNP	Knee, Not injury related - resting player	Josaiah Stewart	2	2	0	1						S31	https://www.therams.com/team/depth-chart
+LAR	Defense	defence	S	S	Kam Curl	1	2	Questionable	LIMITED	Toe	Jaylen McCollough	2	2	0	0						S31	https://www.therams.com/team/depth-chart
+LAR	Offense	offence	LG	G	Steve Avila	1	1	Out	DNP	Hamstring	Bill Murray	2	1	0	0						S31	https://www.therams.com/team/depth-chart
+LAR	Offense	offence	TE	TE	Davis Allen	1	1	Questionable	LIMITED	Oblique	Max Klare	2	2	1	0	YES - the next man up is also on the report					S31	https://www.therams.com/team/depth-chart
+LV	Offense	offence	WR	WR	Dont'e Thornton Jr.	3	1	Questionable	DNP	Back	Tre Tucker	1	2	1	3						S32	https://www.raiders.com/team/depth-chart
+MIA	Offense	offence	C	C	Aaron Brewer	1	1	Out	DNP	Concussion	Andrew Meyer	2	1	0	0						S33	https://www.miamidolphins.com/team/depth-chart
+MIA	Offense	offence	WR	WR	Jared Wayne	2	1	Out	DNP	Quadricep	Malik Washington	1	2	1	3						S33	https://www.miamidolphins.com/team/depth-chart
+MIA	Offense	offence	WR	WR	Chris Bell	1	3	Doubtful	DNP	Knee	Jalen Tolbert	2	3	0	0						S33	https://www.miamidolphins.com/team/depth-chart
+MIN	Defense	defence	DL	DT	Tyrion Ingram-Dawkins	1	3	Out	DNP	Ankle	Elijah Williams	2	3	0	0						S34	https://www.vikings.com/team/depth-chart
+MIN	Defense	defence	LB	LB	Blake Cashman	1	1	Out	LIMITED	Concussion	Ivan Pace Jr.	2	1	0	2						S34	https://www.vikings.com/team/depth-chart
+MIN	Defense	defence	OLB	LB	Kyle Van Noy	2	1	Questionable	LIMITED	Calf	Chaz Chambliss	3	1	0	2						S34	https://www.vikings.com/team/depth-chart
+MIN	Offense	offence	QB	QB	Kyler Murray	1	1	Out	DNP	Hamstring	Max Brosmer	3	1	0	1	YES - the next man up is also on the report					S34	https://www.vikings.com/team/depth-chart
+MIN	Offense	offence	TE	TE	T.J. Hockenson	1	1	Out	DNP	Wrist, Chest	Gavin Bartholomew	2	1	0	0						S34	https://www.vikings.com/team/depth-chart
+MIN	Offense	offence	WR	WR	Jordan Addison	1	2	Questionable	LIMITED	Thumb	Myles Price	2	3	1	0	YES - the next man up is also on the report					S34	https://www.vikings.com/team/depth-chart
+MIN	Offense	offence	WR	WR	Jauan Jennings	1	3	Out	DNP	Calf	Myles Price	2	3	0	0						S34	https://www.vikings.com/team/depth-chart
+NE	Defense	defence	CB	CB	Carlton Davis III	1	1	Out	DNP	Knee	Channing Canada	2	1	0	4						S35	https://www.patriots.com/team/depth-chart
+NE	Defense	defence	CB	CB	Charles Woods	2	2	Questionable	FULL	Hamstring	Christian Gonzalez	1	3	1	1						S35	https://www.patriots.com/team/depth-chart
+NE	Defense	defence	S	S	Brenden Schooler	3	2	Questionable	LIMITED	Hamstring					0		YES - nobody is listed behind this slot				S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	C	C	Ben Brown	2	1	Out	DNP	Knee					0		YES - nobody is listed behind this slot				S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	LG	C	Ben Brown	1	1	Out	DNP	Knee	Walter Rouse	2	1	0	0	YES - the next man up is also on the report		Questionable			S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	LG	T	Walter Rouse	2	1	Questionable	LIMITED	Concussion					0		YES - nobody is listed behind this slot				S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	RB	RB	Rhamondre Stevenson	1	1	Questionable	LIMITED	Knee	Corey Kiner	3	1	0	1	YES - the next man up is also on the report					S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	RB	RB	TreVeyon Henderson	2	1	Out	DNP	Illness	Corey Kiner	3	1	0	1						S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	RG	T	Walter Rouse	2	1	Questionable	LIMITED	Concussion					0		YES - nobody is listed behind this slot				S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	TE	TE	Cameron Latu	3	1	Questionable	LIMITED	Back					0		YES - nobody is listed behind this slot				S35	https://www.patriots.com/team/depth-chart
+NE	Offense	offence	WR	WR	A.J. Brown	1	1	Questionable	LIMITED	Ankle, Knee	Efton Chism III	2	1	0	4						S35	https://www.patriots.com/team/depth-chart
+NO	Defense	defence	DL	DT	Christen Miller	2	2	Out	DNP	Knee	Nathan Shepherd	1	3	1	1						S36	https://www.neworleanssaints.com/team/depth-chart
+NO	Offense	offence	C	C	Erik McCoy	1	1	Out	DNP	Biceps	William Sherman	2	1	0	0						S36	https://www.neworleanssaints.com/team/depth-chart
+NO	Offense	offence	RB	RB	CJ Donaldson	3	1	Out	DNP	Shoulder					0		YES - nobody is listed behind this slot				S36	https://www.neworleanssaints.com/team/depth-chart
+NO	Offense	offence	RT	T	Taliese Fuaga	1	1	Out	DNP	Knee	Mason Murphy	2	1	0	0						S36	https://www.neworleanssaints.com/team/depth-chart
+NYJ	Defense	defence	CB	CB	Nahshon Wright	2	2	Questionable	FULL	Back					0		YES - nobody is listed behind this slot				S38	https://www.newyorkjets.com/team/depth-chart
+NYJ	Defense	defence	DL	DT	Harrison Phillips	1	1	Questionable	FULL	Ankle	Jack Heflin	2	1	0	4						S38	https://www.newyorkjets.com/team/depth-chart
+NYJ	Defense	defence	EDGE	DE	Joseph Ossai	2	2	Questionable	FULL	Ankle	Nate Lynn	3	2	0	0						S38	https://www.newyorkjets.com/team/depth-chart
+NYJ	Defense	defence	LB	LB	Trevin Wallace	2	1	Out	DNP	Groin	Demario Davis	1	2	1	1						S38	https://www.newyorkjets.com/team/depth-chart
+NYJ	Defense	defence	NB	CB	Jarvis Brownlee Jr.	1	1	Questionable	LIMITED	Illness	D'Angelo Ponds	2	1	0	0						S38	https://www.newyorkjets.com/team/depth-chart
+NYJ	Offense	offence	WR	WR	Garrett Wilson	1	1	Questionable	FULL	Concussion	Isaiah Williams	3	1	0	3	YES - the next man up is also on the report					S38	https://www.newyorkjets.com/team/depth-chart
+NYJ	Offense	offence	WR	WR	Omar Cooper Jr.	2	1	Questionable	FULL	Ankle	Isaiah Williams	3	1	0	3						S38	https://www.newyorkjets.com/team/depth-chart
+NYJ	Offense	offence	WR	WR	Adonai Mitchell	1	2	Questionable	FULL	Knee	Tim Patrick	2	2	0	1						S38	https://www.newyorkjets.com/team/depth-chart
+SEA	Defense	defence	DT	DT	Leonard Williams	1	1	Out	DNP	Stinger	Rylie Mills	2	1	0	0						S41	https://www.seahawks.com/team/depth-chart/
+SEA	Offense	offence	LG	G	Quenton Nelson	1	1	Out	DNP	Knee	Anthony Bradford	2	1	0	0	YES - the next man up is also on the report					S41	https://www.seahawks.com/team/depth-chart/
+SEA	Offense	offence	LT	T	Charles Cross	1	1	Out	DNP	Ankle	Josh Jones	2	1	0	0						S41	https://www.seahawks.com/team/depth-chart/
+SEA	Offense	offence	QB	QB	Sam Darnold	1	1	Out	DNP	Ribs, Quadricep	Jalen Milroe	3	1	0	0	YES - the next man up is also on the report					S41	https://www.seahawks.com/team/depth-chart/
+SF	Defense	defence	LCB	CB	Renardo Green	1	1	Questionable	LIMITED	Back					0		YES - nobody is listed behind this slot				S42	https://www.49ers.com/team/depth-chart
+SF	Defense	defence	NB	CB	Upton Stout	1	1	Questionable	LIMITED	Shoulder, Neck					0		YES - nobody is listed behind this slot				S42	https://www.49ers.com/team/depth-chart
+SF	Defense	defence	RCB	CB	Deommodore Lenoir	1	1	Questionable	LIMITED	Foot	Ephesians Prysock	2	1	0	0						S42	https://www.49ers.com/team/depth-chart
+SF	Defense	defence	WILL	LB	Dre Greenlaw	1	1	Questionable	LIMITED	Knee	Garret Wallow	2	1	0	0						S42	https://www.49ers.com/team/depth-chart
+SF	Offense	offence	LT	T	Trent Williams	1	1	Questionable	DNP	Shoulder	Vederian Lowe	2	1	0	1						S42	https://www.49ers.com/team/depth-chart
+SF	Offense	offence	WR	WR	Mike Evans	1	1	Out	DNP	Achilles	Jordan Watkins	2	1	0	4						S42	https://www.49ers.com/team/depth-chart
+TEN	Defense	defence	LB	LB	Cody Barton	1	1	Out	DNP	Concussion	Cedric Gray	1	2	1	2						S44	https://www.tennesseetitans.com/team/depth-chart
+TEN	Defense	defence	LB	LB	Anthony Hill Jr.	1	3	Out	DNP	Neck	Dorian Mausi	2	3	0	0						S44	https://www.tennesseetitans.com/team/depth-chart
+TEN	Offense	offence	LG	G	Peter Skoronski	1	1	Out	DNP	Hamstring					0		YES - nobody is listed behind this slot				S44	https://www.tennesseetitans.com/team/depth-chart
+TEN	Offense	offence	RB	RB	Tyjae Spears	2	1	Questionable	FULL	Knee	Julius Chestnut	3	1	0	1						S44	https://www.tennesseetitans.com/team/depth-chart
+TEN	Offense	offence	WR	WR	Carnell Tate	1	3	Out	DNP	Shoulder	Elic Ayomanor	2	3	0	0						S44	https://www.tennesseetitans.com/team/depth-chart
+TEN	Special Teams	special teams	K	P	Tommy Townsend	2	1	Out	DNP	Knee, Achilles					0		YES - nobody is listed behind this slot				S44	https://www.tennesseetitans.com/team/depth-chart
+WAS	Offense	offence	TE	TE	Colson Yankoff	2	2	Out	DNP	Knee					0		YES - nobody is listed behind this slot				S45	https://www.commanders.com/team/depth-chart

@@ -649,7 +649,7 @@
     "category": "Data",
     "problem": "Player-prop combos cannot be backtested from team-level results; the only player-level logs in the repo are third-party, so prop correlations stay blocked on the official-correlations page (CO-07).",
     "proposal": "Register an official player-statistics source (NFL.com gamebooks or the league's official statistics pages at season grain), capture it into an append-only feed like the results feed, and only then compute prop-pair correlations officially.",
-    "evidence": "correlations-official.html (CO-07 blocked); prop-correlations.html (third-party estimates, labelled).",
+    "evidence": "correlation-register.html and official-correlations.html (the availability-edge value stays blank, n=1); prop-correlations.html (third-party estimates, labelled).",
     "effort": "High",
     "risk": "Medium - official gamebooks are per-week documents; season-grain capture is real work.",
     "reversibility": "Fully reversible",
@@ -706,6 +706,88 @@
   },
   {
     "id": "SG35",
+    "title": "Run a dated snapshot collector before Week 12",
+    "category": "Prices",
+    "problem": "Nothing in the repository can measure closing-line value, so the one gate that separates a real edge from a lucky run cannot run, and 0 units of reward can be paid.",
+    "proposal": "Start the live price collector now, on the 38 unlined 2026 games and next week's slate: one row per (game, market, side, line, price, source, UTC timestamp), written through the existing append-only store at the first sighting and again at kick-off. Two weeks of collection produces the only dataset in this project that makes D1 the real rule instead of a substitute.",
+    "evidence": "data/market/snapshot_manifest.json (no dated open for any season); flags F43 and F49; engine/price_snapshots.py (append-only, content-hashed, provenance required).",
+    "effort": "Medium - the writer exists, the capture loop does not",
+    "risk": "Low. Worst case is a store full of rows nobody can settle, which is the state today.",
+    "reversibility": "Fully reversible; the store is append-only and every row carries its own source.",
+    "prerequisites": [
+      "Q35"
+    ],
+    "options": [
+      "Collect opens and closes on all four markets, timestamped. (Recommended)",
+      "Collect closes only, and accept that CLV stays unmeasurable.",
+      "Buy a historical open-price archive; requires a budget decision, not an engineering one."
+    ],
+    "recommendation": "A. It is the single change that unblocks the promotion gate, the reward rule and the CLV claim at once.",
+    "impact": "Turns requirement 1 from 'close only' into 'open and close', and makes 2026 bets measurable for line value from the first collected week."
+  },
+  {
+    "id": "SG36",
+    "title": "Keep the undated vintage as a first-class label everywhere",
+    "category": "Data model",
+    "problem": "A price whose vintage nobody stated is currently either refused or pushed into 'intermediate'. Both are losses: one hides data, the other invents provenance.",
+    "proposal": "Make UNDOCUMENTED a legal value in the store's phase enum and in every page label, and have the site print the vintage next to every market number (it already does in the board). This is a 3-line schema change plus a vocabulary decision, and it is the reason 57,920 rows are refused today.",
+    "evidence": "data/market/snapshot_manifest.json sqlite_interop block; engine/price_snapshots.py CHECK clause; flag F47.",
+    "effort": "Low",
+    "risk": "Low, if the strict provenance columns stay mandatory",
+    "reversibility": "A new database file; the old one stays as it is.",
+    "prerequisites": [
+      "Q35"
+    ],
+    "options": [
+      "Add UNDOCUMENTED to the enum. (Recommended)",
+      "Relabel undated rows 'intermediate'.",
+      "Keep the store close-only and the ledger separate."
+    ],
+    "recommendation": "A. The label describes what we have; the other two describe what we wish we had.",
+    "impact": "The store then holds the whole ledger, so a reviewer does not need two systems to audit a price."
+  },
+  {
+    "id": "SG37",
+    "title": "Publish cross-feed drift as a standing section, not a one-off",
+    "category": "Trust",
+    "problem": "Two feeds disagree on 167 games about which team is favoured. If that fact appears once, in a flag, it stops steering behaviour the moment the flag list is scrolled past.",
+    "proposal": "Render the drift matrix on every page that quotes a market number, computed at build time, and let the origination board switch its benchmark column between the disagreeing feeds so a reader can see how much a pick depends on the choice.",
+    "evidence": "data/market/price_drift.tsv; engine/price_store.py drift(); flag F45.",
+    "effort": "Low - the matrix is already computed",
+    "risk": "Very low",
+    "reversibility": "Fully reversible; presentation only.",
+    "prerequisites": [],
+    "options": [
+      "Standing drift section plus a benchmark toggle. (Recommended)",
+      "Drift in the flag list only.",
+      "Pick one feed quietly and never mention the other."
+    ],
+    "recommendation": "A. Option three is the failure mode this whole site was built to avoid.",
+    "impact": "Makes the size of vendor disagreement visible at the moment a number is used, which is the only time it matters."
+  },
+  {
+    "id": "SG38",
+    "title": "Tie rewards to measured line value, not to ROI",
+    "category": "Competition",
+    "problem": "A reward table keyed on ROI pays whoever was luckiest at the price they were given. On this data every ROI is computed against a close or an undated number, so it is an upper bound - and the two best-ranked signals are negative anyway.",
+    "proposal": "Make reward eligibility require (a) a positive lower bound on points beat, (b) a non-inverted calibration slope, and (c) at least 200 bets measured against a *timestamped* close, i.e. the CLV condition SG35 creates. Until then, 0 units are payable and the page says so in the same place the ranking appears.",
+    "evidence": "data/market/leaderboard_split.tsv (9 rules, 0 clearing, 0 paid); engine/signal_staking.py _reward(); data/leaderboard.csv (16 strategies, all REJECTED).",
+    "effort": "Low - the rule is config plus a column",
+    "risk": "Low; the risk is paying nothing, which is already the state",
+    "reversibility": "Fully reversible; nothing has been paid.",
+    "prerequisites": [
+      "SG35"
+    ],
+    "options": [
+      "Require CLV with n>=200 before any payout. (Recommended)",
+      "Pay on the signal lower bound alone.",
+      "Keep paying nothing until a reviewer chooses."
+    ],
+    "recommendation": "A. It is the version of the rule that cannot be satisfied by a run of coin flips.",
+    "impact": "The competition becomes a measurement rather than a leaderboard with a prize attached."
+  },
+  {
+    "id": "SG39",
     "title": "Publish a weekly 'what changed' diff instead of a static snapshot",
     "category": "Site",
     "problem": "The site publishes the injury report as one table. This session showed the official page moves between reads: two days, two added rows, 32 moved fields. A static table hides exactly the movement the availability signal depends on.",
@@ -715,7 +797,7 @@
     "risk": "Very low",
     "reversibility": "Fully reversible",
     "prerequisites": [
-      "Q36"
+      "Q41"
     ],
     "options": [
       "Diff published weekly for the whole league. (Recommended)",
@@ -726,7 +808,7 @@
     "impact": "Turns the injury layer from a snapshot into the series the brief asks for (R80, R74)."
   },
   {
-    "id": "SG36",
+    "id": "SG40",
     "title": "Promote the two dated captures into a scheduled, append-only ledger",
     "category": "Data",
     "problem": "Two captures exist only because a session took them by hand. The brief asks for Wednesday, Thursday and Friday reads with retained hashes; nothing in the repository schedules that.",
@@ -736,7 +818,7 @@
     "risk": "Low",
     "reversibility": "Fully reversible",
     "prerequisites": [
-      "Q37"
+      "Q42"
     ],
     "options": [
       "Scheduled append-only capture with hashes and an alert. (Recommended)",
@@ -747,7 +829,7 @@
     "impact": "Makes R41, R48, R49 and R73 achievable instead of aspirational."
   },
   {
-    "id": "SG37",
+    "id": "SG41",
     "title": "Adopt the removal-of-luck thresholds as the leaderboard's qualification bar",
     "category": "Competition",
     "problem": "The leaderboard has a ranking rule but no sample-size bar, so a short lucky run would top it. The luck panel publishes what the bar would have to be.",
@@ -757,7 +839,7 @@
     "risk": "Low",
     "reversibility": "Fully reversible until the first result lands",
     "prerequisites": [
-      "Q38"
+      "Q43"
     ],
     "options": [
       "Adopt 785 (5pp edge, unadjusted) and 1,211 (adjusted for six entries) as published. (Recommended)",
@@ -768,7 +850,7 @@
     "impact": "Converts 'remove luck' from a slogan into a gate that can be checked (R57, R78)."
   },
   {
-    "id": "SG38",
+    "id": "SG42",
     "title": "Add random-pick and favourites-only controls to every leaderboard run",
     "category": "Competition",
     "problem": "Every registered strategy is a candidate and none is a control, so a candidate can only be compared against other candidates. The brief asks for controls explicitly.",
