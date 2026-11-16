@@ -6,7 +6,7 @@
 
 | ID | Task | Status | Owner | File scope (claimed) |
 |---|---|---|---|---|
-| A-01 | Audit the integrated site for stale/contradictory headline claims; add a landing-page decision-readiness table mapping each requirement to its blocking gate and a sourced clearance criterion; reconcile executive summary and reading guide; run site and data checks. | in progress | `arena/4501cbb9-fl1` | `COORDINATION.md`, `data/readiness.json`, `tools/site.py`, generated `index.html`, `executive-summary.html`, `EXECUTIVE_SUMMARY.md`, `README.md`, `REVIEW.md`, `tests/test_readiness.py` |
+| A-01 | Audit the integrated site for stale/contradictory claims; add a landing-page decision-readiness table mapping every registered requirement to its blocking gate and a sourced clearance criterion; keep backtest results off all leaderboard pages (separate audit-only research view); reconcile executive summary and reading guide; run site and data checks. | in progress | `arena/4501cbb9-fl1` | `COORDINATION.md`, `data/readiness.json`, `tools/site.py`, `scripts/build_site.py`, `scripts/strategy_lab.py`, generated `index.html`, `strategies.html`, `signal-vs-staking.html`, `docs/computed/leaderboard.html`, `executive-summary.html`, `EXECUTIVE_SUMMARY.md`, `README.md`, `REVIEW.md`, `tests/test_readiness.py`, `tests/test_leaderboard_policy.py` |
 
 > Read this **before** starting. Claim a task by writing your session ID and file scope, then commit
 > and push that claim immediately. Never start a task another session has claimed.
