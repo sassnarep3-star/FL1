@@ -251,6 +251,35 @@ where clubs publish no further name (F40), the week-10 availability-vs-outcome c
 settles (F41). Four questions (Q30-Q34) and five suggestions (SG16-SG30) were added for your decision;
 none of them is answered unilaterally.
 
+---
+
+## Final integration addendum — session `arena-a4c5a1de-fl1` (2026-11-16)
+
+**Stale-PR takeover (coordination rule: claim >60 min stale).** Two complete, CI-green PRs whose
+sessions went inactive were integrated: **#38** (`arena/08fef9e9-fl1`, the market-data spine: 9 engine
+modules, 8 pages, 74 unit tests, four settlement bugs it found in its own first pass) and **#39**
+(`arena/2fa09442-fl1`, the cross-check gate between the two independent replacement-depth
+implementations). Nothing discarded: colliding engine paths renamed with importers repointed
+(`engine/backtest_spine.py`, `engine/originate_spine.py`), colliding page outputs re-issued
+(`results-feed-market.html`, `signal-vs-staking-market.html`, `replacement-depth-market.html`),
+register ids re-issued per repo convention (flags F43–F52, questions Q35–Q39, suggestions SG35–SG38,
+sources S77–S76) with every in-file reference retagged inside the spine's own files only.
+
+**All 28 tracked requirements now show `done` on [Requirements](requirements.html).** The last four
+partials were closed with published evidence: R11 (numeric fair | market | difference boards on
+`line-board.html` and `origination.html`), R12 (fitted signals, walk-forward 13,310 published bets,
+headline finding F50: the model's own signal is negative against the recorded market number on all
+three markets), R16 (official-operand correlation register with n + Fisher CIs, plus the correlation
+gate that publishes its refusals with reasons), R19 (71 verified replacement-depth ladders,
+cross-checked by two independent implementations). Status changes cite their evidence on the
+requirements page itself.
+
+**Known-open items are unchanged and stay on [Flagged for Review](flagged.html)**: no official price
+source exists (F34/F39), opening prices for 2026 are uncapturable from official channels (F43), CLV
+is unmeasurable until a dated snapshot collector runs (F49, SG35), the undated-vintage vocabulary
+decision (Q35), and the benchmark-policy decision (Q37). These do not block the merge; they are the
+owner's decision list.
+
 ## Session `arena-38a78804-fl1` — live refresh + brief-gap sprint N01–N06 (2026-11-16)
 
 Fresh official captures (both clock-timed, transcribed verbatim, all re-runnable) plus five brief
@@ -258,19 +287,19 @@ requirements that no prior session had built. Nothing already published was over
 
 **New verified data (official NFL.com, read 2026-11-16 ~01:15–01:25 UTC):**
 
-1. **Second dated read of the injury hub (S70).** The hub still showed *WEEK 10*. Delta vs the
+1. **Second dated read of the injury hub (S77).** The hub still showed *WEEK 10*. Delta vs the
    2026-11-14 read: **32 field changes + 2 added rows + 0 removed** — every change belongs to a
    report still evolving (both Monday-night clubs; Baltimore grew 8→10 rows; one Colts row cleared).
    The three Lions designations flagged earlier were already populated in the 2026-11-14 re-capture.
    Published as a delta register (`data/injury_hub_delta.json` + new section on `injuries.html`);
    the level is never re-published. Reserve-list events referenced on the hub (TreVeyon Henderson
    IR, Malik Willis IR, Lamar Jackson IR roundups) are recorded as pointers, never as table rows.
-2. **Week 10 finals (S71).** 12 of 13 games printed FINAL at read time: 11 new finals captured.
+2. **Week 10 finals (S78).** 12 of 13 games printed FINAL at read time: 11 new finals captured.
    The two non-final games (SNF in progress, MNF unplayed) are published as **pending with blank
    scores** — nothing inferred. Verification V1–V4 in `scripts/build_week10_extension.py`:
    TNF corroborates the existing feed; every final is a published fixture; record arithmetic for
    all 32 clubs reproduces the page's game-card records; and the feed + new finals reproduce the
-   fresh official standings (S72) **including PF/PA, 32/32**.
+   fresh official standings (S79) **including PF/PA, 32/32**.
 
 **Brief requirements closed:**
 

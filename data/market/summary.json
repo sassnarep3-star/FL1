@@ -1,0 +1,42 @@
+{
+ "capture_date": "2026-11-14",
+ "snapshots": 78410,
+ "snapshots_quarantined": 1088,
+ "snapshots_current_season": 1304,
+ "vintage_counts": {
+  "CLOSE": 20490,
+  "LIVE_CURRENT": 208,
+  "OPEN": 1088,
+  "UNDOCUMENTED": 56624
+ },
+ "games_2026": 272,
+ "games_2026_verified": 137,
+ "games_2026_unplayed": 135,
+ "trades": 23219,
+ "trades_published": 13310,
+ "pushes": 395,
+ "strategies": 9,
+ "strategies_clearing_signal": 0,
+ "rewards_paid": 0,
+ "demotions": 28,
+ "best_signal": {
+  "strategy_id": "ML_EDGE_3PP",
+  "points_beat_lb": -0.021346,
+  "hit_rate": 0.3839,
+  "breakeven_hit": 0.43478,
+  "roi": -0.06139,
+  "rank_staking": 8
+ },
+ "correlations_published": 3,
+ "correlations_held": 4,
+ "n_official_games_for_correlation": 137,
+ "depth_vacancies": 107,
+ "depth_resolved": 87,
+ "clubs_with_chart": 30,
+ "model_params": {
+  "lam": 0.88,
+  "s": 0.55,
+  "hfa": 2.5
+ },
+ "fingerprint": "f25651488fc1c42d"
+}
