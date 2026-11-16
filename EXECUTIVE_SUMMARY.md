@@ -348,7 +348,7 @@ implementations). Nothing discarded: colliding engine paths renamed with importe
 (`engine/backtest_spine.py`, `engine/originate_spine.py`), colliding page outputs re-issued
 (`results-feed-market.html`, `signal-vs-staking-market.html`, `replacement-depth-market.html`),
 register ids re-issued per repo convention (flags F43–F52, questions Q35–Q39, suggestions SG35–SG38,
-sources S70–S76) with every in-file reference retagged inside the spine's own files only.
+sources S77–S76) with every in-file reference retagged inside the spine's own files only.
 
 **All 28 tracked requirements now show `done` on [Requirements](requirements.html).** The last four
 partials were closed with published evidence: R11 (numeric fair | market | difference boards on
@@ -364,3 +364,43 @@ source exists (F34/F39), opening prices for 2026 are uncapturable from official 
 is unmeasurable until a dated snapshot collector runs (F49, SG35), the undated-vintage vocabulary
 decision (Q35), and the benchmark-policy decision (Q37). These do not block the merge; they are the
 owner's decision list.
+
+## Session `arena-38a78804-fl1` — live refresh + brief-gap sprint N01–N06 (2026-11-16)
+
+Fresh official captures (both clock-timed, transcribed verbatim, all re-runnable) plus five brief
+requirements that no prior session had built. Nothing already published was overwritten.
+
+**New verified data (official NFL.com, read 2026-11-16 ~01:15–01:25 UTC):**
+
+1. **Second dated read of the injury hub (S77).** The hub still showed *WEEK 10*. Delta vs the
+   2026-11-14 read: **32 field changes + 2 added rows + 0 removed** — every change belongs to a
+   report still evolving (both Monday-night clubs; Baltimore grew 8→10 rows; one Colts row cleared).
+   The three Lions designations flagged earlier were already populated in the 2026-11-14 re-capture.
+   Published as a delta register (`data/injury_hub_delta.json` + new section on `injuries.html`);
+   the level is never re-published. Reserve-list events referenced on the hub (TreVeyon Henderson
+   IR, Malik Willis IR, Lamar Jackson IR roundups) are recorded as pointers, never as table rows.
+2. **Week 10 finals (S78).** 12 of 13 games printed FINAL at read time: 11 new finals captured.
+   The two non-final games (SNF in progress, MNF unplayed) are published as **pending with blank
+   scores** — nothing inferred. Verification V1–V4 in `scripts/build_week10_extension.py`:
+   TNF corroborates the existing feed; every final is a published fixture; record arithmetic for
+   all 32 clubs reproduces the page's game-card records; and the feed + new finals reproduce the
+   fresh official standings (S79) **including PF/PA, 32/32**.
+
+**Brief requirements closed:**
+
+- **Decision-readiness table on the landing page (N01)** — one row per requirement R01–R28 with
+  the gate that blocks it and the number that would clear it; blockers cite published question and
+  flag records only (`scripts/build_decision_readiness.py`, fails if the register drifts).
+- **Two-sided "what would change our mind" field on every strategy entry (N02)** — both directions
+  populated for ST01–ST06, each naming the data it needs or the open question that owns it.
+- **Removal-of-luck panel on the dashboard (N05)** — the luck-removed edge (95% CI lower bound vs
+  break-even hurdle) for all 16 computed entries: **0 proven; all 7 positive-ROI entries rejected
+  on signal**; control baseline (home teams at the close, −5.19% over 5,067 bets) and the 16-trial
+  multiplicity adjustment shown beside.
+- **Open question Q35 + suggestion SG35** — the promotion policy for moving verified finals into
+  the canonical feed after a week completes (owner decision; pairs with the V1–V4 machinery).
+
+**Verification this session:** 192 unit tests OK (24 new); `tools/checklinks.py` 28 pages OK;
+`scripts/verify_site.py` 0 errors/0 warnings; `tools/verify_injuries.py` 345/345;
+`tools/verify_results.py` PASS; `scripts/verify_d.py` V5–V8 PASS (V9 BLOCKED by design — uncommitted
+parquet input); `engine/demo_run.py --check` current; docs sub-site builds 18 pages, 0 unsourced rows.

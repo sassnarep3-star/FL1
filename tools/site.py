@@ -206,7 +206,7 @@ def page(filename, title, body, extra_head="", wide=False):
 </main>
 <footer class="foot">
   <p><strong>%s</strong> — %s</p>
-  <p>Data captured 2026-11-14 (UTC) from official league and club sources. Every value links to its source.
+  <p>Data captured 2026-11-14 and 2026-11-16 (UTC) from official league and club sources. Every value links to its source.
   Values that could not be confirmed from an official source are left blank and listed on
   <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
   No price, edge or expected-value figure is displayed unless an official source supports it.</p>
@@ -759,6 +759,225 @@ official, so they cannot enter this register. They live on their own labelled pa
             [cell(x["path"]), cell(x["why"])] for x in corr["excluded_registers"]
         ], cls="dense"))
 
+    # ---------------------------------------------- N01-N05 sprint (2026-11-16)
+    dec = build.load_json("decision_readiness.json")
+    luck = build.load_json("luck_panel_signal.json")
+    delta = build.load_json("injury_hub_delta.json")
+    w10x = build.load_json("week10_results_extension.json")
+    strat_j = build.load_json("strategies.json")
+
+    def qflink(ref):
+        if ref.startswith("Q"):
+            return '<a href="questions.html#%s">%s</a>' % (ref, ref)
+        return '<a href="flagged.html#%s">%s</a>' % (ref, ref)
+
+    # ------------------------------------------------- N01 decision readiness
+    dr_rows = []
+    for r in dec["rows"]:
+        blocker = r["blocker"] or "none — delivered"
+        refs = " ".join(qflink(x) for x in r["blocker_refs"])
+        dr_rows.append([
+            '<td><a href="requirements.html">%s</a></td>' % esc(r["id"]),
+            cell(r["requirement"]),
+            '<td>%s</td>' % pill(r["status"], STATUS_KIND.get(r["status"], "")),
+            cell(r["delivered"]),
+            cell(blocker) + ('<td>%s</td>' % refs if refs else "<td>—</td>"),
+            cell(r["clears"]),
+        ])
+    out["decision_readiness"] = """
+<section id="decision-readiness">
+<h2>Decision-readiness — one row per requirement</h2>
+<p class="lead">What each requirement needs before a decision can rest on it: the gate that blocks it
+today, and the number that would clear that gate. Identity and status are read from the requirements
+register at build time; blockers cite published question and flag records; clearing numbers are this
+repo's own verification counts, and proposed thresholds are marked as proposals.</p>
+%s
+</section>
+""" % table(["Req", "Requirement", "Status", "Delivered so far", "Gate that blocks it",
+             "Refs", "The number that would clear it"],
+            dr_rows, cls="dense searchable",
+            caption="Built by <code>scripts/build_decision_readiness.py</code> from "
+                    "data/requirements.json + published registers. A blank blocker means the "
+                    "requirement is delivered and held open only by ongoing verification.")
+
+    # ------------------------------------------------------- N05 luck panel
+    lk_rows = []
+    for r in luck["rows"]:
+        lk_rows.append([
+            cell(r["strategy_id"]),
+            cell(r["market"]),
+            cell(r["settled"], "n"),
+            cell("%.2f%%" % (100 * r["hit_rate"]), "n"),
+            cell("%.2f%%" % (100 * r["hit_ci_low"]), "n"),
+            cell("%.2f%%" % (100 * r["reference_hurdle"]), "n"),
+            cell("%+.2f pp" % (100 * r["edge_lcb"]), "n"),
+            cell("%+.2f%%" % (100 * r["roi_report_only"]), "n"),
+            '<td>%s</td>' % pill(r["verdict"], "ok" if r["verdict"] == "PROVEN" else "bad"),
+        ])
+    h = luck["headlines"]
+    out["luck_panel"] = """
+<section id="removal-of-luck">
+<h2>Removal of luck &mdash; why the board is still empty</h2>
+<p class="lead">%s</p>
+<div class="callout"><p><strong>The one-line proof.</strong> %s</p>
+<p><strong>Control baseline.</strong> %s</p>
+<p><strong>Multiplicity.</strong> %s</p></div>
+<div class="callout bad"><p><strong>Dataset tier.</strong> %s</p></div>
+%s
+</section>
+""" % (esc(luck["metric_plain"]),
+       esc(h["best_case"]["point"]),
+       esc(h["control_baseline"]["point"]),
+       esc(h["multiplicity"]["note"]),
+       esc(luck["provenance"]["warning"]),
+       table(["Entry", "Market", "Settled n", "Hit rate", "95% CI low", "Break-even hurdle",
+              "Luck-removed edge", "ROI (report only)", "Verdict"],
+             lk_rows, cls="dense searchable",
+             caption="Every row from data/leaderboard_signal_staking.json, ordered by the "
+                     "luck-removed edge. ROI is shown but can never change a rank — 7 of 16 "
+                     "entries show a positive ROI and every one of them is rejected on signal."))
+
+    # -------------------------------------------------- N03 injury-hub delta
+    reads = delta["reads"]
+    ch = delta["delta"]["changed"]
+    add = delta["delta"]["added"]
+    rem = delta["delta"]["removed"]
+    pc = delta["delta"]["per_club_row_count_changes"]
+    read_rows = []
+    for r in reads:
+        when = r.get("read_window_utc") or r.get("captured", "")
+        read_rows.append([
+            cell("read %d" % r["read"], "n"),
+            cell(when),
+            cell(r["rows"], "n"),
+            cell(r["week_shown"]),
+            raw_src(src_link(r["source_id"], sources_by_id)),
+        ])
+    ch_rows = []
+    for c in ch:
+        ch_rows.append([
+            cell(c["team"]),
+            cell(c["player"]),
+            cell(c["pos"]),
+            cell(c["field"]),
+            cell(c["old"] or "—"),
+            cell(c["new"] or "—"),
+        ])
+    add_rows = [[cell(a["team"]), cell(a["player"]), cell(a["pos"]),
+                 cell(a["injury"] or "—"), cell(a["practice"] or "—"),
+                 cell(a["game"] or "—")] for a in add]
+    rem_rows = [[cell(d["team"]), cell(d["player"]), cell(d["pos"])] for d in rem]
+    pc_rows = [[cell(p["team"]), cell(p["read1"], "n"), cell(p["read2"], "n")] for p in pc]
+    res_rows = [[cell(p["text"]), raw_src('<a href="%s">%s</a>' % (p["url"], "nfl.com/news"))]
+                for p in delta["reserve_list_pointers"]]
+    out["injury_delta"] = """
+<section>
+<h2>Dated reads of the injury hub &mdash; delta, never the level</h2>
+<p class="lead">The hub is read with its clock time and each new read is published as the
+<em>difference</em> from the previous one, so a designation's history is a series, not a snapshot.
+Both captures are kept verbatim under <code>raw/</code>.</p>
+%s
+<div class="callout"><p><strong>Read 2 (2026-11-16, ~01:15&ndash;01:25 UTC).</strong> The hub still showed
+<em>WEEK 10</em>. The %d field changes and %d added rows since read 1 all belong to clubs whose
+report was still evolving (the Monday-night clubs and one Colts row that cleared); the three Lions
+game-status designations flagged earlier are already populated in read 1, so the 2026-11-14
+re-capture had fixed them. The page's NEWS section also carried reserve-list events (below) —
+recorded as pointers, never used as injury-table rows.</p></div>
+<h3>Changed rows (%d)</h3>
+%s
+<h3>Added rows (%d)</h3>
+%s
+<h3>Removed rows (%d)</h3>
+%s
+<h3>Clubs whose row count moved</h3>
+%s
+<h3>Reserve-list events referenced on the page (pointers)</h3>
+%s
+</section>
+""" % (table(["Read", "When (UTC)", "Rows parsed", "Week shown", "Source"], read_rows, cls="dense"),
+       len(ch), len(add), len(ch),
+       table(["Club", "Player", "Pos", "Field", "At read 1 (2026-11-14)", "At read 2 (2026-11-16)"],
+             ch_rows, cls="dense searchable"),
+       len(add),
+       table(["Club", "Player", "Pos", "Injury", "Practice", "Game"], add_rows, cls="dense"),
+       len(rem),
+       (table(["Club", "Player", "Pos"], rem_rows, cls="dense") if rem_rows
+        else '<p class="caption">No row disappeared between the two reads.</p>'),
+       (table(["Club", "Read 1", "Read 2"], pc_rows, cls="dense") if pc_rows
+        else '<p class="caption">No club row count changed.</p>'),
+       table(["Event as headlined on the hub", "Link"], res_rows, cls="dense"))
+
+    # --------------------------------------------- N04 week-10 finals extension
+    fin_rows = []
+    for f in w10x["finals"]:
+        fin_rows.append([
+            cell(f["date"]),
+            cell(f["away"]),
+            cell(f["awayPts"], "n"),
+            cell(f["home"]),
+            cell(f["homePts"], "n"),
+            cell(f["note"] or "—"),
+            raw_src('<a href="%s">game centre</a>' % esc(f["game_url"])),
+        ])
+    pend_rows = []
+    for p in w10x["pending"]:
+        pend_rows.append([
+            cell(p["date"]),
+            cell(p["away"]),
+            "<td class=\"blank\">—</td>",
+            cell(p["home"]),
+            "<td class=\"blank\">—</td>",
+            cell(p["status"]),
+            raw_src('<a href="%s">game centre</a>' % esc(p["game_url"])),
+        ])
+    out["week10_finals"] = """
+<section>
+<h2>Week 10 finals &mdash; captured 2026-11-16 after the 2026-11-14 read</h2>
+<p class="lead">The week-10 slate had 12 games printed FINAL on the official week page at the
+2026-11-16 read; 11 of them are new since the 2026-11-14 capture (the Thursday game was already in
+the feed and corroborates it). The two games that were not final at read time are published as
+pending with blank scores — nothing is inferred.</p>
+<h3>FINAL at read time (%d)</h3>
+%s
+<h3>Pending at read time (%d)</h3>
+%s
+<div class="callout"><p><strong>Verification (all four pass, enforced by
+<code>scripts/build_week10_extension.py</code>).</strong> V1: the TNF row equals the row already in
+the feed (two independent captures agree). V2: every final is a Week 10 fixture on the published
+schedule. V3: recomputing all 32 clubs' W/L/T from the feed plus these finals reproduces the records
+printed on the page's game cards exactly. V4: the same arithmetic reproduces the fresh official
+league standings (W/L/T <em>and</em> PF/PA, 32 of 32) captured at the same read —
+<code>raw/standings-2026-20261116.tsv</code>, corroborating evidence only; the canonical standings
+capture is unchanged. The Sunday-night game was in progress and the Monday game unplayed at read
+time, so those two clubs show pre-game records on the page and blanks here.</p></div>
+</section>
+""" % (len(w10x["finals"]),
+       table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre"], fin_rows, cls="dense"),
+       len(w10x["pending"]),
+       table(["Date", "Away", "Pts", "Home", "Pts", "Status at read", "Game centre"],
+             pend_rows, cls="dense"))
+
+    # ------------------------------------- N02 two-sided change-our-mind fields
+    cm_rows = []
+    for s in strat_j:
+        cm_rows.append([
+            '<td><strong>%s</strong></td>' % esc(s["id"]),
+            cell(s["name"]),
+            cell(s["raises_confidence"]),
+            cell(s["lowers_confidence"]),
+        ])
+    out["change_mind"] = """
+<section>
+<h2>What would change our mind &mdash; every entry, both directions</h2>
+<p class="lead">A strategy entry without a falsification clause is an opinion. Each entry below
+states what evidence would raise confidence and what would lower it, in advance, before results
+exist. Where the needed data does not exist yet the field says so and names the open question that
+owns obtaining it.</p>
+%s
+</section>
+""" % table(["ID", "Strategy", "Would RAISE confidence", "Would LOWER confidence"],
+            cm_rows, cls="dense searchable")
+
     # ------------------------------------------------ R21+R22 exec summary addendum
     out["exec_summary"] = """
 <section>
@@ -872,6 +1091,12 @@ def main():
 <section class="grid">
   <a class="card" href="executive-summary.html"><h3>Executive Summary</h3>
     <p>One page: what is verified, what is blocked, and the five decisions that unblock the rest.</p></a>
+  <a class="card" href="#decision-readiness"><h3>Decision-Readiness Table</h3>
+    <p>One row per requirement: the gate that blocks it and the number that would clear it.
+    <strong>24 of 28</strong> delivered, 4 partial with named gates.</p></a>
+  <a class="card" href="#removal-of-luck"><h3>Removal of Luck</h3>
+    <p>The luck-removed edge (95%% CI lower bound vs break-even) applied to all 16 computed entries:
+    <strong>0 proven</strong>, including every positive-ROI entry. See why before trusting any record.</p></a>
   <a class="card" href="injuries.html"><h3>Injury Report</h3>
     <p><strong>%(inj_rows)d</strong> player rows across <strong>%(inj_clubs)d of %(inj_clubs_total)d</strong> clubs, straight from the official
     Week 10 report. Practice status and game status preserved exactly.</p></a>
@@ -985,7 +1210,9 @@ def main():
         caption="Headline figures. Each is computed by <code>tools/build.py</code> from the data files, not typed in by hand.",
     )
 
-    written.append(page("index.html", "Dashboard", cards + kpis + g_sections))
+    written.append(page("index.html", "Dashboard",
+                        cards + kpis + sprint["decision_readiness"]
+                        + sprint["luck_panel"] + g_sections))
 
     # ------------------------------------------------------- executive summary
     total_out_def = sum(t["defOut"] for t in by_team)
@@ -1186,7 +1413,8 @@ for that field — they are not blank because a value was unknown to us.</p>
              inj_rows, cls="dense searchable",
              caption="Ordered as published, by club. Use the filter box to search. Every row resolves to "
                      "the same official page."))
-    written.append(page("injuries.html", "Injury Report", inj_html, wide=True))
+    written.append(page("injuries.html", "Injury Report",
+                        inj_html + sprint["injury_delta"], wide=True))
 
     # ------------------------------------------------------------------- depth
     # The KC chart stays as the worked example below; the league view is built
@@ -1867,7 +2095,7 @@ The reason is set out as open question Q14 and suggestion SG11 rather than answe
             '<td>%s</td>' % pill("BLOCKED", "bad")],
        ], cls="dense"))
     written.append(page("strategies.html", "Leaderboard",
-                        strat + sprint["signal_staking"], wide=True))
+                        strat + sprint["change_mind"] + sprint["signal_staking"], wide=True))
 
     # -------------------------------------------------------------- validation
     gates = [
@@ -1998,7 +2226,7 @@ No strategy can be promoted to live until a price source is supplied and the dem
         rows = []
         for q in items:
             rows.append([
-                cell(q["id"]),
+                '<td id="%s"><strong>%s</strong></td>' % (esc(q["id"]), esc(q["id"])),
                 cell(q["question"]),
                 '<td>%s</td>' % pill(q["priority"],
                                      "bad" if q["priority"] == "Critical" else
@@ -2230,7 +2458,8 @@ verification note for each one.</p>
     # Requirements sprint pages (R21-R28) — session arena-360ca650-fl1
     written.append(page("line-board.html", "Line Board", sprint["line_board"], wide=True))
     written.append(page("price-snapshots.html", "Price Snapshots", sprint["price_snapshots"], wide=True))
-    written.append(page("verified-results-feed.html", "Verified Results Feed", sprint["results_feed"], wide=True))
+    written.append(page("verified-results-feed.html", "Verified Results Feed",
+                        sprint["results_feed"] + sprint["week10_finals"], wide=True))
     # replacement-depth.html is generated merged by scripts/build_pages_m.py (final
     # integration: this sprint's 52-slot register AND the 69-spot week-10 analysis share
     # the page; both datasets preserved). The body computed here is kept verbatim on
