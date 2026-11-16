@@ -364,3 +364,37 @@ source exists (F34/F39), opening prices for 2026 are uncapturable from official 
 is unmeasurable until a dated snapshot collector runs (F49, SG35), the undated-vintage vocabulary
 decision (Q35), and the benchmark-policy decision (Q37). These do not block the merge; they are the
 owner's decision list.
+
+---
+
+## Session `arena-fc0ed6e8-fl1` — decision layer (2026-11-16)
+
+The eight remaining brief items that no prior session had built are now built and verified:
+
+1. **Decision readiness** — the landing page now carries one row per requirement with the gate that
+   blocks it and the number that would clear it (`readiness.html` holds the full register plus a
+   69-row audit of every brief bullet; 28/28 requirements covered).
+2. **Change of mind** — every strategy entry now carries two-sided, pre-registered
+   "what would change our mind" conditions (upgrade / downgrade).
+3. **Removal of luck, published** — the dashboard panel decomposes each signal run: the probability
+   luck alone ran that hot, the family-wise bar (α/16 = 0.00313), the sample each strategy would need
+   to certify its observed rate if real (best candidate: 4,315 bets vs 936 held), and the smallest
+   edge each sample could certify at 80% power. Verdict unchanged: **no strategy clearing**; the
+   every-home-team control (−5.2%, the vig) anchors the panel.
+4. **Ablations instead of fixed penalties** — a real one, run on 5,657 games: identical models with
+   and without QB-deficiency features, chronological splits, holdout scored once. Result: margin MAE
+   −0.11 pts [−0.24, +0.02], total MAE −0.08 [−0.19, +0.03] — **both CIs include zero, so the feature
+   stays OUT of every published model**. The fitted coefficients (home 2nd-string QB ≈ −3.5 pts
+   [−4.6, −2.4]) are published with intervals: the estimate a fixed penalty would have guessed.
+5. **Drift alarm (G-18)** — 19 datasets pinned; shrink/missing/emptied fields fail the build loudly.
+6. **Reserve list captured** (25 official rows, S80) — "not listed" no longer silently means available.
+7. **Announced-starter evidence** (S84/S85) — official dated announcements recorded with a strict
+   verified/unverified boundary.
+8. **Venue + schedule announcement** (S81–S83) — official Game Center spot-checks (2/272, both
+   matching, Game Books confirmed reachable) and the league's dated May 8, 2026 schedule announcement
+   published beside the live schedule page.
+
+Parallel-session note: sessions `arena/a4c5a1de-fl1` and `arena/dbf11de0-fl1` shipped overlapping
+deliverables in PRs #42–#44 (their removal-of-luck panel, backlog, availability pages, snapshot
+ledger). Nothing was discarded: both builds are live and cross-linked; register IDs from this
+session were renumbered (F61–F65, Q44, SG43–SG45, S80–S85) and the collisions cross-referenced.

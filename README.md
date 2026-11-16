@@ -332,3 +332,28 @@ cross-references to the overlapping entries from the other sessions. Full log in
   `tools/checklinks.py` OK, `tools/checkrows.py` 5,604 rows OK, 242 unit tests OK,
   `scripts/build_market_spine.py --check` byte-identical, `scripts/verify_feed_m.py` 137/137,
   `scripts/verify_site.py` 0 errors / 0 warnings, `site/build.py` + `site/verify.py` publishable.
+
+---
+
+## Session `arena-fc0ed6e8-fl1` additions (2026-11-16)
+
+The decision layer requested by the brief and still missing after the second-pass sprints is now built.
+All of it is additive to the site described above; nothing above was rewritten.
+
+| New artefact | What it is | Where |
+|---|---|---|
+| Decision-readiness register | One row per requirement (R01–R28) with the gate that blocks it and the number that would clear it, plus a 69-row line-by-line audit of every brief bullet | `data/readiness.json`, `readiness.html`, compact table on the landing page |
+| Two-sided "what would change our mind" | Pre-registered upgrade/downgrade conditions on all 6 strategy entries | `data/strategies.json`, Leaderboard page column |
+| Signal-level removal-of-luck panel | Per-strategy p(luck alone this hot), family-wise bar (α/16), sample floors, certifiable edges, control anchor | `engine/luck_signals.py`, `data/luck_panel_signals.json`, dashboard section, `readiness.html#luck` |
+| Injury/personnel ablations | Same model with and without QB-deficiency features; train 1999–2019, validation 2020–21, holdout 2022–25 scored once; difference with paired-bootstrap CIs and fitted coefficient CIs | `engine/ablation.py` (stdlib), `data/ablations.json`, `ablations.html` |
+| Drift alarm (gate G-18) | 19 pinned datasets: shrink / missing-column / emptied-column fail the build loudly; growth warns until the pin is re-committed | `tools/verify_drift.py`, `data/verification-drift.tsv`, `validation.html` |
+| Reserve-list capture (S80) | First dated official reserve-list capture: 25 Reserve/Injured rows incl. Malik Willis 11/10 — the brief's "not listed ≠ available" row | `raw/nfl-reserve-list-2026-11.md`, `data/reserve_list_2026-11.tsv`, `readiness.html` |
+| Announced-starter evidence (S84, S85) | Dated official announcements with an explicit verified/unverified boundary: Lock announced (official), Brissett/McCord recorded as roster events with `announced_start` deliberately blank | `data/announced_starters_g.json`, `readiness.html` |
+| Venue spot-checks (S81, S82) | Official Game Center reads vs the published Stadium column: 2/272 verified matching (incl. Munich), Game Book PDF links confirmed reachable | `data/venue_spotchecks.json`, `readiness.html` |
+| Dated schedule announcement (S83) | The league's official May 8, 2026 release announcement published beside the live schedule page | `schedule.html` |
+
+Verification for this layer: 285 unit tests OK (18 new), `checklinks` 43 pages OK, `checkrows` 6,176 rows
+audited with every data row sourced, drift alarm 19/19 PASS, injuries 345/345, results 32/32,
+`verify_brief` 10/10, computed-layer rebuild byte-identical. Register IDs from this session: flags
+F61–F65, question Q44, suggestions SG43–SG45, sources S80–S85 (renumbered after merging parallel
+sessions' F43–F60 / Q35–Q43 / SG35–SG42 / S70–S79, with cross-references preserved).
