@@ -35,6 +35,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEF_PAGES = {
     "questions.html", "suggestions.html", "requirements.html",
     "validation.html", "line-origination.html",
+    "readiness.html",  # session arena-fc0ed6e8-fl1: register/decision rows (targets, not data)
 }
 
 ROW_RE = re.compile(r"<tr>(.*?)</tr>", re.S)

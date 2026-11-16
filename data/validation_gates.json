@@ -2,7 +2,7 @@
  "id": "gates",
  "title": "Validation gates — how luck is removed before a strategy is trusted",
  "description": "A gate set is the difference between a leaderboard and a lottery. Hard gates cannot be overridden by profit: a strategy that made money while failing a hard gate is evidence of variance, not skill. Thresholds below are our proposed rules (a design decision), whereas every statistical method cited is from the literature register. All are implemented in engine/gates.py, which turns a bet log into this table, filled in.",
- "updated": "2026-11-14",
+ "updated": "2026-11-16",
  "columns": [
   {
    "key": "g_id",
@@ -210,6 +210,18 @@
    "impl": "engine/demotion.py demotion_status() / repromotion_status(); thresholds are constructor arguments (proposed rules, flag F23).",
    "sources": [
     "SRC-015"
+   ]
+  },
+  {
+   "g_id": "G-18",
+   "gate": "Drift alarm on every scraper/register",
+   "kind": "HARD",
+   "metric": "pinned data-row counts and required fields for every dataset the build publishes (tools/verify_drift.py, data/verification-drift.tsv)",
+   "threshold": "FAIL the build when a dataset shrinks, a required column disappears, or a required column goes fully empty; WARN (pin must be re-committed) when a dataset grows",
+   "why": "The brief: pin each parser to expected row counts and required fields and fail the build loudly when a field goes missing rather than publishing a blank. A scraper that dies quietly publishes blanks that look like facts-by-omission; shrinkage means data went backwards, and neither may reach the site unannounced.",
+   "impl": "tools/verify_drift.py check(); run in CI and before any push (2026-11-16, arena-fc0ed6e8-fl1). 19 pins: injuries 345, standings 32, results 137, schedule 272, results feed 137, price snapshots 56, settled markets 548, registers 34/34/42/6, gates 15, signal-staking 16, sources (columns only), reserve list 25, announced starters 4, venue spot-checks 2, luck panel 16, ablations 2.",
+   "sources": [
+    "SRC-016"
    ]
   }
  ],

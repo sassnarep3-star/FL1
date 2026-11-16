@@ -11,7 +11,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="verified-results-feed.html">Verified Results Feed</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html" class="on">Validation Gates</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="readiness.html">Decision Readiness</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="injuries.html">Injuries</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="verified-results-feed.html">Verified Results Feed</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html" class="on">Validation Gates</a><a href="ablations.html">Ablations</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a></nav>
 </header>
 <main id="main" class="wide">
 
@@ -75,6 +75,36 @@ re-promotion on a fresh sealed sample. Old bets never re-qualify an entry — th
 Implementation: <code>engine/demotion.py</code>, tested in <code>tests/test_r21_r28.py</code>.
 Thresholds are proposed competition rules, reviewable under <a href="flagged.html#F28">F28</a> /
 question Q24.</p>
+</section>
+
+<section>
+<h2>Luck panel &mdash; where the three tests meet their numbers (G-19 panel, session 2026-11-16)</h2>
+<p>The removal-of-luck tests above now have a published numeric panel on the
+<a href="index.html#luck">dashboard</a> and the full table on
+<a href="readiness.html#luck">Decision Readiness</a>: per-strategy p(luck alone this hot), the
+family-wise bar (&alpha;/16 = 0.00313), the sample floor to certify an observed rate at 80 percent
+power, and the smallest edge each sample could certify. Verdict: <strong>NO STRATEGY CLEARING</strong> &mdash;
+the best raw p-value (0.1236, DIV_DOG_AND_ELO) is far from the bar, so nothing is promoted and the
+reward pool pays 0 units.</p>
+</section>
+
+<section>
+<h2>G-18 &mdash; drift alarm on every scraper</h2>
+<p>The brief: pin each parser to expected row counts and required fields; fail the build loudly when
+a field goes missing rather than publishing a blank. <code>tools/verify_drift.py</code> pins
+<strong>19</strong> datasets (row counts + required columns) and rewrites
+<code>data/verification-drift.tsv</code> on every run:</p>
+<ul class="tight">
+<li><strong>FAIL (exit 1):</strong> a dataset shrinks, a required column disappears, or a required
+column goes fully empty &mdash; the build refuses to publish.</li>
+<li><strong>WARN (exit 0):</strong> a dataset grows &mdash; legitimate (a new week settles), but the
+pin must be re-committed with the growth, in the open.</li>
+</ul>
+<p>Pins cover: injuries 345, standings 32, results 137, schedule 272, results feed 137, price
+snapshots 56, settled markets 548, questions 34, suggestions 34, flags 42, strategies 6 (incl. the
+change-of-mind fields), gates 15, signal-staking 16, sources (columns), reserve list 25, announced
+starters 4, venue spot-checks 2, luck panel 16, ablations 2. Run:
+<code>python3 tools/verify_drift.py</code> &mdash; wired into CI beside the other gates.</p>
 </section>
 
 </main>

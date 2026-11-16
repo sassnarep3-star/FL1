@@ -1,0 +1,285 @@
+{
+ "id": "ablations",
+ "title": "Injury/personnel ablations instead of fixed penalties",
+ "updated": "2026-11-16",
+ "requirement": "Add injury and personnel ablations instead of fixed penalties; compare identical models with and without verified availability features using chronological holdouts (brief, R-series sprint).",
+ "design": {
+  "without": "intercept + prior-3-game scoring-margin difference",
+  "with": "the same features + four 0/1 QB-deficiency indicators (home/away x 2nd-starter / 3rd-or-larter-starter classes)",
+  "splits": {
+   "train": "1999-2019",
+   "validation": "2020-2021 (stability reading only)",
+   "holdout": "2022-2025 (scored once, after freezing)",
+   "excluded": "2026 (season in progress; no split may absorb it)"
+  },
+  "difference_statistic": "MAE(with) - MAE(without) on the holdout, paired by game; 95% CI by paired bootstrap over per-game absolute errors (seed 20261116, 4000 resamples)",
+  "coefficient_ci": "train-only case bootstrap (1000 resamples, seed 20261117)",
+  "why_not_a_fixed_penalty": "The adjustment's SIZE is fitted from training data and published with an interval; whether the feature helps at all is decided on the holdout. A fixed penalty would assert the size with no uncertainty and no test."
+ },
+ "provenance": {
+  "games": "data/raw/games.csv - nflverse combined feed snapshot (source S47, THIRD-PARTY)",
+  "qb_deficiency": "data/depth_deficiency.csv - derived from the same feed's recorded starting QB identity vs each team's most-used starter that season (scripts/build_availability.py); classes: primary starter / 2nd different starter / 3rd-or-later different starter",
+  "official_status": "No output on this page is an official NFL publication. The feature is built from recorded starters, which is evidence of who STARTED, not of injury designations; the official-only correlation register (correlation-register.html) is separate and unaffected."
+ },
+ "reading_guide": "mae_diff < 0 means the availability feature REDUCED holdout error. ci_contains_zero = true means the data cannot distinguish the two shapes - the feature stays OUT of any published model rather than being waved in.",
+ "ablations": {
+  "margin": {
+   "target": "margin",
+   "splits": {
+    "train": [
+     "1999",
+     "2000",
+     "2001",
+     "2002",
+     "2003",
+     "2004",
+     "2005",
+     "2006",
+     "2007",
+     "2008",
+     "2009",
+     "2010",
+     "2011",
+     "2012",
+     "2013",
+     "2014",
+     "2015",
+     "2016",
+     "2017",
+     "2018",
+     "2019"
+    ],
+    "validation": [
+     "2020",
+     "2021"
+    ],
+    "holdout": [
+     "2022",
+     "2023",
+     "2024",
+     "2025"
+    ]
+   },
+   "n_train": 4330,
+   "n_validation": 432,
+   "n_holdout": 895,
+   "without_availability": {
+    "beta": [
+     2.7108,
+     0.3267
+    ],
+    "mae_holdout": 10.2377,
+    "mae_validation": 11.3558,
+    "availability_coefficients_ci": null
+   },
+   "with_availability": {
+    "beta": [
+     2.995,
+     0.289,
+     -3.5151,
+     -4.6007,
+     2.0784,
+     4.495
+    ],
+    "mae_holdout": 10.1291,
+    "mae_validation": 11.2483,
+    "availability_coefficients_ci": [
+     {
+      "feature": "home_qb_2nd",
+      "coef": -3.5151,
+      "ci_low": -4.5738,
+      "ci_high": -2.4429
+     },
+     {
+      "feature": "home_qb_3rd_or_later",
+      "coef": -4.6007,
+      "ci_low": -6.6062,
+      "ci_high": -2.5264
+     },
+     {
+      "feature": "away_qb_2nd",
+      "coef": 2.0784,
+      "ci_low": 1.0416,
+      "ci_high": 3.0671
+     },
+     {
+      "feature": "away_qb_3rd_or_later",
+      "coef": 4.495,
+      "ci_low": 2.5068,
+      "ci_high": 6.3572
+     }
+    ]
+   },
+   "holdout_difference": {
+    "mae_diff": -0.1086,
+    "ci_low": -0.2368,
+    "ci_high": 0.016,
+    "ci_contains_zero": true,
+    "n_holdout": 895,
+    "seed": 20261116,
+    "n_boot": 4000
+   },
+   "rows_available": 5746,
+   "rows_in_study": 5657,
+   "seasons_with_feature": [
+    "1999",
+    "2000",
+    "2001",
+    "2002",
+    "2003",
+    "2004",
+    "2005",
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+   ]
+  },
+  "total": {
+   "target": "total",
+   "splits": {
+    "train": [
+     "1999",
+     "2000",
+     "2001",
+     "2002",
+     "2003",
+     "2004",
+     "2005",
+     "2006",
+     "2007",
+     "2008",
+     "2009",
+     "2010",
+     "2011",
+     "2012",
+     "2013",
+     "2014",
+     "2015",
+     "2016",
+     "2017",
+     "2018",
+     "2019"
+    ],
+    "validation": [
+     "2020",
+     "2021"
+    ],
+    "holdout": [
+     "2022",
+     "2023",
+     "2024",
+     "2025"
+    ]
+   },
+   "n_train": 4330,
+   "n_validation": 432,
+   "n_holdout": 895,
+   "without_availability": {
+    "beta": [
+     43.8936,
+     -0.001
+    ],
+    "mae_holdout": 10.675,
+    "mae_validation": 11.4472,
+    "availability_coefficients_ci": null
+   },
+   "with_availability": {
+    "beta": [
+     45.2459,
+     -0.0019,
+     -2.6954,
+     -2.664,
+     -2.2458,
+     -3.4673
+    ],
+    "mae_holdout": 10.598,
+    "mae_validation": 11.216,
+    "availability_coefficients_ci": [
+     {
+      "feature": "home_qb_2nd",
+      "coef": -2.6954,
+      "ci_low": -3.6679,
+      "ci_high": -1.6487
+     },
+     {
+      "feature": "home_qb_3rd_or_later",
+      "coef": -2.664,
+      "ci_low": -4.5208,
+      "ci_high": -0.7058
+     },
+     {
+      "feature": "away_qb_2nd",
+      "coef": -2.2458,
+      "ci_low": -3.3516,
+      "ci_high": -1.1281
+     },
+     {
+      "feature": "away_qb_3rd_or_later",
+      "coef": -3.4673,
+      "ci_low": -5.198,
+      "ci_high": -1.7035
+     }
+    ]
+   },
+   "holdout_difference": {
+    "mae_diff": -0.077,
+    "ci_low": -0.1862,
+    "ci_high": 0.032,
+    "ci_contains_zero": true,
+    "n_holdout": 895,
+    "seed": 20261116,
+    "n_boot": 4000
+   },
+   "rows_available": 5746,
+   "rows_in_study": 5657,
+   "seasons_with_feature": [
+    "1999",
+    "2000",
+    "2001",
+    "2002",
+    "2003",
+    "2004",
+    "2005",
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012",
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024",
+    "2025",
+    "2026"
+   ]
+  }
+ }
+}

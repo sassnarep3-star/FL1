@@ -5,7 +5,7 @@
   "category": "Trust",
   "problem": "The brief asks to originate lines. There is no official source of market prices in this repo, so any displayed price that looks like a market quote would be invented.",
   "proposal": "Output one number per game: our fair-value probability, with an explicit uncertainty band and a timestamp. Display the market price column as blank until the user supplies a benchmark feed.",
-  "evidence": "data/sources.tsv S03 \u2014 official standings supply team scoring, but no official price feed was found.",
+  "evidence": "data/sources.tsv S03 — official standings supply team scoring, but no official price feed was found.",
   "effort": "Low",
   "risk": "Low",
   "reversibility": "Fully reversible",
@@ -26,7 +26,7 @@
   "category": "Method",
   "problem": "Ranking strategies by win rate or units won rewards luck. Over a few dozen bets the noise band is wider than any realistic edge.",
   "proposal": "Make calibration the primary gate: bucket predictions by stated probability and check that the realised hit rate matches. Rank on calibration error and sample size, and show profit only after the sample gate is met.",
-  "evidence": "data/questions.json Q09, Q10 \u2014 the season is 18 weeks and Week 10 is in progress (S05).",
+  "evidence": "data/questions.json Q09, Q10 — the season is 18 weeks and Week 10 is in progress (S05).",
   "effort": "Medium",
   "risk": "Low",
   "reversibility": "Fully reversible",
@@ -73,7 +73,7 @@
   "evidence": "data/sources.tsv S13 (404), S08 (club page titled 'Unofficial Depth Chart'), S07 (roster status codes), S01 (injury report).",
   "effort": "High",
   "risk": "Medium",
-  "reversibility": "Reversible \u2014 the derived layer can be removed without touching the observed layer.",
+  "reversibility": "Reversible — the derived layer can be removed without touching the observed layer.",
   "prerequisites": [
    "Q04",
    "Q05"
@@ -135,7 +135,7 @@
   "evidence": "data/questions.json Q01, Q11.",
   "effort": "Medium",
   "risk": "Low",
-  "reversibility": "Fully reversible \u2014 it is an ordering, not a removal.",
+  "reversibility": "Fully reversible — it is an ordering, not a removal.",
   "prerequisites": [
    "Q01",
    "Q11"
@@ -154,7 +154,7 @@
   "category": "Method",
   "problem": "A model that only rediscovers 'the better team usually wins' looks skilful when compared to nothing.",
   "proposal": "Publish a named baseline, for example a points-differential rating from official season scoring. A strategy is only ranked if it beats that baseline out of sample.",
-  "evidence": "data/sources.tsv S03 \u2014 official PF/PA for all 32 clubs.",
+  "evidence": "data/sources.tsv S03 — official PF/PA for all 32 clubs.",
   "effort": "Low",
   "risk": "Low",
   "reversibility": "Fully reversible",
@@ -633,7 +633,7 @@
   "reversibility": "Reversible only by a later pre-registered amendment, never silently.",
   "prerequisites": [
    "Q24",
-   "SG17 (G-14 thresholds \u2014 same decision family)"
+   "SG17 (G-14 thresholds — same decision family)"
   ],
   "options": [
    "Freeze now with the documented defaults. (Recommended)",
@@ -703,5 +703,66 @@
   ],
   "recommendation": "A. Option C is how invented numbers enter a site that promised never to publish them.",
   "impact": "Keeps the board's blank-cell promise intact once the model exists."
+ },
+ {
+  "id": "SG35",
+  "title": "Adopt the decision-readiness table as the standing decision view (pairs with Q29)",
+  "category": "Governance",
+  "problem": "Every session publishes progress in its own pages; the owner must re-derive 'what blocks what' each time. The brief explicitly asks for a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it.",
+  "proposal": "Make data/readiness.json + readiness.html the canonical decision view; the landing page carries the compact table. Update it at every integration (statuses, gates, clearing numbers) instead of writing new parallel summaries.",
+  "evidence": "index.html readiness section; readiness.html (28 requirements + 69-row brief audit).",
+  "effort": "Low (ongoing discipline)",
+  "risk": "Very low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [],
+  "options": [
+   "Adopt as canonical, update at every integration. (Recommended)",
+   "Keep per-session summaries only.",
+   "Adopt but move the full brief audit off the site."
+  ],
+  "recommendation": "A. One table beats five summaries; the brief asked for exactly this view.",
+  "impact": "Every decision starts from the same table; drift between sessions' claims becomes visible immediately."
+ },
+ {
+  "id": "SG36",
+  "title": "Automate official Game Center venue + Game Book capture in the weekly refresh",
+  "category": "Data",
+  "problem": "The venue requirement ('transcribe the venue of every fixture from the official game centre') is met for 2/272 rows by hand this session; the remaining 270 stay labelled third-party. Game Books are confirmed reachable per game (the brief's Game Book requirement), but nothing captures them.",
+  "proposal": "Extend .github/workflows/refresh.yml: for each game in the coming week (then rolling backfill), fetch the official Game Center page, record Location + Stadium + Game Book URL into a versioned register, and hash-pin the capture. Replaces the third-party Stadium label row by row.",
+  "evidence": "data/venue_spotchecks.json (2 verified matches incl. Munich); both Game Centers expose Game Book PDF links.",
+  "effort": "Medium",
+  "risk": "Low (read-only capture)",
+  "reversibility": "Fully reversible",
+  "prerequisites": [
+   "F45"
+  ],
+  "options": [
+   "Automate in refresh.yml. (Recommended)",
+   "Keep manual spot-checks only.",
+   "Accept the labelled third-party column by decision."
+  ],
+  "recommendation": "A. The access problem is solved; the remaining gap is one scheduled job.",
+  "impact": "Turns D-23 and D-25 from partial into automatable; Game Books become the official starters source the brief wants."
+ },
+ {
+  "id": "SG37",
+  "title": "Capture the 13 settled Week 10 finals and the reserve list at the next refresh run",
+  "category": "Data",
+  "problem": "13 Week 10 games are FINAL on the official page (verified 2026-11-16) but the committed feed snapshot holds blank scores (F43); the reserve-list capture (S70) is one month old the moment the next month starts.",
+  "proposal": "At the next refresh run: transcribe the 13 finals row-by-row with official game links (the S61-S69 pattern), extend the verified results feed, and re-capture the current reserve-list month into a new dated file (never overwrite November).",
+  "evidence": "F43; raw/nfl-reserve-list-2026-11.md; data/reserve_list_2026-11.tsv (25 rows).",
+  "effort": "Low",
+  "risk": "Very low",
+  "reversibility": "Fully reversible",
+  "prerequisites": [
+   "F43"
+  ],
+  "options": [
+   "Next refresh run. (Recommended)",
+   "Backfill immediately by hand in this session.",
+   "Leave until Week 11 settles."
+  ],
+  "recommendation": "A. Hand-editing feed rows outside the capture pipeline is exactly what the provenance rules forbid; the scheduled run is the right owner.",
+  "impact": "Keeps the verified results feed and the reserve history current without breaking lineage."
  }
 ]

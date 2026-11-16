@@ -1,0 +1,49 @@
+{
+ "id": "venue_spotchecks",
+ "title": "Official Game Center venue spot-checks against the published schedule table",
+ "updated": "2026-11-16",
+ "method": "The schedule table's Stadium column comes from the reconciled nflverse feed (source S47, third-party, flagged). This register spot-checks that column against the OFFICIAL Game Center page of each game, which publishes Location and Stadium in its Game Info block. A spot-check is evidence about the sample checked, never a certification of the whole column - the 270 unchecked rows stay labelled third-party.",
+ "rows": [
+  {
+   "id": "VS-01",
+   "game_id": "chiefs-at-falcons-2026-reg-10",
+   "matchup": "KC @ ATL (Week 10, 2026-11-15)",
+   "official_location": "ATLANTA, GA",
+   "official_stadium": "MERCEDES-BENZ STADIUM",
+   "feed_stadium": "Mercedes-Benz Stadium",
+   "feed_source": "data/schedule2026-d.csv row (S47, third-party)",
+   "match": true,
+   "game_book_published": true,
+   "game_book_note": "The official Game Center also exposes a 'Download Game Book (PDF)' link, confirming the league publishes per-game official Game Books (URL captured on the page; large PDF not archived this session).",
+   "source_url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+   "fetched": "2026-11-16",
+   "verified": true
+  },
+  {
+   "id": "VS-02",
+   "game_id": "patriots-at-lions-2026-reg-10",
+   "matchup": "NE @ DET (Week 10, Munich, 2026-11-15)",
+   "official_location": "MUNICH",
+   "official_stadium": "FC BAYERN MUNICH STADIUM",
+   "feed_stadium": "FC Bayern Munich Stadium",
+   "feed_source": "data/schedule2026-d.csv row (S47, third-party)",
+   "match": true,
+   "game_book_published": true,
+   "game_book_note": "Game Book PDF link present on the page. The official venue name confirms the feed's Munich naming, which the home-field flag (F21) treats as an international neutral-site game.",
+   "source_url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+   "fetched": "2026-11-16",
+   "verified": true
+  }
+ ],
+ "game_book_evidence": {
+  "finding": "Both Game Centers read this session expose the official per-game Game Book PDF link. This upgrades the brief item 'use official NFL Game Books for actual starters and game-day status' from blocked to PATH-KNOWN: the documents are reachable; the missing piece is a parser and storage, not access.",
+  "source_urls": [
+   "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+   "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+  ]
+ },
+ "open_items": [
+  "270 of 272 rows remain officially unchecked; automating a per-game Game Center read in the weekly refresh workflow is registered as SG36.",
+  "Pregame Game Centers (future weeks) were not tested this session; whether the venue block renders before kickoff is unverified."
+ ]
+}
