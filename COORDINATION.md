@@ -21,7 +21,30 @@ Both pass CI (`verify` SUCCESS). Nothing below starts work claimed by a live ses
 |---|------|--------|-------|----------------------|------------------------|----------------|
 | I1 | Integrate stale open PRs #38 and #39 into main (verify combined tree, resolve conflicts preserving both sides, merge, confirm Pages) | done | arena-a4c5a1de-fl1 | PR operations + `COORDINATION.md` records + conflict resolutions (engine renames, registers, tools/site.py, pages_market.py, test page list) + regenerated pages | see completion record below | see completion record below |
 | P1 | Close out partial requirements R11/R12/R16/R19 where merged evidence now exists; where evidence does not exist, leave status `partial` and make the exact blocking gap + clearing number explicit (decision-readiness contract) | done | arena-a4c5a1de-fl1 | `data/requirements.json`, `requirements.html` (generated), `data/suggestions.json` (SG32 stale-page fix), `EXECUTIVE_SUMMARY.md`, `README.md` (stray-marker fix + addendum) | per-requirement evidence text cites the published pages/files; every number quoted was re-checked against committed data (summary.json, signal_cards.tsv, correlations_official.json, depth.html) | see completion record below |
-| I2 | Final integration: PR → main, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | pending | arena-a4c5a1de-fl1 | PR + `COORDINATION.md` | Pages API + live fetch | — |
+| I2 | Final integration: PR → main, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | done | arena-a4c5a1de-fl1 | PR + `COORDINATION.md` + requirements-page lead fix | Pages API + live fetch | — |
+
+### Integration record — I2 (2026-11-16)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/42 (`arena/a4c5a1de-fl1` → `main`),
+  **MERGED** as `bec36881fa3ec01e40852870a6473b352698131c` via `gh pr merge 42 --merge` after the
+  `verify` check passed. **PRs #38 and #39 now show state MERGED** — their head commits
+  (`c09098c`, `372793a`) became ancestors of `main` through this integration, which is the intended
+  takeover outcome: their work is on main under their own authorship history.
+- **GitHub Pages:** latest build for `bec3688` → status **`built`**, `error: null`
+  (pages-build-deployment run 43787989062, success). Source `main` `/`,
+  https://sassnarep3-star.github.io/FL1/ live.
+- **Live verification (page fetch, cache-busted):** `requirements.html` renders all 28 requirements
+  with the new page-anchored evidence (R11/R12/R16/R19 rows confirmed); `flagged.html` publishes
+  **52 items (F01–F52)** including the re-issued F43–F52; `results-feed-market.html` (the renamed
+  spine page) renders with per-row source chips and the retagged F48 link; NAV/cards show both builds.
+- **Follow-up fix shipped with this record:** the requirements-page lead said "The rest are marked
+  partial on purpose" even at 28/28 — now conditional in the generator (`tools/site.py`), rebuilt,
+  gates re-run (242 tests, checklinks 36 pages, checkrows 5,604 rows, verify_site 0/0).
+
+**Session state: complete.** All three claimed tasks (I1, P1, I2) done and recorded. No open claims
+remain on this session's board. The owner's decision list stays on the live pages: Q35–Q39 and
+SG35–SG38 (spine decisions), Q23/Q37 (benchmark policy), Q29/Q32 (canonical build + official-only
+rule), plus the long-standing flags (F34/F39 prices, F43 opening prices, F49 CLV collector).
 
 ### Completion record — I1 (2026-11-16)
 
