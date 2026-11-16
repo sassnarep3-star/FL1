@@ -67,6 +67,36 @@ Nothing from either side was discarded:
 
 ### Integration record (G7)
 
+**PR:** https://github.com/sassnarep3-star/FL1/pull/44 (`arena/dbf11de0-fl1` → `main`) —
+**merged** with `gh pr merge 44 --merge` at merge commit
+`4f6ee975b6534f17c230a5b1afb35e0bd3ff7e36` on 2026-11-16T01:49:46Z, after both
+`verify-research-build` checks reported SUCCESS and GitHub reported `MERGEABLE / CLEAN`.
+
+**GitHub Pages:** build triggered 2026-11-16T01:49:47Z → status **`built`**
+(`gh api repos/sassnarep3-star/FL1/pages`; source `main`, path `/`). The site is live at
+https://sassnarep3-star.github.io/FL1/ .
+
+**Live re-fetch after deploy (page fetch, not curl):** `removal-of-luck.html` and
+`availability-ledger.html` were re-read from the live origin and render correctly — headline
+numbers, the luck bands by sample size, the sizing grid, the two dated captures with the 347-row
+sha256, the 35-row diff, and every check row with its own official source link.
+
+**Post-merge follow-up:** one small PR corrected the verification table so each check row links to
+its own official URL rather than a shared one (the G-R* checks now point at the schedule/standings
+page instead of the injury page).
+
+**Final state on `main`:** 41 pages; 267 unit tests OK; `tools/build.py` clean;
+`tools/verify_injuries.py` 345/345; `tools/verify_results.py` PASS 32/32; `tools/checklinks.py`
+41 pages; `tools/checkrows.py` 41 pages / 5,963 rows; `scripts/verify_recapture_g.py` GATE PASS;
+`scripts/verify_results_g.py` PASS (G-R1..G-R4). 60 flags, 43 questions, 42 suggestions,
+71 sources, 87 requirement rows.
+
+**Open items, all published on Flagged for Review and none blocking:** F53–F60 as listed above.
+The decisions that would unblock the most work are **Q40** (which dated read a backtest may pin),
+**Q43** (the leaderboard's sample-size bar) and **Q42** (whether the injury report may be captured
+at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is
+answered).
+
 # COORDINATION — Shared Task Board
 
 > Read this **before** starting. Claim a task by writing your session ID and file scope, then commit

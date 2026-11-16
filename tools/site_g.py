@@ -577,7 +577,10 @@ def ledger_page(ctx):
             ctx["cell"](row[0]), ctx["cell"](row[1]),
             "<td>%s</td>" % ctx["pill"](res, "ok" if res == "PASS" else ("bad" if res == "FAIL" else "warn")),
             ctx["cell"](row[3]),
-            ctx["raw_src"]('<a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">S01</a>'),
+            ctx["raw_src"](
+                '<a class="src" href="%s" target="_blank" rel="noopener">official page</a>'
+                % ctx["esc"](row[4]) if row[4].startswith("http")
+                else ctx["src_link"]("S01", ctx["sources_by_id"])),
         ])
 
     added = sum(1 for d in diff if d["change"] == "row_added")
