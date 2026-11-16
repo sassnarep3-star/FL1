@@ -102,6 +102,48 @@ See `flagged.html` for all fifteen items, with links.
 Nothing here is a bet, an offer to wager, betting advice, or a statement about the legality of any
 activity in any jurisdiction. No regulator or tax source was verified.
 
+
+---
+
+## Session `arena/dbf11de0-fl1` additions (2026-11-16)
+
+**New pages** (all generated, all re-runnable):
+
+| Page | Contents |
+|---|---|
+| `requirements-backlog.html` | The brief line by line: 87 requirement rows, each with the gate that blocks it and the number that would clear it |
+| `team-availability.html` | Per club: starters out, the replacement the club charts, and a net injury count whose rule is printed on every row |
+| `announced-starters.html` | Starters an official NFL.com page actually announced — quoted, dated and linked. Inferred replacements are kept out of this table on purpose |
+| `availability-ledger.html` | Point-in-time snapshot ledger: every dated read of the official injury report with its sha256, plus the diff between consecutive reads |
+| `removal-of-luck.html` | How much of a result could be chance, the sample size at which it stops being chance, and the multiplicity adjustment |
+| `index.html` | Now carries the **decision-readiness table** (one row per requirement) and a **removal-of-luck** summary |
+
+**New engine and scripts** (stdlib only): `engine/luck.py` (Wilson intervals, luck bands, sample
+sizing, cluster inflation, Bonferroni, Brier skill, exact binomial) with 25 unit tests in
+`tests/test_luck_g.py`; `scripts/verify_recapture_g.py` (re-capture diff gate);
+`scripts/build_backlog_g.py`; `scripts/build_luck_g.py`; `scripts/build_availability_g.py`;
+`scripts/register_g.py`; `tools/site_g.py` (page generators).
+
+**Verification added this session:** the official Week 10 injury report was re-read on 2026-11-16
+and diffed row by row against the 2026-11-14 capture. It moved: +2 rows, 32 changed fields, 22 of
+them Chargers rows for a game not yet played at the earlier read. Both reads are kept, hash-pinned,
+and the earlier one is never overwritten (`data/raw/MANIFEST-g.json`, `data/injury_diff_g.tsv`).
+Checks recorded in `data/verification-g.tsv`.
+
+**New registers:** sources S70–S72 (all read in session, all official NFL.com), flags F43–F48,
+questions Q35–Q38, suggestions SG35–SG38.
+
+**Reproduce this session's work:**
+
+```bash
+python3 scripts/verify_recapture_g.py   # re-capture diff gate (exit 0/1)
+python3 scripts/build_backlog_g.py      # requirement backlog
+python3 scripts/build_luck_g.py         # removal-of-luck panel
+python3 scripts/build_availability_g.py # team availability + announced starters
+python3 scripts/register_g.py           # registers (append-only)
+python3 tools/site.py && python3 tools/checklinks.py && python3 tools/checkrows.py
+```
+
 ---
 
 ## Session D additions (2026-11-14)

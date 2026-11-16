@@ -1043,7 +1043,7 @@ pages contradict each other. It does not print a single performance number. Each
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
     import brief as _brief  # session arena/685f958d-fl1
-    es = _brief.exec_banner() + es
+    es = _brief.exec_banner() + site_g.exec_section(g_ctx) + es
     written.append(page("executive-summary.html", "Executive Summary",
                         es + sprint["exec_summary"]))
 

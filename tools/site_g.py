@@ -176,7 +176,7 @@ def readiness_section(ctx):
             ctx["raw_src"](ctx["src_link"]("S01", ctx["sources_by_id"])),
         ])
     return """
-<section>
+<section id="decision">
 <h2>Decision readiness</h2>
 <p class="lead">One row per requirement: what stops it today, and the number that
 would clear it. <strong>%d of %d rows are blocked or waiting on a decision.</strong>
@@ -628,3 +628,65 @@ def build(ctx):
     ]
     sections = readiness_section(ctx) + luck_section(ctx)
     return pages, sections
+
+
+# ------------------------------------------------------- executive summary add
+def exec_section(ctx):
+    """Dated block on the executive summary page: what this session added and
+    verified, with the numbers and the source behind each claim."""
+    backlog = load_json("requirements_backlog.json")
+    luck = load_json("luck_panel.json")
+    h = luck["headline"]
+    counts = backlog["counts"]
+    rows = [
+        [ctx["cell"]("Requirement lines tracked"), ctx["cell"]("87", "n"),
+         ctx["cell"]("R01–R28 from the earlier register, R29–R87 added this session from the brief"),
+         ctx["raw_src"]('<a class="src" href="requirements-backlog.html">backlog</a>')],
+        [ctx["cell"]("Blocked or awaiting a decision"),
+         ctx["cell"](counts.get("blocked", 0) + counts.get("decision-open", 0), "n"),
+         ctx["cell"]("each row names the gate and the number that would clear it"),
+         ctx["raw_src"]('<a class="src" href="index.html#decision">readiness</a>')],
+        [ctx["cell"]("Official injury report, dated reads held"), ctx["cell"]("2", "n"),
+         ctx["cell"]("2026-11-14 (345 rows) and 2026-11-16 (347 rows), both hash-pinned"),
+         ctx["raw_src"]('<a class="src" href="availability-ledger.html">ledger</a>')],
+        [ctx["cell"]("Rows / fields that moved between those reads"),
+         ctx["cell"]("+2 / 32", "n"),
+         ctx["cell"]("mostly the Monday-night game, which had no designations yet on the earlier read"),
+         ctx["raw_src"]('<a class="src" href="availability-ledger.html">diff</a>')],
+        [ctx["cell"]("Starters ruled out, with the club's next charted name"),
+         ctx["cell"]("33 / 31", "n"),
+         ctx["cell"]("derived from club charts the clubs themselves call unofficial"),
+         ctx["raw_src"]('<a class="src" href="team-availability.html">teams</a>')],
+        [ctx["cell"]("Starters an official page actually announced"),
+         ctx["cell"]("11", "n"),
+         ctx["cell"]("quoted and linked; one name from the brief could not be evidenced and is blank"),
+         ctx["raw_src"]('<a class="src" href="announced-starters.html">starters</a>')],
+        [ctx["cell"]("Home-team hit rate over 137 official results"),
+         ctx["cell"]("%s" % pct(h["home_win_rate"], 1), "n"),
+         ctx["cell"]("95%% interval %s to %s — contains 50%%"
+                     % (pct(h["home_win_rate_wilson"][0], 1), pct(h["home_win_rate_wilson"][1], 1))),
+         ctx["raw_src"]('<a class="src" href="removal-of-luck.html">panel</a>')],
+        [ctx["cell"]("Decisions needed before a 5pp edge is visible"),
+         ctx["cell"]("785", "n"),
+         ctx["cell"]("%d once six strategies are tried — more than three NFL seasons of every game"
+                     % luck["multiplicity"]["n_required_at_5pp_edge"]),
+         ctx["raw_src"]('<a class="src" href="removal-of-luck.html">panel</a>')],
+    ]
+    return """
+<section id="session-g">
+<h2>Session <code>arena/dbf11de0-fl1</code> &mdash; 2026-11-16</h2>
+<p class="lead">This session re-read the official injury report on a later date, registered the
+brief's requirement lines that no register tracked, and published the numbers that say how much of
+any future result could be chance. Everything below came out of a script in this repository against
+a page that is linked from every row.</p>
+%s
+<div class="callout">
+  <h3>The finding worth acting on</h3>
+  <p>The official injury report <strong>moved</strong> between two reads taken two days apart: two
+  rows appeared and 32 fields changed, 22 of them Chargers rows for a game that had not yet been
+  played at the time of the first read. Any backtest that trains on the later read has used
+  information that did not exist before kickoff. The repository now keeps both reads, hash-pinned,
+  and publishes the diff &mdash; and never overwrites the earlier one.</p>
+</div>
+</section>
+""" % ctx["table"](["Figure", "Value", "Basis", "Where"], rows, cls="kpi")
