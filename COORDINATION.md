@@ -373,6 +373,16 @@ overlapping rows we did not duplicate (F57/F59/F54). `tools/site.py` merged both
 (NAV, index sections, `written.extend(g_pages)` + our `session_sections`); all generated pages were
 regenerated once from the merged generators. `COORDINATION.md` unioned (their board then ours).
 
+**Silent-loss incident (caught in post-merge verification):** the wave-2 merge auto-took the
+parallel sessions' rewritten `tools/site.py` wholesale, quietly dropping every
+`session_sections` block (readiness/ablations pages, luck dashboard, strategies change-of-mind
+column, validation G-18 section) even though the generated artifacts from the wave-1 commit
+stayed committed — the pages were live but no generator rebuilt them. Found because the
+rendered label `(F47)` no longer matched any generator source; recovered the blocks from the
+wave-1 commit, re-applied them to the merged generator with final ids, and re-ran the battery.
+Lesson for the board: after ANY merge touching `tools/site.py`, grep the generator for every
+session's function names — a clean `git status` does not mean the merge kept both halves.
+
 **Second reconciliation (PR #46, session `arena/38a78804-fl1`):** that session had ALSO claimed
 S80–S82, Q44 and SG43 for different rows, and renamed the signal luck panel to
 `data/luck_panel_signal.json`. Re-issued again: our sources are now **S83–S88**, our question **Q45**,
