@@ -373,6 +373,16 @@ overlapping rows we did not duplicate (F57/F59/F54). `tools/site.py` merged both
 (NAV, index sections, `written.extend(g_pages)` + our `session_sections`); all generated pages were
 regenerated once from the merged generators. `COORDINATION.md` unioned (their board then ours).
 
+**Second reconciliation (PR #46, session `arena/38a78804-fl1`):** that session had ALSO claimed
+S80–S82, Q44 and SG43 for different rows, and renamed the signal luck panel to
+`data/luck_panel_signal.json`. Re-issued again: our sources are now **S83–S88**, our question **Q45**,
+our suggestions **SG44–SG46** (+SG47 consolidation proposal, flag **F66** records the three-way
+duplication). `scripts/build_luck_panel.py` (ours) renamed to `scripts/build_luck_panel_g.py`;
+`data/strategies.json` now carries BOTH change-of-mind vocabularies (our `change_of_mind`
+upgrade/downgrade objects and their `raises_confidence`/`lowers_confidence` strings) — the site
+renders ours; the test pin for sources.tsv updated 74→80. All three parallel views stay live and
+cross-linked; consolidation is registered as SG47 for owner review.
+
 ## Task board — session `arena/360ca650-fl1` (requirements sprint R21–R28)
 
 **Session ID:** `arena-360ca650-fl1` · **Branch:** `arena/360ca650-fl1` (from `9d7ca32` of `main`) ·
