@@ -87,7 +87,7 @@ def schedule_page(sources_by_id):
 <h2>Full 2026 regular-season schedule &amp; results (272 games)</h2>
 <div class="callout">
 <p><strong>The league's dated schedule announcement</strong> (official, read 2026-11-16,
-source <a href="sources.html#S73">S73</a>):
+source <a href="sources.html#S83">S83</a>):
 &ldquo;The National Football League announced that the 2026 NFL Schedule powered by AWS will be
 released on <strong>Thursday, May 14 at 8 p.m. ET</strong>&rdquo; &mdash; the announcement was
 published <a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14">on nfl.com on May 8, 2026</a>
@@ -111,7 +111,7 @@ with a flag and are never used as verified facts.</p>
 reconciled feed and stays labelled third-party; the official Game Center spot-checks read on
 2026-11-16 (2 games, both matching, Game Book links confirmed) are recorded on
 <a href="readiness.html">Decision Readiness</a>
-(flag <a href="flagged.html#F45">F45</a>).</p>
+(flag <a href="flagged.html#F63">F63</a>).</p>
 </div>
 %s
 </section>

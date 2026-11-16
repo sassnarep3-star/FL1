@@ -22,7 +22,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from engine.luck import build_panel  # noqa: E402
+from engine.luck_signals import build_panel  # noqa: E402
 
 
 def main() -> None:
@@ -54,7 +54,7 @@ def main() -> None:
         raise SystemExit("no signal rows found - nothing to compute")
 
     panel = build_panel(signal_rows, trials=trials, controls=controls)
-    out = ROOT / "data" / "luck_panel.json"
+    out = ROOT / "data" / "luck_panel_signals.json"
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(panel, fh, indent=1, ensure_ascii=False)
         fh.write("\n")

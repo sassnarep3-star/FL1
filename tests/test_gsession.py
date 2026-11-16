@@ -13,7 +13,7 @@ import unittest
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from engine.luck import build_panel, familywise, strategy_luck_rows  # noqa: E402
+from engine.luck_signals import build_panel, familywise, strategy_luck_rows  # noqa: E402
 from engine.ablation import (  # noqa: E402
     ablate, build_rows, features, load_team_week_qb, paired_mae_diff_ci,
     predict, rolling_prior_margin, solve_normal_equations,

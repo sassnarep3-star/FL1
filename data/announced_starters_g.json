@@ -1,0 +1,69 @@
+{
+ "id": "announced_starters",
+ "title": "Announced-starter evidence register - dated official announcements, never inferred replacements",
+ "updated": "2026-11-16",
+ "requirement": "Add an announced-starter evidence field: the blank replacement columns on the injury-report page are correct there, but the league DOES publish dated starter announcements; record them with their clock dates and links, separately from anything inferred.",
+ "rule": "A row is published only when the announcement itself was read on an official page this session. Where the official document announces a roster event rather than a start, the announced_start column stays blank and the roster event is recorded as evidence - the distinction between 'announced to start' and 'likely to start' is preserved verbatim.",
+ "rows": [
+  {
+   "id": "AS-01",
+   "player": "Drew Lock",
+   "club": "SEA",
+   "week": 10,
+   "announced_start": "yes - announced",
+   "announcement": "Head coach Mike Macdonald said Friday that Lock has no injury designation and WILL START Sunday vs. the Raiders; the article adds Lock is filling in for the injured Sam Darnold and making his third start of the season.",
+   "event_date": "2026-11-13",
+   "source_url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+   "source_kind": "official (nfl.com news)",
+   "cross_check": "data/injuries.tsv Week 10 capture: SEA Sam Darnold DNP/Out (Ribs, Quadricep) and Drew Lock LIMITED with no game status - consistent with an announced healthy starter.",
+   "verified": true
+  },
+  {
+   "id": "AS-02",
+   "player": "Jacoby Brissett",
+   "club": "BAL",
+   "week": 10,
+   "announced_start": "",
+   "announcement": "",
+   "roster_event": "Official: the Cardinals finalized a trade sending Brissett to the Ravens (announced Friday). The same official article states Lamar Jackson is on injured reserve and out indefinitely, Tyler Huntley suffered a season-ending turf toe injury, and Baltimore had a different starting quarterback for a third consecutive game.",
+   "event_date": "2026-11-06",
+   "source_url": "https://www.nfl.com/news/ravens-complete-trade-for-cardinals-jacoby-brissett-deal-terms-revealed",
+   "source_kind": "official (nfl.com news)",
+   "cross_check": "The article's own words about Week 10 are that Brissett 'presumably will start' - a reporter inference, NOT an announcement. The announced_start cell is therefore blank; publishing it as an announced start would be exactly the inference this register exists to prevent.",
+   "verified": true
+  },
+  {
+   "id": "AS-03",
+   "player": "Kyle McCord",
+   "club": "MIA",
+   "week": 10,
+   "announced_start": "",
+   "announcement": "",
+   "roster_event": "Official: the league's reserve-list transaction table shows Malik Willis (MIA) placed on Reserve/Injured on 11/10 (raw capture: raw/nfl-reserve-list-2026-11.md).",
+   "event_date": "2026-11-10",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "source_kind": "official (nfl.com transactions)",
+   "cross_check": "League-adjacent reporting says McCord made his first NFL start in Week 10, and data/injuries.tsv is consistent (MIA Tua Tagovailoa-era depth moves; Willis absent from the weekly report because he is on IR, not because he is healthy - the brief's exact 'not listed != available' case). No official page announcing the START itself was read this session, so the announced_start cell stays blank (flag F64).",
+   "verified": false
+  },
+  {
+   "id": "AS-04",
+   "player": "Lamar Jackson / Tyler Huntley",
+   "club": "BAL",
+   "week": 10,
+   "announced_start": "",
+   "announcement": "",
+   "roster_event": "Official article of 2026-11-06: Jackson 'is on injured reserve and out indefinitely'; Huntley 'suffered a turf toe injury that has ended his season'; Baltimore started a different QB for a third consecutive game (Joe Fagnano started vs. Jacksonville in Week 9).",
+   "event_date": "2026-11-06",
+   "source_url": "https://www.nfl.com/news/ravens-complete-trade-for-cardinals-jacoby-brissett-deal-terms-revealed",
+   "source_kind": "official (nfl.com news)",
+   "cross_check": "This is the evidence behind the brief's stale-depth flag: any club depth page still publishing Jackson/Huntley as the QB line must be read against this dated event, never as a current starter statement.",
+   "verified": true
+  }
+ ],
+ "open_items": [
+  "McCord (AS-03): an official dated start announcement is still to be captured; the reserve transaction is captured.",
+  "The register currently covers Week 10 evidence only; it extends week by week as announcements are read from official pages.",
+  "Club depth-chart pages are NOT treated as start announcements anywhere in this register: a chart is an unofficial depth statement, not a dated starter declaration."
+ ]
+}

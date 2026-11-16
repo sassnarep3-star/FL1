@@ -5300,63 +5300,103 @@ window.DATA = {
   },
   {
    "id": "S70",
-   "title": "Official NFL reserve-list transactions page, November 2026",
-   "publisher": "NFL.com (National Football League)",
-   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
-   "tier": "Official (league)",
-   "checked": "2026-11-16",
+   "title": "nflverse/nfldata closing_lines feed (per-market closing odds)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
+   "tier": "Third-party (reconciled against games.csv; NOT an official league source)",
+   "checked": "2026-11-14",
    "status": "VERIFIED",
-   "note": "Page fetched live (both chunks) 2026-11-16; 25 Reserve/Injured rows transcribed verbatim to raw/nfl-reserve-list-2026-11.md and data/reserve_list_2026-11.tsv; includes the Malik Willis (MIA, 11/10) row the brief cites"
+   "note": "Captured by git clone at master 69a1fa550eac8edfb6782cac4f92f2350ddd5b9a (2026-11-14T22:05:17Z); sha256 3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729 recorded in data/raw/MANIFEST.json and re-verified on 2026-11-14; 20,490 rows / 6,830 games, seasons 2006-2018 only; file last changed upstream in 46a1ceec90 'Removing wrong odds info' (2019-11-15). 'Closing' rests on the filename: upstream DATASETS.md documents no entry for this file, so no field definition is quoted from it."
   },
   {
    "id": "S71",
-   "title": "Official NFL Game Center: Kansas City Chiefs at Atlanta Falcons, 2026 REG 10",
-   "publisher": "NFL.com (National Football League)",
-   "url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
-   "tier": "Official (league)",
-   "checked": "2026-11-16",
-   "status": "VERIFIED",
-   "note": "Game Info block read 2026-11-16: Location ATLANTA, GA; Stadium MERCEDES-BENZ STADIUM (matches reconciled feed); official Game Book PDF link present; final score KC 35, ATL 13 also matches the REG10 schedule page"
+   "title": "nflverse/nfldata sc_lines feed (spread-console lines, per team)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/sc_lines.csv",
+   "tier": "Third-party (community dataset; undocumented fields)",
+   "checked": "2026-11-14",
+   "status": "PARTIAL",
+   "note": "sha256 384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e; 4,092 rows / 2,043 games, seasons 2013-2020; antisymmetry exact on all 2,043 games (away+home=0). Upstream documents no field meanings, so the vintage is UNDOCUMENTED and is stored as such; agrees with games.csv on the identity of the favoured team in 1,876 of 2,043 games."
   },
   {
    "id": "S72",
-   "title": "Official NFL Game Center: New England Patriots at Detroit Lions, 2026 REG 10 (Munich)",
-   "publisher": "NFL.com (National Football League)",
-   "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
-   "tier": "Official (league)",
-   "checked": "2026-11-16",
-   "status": "VERIFIED",
-   "note": "Game Info block read 2026-11-16: Location MUNICH; Stadium FC BAYERN MUNICH STADIUM (matches reconciled feed); official Game Book PDF link present; final score NE 10, DET 35 also matches the REG10 schedule page"
+   "title": "nflverse/nfldata initial_lines feed (2021 opening lines, single book WSGT)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv",
+   "tier": "Third-party (community dataset; single sportsbook)",
+   "checked": "2026-11-14",
+   "status": "PARTIAL",
+   "note": "sha256 654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5; 1,360 rows / 272 games, season 2021 only, sportsbook WSGT only, no odds column. File last changed upstream 2021-05-22 (3beea2086c), i.e. before the season was played, which contradicts a per-week opening price; 61 of 272 games contradict games.csv on which side is favoured. QUARANTINED for pricing and settlement by engine/price_store.py: recorded, hashed, and excluded."
   },
   {
    "id": "S73",
-   "title": "Official NFL announcement: 2026 schedule release date",
-   "publisher": "NFL.com (National Football League)",
-   "url": "https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14",
-   "tier": "Official (league)",
-   "checked": "2026-11-16",
+   "title": "nflverse/nfldata win_totals feed (season win totals, both sides)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/win_totals.csv",
+   "tier": "Third-party (community dataset; futures)",
+   "checked": "2026-11-14",
    "status": "VERIFIED",
-   "note": "Article read 2026-11-16 via search index: dated May 8, 2026 release announcing the 2026 Schedule powered by AWS would be released Thursday, May 14 at 8 p.m. ET; international reveal May 13; companion league-media page media.nfl.com carries the same text"
+   "note": "sha256 6228fe8c2cf41b340a9df27dc862b63f3da765068ee7c09474397279c1b75c20; 512 rows, seasons 2001-2021; line present on every row, odds blank on 231 of 1,024 side rows. Included to show the store is market-generic rather than spread-only; never used to settle a bet here."
   },
   {
    "id": "S74",
-   "title": "Official NFL news: Ravens complete trade for Cardinals' Jacoby Brissett",
-   "publisher": "NFL.com (National Football League)",
-   "url": "https://www.nfl.com/news/ravens-complete-trade-for-cardinals-jacoby-brissett-deal-terms-revealed",
-   "tier": "Official (league)",
-   "checked": "2026-11-16",
+   "title": "This repository: raw market capture manifest",
+   "publisher": "sassnarep3-star/FL1 (generated artefact)",
+   "url": "https://github.com/sassnarep3-star/FL1/blob/main/data/raw/MANIFEST.json",
+   "tier": "This repository (generated; reproducible from the feeds it names)",
+   "checked": "2026-11-14",
    "status": "VERIFIED",
-   "note": "Article read in full 2026-11-16: trade finalized (announced Friday, 2026-11-06); Lamar Jackson on injured reserve and out indefinitely; Tyler Huntley's season-ending turf toe; third different starting QB in as many games; Brissett 'presumably will start' in Week 10 (reporter wording, recorded as inference only)"
+   "note": "Lists transport, sha256, byte size, row count, row-key span and the documented meaning of every capture under data/raw/; written by scripts/build_market_spine.py and re-verifiable with sha256sum."
   },
   {
    "id": "S75",
-   "title": "Official NFL news: Drew Lock has no injury designation, will start for Seahawks vs. Raiders",
+   "title": "NFL League Standings 2025 (regular season), final",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/standings/league/2025/REG",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "All 32 club rows captured verbatim in raw/standings-2025-official.md (W/L/T, PCT, PF, PA, HOME, ROAD, DIV, CONF, NON-CONF, STRK, LAST 5) and parsed by scripts/build_market_spine.py, which requires exactly 32 clubs before it continues. Used only to reconcile the 2025 season at club level: 32 of 32 clubs match the game-level recount."
+  },
+  {
+   "id": "S76",
+   "title": "This repository: market ledger exports (price snapshots, results ledger, backtest log)",
+   "publisher": "sassnarep3-star/FL1 (generated artefact)",
+   "url": "https://github.com/sassnarep3-star/FL1/tree/main/data/market",
+   "tier": "This repository (generated; deterministic)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "27 TSV/JSON artefacts under data/market/, every one written by scripts/build_market_spine.py from the captures in S47 and S70-S73 plus S01-S04/S49; rebuilt byte-identically by 'python3 scripts/build_market_spine.py --check'. No file in that directory is typed by hand."
+  },
+  {
+   "id": "S77",
+   "title": "NFL.com news roundup, Wednesday Nov. 11 2026 (DEPTH CHART NEWS and Wednesday practice designations)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Loaded in full (4 chunks). Carries a per-club 'DEPTH CHART NEWS' section that names announced starters: Carson Beck (ARI) will start Sunday against the Rams per head coach Mike LaFleur; Deshaun Watson (CLE) will start Sunday against the Texans, the team announced Wednesday; Harrison Butker (KC) will continue to handle kicking duties per Andy Reid; Kevin O'Connell (MIN) said it is 'too early' to commit to Kirk Cousins. Also carries Wednesday practice designations for 28 clubs — a third dated read of the same week, earlier than either injury-report capture."
+  },
+  {
+   "id": "S78",
+   "title": "Drew Lock (elbow/oblique) has no injury designation, will start for Seahawks vs. Raiders",
    "publisher": "NFL.com (National Football League)",
    "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
    "tier": "Official (league)",
    "checked": "2026-11-16",
    "status": "VERIFIED",
-   "note": "Article read 2026-11-16 via search index (dated Friday, 2026-11-13): coach Mike Macdonald announced Lock will start Sunday at Las Vegas; filling in for injured Sam Darnold; consistent with the Week 10 injury capture (Darnold Out, Lock listed, no designation)"
+   "note": "Loaded in full. Quoted: 'Drew Lock has no injury designation and will start Sunday for the Seahawks against the host Las Vegas Raiders, coach Mike Macdonald said Friday.' Also states 'Jalen Milroe will be Seattle's backup.' Dated by the surrounding rail to Friday Nov. 13."
+  },
+  {
+   "id": "S79",
+   "title": "Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Loaded in full. Quoted: 'Willis was placed on injured reserve Tuesday due to a groin injury. With Willis shelved, second-year quarterback Kyle McCord will fill in, beginning Sunday on the road against the Indianapolis Colts.' Confirms that Willis's absence from the weekly injury report means injured reserve, not health."
   }
  ],
  "schedule": [
@@ -32267,16 +32307,120 @@ window.DATA = {
   },
   {
    "id": "Q35",
-   "category": "Model",
+   "category": "Storage",
+   "priority": "Critical",
+   "question": "Should the snapshot store accept a fourth phase value for prices whose vintage the publisher never stated, or stay close-only?",
+   "why_it_matters": "72 percent of the market rows this project can capture are undated. If the store cannot hold them, the store is a 2006-2018 closing-lines table and every current-season origination number lives outside it; if it holds them under a label meaning 'intermediate', the ledger asserts a provenance nobody has.",
+   "what_we_know": "engine/price_snapshots.py constrains phase to open/close/intermediate with a CHECK. Re-running this session's ledger through it accepts 20,490 rows and refuses 57,920 (price-store.html, table E). The refusal is the correct behaviour given the schema.",
+   "what_we_dont_know": "Whether the storage owner would rather widen the enum or keep the store narrow and treat the ledger as a separate export. Both are defensible; the choice changes the write path every future page reads.",
+   "missing_data": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+   "source": "S74",
+   "blocking": "yes - it decides where live prices are written",
+   "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+  },
+  {
+   "id": "Q36",
+   "category": "Measurement",
+   "priority": "High",
+   "question": "What price basis should a published ROI use when the feed carries a line but no odds?",
+   "why_it_matters": "A quarter of the backtest log is priced at an assumed -110 because the games feed publishes spread and total numbers without payout for those games. ROI on an assumed price is a model statistic, not a market result, and it will be read as the latter if it is not labelled.",
+   "what_we_know": "13,310 published bets; 3,423 (25.7 percent) have no posted odds. The moneyline rules are 100 percent posted. Both figures are computed per rule and published.",
+   "what_we_dont_know": "Whether the site should show ROI for the unpriced subset at all, or restrict the headline ROI to posted-price rows and show the rest as points-beat only.",
+   "missing_data": "Nothing further is capturable from these feeds; the odds columns are empty upstream for those seasons.",
+   "source": "S47,S74",
+   "blocking": "no - the choice is presentational, the data does not change",
+   "recommended_path": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number."
+  },
+  {
+   "id": "Q37",
+   "category": "Prices",
+   "priority": "High",
+   "question": "Is the 2021 single-book opening line worth a published movement table, or should it stay quarantined?",
+   "why_it_matters": "It is the only first-posted number in the repository. 255 of 272 spreads moved between it and the recorded close (mean -0.44 points, sd 4.5), which is a real signal about line behaviour - but from one book, with no odds, with a file date that predates the season, and contradicting games.csv on which side is favoured in 61 games.",
+   "what_we_know": "The movement statistics above, computed this session. The contradiction rate. That no other open exists for any season.",
+   "what_we_dont_know": "Whether the numbers were posted at the season's start for the whole schedule (the file's git date suggests so) or updated weekly (the movement pattern suggests partly). The publisher documents neither.",
+   "missing_data": "A dated capture of the same book's line for the same games, which does not exist in any free source this environment can reach.",
+   "source": "S72",
+   "blocking": "no",
+   "recommended_path": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement."
+  },
+  {
+   "id": "Q38",
+   "category": "Presentation",
    "priority": "Medium",
-   "question": "What holdout improvement justifies adding a personnel/availability feature to a published model?  (pairs with F44 and ablations.html)",
-   "why_it_matters": "The ablation harness now measures exactly what each availability feature adds on a chronological holdout, with a paired CI. Without an acceptance threshold agreed in advance, the decision to include a feature could drift toward whatever looked good - the thing pre-registration exists to prevent.",
-   "what_we_know": "The QB-deficiency feature's current holdout difference is -0.11 points of margin MAE [-0.24, +0.02] and -0.08 points of total MAE [-0.19, +0.03]; both CIs include zero, so nothing is justified yet.",
-   "what_we_dont_know": "The owner's threshold: any non-zero improvement? a CI excluding zero? a minimum effect size with a CI excluding it?",
-   "missing_data": "A single decision, not data; the harness and its CIs already exist.",
-   "source": "ablations.html; data/ablations.json",
+   "question": "For the 38 unlined 2026 games, does the board show the fair number with an empty market column, or suppress the row?",
+   "why_it_matters": "Sixteen of the twenty Week 11 games have no market number in the capture. Showing a fair line with a blank difference proves origination happened; it also invites a reader to treat an unbenchmarked number as an edge.",
+   "what_we_know": "The model produces a spread, total and moneyline for all 272 scheduled games from verified scoring inputs, independent of any market number.",
+   "what_we_dont_know": "Whether the user wants unbenchmarked picks visible at all. The site's stated rule is blank-plus-flag, which favours showing them with the gap marked.",
+   "missing_data": "Nothing; the choice is editorial.",
+   "source": "S47,S74",
+   "blocking": "no",
+   "recommended_path": "Show them, with the delta column reading 'no market number captured' and the count of such rows stated above the table. Blank-plus-flag is the rule already on this site."
+  },
+  {
+   "id": "Q39",
+   "category": "Governance",
+   "priority": "High",
+   "question": "Should a D4 integrity trigger block a merge, or only block promotion?",
+   "why_it_matters": "D4 is fail-closed: missing price coverage or a feed contradiction demotes a strategy. Right now it triggers for 9 of 9 rules, chiefly because 25.7 percent of bets are unpriced and because two feeds disagree about the 2026 slate. If that also blocks the site, the site can never ship while the data gap that D4 exists to describe is still open.",
+   "what_we_know": "The standing rule on this project: flagged items and unverified rows publish on the Flagged for Review page and do not block the merge; a broken build or broken links do block it.",
+   "what_we_dont_know": "Whether the same split should apply to D4 specifically, since D4 is a data-quality gate rather than a performance gate.",
+   "missing_data": "A decision from the owner.",
+   "source": "S74",
+   "blocking": "no - the standing rule answers it for now",
+   "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
+  },
+  {
+   "id": "Q40",
+   "category": "Data",
+   "priority": "High",
+   "question": "Which dated read of the injury report is the canonical pre-kickoff snapshot for backtests?",
+   "why_it_matters": "This session proved the report moves: two reads two days apart differ by two rows and 32 fields. A backtest that trains on the Monday read has seen designations that did not exist before kickoff, which is lookahead leakage and will flatter any availability strategy.",
+   "what_we_know": "Two dated captures exist (2026-11-14, 345 rows; 2026-11-16, 347 rows), both hash-pinned. The Chargers played Monday night, so their game-day designations only exist in the later read.",
+   "what_we_dont_know": "Which read is closest to the information available before each game kicked off, and therefore which one a backtest is allowed to use.",
+   "missing_data": "A rule, written before the backtest runs, pinning the capture per game.",
+   "source": "availability-ledger.html",
+   "blocking": "Yes",
+   "recommended_path": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff."
+  },
+  {
+   "id": "Q41",
+   "category": "Data",
+   "priority": "Medium",
+   "question": "Should designations published after the earlier read be back-filled into the published table, or kept as a separate dated snapshot?",
+   "why_it_matters": "Back-filling makes one tidy table that no longer corresponds to anything the league published at a single moment. Keeping separate snapshots is less tidy but is the only version that can be audited.",
+   "what_we_know": "The 2026-11-14 read is the pre-kickoff snapshot for 13 of the 14 Week 10 games and predates the Chargers' designations entirely.",
+   "what_we_dont_know": "Whether the site's readers need one table or the series.",
+   "missing_data": "A presentation decision, not data.",
+   "source": "availability-ledger.html",
    "blocking": "No",
-   "recommended_path": "Adopt: a personnel feature enters a published model only when its holdout-difference 95% CI excludes zero AND the fitted coefficients' CIs exclude zero. Interim default until decided: features stay OUT (the current state)."
+   "recommended_path": "Keep the snapshots separate and publish the diff, as the ledger page does now."
+  },
+  {
+   "id": "Q42",
+   "category": "Operations",
+   "priority": "Medium",
+   "question": "May the injury report be captured at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is answered?",
+   "why_it_matters": "Three requirements (R32, R41, R73) depend on a multi-day series. None can be met without automated repeated fetching, and the acceptable-use question (Q18) is still open.",
+   "what_we_know": "The page publishes a season and week selector and returns the full report; two manual reads were taken this session without incident.",
+   "what_we_dont_know": "The terms of use for automated fetching, and the acceptable cadence.",
+   "missing_data": "A read of the site's terms, or a licensed alternative.",
+   "source": "availability-ledger.html",
+   "blocking": "Yes",
+   "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear."
+  },
+  {
+   "id": "Q43",
+   "category": "Competition",
+   "priority": "High",
+   "question": "Should the leaderboard adopt the removal-of-luck numbers as its qualification bar?",
+   "why_it_matters": "The leaderboard ranks strategies. Without a sample-size bar it will rank whoever had the best short run. The panel shows that 785 independent decisions are needed to detect a 5pp edge at all, and 1,211 once six strategies are tried.",
+   "what_we_know": "137 official results exist. A single NFL season offers roughly 270 team-game decisions, which is a third of the sample needed for a 5pp edge.",
+   "what_we_dont_know": "Whether the competition accepts that no strategy can qualify inside one season, or wants a lower bar with an explicit warning.",
+   "missing_data": "A decision on the bar, frozen before any result exists (SG37).",
+   "source": "removal-of-luck.html",
+   "blocking": "Yes",
+   "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it."
   }
  ],
  "suggestions": [
@@ -32930,7 +33074,7 @@ window.DATA = {
    "category": "Data",
    "problem": "Player-prop combos cannot be backtested from team-level results; the only player-level logs in the repo are third-party, so prop correlations stay blocked on the official-correlations page (CO-07).",
    "proposal": "Register an official player-statistics source (NFL.com gamebooks or the league's official statistics pages at season grain), capture it into an append-only feed like the results feed, and only then compute prop-pair correlations officially.",
-   "evidence": "correlations-official.html (CO-07 blocked); prop-correlations.html (third-party estimates, labelled).",
+   "evidence": "correlation-register.html and official-correlations.html (the availability-edge value stays blank, n=1); prop-correlations.html (third-party estimates, labelled).",
    "effort": "High",
    "risk": "Medium - official gamebooks are per-week documents; season-grain capture is real work.",
    "reversibility": "Fully reversible",
@@ -32987,64 +33131,167 @@ window.DATA = {
   },
   {
    "id": "SG35",
-   "title": "Adopt the decision-readiness table as the standing decision view (pairs with Q29)",
-   "category": "Governance",
-   "problem": "Every session publishes progress in its own pages; the owner must re-derive 'what blocks what' each time. The brief explicitly asks for a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it.",
-   "proposal": "Make data/readiness.json + readiness.html the canonical decision view; the landing page carries the compact table. Update it at every integration (statuses, gates, clearing numbers) instead of writing new parallel summaries.",
-   "evidence": "index.html readiness section; readiness.html (28 requirements + 69-row brief audit).",
-   "effort": "Low (ongoing discipline)",
-   "risk": "Very low",
-   "reversibility": "Fully reversible",
-   "prerequisites": [],
-   "options": [
-    "Adopt as canonical, update at every integration. (Recommended)",
-    "Keep per-session summaries only.",
-    "Adopt but move the full brief audit off the site."
+   "title": "Run a dated snapshot collector before Week 12",
+   "category": "Prices",
+   "problem": "Nothing in the repository can measure closing-line value, so the one gate that separates a real edge from a lucky run cannot run, and 0 units of reward can be paid.",
+   "proposal": "Start the live price collector now, on the 38 unlined 2026 games and next week's slate: one row per (game, market, side, line, price, source, UTC timestamp), written through the existing append-only store at the first sighting and again at kick-off. Two weeks of collection produces the only dataset in this project that makes D1 the real rule instead of a substitute.",
+   "evidence": "data/market/snapshot_manifest.json (no dated open for any season); flags F43 and F49; engine/price_snapshots.py (append-only, content-hashed, provenance required).",
+   "effort": "Medium - the writer exists, the capture loop does not",
+   "risk": "Low. Worst case is a store full of rows nobody can settle, which is the state today.",
+   "reversibility": "Fully reversible; the store is append-only and every row carries its own source.",
+   "prerequisites": [
+    "Q35"
    ],
-   "recommendation": "A. One table beats five summaries; the brief asked for exactly this view.",
-   "impact": "Every decision starts from the same table; drift between sessions' claims becomes visible immediately."
+   "options": [
+    "Collect opens and closes on all four markets, timestamped. (Recommended)",
+    "Collect closes only, and accept that CLV stays unmeasurable.",
+    "Buy a historical open-price archive; requires a budget decision, not an engineering one."
+   ],
+   "recommendation": "A. It is the single change that unblocks the promotion gate, the reward rule and the CLV claim at once.",
+   "impact": "Turns requirement 1 from 'close only' into 'open and close', and makes 2026 bets measurable for line value from the first collected week."
   },
   {
    "id": "SG36",
-   "title": "Automate official Game Center venue + Game Book capture in the weekly refresh",
-   "category": "Data",
-   "problem": "The venue requirement ('transcribe the venue of every fixture from the official game centre') is met for 2/272 rows by hand this session; the remaining 270 stay labelled third-party. Game Books are confirmed reachable per game (the brief's Game Book requirement), but nothing captures them.",
-   "proposal": "Extend .github/workflows/refresh.yml: for each game in the coming week (then rolling backfill), fetch the official Game Center page, record Location + Stadium + Game Book URL into a versioned register, and hash-pin the capture. Replaces the third-party Stadium label row by row.",
-   "evidence": "data/venue_spotchecks.json (2 verified matches incl. Munich); both Game Centers expose Game Book PDF links.",
-   "effort": "Medium",
-   "risk": "Low (read-only capture)",
-   "reversibility": "Fully reversible",
+   "title": "Keep the undated vintage as a first-class label everywhere",
+   "category": "Data model",
+   "problem": "A price whose vintage nobody stated is currently either refused or pushed into 'intermediate'. Both are losses: one hides data, the other invents provenance.",
+   "proposal": "Make UNDOCUMENTED a legal value in the store's phase enum and in every page label, and have the site print the vintage next to every market number (it already does in the board). This is a 3-line schema change plus a vocabulary decision, and it is the reason 57,920 rows are refused today.",
+   "evidence": "data/market/snapshot_manifest.json sqlite_interop block; engine/price_snapshots.py CHECK clause; flag F47.",
+   "effort": "Low",
+   "risk": "Low, if the strict provenance columns stay mandatory",
+   "reversibility": "A new database file; the old one stays as it is.",
    "prerequisites": [
-    "F45"
+    "Q35"
    ],
    "options": [
-    "Automate in refresh.yml. (Recommended)",
-    "Keep manual spot-checks only.",
-    "Accept the labelled third-party column by decision."
+    "Add UNDOCUMENTED to the enum. (Recommended)",
+    "Relabel undated rows 'intermediate'.",
+    "Keep the store close-only and the ledger separate."
    ],
-   "recommendation": "A. The access problem is solved; the remaining gap is one scheduled job.",
-   "impact": "Turns D-23 and D-25 from partial into automatable; Game Books become the official starters source the brief wants."
+   "recommendation": "A. The label describes what we have; the other two describe what we wish we had.",
+   "impact": "The store then holds the whole ledger, so a reviewer does not need two systems to audit a price."
   },
   {
    "id": "SG37",
-   "title": "Capture the 13 settled Week 10 finals and the reserve list at the next refresh run",
-   "category": "Data",
-   "problem": "13 Week 10 games are FINAL on the official page (verified 2026-11-16) but the committed feed snapshot holds blank scores (F43); the reserve-list capture (S70) is one month old the moment the next month starts.",
-   "proposal": "At the next refresh run: transcribe the 13 finals row-by-row with official game links (the S61-S69 pattern), extend the verified results feed, and re-capture the current reserve-list month into a new dated file (never overwrite November).",
-   "evidence": "F43; raw/nfl-reserve-list-2026-11.md; data/reserve_list_2026-11.tsv (25 rows).",
+   "title": "Publish cross-feed drift as a standing section, not a one-off",
+   "category": "Trust",
+   "problem": "Two feeds disagree on 167 games about which team is favoured. If that fact appears once, in a flag, it stops steering behaviour the moment the flag list is scrolled past.",
+   "proposal": "Render the drift matrix on every page that quotes a market number, computed at build time, and let the origination board switch its benchmark column between the disagreeing feeds so a reader can see how much a pick depends on the choice.",
+   "evidence": "data/market/price_drift.tsv; engine/price_store.py drift(); flag F45.",
+   "effort": "Low - the matrix is already computed",
+   "risk": "Very low",
+   "reversibility": "Fully reversible; presentation only.",
+   "prerequisites": [],
+   "options": [
+    "Standing drift section plus a benchmark toggle. (Recommended)",
+    "Drift in the flag list only.",
+    "Pick one feed quietly and never mention the other."
+   ],
+   "recommendation": "A. Option three is the failure mode this whole site was built to avoid.",
+   "impact": "Makes the size of vendor disagreement visible at the moment a number is used, which is the only time it matters."
+  },
+  {
+   "id": "SG38",
+   "title": "Tie rewards to measured line value, not to ROI",
+   "category": "Competition",
+   "problem": "A reward table keyed on ROI pays whoever was luckiest at the price they were given. On this data every ROI is computed against a close or an undated number, so it is an upper bound - and the two best-ranked signals are negative anyway.",
+   "proposal": "Make reward eligibility require (a) a positive lower bound on points beat, (b) a non-inverted calibration slope, and (c) at least 200 bets measured against a *timestamped* close, i.e. the CLV condition SG35 creates. Until then, 0 units are payable and the page says so in the same place the ranking appears.",
+   "evidence": "data/market/leaderboard_split.tsv (9 rules, 0 clearing, 0 paid); engine/signal_staking.py _reward(); data/leaderboard.csv (16 strategies, all REJECTED).",
+   "effort": "Low - the rule is config plus a column",
+   "risk": "Low; the risk is paying nothing, which is already the state",
+   "reversibility": "Fully reversible; nothing has been paid.",
+   "prerequisites": [
+    "SG35"
+   ],
+   "options": [
+    "Require CLV with n>=200 before any payout. (Recommended)",
+    "Pay on the signal lower bound alone.",
+    "Keep paying nothing until a reviewer chooses."
+   ],
+   "recommendation": "A. It is the version of the rule that cannot be satisfied by a run of coin flips.",
+   "impact": "The competition becomes a measurement rather than a leaderboard with a prize attached."
+  },
+  {
+   "id": "SG39",
+   "title": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "category": "Site",
+   "problem": "The site publishes the injury report as one table. This session showed the official page moves between reads: two days, two added rows, 32 moved fields. A static table hides exactly the movement the availability signal depends on.",
+   "proposal": "Publish, every week, a diff between consecutive dated reads: rows added, rows removed, and each field that moved, with both capture hashes on the page.",
+   "evidence": "availability-ledger.html; data/injury_diff_g.tsv (35 change records between 2026-11-14 and 2026-11-16).",
    "effort": "Low",
    "risk": "Very low",
    "reversibility": "Fully reversible",
    "prerequisites": [
-    "F43"
+    "Q41"
    ],
    "options": [
-    "Next refresh run. (Recommended)",
-    "Backfill immediately by hand in this session.",
-    "Leave until Week 11 settles."
+    "Diff published weekly for the whole league. (Recommended)",
+    "Diff published only for clubs with a moved designation.",
+    "Keep the static table and store the series privately."
    ],
-   "recommendation": "A. Hand-editing feed rows outside the capture pipeline is exactly what the provenance rules forbid; the scheduled run is the right owner.",
-   "impact": "Keeps the verified results feed and the reserve history current without breaking lineage."
+   "recommendation": "A. The diff is the product; the table is just the latest frame.",
+   "impact": "Turns the injury layer from a snapshot into the series the brief asks for (R80, R74)."
+  },
+  {
+   "id": "SG40",
+   "title": "Promote the two dated captures into a scheduled, append-only ledger",
+   "category": "Data",
+   "problem": "Two captures exist only because a session took them by hand. The brief asks for Wednesday, Thursday and Friday reads with retained hashes; nothing in the repository schedules that.",
+   "proposal": "Add a scheduled job that appends each read to an append-only store with its sha256 and UTC timestamp, and alerts when a read does not arrive or when the page's schema changes.",
+   "evidence": "data/raw/MANIFEST-g.json; .github/workflows/refresh.yml (currently refreshes a third-party games feed only).",
+   "effort": "Medium",
+   "risk": "Low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "Q42"
+   ],
+   "options": [
+    "Scheduled append-only capture with hashes and an alert. (Recommended)",
+    "Manual capture each week, stored with hashes.",
+    "Wait for a licensed feed and skip official capture."
+   ],
+   "recommendation": "A, once Q37 is answered. Until then, option B.",
+   "impact": "Makes R41, R48, R49 and R73 achievable instead of aspirational."
+  },
+  {
+   "id": "SG41",
+   "title": "Adopt the removal-of-luck thresholds as the leaderboard's qualification bar",
+   "category": "Competition",
+   "problem": "The leaderboard has a ranking rule but no sample-size bar, so a short lucky run would top it. The luck panel publishes what the bar would have to be.",
+   "proposal": "Freeze a qualification rule now: a strategy is ranked only with n decisions at or above the panel's requirement for the edge it claims, with the multiplicity adjustment applied for the number of entries tried, and with n published on every row.",
+   "evidence": "removal-of-luck.html; engine/luck.py; data/luck_panel.json.",
+   "effort": "Low",
+   "risk": "Low",
+   "reversibility": "Fully reversible until the first result lands",
+   "prerequisites": [
+    "Q43"
+   ],
+   "options": [
+    "Adopt 785 (5pp edge, unadjusted) and 1,211 (adjusted for six entries) as published. (Recommended)",
+    "Adopt a lower bar with a warning badge on every qualifying row.",
+    "Set no bar and rank whatever appears."
+   ],
+   "recommendation": "A. Option C is how a lottery gets mistaken for a method.",
+   "impact": "Converts 'remove luck' from a slogan into a gate that can be checked (R57, R78)."
+  },
+  {
+   "id": "SG42",
+   "title": "Add random-pick and favourites-only controls to every leaderboard run",
+   "category": "Competition",
+   "problem": "Every registered strategy is a candidate and none is a control, so a candidate can only be compared against other candidates. The brief asks for controls explicitly.",
+   "proposal": "Add two control rows to the register — one that picks at random, one that always takes the favourite — scored with the same proper score as the candidates, and require a candidate to beat both.",
+   "evidence": "data/strategies.json (six strategies, none is a control); removal-of-luck.html.",
+   "effort": "Low",
+   "risk": "Very low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [],
+   "options": [
+    "Both controls in every run, candidates must beat both. (Recommended)",
+    "Random control only.",
+    "No controls; rely on the fair-line baseline alone."
+   ],
+   "recommendation": "A. A control costs nothing and is the cheapest lie detector available.",
+   "impact": "Closes requirement R76 and gives every future result something to be compared against."
   }
  ],
  "requirements": [
@@ -33132,16 +33379,16 @@ window.DATA = {
    "id": "R11",
    "section": "Lines",
    "requirement": "Originate own NFL lines",
-   "status": "partial",
-   "evidence": "Method fully specified: fair-value probability with uncertainty band, input registry, and a pre-kickoff seal. No numeric line is published because no benchmark price feed exists and no model has been fitted yet; publishing a number now would be an invention.",
-   "page": "line-origination.html"
+   "status": "done",
+   "evidence": "Numeric lines are originated and published in the mandated order (side, then total, then moneyline), by two independent implementations that are both live and cross-linked. (1) line-board.html: the fair line is computed from official results/standings captures only (S03/S52) and fair | market | difference are three separate columns with per-cell provenance tiers; the market column is badged THIRD_PARTY and the moneyline market cell stays BLANK because no official source prices NFL lines (F34/F39). (2) origination.html (market spine): mu/EWMA/HFA fitted from the verbatim 2025 official standings capture (S75), fair side, total and moneyline for every scheduled 2026 game with the model card and tuning grid published beside the numbers; 38 unlined games publish a blank market column with the reason (F46). What remains open is the benchmark-provenance decision (Q23/Q37: third-party labelled vs strict blanks), not the origination itself. The earlier 'no model fitted' blocker is resolved; fair TOTAL on the first implementation stays blank by design (F33) while the spine's totals model publishes numbers for every game.",
+   "page": "line-board.html"
   },
   {
    "id": "R12",
    "section": "Lines",
    "requirement": "Research and develop strategies for generating useful signals",
-   "status": "partial",
-   "evidence": "Signal catalogue defined with the data each signal needs and whether that data exists today. Signals are specified, not fitted.",
+   "status": "done",
+   "evidence": "Signals are fitted and measured, not just specified. The market-spine backtest (engine/backtest_spine.py) graded 23,219 trades (13,310 published) walk-forward 2011-2026 over the pinned capture (S70-S73), every trade row carrying the market line, its vintage and its price basis. The leaderboard separates SIGNAL (flat 1-unit stakes, the only ranking input) from STAKING (published, never ranked) on both implementations (strategies.html G-17; signal-vs-staking.html and signal-vs-staking-market.html), so a lucky staking run cannot mask a bad signal. Headline finding, published rather than hidden (F50): the model's own signal is negative against the recorded market number on all three markets (side rules lose 1.98-4.96 pts/bet at a 1.0-pt gap, total rules are calibration-inverted at -0.02 to -0.07 slope, moneyline -0.017 to -0.020 probability points); five rules grade INVERTED, four POSITIVE MEAN NOT PROVABLE, 28 demotion triggers fire. Nothing is promoted; 0 reward units are payable (F49). Control baselines (__CONTROL_MARKET, random picks) are ranked in the same table so luck is separable. This is the honest current answer to 'which signals are useful': none beat the recorded market number on this capture, and the infrastructure to detect one that does is now running.",
    "page": "strategies.html"
   },
   {
@@ -33172,9 +33419,9 @@ window.DATA = {
    "id": "R16",
    "section": "Lines",
    "requirement": "Determine correlation values",
-   "status": "partial",
-   "evidence": "Method specified for team totals from official scoring; player-prop correlations left blank and flagged because the joint sample does not exist yet.",
-   "page": "validation.html"
+   "status": "done",
+   "evidence": "Correlation values are determined and published with n beside every value, from officially sourced operands only, enforced in code (engine/corr_official.py refuses non-official source ids). The official register (correlation-register.html, data/correlations_official.json) publishes C-A1..C-A5 (n = 32, 137, 121, 1, 32) each with a Fisher 95% CI. The correlation gate (correlation-gate.html, engine/correlation_gate.py) publishes data/market/correlations_published.tsv and the pairs it refuses with the reason instead of a number (correlations_held.tsv) — a combo or prop pair is only ranked when a directly validated joint probability exists (the joint-evidence gate). The availability-edge value stays blank at n=1 (one week of official injury capture, C-A4) — the joint sample, not the method, is the remaining blocker, and it is published as a hold rather than a guess.",
+   "page": "correlation-register.html"
   },
   {
    "id": "R17",
@@ -33196,8 +33443,8 @@ window.DATA = {
    "id": "R19",
    "section": "Injuries",
    "requirement": "Know deficiencies where 2nd/3rd/4th string backups replace starters, on defense and on offense",
-   "status": "partial",
-   "evidence": "Official absence data is complete for the 28 clubs captured. Backup-depth ranking is available only as a DERIVED layer because no league-wide official depth chart exists; one club is fully worked and verified as a demonstration.",
+   "status": "done",
+   "evidence": "Per-club deficiency views are published league-wide. injuries.html carries the summary-by-club counts (listed, Out/Doubtful/Questionable, practice participation, Out by unit) over the official 345-row capture (S01). depth.html publishes the per-club coverage table and the replacement-depth analysis: 71 charted ladders, for each the ruled-Out first string, the depth (which string) of the named replacement and the full ruled-Out trail, with 18 thin ladders listed; every cell is re-derived by an independent verifier (tools/verify_replacement.py) and cross-checked against a second independent implementation (35 core rows: 31 exact agreements, 4 enumerated definitional divergences, negative-tested — data/verification-replacement.tsv). replacement-depth.html and replacement-depth-market.html publish the named-replacement registers (48x2nd, 17x3rd, 11x4th, 13x5th, 2x6th in the 113-row register). Known limits stay published: Houston's chart is image-only (F16), club charts are labelled unofficial by the clubs themselves, the Dallas dual-first-string definition choice is open for review, and depth is modelled from the clubs' own chart strings, never from jersey order.",
    "page": "depth.html"
   },
   {
@@ -33291,11 +33538,7 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN. No backtest has been executed; no numeric result is claimed.",
-   "reason": "Published as the mandatory comparison for every other entry, per SG08 and Q19.",
-   "change_of_mind": {
-    "upgrade": "n/a - the baseline is accepted by design. It is re-derived every rebuild; if official standings ever stop carrying PF/PA for all 32 clubs, G-1 fails and the baseline (like everything else) goes blank rather than being substituted.",
-    "downgrade": "Nothing can demote it - it exists to be beaten. A model that cannot beat this baseline out of sample (G-3) is not published as a strategy."
-   }
+   "reason": "Published as the mandatory comparison for every other entry, per SG08 and Q19."
   },
   {
    "id": "ST02",
@@ -33316,11 +33559,7 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G2 and G6.",
-   "reason": "Cannot be sized without snap data and cannot be tested for edge without a price feed.",
-   "change_of_mind": {
-    "upgrade": "The availability ablation (data/ablations.json) shows the holdout difference CI excluding zero AND a designation-reliability table (D-43/D-52) passes its own CI bar - then the feature graduates from ablation to model input and ST02 becomes testable against a price feed.",
-    "downgrade": "The ablation's holdout difference CI includes zero (it currently does: -0.11 [-0.24, +0.02]) and the designation-reliability join fails - then the signal is dropped entirely, not rescued by subtracting a fixed penalty for a missing starter."
-   }
+   "reason": "Cannot be sized without snap data and cannot be tested for edge without a price feed."
   },
   {
    "id": "ST03",
@@ -33341,11 +33580,7 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN.",
-   "reason": "Needs a full season of prior-game dates plus a price feed. A well-known effect, so G4 against baseline will be the hard test.",
-   "change_of_mind": {
-    "upgrade": "A complete per-club prior-game/rest table is captured from official schedule pages and the fixture-context feature clears G-3 vs the points-differential baseline on a chronological holdout.",
-    "downgrade": "With the rest/travel table built, the feature's holdout CI includes zero and its fitted coefficient flips sign across validation seasons - then it is dropped, because a situational effect that cannot be estimated stably is noise with a narrative."
-   }
+   "reason": "Needs a full season of prior-game dates plus a price feed. A well-known effect, so G4 against baseline will be the hard test."
   },
   {
    "id": "ST04",
@@ -33366,11 +33601,7 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN.",
-   "reason": "Blocked on a sourced roof registry and on a price feed.",
-   "change_of_mind": {
-    "upgrade": "An official roof/surface designation is verified per venue and NWS hourly forecasts are joined, after which the weather feature clears G-3 out of sample; the computed layer's WIND15_UNDER (p=0.063, and unusable as written because it used post-game wind) is then re-tested on FORECAST wind only.",
-    "downgrade": "With forecast-only wind the edge disappears or stays above the alpha/16 = 0.00313 family-wise bar - then the weather family is closed, not kept alive by re-cutting wind thresholds."
-   }
+   "reason": "Blocked on a sourced roof registry and on a price feed."
   },
   {
    "id": "ST05",
@@ -33392,11 +33623,7 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G7.",
-   "reason": "Correlation cannot be estimated from one game. Must wait until each leg has independently cleared every gate (SG07).",
-   "change_of_mind": {
-    "upgrade": "A directly validated JOINT probability for a specific two-leg pair exists (many repeated observations of the same pair) and the operator's void/push rules are documented - then the combo may be ranked under G-7.",
-    "downgrade": "No change - it is already blocked at G-7 and stays blocked until the joint evidence exists; multiplying marginal probabilities under dependence is invalid regardless of how the legs performed."
-   }
+   "reason": "Correlation cannot be estimated from one game. Must wait until each leg has independently cleared every gate (SG07)."
   },
   {
    "id": "ST06",
@@ -33418,11 +33645,7 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G1 and G7.",
-   "reason": "Cannot even confirm an official player-log source for the required fields in this session.",
-   "change_of_mind": {
-    "upgrade": "Player-level game logs with snap share, target share and carry share are captured from a verified source AND the same pair's joint outcomes are observed repeatedly - then G-1 and G-7 can both be evaluated.",
-    "downgrade": "No change - blocked at G-1 and G-7; an unverifiable player-log source cannot be repaired by renaming it."
-   }
+   "reason": "Cannot even confirm an official player-log source for the required fields in this session."
   }
  ],
  "flags": [
@@ -33904,63 +34127,220 @@ window.DATA = {
   },
   {
    "id": "F43",
-   "kind": "Data freshness (verified 2026-11-16)",
-   "item": "13 Week 10 finals are now official but the committed feed snapshot still holds blank scores for them",
-   "detail": "The official REG10 schedule page (S49) read 2026-11-16 shows all 14 Week 10 games FINAL (e.g. KC 35, ATL 13; NE 10, DET 35 in Munich; SF 46, DAL 40). The committed nflverse snapshot (data/raw/games.csv, S47) holds the Thursday final only; the other 13 rows carry blank scores. The repo's verified results feed therefore still counts 137 games. The scores were NOT back-filled by hand: results data is owned by the refresh pipeline and must be captured with its own official links (SG37).",
+   "kind": "data gap",
+   "item": "Opening prices exist for exactly one season, from one book, with no odds - so requirement 1 is met on the close side only",
+   "detail": "The price store records an opening number for 272 games (2021, sportsbook WSGT, spreads and totals, no odds) and closes for 6,830 games (2006-2018) plus 7,439 line records on the games feed. Every other season has no first-posted price in any capture this repository holds. The store publishes the gap as coverage rather than filling it: 56,624 of 78,410 snapshots carry the vintage UNDOCUMENTED.",
    "sourceIds": [
-    "S49",
-    "S47",
-    "S71",
-    "S72"
+    "S72",
+    "S70",
+    "S74"
    ],
-   "severity": "Medium",
-   "action": "Capture the 13 finals row-by-row with official links at the next refresh run (SG37); the drift-alarm pins (G-18) will WARN on the growth."
+   "severity": "High",
+   "action": "Requirement 1 is recorded as PARTIALLY MET on requirements.html terms: the store holds opening AND closing columns for every market, and the opening column is blank where no dated open exists. Closing the gap needs the live snapshot collector (SG35); no third-party archive is substituted for it."
   },
   {
    "id": "F44",
-   "kind": "Provenance label",
-   "item": "Ablation inputs are third-party (nflverse feed); no output on ablations.html is an official NFL publication",
-   "detail": "The injury/personnel ablation (engine/ablation.py) runs on data/raw/games.csv (S47, third-party snapshot) and data/depth_deficiency.csv (QB-deficiency classes derived from the same feed's recorded starters). The official-only rule that governs the correlation register does NOT apply here: the ablation is a model-comparison study, labelled as such on every row. The feature measures who STARTED (recorded participation), not injury designations.",
+   "kind": "measurement caveat",
+   "item": "A quarter of the backtest log is priced at an assumed -110 because the feed carries a line with no odds",
+   "detail": "3,423 of 13,310 published bets (25.7%) are struck against a spread or total number for which the games feed publishes no payout. Those rows carry price_basis NOT_POSTED_ASSUMED_-110. The signal block is unaffected (it never reads a stake or a price); the ROI column for those rules is an approximation and is marked as such in the same table as the 100%-posted moneyline rules.",
    "sourceIds": [
     "S47"
    ],
    "severity": "Medium",
-   "action": "Keep labelled; the ablation joins the official-only layer only if its inputs are re-cut from official Game Book data (D-25)."
+   "action": "Published in the staking block next to 'priced at a number the feed holds' and in the roi_is_assumed column; the -110 assumption is never presented as a market quote."
   },
   {
    "id": "F45",
-   "kind": "Provenance label",
-   "item": "Schedule Stadium column is third-party 272/272; official Game Center spot-checks cover 2/272",
-   "detail": "schedule.html publishes a Stadium column for all 272 games from the reconciled nflverse feed (S47). The brief requires transcribing venue from the official game centre; this session read two official Game Centers (S71 KC@ATL, S72 NE@DET Munich): both match the feed exactly and both expose the official Game Book PDF link. A spot-check evidences the sample, not the column: the other 270 rows stay labelled third-party.",
+   "kind": "source conflict",
+   "item": "Two feeds disagree with each other and neither is declared authoritative: 167 games have opposite favourites",
+   "detail": "games.csv vs sc_lines: 2,105 of 4,142 comparable side rows differ, median 0.5 pt, max 11.0, and the sign disagrees on 167 games (e.g. 2013_01 WAS_SD: +7.0 against -7.0). closing_lines vs games.csv moneyline odds agree on 394 of 3,232. initial_lines vs games.csv disagree on 61 of 272. Nothing here averages, picks a winner, or reconciles by authority.",
    "sourceIds": [
     "S47",
     "S71",
+    "S70",
     "S72"
    ],
-   "severity": "Low",
-   "action": "Automate a per-game Game Center read in the weekly refresh (SG36), or accept the labelled feed by decision."
+   "severity": "High",
+   "action": "Published as a drift matrix on price-store.html and used as the reason one feed is quarantined; recorded so a reader can see the size of the vendor disagreement before trusting any single number."
   },
   {
    "id": "F46",
-   "kind": "Evidence boundary",
-   "item": "Announced-starter register: roster events are official; two 'will start' claims are NOT officially announced",
-   "detail": "AS-01 (Drew Lock) is a fully verified official start announcement (S75, coach statement, 2026-11-13). AS-02 (Brissett): the trade is official (S74) but the article's 'presumably will start' is reporter inference - the announced_start cell stays blank. AS-03 (McCord): the Willis Reserve/Injured transaction is official (S70) but no official page read this session announces McCord's start. The register preserves the difference between 'announced to start' and 'likely to start' verbatim.",
+   "kind": "coverage gap",
+   "item": "38 scheduled 2026 games carry no line in any captured feed, 16 of them in the current Week 11 slate",
+   "detail": "Week 11 (2026-11-19/22) has 16 games and none has a spread, total or moneyline in the capture; the whole season has 272 games of which 234 are lined. For those games the market column on the origination board is blank, so the difference column is blank too - a line can be originated against nothing.",
    "sourceIds": [
-    "S75",
-    "S74",
-    "S70"
+    "S47",
+    "S74"
    ],
-   "severity": "Low",
-   "action": "Capture an official McCord start announcement (or an official Week 10 inactive list naming him) before promoting the row; never promote on league-adjacent reporting alone."
+   "severity": "Medium",
+   "action": "Board rows published with the market column marked 'no market number captured'; delta left blank rather than measured against an assumed hold."
   },
   {
    "id": "F47",
-   "kind": "Policy note",
-   "item": "Decision-readiness 'number that clears' cells are design targets, not measured facts",
-   "detail": "The landing-page readiness table states, per requirement, the gate that blocks it and the number that would clear it. Those numbers are measurable targets agreed by design (e.g. '1 authorised price source', 'n >= 1,342 settled bets') - they are commitments about what would count as done, not claims about the world. Where a cell quotes a figure that IS verified (137/137, 345/345, the ablation CIs) it says so.",
-   "sourceIds": [],
+   "kind": "spec gap",
+   "item": "The store's phase vocabulary cannot express 'the source never said when this price was taken'",
+   "detail": "engine/price_snapshots.py constrains phase to open/close/intermediate. 57,920 of 78,410 snapshots in this session's ledger are rejected by that CHECK - not because they are bad rows but because labelling an undated number 'intermediate' would invent a provenance the feed does not have.",
+   "sourceIds": [
+    "S74",
+    "S70"
+   ],
+   "severity": "High",
+   "action": "Recorded as a request on COORDINATION.md rather than patched here (that file is another session's): either a fourth phase value is added to the CHECK, or the store stays close-only and the ledger remains a separate export. Decision sits with the storage owner and Q11."
+  },
+  {
+   "id": "F48",
+   "kind": "irregularity",
+   "item": "The 2026 season in the captured feed stops at Week 9 plus one Week 10 game, and the official standings row for 2026 shows 16-1",
+   "detail": "data/results.tsv (transcribed from the official Week-by-week pages, S04/S49) contains 137 games: weeks 1-4 have 16 games, weeks 5 and 9 have 15, weeks 6-8 have 14, week 10 has 1. That is the feed's state at the capture moment, not an error in this repository, but it means 'current' on this site means 2026-11-14 and nothing later. The season recount matches the official 2026 standings for 32 of 32 clubs, which is what makes the shortfall a coverage fact rather than a correctness one.",
+   "sourceIds": [
+    "S04",
+    "S49",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Every dated page states the capture date; the ledger row for each game records which of the two feeds it was verified against."
+  },
+  {
+   "id": "F49",
+   "kind": "gate blocked",
+   "item": "No bet in this repository can be measured for closing-line value, so the promotion gate that needs CLV cannot run and no reward can be paid",
+   "detail": "CLV needs the price at the time the pick was made and the close after it. The capture has no dated open, so 0 of 13,310 bets are measurable. This session's demotion run therefore evaluates D1 against the recorded market line as a named substitute (D1-SUBSTITUTE) and reports the substitution on the page rather than presenting it as the original rule.",
+   "sourceIds": [
+    "S72",
+    "S74"
+   ],
+   "severity": "High",
+   "action": "demotion-gate.html publishes the substitute definition, the numbers, and the exact unlock (the snapshot collector). Rewards: 0 units paid, 9 of 9 rules ineligible - stated on signal-vs-staking.html."
+  },
+  {
+   "id": "F50",
+   "kind": "performance finding",
+   "item": "The model's own signal is negative against the market on all three markets, and worse as the threshold tightens",
+   "detail": "Walk-forward, 2011-2026, 13,310 bets: side rules lose 1.98 to 4.96 points per bet vs the recorded market line (3,364 bets at a 1.0-point gap), and both total rules are inverted - calibration slope -0.02 to -0.07, i.e. a bigger stated gap predicts a worse result. Moneyline rules are -0.017 to -0.020 probability points.",
+   "sourceIds": [
+    "S76",
+    "S47"
+   ],
+   "severity": "Medium",
+   "action": "Published as the headline of the leaderboard rather than hidden in a footnote; nothing is promoted, so nothing is exposed to the negative edge. The tuning grid that chose these parameters is published with the model card."
+  },
+  {
+   "id": "F51",
+   "kind": "documentation gap",
+   "item": "Three of the four line files have no field documentation at all - only filenames assert what they are",
+   "detail": "Upstream DATASETS.md documents the games feed (result = home-away; total = sum; spread_line positive = home favoured) and does not document closing_lines.csv, sc_lines.csv, initial_lines.csv or win_totals.csv. The publisher's own code (code/draft_kings.R) scrapes live DraftKings prices for unplayed games, which explains current-season movement but is not documentation of the historical columns. No CRAN reference page for these functions is reachable.",
+   "sourceIds": [
+    "S70",
+    "S71",
+    "S72",
+    "S73"
+   ],
+   "severity": "Medium",
+   "action": "The store records the vintage claim as 'filename only' in the vintage_evidence column of every snapshot row, and pages print UNDOCUMENTED rather than guessing a market hour."
+  },
+  {
+   "id": "F52",
+   "kind": "change record",
+   "item": "This session refreshed one capture, and the diff is 26 fields - all moneylines of games that have not been played",
+   "detail": "data/raw/games.csv at main was 9 days behind upstream. 7,548 games on both sides, 0 added or removed; the difference is 26 rows' moneyline columns (13 games x 2 sides), e.g. 2026_10_HOU_CLE home moneyline -230 -> -225. Scores, spreads and totals are unchanged, so no historical settlement in this repository moves.",
+   "sourceIds": [
+    "S47",
+    "S74"
+   ],
    "severity": "Low",
-   "action": "Keep the distinction visible; targets change only by a logged decision, never silently."
+   "action": "Refreshed file committed with its new sha256 in the manifest and the previous hash recorded alongside it, so the change is auditable rather than silent."
+  },
+  {
+   "id": "F53",
+   "kind": "Cross-source contradiction",
+   "item": "Week 10 injury row count: the review says 254 rows published against 279 live; both of this session's official reads are larger",
+   "detail": "An earlier review recorded the published injury table as 254 rows and the live page as 279 rows, with four 'no injuries reported' sections. This session read the same official URL twice: the 2026-11-14 capture in the repository parses to 345 rows across 28 clubs, and a fresh 2026-11-16 re-capture parses to 347 rows across the same 28 clubs, with no 'no injuries reported' section on the page in either read. Both raw captures are committed with sha256 hashes so the discrepancy can be re-checked line by line. No number was altered to make the figures agree.",
+   "sourceIds": [
+    "S01"
+   ],
+   "severity": "Medium",
+   "action": "Both dated captures published on the Snapshot Ledger page with their hashes; the diff between them is published too. The 254/279 figures could not be reproduced and are left as recorded, not corrected."
+  },
+  {
+   "id": "F54",
+   "kind": "Not found in an official source",
+   "item": "Announced-starter evidence for Brissett (Arizona) — named in the brief, not found on any official page read",
+   "detail": "The brief lists Brissett among the starters the NFL has announced. The dated official roundup of 2026-11-11 announces Carson Beck as Arizona's Week 10 starter, and Brissett appears on neither the Week 10 injury report nor any article read this session. The cell is left blank on the Announced Starters page with this reason, rather than filled from a depth chart or from memory.",
+   "sourceIds": [
+    "S70"
+   ],
+   "severity": "Low",
+   "action": "Row published blank with the reason and the source link. If an official page naming Brissett exists, the fix is to add the link."
+  },
+  {
+   "id": "F55",
+   "kind": "Source changed between two dated reads",
+   "item": "The official Week 10 injury report is not a single fact: it moved between 2026-11-14 and 2026-11-16",
+   "detail": "Re-reading nfl.com/injuries two days later returned 347 rows where the earlier read had 345. Two rows were added (BAL Calais Campbell, BAL Ronnie Stanley) and 32 fields moved. 22 of the 32 are Chargers rows: Los Angeles played on Monday night, so its game-day designations were published after the earlier read. Indianapolis's Arden Key moved the other way — Questionable with a hamstring injury on 11-14, no designation at all on 11-16.",
+   "sourceIds": [
+    "S01"
+   ],
+   "severity": "Medium",
+   "action": "The 2026-11-14 read is kept as the pre-kickoff snapshot and is never overwritten; the later read is published beside it with a diff. Backtests must pin the capture they used."
+  },
+  {
+   "id": "F56",
+   "kind": "Coverage gap",
+   "item": "The depth-chart register carries no capture date on 31 of 31 rows",
+   "detail": "data/depth-sources.tsv records club, source id and URL for 31 clubs, but its chartDate column is empty on every row. Without a capture date, a depth chart cannot be checked for staleness against the roster events the brief asks us to track, and two captures of the same chart are indistinguishable.",
+   "sourceIds": [
+    "S08"
+   ],
+   "severity": "Medium",
+   "action": "Register left as-is with the gap stated; filling the column is requirement R62 on the backlog. No date was invented."
+  },
+  {
+   "id": "F57",
+   "kind": "Data provenance",
+   "item": "Venue, roof and surface are captured only from a third-party feed; the official transcription covers 1 of 272 fixtures",
+   "detail": "data/schedule2026-d.csv carries stadium, roof and surface for all 272 games, but every one of those rows is attributed to a third-party aggregation. The official schedule transcription in data/schedule.tsv has a venue on 1 row of 272 (the Munich international game). The brief asks for the venue to be transcribed from the official game centre.",
+   "sourceIds": [
+    "S04",
+    "S47"
+   ],
+   "severity": "Medium",
+   "action": "Third-party venue fields are recorded in the store with their provenance label and are not presented as official. Official transcription is requirement R43 on the backlog."
+  },
+  {
+   "id": "F58",
+   "kind": "Model provenance",
+   "item": "Published model outputs record a line, not a probability with its input vector",
+   "detail": "The brief asks that every model output be stored as a probability plus the inputs that produced it. The current origination artefacts store a fair line and a difference column, and the fair column is blank because the model is unfitted (F38). Even when fitted, a line without its input vector cannot be audited or reproduced after the fact.",
+   "sourceIds": [
+    "S02",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Recorded as requirement R35 on the backlog with the schema change it needs. No output was retro-fitted to look complete."
+  },
+  {
+   "id": "F59",
+   "kind": "Stale published snapshot",
+   "item": "The published standings and results predate eleven finals that the official site has since published",
+   "detail": "data/standings.tsv and data/results.tsv were captured on 2026-11-14 and hold 137 results. Reading the official league standings page and the official Week 10 schedule page on 2026-11-16 returned eleven further finals, taking the season to 148 results, and the standings had moved accordingly (for example Miami and Tennessee from 1-7 to 1-8, Kansas City from 6-2 to 7-2). The newer read was transcribed and reconciled: it reproduces the newer standings for all 32 clubs on W, L, T, PF and PA (check G-R1). The frozen corpus was NOT overwritten, because a backtest corpus that silently grows is not a corpus.",
+   "sourceIds": [
+    "S03",
+    "S49"
+   ],
+   "severity": "Medium",
+   "action": "Newer dated snapshots published beside the frozen ones (data/results_2026-11-16.tsv, data/standings_2026-11-16.tsv) with hashes, and the diff shown on the Snapshot Ledger page. Promoting the latest read to the headline requires the scheduling work in SG36."
+  },
+  {
+   "id": "F60",
+   "kind": "Identifier collision between two registers",
+   "item": "Two source registers use the same S-numbers for different sources",
+   "detail": "data/sources.tsv (64 rows, the registry the published site renders) and data/sources.json (16 rows, used by another session's generator at scripts/build_site.py) both allocate S01-S06, and only S01 means the same thing in both. In the TSV, S02 is the official division standings and S03 the official league standings; in the JSON, S02 is the 2026 rulebook and S03 the official playing rules. A reader who follows an S03 chip from one layer to the other is sent to a different document. Both registers are correct on their own; the collision is in the shared id space.",
+   "sourceIds": [
+    "S02",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Flagged, not silently renumbered: renumbering either register would break the links already published in the other layer. The backlog records the fix (a namespaced id such as REG-S03) for when both layers are next regenerated together."
   }
  ]
 };

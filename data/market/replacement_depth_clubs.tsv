@@ -1,0 +1,29 @@
+team	club	listed_on_report	first_string_out	vacancies_resolved	vacancies_unresolved	offence_levels_lost	defence_levels_lost	special_teams_levels_lost	depth_lost_units	mean_levels_lost	worst_slot	chain_broken_count	chart_captured
+ARI	ARI	15	6	6	1	0	1	0	1	0.167	DT Darius Robinson (line 1 -> 2)	0	YES
+ATL	ATL	11	3	4	1	1	2	0	3	0.75	DL Gervon Dexter Sr. (line 1 -> 2)	1	YES
+BAL	BAL	8	0	0	0	0	0	0	0			0	YES
+BUF	BUF	14	3	3	0	0	1	0	1	0.333	S Sam Franklin Jr. (line 1 -> 2)	0	YES
+CAR	CAR	12	0	2	1	0	0	0	0	0.0		0	YES
+CIN	CIN	9	0	1	0	0	0	0	0	0.0		0	YES
+CLE	CLE	12	1	2	0	0	0	0	0	0.0		0	YES
+DAL	DAL	19	6	6	3	0	1	0	1	0.167	S Juanyeh Thomas (line 1 -> 2)	3	YES
+DET	DET	9	3	4	0	0	0	0	0	0.0		1	YES
+GB	GB	17	9	8	1	0	0	0	0	0.0		1	YES
+HOU	HOU	16	0	0	0	0	0	0	0			0	NO - no chart to measure against
+IND	IND	14	6	5	1	0	0	0	0	0.0		1	YES
+JAX	JAX	11	2	2	0	0	0	0	0	0.0		0	YES
+KC	KC	13	0	0	0	0	0	0	0			0	NO - no chart to measure against
+LAC	LAC	19	0	0	0	0	0	0	0			0	YES
+LAR	LAR	14	3	5	0	1	0	0	1	0.2	TE Davis Allen (line 1 -> 2)	1	YES
+LV	LV	5	1	1	0	1	0	0	1	1.0	WR Dont'e Thornton Jr. (line 1 -> 2)	0	YES
+MIA	MIA	11	2	3	0	1	0	0	1	0.333	WR Jared Wayne (line 1 -> 2)	0	YES
+MIN	MIN	13	4	7	0	1	0	0	1	0.143	WR Jordan Addison (line 2 -> 3)	2	YES
+NE	NE	15	9	6	5	0	1	0	1	0.167	CB Charles Woods (line 2 -> 3)	2	YES
+NO	NO	12	3	3	1	0	1	0	1	0.333	DL Christen Miller (line 2 -> 3)	0	YES
+NYG	NYG	11	0	0	0	0	0	0	0			0	YES
+NYJ	NYJ	9	5	7	1	0	1	0	1	0.143	LB Trevin Wallace (line 1 -> 2)	1	YES
+PIT	PIT	8	0	0	0	0	0	0	0			0	YES
+SEA	SEA	15	4	4	0	0	0	0	0	0.0		2	YES
+SF	SF	12	6	4	2	0	0	0	0	0.0		0	YES
+TEN	TEN	12	4	4	2	0	1	0	1	0.25	LB Cody Barton (line 1 -> 2)	0	YES
+WAS	WAS	9	0	0	1	0	0	0	0			0	YES

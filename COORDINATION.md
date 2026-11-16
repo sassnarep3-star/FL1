@@ -1,3 +1,72 @@
+## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
+
+**Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
+**Claimed:** 2026-11-16 (UTC) · **Status:** complete — merged to `main`, Pages deploy confirmed
+(record at the end of this block).
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| G0 | Coordination claim + immediate push | done | `arena-dbf11de0` | `COORDINATION.md` |
+| G1 | Live official re-capture of the Week 10 2026 injury report, line-by-line diff, plus a dated results/standings read | done | `arena-dbf11de0` | `raw/injuries-week10-2026-recapture-2026-11-16.md`, `raw/results-week10-2026-2026-11-16.md`, `data/injuries_2026-11-16.tsv`, `data/results_2026-11-16.tsv`, `data/standings_2026-11-16.tsv`, `data/injury_diff_g.tsv`, `data/verification-g.tsv`, `scripts/verify_recapture_g.py`, `scripts/verify_results_g.py` |
+| G2 | Requirement backlog: every brief line registered with the gate that blocks it and the number that clears it | done | `arena-dbf11de0` | `data/requirements_backlog.{csv,json}`, `scripts/build_backlog_g.py`, `requirements-backlog.html` |
+| G3 | Decision-readiness table on the landing page (one row per requirement) | done | `arena-dbf11de0` | `tools/site_g.py`, `index.html` (section `#decision`) |
+| G4 | Removal-of-luck panel | done | `arena-dbf11de0` | `engine/luck.py`, `tests/test_luck_g.py`, `scripts/build_luck_g.py`, `data/luck_panel.json`, `removal-of-luck.html` |
+| G5 | Per-team availability view: starters out, replacement named, net injury count | done | `arena-dbf11de0` | `scripts/build_availability_g.py`, `data/team_availability.csv`, `data/starters_out_detail.csv`, `team-availability.html` |
+| G6 | Announced-starter evidence field + registers | done | `arena-dbf11de0` | `data/announced_starters.{csv,json}`, `announced-starters.html`, `availability-ledger.html`, `scripts/register_g.py`, `data/{flags,questions,suggestions}.json`, `data/sources.tsv` |
+| G7 | Final integration: PR → `main`, merge, Pages confirmed | done | `arena-dbf11de0` | PR + this record |
+
+### What the official sources said (each claim links to the page)
+
+| Check | Result | Source |
+|---|---|---|
+| Injury report re-read two days later | 345 rows (2026-11-14) → 347 rows (2026-11-16); 2 rows added, 32 fields moved | https://www.nfl.com/injuries/ |
+| No published row missing from the later read | 0 missing (so the published table holds no invented row) | https://www.nfl.com/injuries/ |
+| Kerby Joseph / Cade Mays / D.J. Reed game status | all three published **Out** on the official page | https://www.nfl.com/injuries/ |
+| Results and standings re-read | 137 → 148 results; the new read reproduces the new official standings for 32/32 clubs on W, L, T, PF, PA | https://www.nfl.com/schedules/2026/REG10/ , https://www.nfl.com/standings/league/2026/REG |
+| Announced starters (quoted, dated, linked) | 11 rows from 3 official pages | S77, S78, S79 (`sources.html`) |
+
+Two games were deliberately **not** recorded: the Sunday-night game (PIT at CIN) was in the first
+quarter at capture time and the Monday-night game (LAC at BAL) had not kicked off. A partial score
+is not a result.
+
+### Verification performed at completion (all re-runnable, all green)
+
+`python3 -m unittest discover -s tests -q` → **267 OK** · `tools/build.py` clean ·
+`tools/verify_injuries.py` → 345/345 · `tools/verify_results.py` → PASS 32/32 ·
+`tools/checklinks.py` → **41 pages**, every link and anchor resolves ·
+`tools/checkrows.py` → **41 pages, 5,963 rows**, every row sourced ·
+`scripts/verify_recapture_g.py` → GATE PASS (G-V1..G-V7) ·
+`scripts/verify_results_g.py` → PASS (G-R1..G-R4).
+
+### Irregularities this session found (published on Flagged for Review)
+
+F53 injury row-count discrepancy (254/279 claimed; 345 and 347 measured) · F54 Brissett
+announced-starter evidence not found · F55 the official report moved between two dated reads ·
+F56 depth-chart register carries no capture date on 31/31 rows · F57 venue/roof/surface only from a
+third-party feed · F58 model outputs store a line, not a probability with inputs · F59 published
+standings/results predate eleven finals · F60 two source registers share the S-number space with
+different meanings.
+
+### Merge reconciliation with `origin/main` (140 commits, PRs up to #42)
+
+`main` had moved 140 commits ahead while this session worked. The merge conflicted in 27 files.
+Nothing from either side was discarded:
+
+- **Generated pages (23 HTML files + `assets/js/data.js`)** — resolved to `main`'s version and then
+  regenerated from the merged sources, because they are build artefacts, not hand-edited content.
+- **`tools/site.py`** — auto-merged cleanly; this session's five NAV entries and its `site_g`
+  wiring are intact.
+- **Registers (`flags`, `questions`, `suggestions`, `sources.tsv`)** — `main` had independently
+  allocated ids that collided with this session's (`F43`–`F50`, `Q35`–`Q38`, `SG36`–`SG38`,
+  `S70`–`S72`). Rather than overwrite either side, this session's rows were **renumbered** to
+  `F53`–`F60`, `Q40`–`Q43`, `SG39`–`SG42`, `S77`–`S79` and appended. Their content is unrelated to
+  mine (theirs concern price feeds and line vintages; mine concern official availability data), so
+  both sets stand. Cross-references inside my rows were updated to the new ids.
+- **`COORDINATION.md`** — `main`'s version taken as the base and this block prepended, so no other
+  session's record was lost.
+
+### Integration record (G7)
+
 # COORDINATION — Shared Task Board
 
 > Read this **before** starting. Claim a task by writing your session ID and file scope, then commit
@@ -5,6 +74,121 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
+**Last updated:** 2026-11-16 (UTC) — session `arena-a4c5a1de-fl1` claimed below (stale-PR integration + partial-requirements close-out + final integration)
+
+## Task board — session `arena/a4c5a1de-fl1` (final integration, 2026-11-16)
+
+**Session ID:** `arena-a4c5a1de-fl1` · **Branch:** `arena/a4c5a1de-fl1` (from `ebf20eb` = main tip) ·
+**Claimed:** 2026-11-16T00:00Z · **Status:** active.
+
+Handoff basis: open PRs **#38** (market spine, `arena/08fef9e9-fl1`, last activity 2026-11-14T23:06Z) and
+**#39** (replacement-depth cross-check, `arena/2fa09442-fl1`, last activity 2026-11-14T23:09Z) have no
+commits for >60 minutes and their sessions show no activity — takeover permitted by the stale-claim rule.
+Both pass CI (`verify` SUCCESS). Nothing below starts work claimed by a live session.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| I1 | Integrate stale open PRs #38 and #39 into main (verify combined tree, resolve conflicts preserving both sides, merge, confirm Pages) | done | arena-a4c5a1de-fl1 | PR operations + `COORDINATION.md` records + conflict resolutions (engine renames, registers, tools/site.py, pages_market.py, test page list) + regenerated pages | see completion record below | see completion record below |
+| P1 | Close out partial requirements R11/R12/R16/R19 where merged evidence now exists; where evidence does not exist, leave status `partial` and make the exact blocking gap + clearing number explicit (decision-readiness contract) | done | arena-a4c5a1de-fl1 | `data/requirements.json`, `requirements.html` (generated), `data/suggestions.json` (SG32 stale-page fix), `EXECUTIVE_SUMMARY.md`, `README.md` (stray-marker fix + addendum) | per-requirement evidence text cites the published pages/files; every number quoted was re-checked against committed data (summary.json, signal_cards.tsv, correlations_official.json, depth.html) | see completion record below |
+| I2 | Final integration: PR → main, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | done | arena-a4c5a1de-fl1 | PR + `COORDINATION.md` + requirements-page lead fix | Pages API + live fetch | — |
+
+### Integration record — I2 (2026-11-16)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/42 (`arena/a4c5a1de-fl1` → `main`),
+  **MERGED** as `bec36881fa3ec01e40852870a6473b352698131c` via `gh pr merge 42 --merge` after the
+  `verify` check passed. **PRs #38 and #39 now show state MERGED** — their head commits
+  (`c09098c`, `372793a`) became ancestors of `main` through this integration, which is the intended
+  takeover outcome: their work is on main under their own authorship history.
+- **GitHub Pages:** latest build for `bec3688` → status **`built`**, `error: null`
+  (pages-build-deployment run 43787989062, success). Source `main` `/`,
+  https://sassnarep3-star.github.io/FL1/ live.
+- **Live verification (page fetch, cache-busted):** `requirements.html` renders all 28 requirements
+  with the new page-anchored evidence (R11/R12/R16/R19 rows confirmed); `flagged.html` publishes
+  **52 items (F01–F52)** including the re-issued F43–F52; `results-feed-market.html` (the renamed
+  spine page) renders with per-row source chips and the retagged F48 link; NAV/cards show both builds.
+- **Follow-up fix shipped with this record:** the requirements-page lead said "The rest are marked
+  partial on purpose" even at 28/28 — now conditional in the generator (`tools/site.py`), rebuilt,
+  gates re-run (242 tests, checklinks 36 pages, checkrows 5,604 rows, verify_site 0/0).
+
+**Session state: complete.** All three claimed tasks (I1, P1, I2) done and recorded. No open claims
+remain on this session's board. The owner's decision list stays on the live pages: Q35–Q39 and
+SG35–SG38 (spine decisions), Q23/Q37 (benchmark policy), Q29/Q32 (canonical build + official-only
+rule), plus the long-standing flags (F34/F39 prices, F43 opening prices, F49 CLV collector).
+
+### Completion record — I1 (2026-11-16)
+
+**Merges performed on `arena/a4c5a1de-fl1` (takeover basis: both PRs' last commits 2026-11-14T23:0xZ,
+>60 min stale; both CI-green; no live session activity):**
+- PR #39 (`arena/2fa09442-fl1`, head `372793a`) merged first — one COORDINATION.md append/append
+  conflict, both records kept. `tools/verify_replacement.py` cross-check passes after merge.
+- PR #38 (`arena/08fef9e9-fl1`, head `c09098c`) merged second — resolutions, nothing discarded:
+  - **engine add/add:** main keeps `engine/backtest.py` (R22 module, PR #33) and `engine/originate.py`
+    (tools/brief.py `O` module); the spine's implementations renamed to `engine/backtest_spine.py` /
+    `engine/originate_spine.py`; importers (`scripts/build_market_spine.py`, `tests/test_market_pipeline.py`)
+    repointed; prose references in `tools/pages_market.py` updated.
+  - **Register id re-issue (repo convention):** spine flags F18–F27 → **F43–F52**, questions Q21–Q25 →
+    **Q35–Q39**, suggestions SG16–SG19 → **SG35–SG38**, sources S50–S56 → **S70–S76**. Retagging applied
+    only inside the spine's own files (pages_market.py, its register rows, its COORDINATION record,
+    its generated pages) — main-side references to same-numbered ids (685f958d's F18–F22 etc.) untouched.
+  - **Page-name collisions:** spine outputs re-issued as `results-feed-market.html`,
+    `signal-vs-staking-market.html`, `replacement-depth-market.html`; NAV + index cards retargeted;
+    `tests/test_market_pipeline.py` PAGES list repointed.
+  - **Generated artefacts** (`assets/js/data.js`, root pages) resolved to main then regenerated once
+    from the merged generators — no hand-merged HTML.
+  - **Capture refresh taken from the spine** per its own change record (F52): `data/raw/games.csv`,
+    `data/raw/MANIFEST.json`, `data/raw/initial_lines.csv`; derived `docs/computed/week10.html` and
+    `data/week10_signal_board.csv` match the spine's regenerated versions.
+- **Post-merge gate battery (all green):** 242 unit tests OK · `tools/checklinks.py` 36 pages OK ·
+  `tools/checkrows.py` 36 pages / 5,604 rows OK · `tools/verify_injuries.py` 345/345 ·
+  `tools/verify_results.py` PASS · `tools/verify_replacement.py` OK (with cross-check) ·
+  `tools/verify_brief.py` 10/10 · `scripts/build_market_spine.py --check` **byte-identical** ·
+  `scripts/verify_feed_m.py` PASS 137/137 · `engine/demo_run.py --check` current ·
+  `scripts/verify_d.py` V5/V7/V7a/V8 PASS (V6, V9 BLOCKED — optional deps/parquet absent in this
+  sandbox, the recorded limitation) · `scripts/verify_site.py` 0 errors / 0 warnings ·
+  `site/build.py` + `site/verify.py` publishable · no broken page references across root + docs pages.
+
+**Irregularities found during I1 (all fixed here, all logged):**
+1. README.md carried a committed, unresolved conflict-marker pair (`=======` / `>>>>>>> origin/main`
+   around the 685f958d record) — a prior session removed the `<<<<<<<` line but left the other two.
+   Fixed; both records preserved verbatim.
+2. Generated `suggestions.html` (SG32's evidence text) referenced `correlations-official.html`, a page
+   removed at a previous integration — invisible to `checklinks` because it is plain text, not an href.
+   Repointed to the live `correlation-register.html` / `official-correlations.html` in the register row.
+3. The shallow clone (depth 1) made `git merge-base` report "unrelated histories" until
+   `git fetch --unshallow`; noted for future sessions.
+
+### Completion record — P1 (2026-11-16)
+
+All four remaining partials closed with published evidence; **all 28 tracked requirements now render
+`done`** on `requirements.html`. Every number in the new evidence text was re-checked against committed
+data before writing it (`data/market/summary.json` 23,219/13,310; `data/market/signal_cards.tsv`
+5×INVERTED + 4×POSITIVE-MEAN-NOT-PROVABLE; `data/correlations_official.json` C-A1..C-A5 with n;
+`depth.html` 71 ladders). Status → `done`, evidence → page-anchored:
+
+- **R11** — numeric fair | market | difference published on `line-board.html` (official-only fair
+  side/total; moneyline market cell BLANK by rule) and `origination.html` (spine: fitted µ/EWMA/HFA
+  from the verbatim 2025 official standings capture S75, all 272 games, model card + tuning grid).
+  The benchmark-provenance decision stays open (Q37) but is no longer a blocker of origination itself.
+- **R12** — signals fitted and measured walk-forward (13,310 published bets, 2011–2026, sealed tail);
+  SIGNAL/STAKING split live on both leaderboard implementations; headline finding F50 published
+  (model signal negative vs recorded market on all three markets); 0 rewards payable (F49); control
+  baselines ranked in the same table.
+- **R16** — official-operand correlation register with n + Fisher CIs (C-A1..C-A5); correlation gate
+  publishes its refused pairs with reasons (joint-evidence rule); availability-edge value blank at n=1
+  (C-A4) as a published hold.
+- **R19** — 71 verified replacement-depth ladders (per-club coverage, ruled-Out trails, named
+  replacements by string), independently re-derived and cross-checked against the second
+  implementation (31/35 exact, 4 enumerated definitional divergences, negative-tested); HOU image-only
+  limit (F16) and the Dallas dual-first-string decision stay published.
+
+Requests to future sessions: none open. The decision list for the owner remains Q35–Q39 (+ Q23/Q37
+benchmark policy) and SG35–SG38 (+ SG24 breakeven fix) on the live pages.
+
+Requests to other sessions: none currently. This session does not edit `tools/site.py` NAV regions or
+other sessions' engine files; if I1 reveals a conflict, both sides are preserved and logged.
+
+---
+
 **Last updated:** 2026-11-16 (UTC) — claim of session `arena/fc0ed6e8-fl1` added at the top of this board
 
 ## Task board — session `arena/fc0ed6e8-fl1` (decision layer: readiness, change-of-mind, luck panel, ablations, drift alarm)
@@ -1362,3 +1546,152 @@ session's audit layer stands beside them.**
   `tools/verify_replacement.py` PASS · `scripts/verify_feed_m.py` PASS (137 games) ·
   `engine/demo_run.py --check` · `site/build.py` + `site/verify.py` publishable ·
   `scripts/verify_site.py` 0 errors · `scripts/verify_d.py` V5–V9 PASS.
+
+---
+
+## Session `arena/2fa09442-fl1` — D2 completion record (PR, merge, Pages)
+
+| Item | Result |
+|---|---|
+| PR | https://github.com/sassnarep3-star/FL1/pull/36 (branch `arena/2fa09442-fl1` → `main`) |
+| CI before merge | `verify-research-build` run 43650935714 → **pass** (31s) |
+| Merge | **MERGED** as `20bb8d0` (`gh pr merge 36 --merge`), 2026-11-14 |
+| Pages | `gh api repos/sassnarep3-star/FL1/pages` → **status: built**, source `main` / `/` |
+| Live verification | `depth.html` re-fetched from the live host: replacement-depth section present (71 ladders, KC row = 28 slots after the fold fix, TEN blanks with reasons). `index.html?cb=20bb8d0` re-fetched with a cache-buster: corrected schedule card **"All 272 regular-season games, 137 results in so far"** is live. (A first read without the cache-buster showed the pre-merge card — the documented CDN cache artefact, not a broken deploy.) |
+| Merges in-session | `origin/main` merged twice (PRs #22–#32, then #33); `COORDINATION.md` conflict resolved by keeping both sides' records; no work discarded |
+| Post-merge follow-up | cross-check of the two replacement-depth implementations, committed as `3afdcb2` and shipped in the follow-up PR below |
+
+### Cross-check of the two replacement-depth implementations (R26 / D1)
+
+Session `arena/360ca650-fl1` shipped `data/replacement_depth.tsv` (PR #33) from an independent code path.
+`tools/verify_replacement.py` now compares it against this session's ladder walk on every run:
+
+- **35 core rows: 31 agree exactly** — including the two Titans ladders (Barton LB, Skoronski LG) where *both*
+  implementations return blank (the club publishes no deeper name: confirmed against the live
+  [Titans chart](https://www.tennesseetitans.com/team/depth-chart)).
+- **17 contingent rows == 17 non-KC thin ladders**, set-equal.
+- **4 accepted divergences, enumerated in the code and failing the gate if they grow:**
+  1. *Definitional (flagged for review, not an error):* Dallas S and Dallas TE publish **two names at first
+     string**. This site reports ladder-level depth (a not-ruled-out name exists at string 1 → depth 1, with the
+     ruled-Out name still shown in the trail); their file reports per-missing-starter depth (Locke Out → Thomas,
+     depth 2). **Decision needed: which definition is canonical?** Both are published today, on different pages.
+  2. *Superseded:* their two KC rows were built from the **pre-fix fold** (each KC row its own ladder), so they
+     read "no charted player left"; the fold fix shipped in PR #36 resolves KC RT to depth 2 (Ezeudu) and KC DT to
+     a thin ladder. Their file should be regenerated from the fixed fold by whoever owns it next.
+- Negative-tested: corrupting one cell in their TSV fails the gate.
+
+### Status
+
+- **D1: done** — replacement-depth tracking published on `depth.html`, verified cell-by-cell by an independent
+  walker, cross-checked against a second independent implementation, spot-checked against two live official pages.
+- **D2: done** — PR #36 merged, CI green, Pages built, live site verified.
+- Open items for the integration session (non-blocking, logged above): the R26/D1 claim race, the Dallas
+  dual-first-string definition choice, and regenerating `data/replacement_depth.tsv` from the fixed KC fold.
+- Open PRs from other sessions at time of writing: #34 (`arena/5876146b-fl1`), #35 (already merged), #37+ as they appear.
+
+---
+
+
+## Session `arena/08fef9e9-fl1` — market-data spine, origination run, and the eight brief items
+
+**Session ID:** `sess-08fef9e9` · **Branch:** `arena/08fef9e9-fl1` (from `main` @ `9d7ca328`) · **Started:** 2026-11-14T22:10Z
+**Role:** this session also acts as **integrator** (checked `gh pr list --state open` → no open PRs; `git ls-remote --heads origin` → every
+other `arena/*` branch already merged or abandoned; `origin/main` == this branch's base). If a new session appears mid-flight it should
+claim from the **Unclaimed** list at the bottom of this section, not from the scopes below.
+
+### Scopes claimed (do not edit these files from another session)
+
+| ID | Task | Status | File scope |
+|---|---|---|---|
+| F01 | Price-snapshot store: opening + closing, every market we originate, append-only, per-feed provenance | in progress | `engine/price_snapshot.py`, `data/market/price_*.tsv`, `data/market/price_manifest.json`, `price-store.html` |
+| F02 | Verified results feed: multi-feed reconciliation + settlement engine so backtests and ROI exist | in progress | `engine/results_feed.py`, `data/market/results_feed.tsv`, `results-feed.html` |
+| F03 | Origination order enforced: side → total → derived moneyline; fair / market / delta as separate columns | in progress | `engine/originate.py`, `data/market/fair_lines.tsv`, `origination.html` |
+| F04 | Leaderboard: signal score and staking score computed and published separately | in progress | `engine/signal_staking.py`, `data/market/leaderboard_split.tsv`, `signal-vs-staking.html` |
+| F05 | Depth of the replacement (levels lost, who fills in, what they bring), not just "X is out" | in progress | `engine/replacement_depth.py`, `data/market/replacement_depth.tsv`, `replacement-depth.html` |
+| F06 | Correlation publication gate: official-sourced inputs only, `n` published with every value | in progress | `engine/correlation_gate.py`, `data/market/correlations_gated.tsv`, `correlation-gate.html` |
+| F07 | Demotion gate: rules that send a live strategy back to paper, with hysteresis | in progress | `engine/demotion.py`, `data/market/demotion_eval.tsv`, `demotion-gate.html` |
+| F08 | Decision desk: suggestions + the questions each one hinges on, reviewable before anything is implemented | in progress | `data/market/decisions.json`, `data/market/questions.json`, `decision-desk.html` |
+| F09 | Site integration: shared nav module, 8 new pages in the root build, README/exec-summary addenda | in progress | `tools/site.py` (**NAV block + import only**), `tools/site_shell.py`, `tools/pages_market.py`, `index.html` (+1 card), `README.md` (append-only), `EXECUTIVE_SUMMARY.md` (append-only) |
+| F10 | Verification pass, flags, tests, PR → main → merge → confirm Pages | in progress | `tests/test_market.py`, `data/flags.json` (append), `data/sources.tsv` (append S70+), `docs/MARKET_SPINE.md`, PR |
+
+**Unclaimed after this session starts (free for another session):** `docs/computed/**`, `archive/**`, `docs/pages/**`,
+`scripts/strategy_lab.py`, `scripts/build_week10_board.py`, `schedule.html`, `standings.html`, `injuries.html`, `depth.html`.
+
+### Upstream verification performed before claiming (no other session's data trusted)
+
+- Re-cloned `nflverse/nfldata` (HEAD `69a1fa550eac8edfb6782cac4f92f2350ddd5b9a`, pushed 2026-11-14T22:05Z) and re-hashed every
+  file the repo carries under `data/raw/`: `closing_lines.csv`, `sc_lines.csv`, `rosters.csv`, `win_totals.csv` are **byte-identical
+  to upstream**; `games.csv` differs from upstream HEAD in **26 fields, all of them moneyline columns of games not yet played**
+  (weeks 10–11 of 2026). Score, spread and total columns are unchanged. Recorded as a price-store drift finding, not as an error.
+- Measured the disagreement between the two feeds that both claim to price the same games: `closing_lines.csv` vs `games.csv`
+  `spread_line` agree on **2,267 / 3,368** game-sides; totals **2,078 / 3,368**; moneyline prices **394 / 3,232**.
+- `data/initial_lines.csv` (the only upstream file that claims to be an **opening** price): 2021 regular season only, one sportsbook
+  (`WSGT`), no odds, undocumented in upstream `DATASETS.md`, added by a single upstream commit dated 2021-05-22 — before the games
+  it contains — and it names the **opposite** favoured team from `games.csv` in **61 of 272** games. Quarantined, not used for ROI.
+
+### Log
+
+| When (UTC) | Entry |
+|---|---|
+| 2026-11-14T22:10Z | Read board. `main` @ `9d7ca328` (PR #21 merge). All prior session boards/records preserved. No open PRs. |
+| 2026-11-14T22:12Z | Upstream re-verification of `data/raw/*` against `nflverse/nfldata` HEAD completed (results above). Baseline checks on this tree: `unittest` 75 OK, `tools/build.py` OK, `tools/site.py` OK (16 pages), `tools/checklinks.py` OK, `tools/verify_injuries.py` 345/345 OK. |
+
+| 2026-11-14T22:14Z | **Conflict, resolved without discarding work.** `git pull --rebase origin main` hit a `COORDINATION.md` conflict: `main` had advanced through PRs #22–#27 while this claim was being written (sessions `4a9893e6`, `f1e4deb7`, `725adbd2` merged, including `d872543` "retain demotion gate in regenerated validation page"). Resolution = take `main`'s board verbatim and re-append this section, per the board's own rule. **Re-scope noted:** `725adbd2` touched the validation-page demotion-gate rendering; this session's F07 therefore ships as a *new* page + engine module and will not edit `validation.html`'s generator output — if `main`'s validation page already carries a demotion gate, both are published and reconciled at integration. |
+| 2026-11-14T22:15Z | `git ls-remote` re-checked: branches `arena/4a9893e6-fl1`, `arena/f1e4deb7-fl1`, `arena/725adbd2-fl1` all merged into `main` at `d495ba8`. No open PRs at claim time. |
+
+### Re-scope after live contention (same minute as the claim)
+
+Two sessions are active in parallel, so the claim above is narrowed to what they do not cover:
+
+| Other session | What they own | What this session will NOT do |
+|---|---|---|
+| `arena/0669d4cf-fl1` (PR #25, open) | `engine/snapshot_store.py`, `engine/results_feed.py`, `tests/test_market_results_store.py`, `docs/market-results-store.md` — the **write-path storage primitives** (fair/market/difference ledger, FINAL-only results importer with hash check) | Write a competing store. `engine/price_snapshots.py` (already on `main`) is reused as-is and imported; no edits to that file or to #25's files |
+| `arena/4a9893e6-fl1` (PR #24, merged) | `validation.html` D1–D3 demotion gate, "defined but not active pending a benchmark price (flag F08)" | Re-define D1–D3 or edit their rendering. F07 ships as **activation + evaluation** of those three rules over a real bet log, on a new page, and reports the numbers that F08 says were missing |
+| `arena/725adbd2-fl1` (PR #27 merged, #28 open) | `scripts/verify_d.py`, `schedule.html`, `prop-correlations.html`, `validation.html`, `tools/site.py` D1–D3 emitter | Touch `scripts/*_d.py`, `schedule.html`, `prop-correlations.html`, or the D1–D3 emitter block |
+
+**This session's scope after re-scope (F01–F10, updated):** ingestion + published exports into `data/market/*` (a deterministic TSV/JSON export *of* the store, so a reviewer can read the ledger without opening SQLite); `engine/price_snapshot_pipeline.py`, `engine/backtest.py`, `engine/signal_staking.py`, `engine/replacement_depth.py`, `engine/correlation_gate.py`, `engine/demotion_eval.py`; new pages `price-store.html`, `results-feed.html`, `origination.html`, `signal-vs-staking.html`, `replacement-depth.html`, `correlation-gate.html`, `demotion-gate.html`, `decision-desk.html`; `tools/pages_market.py`; two additive edits inside `tools/site.py` (NAV entries + one index card block); `tests/test_market_pipeline.py`; append-only additions to `data/sources.tsv` (S70+) and `data/flags.json`; `README.md` / `EXECUTIVE_SUMMARY.md` append-only addenda; integration PR.
+
+### Follow-up — unit tests, four engine bugs, and the eight pages actually built
+
+| When (UTC) | Entry |
+|---|---|
+| 2026-11-14T23:45Z | Added `tests/test_market_pipeline.py` (74 tests). Deliberately split: unit tests on synthetic fixtures, plus one class that cross-checks the committed files in `data/market/` against **each other** — never by re-running the function that wrote them, which would only prove the code agrees with itself. |
+| 2026-11-14T23:58Z | First run was red: 15 failures, 6 errors. Four were defects in **published numbers**, not test bugs. Fixed in `engine/` and the spine rebuilt (committed `5eea570`). |
+| 2026-11-15T00:05Z | Built the eight pages for real (`tools/pages_market.py`, wired into `tools/site.py`), removed the stale "Not built yet" stamp and reworded the four `data/verification.tsv` rows that asserted the pages were unbuilt. Regenerated the six session-D artefacts with the CI toolchain so `verify.yml`'s final `git diff --exit-code -- data docs` cannot fail on the refreshed capture. |
+
+**The four bugs, in the order they were found.** Anyone reading `main` after this merge should know these were live before the tests existed:
+
+1. `results_ledger.settle_side` / `settle_total` took no side argument. An away bet was graded on the **home** margin and an **under** on the over's difference. Both now take `side_key`; the away margin is the negated home margin, the under flips the total difference, and an NFL tie is a push on a two-way moneyline.
+2. `backtest` mapped a TOTAL bet's side onto `home`/`away`. `settle_total` reads any side that is not `over` as an under, so every published over bet was graded as an under while being priced at the over. Each market now names its own side, with the derivation written out per market.
+3. `signal_staking._points_beat` ignored the side on a spread bet, so the stake-free measure could carry the opposite sign to the settled outcome. It now reads the number the bet was actually struck at, and a test requires the two to agree.
+4. `replacement_depth.load_aliases()` read the headerless positional `data/depth-aliases.tsv` with `csv.DictReader`. The first alias was consumed as the header, no `depthName` field was found, and the map came back **empty** — the page advertised "an exact join after alias mapping" while no alias had ever applied.
+
+A fifth, smaller one: `backtest` counted a game as `eligible` only when a bet was written, so "games meeting the condition" and "bets placed" could never differ. The counters are separate now, and selectivity is stated as a share of eligible games.
+
+**Numbers that moved.** The spine is deterministic and `--check` is byte-identical, but the published figures are **not** the ones earlier rows of this log quoted: 23,219 trades, 13,310 published, and every ROI now sits between −1.6% and −6.9% with hit rates 48–51% against a 52.38% break-even. Five rules grade `INVERTED` (mean points beat below zero) and four `POSITIVE MEAN, NOT PROVABLE`. That is the finding: on this capture no rule beats the recorded market number, and the model's 67%-ROI-shaped story does not survive its own settlement arithmetic. Demotion triggers: 28 (D1-SUBSTITUTE 9, D2 7, D3 3, D4 9).
+
+**Files this session touched that another session also owns — please read before rebasing.**
+
+* `tools/site.py` — three additive edits (8 NAV tuples with `flagged.html` last, 8 index cards fed from `pages_market.summary_counts()`, and `import pages_market` inside `main()`). PR #28 (`arena/725adbd2-fl1`) edits the same file's D1–D3 emitter; expect a conflict and keep **both** halves. Nothing in the D1–D3 table was changed here.
+* `data/verification.tsv`, `data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/sources.tsv` — appended only, deduped on the `check`/`id` key. Row counts now: sources 56, questions 25, suggestions 19, flags 27. `data/verification.tsv` is 36 rows and this branch's diff against `main` for it is **17 insertions, 0 deletions** (`git diff origin/main...HEAD -- data/verification.tsv`), so no other session's check row is lost at merge; the per-game file `data/market/results_verification.tsv` (13 rows) is written by the spine and is not the register.
+* `docs/computed/week10.html` and `data/week10_signal_board.csv` — regenerated by the **session-D scripts** (`build_week10_board.py` etc.), not by this session's code, because those scripts read `data/raw/games.csv`, whose sha256 changed when the capture was refreshed (`6766de0`). Row counts unchanged at 7,548; the 26 changed fields are moneylines of unplayed games. Run with pandas 3.1.1/numpy/scipy to match `verify.yml`.
+* `engine/price_snapshots.py` — **not edited**, as claimed.
+
+### Request against `engine/price_snapshots.py` (F47, restated for the storage owner)
+
+The store's `phase` CHECK accepts `OPEN`, `CLOSE`, `LIVE`. It has no legal value for "a price whose vintage the publisher never stated", which is the true state of 56,624 of the 78,410 ledger rows this session loaded (`vintage_counts` in `data/market/summary.json`): 20,490 were accepted as `CLOSE` on a filename's word, and 1,088 were quarantined. Two shapes, storage owner's choice:
+
+* add a fourth value (`UNDOCUMENTED`) to the CHECK and keep the strict provenance columns (`source_url`, `source_record_id`, `line_origin_version`) mandatory, so widening the enum does not widen the trust boundary; or
+* leave the store close-only and treat the exported ledger under `data/market/` as the record of undated prices, which is what ships today.
+
+This session took the second option and published the refusals rather than hiding them. Q35 is the open question for the board; SG36 is the suggestion. Nothing here was patched into that file, and no test in this session asserts its current behaviour — the tests assert this session's loader and ledger only.
+
+### Build / check commands (this follow-up)
+
+```
+python3 -m unittest discover -s tests                    # 152 tests, no network, no pandas
+python3 scripts/build_market_spine.py                    # ~78 s
+python3 scripts/build_market_spine.py --check            # "rebuild is byte-identical"
+python3 tools/build.py && python3 tools/site.py && python3 tools/checklinks.py
+/home/user/.ci-venv/bin/python scripts/verify_site.py    # errors 0, warnings 0
+```

@@ -19,9 +19,11 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 
 import build  # noqa: E402  (shares the loaders and derived analysis)
+import site_g  # noqa: E402  (session arena/dbf11de0-fl1: backlog, luck, availability, ledger)
 
 E = html.escape
 
@@ -33,7 +35,11 @@ NAV = [
     ("readiness.html", "Decision Readiness"),
     ("executive-summary.html", "Executive Summary"),
     ("requirements.html", "Requirements"),
+    ("requirements-backlog.html", "Requirement Backlog"),
     ("injuries.html", "Injuries"),
+    ("team-availability.html", "Team Availability"),
+    ("announced-starters.html", "Announced Starters"),
+    ("availability-ledger.html", "Snapshot Ledger"),
     ("depth.html", "Backup Depth"),
     ("replacement-depth.html", "Replacement Depth"),
     ("standings.html", "Standings"),
@@ -53,11 +59,20 @@ NAV = [
     ("signal-vs-staking.html", "Signal vs Staking"),
     ("governance.html", "Signal & Demotion"),
     ("validation.html", "Validation Gates"),
+    ("removal-of-luck.html", "Removal of Luck"),
     ("ablations.html", "Ablations"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
     ("sources.html", "Sources"),
     ("verification.html", "Verification"),
+    ("price-store.html", "Price Store"),
+    ("results-feed-market.html", "Verified Results Feed (spine)"),
+    ("origination.html", "Origination Run"),
+    ("signal-vs-staking-market.html", "Signal vs Staking (spine)"),
+    ("replacement-depth-market.html", "Replacement Depth (spine)"),
+    ("correlation-gate.html", "Correlation Gate"),
+    ("demotion-gate.html", "Demotion Gate"),
+    ("decision-desk.html", "Decision Desk"),
     ("flagged.html", "Flagged for Review"),
 ]
 
@@ -824,7 +839,7 @@ def session_sections(sources_by_id, readiness, luck_panel, ablations, announced,
 <h2>Decision readiness &mdash; one row per requirement</h2>
 <p class="lead">The gate that blocks each requirement, and the number that would clear it.
 &ldquo;Number that clears&rdquo; cells are measurable targets agreed by design, not measured facts
-(<a href="flagged.html#F47">F47</a>); where a cell quotes a figure, that figure is verified.
+(<a href="flagged.html#F65">F47</a>); where a cell quotes a figure, that figure is verified.
 The full register &mdash; including a line-by-line audit of every brief bullet &mdash; is on
 <a href="readiness.html">Decision Readiness</a>.</p>
 %s
@@ -961,7 +976,7 @@ this page audits every bullet of the project brief, and holds this session&rsquo
 the full luck panel, the announced-starter evidence, the official venue spot-checks, and the first
 reserve-list capture.</p>
 <p>Updated %(updated)s by session <code>%(owner)s</code>. &ldquo;Number that clears&rdquo; cells are measurable
-targets agreed by design, not measured facts (<a href="flagged.html#F47">F47</a>) &mdash; except where a cell
+targets agreed by design, not measured facts (<a href="flagged.html#F65">F47</a>) &mdash; except where a cell
 quotes a verified figure.</p>
 </section>
 
@@ -999,7 +1014,7 @@ official page this session.</p>
 <p class="note">Register: <code>data/announced_starters.json</code>. The Lock row (AS-01) is a
 fully verified announcement; the Brissett and McCord rows record official roster events while their
 &ldquo;announced start&rdquo; cells stay blank, because the official documents announce the event, not the
-start (flag <a href="flagged.html#F46">F46</a>).</p>
+start (flag <a href="flagged.html#F64">F46</a>).</p>
 </section>
 
 <section>
@@ -1009,7 +1024,7 @@ start (flag <a href="flagged.html#F46">F46</a>).</p>
 Game Center read this session, checking the feed value against what the league itself publishes.</p>
 %(vsc)s
 <p class="note">Register: <code>data/venue_spotchecks.json</code>. 2 of 272 rows are officially
-checked; the rest stay labelled third-party (flag <a href="flagged.html#F45">F45</a>). Both Game
+checked; the rest stay labelled third-party (flag <a href="flagged.html#F63">F45</a>). Both Game
 Centers read this session also expose the official per-game Game Book PDF link &mdash; recorded as
 evidence that Game Books are reachable (the remaining gap is a parser, not access).</p>
 </section>
@@ -1147,7 +1162,7 @@ holdout &mdash; published with their uncertainty.</p>
 <h2>Provenance and limits</h2>
 <ul class="tight">
 <li><strong>Inputs:</strong> <code>data/raw/games.csv</code> (nflverse feed, source
-<a href="sources.html#S47">S47</a>, third-party snapshot &mdash; flag <a href="flagged.html#F44">F44</a>)
+<a href="sources.html#S47">S47</a>, third-party snapshot &mdash; flag <a href="flagged.html#F62">F62</a>)
 and <code>data/depth_deficiency.csv</code> (QB-deficiency classes derived from the same feed&rsquo;s
 recorded starters by <code>scripts/build_availability.py</code>).</li>
 <li><strong>Not official:</strong> no output on this page is an official NFL publication. The feature
@@ -1213,6 +1228,11 @@ starters 4, venue spot-checks 2, luck panel 16, ablations 2. Run:
 
 
 def main():
+    # imported here rather than at module scope: pages_market reuses this file's page
+    # shell through a late-bound lookup, and a module-level import would run it before
+    # those helpers are defined (and shadow the stdlib `site` module in the process)
+    import pages_market
+
     teams = build.load("teams.tsv")
     standings = build.load("standings.tsv")
     injuries = build.load("injuries.tsv")
@@ -1229,9 +1249,9 @@ def main():
     flags = build.load_json("flags.json")
     # Session arena-fc0ed6e8-fl1 (2026-11-16): decision-layer registers.
     readiness = build.load_json("readiness.json")
-    luck_panel = build.load_json("luck_panel.json")
+    luck_panel = build.load_json("luck_panel_signals.json")
     ablations = build.load_json("ablations.json")
-    announced = build.load_json("announced_starters.json")
+    announced = build.load_json("announced_starters_g.json")
     venue_checks = build.load_json("venue_spotchecks.json")
     import csv as _csv
     with open(os.path.join(build.DATA, "reserve_list_2026-11.tsv"), encoding="utf-8", newline="") as fh:
@@ -1259,6 +1279,15 @@ def main():
     # Session arena-fc0ed6e8-fl1 (2026-11-16): decision-layer sections and pages.
     sess = session_sections(sources_by_id, readiness, luck_panel, ablations, announced,
                             venue_checks, reserve_rows)
+
+    # Session arena/dbf11de0-fl1: requirement backlog, decision readiness,
+    # removal of luck, team availability, announced starters, snapshot ledger.
+    g_ctx = {
+        "page": page, "table": table, "cell": cell, "pill": pill,
+        "raw_src": raw_src, "src_link": src_link, "esc": esc,
+        "sources_by_id": sources_by_id,
+    }
+    g_pages, g_sections = site_g.build(g_ctx)
 
     written = []
 
@@ -1323,6 +1352,30 @@ def main():
     <p>Which string replaces the missing starter, not just that a replacement exists &mdash; Week 10, 69 affected spots.</p></a>
   <a class="card" href="official-correlations.html"><h3>Official Correlations</h3>
     <p>Correlations computed only from officially sourced numbers, every value published with its n.</p></a>
+  <a class="card" href="price-store.html"><h3>Price-Snapshot Store</h3>
+    <p><strong>%(mk_snapshots)s</strong> append-only price rows with feed, field, capture timestamp and the
+    vintage the publisher actually asserted &mdash; plus the coverage that honest labelling leaves open, and the
+    cross-feed drift that averaging would hide.</p></a>
+  <a class="card" href="results-feed-market.html"><h3>Verified Results Feed</h3>
+    <p><strong>%(mk_verified)s of %(mk_games)s</strong> current-season games verified game-by-game against the
+    official transcription, with the season recount against the league table. Settlement refused where the
+    status is not earned.</p></a>
+  <a class="card" href="origination.html"><h3>Origination Run</h3>
+    <p>Side, then total, then moneyline &mdash; the order enforced in code. Fair line, market line and the
+    difference as three columns, with the model card and the tuning grid beside every number.</p></a>
+  <a class="card" href="signal-vs-staking-market.html"><h3>Signal vs Staking</h3>
+    <p>Two scorecards per strategy: a stake-free signal block ranked on its lower bound, and a staking block
+    that is published but never ranked on. <strong>%(mk_rewards)s</strong> reward units payable today.</p></a>
+  <a class="card" href="replacement-depth-market.html"><h3>Replacement Depth</h3>
+    <p><strong>%(mk_depth)s</strong> vacancies resolved to a named replacement with the depth it cost, instead
+    of a count of who is out.</p></a>
+  <a class="card" href="correlation-gate.html"><h3>Correlation Gate</h3>
+    <p>Official operands only, <em>n</em> on every row, and the pairs the gate refuses shown with their reason
+    instead of quietly dropped.</p></a>
+  <a class="card" href="demotion-gate.html"><h3>Demotion Gate</h3>
+    <p>Four monitors evaluated on a real bet log, with the earliest breach named by season, week and game.</p></a>
+  <a class="card" href="decision-desk.html"><h3>Decision Desk</h3>
+    <p>What this build opened, what it is waiting on, and the next five actions in order.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
     <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a></section>
 """ % {
@@ -1337,6 +1390,11 @@ def main():
        "n_blocking": n_block,
        "n_suggestions": n_sugg,
        "n_results": len(results),
+       "mk_snapshots": pages_market.summary_counts()["snapshots"],
+       "mk_verified": pages_market.summary_counts()["verified"],
+       "mk_games": pages_market.summary_counts()["games"],
+       "mk_rewards": pages_market.summary_counts()["rewards"],
+       "mk_depth": pages_market.summary_counts()["depth"],
    }
 
     kpis = table(
@@ -1369,7 +1427,8 @@ def main():
     )
 
     written.append(page("index.html", "Dashboard",
-                        cards + kpis + sess["landing_readiness"] + sess["luck_dashboard"]))
+                        cards + kpis + g_sections + sess["landing_readiness"]
+                        + sess["luck_dashboard"]))
 
     # ------------------------------------------------------- executive summary
     total_out_def = sum(t["defOut"] for t in by_team)
@@ -1469,7 +1528,7 @@ pages contradict each other. It does not print a single performance number. Each
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
     import brief as _brief  # session arena/685f958d-fl1
-    es = _brief.exec_banner() + es
+    es = _brief.exec_banner() + site_g.exec_section(g_ctx) + es
     written.append(page("executive-summary.html", "Executive Summary",
                         es + sprint["exec_summary"]))
 
@@ -1480,10 +1539,12 @@ pages contradict each other. It does not print a single performance number. Each
     req_html = ['<section><h1>Requirements</h1>',
                 '<p class="lead">Every line of the brief, decomposed, with the evidence that satisfies it and '
                 'the page where it can be checked. A requirement is only marked done when there is a link.</p>',
-                '<p class="note">%d of %d requirements are complete. The rest are marked '
-                '<span class="pill warn">partial</span> on purpose — a partial status means the method is '
-                'specified and the number is withheld because no source supports it.</p></section>'
-                % (n_req_done, len(requirements))]
+                '<p class="note">%d of %d requirements are complete.'
+                '%s</p></section>'
+                % (n_req_done, len(requirements),
+                   ("" if n_req_done == len(requirements) else
+                    ' The rest are marked <span class="pill warn">partial</span> on purpose &mdash; a partial '
+                    'status means the method is specified and the number is withheld because no source supports it.'))]
     for section, items in by_section.items():
         rows = []
         for r in items:
@@ -2641,6 +2702,13 @@ verification note for each one.</p>
 
     import brief  # session arena/685f958d-fl1: model lines, results feed, signal/staking/demotion
     written.extend(brief.render(sys.modules[__name__]))
+    # ------------------------------------------------------------- market spine
+    # Eight pages generated from data/market/, i.e. from artefacts a script wrote.
+    # They live in tools/pages_market.py so this file stays the single owner of the
+    # site shell; the numbers here are counts, not new claims.
+    written.extend(pages_market.render_all())
+
+    written.extend(g_pages)
 
     print("wrote %d pages:" % len(written))
     for w in written:

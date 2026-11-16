@@ -1,5 +1,90 @@
 # FL1 — Executive Summary
 
+**Session:** `arena-dbf11de0-fl1` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) · **Built:** 2026-11-16
+**Site:** https://sassnarep3-star.github.io/FL1/
+
+> **Reading note.** This file carries more than one session's summary. The block immediately
+> below is the current one (2026-11-16). Earlier blocks are preserved verbatim further down
+> because they record work that is still in the repository; where they conflict with a later
+> re-verification, the later one is marked as superseding.
+
+---
+
+## Session `arena/dbf11de0-fl1` — 2026-11-16
+
+### What this session set out to do
+
+Take the project brief line by line, check each line against an official source, and publish —
+for every requirement — **the gate that blocks it** and **the number that would clear it**.
+
+### What it found
+
+1. **The official injury report is a series, not a snapshot.** Reading `nfl.com/injuries` on
+   2026-11-14 gave 345 rows across 28 clubs. Reading the same URL on 2026-11-16 gave 347 rows:
+   two Baltimore rows appeared (Calais Campbell, Ronnie Stanley) and 32 fields moved. **22 of the
+   32 are Chargers rows** — Los Angeles played on Monday night, so its game-day designations did
+   not exist when the earlier read was taken. Indianapolis's Arden Key moved the other way, from
+   Questionable to no designation at all. Both reads are now committed with sha256 hashes and the
+   diff between them is published. The earlier read is never overwritten: doing so would inject
+   lookahead into any backtest. (`raw/injuries-week10-2026-recapture-2026-11-16.md`,
+   `data/injury_diff_g.tsv`.)
+
+2. **Three Lions designations the review flagged as blank are in fact published.** Kerby Joseph,
+   Cade Mays and D.J. Reed all carry **Out** on the official page, and the published table already
+   showed Out. Re-verified on 2026-11-16 (check G-V5 in `data/verification-g.tsv`).
+
+3. **A row-count claim in an earlier review could not be reproduced.** The review recorded 254
+   published rows against 279 live. Both of this session's reads parse to 345 and 347. The
+   discrepancy is flagged (F43) rather than reconciled by picking a number.
+
+4. **The requirement register tracked 28 of the brief's roughly seventy lines.** The remaining
+   lines are now registered (R29–R87), each with a status, the gate that blocks it, and the number
+   that would clear it. 12 of the 87 rows are blocked or waiting on a decision.
+
+5. **"Remove luck" is now a number, not a slogan.** Over 137 official 2026 results the home team
+   won 48.9% of games; the 95% interval is 40.7% to 57.2%, which contains 50%. The exact two-sided
+   p-value against a coin flip is 0.864. Detecting a 5-point edge at conventional significance
+   needs **785 independent decisions**, or **1,211** once six strategies are tried — more than
+   three NFL seasons of every game.
+
+6. **NFL.com publishes dated starter announcements.** The daily roundup carries a "DEPTH CHART
+   NEWS" section. Eleven announced-starter rows are now published, each **quoted** with its date
+   and link (Carson Beck ARI, Deshaun Watson CLE, Harrison Butker KC, Kirk Cousins MIN, Drew Lock
+   SEA, Jalen Milroe SEA, Sam Darnold SEA, Kyle McCord MIA, Malik Willis MIA, TreVeyon Henderson
+   NE, Lamar Jackson BAL). One name from the brief — Brissett, Arizona — appears on no official
+   page this session read, so that row is **blank and flagged**, not filled in (F44).
+
+### What it built
+
+| Artefact | File | Re-runnable |
+|---|---|---|
+| Dated re-capture + row-by-row diff | `raw/injuries-week10-2026-recapture-2026-11-16.md`, `data/injury_diff_g.tsv`, `scripts/verify_recapture_g.py` | yes — exits non-zero if a published row is missing from the later read |
+| Requirement backlog (R29–R87) | `data/requirements_backlog.csv`, `scripts/build_backlog_g.py`, `requirements-backlog.html` | yes |
+| Decision-readiness table on the landing page | `index.html` (section `#decision`), `tools/site_g.py` | yes |
+| Removal-of-luck panel | `engine/luck.py`, `scripts/build_luck_g.py`, `data/luck_panel.json`, `removal-of-luck.html` | yes — 25 new unit tests |
+| Per-team availability view | `scripts/build_availability_g.py`, `data/team_availability.csv`, `team-availability.html` | yes |
+| Announced-starter evidence | `data/announced_starters.csv`, `announced-starters.html` | yes |
+| Point-in-time snapshot ledger | `availability-ledger.html` | yes |
+| Registers: 3 sources, 6 flags, 4 questions, 4 suggestions | `scripts/register_g.py` | yes |
+
+### Verification run at completion
+
+`python3 -m unittest discover -s tests -q` → **193 tests OK** (168 pre-existing + 25 new).
+`tools/build.py` → clean. `tools/verify_injuries.py` → 345/345 rows match the raw capture.
+`tools/verify_results.py` → PASS, 32/32 clubs. `tools/checklinks.py` → 33 pages, every link and
+anchor resolves. `tools/checkrows.py` → 33 pages, 4,998 rows, every row sourced.
+`scripts/verify_recapture_g.py` → GATE PASS.
+
+### Irregularities published, not hidden
+
+F43 row-count discrepancy · F44 Brissett not evidenced · F45 the report moved between reads ·
+F46 depth-chart register has no capture date · F47 venue/roof/surface only from a third-party feed
+· F48 model outputs store a line, not a probability with inputs.
+
+---
+
+## Earlier session summary — `arena-ab82c93f` (2026-11-14, preserved)
+
 **Session:** `arena-ab82c93f` · **Branch:** `arena/ab82c93f-fl1` · **Built:** 2026-11-14
 **Site:** https://sassnarep3-star.github.io/FL1/
 
@@ -250,3 +335,32 @@ Opening prices (F37), fair lines (F38), anything needing an official odds source
 where clubs publish no further name (F40), the week-10 availability-vs-outcome correlation until the week
 settles (F41). Four questions (Q30-Q34) and five suggestions (SG16-SG30) were added for your decision;
 none of them is answered unilaterally.
+
+---
+
+## Final integration addendum — session `arena-a4c5a1de-fl1` (2026-11-16)
+
+**Stale-PR takeover (coordination rule: claim >60 min stale).** Two complete, CI-green PRs whose
+sessions went inactive were integrated: **#38** (`arena/08fef9e9-fl1`, the market-data spine: 9 engine
+modules, 8 pages, 74 unit tests, four settlement bugs it found in its own first pass) and **#39**
+(`arena/2fa09442-fl1`, the cross-check gate between the two independent replacement-depth
+implementations). Nothing discarded: colliding engine paths renamed with importers repointed
+(`engine/backtest_spine.py`, `engine/originate_spine.py`), colliding page outputs re-issued
+(`results-feed-market.html`, `signal-vs-staking-market.html`, `replacement-depth-market.html`),
+register ids re-issued per repo convention (flags F43–F52, questions Q35–Q39, suggestions SG35–SG38,
+sources S70–S76) with every in-file reference retagged inside the spine's own files only.
+
+**All 28 tracked requirements now show `done` on [Requirements](requirements.html).** The last four
+partials were closed with published evidence: R11 (numeric fair | market | difference boards on
+`line-board.html` and `origination.html`), R12 (fitted signals, walk-forward 13,310 published bets,
+headline finding F50: the model's own signal is negative against the recorded market number on all
+three markets), R16 (official-operand correlation register with n + Fisher CIs, plus the correlation
+gate that publishes its refusals with reasons), R19 (71 verified replacement-depth ladders,
+cross-checked by two independent implementations). Status changes cite their evidence on the
+requirements page itself.
+
+**Known-open items are unchanged and stay on [Flagged for Review](flagged.html)**: no official price
+source exists (F34/F39), opening prices for 2026 are uncapturable from official channels (F43), CLV
+is unmeasurable until a dated snapshot collector runs (F49, SG35), the undated-vintage vocabulary
+decision (Q35), and the benchmark-policy decision (Q37). These do not block the merge; they are the
+owner's decision list.

@@ -102,6 +102,48 @@ See `flagged.html` for all fifteen items, with links.
 Nothing here is a bet, an offer to wager, betting advice, or a statement about the legality of any
 activity in any jurisdiction. No regulator or tax source was verified.
 
+
+---
+
+## Session `arena/dbf11de0-fl1` additions (2026-11-16)
+
+**New pages** (all generated, all re-runnable):
+
+| Page | Contents |
+|---|---|
+| `requirements-backlog.html` | The brief line by line: 87 requirement rows, each with the gate that blocks it and the number that would clear it |
+| `team-availability.html` | Per club: starters out, the replacement the club charts, and a net injury count whose rule is printed on every row |
+| `announced-starters.html` | Starters an official NFL.com page actually announced — quoted, dated and linked. Inferred replacements are kept out of this table on purpose |
+| `availability-ledger.html` | Point-in-time snapshot ledger: every dated read of the official injury report with its sha256, plus the diff between consecutive reads |
+| `removal-of-luck.html` | How much of a result could be chance, the sample size at which it stops being chance, and the multiplicity adjustment |
+| `index.html` | Now carries the **decision-readiness table** (one row per requirement) and a **removal-of-luck** summary |
+
+**New engine and scripts** (stdlib only): `engine/luck.py` (Wilson intervals, luck bands, sample
+sizing, cluster inflation, Bonferroni, Brier skill, exact binomial) with 25 unit tests in
+`tests/test_luck_g.py`; `scripts/verify_recapture_g.py` (re-capture diff gate);
+`scripts/build_backlog_g.py`; `scripts/build_luck_g.py`; `scripts/build_availability_g.py`;
+`scripts/register_g.py`; `tools/site_g.py` (page generators).
+
+**Verification added this session:** the official Week 10 injury report was re-read on 2026-11-16
+and diffed row by row against the 2026-11-14 capture. It moved: +2 rows, 32 changed fields, 22 of
+them Chargers rows for a game not yet played at the earlier read. Both reads are kept, hash-pinned,
+and the earlier one is never overwritten (`data/raw/MANIFEST-g.json`, `data/injury_diff_g.tsv`).
+Checks recorded in `data/verification-g.tsv`.
+
+**New registers:** sources S70–S72 (all read in session, all official NFL.com), flags F43–F48,
+questions Q35–Q38, suggestions SG35–SG38.
+
+**Reproduce this session's work:**
+
+```bash
+python3 scripts/verify_recapture_g.py   # re-capture diff gate (exit 0/1)
+python3 scripts/build_backlog_g.py      # requirement backlog
+python3 scripts/build_luck_g.py         # removal-of-luck panel
+python3 scripts/build_availability_g.py # team availability + announced starters
+python3 scripts/register_g.py           # registers (append-only)
+python3 tools/site.py && python3 tools/checklinks.py && python3 tools/checkrows.py
+```
+
 ---
 
 ## Session D additions (2026-11-14)
@@ -235,7 +277,6 @@ verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
 `scripts/verify_site.py` (0 errors), `scripts/verify_d.py` (V5-V9 PASS), `site/build.py` +
 `site/verify.py`. See `COORDINATION.md` for the full sources/verification/irregularities record.
 
-=======
 ---
 
 ## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
@@ -257,7 +298,6 @@ verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
   (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
 - **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
   `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
->>>>>>> origin/main
 
 **Merge note (same day):** sessions `arena-685f958d-fl1` and `arena-5876146b-fl1` independently built
 parallel second-pass deliverables and both landed on `main` first. The integration keeps main's canonical
@@ -270,3 +310,25 @@ settlement audit), `engine/origination.py`, `engine/paper_gate.py` (D1–D3 + pr
 regenerate. This session's register entries are numbered F37–F42 / Q30–Q34 / SG30–SG34 with
 cross-references to the overlapping entries from the other sessions. Full log in `COORDINATION.md`.
 
+
+---
+
+## Final integration (2026-11-16, session `arena-a4c5a1de-fl1`)
+
+- **Stale-PR takeover:** PRs #38 (market-data spine) and #39 (replacement-depth cross-check) — both
+  complete and CI-green with inactive sessions — were integrated without discarding anything.
+  Spine engine modules renamed `engine/backtest_spine.py` / `engine/originate_spine.py`; spine page
+  outputs re-issued as `price-store.html`, `origination.html`, `results-feed-market.html`,
+  `signal-vs-staking-market.html`, `replacement-depth-market.html`, `correlation-gate.html`,
+  `demotion-gate.html`, `decision-desk.html`; register ids re-issued (F43–F52, Q35–Q39, SG35–SG38,
+  S70–S76) with references retagged inside the spine's own files only.
+- **All 28 tracked requirements show `done` on `requirements.html`** — the last four partials
+  (R11 own lines, R12 fitted signals, R16 correlations, R19 replacement-depth deficiencies) were
+  closed with published, page-linked evidence; the honest negative findings (no signal beats the
+  recorded market number; 0 rewards payable; CLV unmeasurable) stay published rather than hidden.
+- **Fixed on the way:** a committed stray conflict-marker pair in this README (`=======` /
+  `>>>>>>> origin/main` around the 685f958d record) — both records preserved, markers removed.
+- **Rebuild & gates:** `python3 tools/build.py && python3 tools/site.py` (36 pages),
+  `tools/checklinks.py` OK, `tools/checkrows.py` 5,604 rows OK, 242 unit tests OK,
+  `scripts/build_market_spine.py --check` byte-identical, `scripts/verify_feed_m.py` 137/137,
+  `scripts/verify_site.py` 0 errors / 0 warnings, `site/build.py` + `site/verify.py` publishable.

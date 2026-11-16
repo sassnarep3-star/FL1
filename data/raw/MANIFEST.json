@@ -1,14 +1,17 @@
 {
-  "generated_by": "scripts/fetch_data.py",
+  "generated_by": "scripts/fetch_data.py; games.csv + initial_lines.csv refreshed by scripts/build_market_spine.py capture step (sess-08fef9e9)",
   "files": [
     {
       "file": "games.csv",
-      "source_url": "https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv",
+      "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
       "source_repo": "https://github.com/nflverse/nfldata",
-      "sha256": "9db20ab7cc0941c726f07540c2935684e196473e2d91a4de82e8099cdabe27e3",
+      "sha256": "ee311f898842eaab8429eda944df1ea52eddd88f596981464a2ca613935eda83",
       "rows": 7548,
-      "bytes": 2190039,
-      "transport": "git clone (raw.githubusercontent blocked)"
+      "bytes": 2190038,
+      "transport": "git clone (raw.githubusercontent blocked)",
+      "upstream_commit": "69a1fa550eac8edfb6782cac4f92f2350ddd5b9a",
+      "note": "re-captured 2026-11-14 from nflverse/nfldata master HEAD 69a1fa550eac8edfb6782cac4f92f2350ddd5b9a (2026-11-14T22:05:17Z) by sess-08fef9e9; the previous capture differed in 26 fields, all moneyline columns of games not yet played",
+      "previous_sha256": "9db20ab7cc0941c726f07540c2935684e196473e2d91a4de82e8099cdabe27e3"
     },
     {
       "file": "closing_lines.csv",
@@ -54,6 +57,18 @@
       "rows": 4442,
       "bytes": 169327,
       "note": "nflverse release CDN not reachable from sandbox; mirror used (irregularity #1)"
+    },
+    {
+      "file": "initial_lines.csv",
+      "source_url": "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv",
+      "source_repo": "https://github.com/nflverse/nfldata",
+      "sha256": "654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5",
+      "rows": 1088,
+      "bytes": 45068,
+      "transport": "git clone (raw.githubusercontent blocked)",
+      "upstream_commit": "69a1fa550eac8edfb6782cac4f92f2350ddd5b9a",
+      "note": "captured 2026-11-14 from nflverse/nfldata master HEAD 69a1fa550eac8edfb6782cac4f92f2350ddd5b9a by sess-08fef9e9; only file in the repo's feeds that claims an opening number, and it is undocumented in upstream DATASETS.md - see data/market/snapshot_manifest.json"
     }
-  ]
+  ],
+  "capture_date": "2026-11-14"
 }

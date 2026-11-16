@@ -1,151 +1,156 @@
-"""Removal-of-luck arithmetic: how much of a run is explainable by chance alone.
-
-PURPOSE
--------
-The brief asks for a "removal of luck" panel published on the dashboard. This module
-holds the arithmetic, using only the machinery in engine/stats.py:
-
-1.  For each strategy's signal block (settled bets, hit rate, break-even hurdle):
-      - the Wilson lower bound on the true hit rate,
-      - the one-sided p-value that a ZERO-edge process would run at least this hot
-        over the same number of settled bets (this is "the probability that luck
-        alone explains the run" - it is a p-value, not a posterior),
-      - the sample size that would be needed to certify the observed hit rate as a
-        real edge at 80% power (engine.stats.required_sample),
-      - the smallest true edge this sample could certify at 80% power
-        (engine.stats.detectable_edge).
-2.  The family-wise significance bar for the number of strategies searched
-    (Bonferroni alpha/n and the Sidak equivalent), so a reader can see how far the
-    best raw p-value is from the bar a multi-strategy search has to clear.
-
-HONESTY NOTES (published with the panel)
-----------------------------------------
-- A p-value is the probability of the evidence given no edge; it is NOT the
-  probability that the strategy has no edge. The panel wording keeps this distinction.
-- The input dataset is the computed research layer's third-party ledger
-  (data/leaderboard.csv -> data/leaderboard_signal_staking.json), flagged F39/F34.
-  The panel ranks on NOTHING; it publishes uncertainty so the owner can judge.
-- Where the inputs disagree with the register (e.g. the circular breakeven_hit
-  column, flag F30) the panel recomputes the hurdle from the price-implied
-  reference (0.52381 for standard -110) and labels the recomputation.
+#!/usr/bin/env python3
 """
-from __future__ import annotations
+engine/luck.py — the "removal of luck" arithmetic.
 
-from typing import Any, Dict, List, Sequence
+Standard library only. Every function here answers one question: how much of an
+observed result could chance alone produce, and how many decisions would it take
+before chance stops being a plausible explanation?
 
-from engine.stats import (
-    detectable_edge,
-    one_sided_p_above,
-    proportion_se,
-    required_sample,
-    z_stat,
-)
+The point of the panel is not to flatter a strategy. It is to publish, before
+any result exists, the size of the sample at which a result would mean anything.
+A leaderboard that ranks on a number nobody has earned is a lottery with a
+scoreboard; this module supplies the yardstick.
+
+Definitions used (all conventional, all stated on the page):
+
+  luck band        the 95% interval within which the hit rate of a strategy with
+                   NO skill would fall, at a given number of decisions n.
+  Wilson interval  score interval for a proportion; used instead of the normal
+                   approximation because hit rates near 0 and 1 are common in
+                   small samples and the normal interval misbehaves there.
+  required n       number of independent decisions needed to detect an edge of
+                   d over a base rate p, two-sided alpha, power 1-beta:
+
+                       n = (z_{1-a/2} + z_{1-b})^2 * p(1-p) / d^2
+
+  cluster inflation  when several decisions sit inside one game (a same-game
+                   parlay, a prop combo), the decisions are not independent.
+                   The effective sample is n_eff = n / (1 + (m-1) * ICC), where
+                   m is decisions per game and ICC the intra-cluster
+                   correlation. ICC is NOT measured in this repository, so the
+                   panel publishes a sensitivity grid over ICC and marks the
+                   measured value blank (flag: no joint-outcome source).
+  multiplicity     trying k strategies and ranking the best inflates false
+                   positives. The panel reports the Bonferroni-adjusted alpha
+                   and the n it implies.
+"""
+
+import math
+from math import comb
 
 
-def strategy_luck_rows(signal_rows: Sequence[Dict[str, Any]],
-                       trials: int,
-                       alpha: float = 0.05,
-                       power: float = 0.80) -> List[Dict[str, Any]]:
-    """One luck-decomposition row per strategy signal block.
+# ------------------------------------------------------------------ utilities
+def norm_cdf(x):
+    """Standard normal CDF. math.erf is exact to machine precision, so no
+    series approximation is needed here."""
+    return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 
-    signal_rows: entries carrying a "signal" dict with settled / hit_rate /
-    hit_ci_low / reference_hurdle, as produced by the R25 signal-vs-staking build.
-    """
-    out: List[Dict[str, Any]] = []
-    for r in signal_rows:
-        sig = r.get("signal", {})
-        n = sig.get("settled")
-        hit = sig.get("hit_rate")
-        hurdle = sig.get("reference_hurdle")
-        if not (isinstance(n, (int, float)) and n > 0 and hit is not None and hurdle is not None):
-            out.append({
-                "strategy_id": r.get("strategy_id"),
-                "status": "NO_EVALUABLE_SIGNAL",
-            })
-            continue
-        n_i = int(n)
-        se = proportion_se(float(hit), n_i)
-        z = z_stat(float(hit), float(hurdle), n_i)
-        p = one_sided_p_above(z)
-        if float(hit) > float(hurdle):
-            n_needed = required_sample(float(hurdle), float(hit), alpha=alpha, power=power)
-            n_needed_out = int(n_needed) if n_needed else None
-            n_ratio = round(n_needed / n_i, 1) if n_needed and n_i else None
+
+def z_crit(alpha_two_sided):
+    """Two-sided critical value, e.g. alpha=0.05 -> 1.959964."""
+    target = 1.0 - alpha_two_sided / 2.0
+    lo, hi = 0.0, 10.0
+    for _ in range(200):
+        mid = (lo + hi) / 2.0
+        if norm_cdf(mid) < target:
+            lo = mid
         else:
-            # the observed rate does not clear the hurdle at all - there is no edge to certify
-            n_needed_out = None
-            n_ratio = None
-        edge_cert = detectable_edge(n_i, float(hurdle), alpha=alpha, power=power)
-        out.append({
-            "strategy_id": r.get("strategy_id"),
-            "market": r.get("market", ""),
-            "settled": n_i,
-            "hit_rate": round(float(hit), 4),
-            "reference_hurdle": round(float(hurdle), 5),
-            "se": round(se, 4),
-            "z_vs_hurdle": round(z, 3),
-            "p_luck_alone_this_hot": round(p, 5),
-            "n_to_certify_if_real": n_needed_out,
-            "n_needed_vs_have": n_ratio,
-            "certifiable_edge_at_80pct": round(edge_cert, 4),
-            "status": "LUCK_NOT_EXCLUDED",
-        })
-    return out
+            hi = mid
+    return (lo + hi) / 2.0
 
 
-def familywise(rows: Sequence[Dict[str, Any]], trials: int, alpha: float = 0.05) -> Dict[str, Any]:
-    """The bar a multi-strategy search must clear, published before results are read."""
-    evaluated = [r for r in rows if "p_luck_alone_this_hot" in r]
-    ps = [r["p_luck_alone_this_hot"] for r in evaluated]
-    bonf = alpha / trials
-    sidak = 1.0 - (1.0 - alpha) ** (1.0 / trials)
-    best = min(ps) if ps else None
-    best_id = None
-    if ps:
-        best_id = min(evaluated, key=lambda r: r["p_luck_alone_this_hot"])["strategy_id"]
-    return {
-        "trials": trials,
-        "alpha": alpha,
-        "bonferroni_p_bar": round(bonf, 5),
-        "sidak_p_bar": round(sidak, 5),
-        "strategies_evaluated": len(evaluated),
-        "best_raw_p": best,
-        "best_raw_p_strategy": best_id,
-        "clears_familywise_bar": bool(best is not None and best < bonf),
-        "verdict": ("NO STRATEGY CLEARING" if best is None or best >= bonf
-                    else "SKILL CANDIDATE - REQUIRES PRICE-SOURCED REPLAY"),
-    }
+# ------------------------------------------------------------- intervals
+def wilson_interval(k, n, alpha=0.05):
+    """Wilson score interval for a proportion. Returns (lo, hi) or (None, None)."""
+    if n <= 0:
+        return (None, None)
+    z = z_crit(alpha)
+    p = k / n
+    denom = 1.0 + z * z / n
+    centre = (p + z * z / (2 * n)) / denom
+    spread = (z / denom) * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n))
+    return (max(0.0, centre - spread), min(1.0, centre + spread))
 
 
-def build_panel(signal_rows: Sequence[Dict[str, Any]],
-                trials: int,
-                controls: Sequence[Dict[str, Any]],
-                alpha: float = 0.05,
-                power: float = 0.80) -> Dict[str, Any]:
-    """Assemble the full luck panel: per-strategy rows, the family-wise bar, controls."""
-    rows = strategy_luck_rows(signal_rows, trials, alpha=alpha, power=power)
-    fw = familywise(rows, trials, alpha=alpha)
-    return {
-        "id": "luck_panel",
-        "title": "Removal of luck - what the runs look like once chance is priced in",
-        "updated": "2026-11-16",
-        "method": ("p_luck_alone_this_hot is the one-sided p-value that a zero-edge process "
-                   "over the same number of settled bets runs at least this hot. "
-                   "n_to_certify_if_real is engine.stats.required_sample at 80% power against "
-                   "the -110 reference hurdle. certifiable_edge_at_80pct is "
-                   "engine.stats.detectable_edge - the smallest TRUE edge this sample could "
-                   "certify. A p-value is P(evidence | no edge), never P(no edge | evidence)."),
-        "input_provenance": ("data/leaderboard_signal_staking.json, built from the computed "
-                             "research layer's third-party ledger (data/leaderboard.csv) - "
-                             "flagged F39/F34. The panel publishes uncertainty; it ranks on nothing."),
-        "hurdle_note": ("Hurdle recomputed from the standard -110 break-even (0.52381); the "
-                        "dataset's own breakeven_hit column is circular (flag F30) and is not used."),
-        "familywise": fw,
-        "rows": rows,
-        "controls": list(controls),
-        "headline": {
-            "strategies_evaluated": fw["strategies_evaluated"],
-            "proven": sum(1 for r in rows if r.get("clears_familywise_bar")),
-            "verdict": fw["verdict"],
-        },
-    }
+def luck_band(n, p=0.5, alpha=0.05):
+    """95% interval for the OBSERVED hit rate of a skill-free strategy.
+
+    This is the number that answers 'could that be luck?'. A strategy whose hit
+    rate sits inside its own band has not demonstrated anything.
+    """
+    if n <= 0:
+        return (None, None)
+    z = z_crit(alpha)
+    half = z * math.sqrt(p * (1 - p) / n)
+    return (max(0.0, p - half), min(1.0, p + half))
+
+
+# -------------------------------------------------------------------- sizing
+def required_n(p, edge, alpha=0.05, power=0.80):
+    """Independent decisions needed to detect `edge` (a proportion, e.g. 0.05)
+    above base rate p, two-sided alpha, given power."""
+    if edge <= 0 or p <= 0 or p >= 1:
+        return None
+    za = z_crit(alpha)
+    zb = z_crit(2 * (1 - power))  # one-sided tail converted to two-sided input
+    return math.ceil((za + zb) ** 2 * p * (1 - p) / (edge * edge))
+
+
+def cluster_design_effect(m, icc):
+    """Variance inflation for m correlated decisions per cluster."""
+    if m is None or icc is None or m < 1:
+        return None
+    return 1.0 + (m - 1.0) * icc
+
+
+def effective_n(n, m, icc):
+    """Independent-decision equivalent of n clustered decisions."""
+    if n is None:
+        return None
+    de = cluster_design_effect(m, icc)
+    if not de:
+        return n
+    return int(math.floor(n / de))
+
+
+def bonferroni_alpha(alpha, k):
+    """Per-comparison alpha that holds the family-wise rate at `alpha` over k
+    independent comparisons."""
+    if k is None or k < 1:
+        return alpha
+    return alpha / k
+
+
+# ----------------------------------------------------------------- scoring
+def brier(forecasts, outcomes):
+    """Mean squared error of probability forecasts against 0/1 outcomes."""
+    if not forecasts:
+        return None
+    return sum((f - o) ** 2 for f, o in zip(forecasts, outcomes)) / len(forecasts)
+
+
+def brier_skill_score(forecasts, outcomes, benchmark_forecasts):
+    """BSS = 1 - BS_model / BS_benchmark. 0 means no improvement on the
+    benchmark; negative means worse than the benchmark."""
+    bs = brier(forecasts, outcomes)
+    bs_ref = brier(benchmark_forecasts, outcomes)
+    if bs is None or bs_ref in (None, 0):
+        return None
+    return 1.0 - bs / bs_ref
+
+
+def constant_brier(p, outcomes):
+    """Brier score of forecasting the same probability every time."""
+    if not outcomes:
+        return None
+    return sum((p - o) ** 2 for o in outcomes) / len(outcomes)
+
+
+def binomial_p_two_sided(k, n, p=0.5):
+    """Exact two-sided binomial test p-value. Pure python; fine for the sample
+    sizes this project will see for a long while."""
+    if n <= 0:
+        return None
+    pk = [comb(n, i) * (p ** i) * ((1 - p) ** (n - i)) for i in range(n + 1)]
+    obs = pk[k]
+    return min(1.0, sum(q for q in pk if q <= obs * (1 + 1e-12)))
