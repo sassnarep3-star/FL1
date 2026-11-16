@@ -5,12 +5,35 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
-**Last updated:** 2026-11-14 (UTC) — reconciliations R1 (PR #1), R2 (PR #2) and R3 (PR #4) recorded below
+**Last updated:** 2026-11-16 (UTC) — session `arena/dbf11de0-fl1` board added at the top (G0–G7);
+earlier reconciliations R1 (PR #1), R2 (PR #2) and R3 (PR #4) recorded below
 
 > **Which board is authoritative?** This file. The board below is maintained by the session that owns the
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
 > kept verbatim further down so their records are not lost. If your session's board is not the one at the top,
 > **add your tasks to the top board** rather than replacing it.
+
+## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — ACTIVE
+
+**Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
+**Claimed:** 2026-11-16 (UTC) · **Status:** active — no other session has committed since 2026-11-14T23:09Z,
+so this session adds tasks to the top board and performs its own final integration. Work is **additive**:
+new files, new pages appended to `NAV` in `tools/site.py`, registers appended to, never replaced.
+
+| ID | Task | Status | Owner | File scope (claimed) |
+|----|------|--------|-------|----------------------|
+| G0 | Coordination claim (this row) + immediate push | in progress | `arena-dbf11de0` | `COORDINATION.md` |
+| G1 | Live official re-capture of the Week 10 2026 injury report and line-by-line re-verification against `data/injuries.tsv`; resolve the stale-count and blank-designation items | claimed | `arena-dbf11de0` | `raw/injuries-week10-2026-recapture-2026-11-16.tsv`, `raw/injuries-week10-2026-recapture-2026-11-16.md`, `scripts/verify_recapture_g.py`, `data/verification-g.tsv` |
+| G2 | Requirements register completed against the full brief (~70 lines): every brief line tracked with status, evidence, blocking gate and clearing number | claimed | `arena-dbf11de0` | `data/requirements_backlog.csv`, `scripts/build_backlog_g.py`, `requirements-backlog.html` |
+| G3 | Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that clears it | claimed | `arena-dbf11de0` | `scripts/build_pages_g.py`, `index.html` (regenerated), `tools/site.py` (NAV append) |
+| G4 | Removal-of-luck panel on the dashboard (cluster-robust, benchmark-relative, multiplicity-adjusted) | claimed | `arena-dbf11de0` | `engine/luck.py`, `scripts/build_luck_g.py`, `data/luck_panel.json`, `removal-of-luck.html` |
+| G5 | Per-team availability view: starters out, replacement named, net injury count | claimed | `arena-dbf11de0` | `scripts/build_team_availability_g.py`, `data/team_availability.csv`, `team-availability.html` |
+| G6 | Registers appended (questions / suggestions / flags / sources), site rebuilt, every gate re-run | claimed | `arena-dbf11de0` | `data/{questions,suggestions,flags}.json`, `data/sources.tsv`, generated pages |
+| G7 | Final integration: PR → `main`, merge without waiting, confirm Pages deploy, record here | claimed | `arena-dbf11de0` | PR + `COORDINATION.md` log |
+
+**Notes for any later session:** two PRs from 2026-11-14 (`#38` `arena/08fef9e9-fl1`, `#39`
+`arena/2fa09442-fl1`) are still open with no commits for ~48 h. They were left untouched by this
+session; if they are merged after this one, re-run `tools/checklinks.py` and `tools/checkrows.py`.
 
 ## Task board — session `arena/360ca650-fl1` (requirements sprint R21–R28)
 
