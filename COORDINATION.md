@@ -5,7 +5,7 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
-**Last updated:** 2026-11-14 (UTC) — reconciliations R1 (PR #1), R2 (PR #2) and R3 (PR #4) recorded below
+**Last updated:** 2026-11-16 (UTC) — session `arena/7f2b1d99-fl1` board added at the foot of this file (claim G-T1)
 
 > **Which board is authoritative?** This file. The board below is maintained by the session that owns the
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
@@ -1337,3 +1337,29 @@ session's audit layer stands beside them.**
   `tools/verify_replacement.py` PASS · `scripts/verify_feed_m.py` PASS (137 games) ·
   `engine/demo_run.py --check` · `site/build.py` + `site/verify.py` publishable ·
   `scripts/verify_site.py` 0 errors · `scripts/verify_d.py` V5–V9 PASS.
+
+---
+
+## Task board — session `arena/7f2b1d99-fl1` (brief traceability, decision-readiness, dashboard refresh)
+
+**Session ID:** `arena-7f2b1d99-fl1` · **Branch:** `arena/7f2b1d99-fl1` (from `ebf20eb` of `main`) ·
+**Claimed:** 2026-11-16T01:2xZ · **Status:** active — final integration session for this pass.
+
+**Scope rule for this pass:** additive only. No existing register row, store, data file or page section is
+deleted or renumbered. New registers/rows are appended (flags F43+, questions Q35+, suggestions SG35+,
+sources S70+). Shared outputs (NAV, `tools/site.py`, `index.html`) are edited **only** by this session,
+because it is the integration session for the pass.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| G-T1 | Coordination claim (this row) | in progress | arena-7f2b1d99-fl1 | `COORDINATION.md` | n/a | — |
+| G-T2 | Live re-verification of every official source the site relies on (reachability + sample values) | unclaimed → claimed | arena-7f2b1d99-fl1 | `data/sources.tsv` (append only), new `data/verification-g.tsv` | nfl.com pages fetched this session | broken/renamed URLs to be flagged |
+| G-T3 | **Brief traceability register** — every line of the user brief mapped to a requirement row with gate + clearing number | claimed | arena-7f2b1d99-fl1 | `data/brief_trace.json`, `scripts/build_brief_trace.py`, `requirements.html` section | brief text + repo evidence | unfunded/blocked rows flagged, never filled |
+| G-T4 | **Decision-readiness table on the landing page** (one row per requirement, the gate that blocks it, the number that would clear it) | claimed | arena-7f2b1d99-fl1 | `tools/site.py` (index + new page), `decision-readiness.html` | G-T3 data | — |
+| G-T5 | Category-grouped navigation + clean dashboard landing page | claimed | arena-7f2b1d99-fl1 | `tools/site.py` (NAV + index), `assets/css/site.css` | — | must not break `tools/checklinks.py` |
+| G-T6 | Repository review of this pass, line by line, with source links and flags | claimed | arena-7f2b1d99-fl1 | `repo-review.html`, `REVIEW-2026-11-16.md` | live official sources + repo files | published on Flagged for Review |
+| G-T7 | Suggestions review workflow (review → choose a path before implementing) | claimed | arena-7f2b1d99-fl1 | `data/suggestions.json` (append), `suggestions.html` | registers | nothing implemented without an owner decision |
+| G-T8 | Registers append + executive summary refresh | claimed | arena-7f2b1d99-fl1 | `data/{flags,questions,suggestions,sources}.*`, `EXECUTIVE_SUMMARY.md`, `executive-summary.html`, `docs/EXECUTIVE_SUMMARY.md` | — | — |
+| G-T9 | Full gate battery, PR → `main`, merge, Pages deploy confirmation, record here | claimed | arena-7f2b1d99-fl1 | PR + this file | unit tests, checklinks, checkrows, verifiers, Pages API | — |
+
+**Completion record:** appended below when G-T9 finishes.
