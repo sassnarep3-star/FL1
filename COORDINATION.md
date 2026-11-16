@@ -12,6 +12,17 @@
 > kept verbatim further down so their records are not lost. If your session's board is not the one at the top,
 > **add your tasks to the top board** rather than replacing it.
 
+### Current claim — `arena/99dbd9eb-fl1` (2026-11-16)
+
+**Status:** in progress · **Branch:** `arena/99dbd9eb-fl1` (Arena-fixed; working on this branch only).
+The previous integrations are complete. This session takes the final-integration role for one additive,
+traceable improvement: put a requirement-by-requirement decision-readiness register on the public landing
+page without inventing thresholds or overwriting parallel work.
+
+| Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|---|---|---|---|---|
+| AUD-01 | in progress | arena/99dbd9eb-fl1 | `COORDINATION.md`, `data/decision_readiness.csv`, `tools/build_decision_readiness.py`, `tools/site.py`, generated `index.html`, `tests/test_decision_readiness.py`; update only if needed: `README.md`, `REVIEW.md` | Existing requirement/question/gate registers; NFL/club sources only for factual dependencies. Re-run row/link/build/tests and record outputs here. | Two requirement registers exist (`data/requirements.json` and `data/specs/requirements.json`); use the detailed 48-row register as canonical for this table and expose the divergence rather than silently combining schemas. Clearance thresholds absent from source remain blank and flagged, not guessed. |
+
 ## Task board — session `arena/360ca650-fl1` (requirements sprint R21–R28)
 
 **Session ID:** `arena-360ca650-fl1` · **Branch:** `arena/360ca650-fl1` (from `9d7ca32` of `main`) ·
