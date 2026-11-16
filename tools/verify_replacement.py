@@ -167,6 +167,102 @@ def parse_table(tbl):
     return rows
 
 
+def cross_check_theirs(pop, thin):
+    """Compare this session's ladder walk with session 360ca650's
+    data/replacement_depth.tsv (PR #33) — two independent implementations of
+    the same requirement. Comparable rows must agree; accepted divergences are
+    enumerated explicitly below and anything new is a problem.
+
+    Returns {"problems": [...], "summary": "..."}.
+    """
+    path = os.path.join(ROOT, "data", "replacement_depth.tsv")
+    problems = []
+    if not os.path.exists(path):
+        return {"problems": [],
+                "summary": "skipped (data/replacement_depth.tsv not present)"}
+
+    # (a) definitional: the club publishes TWO names at first string
+    #     (Dallas S and TE). This page reports ladder-level depth (a
+    #     not-ruled-out name exists at string 1 -> depth 1, ruled-Out name
+    #     still shown in the trail); their file reports per-missing-starter
+    #     depth (the ruled-Out starter's next man -> depth 2). Flagged for
+    #     review in COORDINATION.md; both readings are documented.
+    accepted_definitional = {
+        ("DAL", "Defense", "S", "1"),
+        ("DAL", "Offense", "TE", "1"),
+    }
+    # (b) their KC rows were built from the pre-fix fold (every KC row its own
+    #     ladder), so their line numbers are capture indexes and their KC
+    #     depths read "no charted player left". This session's fold fix (in
+    #     the same merge that carries this check) supersedes them; the exact
+    #     documented set below must not grow.
+    accepted_kc = {
+        ("KC", "Defense", "DT", "31"),
+        ("KC", "Offense", "RT", "12"),
+    }
+
+    with open(path, newline="", encoding="utf-8") as fh:
+        theirs = list(csv.DictReader(fh, delimiter="\t"))
+
+    n_core = n_cont = 0
+    their_cont = set()
+    for r in theirs:
+        key = (r["team"], r["unit"], r["slot"], r["line"])
+        contingent = (r.get("note") or "").startswith("contingent")
+        if contingent:
+            n_cont += 1
+            their_cont.add(key)
+            continue
+        n_core += 1
+        if key in accepted_kc:
+            if (r.get("replacement") or "").strip() != "":
+                problems.append("KC row %r no longer empty on their side; "
+                                "re-review the accepted set" % (key,))
+            continue
+        if key in accepted_definitional:
+            if key not in pop:
+                problems.append("accepted definitional row %r missing from "
+                                "this page" % (key,))
+            continue
+        m = pop.get(key)
+        if m is None:
+            problems.append("their core row %r has no ladder on this page"
+                            % (key,))
+            continue
+        raw = (r.get("replacement_depth") or "").strip()
+        their_d = int(raw) if raw.isdigit() else None
+        my_d = m["depthOut"]
+        my_d = int(my_d) if isinstance(my_d, int) else None
+        if their_d != my_d:
+            problems.append(
+                "depth disagrees for %r: theirs=%r this page=%r"
+                % (key, their_d, my_d))
+        # the named replacement must also agree where both resolve
+        if their_d is not None and m["firstNotOut"]:
+            their_name = (r.get("replacement") or "").strip()
+            my_name = m["firstNotOut"].split(" (")[0]
+            if their_name and their_name != my_name:
+                problems.append(
+                    "replacement name disagrees for %r: theirs=%r this page=%r"
+                    % (key, their_name, my_name))
+
+    my_thin = set(thin)  # recompute() returns thin as {ladder-key: trail}
+    my_thin_non_kc = {k for k in my_thin if k[0] != "KC"}
+    if their_cont != my_thin_non_kc:
+        only_mine = sorted(my_thin_non_kc - their_cont)
+        only_theirs = sorted(their_cont - my_thin_non_kc)
+        problems.append("contingent/thin sets disagree: only here=%r, "
+                        "only theirs=%r" % (only_mine, only_theirs))
+
+    summary = ("%d core rows checked (%d accepted divergences), "
+               "%d contingent rows vs %d thin ladders"
+               % (n_core, len(accepted_definitional) + len(accepted_kc),
+                  n_cont, len(my_thin)))
+    if not problems:
+        summary += " — AGREE"
+    return {"problems": problems, "summary": summary}
+
+
 def main():
     league, pop, thin, problems = recompute()
     html = read_page()
@@ -319,6 +415,15 @@ def main():
             problems.append("thin row %s/%s: no source chip"
                             % (row[0]["text"], row[2]["text"]))
 
+    # ---- check 7: cross-check against session 360ca650's implementation -----
+    # data/replacement_depth.tsv (PR #33) is an independent implementation of
+    # the same requirement. Comparable rows must agree; the accepted
+    # divergences are enumerated explicitly and anything NEW fails the gate.
+    cross = cross_check_theirs(pop, thin)
+    problems.extend(cross["problems"])
+    print("  cross-check vs data/replacement_depth.tsv: %s"
+          % cross["summary"])
+
     # ---- report --------------------------------------------------------------
     checks = [
         ("population equals independent walk", len(page_keys), len(pop)),
@@ -391,6 +496,14 @@ def write_tsv(n_pop, n_thin, n_rows):
          "Woods, Delane, Walker, Branch, Whyle, Wallace, Wayne, Alie-Cox, "
          "Benford, Brown and CJ Allen",
          "15 of 15 match", "15 of 15 match", "PASS", "S01"],
+        ["2026-11-14",
+         "cross-check against session 360ca650's independent implementation "
+         "(data/replacement_depth.tsv, PR #33): every comparable core row and "
+         "the whole contingent/thin set agree; accepted divergences are the 2 "
+         "Dallas dual-first-string ladders (definitional, flagged for review) "
+         "and the 2 KC rows built from the pre-fix fold",
+         "0 unexplained diffs", "0 unexplained diffs", "PASS",
+         "S01;S08;S16-S45"],
     ]
     with open(OUT_TSV, "w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh, delimiter="\t", lineterminator="\n")

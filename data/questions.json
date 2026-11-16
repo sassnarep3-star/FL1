@@ -3,7 +3,7 @@
     "id": "Q01",
     "category": "Scope",
     "priority": "Critical",
-    "question": "What exactly is being priced \u2014 the full-game winner, the spread, the total, or a specific prop \u2014 and for which market type first?",
+    "question": "What exactly is being priced — the full-game winner, the spread, the total, or a specific prop — and for which market type first?",
     "why_it_matters": "Every downstream choice (data needed, sample size, validation test) differs by market. A spread needs a margin model; a winner market needs only a probability. A total needs a pace model. Picking all of them at once guarantees none reaches statistical significance this season.",
     "what_we_know": "The brief asks for single bets, parlays and player-prop combos. Official NFL data supplies team scoring (PF/PA), records and game status, which is enough to specify a spread or total model.",
     "what_we_dont_know": "Which market the user wants first, and whether the goal is to beat a specific book's price or to produce an independent fair-value number.",
@@ -48,7 +48,7 @@
     "what_we_dont_know": "Whether every club publishes a machine-readable depth chart, and whether any of them agree with each other on the same date.",
     "missing_data": "A league-wide official depth feed. Full 32-club depth chart capture.",
     "source": "S08, S13, S07",
-    "blocking": "Yes \u2014 for the backup-deficiency feature",
+    "blocking": "Yes — for the backup-deficiency feature",
     "recommended_path": "Treat 'official depth chart' as unavailable. Rank depth explicitly from roster status codes plus published club depth charts, and label every derived rank as *derived*, never as official."
   },
   {
@@ -69,12 +69,12 @@
     "category": "Injury tracking",
     "priority": "High",
     "question": "How is the injury report snapped and versioned, given that it changes several times per week?",
-    "why_it_matters": "A player can be Full on Wednesday and Out on Saturday. If snapshots are not timestamped, any model trained on the report is using information that did not exist at the time \u2014 a look-ahead bias that manufactures fake skill.",
+    "why_it_matters": "A player can be Full on Wednesday and Out on Saturday. If snapshots are not timestamped, any model trained on the report is using information that did not exist at the time — a look-ahead bias that manufactures fake skill.",
     "what_we_know": "The Week 10 report captured here (S01) is a single point-in-time snapshot taken 2026-11-14, and it is already partly final: e.g. Sam Darnold is listed Out and a same-page NFL news item confirms he was ruled out.",
     "what_we_dont_know": "The exact publication cadence per club, and whether earlier-week versions are archived anywhere official and free.",
     "missing_data": "A time series of injury reports. This repo holds one snapshot only.",
     "source": "S01",
-    "blocking": "Yes \u2014 for any injury-based signal",
+    "blocking": "Yes — for any injury-based signal",
     "recommended_path": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now."
   },
   {
@@ -96,7 +96,7 @@
     "priority": "High",
     "question": "How should the cross-source irregularities found in this repo be handled?",
     "why_it_matters": "Two official pages disagree. If the build silently picks one, every downstream number inherits an unstated choice.",
-    "what_we_know": "Case 1: NFL.com's Week 10 injury page lists Myles Garrett as a Rams LB, while NFL.com's own Next Gen Stats page carries a Rams article titled 'No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article places Garrett in the Rams defense. Case 2: Aaron Donald is listed as a Did Not Participate on the Rams injury table and NFL.com's player profile shows him active with the Rams, consistent with a same-season NFL.com report that he unretired on Aug. 30 and planned a season debut. Case 3: the injury page header reads 'Week 10 of the 2026 Season' while the article slug for the same week is dated 2026 \u2014 consistent \u2014 but the Commanders' sideline game is shown as FINAL 24-21 on Nov 12 while the injury page still lists them.",
+    "what_we_know": "Case 1: NFL.com's Week 10 injury page lists Myles Garrett as a Rams LB, while NFL.com's own Next Gen Stats page carries a Rams article titled 'No timeline on Myles Garrett's return post knee surgery', and a separate NFL.com article places Garrett in the Rams defense. Case 2: Aaron Donald is listed as a Did Not Participate on the Rams injury table and NFL.com's player profile shows him active with the Rams, consistent with a same-season NFL.com report that he unretired on Aug. 30 and planned a season debut. Case 3: the injury page header reads 'Week 10 of the 2026 Season' while the article slug for the same week is dated 2026 — consistent — but the Commanders' sideline game is shown as FINAL 24-21 on Nov 12 while the injury page still lists them.",
     "what_we_dont_know": "Whether these are data-entry errors at the source, stale cached rows, or genuinely correct and our reading is wrong.",
     "missing_data": "An authoritative roster-move log to reconcile against.",
     "source": "S01, S10, S15",
@@ -113,7 +113,7 @@
     "what_we_dont_know": "The effect size any strategy will actually achieve, which is what determines the sample needed.",
     "missing_data": "Historical graded results to estimate variance.",
     "source": "S05, S02",
-    "blocking": "Yes \u2014 for the leaderboard",
+    "blocking": "Yes — for the leaderboard",
     "recommended_path": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate."
   },
   {
@@ -122,7 +122,7 @@
     "priority": "High",
     "question": "How is 'luck removed' defined operationally, rather than as a slogan?",
     "why_it_matters": "The brief asks to remove luck. That needs a testable definition or it becomes an untestable claim.",
-    "what_we_know": "Three measurable proxies exist with data we can actually get: (a) calibration \u2014 do 60% predictions win 60% of the time; (b) closing-line value \u2014 did the fair value move toward our number; (c) persistence \u2014 does the edge hold out of sample and across seasons.",
+    "what_we_know": "Three measurable proxies exist with data we can actually get: (a) calibration — do 60% predictions win 60% of the time; (b) closing-line value — did the fair value move toward our number; (c) persistence — does the edge hold out of sample and across seasons.",
     "what_we_dont_know": "Which proxy the user will accept as the definition.",
     "missing_data": "A benchmark price feed for the CLV test.",
     "source": "S03",
@@ -139,7 +139,7 @@
     "what_we_dont_know": "Whether player-level joint outcomes can be assembled at all from official sources at the depth needed, and how many observations per pair are required.",
     "missing_data": "Player game logs sufficient to estimate pairwise prop correlations.",
     "source": "S03",
-    "blocking": "Yes \u2014 for parlay and combo products",
+    "blocking": "Yes — for parlay and combo products",
     "recommended_path": "Start correlations at the team-total level where data exists. For player props, publish the method and mark correlations blank until the joint sample is adequate."
   },
   {
@@ -166,7 +166,7 @@
     "missing_data": "A decision from the user on any monetary component.",
     "source": "S03",
     "blocking": "No",
-    "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first \u2014 see Q14."
+    "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14."
   },
   {
     "id": "Q14",
@@ -230,7 +230,7 @@
     "what_we_dont_know": "The terms of use and robots policy of nfl.com and the 32 club sites, which were not reviewed in this session.",
     "missing_data": "A terms-of-use review.",
     "source": "S01",
-    "blocking": "Yes \u2014 before any scheduled fetching",
+    "blocking": "Yes — before any scheduled fetching",
     "recommended_path": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached."
   },
   {
@@ -243,7 +243,7 @@
     "what_we_dont_know": "The baseline the user considers fair.",
     "missing_data": "A stated baseline.",
     "source": "S03",
-    "blocking": "Yes \u2014 for the leaderboard",
+    "blocking": "Yes — for the leaderboard",
     "recommended_path": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy."
   },
   {
@@ -440,5 +440,70 @@
     "source": "results-feed.html",
     "blocking": "No",
     "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
+  },
+  {
+    "id": "Q35",
+    "category": "Storage",
+    "priority": "Critical",
+    "question": "Should the snapshot store accept a fourth phase value for prices whose vintage the publisher never stated, or stay close-only?",
+    "why_it_matters": "72 percent of the market rows this project can capture are undated. If the store cannot hold them, the store is a 2006-2018 closing-lines table and every current-season origination number lives outside it; if it holds them under a label meaning 'intermediate', the ledger asserts a provenance nobody has.",
+    "what_we_know": "engine/price_snapshots.py constrains phase to open/close/intermediate with a CHECK. Re-running this session's ledger through it accepts 20,490 rows and refuses 57,920 (price-store.html, table E). The refusal is the correct behaviour given the schema.",
+    "what_we_dont_know": "Whether the storage owner would rather widen the enum or keep the store narrow and treat the ledger as a separate export. Both are defensible; the choice changes the write path every future page reads.",
+    "missing_data": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+    "source": "S74",
+    "blocking": "yes - it decides where live prices are written",
+    "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+  },
+  {
+    "id": "Q36",
+    "category": "Measurement",
+    "priority": "High",
+    "question": "What price basis should a published ROI use when the feed carries a line but no odds?",
+    "why_it_matters": "A quarter of the backtest log is priced at an assumed -110 because the games feed publishes spread and total numbers without payout for those games. ROI on an assumed price is a model statistic, not a market result, and it will be read as the latter if it is not labelled.",
+    "what_we_know": "13,310 published bets; 3,423 (25.7 percent) have no posted odds. The moneyline rules are 100 percent posted. Both figures are computed per rule and published.",
+    "what_we_dont_know": "Whether the site should show ROI for the unpriced subset at all, or restrict the headline ROI to posted-price rows and show the rest as points-beat only.",
+    "missing_data": "Nothing further is capturable from these feeds; the odds columns are empty upstream for those seasons.",
+    "source": "S47,S74",
+    "blocking": "no - the choice is presentational, the data does not change",
+    "recommended_path": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number."
+  },
+  {
+    "id": "Q37",
+    "category": "Prices",
+    "priority": "High",
+    "question": "Is the 2021 single-book opening line worth a published movement table, or should it stay quarantined?",
+    "why_it_matters": "It is the only first-posted number in the repository. 255 of 272 spreads moved between it and the recorded close (mean -0.44 points, sd 4.5), which is a real signal about line behaviour - but from one book, with no odds, with a file date that predates the season, and contradicting games.csv on which side is favoured in 61 games.",
+    "what_we_know": "The movement statistics above, computed this session. The contradiction rate. That no other open exists for any season.",
+    "what_we_dont_know": "Whether the numbers were posted at the season's start for the whole schedule (the file's git date suggests so) or updated weekly (the movement pattern suggests partly). The publisher documents neither.",
+    "missing_data": "A dated capture of the same book's line for the same games, which does not exist in any free source this environment can reach.",
+    "source": "S72",
+    "blocking": "no",
+    "recommended_path": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement."
+  },
+  {
+    "id": "Q38",
+    "category": "Presentation",
+    "priority": "Medium",
+    "question": "For the 38 unlined 2026 games, does the board show the fair number with an empty market column, or suppress the row?",
+    "why_it_matters": "Sixteen of the twenty Week 11 games have no market number in the capture. Showing a fair line with a blank difference proves origination happened; it also invites a reader to treat an unbenchmarked number as an edge.",
+    "what_we_know": "The model produces a spread, total and moneyline for all 272 scheduled games from verified scoring inputs, independent of any market number.",
+    "what_we_dont_know": "Whether the user wants unbenchmarked picks visible at all. The site's stated rule is blank-plus-flag, which favours showing them with the gap marked.",
+    "missing_data": "Nothing; the choice is editorial.",
+    "source": "S47,S74",
+    "blocking": "no",
+    "recommended_path": "Show them, with the delta column reading 'no market number captured' and the count of such rows stated above the table. Blank-plus-flag is the rule already on this site."
+  },
+  {
+    "id": "Q39",
+    "category": "Governance",
+    "priority": "High",
+    "question": "Should a D4 integrity trigger block a merge, or only block promotion?",
+    "why_it_matters": "D4 is fail-closed: missing price coverage or a feed contradiction demotes a strategy. Right now it triggers for 9 of 9 rules, chiefly because 25.7 percent of bets are unpriced and because two feeds disagree about the 2026 slate. If that also blocks the site, the site can never ship while the data gap that D4 exists to describe is still open.",
+    "what_we_know": "The standing rule on this project: flagged items and unverified rows publish on the Flagged for Review page and do not block the merge; a broken build or broken links do block it.",
+    "what_we_dont_know": "Whether the same split should apply to D4 specifically, since D4 is a data-quality gate rather than a performance gate.",
+    "missing_data": "A decision from the owner.",
+    "source": "S74",
+    "blocking": "no - the standing rule answers it for now",
+    "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
   }
 ]
