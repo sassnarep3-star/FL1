@@ -5,7 +5,32 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
-**Last updated:** 2026-11-14 (UTC) — reconciliations R1 (PR #1), R2 (PR #2) and R3 (PR #4) recorded below
+**Last updated:** 2026-11-16 (UTC) — claim of session `arena/fc0ed6e8-fl1` added at the top of this board
+
+## Task board — session `arena/fc0ed6e8-fl1` (decision layer: readiness, change-of-mind, luck panel, ablations, drift alarm)
+
+**Session ID:** `arena-fc0ed6e8-fl1` · **Branch:** `arena/fc0ed6e8-fl1` (from `ebf20eb` of `main`, PR #41 merged) ·
+**Claimed:** 2026-11-16T00:00Z · **Status:** active.
+**Pre-claim sweep:** `origin/main` = `ebf20eb`; two open PRs inspected — **#38** (`arena/08fef9e9-fl1`, market
+spine: touches `tools/site.py`, most root pages, `data/market/*`, several engine files) and **#39**
+(`arena/2fa09442-fl1`, touches only `tools/verify_replacement.py`, `data/verification-replacement.tsv`,
+`COORDINATION.md`). This session avoids every file in those scopes except minimal, additive edits to
+`tools/site.py` (new NAV entries + one new index section + one strategies-page column), logged here as
+required by the shared-file rule.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| G1 | Coordination claim | done | `arena/fc0ed6e8-fl1` | `COORDINATION.md` | open-PR sweep via `gh pr list` | — |
+| G2 | **Decision-readiness table on the landing page** — one row per brief requirement, with the gate that blocks it and the number that would clear it; full table on a new `readiness.html` | in progress | `arena/fc0ed6e8-fl1` | `data/readiness.json` (new), `readiness.html` (new), `tools/site.py` (additive: NAV + index section), `assets/js/data.js` (generated) | brief text + existing registers/gates | — |
+| G3 | **Two-sided "what would change our mind" field on every strategy entry** (upgrade side + downgrade side) | in progress | `arena/fc0ed6e8-fl1` | `data/strategies.json` (add field), `tools/site.py` (strategies page render) | requirement text | — |
+| G4 | **"Removal of luck" panel on the dashboard** — signal score vs luck decomposition, control baselines, uncertainty, sample floors; computed from committed official-reconciled data | in progress | `arena/fc0ed6e8-fl1` | `engine/luck.py` (new), `data/luck_panel.json` (new), `tools/site.py` (index section + validation.html section) | `engine/stats.py`, `data/results_feed.csv` (official-reconciled), `data/leaderboard_signal_staking.json` | — |
+| G5 | **Injury/personnel ablations instead of fixed penalties** — same model with and without availability features, chronological holdouts, difference with uncertainty | in progress | `arena/fc0ed6e8-fl1` | `engine/ablation.py` (new), `data/ablations.json` (new), `ablations.html` (new) | `data/availability_2025.csv`, `data/depth_deficiency.csv`, `data/raw/games.csv` (third-party, labelled) | — |
+| G6 | **Drift alarm gate** — pin every register/scraper output to expected row counts and required fields; fail loudly | in progress | `arena/fc0ed6e8-fl1` | `tools/verify_drift.py` (new), `data/validation_gates.json` (append G-18) | repo data files | — |
+| G7 | **Venue transcription of 2026 fixtures** + published source label per row | in progress | `arena/fc0ed6e8-fl1` | `data/venue_2026.csv` (new), schedule page section via `tools/site.py` | `raw/games-nfldata.csv` (labelled third-party) + official game-centre spot checks | — |
+| G8 | Registers append (flags/questions/suggestions/sources), README + EXEC_SUMMARY appends — **done only after merging `origin/main` into this branch** | pending | `arena/fc0ed6e8-fl1` | `data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/sources.tsv`, `README.md`, `EXECUTIVE_SUMMARY.md` | append-only | — |
+| G9 | Integration: full verification battery, PR → main, merge, confirm Pages deploy, record here | pending | `arena/fc0ed6e8-fl1` | PR + `COORDINATION.md` | CI + Pages API | — |
+
+
 
 > **Which board is authoritative?** This file. The board below is maintained by the session that owns the
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
