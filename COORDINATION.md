@@ -5,7 +5,25 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
-**Last updated:** 2026-11-14 (UTC) — reconciliations R1 (PR #1), R2 (PR #2) and R3 (PR #4) recorded below
+**Last updated:** 2026-11-16 (UTC) — session `arena-38a78804-fl1` claim added below
+
+## Task board — session `arena/38a78804-fl1` (Week-10 live refresh + brief-gap sprint N01–N06)
+
+**Session ID:** `arena-38a78804-fl1` · **Branch:** `arena/38a78804-fl1` (from `ebf20eb` of `main`) ·
+**Claimed:** 2026-11-16T01:20Z · **Status:** active. Work is additive per the standing rule: new files +
+appended sections rendered by the shared generator; registers appended to, never replaced. Shared files
+touched (`tools/site.py`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`) are logged here.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| N01 | Decision-readiness table on the landing page — one row per requirement R01–R28, the gate that blocks it, the number that would clear it | claimed | arena-38a78804-fl1 | `data/decision_readiness.json`, `tools/site.py` (index section only), generated `index.html` | derived from `data/requirements.json`, `data/questions.json`, `data/flags.json`, `data/validation_gates.json`; no external claims | none expected |
+| N02 | Two-sided "what would change our mind" field on every strategy entry | claimed | arena-38a78804-fl1 | `data/strategies.json` (append field to all 6 entries), `tools/site.py` (strategies section only), generated `strategies.html` | design decision per brief; each field states what raises and what lowers confidence with the data it needs | none expected |
+| N03 | Fresh injury-hub read with clock time + published delta vs the 2026-11-14 read (delta, never the level) | claimed | arena-38a78804-fl1 | `raw/injuries-week10-2026-read2-*.md` (new capture), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py`, `data/sources.tsv` (append), generated `injuries.html` (appended section) | official nfl.com/injuries page fetched in this session, transcribed with UTC clock time | if the live page no longer shows Week 10, that fact itself is recorded |
+| N04 | Week 10 finals capture — the games that are FINAL at capture time (SNF live / MNF pending left blank and flagged) | claimed | arena-38a78804-fl1 | `raw/schedule-results-2026-week10-finals.tsv` (new), `data/week10_results_extension.json`, `scripts/build_week10_extension.py`, `data/sources.tsv` (append), generated `schedule.html` (appended section) | official nfl.com week-10 schedule page fetched in this session; per-row official link | standings reconciliation stays pinned to its capture state; extension labelled per-row |
+| N05 | "Removal of luck" panel on the site dashboard (derived from existing computed/official numbers only) | claimed | arena-38a78804-fl1 | `data/luck_panel.json`, `scripts/build_luck_panel.py`, `tools/site.py` (index section only), generated `index.html` | engine/leaderboard.py + data/leaderboard_signal_staking.json + data/correlations_official.json; no new claims | none expected |
+| N06 | Registers append, tests, link checks, rebuild, exec-summary update, coordination completion record, PR → main, merge, confirm Pages | claimed | arena-38a78804-fl1 | `data/{flags,questions,suggestions}.json` (append only), `data/sources.tsv` (append only), `tests/test_n01_n05.py`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`, PR | tools/checklinks.py, scripts/verify_site.py, unittest | — |
+
+
 
 > **Which board is authoritative?** This file. The board below is maintained by the session that owns the
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
