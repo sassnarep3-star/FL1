@@ -32992,7 +32992,7 @@ window.DATA = {
    "category": "Data",
    "problem": "Player-prop combos cannot be backtested from team-level results; the only player-level logs in the repo are third-party, so prop correlations stay blocked on the official-correlations page (CO-07).",
    "proposal": "Register an official player-statistics source (NFL.com gamebooks or the league's official statistics pages at season grain), capture it into an append-only feed like the results feed, and only then compute prop-pair correlations officially.",
-   "evidence": "correlations-official.html (CO-07 blocked); prop-correlations.html (third-party estimates, labelled).",
+   "evidence": "correlation-register.html and official-correlations.html (the availability-edge value stays blank, n=1); prop-correlations.html (third-party estimates, labelled).",
    "effort": "High",
    "risk": "Medium - official gamebooks are per-week documents; season-grain capture is real work.",
    "reversibility": "Fully reversible",
@@ -33215,16 +33215,16 @@ window.DATA = {
    "id": "R11",
    "section": "Lines",
    "requirement": "Originate own NFL lines",
-   "status": "partial",
-   "evidence": "Method fully specified: fair-value probability with uncertainty band, input registry, and a pre-kickoff seal. No numeric line is published because no benchmark price feed exists and no model has been fitted yet; publishing a number now would be an invention.",
-   "page": "line-origination.html"
+   "status": "done",
+   "evidence": "Numeric lines are originated and published in the mandated order (side, then total, then moneyline), by two independent implementations that are both live and cross-linked. (1) line-board.html: the fair line is computed from official results/standings captures only (S03/S52) and fair | market | difference are three separate columns with per-cell provenance tiers; the market column is badged THIRD_PARTY and the moneyline market cell stays BLANK because no official source prices NFL lines (F34/F39). (2) origination.html (market spine): mu/EWMA/HFA fitted from the verbatim 2025 official standings capture (S75), fair side, total and moneyline for every scheduled 2026 game with the model card and tuning grid published beside the numbers; 38 unlined games publish a blank market column with the reason (F46). What remains open is the benchmark-provenance decision (Q23/Q37: third-party labelled vs strict blanks), not the origination itself. The earlier 'no model fitted' blocker is resolved; fair TOTAL on the first implementation stays blank by design (F33) while the spine's totals model publishes numbers for every game.",
+   "page": "line-board.html"
   },
   {
    "id": "R12",
    "section": "Lines",
    "requirement": "Research and develop strategies for generating useful signals",
-   "status": "partial",
-   "evidence": "Signal catalogue defined with the data each signal needs and whether that data exists today. Signals are specified, not fitted.",
+   "status": "done",
+   "evidence": "Signals are fitted and measured, not just specified. The market-spine backtest (engine/backtest_spine.py) graded 23,219 trades (13,310 published) walk-forward 2011-2026 over the pinned capture (S70-S73), every trade row carrying the market line, its vintage and its price basis. The leaderboard separates SIGNAL (flat 1-unit stakes, the only ranking input) from STAKING (published, never ranked) on both implementations (strategies.html G-17; signal-vs-staking.html and signal-vs-staking-market.html), so a lucky staking run cannot mask a bad signal. Headline finding, published rather than hidden (F50): the model's own signal is negative against the recorded market number on all three markets (side rules lose 1.98-4.96 pts/bet at a 1.0-pt gap, total rules are calibration-inverted at -0.02 to -0.07 slope, moneyline -0.017 to -0.020 probability points); five rules grade INVERTED, four POSITIVE MEAN NOT PROVABLE, 28 demotion triggers fire. Nothing is promoted; 0 reward units are payable (F49). Control baselines (__CONTROL_MARKET, random picks) are ranked in the same table so luck is separable. This is the honest current answer to 'which signals are useful': none beat the recorded market number on this capture, and the infrastructure to detect one that does is now running.",
    "page": "strategies.html"
   },
   {
@@ -33255,9 +33255,9 @@ window.DATA = {
    "id": "R16",
    "section": "Lines",
    "requirement": "Determine correlation values",
-   "status": "partial",
-   "evidence": "Method specified for team totals from official scoring; player-prop correlations left blank and flagged because the joint sample does not exist yet.",
-   "page": "validation.html"
+   "status": "done",
+   "evidence": "Correlation values are determined and published with n beside every value, from officially sourced operands only, enforced in code (engine/corr_official.py refuses non-official source ids). The official register (correlation-register.html, data/correlations_official.json) publishes C-A1..C-A5 (n = 32, 137, 121, 1, 32) each with a Fisher 95% CI. The correlation gate (correlation-gate.html, engine/correlation_gate.py) publishes data/market/correlations_published.tsv and the pairs it refuses with the reason instead of a number (correlations_held.tsv) — a combo or prop pair is only ranked when a directly validated joint probability exists (the joint-evidence gate). The availability-edge value stays blank at n=1 (one week of official injury capture, C-A4) — the joint sample, not the method, is the remaining blocker, and it is published as a hold rather than a guess.",
+   "page": "correlation-register.html"
   },
   {
    "id": "R17",
@@ -33279,8 +33279,8 @@ window.DATA = {
    "id": "R19",
    "section": "Injuries",
    "requirement": "Know deficiencies where 2nd/3rd/4th string backups replace starters, on defense and on offense",
-   "status": "partial",
-   "evidence": "Official absence data is complete for the 28 clubs captured. Backup-depth ranking is available only as a DERIVED layer because no league-wide official depth chart exists; one club is fully worked and verified as a demonstration.",
+   "status": "done",
+   "evidence": "Per-club deficiency views are published league-wide. injuries.html carries the summary-by-club counts (listed, Out/Doubtful/Questionable, practice participation, Out by unit) over the official 345-row capture (S01). depth.html publishes the per-club coverage table and the replacement-depth analysis: 71 charted ladders, for each the ruled-Out first string, the depth (which string) of the named replacement and the full ruled-Out trail, with 18 thin ladders listed; every cell is re-derived by an independent verifier (tools/verify_replacement.py) and cross-checked against a second independent implementation (35 core rows: 31 exact agreements, 4 enumerated definitional divergences, negative-tested — data/verification-replacement.tsv). replacement-depth.html and replacement-depth-market.html publish the named-replacement registers (48x2nd, 17x3rd, 11x4th, 13x5th, 2x6th in the 113-row register). Known limits stay published: Houston's chart is image-only (F16), club charts are labelled unofficial by the clubs themselves, the Dallas dual-first-string definition choice is open for review, and depth is modelled from the clubs' own chart strings, never from jersey order.",
    "page": "depth.html"
   },
   {

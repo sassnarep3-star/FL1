@@ -19,9 +19,78 @@ Both pass CI (`verify` SUCCESS). Nothing below starts work claimed by a live ses
 
 | # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
 |---|------|--------|-------|----------------------|------------------------|----------------|
-| I1 | Integrate stale open PRs #38 and #39 into main (verify combined tree, resolve conflicts preserving both sides, merge, confirm Pages) | in progress | arena-a4c5a1de-fl1 | PR operations + `COORDINATION.md` records | CI on both PRs; post-merge gate battery re-run | will be recorded at completion |
-| P1 | Close out partial requirements R11/R12/R16/R19 where merged evidence now exists; where evidence does not exist, leave status `partial` and make the exact blocking gap + clearing number explicit (decision-readiness contract) | in progress | arena-a4c5a1de-fl1 | `data/requirements.json`, `requirements.html` (generated), `docs/computed/requirements.html` if generated, `EXECUTIVE_SUMMARY.md`, `README.md`, tests if register contract changes | per-requirement evidence links recorded in the register rows themselves | will be recorded at completion |
+| I1 | Integrate stale open PRs #38 and #39 into main (verify combined tree, resolve conflicts preserving both sides, merge, confirm Pages) | done | arena-a4c5a1de-fl1 | PR operations + `COORDINATION.md` records + conflict resolutions (engine renames, registers, tools/site.py, pages_market.py, test page list) + regenerated pages | see completion record below | see completion record below |
+| P1 | Close out partial requirements R11/R12/R16/R19 where merged evidence now exists; where evidence does not exist, leave status `partial` and make the exact blocking gap + clearing number explicit (decision-readiness contract) | done | arena-a4c5a1de-fl1 | `data/requirements.json`, `requirements.html` (generated), `data/suggestions.json` (SG32 stale-page fix), `EXECUTIVE_SUMMARY.md`, `README.md` (stray-marker fix + addendum) | per-requirement evidence text cites the published pages/files; every number quoted was re-checked against committed data (summary.json, signal_cards.tsv, correlations_official.json, depth.html) | see completion record below |
 | I2 | Final integration: PR → main, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | pending | arena-a4c5a1de-fl1 | PR + `COORDINATION.md` | Pages API + live fetch | — |
+
+### Completion record — I1 (2026-11-16)
+
+**Merges performed on `arena/a4c5a1de-fl1` (takeover basis: both PRs' last commits 2026-11-14T23:0xZ,
+>60 min stale; both CI-green; no live session activity):**
+- PR #39 (`arena/2fa09442-fl1`, head `372793a`) merged first — one COORDINATION.md append/append
+  conflict, both records kept. `tools/verify_replacement.py` cross-check passes after merge.
+- PR #38 (`arena/08fef9e9-fl1`, head `c09098c`) merged second — resolutions, nothing discarded:
+  - **engine add/add:** main keeps `engine/backtest.py` (R22 module, PR #33) and `engine/originate.py`
+    (tools/brief.py `O` module); the spine's implementations renamed to `engine/backtest_spine.py` /
+    `engine/originate_spine.py`; importers (`scripts/build_market_spine.py`, `tests/test_market_pipeline.py`)
+    repointed; prose references in `tools/pages_market.py` updated.
+  - **Register id re-issue (repo convention):** spine flags F18–F27 → **F43–F52**, questions Q21–Q25 →
+    **Q35–Q39**, suggestions SG16–SG19 → **SG35–SG38**, sources S50–S56 → **S70–S76**. Retagging applied
+    only inside the spine's own files (pages_market.py, its register rows, its COORDINATION record,
+    its generated pages) — main-side references to same-numbered ids (685f958d's F18–F22 etc.) untouched.
+  - **Page-name collisions:** spine outputs re-issued as `results-feed-market.html`,
+    `signal-vs-staking-market.html`, `replacement-depth-market.html`; NAV + index cards retargeted;
+    `tests/test_market_pipeline.py` PAGES list repointed.
+  - **Generated artefacts** (`assets/js/data.js`, root pages) resolved to main then regenerated once
+    from the merged generators — no hand-merged HTML.
+  - **Capture refresh taken from the spine** per its own change record (F52): `data/raw/games.csv`,
+    `data/raw/MANIFEST.json`, `data/raw/initial_lines.csv`; derived `docs/computed/week10.html` and
+    `data/week10_signal_board.csv` match the spine's regenerated versions.
+- **Post-merge gate battery (all green):** 242 unit tests OK · `tools/checklinks.py` 36 pages OK ·
+  `tools/checkrows.py` 36 pages / 5,604 rows OK · `tools/verify_injuries.py` 345/345 ·
+  `tools/verify_results.py` PASS · `tools/verify_replacement.py` OK (with cross-check) ·
+  `tools/verify_brief.py` 10/10 · `scripts/build_market_spine.py --check` **byte-identical** ·
+  `scripts/verify_feed_m.py` PASS 137/137 · `engine/demo_run.py --check` current ·
+  `scripts/verify_d.py` V5/V7/V7a/V8 PASS (V6, V9 BLOCKED — optional deps/parquet absent in this
+  sandbox, the recorded limitation) · `scripts/verify_site.py` 0 errors / 0 warnings ·
+  `site/build.py` + `site/verify.py` publishable · no broken page references across root + docs pages.
+
+**Irregularities found during I1 (all fixed here, all logged):**
+1. README.md carried a committed, unresolved conflict-marker pair (`=======` / `>>>>>>> origin/main`
+   around the 685f958d record) — a prior session removed the `<<<<<<<` line but left the other two.
+   Fixed; both records preserved verbatim.
+2. Generated `suggestions.html` (SG32's evidence text) referenced `correlations-official.html`, a page
+   removed at a previous integration — invisible to `checklinks` because it is plain text, not an href.
+   Repointed to the live `correlation-register.html` / `official-correlations.html` in the register row.
+3. The shallow clone (depth 1) made `git merge-base` report "unrelated histories" until
+   `git fetch --unshallow`; noted for future sessions.
+
+### Completion record — P1 (2026-11-16)
+
+All four remaining partials closed with published evidence; **all 28 tracked requirements now render
+`done`** on `requirements.html`. Every number in the new evidence text was re-checked against committed
+data before writing it (`data/market/summary.json` 23,219/13,310; `data/market/signal_cards.tsv`
+5×INVERTED + 4×POSITIVE-MEAN-NOT-PROVABLE; `data/correlations_official.json` C-A1..C-A5 with n;
+`depth.html` 71 ladders). Status → `done`, evidence → page-anchored:
+
+- **R11** — numeric fair | market | difference published on `line-board.html` (official-only fair
+  side/total; moneyline market cell BLANK by rule) and `origination.html` (spine: fitted µ/EWMA/HFA
+  from the verbatim 2025 official standings capture S75, all 272 games, model card + tuning grid).
+  The benchmark-provenance decision stays open (Q37) but is no longer a blocker of origination itself.
+- **R12** — signals fitted and measured walk-forward (13,310 published bets, 2011–2026, sealed tail);
+  SIGNAL/STAKING split live on both leaderboard implementations; headline finding F50 published
+  (model signal negative vs recorded market on all three markets); 0 rewards payable (F49); control
+  baselines ranked in the same table.
+- **R16** — official-operand correlation register with n + Fisher CIs (C-A1..C-A5); correlation gate
+  publishes its refused pairs with reasons (joint-evidence rule); availability-edge value blank at n=1
+  (C-A4) as a published hold.
+- **R19** — 71 verified replacement-depth ladders (per-club coverage, ruled-Out trails, named
+  replacements by string), independently re-derived and cross-checked against the second
+  implementation (31/35 exact, 4 enumerated definitional divergences, negative-tested); HOU image-only
+  limit (F16) and the Dallas dual-first-string decision stay published.
+
+Requests to future sessions: none open. The decision list for the owner remains Q35–Q39 (+ Q23/Q37
+benchmark policy) and SG35–SG38 (+ SG24 breakeven fix) on the live pages.
 
 Requests to other sessions: none currently. This session does not edit `tools/site.py` NAV regions or
 other sessions' engine files; if I1 reveals a conflict, both sides are preserved and logged.

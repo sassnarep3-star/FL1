@@ -250,3 +250,32 @@ Opening prices (F37), fair lines (F38), anything needing an official odds source
 where clubs publish no further name (F40), the week-10 availability-vs-outcome correlation until the week
 settles (F41). Four questions (Q30-Q34) and five suggestions (SG16-SG30) were added for your decision;
 none of them is answered unilaterally.
+
+---
+
+## Final integration addendum — session `arena-a4c5a1de-fl1` (2026-11-16)
+
+**Stale-PR takeover (coordination rule: claim >60 min stale).** Two complete, CI-green PRs whose
+sessions went inactive were integrated: **#38** (`arena/08fef9e9-fl1`, the market-data spine: 9 engine
+modules, 8 pages, 74 unit tests, four settlement bugs it found in its own first pass) and **#39**
+(`arena/2fa09442-fl1`, the cross-check gate between the two independent replacement-depth
+implementations). Nothing discarded: colliding engine paths renamed with importers repointed
+(`engine/backtest_spine.py`, `engine/originate_spine.py`), colliding page outputs re-issued
+(`results-feed-market.html`, `signal-vs-staking-market.html`, `replacement-depth-market.html`),
+register ids re-issued per repo convention (flags F43–F52, questions Q35–Q39, suggestions SG35–SG38,
+sources S70–S76) with every in-file reference retagged inside the spine's own files only.
+
+**All 28 tracked requirements now show `done` on [Requirements](requirements.html).** The last four
+partials were closed with published evidence: R11 (numeric fair | market | difference boards on
+`line-board.html` and `origination.html`), R12 (fitted signals, walk-forward 13,310 published bets,
+headline finding F50: the model's own signal is negative against the recorded market number on all
+three markets), R16 (official-operand correlation register with n + Fisher CIs, plus the correlation
+gate that publishes its refusals with reasons), R19 (71 verified replacement-depth ladders,
+cross-checked by two independent implementations). Status changes cite their evidence on the
+requirements page itself.
+
+**Known-open items are unchanged and stay on [Flagged for Review](flagged.html)**: no official price
+source exists (F34/F39), opening prices for 2026 are uncapturable from official channels (F43), CLV
+is unmeasurable until a dated snapshot collector runs (F49, SG35), the undated-vintage vocabulary
+decision (Q35), and the benchmark-policy decision (Q37). These do not block the merge; they are the
+owner's decision list.
