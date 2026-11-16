@@ -12,6 +12,32 @@
 > kept verbatim further down so their records are not lost. If your session's board is not the one at the top,
 > **add your tasks to the top board** rather than replacing it.
 
+## Task board — session `arena/d2ef3f4b-fl1` (integration + takeover) — ACTIVE
+
+**Session ID:** `arena-d2ef3f4b-fl1` · **Branch:** `arena/d2ef3f4b-fl1` (from `ebf20eb` of `main`, = PR #41 merge) ·
+**Claimed:** 2026-11-16T01:20Z · **Status:** active. This session performs the final integration the brief
+requires: full verification battery, takeover of two stale conflicting PRs (per the 60-minute rule below),
+one PR to `main`, merge without waiting, Pages deploy confirmation, and this record. Work is **additive**;
+no other session's files are deleted or discarded.
+
+**Takeover notices (60-minute rule, logged as required):**
+- **PR #39** (`arena/2fa09442-fl1`, last commit 2026-11-14T23:09Z, >26h stale, GitHub state CONFLICTING)
+  → taken over by `arena-d2ef3f4b-fl1` at 2026-11-16T01:20Z. Content: replacement-depth cross-check gate +
+  D2 completion record. Nothing discarded; merged into this branch.
+- **PR #38** (`arena/08fef9e9-fl1`, last commit 2026-11-14T23:07Z, >26h stale, GitHub state CONFLICTING)
+  → taken over by `arena-d2ef3f4b-fl1` at 2026-11-16T01:20Z. Content: market-spine engine + 8 pages + 74
+  tests + 4 settlement-bug fixes. Nothing discarded; merged into this branch.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| I1 | Coordination claim (this row) | done | `arena-d2ef3f4b-fl1` | `COORDINATION.md` | — | — |
+| I2 | Full verification battery at branch point (tests, links, rows, injuries, results, feed, brief, site, demo) | done | `arena-d2ef3f4b-fl1` | none (read-only runs) | 168 tests OK · checklinks 28 pages · checkrows 4,647 rows · injuries 345/345 · results 32/32 · feed 137/137 · brief 10/10 · verify_site 0/0 · demo current · V5/V7/V8 PASS | V9 blocked on external parquet (pre-existing, documented) |
+| I3 | Take over stale PR #39 (replacement-depth cross-check + D2 record); merge without discarding | in progress | `arena-d2ef3f4b-fl1` | `tools/verify_replacement.py`, `data/verification-replacement.tsv`, `COORDINATION.md` (records) | its own gate suite + full battery after merge | takeover logged above |
+| I4 | Take over stale PR #38 (market spine: engine fixes, 8 pages, 74 tests); merge without discarding | in progress | `arena-d2ef3f4b-fl1` | `engine/*`, `tools/pages_market.py`, `data/market/*`, new pages, `tests/test_market_pipeline.py`, `tools/site.py` (additive hunks) | its own suite + full battery after merge | takeover logged above; conflicts with main must keep both sides |
+| I5 | Re-run full battery on the merged tree; fix anything broken until green | in progress | `arena-d2ef3f4b-fl1` | generator/test fixes only as needed | battery listed in I2 + PR suites | — |
+| I6 | Advance what can honestly be advanced on the 4 `partial` requirements (R11/R12/R16/R19) — no invented numbers; blank+flag where official data does not exist | in progress | `arena-d2ef3f4b-fl1` | `data/requirements.json` (status/evidence rows), register pages via generators | official-source rule; existing flags | partial status is correct where data does not exist; do not force `done` |
+| I7 | PR → `main`, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | in progress | `arena-d2ef3f4b-fl1` | `COORDINATION.md` (record) + PR | CI + Pages API + live fetch | — |
+
 ## Task board — session `arena/360ca650-fl1` (requirements sprint R21–R28)
 
 **Session ID:** `arena-360ca650-fl1` · **Branch:** `arena/360ca650-fl1` (from `9d7ca32` of `main`) ·
