@@ -919,8 +919,11 @@ class ArtefactConsistencyTest(unittest.TestCase):
 
 
 class SiteRenderingTest(unittest.TestCase):
-    PAGES = ("price-store.html", "results-feed.html", "origination.html",
-             "signal-vs-staking.html", "replacement-depth.html", "correlation-gate.html",
+    # Renamed at integration (PR #38 takeover): main already publishes results-feed.html,
+    # signal-vs-staking.html and replacement-depth.html from its own generators, so the
+    # spine's three colliding outputs were re-issued with -market names.
+    PAGES = ("price-store.html", "results-feed-market.html", "origination.html",
+             "signal-vs-staking-market.html", "replacement-depth-market.html", "correlation-gate.html",
              "demotion-gate.html", "decision-desk.html")
 
     def test_pages_exist_and_declare_they_are_generated(self):

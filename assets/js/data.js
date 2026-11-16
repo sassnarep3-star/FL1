@@ -5297,6 +5297,76 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "2026 Week 9 schedule page; 15 FINAL lines transcribed row-by-row to raw/official-finals-2026.tsv on 2026-11-14 (scripts/verify_feed_m.py PASS, three-way) (re-issued at final integration after the R21-R28 sprint took the earlier week-source ids)"
+  },
+  {
+   "id": "S70",
+   "title": "nflverse/nfldata closing_lines feed (per-market closing odds)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
+   "tier": "Third-party (reconciled against games.csv; NOT an official league source)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "Captured by git clone at master 69a1fa550eac8edfb6782cac4f92f2350ddd5b9a (2026-11-14T22:05:17Z); sha256 3571e1c9fc8d7396f405fb7c17d43c15676d335ffc932fbb03ff18da691d1729 recorded in data/raw/MANIFEST.json and re-verified on 2026-11-14; 20,490 rows / 6,830 games, seasons 2006-2018 only; file last changed upstream in 46a1ceec90 'Removing wrong odds info' (2019-11-15). 'Closing' rests on the filename: upstream DATASETS.md documents no entry for this file, so no field definition is quoted from it."
+  },
+  {
+   "id": "S71",
+   "title": "nflverse/nfldata sc_lines feed (spread-console lines, per team)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/sc_lines.csv",
+   "tier": "Third-party (community dataset; undocumented fields)",
+   "checked": "2026-11-14",
+   "status": "PARTIAL",
+   "note": "sha256 384039e92630831eaf4d851471ba9e521f4a7b0207d0d7da7d376c4a1cc5004e; 4,092 rows / 2,043 games, seasons 2013-2020; antisymmetry exact on all 2,043 games (away+home=0). Upstream documents no field meanings, so the vintage is UNDOCUMENTED and is stored as such; agrees with games.csv on the identity of the favoured team in 1,876 of 2,043 games."
+  },
+  {
+   "id": "S72",
+   "title": "nflverse/nfldata initial_lines feed (2021 opening lines, single book WSGT)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv",
+   "tier": "Third-party (community dataset; single sportsbook)",
+   "checked": "2026-11-14",
+   "status": "PARTIAL",
+   "note": "sha256 654770173d11fdb2074537d520f6b1213d663e3bbf47689e5cc9994c1af255e5; 1,360 rows / 272 games, season 2021 only, sportsbook WSGT only, no odds column. File last changed upstream 2021-05-22 (3beea2086c), i.e. before the season was played, which contradicts a per-week opening price; 61 of 272 games contradict games.csv on which side is favoured. QUARANTINED for pricing and settlement by engine/price_store.py: recorded, hashed, and excluded."
+  },
+  {
+   "id": "S73",
+   "title": "nflverse/nfldata win_totals feed (season win totals, both sides)",
+   "publisher": "nflverse (community dataset)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/data/win_totals.csv",
+   "tier": "Third-party (community dataset; futures)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "sha256 6228fe8c2cf41b340a9df27dc862b63f3da765068ee7c09474397279c1b75c20; 512 rows, seasons 2001-2021; line present on every row, odds blank on 231 of 1,024 side rows. Included to show the store is market-generic rather than spread-only; never used to settle a bet here."
+  },
+  {
+   "id": "S74",
+   "title": "This repository: raw market capture manifest",
+   "publisher": "sassnarep3-star/FL1 (generated artefact)",
+   "url": "https://github.com/sassnarep3-star/FL1/blob/main/data/raw/MANIFEST.json",
+   "tier": "This repository (generated; reproducible from the feeds it names)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "Lists transport, sha256, byte size, row count, row-key span and the documented meaning of every capture under data/raw/; written by scripts/build_market_spine.py and re-verifiable with sha256sum."
+  },
+  {
+   "id": "S75",
+   "title": "NFL League Standings 2025 (regular season), final",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/standings/league/2025/REG",
+   "tier": "Official (league)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "All 32 club rows captured verbatim in raw/standings-2025-official.md (W/L/T, PCT, PF, PA, HOME, ROAD, DIV, CONF, NON-CONF, STRK, LAST 5) and parsed by scripts/build_market_spine.py, which requires exactly 32 clubs before it continues. Used only to reconcile the 2025 season at club level: 32 of 32 clubs match the game-level recount."
+  },
+  {
+   "id": "S76",
+   "title": "This repository: market ledger exports (price snapshots, results ledger, backtest log)",
+   "publisher": "sassnarep3-star/FL1 (generated artefact)",
+   "url": "https://github.com/sassnarep3-star/FL1/tree/main/data/market",
+   "tier": "This repository (generated; deterministic)",
+   "checked": "2026-11-14",
+   "status": "VERIFIED",
+   "note": "27 TSV/JSON artefacts under data/market/, every one written by scripts/build_market_spine.py from the captures in S47 and S70-S73 plus S01-S04/S49; rebuilt byte-identically by 'python3 scripts/build_market_spine.py --check'. No file in that directory is typed by hand."
   }
  ],
  "schedule": [
@@ -32204,6 +32274,71 @@ window.DATA = {
    "source": "results-feed.html",
    "blocking": "No",
    "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
+  },
+  {
+   "id": "Q35",
+   "category": "Storage",
+   "priority": "Critical",
+   "question": "Should the snapshot store accept a fourth phase value for prices whose vintage the publisher never stated, or stay close-only?",
+   "why_it_matters": "72 percent of the market rows this project can capture are undated. If the store cannot hold them, the store is a 2006-2018 closing-lines table and every current-season origination number lives outside it; if it holds them under a label meaning 'intermediate', the ledger asserts a provenance nobody has.",
+   "what_we_know": "engine/price_snapshots.py constrains phase to open/close/intermediate with a CHECK. Re-running this session's ledger through it accepts 20,490 rows and refuses 57,920 (price-store.html, table E). The refusal is the correct behaviour given the schema.",
+   "what_we_dont_know": "Whether the storage owner would rather widen the enum or keep the store narrow and treat the ledger as a separate export. Both are defensible; the choice changes the write path every future page reads.",
+   "missing_data": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+   "source": "S74",
+   "blocking": "yes - it decides where live prices are written",
+   "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+  },
+  {
+   "id": "Q36",
+   "category": "Measurement",
+   "priority": "High",
+   "question": "What price basis should a published ROI use when the feed carries a line but no odds?",
+   "why_it_matters": "A quarter of the backtest log is priced at an assumed -110 because the games feed publishes spread and total numbers without payout for those games. ROI on an assumed price is a model statistic, not a market result, and it will be read as the latter if it is not labelled.",
+   "what_we_know": "13,310 published bets; 3,423 (25.7 percent) have no posted odds. The moneyline rules are 100 percent posted. Both figures are computed per rule and published.",
+   "what_we_dont_know": "Whether the site should show ROI for the unpriced subset at all, or restrict the headline ROI to posted-price rows and show the rest as points-beat only.",
+   "missing_data": "Nothing further is capturable from these feeds; the odds columns are empty upstream for those seasons.",
+   "source": "S47,S74",
+   "blocking": "no - the choice is presentational, the data does not change",
+   "recommended_path": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number."
+  },
+  {
+   "id": "Q37",
+   "category": "Prices",
+   "priority": "High",
+   "question": "Is the 2021 single-book opening line worth a published movement table, or should it stay quarantined?",
+   "why_it_matters": "It is the only first-posted number in the repository. 255 of 272 spreads moved between it and the recorded close (mean -0.44 points, sd 4.5), which is a real signal about line behaviour - but from one book, with no odds, with a file date that predates the season, and contradicting games.csv on which side is favoured in 61 games.",
+   "what_we_know": "The movement statistics above, computed this session. The contradiction rate. That no other open exists for any season.",
+   "what_we_dont_know": "Whether the numbers were posted at the season's start for the whole schedule (the file's git date suggests so) or updated weekly (the movement pattern suggests partly). The publisher documents neither.",
+   "missing_data": "A dated capture of the same book's line for the same games, which does not exist in any free source this environment can reach.",
+   "source": "S72",
+   "blocking": "no",
+   "recommended_path": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement."
+  },
+  {
+   "id": "Q38",
+   "category": "Presentation",
+   "priority": "Medium",
+   "question": "For the 38 unlined 2026 games, does the board show the fair number with an empty market column, or suppress the row?",
+   "why_it_matters": "Sixteen of the twenty Week 11 games have no market number in the capture. Showing a fair line with a blank difference proves origination happened; it also invites a reader to treat an unbenchmarked number as an edge.",
+   "what_we_know": "The model produces a spread, total and moneyline for all 272 scheduled games from verified scoring inputs, independent of any market number.",
+   "what_we_dont_know": "Whether the user wants unbenchmarked picks visible at all. The site's stated rule is blank-plus-flag, which favours showing them with the gap marked.",
+   "missing_data": "Nothing; the choice is editorial.",
+   "source": "S47,S74",
+   "blocking": "no",
+   "recommended_path": "Show them, with the delta column reading 'no market number captured' and the count of such rows stated above the table. Blank-plus-flag is the rule already on this site."
+  },
+  {
+   "id": "Q39",
+   "category": "Governance",
+   "priority": "High",
+   "question": "Should a D4 integrity trigger block a merge, or only block promotion?",
+   "why_it_matters": "D4 is fail-closed: missing price coverage or a feed contradiction demotes a strategy. Right now it triggers for 9 of 9 rules, chiefly because 25.7 percent of bets are unpriced and because two feeds disagree about the 2026 slate. If that also blocks the site, the site can never ship while the data gap that D4 exists to describe is still open.",
+   "what_we_know": "The standing rule on this project: flagged items and unverified rows publish on the Flagged for Review page and do not block the merge; a broken build or broken links do block it.",
+   "what_we_dont_know": "Whether the same split should apply to D4 specifically, since D4 is a data-quality gate rather than a performance gate.",
+   "missing_data": "A decision from the owner.",
+   "source": "S74",
+   "blocking": "no - the standing rule answers it for now",
+   "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
   }
  ],
  "suggestions": [
@@ -32911,6 +33046,88 @@ window.DATA = {
    ],
    "recommendation": "A. Option C is how invented numbers enter a site that promised never to publish them.",
    "impact": "Keeps the board's blank-cell promise intact once the model exists."
+  },
+  {
+   "id": "SG35",
+   "title": "Run a dated snapshot collector before Week 12",
+   "category": "Prices",
+   "problem": "Nothing in the repository can measure closing-line value, so the one gate that separates a real edge from a lucky run cannot run, and 0 units of reward can be paid.",
+   "proposal": "Start the live price collector now, on the 38 unlined 2026 games and next week's slate: one row per (game, market, side, line, price, source, UTC timestamp), written through the existing append-only store at the first sighting and again at kick-off. Two weeks of collection produces the only dataset in this project that makes D1 the real rule instead of a substitute.",
+   "evidence": "data/market/snapshot_manifest.json (no dated open for any season); flags F43 and F49; engine/price_snapshots.py (append-only, content-hashed, provenance required).",
+   "effort": "Medium - the writer exists, the capture loop does not",
+   "risk": "Low. Worst case is a store full of rows nobody can settle, which is the state today.",
+   "reversibility": "Fully reversible; the store is append-only and every row carries its own source.",
+   "prerequisites": [
+    "Q35"
+   ],
+   "options": [
+    "Collect opens and closes on all four markets, timestamped. (Recommended)",
+    "Collect closes only, and accept that CLV stays unmeasurable.",
+    "Buy a historical open-price archive; requires a budget decision, not an engineering one."
+   ],
+   "recommendation": "A. It is the single change that unblocks the promotion gate, the reward rule and the CLV claim at once.",
+   "impact": "Turns requirement 1 from 'close only' into 'open and close', and makes 2026 bets measurable for line value from the first collected week."
+  },
+  {
+   "id": "SG36",
+   "title": "Keep the undated vintage as a first-class label everywhere",
+   "category": "Data model",
+   "problem": "A price whose vintage nobody stated is currently either refused or pushed into 'intermediate'. Both are losses: one hides data, the other invents provenance.",
+   "proposal": "Make UNDOCUMENTED a legal value in the store's phase enum and in every page label, and have the site print the vintage next to every market number (it already does in the board). This is a 3-line schema change plus a vocabulary decision, and it is the reason 57,920 rows are refused today.",
+   "evidence": "data/market/snapshot_manifest.json sqlite_interop block; engine/price_snapshots.py CHECK clause; flag F47.",
+   "effort": "Low",
+   "risk": "Low, if the strict provenance columns stay mandatory",
+   "reversibility": "A new database file; the old one stays as it is.",
+   "prerequisites": [
+    "Q35"
+   ],
+   "options": [
+    "Add UNDOCUMENTED to the enum. (Recommended)",
+    "Relabel undated rows 'intermediate'.",
+    "Keep the store close-only and the ledger separate."
+   ],
+   "recommendation": "A. The label describes what we have; the other two describe what we wish we had.",
+   "impact": "The store then holds the whole ledger, so a reviewer does not need two systems to audit a price."
+  },
+  {
+   "id": "SG37",
+   "title": "Publish cross-feed drift as a standing section, not a one-off",
+   "category": "Trust",
+   "problem": "Two feeds disagree on 167 games about which team is favoured. If that fact appears once, in a flag, it stops steering behaviour the moment the flag list is scrolled past.",
+   "proposal": "Render the drift matrix on every page that quotes a market number, computed at build time, and let the origination board switch its benchmark column between the disagreeing feeds so a reader can see how much a pick depends on the choice.",
+   "evidence": "data/market/price_drift.tsv; engine/price_store.py drift(); flag F45.",
+   "effort": "Low - the matrix is already computed",
+   "risk": "Very low",
+   "reversibility": "Fully reversible; presentation only.",
+   "prerequisites": [],
+   "options": [
+    "Standing drift section plus a benchmark toggle. (Recommended)",
+    "Drift in the flag list only.",
+    "Pick one feed quietly and never mention the other."
+   ],
+   "recommendation": "A. Option three is the failure mode this whole site was built to avoid.",
+   "impact": "Makes the size of vendor disagreement visible at the moment a number is used, which is the only time it matters."
+  },
+  {
+   "id": "SG38",
+   "title": "Tie rewards to measured line value, not to ROI",
+   "category": "Competition",
+   "problem": "A reward table keyed on ROI pays whoever was luckiest at the price they were given. On this data every ROI is computed against a close or an undated number, so it is an upper bound - and the two best-ranked signals are negative anyway.",
+   "proposal": "Make reward eligibility require (a) a positive lower bound on points beat, (b) a non-inverted calibration slope, and (c) at least 200 bets measured against a *timestamped* close, i.e. the CLV condition SG35 creates. Until then, 0 units are payable and the page says so in the same place the ranking appears.",
+   "evidence": "data/market/leaderboard_split.tsv (9 rules, 0 clearing, 0 paid); engine/signal_staking.py _reward(); data/leaderboard.csv (16 strategies, all REJECTED).",
+   "effort": "Low - the rule is config plus a column",
+   "risk": "Low; the risk is paying nothing, which is already the state",
+   "reversibility": "Fully reversible; nothing has been paid.",
+   "prerequisites": [
+    "SG35"
+   ],
+   "options": [
+    "Require CLV with n>=200 before any payout. (Recommended)",
+    "Pay on the signal lower bound alone.",
+    "Keep paying nothing until a reviewer chooses."
+   ],
+   "recommendation": "A. It is the version of the rule that cannot be satisfied by a run of coin flips.",
+   "impact": "The competition becomes a measurement rather than a leaderboard with a prize attached."
   }
  ],
  "requirements": [
@@ -33743,6 +33960,131 @@ window.DATA = {
    "sourceIds": [],
    "severity": "Medium",
    "action": "Demotion section now generated; full regeneration + link check re-run green. Any future page change must go through tools/site.py."
+  },
+  {
+   "id": "F43",
+   "kind": "data gap",
+   "item": "Opening prices exist for exactly one season, from one book, with no odds - so requirement 1 is met on the close side only",
+   "detail": "The price store records an opening number for 272 games (2021, sportsbook WSGT, spreads and totals, no odds) and closes for 6,830 games (2006-2018) plus 7,439 line records on the games feed. Every other season has no first-posted price in any capture this repository holds. The store publishes the gap as coverage rather than filling it: 56,624 of 78,410 snapshots carry the vintage UNDOCUMENTED.",
+   "sourceIds": [
+    "S72",
+    "S70",
+    "S74"
+   ],
+   "severity": "High",
+   "action": "Requirement 1 is recorded as PARTIALLY MET on requirements.html terms: the store holds opening AND closing columns for every market, and the opening column is blank where no dated open exists. Closing the gap needs the live snapshot collector (SG35); no third-party archive is substituted for it."
+  },
+  {
+   "id": "F44",
+   "kind": "measurement caveat",
+   "item": "A quarter of the backtest log is priced at an assumed -110 because the feed carries a line with no odds",
+   "detail": "3,423 of 13,310 published bets (25.7%) are struck against a spread or total number for which the games feed publishes no payout. Those rows carry price_basis NOT_POSTED_ASSUMED_-110. The signal block is unaffected (it never reads a stake or a price); the ROI column for those rules is an approximation and is marked as such in the same table as the 100%-posted moneyline rules.",
+   "sourceIds": [
+    "S47"
+   ],
+   "severity": "Medium",
+   "action": "Published in the staking block next to 'priced at a number the feed holds' and in the roi_is_assumed column; the -110 assumption is never presented as a market quote."
+  },
+  {
+   "id": "F45",
+   "kind": "source conflict",
+   "item": "Two feeds disagree with each other and neither is declared authoritative: 167 games have opposite favourites",
+   "detail": "games.csv vs sc_lines: 2,105 of 4,142 comparable side rows differ, median 0.5 pt, max 11.0, and the sign disagrees on 167 games (e.g. 2013_01 WAS_SD: +7.0 against -7.0). closing_lines vs games.csv moneyline odds agree on 394 of 3,232. initial_lines vs games.csv disagree on 61 of 272. Nothing here averages, picks a winner, or reconciles by authority.",
+   "sourceIds": [
+    "S47",
+    "S71",
+    "S70",
+    "S72"
+   ],
+   "severity": "High",
+   "action": "Published as a drift matrix on price-store.html and used as the reason one feed is quarantined; recorded so a reader can see the size of the vendor disagreement before trusting any single number."
+  },
+  {
+   "id": "F46",
+   "kind": "coverage gap",
+   "item": "38 scheduled 2026 games carry no line in any captured feed, 16 of them in the current Week 11 slate",
+   "detail": "Week 11 (2026-11-19/22) has 16 games and none has a spread, total or moneyline in the capture; the whole season has 272 games of which 234 are lined. For those games the market column on the origination board is blank, so the difference column is blank too - a line can be originated against nothing.",
+   "sourceIds": [
+    "S47",
+    "S74"
+   ],
+   "severity": "Medium",
+   "action": "Board rows published with the market column marked 'no market number captured'; delta left blank rather than measured against an assumed hold."
+  },
+  {
+   "id": "F47",
+   "kind": "spec gap",
+   "item": "The store's phase vocabulary cannot express 'the source never said when this price was taken'",
+   "detail": "engine/price_snapshots.py constrains phase to open/close/intermediate. 57,920 of 78,410 snapshots in this session's ledger are rejected by that CHECK - not because they are bad rows but because labelling an undated number 'intermediate' would invent a provenance the feed does not have.",
+   "sourceIds": [
+    "S74",
+    "S70"
+   ],
+   "severity": "High",
+   "action": "Recorded as a request on COORDINATION.md rather than patched here (that file is another session's): either a fourth phase value is added to the CHECK, or the store stays close-only and the ledger remains a separate export. Decision sits with the storage owner and Q11."
+  },
+  {
+   "id": "F48",
+   "kind": "irregularity",
+   "item": "The 2026 season in the captured feed stops at Week 9 plus one Week 10 game, and the official standings row for 2026 shows 16-1",
+   "detail": "data/results.tsv (transcribed from the official Week-by-week pages, S04/S49) contains 137 games: weeks 1-4 have 16 games, weeks 5 and 9 have 15, weeks 6-8 have 14, week 10 has 1. That is the feed's state at the capture moment, not an error in this repository, but it means 'current' on this site means 2026-11-14 and nothing later. The season recount matches the official 2026 standings for 32 of 32 clubs, which is what makes the shortfall a coverage fact rather than a correctness one.",
+   "sourceIds": [
+    "S04",
+    "S49",
+    "S03"
+   ],
+   "severity": "Medium",
+   "action": "Every dated page states the capture date; the ledger row for each game records which of the two feeds it was verified against."
+  },
+  {
+   "id": "F49",
+   "kind": "gate blocked",
+   "item": "No bet in this repository can be measured for closing-line value, so the promotion gate that needs CLV cannot run and no reward can be paid",
+   "detail": "CLV needs the price at the time the pick was made and the close after it. The capture has no dated open, so 0 of 13,310 bets are measurable. This session's demotion run therefore evaluates D1 against the recorded market line as a named substitute (D1-SUBSTITUTE) and reports the substitution on the page rather than presenting it as the original rule.",
+   "sourceIds": [
+    "S72",
+    "S74"
+   ],
+   "severity": "High",
+   "action": "demotion-gate.html publishes the substitute definition, the numbers, and the exact unlock (the snapshot collector). Rewards: 0 units paid, 9 of 9 rules ineligible - stated on signal-vs-staking.html."
+  },
+  {
+   "id": "F50",
+   "kind": "performance finding",
+   "item": "The model's own signal is negative against the market on all three markets, and worse as the threshold tightens",
+   "detail": "Walk-forward, 2011-2026, 13,310 bets: side rules lose 1.98 to 4.96 points per bet vs the recorded market line (3,364 bets at a 1.0-point gap), and both total rules are inverted - calibration slope -0.02 to -0.07, i.e. a bigger stated gap predicts a worse result. Moneyline rules are -0.017 to -0.020 probability points.",
+   "sourceIds": [
+    "S76",
+    "S47"
+   ],
+   "severity": "Medium",
+   "action": "Published as the headline of the leaderboard rather than hidden in a footnote; nothing is promoted, so nothing is exposed to the negative edge. The tuning grid that chose these parameters is published with the model card."
+  },
+  {
+   "id": "F51",
+   "kind": "documentation gap",
+   "item": "Three of the four line files have no field documentation at all - only filenames assert what they are",
+   "detail": "Upstream DATASETS.md documents the games feed (result = home-away; total = sum; spread_line positive = home favoured) and does not document closing_lines.csv, sc_lines.csv, initial_lines.csv or win_totals.csv. The publisher's own code (code/draft_kings.R) scrapes live DraftKings prices for unplayed games, which explains current-season movement but is not documentation of the historical columns. No CRAN reference page for these functions is reachable.",
+   "sourceIds": [
+    "S70",
+    "S71",
+    "S72",
+    "S73"
+   ],
+   "severity": "Medium",
+   "action": "The store records the vintage claim as 'filename only' in the vintage_evidence column of every snapshot row, and pages print UNDOCUMENTED rather than guessing a market hour."
+  },
+  {
+   "id": "F52",
+   "kind": "change record",
+   "item": "This session refreshed one capture, and the diff is 26 fields - all moneylines of games that have not been played",
+   "detail": "data/raw/games.csv at main was 9 days behind upstream. 7,548 games on both sides, 0 added or removed; the difference is 26 rows' moneyline columns (13 games x 2 sides), e.g. 2026_10_HOU_CLE home moneyline -230 -> -225. Scores, spreads and totals are unchanged, so no historical settlement in this repository moves.",
+   "sourceIds": [
+    "S47",
+    "S74"
+   ],
+   "severity": "Low",
+   "action": "Refreshed file committed with its new sha256 in the manifest and the previous hash recorded alongside it, so the change is auditable rather than silent."
   }
  ]
 };
