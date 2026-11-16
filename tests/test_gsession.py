@@ -171,14 +171,14 @@ class RegisterIntegrityTests(unittest.TestCase):
                             s["id"] + " missing two-sided change_of_mind")
 
     def test_announced_starters_never_publishes_an_unverified_start(self):
-        doc = json.load(open(ROOT / "data" / "announced_starters.json", encoding="utf-8"))
+        doc = json.load(open(ROOT / "data" / "announced_starters_g.json", encoding="utf-8"))
         for r in doc["rows"]:
             if r.get("verified") is not True or "yes" not in (r.get("announced_start") or ""):
                 self.assertEqual(r.get("announced_start"), "", r["id"])
 
     def test_luck_panel_matches_signal_register(self):
         sig = json.load(open(ROOT / "data" / "leaderboard_signal_staking.json", encoding="utf-8"))
-        panel = json.load(open(ROOT / "data" / "luck_panel.json", encoding="utf-8"))
+        panel = json.load(open(ROOT / "data" / "luck_panel_signals.json", encoding="utf-8"))
         self.assertEqual(len(panel["rows"]), len(sig["rows"]))
 
     def test_reserve_list_row_count_matches_raw_capture(self):

@@ -5397,6 +5397,66 @@ window.DATA = {
    "checked": "2026-11-16",
    "status": "VERIFIED",
    "note": "Loaded in full. Quoted: 'Willis was placed on injured reserve Tuesday due to a groin injury. With Willis shelved, second-year quarterback Kyle McCord will fill in, beginning Sunday on the road against the Indianapolis Colts.' Confirms that Willis's absence from the weekly injury report means injured reserve, not health."
+  },
+  {
+   "id": "S80",
+   "title": "Official NFL reserve-list transactions page, November 2026",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Page fetched live (both chunks) 2026-11-16; 25 Reserve/Injured rows transcribed verbatim to raw/nfl-reserve-list-2026-11.md and data/reserve_list_2026-11.tsv; includes the Malik Willis (MIA, 11/10) row the brief cites"
+  },
+  {
+   "id": "S81",
+   "title": "Official NFL Game Center: Kansas City Chiefs at Atlanta Falcons, 2026 REG 10",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Game Info block read 2026-11-16: Location ATLANTA, GA; Stadium MERCEDES-BENZ STADIUM (matches reconciled feed); official Game Book PDF link present; final score KC 35, ATL 13 also matches the REG10 schedule page"
+  },
+  {
+   "id": "S82",
+   "title": "Official NFL Game Center: New England Patriots at Detroit Lions, 2026 REG 10 (Munich)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Game Info block read 2026-11-16: Location MUNICH; Stadium FC BAYERN MUNICH STADIUM (matches reconciled feed); official Game Book PDF link present; final score NE 10, DET 35 also matches the REG10 schedule page"
+  },
+  {
+   "id": "S83",
+   "title": "Official NFL announcement: 2026 schedule release date",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Article read 2026-11-16 via search index: dated May 8, 2026 release announcing the 2026 Schedule powered by AWS would be released Thursday, May 14 at 8 p.m. ET; international reveal May 13; companion league-media page media.nfl.com carries the same text"
+  },
+  {
+   "id": "S84",
+   "title": "Official NFL news: Ravens complete trade for Cardinals' Jacoby Brissett",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/ravens-complete-trade-for-cardinals-jacoby-brissett-deal-terms-revealed",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Article read in full 2026-11-16: trade finalized (announced Friday, 2026-11-06); Lamar Jackson on injured reserve and out indefinitely; Tyler Huntley's season-ending turf toe; third different starting QB in as many games; Brissett 'presumably will start' in Week 10 (reporter wording, recorded as inference only)"
+  },
+  {
+   "id": "S85",
+   "title": "Official NFL news: Drew Lock has no injury designation, will start for Seahawks vs. Raiders",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+   "tier": "Official (league)",
+   "checked": "2026-11-16",
+   "status": "VERIFIED",
+   "note": "Article read 2026-11-16 via search index (dated Friday, 2026-11-13): coach Mike Macdonald announced Lock will start Sunday at Las Vegas; filling in for injured Sam Darnold; consistent with the Week 10 injury capture (Darnold Out, Lock listed, no designation)"
   }
  ],
  "schedule": [
@@ -32421,6 +32481,19 @@ window.DATA = {
    "source": "removal-of-luck.html",
    "blocking": "Yes",
    "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it."
+  },
+  {
+   "id": "Q44",
+   "category": "Model",
+   "priority": "Medium",
+   "question": "What holdout improvement justifies adding a personnel/availability feature to a published model?  (pairs with F44 and ablations.html)",
+   "why_it_matters": "The ablation harness now measures exactly what each availability feature adds on a chronological holdout, with a paired CI. Without an acceptance threshold agreed in advance, the decision to include a feature could drift toward whatever looked good - the thing pre-registration exists to prevent.",
+   "what_we_know": "The QB-deficiency feature's current holdout difference is -0.11 points of margin MAE [-0.24, +0.02] and -0.08 points of total MAE [-0.19, +0.03]; both CIs include zero, so nothing is justified yet.",
+   "what_we_dont_know": "The owner's threshold: any non-zero improvement? a CI excluding zero? a minimum effect size with a CI excluding it?",
+   "missing_data": "A single decision, not data; the harness and its CIs already exist.",
+   "source": "ablations.html; data/ablations.json",
+   "blocking": "No",
+   "recommended_path": "Adopt: a personnel feature enters a published model only when its holdout-difference 95% CI excludes zero AND the fitted coefficients' CIs exclude zero. Interim default until decided: features stay OUT (the current state)."
   }
  ],
  "suggestions": [
@@ -33292,6 +33365,67 @@ window.DATA = {
    ],
    "recommendation": "A. A control costs nothing and is the cheapest lie detector available.",
    "impact": "Closes requirement R76 and gives every future result something to be compared against."
+  },
+  {
+   "id": "SG43",
+   "title": "Adopt the decision-readiness table as the standing decision view (pairs with Q29)",
+   "category": "Governance",
+   "problem": "Every session publishes progress in its own pages; the owner must re-derive 'what blocks what' each time. The brief explicitly asks for a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it.",
+   "proposal": "Make data/readiness.json + readiness.html the canonical decision view; the landing page carries the compact table. Update it at every integration (statuses, gates, clearing numbers) instead of writing new parallel summaries.",
+   "evidence": "index.html readiness section; readiness.html (28 requirements + 69-row brief audit).",
+   "effort": "Low (ongoing discipline)",
+   "risk": "Very low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [],
+   "options": [
+    "Adopt as canonical, update at every integration. (Recommended)",
+    "Keep per-session summaries only.",
+    "Adopt but move the full brief audit off the site."
+   ],
+   "recommendation": "A. One table beats five summaries; the brief asked for exactly this view.",
+   "impact": "Every decision starts from the same table; drift between sessions' claims becomes visible immediately."
+  },
+  {
+   "id": "SG44",
+   "title": "Automate official Game Center venue + Game Book capture in the weekly refresh",
+   "category": "Data",
+   "problem": "The venue requirement ('transcribe the venue of every fixture from the official game centre') is met for 2/272 rows by hand this session; the remaining 270 stay labelled third-party. Game Books are confirmed reachable per game (the brief's Game Book requirement), but nothing captures them.",
+   "proposal": "Extend .github/workflows/refresh.yml: for each game in the coming week (then rolling backfill), fetch the official Game Center page, record Location + Stadium + Game Book URL into a versioned register, and hash-pin the capture. Replaces the third-party Stadium label row by row.",
+   "evidence": "data/venue_spotchecks.json (2 verified matches incl. Munich); both Game Centers expose Game Book PDF links.",
+   "effort": "Medium",
+   "risk": "Low (read-only capture)",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "F45"
+   ],
+   "options": [
+    "Automate in refresh.yml. (Recommended)",
+    "Keep manual spot-checks only.",
+    "Accept the labelled third-party column by decision."
+   ],
+   "recommendation": "A. The access problem is solved; the remaining gap is one scheduled job.",
+   "impact": "Turns D-23 and D-25 from partial into automatable; Game Books become the official starters source the brief wants."
+  },
+  {
+   "id": "SG45",
+   "title": "Capture the 13 settled Week 10 finals and the reserve list at the next refresh run",
+   "category": "Data",
+   "problem": "13 Week 10 games are FINAL on the official page (verified 2026-11-16) but the committed feed snapshot holds blank scores (F43); the reserve-list capture (S70) is one month old the moment the next month starts.",
+   "proposal": "At the next refresh run: transcribe the 13 finals row-by-row with official game links (the S61-S69 pattern), extend the verified results feed, and re-capture the current reserve-list month into a new dated file (never overwrite November).",
+   "evidence": "F43; raw/nfl-reserve-list-2026-11.md; data/reserve_list_2026-11.tsv (25 rows).",
+   "effort": "Low",
+   "risk": "Very low",
+   "reversibility": "Fully reversible",
+   "prerequisites": [
+    "F43"
+   ],
+   "options": [
+    "Next refresh run. (Recommended)",
+    "Backfill immediately by hand in this session.",
+    "Leave until Week 11 settles."
+   ],
+   "recommendation": "A. Hand-editing feed rows outside the capture pipeline is exactly what the provenance rules forbid; the scheduled run is the right owner.",
+   "impact": "Keeps the verified results feed and the reserve history current without breaking lineage."
   }
  ],
  "requirements": [
@@ -33538,7 +33672,11 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN. No backtest has been executed; no numeric result is claimed.",
-   "reason": "Published as the mandatory comparison for every other entry, per SG08 and Q19."
+   "reason": "Published as the mandatory comparison for every other entry, per SG08 and Q19.",
+   "change_of_mind": {
+    "upgrade": "n/a - the baseline is accepted by design. It is re-derived every rebuild; if official standings ever stop carrying PF/PA for all 32 clubs, G-1 fails and the baseline (like everything else) goes blank rather than being substituted.",
+    "downgrade": "Nothing can demote it - it exists to be beaten. A model that cannot beat this baseline out of sample (G-3) is not published as a strategy."
+   }
   },
   {
    "id": "ST02",
@@ -33559,7 +33697,11 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G2 and G6.",
-   "reason": "Cannot be sized without snap data and cannot be tested for edge without a price feed."
+   "reason": "Cannot be sized without snap data and cannot be tested for edge without a price feed.",
+   "change_of_mind": {
+    "upgrade": "The availability ablation (data/ablations.json) shows the holdout difference CI excluding zero AND a designation-reliability table (D-43/D-52) passes its own CI bar - then the feature graduates from ablation to model input and ST02 becomes testable against a price feed.",
+    "downgrade": "The ablation's holdout difference CI includes zero (it currently does: -0.11 [-0.24, +0.02]) and the designation-reliability join fails - then the signal is dropped entirely, not rescued by subtracting a fixed penalty for a missing starter."
+   }
   },
   {
    "id": "ST03",
@@ -33580,7 +33722,11 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN.",
-   "reason": "Needs a full season of prior-game dates plus a price feed. A well-known effect, so G4 against baseline will be the hard test."
+   "reason": "Needs a full season of prior-game dates plus a price feed. A well-known effect, so G4 against baseline will be the hard test.",
+   "change_of_mind": {
+    "upgrade": "A complete per-club prior-game/rest table is captured from official schedule pages and the fixture-context feature clears G-3 vs the points-differential baseline on a chronological holdout.",
+    "downgrade": "With the rest/travel table built, the feature's holdout CI includes zero and its fitted coefficient flips sign across validation seasons - then it is dropped, because a situational effect that cannot be estimated stably is noise with a narrative."
+   }
   },
   {
    "id": "ST04",
@@ -33601,7 +33747,11 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "NOT RUN.",
-   "reason": "Blocked on a sourced roof registry and on a price feed."
+   "reason": "Blocked on a sourced roof registry and on a price feed.",
+   "change_of_mind": {
+    "upgrade": "An official roof/surface designation is verified per venue and NWS hourly forecasts are joined, after which the weather feature clears G-3 out of sample; the computed layer's WIND15_UNDER (p=0.063, and unusable as written because it used post-game wind) is then re-tested on FORECAST wind only.",
+    "downgrade": "With forecast-only wind the edge disappears or stays above the alpha/16 = 0.00313 family-wise bar - then the weather family is closed, not kept alive by re-cutting wind thresholds."
+   }
   },
   {
    "id": "ST05",
@@ -33623,7 +33773,11 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G7.",
-   "reason": "Correlation cannot be estimated from one game. Must wait until each leg has independently cleared every gate (SG07)."
+   "reason": "Correlation cannot be estimated from one game. Must wait until each leg has independently cleared every gate (SG07).",
+   "change_of_mind": {
+    "upgrade": "A directly validated JOINT probability for a specific two-leg pair exists (many repeated observations of the same pair) and the operator's void/push rules are documented - then the combo may be ranked under G-7.",
+    "downgrade": "No change - it is already blocked at G-7 and stays blocked until the joint evidence exists; multiplying marginal probabilities under dependence is invalid regardless of how the legs performed."
+   }
   },
   {
    "id": "ST06",
@@ -33645,7 +33799,11 @@ window.DATA = {
    ],
    "result": "",
    "result_note": "BLOCKED at G1 and G7.",
-   "reason": "Cannot even confirm an official player-log source for the required fields in this session."
+   "reason": "Cannot even confirm an official player-log source for the required fields in this session.",
+   "change_of_mind": {
+    "upgrade": "Player-level game logs with snap share, target share and carry share are captured from a verified source AND the same pair's joint outcomes are observed repeatedly - then G-1 and G-7 can both be evaluated.",
+    "downgrade": "No change - blocked at G-1 and G-7; an unverifiable player-log source cannot be repaired by renaming it."
+   }
   }
  ],
  "flags": [
@@ -34341,6 +34499,66 @@ window.DATA = {
    ],
    "severity": "Medium",
    "action": "Flagged, not silently renumbered: renumbering either register would break the links already published in the other layer. The backlog records the fix (a namespaced id such as REG-S03) for when both layers are next regenerated together."
+  },
+  {
+   "id": "F61",
+   "kind": "Data freshness (verified 2026-11-16)",
+   "item": "13 Week 10 finals are now official but the committed feed snapshot still holds blank scores for them",
+   "detail": "The official REG10 schedule page (S49) read 2026-11-16 shows all 14 Week 10 games FINAL (e.g. KC 35, ATL 13; NE 10, DET 35 in Munich; SF 46, DAL 40). The committed nflverse snapshot (data/raw/games.csv, S47) holds the Thursday final only; the other 13 rows carry blank scores. The repo's verified results feed therefore still counts 137 games. The scores were NOT back-filled by hand: results data is owned by the refresh pipeline and must be captured with its own official links (SG37). Cross-ref F59 (stale published snapshot, their read) and SG45; this flag records the 13-finals count verified 2026-11-16.",
+   "sourceIds": [
+    "S49",
+    "S47",
+    "S81",
+    "S82"
+   ],
+   "severity": "Medium",
+   "action": "Capture the 13 finals row-by-row with official links at the next refresh run (SG37); the drift-alarm pins (G-18) will WARN on the growth."
+  },
+  {
+   "id": "F62",
+   "kind": "Provenance label",
+   "item": "Ablation inputs are third-party (nflverse feed); no output on ablations.html is an official NFL publication",
+   "detail": "The injury/personnel ablation (engine/ablation.py) runs on data/raw/games.csv (S47, third-party snapshot) and data/depth_deficiency.csv (QB-deficiency classes derived from the same feed's recorded starters). The official-only rule that governs the correlation register does NOT apply here: the ablation is a model-comparison study, labelled as such on every row. The feature measures who STARTED (recorded participation), not injury designations.",
+   "sourceIds": [
+    "S47"
+   ],
+   "severity": "Medium",
+   "action": "Keep labelled; the ablation joins the official-only layer only if its inputs are re-cut from official Game Book data (D-25)."
+  },
+  {
+   "id": "F63",
+   "kind": "Provenance label",
+   "item": "Schedule Stadium column is third-party 272/272; official Game Center spot-checks cover 2/272",
+   "detail": "schedule.html publishes a Stadium column for all 272 games from the reconciled nflverse feed (S47). The brief requires transcribing venue from the official game centre; this session read two official Game Centers (S71 KC@ATL, S72 NE@DET Munich): both match the feed exactly and both expose the official Game Book PDF link. A spot-check evidences the sample, not the column: the other 270 rows stay labelled third-party. Cross-ref F57 (venue/roof/surface provenance, their audit) and SG44; this flag records the 2/272 official spot-checks.",
+   "sourceIds": [
+    "S47",
+    "S81",
+    "S82"
+   ],
+   "severity": "Low",
+   "action": "Automate a per-game Game Center read in the weekly refresh (SG36), or accept the labelled feed by decision."
+  },
+  {
+   "id": "F64",
+   "kind": "Evidence boundary",
+   "item": "Announced-starter register: roster events are official; two 'will start' claims are NOT officially announced",
+   "detail": "AS-01 (Drew Lock) is a fully verified official start announcement (S75, coach statement, 2026-11-13). AS-02 (Brissett): the trade is official (S74) but the article's 'presumably will start' is reporter inference - the announced_start cell stays blank. AS-03 (McCord): the Willis Reserve/Injured transaction is official (S70) but no official page read this session announces McCord's start. The register preserves the difference between 'announced to start' and 'likely to start' verbatim. Cross-ref F54 (their announced-starter evidence gap for Brissett); this flag records the evidence-boundary decision on our register.",
+   "sourceIds": [
+    "S85",
+    "S84",
+    "S80"
+   ],
+   "severity": "Low",
+   "action": "Capture an official McCord start announcement (or an official Week 10 inactive list naming him) before promoting the row; never promote on league-adjacent reporting alone."
+  },
+  {
+   "id": "F65",
+   "kind": "Policy note",
+   "item": "Decision-readiness 'number that clears' cells are design targets, not measured facts",
+   "detail": "The landing-page readiness table states, per requirement, the gate that blocks it and the number that would clear it. Those numbers are measurable targets agreed by design (e.g. '1 authorised price source', 'n >= 1,342 settled bets') - they are commitments about what would count as done, not claims about the world. Where a cell quotes a figure that IS verified (137/137, 345/345, the ablation CIs) it says so.",
+   "sourceIds": [],
+   "severity": "Low",
+   "action": "Keep the distinction visible; targets change only by a logged decision, never silently."
   }
  ]
 };
