@@ -700,8 +700,8 @@
   "sourceIds": [
    "S49",
    "S47",
-   "S81",
-   "S82"
+   "S84",
+   "S85"
   ],
   "severity": "Medium",
   "action": "Capture the 13 finals row-by-row with official links at the next refresh run (SG37); the drift-alarm pins (G-18) will WARN on the growth."
@@ -724,8 +724,8 @@
   "detail": "schedule.html publishes a Stadium column for all 272 games from the reconciled nflverse feed (S47). The brief requires transcribing venue from the official game centre; this session read two official Game Centers (S71 KC@ATL, S72 NE@DET Munich): both match the feed exactly and both expose the official Game Book PDF link. A spot-check evidences the sample, not the column: the other 270 rows stay labelled third-party. Cross-ref F57 (venue/roof/surface provenance, their audit) and SG44; this flag records the 2/272 official spot-checks.",
   "sourceIds": [
    "S47",
-   "S81",
-   "S82"
+   "S84",
+   "S85"
   ],
   "severity": "Low",
   "action": "Automate a per-game Game Center read in the weekly refresh (SG36), or accept the labelled feed by decision."
@@ -736,9 +736,9 @@
   "item": "Announced-starter register: roster events are official; two 'will start' claims are NOT officially announced",
   "detail": "AS-01 (Drew Lock) is a fully verified official start announcement (S75, coach statement, 2026-11-13). AS-02 (Brissett): the trade is official (S74) but the article's 'presumably will start' is reporter inference - the announced_start cell stays blank. AS-03 (McCord): the Willis Reserve/Injured transaction is official (S70) but no official page read this session announces McCord's start. The register preserves the difference between 'announced to start' and 'likely to start' verbatim. Cross-ref F54 (their announced-starter evidence gap for Brissett); this flag records the evidence-boundary decision on our register.",
   "sourceIds": [
-   "S85",
-   "S84",
-   "S80"
+   "S88",
+   "S87",
+   "S83"
   ],
   "severity": "Low",
   "action": "Capture an official McCord start announcement (or an official Week 10 inactive list naming him) before promoting the row; never promote on league-adjacent reporting alone."
@@ -751,5 +751,16 @@
   "sourceIds": [],
   "severity": "Low",
   "action": "Keep the distinction visible; targets change only by a logged decision, never silently."
+ },
+ {
+  "id": "F66",
+  "kind": "Integration divergence (parallel duplicate implementations)",
+  "item": "Three decision-readiness views and three removal-of-luck views are now live; nothing was discarded, but consolidation is an owner decision",
+  "detail": "Sessions arena-fc0ed6e8-fl1, arena/dbf11de0-fl1 and arena/38a78804-fl1 each independently built the same brief items. All three remain live and cross-linked: decision readiness (auto-built requirements-backlog view; the hand-authored gates/clearing-numbers register on readiness.html; their 28-row decision_readiness.json rendered on the landing page); removal of luck (the official-results base-rate/Brier panel; the signal-vs-variance panel; this session's p-value/family-wise/sample-floor decomposition on the dashboard). Every view computes from committed inputs and agrees on the verdict: no strategy clears the family-wise bar.",
+  "sourceIds": [
+   "S47"
+  ],
+  "severity": "Low",
+  "action": "Owner review (SG47): pick one canonical view per concept and fold the others into it; until then all are published with cross-links."
  }
 ]

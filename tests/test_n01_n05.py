@@ -207,8 +207,10 @@ class TestSourcesS70S72(unittest.TestCase):
         with open(os.path.join(ROOT, "data", "sources.tsv"), encoding="utf-8") as fh:
             rows = [ln for ln in fh.read().splitlines()
                     if ln.strip() and not ln.startswith("#")]
-        # main (S01-S79, S53-S60 unused) + this session's S80-S82
-        self.assertEqual(len(rows), 74)
+        # main (S01-S79, S53-S60 unused) + S80-S82 (session 38a78804)
+        # + S83-S88 (session fc0ed6e8: renumbered second wave after both
+        #   sessions independently claimed S70-S82 for different sources)
+        self.assertEqual(len(rows), 80)
 
 
 if __name__ == "__main__":

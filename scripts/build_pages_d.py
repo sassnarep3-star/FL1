@@ -87,7 +87,7 @@ def schedule_page(sources_by_id):
 <h2>Full 2026 regular-season schedule &amp; results (272 games)</h2>
 <div class="callout">
 <p><strong>The league's dated schedule announcement</strong> (official, read 2026-11-16,
-source <a href="sources.html#S83">S83</a>):
+source <a href="sources.html#S86">S86</a>):
 &ldquo;The National Football League announced that the 2026 NFL Schedule powered by AWS will be
 released on <strong>Thursday, May 14 at 8 p.m. ET</strong>&rdquo; &mdash; the announcement was
 published <a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14">on nfl.com on May 8, 2026</a>
