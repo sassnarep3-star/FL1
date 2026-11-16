@@ -236,6 +236,35 @@ benchmark policy) and SG35–SG38 (+ SG24 breakeven fix) on the live pages.
 Requests to other sessions: none currently. This session does not edit `tools/site.py` NAV regions or
 other sessions' engine files; if I1 reveals a conflict, both sides are preserved and logged.
 
+---
+
+**Last updated:** 2026-11-16 (UTC) — claim of session `arena/fc0ed6e8-fl1` added at the top of this board
+
+## Task board — session `arena/fc0ed6e8-fl1` (decision layer: readiness, change-of-mind, luck panel, ablations, drift alarm)
+
+**Session ID:** `arena-fc0ed6e8-fl1` · **Branch:** `arena/fc0ed6e8-fl1` (from `ebf20eb` of `main`, PR #41 merged) ·
+**Claimed:** 2026-11-16T00:00Z · **Status:** active.
+**Pre-claim sweep:** `origin/main` = `ebf20eb`; two open PRs inspected — **#38** (`arena/08fef9e9-fl1`, market
+spine: touches `tools/site.py`, most root pages, `data/market/*`, several engine files) and **#39**
+(`arena/2fa09442-fl1`, touches only `tools/verify_replacement.py`, `data/verification-replacement.tsv`,
+`COORDINATION.md`). This session avoids every file in those scopes except minimal, additive edits to
+`tools/site.py` (new NAV entries + one new index section + one strategies-page column), logged here as
+required by the shared-file rule.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| G1 | Coordination claim | done | `arena/fc0ed6e8-fl1` | `COORDINATION.md` | open-PR sweep via `gh pr list` | — |
+| G2 | **Decision-readiness table on the landing page** — one row per brief requirement, with the gate that blocks it and the number that would clear it; full table on a new `readiness.html` | in progress | `arena/fc0ed6e8-fl1` | `data/readiness.json` (new), `readiness.html` (new), `tools/site.py` (additive: NAV + index section), `assets/js/data.js` (generated) | brief text + existing registers/gates | — |
+| G3 | **Two-sided "what would change our mind" field on every strategy entry** (upgrade side + downgrade side) | in progress | `arena/fc0ed6e8-fl1` | `data/strategies.json` (add field), `tools/site.py` (strategies page render) | requirement text | — |
+| G4 | **"Removal of luck" panel on the dashboard** — signal score vs luck decomposition, control baselines, uncertainty, sample floors; computed from committed official-reconciled data | in progress | `arena/fc0ed6e8-fl1` | `engine/luck.py` (new), `data/luck_panel.json` (new), `tools/site.py` (index section + validation.html section) | `engine/stats.py`, `data/results_feed.csv` (official-reconciled), `data/leaderboard_signal_staking.json` | — |
+| G5 | **Injury/personnel ablations instead of fixed penalties** — same model with and without availability features, chronological holdouts, difference with uncertainty | in progress | `arena/fc0ed6e8-fl1` | `engine/ablation.py` (new), `data/ablations.json` (new), `ablations.html` (new) | `data/availability_2025.csv`, `data/depth_deficiency.csv`, `data/raw/games.csv` (third-party, labelled) | — |
+| G6 | **Drift alarm gate** — pin every register/scraper output to expected row counts and required fields; fail loudly | in progress | `arena/fc0ed6e8-fl1` | `tools/verify_drift.py` (new), `data/validation_gates.json` (append G-18) | repo data files | — |
+| G7 | **Venue transcription of 2026 fixtures** + published source label per row | in progress | `arena/fc0ed6e8-fl1` | `data/venue_2026.csv` (new), schedule page section via `tools/site.py` | `raw/games-nfldata.csv` (labelled third-party) + official game-centre spot checks | — |
+| G8 | Registers append (flags/questions/suggestions/sources), README + EXEC_SUMMARY appends — **done only after merging `origin/main` into this branch** | pending | `arena/fc0ed6e8-fl1` | `data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/sources.tsv`, `README.md`, `EXECUTIVE_SUMMARY.md` | append-only | — |
+| G9 | Integration: full verification battery, PR → main, merge, confirm Pages deploy, record here | pending | `arena/fc0ed6e8-fl1` | PR + `COORDINATION.md` | CI + Pages API | — |
+
+
+
 > **Which board is authoritative?** This file. The board below is maintained by the session that owns the
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
 > kept verbatim further down so their records are not lost. If your session's board is not the one at the top,
@@ -299,6 +328,60 @@ brief, `origin/main` was merged **in**; nothing from either side was discarded. 
 Post-merge verification: **266 tests OK** · checklinks **36 pages OK** · `verify_site.py` 0/0 ·
 injuries 345/345 · results PASS · `verify_d.py` V5–V9 + V10 PASS · `verify_brief.py` 10/10 ·
 `verify_replacement.py` OK · `demo_run --check` current · docs sub-site publishable.
+
+### Session `arena-fc0ed6e8-fl1` — completion record (2026-11-16)
+
+**Claim table above (G1–G9) is now done.** Delivered on branch `arena/fc0ed6e8-fl1`, merged into the
+consolidating build after reconciling three parallel sessions (PRs #42–#46; conflicts logged below).
+
+| Task | Result | Verification |
+|---|---|---|
+| G2 decision readiness | `data/readiness.json` (28 requirement rows + 69 brief-audit rows), `readiness.html`, compact table on the landing page | unit-tested (a row per requirement), rendered, link-checked |
+| G3 change of mind | two-sided pre-registered upgrade/downgrade on all 6 strategies, rendered as a Leaderboard column | unit-tested (every entry carries both sides) |
+| G4 luck panel | `engine/luck_signals.py` + `data/luck_panel_signals.json`; dashboard section + full table; verdict NO STRATEGY CLEARING (best raw p 0.1236 vs α/16 = 0.00313; best candidate needs n=4,315, has 936) | unit-tested; companion cross-link to the parallel session's official-results panel |
+| G5 ablations | `engine/ablation.py` (stdlib OLS + seeded paired bootstrap), `data/ablations.json`, `ablations.html`; margin diff −0.11 [−0.24, +0.02], total −0.08 [−0.19, +0.03] — CIs include zero → feature stays OUT | unit-tested (exact-line OLS, leakage-free prior margins, determinism) |
+| G6 drift alarm | `tools/verify_drift.py` (19 pins), gate G-18 appended to `data/validation_gates.json`, `data/verification-drift.tsv` | 19/19 PASS after re-committing pins for register growth |
+| G7 venue | official Game Center spot-checks 2/272 both matching (S81/S82), Game Book PDF links confirmed; Stadium column stays labelled third-party (F63) | fetched live 2026-11-16 |
+| G8 registers + reserve list | flags F61–F65, question Q44, suggestions SG43–SG45, sources S80–S85 (renumbered after PR #42–#44 collisions, cross-referenced); reserve-list capture 25 rows (S80) incl. Malik Willis 11/10 | `checkrows` 6,176 rows sourced; `checklinks` all anchors resolve |
+| G9 integration | merged `origin/main` (nothing discarded; their `site_g` pages + my pages both live and cross-linked); full battery re-run | see below |
+
+**Post-merge battery (all green):** 285 unit tests OK (18 new) · `checklinks` 43 pages OK (255 external
+links) · `checkrows` 43 pages / 6,176 rows, 0 unsourced · `verify_drift` 19/19 PASS ·
+`verify_injuries` 345/345 · `verify_results` 32/32 · `verify_brief` 10/10 · `verify_feed_m` 137/137 ·
+`verify_d` V5–V9 (V7a FLAGGED by design, V9 BLOCKED by design — workspace parquet mirror absent) ·
+`scripts/verify_site.py` 0 errors / 0 warnings · computed-layer CI rebuild byte-identical ·
+`site/build.py` + `site/verify.py` publishable · `engine/demo_run.py --check` current.
+
+**Official sources fetched and read this session:** S80 reserve-list transactions page (both chunks);
+S81 KC@ATL Game Center; S82 NE@DET Game Center (Munich); S83 schedule-release announcement (May 8,
+2026); S84 Brissett trade article (full text); S85 Lock start announcement; plus the official REG10
+schedule page re-read (S49) which confirmed the 13 Week 10 finals behind flag F61.
+
+**Irregularities published this session (Flagged for Review):** F61 (13 Week 10 finals now official
+but feed snapshot stale — refresh task SG45), F62 (ablation inputs third-party, labelled),
+F63 (venue third-party 272/272, spot-checks 2/272 — automation SG44), F64 (announced-starter
+evidence boundary: Brissett start is reporter wording, McCord start not officially read),
+F65 (readiness "numbers that clear" are design targets).
+
+**Conflict log (merge with `origin/main` at PRs #43/#44):** `engine/luck.py`,
+`data/luck_panel.json`, `data/announced_starters.json` existed on both sides — theirs kept at the
+canonical paths (their `scripts/build_luck_g.py` + `tools/site_g.py` build), ours renamed to
+`engine/luck_signals.py`, `data/luck_panel_signals.json`, `data/announced_starters_g.json` with the
+builders, pins and tests re-pointed. Registers were unioned; our new rows renumbered
+(F43–F47→F61–F65, Q35→Q44, SG35–SG37→SG43–SG45, S70–S75→S80–S85) with cross-references to the
+overlapping rows we did not duplicate (F57/F59/F54). `tools/site.py` merged both sessions' blocks
+(NAV, index sections, `written.extend(g_pages)` + our `session_sections`); all generated pages were
+regenerated once from the merged generators. `COORDINATION.md` unioned (their board then ours).
+
+**Second reconciliation (PR #46, session `arena/38a78804-fl1`):** that session had ALSO claimed
+S80–S82, Q44 and SG43 for different rows, and renamed the signal luck panel to
+`data/luck_panel_signal.json`. Re-issued again: our sources are now **S83–S88**, our question **Q45**,
+our suggestions **SG44–SG46** (+SG47 consolidation proposal, flag **F66** records the three-way
+duplication). `scripts/build_luck_panel.py` (ours) renamed to `scripts/build_luck_panel_g.py`;
+`data/strategies.json` now carries BOTH change-of-mind vocabularies (our `change_of_mind`
+upgrade/downgrade objects and their `raises_confidence`/`lowers_confidence` strings) — the site
+renders ours; the test pin for sources.tsv updated 74→80. All three parallel views stay live and
+cross-linked; consolidation is registered as SG47 for owner review.
 
 ## Task board — session `arena/360ca650-fl1` (requirements sprint R21–R28)
 

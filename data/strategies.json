@@ -18,7 +18,11 @@
   "result_note": "NOT RUN. No backtest has been executed; no numeric result is claimed.",
   "reason": "Published as the mandatory comparison for every other entry, per SG08 and Q19.",
   "raises_confidence": "Using the official results feed (S52, 137 settled games, extended weekly), backtest both predictors walk-forward: if margin-based picks beat record-based picks at equal sample with a confidence interval excluding zero, the baseline earns its place.",
-  "lowers_confidence": "If the walk-forward gap between the two estimators stays inside its confidence interval across the whole 2026 season, margin adds no usable information at this sample size and the baseline is downgraded to the record model."
+  "lowers_confidence": "If the walk-forward gap between the two estimators stays inside its confidence interval across the whole 2026 season, margin adds no usable information at this sample size and the baseline is downgraded to the record model.",
+  "change_of_mind": {
+   "upgrade": "n/a - the baseline is accepted by design. It is re-derived every rebuild; if official standings ever stop carrying PF/PA for all 32 clubs, G-1 fails and the baseline (like everything else) goes blank rather than being substituted.",
+   "downgrade": "Nothing can demote it - it exists to be beaten. A model that cannot beat this baseline out of sample (G-3) is not published as a strategy."
+  }
  },
  {
   "id": "ST02",
@@ -41,7 +45,11 @@
   "result_note": "BLOCKED at G2 and G6.",
   "reason": "Cannot be sized without snap data and cannot be tested for edge without a price feed.",
   "raises_confidence": "A price source (Q21/Q30) letting us compare the market move on games with an official Out designation against the same games' fair line, with the replacement string published per slot (replacement-depth register); a persistent, correctly-signed residual would support the hypothesis.",
-  "lowers_confidence": "If games with and without an Out starter show no residual difference once opponent quality is controlled for, or if the derived depth rank layer (flagged unofficial, F10) proves unstable week to week, the signal has no evidence beyond the level effect already public."
+  "lowers_confidence": "If games with and without an Out starter show no residual difference once opponent quality is controlled for, or if the derived depth rank layer (flagged unofficial, F10) proves unstable week to week, the signal has no evidence beyond the level effect already public.",
+  "change_of_mind": {
+   "upgrade": "The availability ablation (data/ablations.json) shows the holdout difference CI excluding zero AND a designation-reliability table (D-43/D-52) passes its own CI bar - then the feature graduates from ablation to model input and ST02 becomes testable against a price feed.",
+   "downgrade": "The ablation's holdout difference CI includes zero (it currently does: -0.11 [-0.24, +0.02]) and the designation-reliability join fails - then the signal is dropped entirely, not rescued by subtracting a fixed penalty for a missing starter."
+  }
  },
  {
   "id": "ST03",
@@ -64,7 +72,11 @@
   "result_note": "NOT RUN.",
   "reason": "Needs a full season of prior-game dates plus a price feed. A well-known effect, so G4 against baseline will be the hard test.",
   "raises_confidence": "The official-register correlation C-A3 (rest edge vs home margin, n=121, r=0.426, CI 0.268..0.562) holding or strengthening as weekly official captures grow n, with the travel component separable from rest.",
-  "lowers_confidence": "If C-A3's interval widens to include zero as n grows, or if adding the international/short-week fixtures reverses the sign, the asymmetry is a small-sample artefact and the strategy is dropped."
+  "lowers_confidence": "If C-A3's interval widens to include zero as n grows, or if adding the international/short-week fixtures reverses the sign, the asymmetry is a small-sample artefact and the strategy is dropped.",
+  "change_of_mind": {
+   "upgrade": "A complete per-club prior-game/rest table is captured from official schedule pages and the fixture-context feature clears G-3 vs the points-differential baseline on a chronological holdout.",
+   "downgrade": "With the rest/travel table built, the feature's holdout CI includes zero and its fitted coefficient flips sign across validation seasons - then it is dropped, because a situational effect that cannot be estimated stably is noise with a narrative."
+  }
  },
  {
   "id": "ST04",
@@ -87,7 +99,11 @@
   "result_note": "NOT RUN.",
   "reason": "Blocked on a sourced roof registry and on a price feed.",
   "raises_confidence": "An official roof/surface registry (the brief's stadium-overlay requirement) joined to NWS point forecasts and to official game totals: a wind-conditioned total estimator that beats the unconditioned one out-of-sample on the official feed.",
-  "lowers_confidence": "If the roof registry cannot be verified officially (determinations are published 90 minutes before kickoff, S-note pending), the outdoor determination stays inferred and the feature is dropped rather than guessed; a fitted model that only helps in-sample would also sink it."
+  "lowers_confidence": "If the roof registry cannot be verified officially (determinations are published 90 minutes before kickoff, S-note pending), the outdoor determination stays inferred and the feature is dropped rather than guessed; a fitted model that only helps in-sample would also sink it.",
+  "change_of_mind": {
+   "upgrade": "An official roof/surface designation is verified per venue and NWS hourly forecasts are joined, after which the weather feature clears G-3 out of sample; the computed layer's WIND15_UNDER (p=0.063, and unusable as written because it used post-game wind) is then re-tested on FORECAST wind only.",
+   "downgrade": "With forecast-only wind the edge disappears or stays above the alpha/16 = 0.00313 family-wise bar - then the weather family is closed, not kept alive by re-cutting wind thresholds."
+  }
  },
  {
   "id": "ST05",
@@ -111,7 +127,11 @@
   "result_note": "BLOCKED at G7.",
   "reason": "Correlation cannot be estimated from one game. Must wait until each leg has independently cleared every gate (SG07).",
   "raises_confidence": "A directly validated joint probability for a specific two-leg pairing (the joint-evidence gate) plus the operator's void/push rules, both available before any combo is ranked.",
-  "lowers_confidence": "If the joint dataset cannot be built (pairing observed too rarely), the gate stays closed permanently for that combo; multiplying marginals remains invalid under dependence and no workaround is permitted."
+  "lowers_confidence": "If the joint dataset cannot be built (pairing observed too rarely), the gate stays closed permanently for that combo; multiplying marginals remains invalid under dependence and no workaround is permitted.",
+  "change_of_mind": {
+   "upgrade": "A directly validated JOINT probability for a specific two-leg pair exists (many repeated observations of the same pair) and the operator's void/push rules are documented - then the combo may be ranked under G-7.",
+   "downgrade": "No change - it is already blocked at G-7 and stays blocked until the joint evidence exists; multiplying marginal probabilities under dependence is invalid regardless of how the legs performed."
+  }
  },
  {
   "id": "ST06",
@@ -135,6 +155,10 @@
   "result_note": "BLOCKED at G1 and G7.",
   "reason": "Cannot even confirm an official player-log source for the required fields in this session.",
   "raises_confidence": "A player-level official or licensed log (snap share, target/carry share — Q17) large enough to estimate the same-script joint frequency for at least one pairing with usable uncertainty.",
-  "lowers_confidence": "If only third-party estimates exist (F17), the strategy stays BLOCKED behind the joint-evidence gate; a marginal-only build would fail G-12 provenance and is not attempted."
+  "lowers_confidence": "If only third-party estimates exist (F17), the strategy stays BLOCKED behind the joint-evidence gate; a marginal-only build would fail G-12 provenance and is not attempted.",
+  "change_of_mind": {
+   "upgrade": "Player-level game logs with snap share, target share and carry share are captured from a verified source AND the same pair's joint outcomes are observed repeatedly - then G-1 and G-7 can both be evaluated.",
+   "downgrade": "No change - blocked at G-1 and G-7; an unverifiable player-log source cannot be repaired by renaming it."
+  }
  }
 ]

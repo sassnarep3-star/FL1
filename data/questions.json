@@ -570,5 +570,18 @@
   "source": "S81, S82",
   "blocking": "no",
   "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG35)."
+ },
+ {
+  "id": "Q45",
+  "category": "Storage",
+  "priority": "Critical",
+  "question": "Should the snapshot store accept a fourth phase value for prices whose vintage the publisher never stated, or stay close-only?",
+  "why_it_matters": "72 percent of the market rows this project can capture are undated. If the store cannot hold them, the store is a 2006-2018 closing-lines table and every current-season origination number lives outside it; if it holds them under a label meaning 'intermediate', the ledger asserts a provenance nobody has.",
+  "what_we_know": "engine/price_snapshots.py constrains phase to open/close/intermediate with a CHECK. Re-running this session's ledger through it accepts 20,490 rows and refuses 57,920 (price-store.html, table E). The refusal is the correct behaviour given the schema.",
+  "what_we_dont_know": "Whether the storage owner would rather widen the enum or keep the store narrow and treat the ledger as a separate export. Both are defensible; the choice changes the write path every future page reads.",
+  "missing_data": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+  "source": "S74",
+  "blocking": "yes - it decides where live prices are written",
+  "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
  }
 ]

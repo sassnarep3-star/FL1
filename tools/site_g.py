@@ -349,6 +349,7 @@ this repository</strong> &mdash; those columns are a sensitivity, not an estimat
 """ % (ctx["esc"]("Rank on a proper score, with the sample size published beside it"),
        ctx["esc"](p["multiplicity"]["note"]),
        ctx["esc"](p["clustering"]["icc_note"])))
+    body.append("<p class='note'>Companion signal-level decomposition (per-strategy p-values, certifiable edges, sample floors) lives on <a href='readiness.html#luck'>Decision Readiness &rarr; Luck</a>.</p>")
     return ctx["page"]("removal-of-luck.html", "Removal of Luck", "".join(body),
                        wide=True)
 

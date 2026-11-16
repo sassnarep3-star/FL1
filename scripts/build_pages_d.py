@@ -86,6 +86,14 @@ def schedule_page(sources_by_id):
 <section>
 <h2>Full 2026 regular-season schedule &amp; results (272 games)</h2>
 <div class="callout">
+<p><strong>The league's dated schedule announcement</strong> (official, read 2026-11-16,
+source <a href="sources.html#S86">S86</a>):
+&ldquo;The National Football League announced that the 2026 NFL Schedule powered by AWS will be
+released on <strong>Thursday, May 14 at 8 p.m. ET</strong>&rdquo; &mdash; the announcement was
+published <a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14">on nfl.com on May 8, 2026</a>
+and set the remaining international-games reveal for May 13, 2026. It is published here beside the
+live schedule table, as the brief requires, so the live page and the announcement that produced it
+are always visible together.</p>
 <p><strong>Provenance.</strong> Game results come from the nflverse combined games feed
 (<a href="https://github.com/nflverse/nfldata/blob/master/data/games.csv">nflverse/nfldata data/games.csv</a>,
 auto-updated from official NFL game books; snapshot committed at
@@ -99,6 +107,11 @@ Reconciliation rows are in <a href="#verification">Verification</a> below and in
 <p><strong>Market spread/total columns are third-party data</strong> (nflverse aggregation of
 bookmaker lines). There is no official NFL source for betting lines; those cells are published
 with a flag and are never used as verified facts.</p>
+<p><strong>Venue provenance.</strong> The Stadium column is published 272/272 from the same
+reconciled feed and stays labelled third-party; the official Game Center spot-checks read on
+2026-11-16 (2 games, both matching, Game Book links confirmed) are recorded on
+<a href="readiness.html">Decision Readiness</a>
+(flag <a href="flagged.html#F63">F63</a>).</p>
 </div>
 %s
 </section>
