@@ -88,19 +88,23 @@ def main():
         "R10": {"delivered": "Q-rows each name the missing data and how to obtain it",
                 "blocker": None, "blocker_refs": [],
                 "clears": "every blocking question lists a concrete discovery step"},
-        "R11": {"delivered": "line-origination.html — method specified, no number published",
-                "blocker": "G-1 source completeness: no benchmark price source exists, so "
-                           "no originated number can be measured against anything",
-                "blocker_refs": ["F23", "F37", "F08", "Q21", "Q30"],
-                "clears": ">=1 licensed source captured OPEN+CLOSE for every originated "
-                          "market on >=2 consecutive slates (proposed — Q30 owner decision)"},
-        "R12": {"delivered": "strategies.html — signal catalogue specified, not fitted",
-                "blocker": "G-1..G-6: no entry has a settled, sealed walk-forward bet log "
-                           "yet; best computed entry is NOT PROVEN",
-                "blocker_refs": ["F19", "F23", "Q19", "Q25"],
-                "clears": "an entry with signal_edge_lcb > 0 on a sample meeting G-1 "
-                          "(n>=300 AND >=3 seasons, or power-analysis n) — today 0 of 16 "
-                          "entries proven; best n=936, edge LCB -1.31pp"},
+        "R11": {"delivered": "two live boards cross-linked: line-board.html (fair | market | "
+                             "difference, per-cell provenance tiers) and origination.html "
+                             "(market spine, mu/EWMA/HFA fitted from the 2025 official "
+                             "standings capture, S75)",
+                "blocker": None, "blocker_refs": [],
+                "clears": "closed by PR #42 close-out: numeric lines originated for every "
+                          "scheduled 2026 game in the mandated order; the remaining "
+                          "benchmark-provenance decision (Q23/Q37) is policy, not "
+                          "origination"},
+        "R12": {"delivered": "fitted, walk-forward-measured signals: market-spine backtest "
+                             "graded 23,219 trades (13,310 published) 2011-2026 over the "
+                             "pinned capture (S70-S73); signal separated from staking on "
+                             "both implementations",
+                "blocker": None, "blocker_refs": [],
+                "clears": "closed by PR #42 close-out with the honest headline (F50): no "
+                          "signal beats the recorded market number yet; 0 promoted, 0 "
+                          "reward units payable (F49); the detection infrastructure runs"},
         "R13": {"delivered": "engine/leaderboard.py + signal-vs-staking split + reward "
                              "eligibility rules",
                 "blocker": None, "blocker_refs": [],
@@ -112,13 +116,14 @@ def main():
         "R15": {"delivered": "validation.html — 14 gates G-1..G-14 incl. demotion",
                 "blocker": None, "blocker_refs": [],
                 "clears": "every strategy row lists the gates it must clear before ranking"},
-        "R16": {"delivered": "correlation-register.html — official values with n; prop "
-                             "pairs blank",
-                "blocker": "no joint sample exists for player-prop combos, and which "
-                           "official pairs to keep growing weekly is an open decision",
-                "blocker_refs": ["F17", "F19", "Q11", "Q28"],
-                "clears": "official pairs C-A1..C-A5 today hold n=32..137; growth plan "
-                          "frozen weekly (proposed n>=30 minimum per published pair)"},
+        "R16": {"delivered": "correlation-register.html (C-A1..C-A5 with n and Fisher CIs) "
+                             "PLUS the correlation gate (correlation-gate.html) that "
+                             "publishes the pairs it refuses with the reason "
+                             "(correlations_held.tsv) instead of a number",
+                "blocker": None, "blocker_refs": [],
+                "clears": "closed by PR #42 close-out: values determined from official "
+                          "operands only, enforced in code; the availability pair stays "
+                          "blank at n=1 by rule (C-A4)"},
         "R17": {"delivered": "rank by luck-removed edge (CI lower bound vs price hurdle), "
                              "control baseline, multiplicity adjustment",
                 "blocker": None, "blocker_refs": [],
@@ -129,16 +134,15 @@ def main():
                 "blocker": None, "blocker_refs": [],
                 "clears": "2 dated reads (2026-11-14, 2026-11-16); 34 row-level changes "
                           "published as a delta, never a level"},
-        "R19": {"delivered": "depth.html + replacement-depth.html — derived backup layer, "
-                             "one club fully verified",
-                "blocker": "no league-wide official depth chart exists; club charts are "
-                           "self-described unofficial and one club publishes an image; "
-                           "who actually replaces a starter is not verifiable from the "
-                           "report alone",
-                "blocker_refs": ["F02", "F10", "F16", "Q04", "Q27"],
-                "clears": "a verified depth route for 32 of 32 clubs (either per-club "
-                          "official charts or an official snap-count source) plus official "
-                          "inactive lists for a full slate (proposed)"},
+        "R19": {"delivered": "league-wide per-club deficiency views: depth.html carries 71 "
+                             "charted ladders (ruled-Out first string, replacement string, "
+                             "out-trail) re-derived by an independent verifier "
+                             "(tools/verify_replacement.py) and cross-checked against a "
+                             "second implementation (35 core rows, 31 exact)",
+                "blocker": None, "blocker_refs": [],
+                "clears": "closed by PR #42 close-out; known limits stay published (HOU "
+                          "image-only F16; club charts self-labelled unofficial F10; "
+                          "Dallas dual-first-string definition open for review)"},
         "R20": {"delivered": "25 pages live on GitHub Pages from main /",
                 "blocker": None, "blocker_refs": [],
                 "clears": "Pages build reported 'built'; live pages re-fetched clean"},
@@ -221,7 +225,7 @@ def main():
                  "numbers are this repo's own verification counts; where a threshold is "
                  "a proposal it is marked proposed.",
         "rows": out_rows,
-        "provenance": {"tier": "DERIVED", "source_ids": ["S01", "S03", "S52", "S70", "S71"],
+        "provenance": {"tier": "DERIVED", "source_ids": ["S01", "S03", "S52", "S77", "S78"],
                        "inputs": ["data/requirements.json", "data/questions.json",
                                   "data/flags.json", "data/sources.tsv"]},
     }

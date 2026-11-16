@@ -7,7 +7,7 @@ publish the delta, never the level."
 
 Inputs (raw captures, never edited after write):
   raw/injuries-week10-2026.md          read 1, 2026-11-14 (source S01)
-  raw/injuries-week10-2026-read2.md    read 2, 2026-11-16 (source S70)
+  raw/injuries-week10-2026-read2.md    read 2, 2026-11-16 (source S77; id re-issued from S70 at merge — main took S70-S76)
 
 The parser is the same line grammar tools/verify_injuries.py uses for read 1,
 applied to both captures so the diff is like-for-like. The script fails loudly
@@ -180,7 +180,7 @@ def main():
              "week_shown": "WEEK 10", "source_id": "S01"},
             {"read": 2, "capture": "raw/injuries-week10-2026-read2.md",
              "read_window_utc": "after 2026-11-16T01:14:56Z, before 2026-11-16T01:25:00Z",
-             "rows": len(r2), "week_shown": "WEEK 10", "source_id": "S70"},
+             "rows": len(r2), "week_shown": "WEEK 10", "source_id": "S77"},
         ],
         "delta": {"changed": changed, "added": added, "removed": removed,
                   "per_club_row_count_changes": per_club},
@@ -199,7 +199,7 @@ def main():
         ],
         "provenance": {
             "tier": "OFFICIAL",
-            "source_ids": ["S01", "S70"],
+            "source_ids": ["S01", "S77"],
             "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted here, "
                             "independently of tools/verify_injuries.py); read 2 parsed with the "
                             "same grammar; all practice/game values map to known designations",

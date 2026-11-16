@@ -52,9 +52,13 @@ class TestN01DecisionReadiness(unittest.TestCase):
                 self.assertTrue(row["blocker"], row["id"])
                 self.assertTrue(row["clears"], row["id"])
 
-    def test_partial_count(self):
-        partial = [r for r in self.dec["rows"] if r["status"] != "done"]
-        self.assertEqual(len(partial), 4)
+    def test_status_counts_match_register(self):
+        reg = {"done": 0, "other": 0}
+        for r in self.req:
+            reg["done" if r["status"] == "done" else "other"] += 1
+        dec_done = sum(1 for r in self.dec["rows"] if r["status"] == "done")
+        self.assertEqual(dec_done, reg["done"])
+        self.assertEqual(len(self.dec["rows"]), len(self.req))
 
 
 class TestN02ChangeOurMind(unittest.TestCase):
@@ -121,7 +125,7 @@ class TestN04Week10Extension(unittest.TestCase):
     def test_shape(self):
         self.assertEqual(len(self.ext["finals"]), 12)
         self.assertEqual(len(self.ext["pending"]), 2)
-        self.assertEqual(self.ext["source_id"], "S71")
+        self.assertEqual(self.ext["source_id"], "S78")  # re-issued from S71 at merge
 
     def test_tnf_corroborates_feed(self):
         tnf = [f for f in self.ext["finals"] if f["away"] == "WAS"]
@@ -193,16 +197,18 @@ class TestSourcesS70S72(unittest.TestCase):
         with open(os.path.join(ROOT, "data", "sources.tsv"), encoding="utf-8") as fh:
             rows = {ln.split("\t")[0]: ln.split("\t")
                     for ln in fh.read().splitlines() if ln.strip() and not ln.startswith("#")}
-        for sid in ("S70", "S71", "S72"):
+        for sid in ("S77", "S78", "S79"):
             self.assertIn(sid, rows)
             self.assertEqual(rows[sid][6], "VERIFIED", sid)
+            self.assertNotIn("nflverse", rows[sid][2], sid)
             self.assertTrue(rows[sid][3].startswith("https://www.nfl.com/"), sid)
 
     def test_counts(self):
         with open(os.path.join(ROOT, "data", "sources.tsv"), encoding="utf-8") as fh:
             rows = [ln for ln in fh.read().splitlines()
                     if ln.strip() and not ln.startswith("#")]
-        self.assertEqual(len(rows), 64)
+        # 68 rows from main (S01-S76) + this session's S77-S79
+        self.assertEqual(len(rows), 71)
 
 
 if __name__ == "__main__":

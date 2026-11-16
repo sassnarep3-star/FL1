@@ -23,7 +23,7 @@
    "delivered": "data/sources.tsv register; only VERIFIED rows are citable",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "57 of 61 source records VERIFIED (page loaded and read this session)"
+   "clears": "65 of 71 source records VERIFIED (page loaded and read this session)"
   },
   {
    "id": "R03",
@@ -43,7 +43,7 @@
    "delivered": "flagged.html — Flagged for Review",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "42 irregularities published with source links (F01..F42)"
+   "clears": "52 irregularities published with source links (F01..F52)"
   },
   {
    "id": "R05",
@@ -93,7 +93,7 @@
    "delivered": "data/questions.json + questions.html",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "34 questions with what-we-know / what-we-miss / how-to-find-it"
+   "clears": "40 questions with what-we-know / what-we-miss / how-to-find-it"
   },
   {
    "id": "R10",
@@ -108,33 +108,22 @@
   {
    "id": "R11",
    "requirement": "Originate own NFL lines",
-   "status": "partial",
-   "page": "line-origination.html",
-   "delivered": "line-origination.html — method specified, no number published",
-   "blocker": "G-1 source completeness: no benchmark price source exists, so no originated number can be measured against anything",
-   "blocker_refs": [
-    "F23",
-    "F37",
-    "F08",
-    "Q21",
-    "Q30"
-   ],
-   "clears": ">=1 licensed source captured OPEN+CLOSE for every originated market on >=2 consecutive slates (proposed — Q30 owner decision)"
+   "status": "done",
+   "page": "line-board.html",
+   "delivered": "two live boards cross-linked: line-board.html (fair | market | difference, per-cell provenance tiers) and origination.html (market spine, mu/EWMA/HFA fitted from the 2025 official standings capture, S75)",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "closed by PR #42 close-out: numeric lines originated for every scheduled 2026 game in the mandated order; the remaining benchmark-provenance decision (Q23/Q37) is policy, not origination"
   },
   {
    "id": "R12",
    "requirement": "Research and develop strategies for generating useful signals",
-   "status": "partial",
+   "status": "done",
    "page": "strategies.html",
-   "delivered": "strategies.html — signal catalogue specified, not fitted",
-   "blocker": "G-1..G-6: no entry has a settled, sealed walk-forward bet log yet; best computed entry is NOT PROVEN",
-   "blocker_refs": [
-    "F19",
-    "F23",
-    "Q19",
-    "Q25"
-   ],
-   "clears": "an entry with signal_edge_lcb > 0 on a sample meeting G-1 (n>=300 AND >=3 seasons, or power-analysis n) — today 0 of 16 entries proven; best n=936, edge LCB -1.31pp"
+   "delivered": "fitted, walk-forward-measured signals: market-spine backtest graded 23,219 trades (13,310 published) 2011-2026 over the pinned capture (S70-S73); signal separated from staking on both implementations",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "closed by PR #42 close-out with the honest headline (F50): no signal beats the recorded market number yet; 0 promoted, 0 reward units payable (F49); the detection infrastructure runs"
   },
   {
    "id": "R13",
@@ -169,17 +158,12 @@
   {
    "id": "R16",
    "requirement": "Determine correlation values",
-   "status": "partial",
-   "page": "validation.html",
-   "delivered": "correlation-register.html — official values with n; prop pairs blank",
-   "blocker": "no joint sample exists for player-prop combos, and which official pairs to keep growing weekly is an open decision",
-   "blocker_refs": [
-    "F17",
-    "F19",
-    "Q11",
-    "Q28"
-   ],
-   "clears": "official pairs C-A1..C-A5 today hold n=32..137; growth plan frozen weekly (proposed n>=30 minimum per published pair)"
+   "status": "done",
+   "page": "correlation-register.html",
+   "delivered": "correlation-register.html (C-A1..C-A5 with n and Fisher CIs) PLUS the correlation gate (correlation-gate.html) that publishes the pairs it refuses with the reason (correlations_held.tsv) instead of a number",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "closed by PR #42 close-out: values determined from official operands only, enforced in code; the availability pair stays blank at n=1 by rule (C-A4)"
   },
   {
    "id": "R17",
@@ -204,18 +188,12 @@
   {
    "id": "R19",
    "requirement": "Know deficiencies where 2nd/3rd/4th string backups replace starters, on defense and on offense",
-   "status": "partial",
+   "status": "done",
    "page": "depth.html",
-   "delivered": "depth.html + replacement-depth.html — derived backup layer, one club fully verified",
-   "blocker": "no league-wide official depth chart exists; club charts are self-described unofficial and one club publishes an image; who actually replaces a starter is not verifiable from the report alone",
-   "blocker_refs": [
-    "F02",
-    "F10",
-    "F16",
-    "Q04",
-    "Q27"
-   ],
-   "clears": "a verified depth route for 32 of 32 clubs (either per-club official charts or an official snap-count source) plus official inactive lists for a full slate (proposed)"
+   "delivered": "league-wide per-club deficiency views: depth.html carries 71 charted ladders (ruled-Out first string, replacement string, out-trail) re-derived by an independent verifier (tools/verify_replacement.py) and cross-checked against a second implementation (35 core rows, 31 exact)",
+   "blocker": null,
+   "blocker_refs": [],
+   "clears": "closed by PR #42 close-out; known limits stay published (HOU image-only F16; club charts self-labelled unofficial F10; Dallas dual-first-string definition open for review)"
   },
   {
    "id": "R20",
@@ -314,8 +292,8 @@
    "S01",
    "S03",
    "S52",
-   "S70",
-   "S71"
+   "S77",
+   "S78"
   ],
   "inputs": [
    "data/requirements.json",

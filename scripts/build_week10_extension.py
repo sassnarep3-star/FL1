@@ -40,7 +40,7 @@ OUT = os.path.join(ROOT, "data", "week10_results_extension.json")
 
 PAGE_URL = "https://www.nfl.com/schedules/2026/by-week/week-10"
 READ_WINDOW = "after 2026-11-16T01:14:56Z, before 2026-11-16T01:25:00Z"
-SOURCE_ID = "S71"
+SOURCE_ID = "S78"
 
 # Records printed on the official page's game cards at read time (all 32 clubs).
 # Post-game for the 12 finals; pre-game for PIT/CIN (in progress) and LAC/BAL
@@ -245,7 +245,7 @@ def main():
                                     "CHI 7-2, DEN 7-2, PHI 2-7, TB 3-6)",
             "V4_points_arithmetic_vs_fresh_standings": "recomputing W/L/T AND PF/PA for all "
                                     "32 clubs from data/results.tsv + the 11 new finals "
-                                    "reproduces raw/standings-2026-20261116.tsv (S72, the official "
+                                    "reproduces raw/standings-2026-20261116.tsv (S79, the official "
                                     "league-standings page at the same read time) exactly; "
                                     "that capture is corroborating evidence and does not "
                                     "replace data/standings.tsv",
