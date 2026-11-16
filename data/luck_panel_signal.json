@@ -1,0 +1,220 @@
+{
+ "id": "luck_panel",
+ "title": "Removal of luck — why no entry is ranked yet",
+ "updated": "2026-11-16",
+ "requirement": "Compute and publish the 'removal of luck' panel on the site dashboard.",
+ "metric": "signal_rank = order by (hit_ci_low - reference_hurdle) descending; ties break on larger settled sample. Profit and ROI are reported, never ranked on.",
+ "metric_plain": "A strategy's luck-removed edge is the 95% LOWER bound of its hit rate minus the break-even hurdle at the price paid (0.52381 at standard -110). A lucky run raises ROI but it also narrows nothing: the lower bound only rises with more settled evidence, so it cannot be gamed by variance.",
+ "headlines": {
+  "entries": 16,
+  "proven": 0,
+  "positive_roi_entries": 7,
+  "positive_roi_but_rejected_on_signal": 7,
+  "best_case": {
+   "strategy_id": "DIV_DOG_AND_ELO",
+   "roi": 0.0573,
+   "roi_units": 53.673,
+   "edge_lcb": -0.01311,
+   "verdict": "NOT PROVEN",
+   "point": "The register's top ROI entry (+5.73%, +53.7 units) is REJECTED because its luck-removed edge is negative (-1.31pp): 936 settled bets give a 95% hit-rate lower bound of 51.07% against a 52.38% break-even hurdle."
+  },
+  "control_baseline": {
+   "strategy_id": "__CONTROL_MARKET",
+   "description": "CONTROL: bet every home team at the close. Not a strategy — it measures house vig.",
+   "settled": 5067,
+   "hit_rate": 0.4865,
+   "roi": -0.0519,
+   "point": "Betting every home team at the close loses 5.19% over 5,067 settled bets — that loss is the house margin. Every strategy is judged against this yardstick, not against zero."
+  },
+  "multiplicity": {
+   "trials": 16,
+   "note": "Gate G-6 deflates for the number of trials; the register transcribes G6_adjusted_alpha=0.00333 per row. With 16 strategies tried, a p-value that looks fine alone is not fine for the family."
+  }
+ },
+ "rows": [
+  {
+   "strategy_id": "DIV_DOG_AND_ELO",
+   "market": "spread",
+   "settled": 936,
+   "hit_rate": 0.5427,
+   "hit_ci_low": 0.5107,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.01311,
+   "roi_report_only": 0.0573,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "DIV_AWAY_DOG",
+   "market": "spread",
+   "settled": 1142,
+   "hit_rate": 0.5368,
+   "hit_ci_low": 0.5078,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.01601,
+   "roi_report_only": 0.0464,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "WIND15_UNDER",
+   "market": "total",
+   "settled": 425,
+   "hit_rate": 0.5506,
+   "hit_ci_low": 0.5031,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.02071,
+   "roi_report_only": 0.0723,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "ELO_MKT_2.5",
+   "market": "spread",
+   "settled": 2469,
+   "hit_rate": 0.5205,
+   "hit_ci_low": 0.5008,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.02301,
+   "roi_report_only": 0.0089,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "ELO_MKT_1.5",
+   "market": "spread",
+   "settled": 3460,
+   "hit_rate": 0.5168,
+   "hit_ci_low": 0.5001,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.02371,
+   "roi_report_only": 0.0032,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "REST_ADV_AWAY",
+   "market": "spread",
+   "settled": 593,
+   "hit_rate": 0.5312,
+   "hit_ci_low": 0.491,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.03281,
+   "roi_report_only": 0.0354,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "DOME_OVER",
+   "market": "total",
+   "settled": 1375,
+   "hit_rate": 0.5149,
+   "hit_ci_low": 0.4885,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.03531,
+   "roi_report_only": -0.0003,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "PROB_GAP_6PT",
+   "market": "spread",
+   "settled": 3807,
+   "hit_rate": 0.4944,
+   "hit_ci_low": 0.4785,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.04531,
+   "roi_report_only": -0.0314,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "__CONTROL_MARKET",
+   "market": "spread",
+   "settled": 5067,
+   "hit_rate": 0.4865,
+   "hit_ci_low": 0.4728,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.05101,
+   "roi_report_only": -0.0519,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "BIG_FAV_FADE",
+   "market": "spread",
+   "settled": 526,
+   "hit_rate": 0.5076,
+   "hit_ci_low": 0.465,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.05881,
+   "roi_report_only": -0.022,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "DOME_UNDER",
+   "market": "total",
+   "settled": 1375,
+   "hit_rate": 0.4851,
+   "hit_ci_low": 0.4588,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.06501,
+   "roi_report_only": -0.0566,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "DIV_HOME_DOG",
+   "market": "spread",
+   "settled": 703,
+   "hit_rate": 0.4922,
+   "hit_ci_low": 0.4554,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.06841,
+   "roi_report_only": -0.043,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "REST_ADV",
+   "market": "spread",
+   "settled": 483,
+   "hit_rate": 0.4969,
+   "hit_ci_low": 0.4525,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.07131,
+   "roi_report_only": -0.0324,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "WIND_COLD_UNDER",
+   "market": "total",
+   "settled": 180,
+   "hit_rate": 0.5222,
+   "hit_ci_low": 0.4495,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.07431,
+   "roi_report_only": 0.0118,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "REST_AND_ELO",
+   "market": "spread",
+   "settled": 120,
+   "hit_rate": 0.4583,
+   "hit_ci_low": 0.3718,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.15201,
+   "roi_report_only": -0.1131,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "AVAIL_EDGE_1.5",
+   "market": "spread",
+   "settled": 133,
+   "hit_rate": 0.4286,
+   "hit_ci_low": 0.3477,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.17611,
+   "roi_report_only": -0.1818,
+   "verdict": "NOT PROVEN"
+  }
+ ],
+ "provenance": {
+  "tier": "COMPUTED",
+  "source_ids": [
+   "S47",
+   "S52"
+  ],
+  "warning": "The underlying dataset is the computed research layer over third-party data (flags F19/F23); its breakeven_hit column is circular (F30) and is NOT used here. The OFFICIAL register has no settled bet log yet, so no entry can be ranked. The panel demonstrates the method on the flagged dataset — it does not endorse any strategy."
+ }
+}

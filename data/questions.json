@@ -560,15 +560,15 @@
  },
  {
   "id": "Q44",
-  "category": "Model",
-  "priority": "Medium",
-  "question": "What holdout improvement justifies adding a personnel/availability feature to a published model?  (pairs with F44 and ablations.html)",
-  "why_it_matters": "The ablation harness now measures exactly what each availability feature adds on a chronological holdout, with a paired CI. Without an acceptance threshold agreed in advance, the decision to include a feature could drift toward whatever looked good - the thing pre-registration exists to prevent.",
-  "what_we_know": "The QB-deficiency feature's current holdout difference is -0.11 points of margin MAE [-0.24, +0.02] and -0.08 points of total MAE [-0.19, +0.03]; both CIs include zero, so nothing is justified yet.",
-  "what_we_dont_know": "The owner's threshold: any non-zero improvement? a CI excluding zero? a minimum effect size with a CI excluding it?",
-  "missing_data": "A single decision, not data; the harness and its CIs already exist.",
-  "source": "ablations.html; data/ablations.json",
-  "blocking": "No",
-  "recommended_path": "Adopt: a personnel feature enters a published model only when its holdout-difference 95% CI excludes zero AND the fitted coefficients' CIs exclude zero. Interim default until decided: features stay OUT (the current state)."
+  "category": "Data policy",
+  "priority": "High",
+  "question": "When a week's games all reach FINAL, who promotes the captured finals into the canonical verified results feed (data/results.tsv) and re-captures the official standings — and what acceptance checks must pass first?",
+  "why_it_matters": "The 2026-11-16 session published the 11 new Week 10 finals as a dated, verified EXTENSION register (V1-V4 checks) instead of editing the canonical feed, because the feed's standings reconciliation is pinned to its capture state and the two Monday/Sunday-night games were not final at read time. Without a promotion policy the canonical feed lags the live record and every downstream backtest silently uses stale data.",
+  "what_we_know": "The extension register and its four verification checks are re-runnable (scripts/build_week10_extension.py); the fresh standings capture (S72) is corroborating evidence, not a replacement for the canonical capture.",
+  "what_we_dont_know": "Whether promotion should be manual (a session task), automated after the last kickoff, or gated on a fresh standings re-capture passing 32/32 - and whether the pinned reconciliation should roll forward with it.",
+  "missing_data": "A promotion run after MNF finalizes: re-capture the week-10 page and the league standings (S71/S72 refresh), re-run scripts/build_week10_extension.py V1-V4, then promote into data/results.tsv + data/standings.tsv and rebuild the feed.",
+  "source": "S81, S82",
+  "blocking": "no",
+  "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG35)."
  }
 ]

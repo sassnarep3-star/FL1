@@ -1,0 +1,32 @@
+# RAW CAPTURE — NFL.com official 2026 game results, Week 10 (finals at read time)
+#
+# URL: https://www.nfl.com/schedules/2026/by-week/week-10
+# Read window (UTC): opened after 2026-11-16T01:14:56Z, completed before 2026-11-16T01:25:00Z
+#   (page fetched in 2 content chunks by the session's page-fetch tool; window bracketed by two
+#   sandbox clock readings taken at the start of the fetch sequence and immediately after it).
+# Page title at capture: "NFL Week 10 Schedule 2026: Games, Times, Matchups & Tickets"
+# Status at read: 12 of the 13 Week 10 games printed FINAL with scores. Sunday Night Football
+#   (PIT at CIN, Nov 15, 8:20 PM) was in progress — the card printed no score and pre-game
+#   records 6-2 / 6-2. Monday Night Football (LAC at BAL, Nov 16, 8:15 PM) had not been played.
+#   Neither is a row here: only games the official page printed as FINAL at read time are rows.
+# Team keys are the repo's canonical abbreviations (teams.tsv); the page prints full team names.
+#   Rams are printed on the page as "Rams" (logo LA) and Cardinals as "Cardinals" (logo AZ);
+#   the repo keys are LAR and ARI as used everywhere in data/.
+# Verification: the WAS@NYG row equals the row already in data/results.tsv (captured 2026-11-14),
+#   so the two captures corroborate each other independently. The records printed on the page's
+#   game cards at this read (e.g. DET 7-2 after the Munich final, GB 6-4, CLE 6-4, SF 8-1) are
+#   consistent with every score below; scripts/build_week10_extension.py asserts that consistency.
+#
+# Format: week<TAB>date<TAB>away<TAB>away_pts<TAB>home<TAB>home_pts[<TAB>note]
+10	2026-11-12	WAS	24	NYG	21	Thursday Night Football — already in data/results.tsv (captured 2026-11-14)
+10	2026-11-15	NE	10	DET	35	International Game (Munich)
+10	2026-11-15	KC	35	ATL	13	
+10	2026-11-15	HOU	24	CLE	27	
+10	2026-11-15	MIN	30	GB	10	
+10	2026-11-15	MIA	22	IND	24	
+10	2026-11-15	CAR	20	NO	17	
+10	2026-11-15	BUF	31	NYJ	12	
+10	2026-11-15	JAX	40	TEN	23	
+10	2026-11-15	LAR	34	ARI	6	
+10	2026-11-15	SEA	21	LV	13	
+10	2026-11-15	SF	46	DAL	40	

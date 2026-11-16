@@ -1,0 +1,433 @@
+{
+ "id": "injury_hub_delta",
+ "title": "Injury-hub reads — clock-timed, delta published",
+ "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level.",
+ "updated": "2026-11-16",
+ "url": "https://www.nfl.com/injuries/",
+ "reads": [
+  {
+   "read": 1,
+   "capture": "raw/injuries-week10-2026.md",
+   "captured": "2026-11-14",
+   "rows": 345,
+   "week_shown": "WEEK 10",
+   "source_id": "S01"
+  },
+  {
+   "read": 2,
+   "capture": "raw/injuries-week10-2026-read2.md",
+   "read_window_utc": "after 2026-11-16T01:14:56Z, before 2026-11-16T01:25:00Z",
+   "rows": 347,
+   "week_shown": "WEEK 10",
+   "source_id": "S80"
+  }
+ ],
+ "delta": {
+  "changed": [
+   {
+    "team": "BAL",
+    "player": "Adam Randall",
+    "pos": "RB",
+    "injury": "Neck, Hamstring",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "injury",
+    "old": "",
+    "new": "Neck, Hamstring"
+   },
+   {
+    "team": "BAL",
+    "player": "Adam Randall",
+    "pos": "RB",
+    "injury": "Neck, Hamstring",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "game",
+    "old": "",
+    "new": "Questionable"
+   },
+   {
+    "team": "BAL",
+    "player": "Jaylinn Hawkins",
+    "pos": "S",
+    "injury": "Knee",
+    "practice": "LIMITED",
+    "game": "Out",
+    "field": "injury",
+    "old": "",
+    "new": "Knee"
+   },
+   {
+    "team": "BAL",
+    "player": "Jaylinn Hawkins",
+    "pos": "S",
+    "injury": "Knee",
+    "practice": "LIMITED",
+    "game": "Out",
+    "field": "game",
+    "old": "",
+    "new": "Out"
+   },
+   {
+    "team": "IND",
+    "player": "Arden Key",
+    "pos": "DE",
+    "injury": "",
+    "practice": "FULL",
+    "game": "",
+    "field": "injury",
+    "old": "Hamstring",
+    "new": ""
+   },
+   {
+    "team": "IND",
+    "player": "Arden Key",
+    "pos": "DE",
+    "injury": "",
+    "practice": "FULL",
+    "game": "",
+    "field": "game",
+    "old": "Questionable",
+    "new": ""
+   },
+   {
+    "team": "LAC",
+    "player": "Branson Taylor",
+    "pos": "G",
+    "injury": "Ankle",
+    "practice": "DNP",
+    "game": "Out",
+    "field": "injury",
+    "old": "",
+    "new": "Ankle"
+   },
+   {
+    "team": "LAC",
+    "player": "Branson Taylor",
+    "pos": "G",
+    "injury": "Ankle",
+    "practice": "DNP",
+    "game": "Out",
+    "field": "game",
+    "old": "",
+    "new": "Out"
+   },
+   {
+    "team": "LAC",
+    "player": "Brenen Thompson",
+    "pos": "WR",
+    "injury": "Hamstring",
+    "practice": "DNP",
+    "game": "Doubtful",
+    "field": "injury",
+    "old": "",
+    "new": "Hamstring"
+   },
+   {
+    "team": "LAC",
+    "player": "Brenen Thompson",
+    "pos": "WR",
+    "injury": "Hamstring",
+    "practice": "DNP",
+    "game": "Doubtful",
+    "field": "game",
+    "old": "",
+    "new": "Doubtful"
+   },
+   {
+    "team": "LAC",
+    "player": "Bud Dupree",
+    "pos": "DE",
+    "injury": "",
+    "practice": "FULL",
+    "game": "",
+    "field": "practice",
+    "old": "DNP",
+    "new": "FULL"
+   },
+   {
+    "team": "LAC",
+    "player": "David Njoku",
+    "pos": "TE",
+    "injury": "Fibula",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "injury",
+    "old": "",
+    "new": "Fibula"
+   },
+   {
+    "team": "LAC",
+    "player": "David Njoku",
+    "pos": "TE",
+    "injury": "Fibula",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "practice",
+    "old": "LIMITED",
+    "new": "FULL"
+   },
+   {
+    "team": "LAC",
+    "player": "David Njoku",
+    "pos": "TE",
+    "injury": "Fibula",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "game",
+    "old": "",
+    "new": "Questionable"
+   },
+   {
+    "team": "LAC",
+    "player": "Denzel Perryman",
+    "pos": "LB",
+    "injury": "Pectoral",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "injury",
+    "old": "",
+    "new": "Pectoral"
+   },
+   {
+    "team": "LAC",
+    "player": "Denzel Perryman",
+    "pos": "LB",
+    "injury": "Pectoral",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "game",
+    "old": "",
+    "new": "Questionable"
+   },
+   {
+    "team": "LAC",
+    "player": "Isas Waxter",
+    "pos": "CB",
+    "injury": "Ankle",
+    "practice": "DNP",
+    "game": "Out",
+    "field": "injury",
+    "old": "",
+    "new": "Ankle"
+   },
+   {
+    "team": "LAC",
+    "player": "Isas Waxter",
+    "pos": "CB",
+    "injury": "Ankle",
+    "practice": "DNP",
+    "game": "Out",
+    "field": "game",
+    "old": "",
+    "new": "Out"
+   },
+   {
+    "team": "LAC",
+    "player": "Justin Eboigbe",
+    "pos": "DE",
+    "injury": "Ankle",
+    "practice": "LIMITED",
+    "game": "Questionable",
+    "field": "injury",
+    "old": "",
+    "new": "Ankle"
+   },
+   {
+    "team": "LAC",
+    "player": "Justin Eboigbe",
+    "pos": "DE",
+    "injury": "Ankle",
+    "practice": "LIMITED",
+    "game": "Questionable",
+    "field": "game",
+    "old": "",
+    "new": "Questionable"
+   },
+   {
+    "team": "LAC",
+    "player": "Kayode Awosika",
+    "pos": "G",
+    "injury": "Fibula",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "injury",
+    "old": "",
+    "new": "Fibula"
+   },
+   {
+    "team": "LAC",
+    "player": "Kayode Awosika",
+    "pos": "G",
+    "injury": "Fibula",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "practice",
+    "old": "LIMITED",
+    "new": "FULL"
+   },
+   {
+    "team": "LAC",
+    "player": "Kayode Awosika",
+    "pos": "G",
+    "injury": "Fibula",
+    "practice": "FULL",
+    "game": "Questionable",
+    "field": "game",
+    "old": "",
+    "new": "Questionable"
+   },
+   {
+    "team": "LAC",
+    "player": "Keaton Mitchell",
+    "pos": "RB",
+    "injury": "",
+    "practice": "FULL",
+    "game": "",
+    "field": "practice",
+    "old": "LIMITED",
+    "new": "FULL"
+   },
+   {
+    "team": "LAC",
+    "player": "Kendall Williamson",
+    "pos": "S",
+    "injury": "Calf",
+    "practice": "DNP",
+    "game": "Out",
+    "field": "injury",
+    "old": "",
+    "new": "Calf"
+   },
+   {
+    "team": "LAC",
+    "player": "Kendall Williamson",
+    "pos": "S",
+    "injury": "Calf",
+    "practice": "DNP",
+    "game": "Out",
+    "field": "game",
+    "old": "",
+    "new": "Out"
+   },
+   {
+    "team": "LAC",
+    "player": "Ladd McConkey",
+    "pos": "WR",
+    "injury": "Back",
+    "practice": "DNP",
+    "game": "Questionable",
+    "field": "injury",
+    "old": "",
+    "new": "Back"
+   },
+   {
+    "team": "LAC",
+    "player": "Ladd McConkey",
+    "pos": "WR",
+    "injury": "Back",
+    "practice": "DNP",
+    "game": "Questionable",
+    "field": "game",
+    "old": "",
+    "new": "Questionable"
+   },
+   {
+    "team": "LAC",
+    "player": "Rodney Shelley",
+    "pos": "CB",
+    "injury": "",
+    "practice": "FULL",
+    "game": "",
+    "field": "practice",
+    "old": "LIMITED",
+    "new": "FULL"
+   },
+   {
+    "team": "LAC",
+    "player": "Trey Pipkins",
+    "pos": "T",
+    "injury": "Not injury related - personal matter, Knee",
+    "practice": "LIMITED",
+    "game": "Questionable",
+    "field": "injury",
+    "old": "",
+    "new": "Not injury related - personal matter, Knee"
+   },
+   {
+    "team": "LAC",
+    "player": "Trey Pipkins",
+    "pos": "T",
+    "injury": "Not injury related - personal matter, Knee",
+    "practice": "LIMITED",
+    "game": "Questionable",
+    "field": "practice",
+    "old": "DNP",
+    "new": "LIMITED"
+   },
+   {
+    "team": "LAC",
+    "player": "Trey Pipkins",
+    "pos": "T",
+    "injury": "Not injury related - personal matter, Knee",
+    "practice": "LIMITED",
+    "game": "Questionable",
+    "field": "game",
+    "old": "",
+    "new": "Questionable"
+   }
+  ],
+  "added": [
+   {
+    "team": "BAL",
+    "player": "Calais Campbell",
+    "pos": "DT",
+    "injury": "",
+    "practice": "DNP",
+    "game": ""
+   },
+   {
+    "team": "BAL",
+    "player": "Ronnie Stanley",
+    "pos": "T",
+    "injury": "",
+    "practice": "DNP",
+    "game": ""
+   }
+  ],
+  "removed": [],
+  "per_club_row_count_changes": [
+   {
+    "team": "BAL",
+    "read1": 8,
+    "read2": 10
+   }
+  ]
+ },
+ "reserve_list_pointers": [
+  {
+   "text": "NFL news roundup: Patriots place RB TreVeyon Henderson (illness) on injured reserve",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-saturday-nov-14"
+  },
+  {
+   "text": "Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start",
+   "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+  },
+  {
+   "text": "NFL news roundup: Ravens confirm Lamar Jackson expected to miss 6-10 weeks; Kenneth Walker questionable",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13"
+  },
+  {
+   "text": "NFL news roundup: Ravens officially place Lamar Jackson on injured reserve",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5"
+  }
+ ],
+ "provenance": {
+  "tier": "OFFICIAL",
+  "source_ids": [
+   "S01",
+   "S80"
+  ],
+  "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted here, independently of tools/verify_injuries.py); read 2 parsed with the same grammar; all practice/game values map to known designations"
+ }
+}
