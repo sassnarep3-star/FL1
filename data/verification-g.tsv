@@ -1,0 +1,11 @@
+check	description	result	detail	source
+G-V1	re-capture parses with no unparsed rows	PASS	unparsed: none	https://www.nfl.com/injuries/
+G-V2	row count: published table vs 2026-11-16 re-capture	DIFF	published 345 rows, re-capture 347 rows	https://www.nfl.com/injuries/
+G-V3	no published row is absent from the re-capture (no invented rows)	PASS	missing in re-capture: 0; field differences: 32	https://www.nfl.com/injuries/
+G-V4	rows added on the official page since 2026-11-14	DIFF	new rows: BAL Calais Campbell, BAL Ronnie Stanley	https://www.nfl.com/injuries/
+G-V5	DET Kerby Joseph / Cade Mays / D.J. Reed game status on the official page	PASS	Kerby Joseph=Out; Cade Mays=Out; D.J. Reed=Out	https://www.nfl.com/injuries/
+G-V6	rows carrying a game-status designation in the re-capture	INFO	171 of 347 rows carry a game designation (49.3%)	https://www.nfl.com/injuries/
+G-V6out	count of Out designations	INFO	70	https://www.nfl.com/injuries/
+G-V6dou	count of Doubtful designations	INFO	11	https://www.nfl.com/injuries/
+G-V6que	count of Questionable designations	INFO	90	https://www.nfl.com/injuries/
+G-V7	clubs present on the official Week 10 page	INFO	28 clubs: ARI,ATL,BAL,BUF,CAR,CIN,CLE,DAL,DET,GB,HOU,IND,JAX,KC,LAC,LAR,LV,MIA,MIN,NE,NO,NYG,NYJ,PIT,SEA,SF,TEN,WAS	https://www.nfl.com/injuries/
