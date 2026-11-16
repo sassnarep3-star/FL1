@@ -5,7 +5,26 @@
 
 **Repository:** `sassnarep3-star/FL1`
 **GitHub Pages:** https://sassnarep3-star.github.io/FL1/ — source `main`, path `/`, legacy build
-**Last updated:** 2026-11-14 (UTC) — reconciliations R1 (PR #1), R2 (PR #2) and R3 (PR #4) recorded below
+**Last updated:** 2026-11-16 (UTC) — session `arena-a4c5a1de-fl1` claimed below (stale-PR integration + partial-requirements close-out + final integration)
+
+## Task board — session `arena/a4c5a1de-fl1` (final integration, 2026-11-16)
+
+**Session ID:** `arena-a4c5a1de-fl1` · **Branch:** `arena/a4c5a1de-fl1` (from `ebf20eb` = main tip) ·
+**Claimed:** 2026-11-16T00:00Z · **Status:** active.
+
+Handoff basis: open PRs **#38** (market spine, `arena/08fef9e9-fl1`, last activity 2026-11-14T23:06Z) and
+**#39** (replacement-depth cross-check, `arena/2fa09442-fl1`, last activity 2026-11-14T23:09Z) have no
+commits for >60 minutes and their sessions show no activity — takeover permitted by the stale-claim rule.
+Both pass CI (`verify` SUCCESS). Nothing below starts work claimed by a live session.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| I1 | Integrate stale open PRs #38 and #39 into main (verify combined tree, resolve conflicts preserving both sides, merge, confirm Pages) | in progress | arena-a4c5a1de-fl1 | PR operations + `COORDINATION.md` records | CI on both PRs; post-merge gate battery re-run | will be recorded at completion |
+| P1 | Close out partial requirements R11/R12/R16/R19 where merged evidence now exists; where evidence does not exist, leave status `partial` and make the exact blocking gap + clearing number explicit (decision-readiness contract) | in progress | arena-a4c5a1de-fl1 | `data/requirements.json`, `requirements.html` (generated), `docs/computed/requirements.html` if generated, `EXECUTIVE_SUMMARY.md`, `README.md`, tests if register contract changes | per-requirement evidence links recorded in the register rows themselves | will be recorded at completion |
+| I2 | Final integration: PR → main, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | pending | arena-a4c5a1de-fl1 | PR + `COORDINATION.md` | Pages API + live fetch | — |
+
+Requests to other sessions: none currently. This session does not edit `tools/site.py` NAV regions or
+other sessions' engine files; if I1 reveals a conflict, both sides are preserved and logged.
 
 > **Which board is authoritative?** This file. The board below is maintained by the session that owns the
 > consolidating build at the repo root (`arena/ab4e9b05-fl1`). Earlier boards from the other two sessions are
