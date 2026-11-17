@@ -68,6 +68,20 @@ source **S91**, and it must be re-read after it shows Final.
 `tools/site_g.py` (one row in the Snapshot Ledger), `data/sources.tsv` (S89–S91), `data/flags.json` (F67),
 regenerated site pages and `assets/js/data.js`.
 
+## Task board — session `arena/14143250-fl1` (current-state audit + summary reconciliation)
+
+**Session ID:** `arena/14143250-fl1` · **Branch:** `arena/14143250-fl1` (current Arena branch; based on `5a076a08cfcb2567dfde1768a5ebedfcba722194`) · **Claimed:** 2026-11-17 UTC · **Status:** active.
+**Coordination check:** read the existing board first; `gh pr list --state open` returned no open PRs. The prior overlapping sessions are merged and their completion records are retained below. This claim stays on the Arena-assigned branch (no branch switch/create).
+
+| ID | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|---|---|---|---|---|---|
+| A1 | Audit current landing/README/executive-summary assertions against the committed registers, generated outputs and cited official sources; reconcile stale or conflicting headline claims; retain explicit blanks and review flags; run repository verification | in progress | `arena/14143250-fl1` | `README.md`, `EXECUTIVE_SUMMARY.md`, `tools/site.py` (executive-summary section only, if required), generated `executive-summary.html`, `tests/test_current_state_docs.py` (if required), `COORDINATION.md` (this record) | Existing official source registry and raw captures; official NFL injury report, schedule, standings and Game Books where cited; deterministic repo checks | — |
+
+**Scope boundary:** this is a documentation/current-state QA task. Do not change source data, model/backtest outputs, availability/depth rows, pricing records, leaderboard calculations, or other sessions' engine/store files. Any disputed facts stay blank and are listed on `flagged.html`; suggestions remain proposals, not silently implemented policy.
+
+---
+
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
