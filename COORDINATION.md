@@ -1,3 +1,17 @@
+## Task board — session `arena/012c2748-fl1` (2026-11-17 — decision review + executive-summary reconciliation)
+
+**Session ID:** `arena-012c2748-fl1` · **Branch:** `arena/012c2748-fl1` (from `5a076a08` of `main`) ·
+**Claimed:** 2026-11-17 UTC · **Status:** in progress.
+**Pre-claim sweep:** Read the existing coordination board, checked the working tree, and checked open PRs (`gh pr list` returned none). The branch is at the current `main` base commit; the existing board's earlier items are historical/merged. Scope below is limited to the suggestion-review UX, the executive summary and its README guidance, plus their tests and coordination record.
+
+| ID | Task | Status | Owner | File scope | Sources / verification | Irregularities |
+|---|---|---|---|---|---|---|
+| A1 | Give the Suggestions page an explicit review workflow: choices, status, optional rationale, browser-local save, import/export; do not treat a recommendation as an owner decision | in progress | `arena-012c2748-fl1` | `tools/site.py` (Suggestions renderer only), `assets/js/suggestion-review.js`, `assets/css/site.css`, generated `suggestions.html`, `tests/test_suggestion_review.py` | Existing `data/suggestions.json` entries and question/source/flag registers; test every suggestion ID and option renders; no decision may be preselected | Static GitHub Pages cannot submit or centrally persist a review; this will be stated in the UI |
+| A2 | Replace the internally contradictory, stale executive-summary page with a capture-dated, evidence-linked current summary; make README entry points and limitations match the current repository | in progress | `arena-012c2748-fl1` | `tools/site.py` (executive-summary renderer only), generated `executive-summary.html`, `EXECUTIVE_SUMMARY.md`, `README.md`, `tests/test_suggestion_review.py` | Committed data/registers and verification outputs only; source links point to `sources.html` entries; do not assert a new live re-fetch | Live NFL pages are not available through this session's outbound host allowlist; no new external fact will be marked verified |
+| A3 | Run the repository verification battery, record results/limitations, and finish this task on the current integration branch | pending | `arena-012c2748-fl1` | `COORDINATION.md` and task outputs above | Unit tests, deterministic build, row/link checks, injury/results verifiers, available site verifiers | `scripts/verify_site.py` currently requires pandas, which is not installed and is intentionally absent from `requirements.txt`; report as blocked unless verified otherwise |
+
+---
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
