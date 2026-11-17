@@ -9,13 +9,23 @@ logged here, per the standing additive rule.
 
 | # | Task | Status | Owner | File scope (claimed) |
 |---|------|--------|-------|----------------------|
-| H1 | Coordination claim + immediate push | claimed | `arena-7ac4e12e-fl1` | `COORDINATION.md` |
-| H2 | Dated read 3 of the official injury hub (2026-11-17, clock-bracketed) parsed with the shared grammar; publish the **read-3 delta** (added / changed / removed) against the 2026-11-16 read — delta, never the level | claimed | `arena-7ac4e12e-fl1` | `raw/injuries-week10-2026-read3.md` (new), `scripts/build_injury_hub_delta.py` (extend to read 3), `data/injury_hub_delta.json`, `data/sources.tsv` (next S id), generated `injuries.html`, `tests/test_injury_delta_h.py` (new) |
-| H3 | Week 10 close-out: official re-read of the week-10 schedule page (are all 13 games FINAL?) plus a fresh standings read to corroborate; extend the published finals extension with SNF/MNF now that they are final; publish the delta and update flag F61's detail. Canonical `data/results.tsv` / `data/standings.tsv` **not** touched (promotion remains Q44's owner decision) | claimed | `arena-7ac4e12e-fl1` | `raw/schedule-results-2026-week10-complete.md` (new), `raw/standings-2026-20261117.tsv` (new), `scripts/build_week10_extension.py` (extend), `data/week10_results_extension.json`, `data/flags.json` (F61 detail append), `data/sources.tsv` (next S ids), generated `verified-results-feed.html` |
-| H4 | **Answers layer on the open-questions register**: every Q row gains an evidence-backed answer state — either an answer now (citing the verified evidence that settles it) or an explicit OPEN state naming the exact decision/data that would answer it and who must supply it; rendered as a new column on `questions.html` with a per-page answered/open count | claimed | `arena-7ac4e12e-fl1` | `data/questions.json` (append `answer` + `answer_state` fields to all 45 rows), `tools/site.py` (questions section only), generated `questions.html`, `tests/test_questions_h.py` (new) |
-| H5 | Registers append, exec-summary/README addendum, full verification battery, coordination completion record, PR → `main`, merge without waiting, confirm GitHub Pages deploy | claimed | `arena-7ac4e12e-fl1` | `data/{flags,suggestions}.json`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md`, PR |
+| H1 | Coordination claim + immediate push | done (30da5d7) | `arena-7ac4e12e-fl1` | `COORDINATION.md` |
+| H2 | Dated read 3 of the official injury hub (2026-11-17, clock-bracketed) parsed with the shared grammar; publish the **read-3 delta** (added / changed / removed) against the 2026-11-16 read — delta, never the level | done (e5ef4af) | `arena-7ac4e12e-fl1` | `raw/injuries-week10-2026-read3.md` (new), `scripts/build_injury_hub_delta.py` (extend to read 3), `data/injury_hub_delta.json`, `data/sources.tsv` (next S id), generated `injuries.html`, `tests/test_injury_delta_h.py` (new) |
+| H3 | Week 10 close-out: official re-read of the week-10 schedule page (are all 13 games FINAL?) plus a fresh standings read to corroborate; extend the published finals extension with SNF/MNF now that they are final; publish the delta and update flag F61's detail. Canonical `data/results.tsv` / `data/standings.tsv` **not** touched (promotion remains Q44's owner decision) | done (1ad7387) | `arena-7ac4e12e-fl1` | `raw/schedule-results-2026-week10-complete.md` (new), `raw/standings-2026-20261117.tsv` (new), `scripts/build_week10_extension.py` (extend), `data/week10_results_extension.json`, `data/flags.json` (F61 detail append), `data/sources.tsv` (next S ids), generated `verified-results-feed.html` |
+| H4 | **Answers layer on the open-questions register**: every Q row gains an evidence-backed answer state — either an answer now (citing the verified evidence that settles it) or an explicit OPEN state naming the exact decision/data that would answer it and who must supply it; rendered as a new column on `questions.html` with a per-page answered/open count | done (0620bff) | `arena-7ac4e12e-fl1` | `data/questions.json` (append `answer` + `answer_state` fields to all 45 rows), `tools/site.py` (questions section only), generated `questions.html`, `tests/test_questions_h.py` (new) |
+| H5 | Registers append, exec-summary/README addendum, full verification battery, coordination completion record, PR → `main`, merge without waiting, confirm GitHub Pages deploy | in progress | `arena-7ac4e12e-fl1` | `data/{flags,suggestions}.json`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md`, PR |
 
 **First push = this claim, per the brief.**
+
+**Reconciliation note (2026-11-17, after H4).** While this session worked, `main` advanced through PRs
+#49 (session `arena/e97f05c3-fl1` — Week-10 SNF final ingested as dated results files, MNF kept out and
+registered as F67) and #51–#54 (sessions `arena/2493a657-fl1`, `arena/d50423eb-fl1` — Q&A exports, Q46,
+row-citation audit, Week-11 schedule). This branch was rebased onto `origin/main` with conflicts resolved
+keeping **both** sides: their `S89–S93 / F67–F69 / SG48–SG49 / Q46` were already on `main`, so this
+session's ids shifted to **`S94–S96` (injury read 3, schedule close-out, standings close-out), `F70`
+(Q45 duplication), `SG50`/`SG51` (cadence automation, frozen promotion rule)**; every reference, pin and
+drift row was rewritten to match and the full battery re-ran green afterwards (344 tests, 57 pages,
+19/19 drift pins). The answers layer covers all 46 questions (45 original + their Q46).
 
 ## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — COMPLETE
 
