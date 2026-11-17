@@ -51,9 +51,9 @@ PINS = [
      ["game_id", "market", "outcome"], ["game_id", "market", "outcome"]),
     ("DR-08", "data/questions.json", "json-list", None, 46,
      ["id", "question"], ["id", "question"]),
-    ("DR-09", "data/suggestions.json", "json-list", None, 49,
+    ("DR-09", "data/suggestions.json", "json-list", None, 51,
      ["id", "title"], ["id", "title"]),
-    ("DR-10", "data/flags.json", "json-list", None, 69,  # F67/F68 from main + F69 (dated injury delta)
+    ("DR-10", "data/flags.json", "json-list", None, 70,  # F67-F69 from main + F70 (Q45 duplication)
      ["id", "item"], ["id", "item"]),
     ("DR-11", "data/strategies.json", "json-list", None, 6,
      ["id", "name", "change_of_mind"], ["id", "name", "change_of_mind"]),

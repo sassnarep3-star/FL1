@@ -1,12 +1,52 @@
 # FL1 — Executive Summary
 
-**Session:** `arena-dbf11de0-fl1` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) · **Built:** 2026-11-16
+**Session:** `arena-7ac4e12e-fl1` · **Branch:** `arena/7ac4e12e-fl1` (from `5a076a0` of `main`) · **Built:** 2026-11-17
 **Site:** https://sassnarep3-star.github.io/FL1/
 
 > **Reading note.** This file carries more than one session's summary. The block immediately
-> below is the current one (2026-11-16). Earlier blocks are preserved verbatim further down
+> below is the current one (2026-11-17). Earlier blocks are preserved verbatim further down
 > because they record work that is still in the repository; where they conflict with a later
 > re-verification, the later one is marked as superseding.
+
+---
+
+## Session `arena/7ac4e12e-fl1` — 2026-11-17
+
+### What this session did
+
+1. **Dated injury read 3, published as a delta only.** The official hub was re-read inside a
+   clock-bracketed window (02:35:39Z–02:36:52Z), captured verbatim (8 chunks, 63 KB), and parsed with
+   the shared grammar: 347 rows, matching read 2's claim. One field moved — **NO Travis Etienne,
+   practice FULL → LIMITED** — and that single change is what the site publishes under
+   `data/injury_hub_delta.json` (read 1 → read 2 kept as history). The canonical 345-row table was
+   not rewritten. Sources: S94.
+
+2. **Week 10 close-out, with the live game left alone.** A second official read
+   (02:45:45Z–02:46:39Z) shows **13 of 14 games FINAL** — the new one being Sunday Night Football,
+   **PIT 18, CIN 38** — while Monday Night Football (LAC at BAL) was live (Q2, 17–7). A partial score
+   is not a result: the extension publishes the final as `completion.new_final`, keeps the live game
+   as a status row with blank scores, and checks **C1–C5** pass, including a 32-of-32 recomputation of
+   records *and* points/allowed against a fresh official standings capture. The pre-existing F61
+   claimed "all 14 FINAL on 2026-11-16" — impossible on any 11-16 UTC read — and carries a dated
+   correction. Canonical `data/results.tsv` untouched (promotion stays Q44). Sources: S95, S96.
+
+3. **Every open question now has an answer.** All 46 rows of `data/questions.json` gained
+   `answer_state` + `answer` + `answer_date`: **12 answered** from evidence already in the repo,
+   **16 partial** (facts stated, named gap remains), **18 open** (owner decision or missing dataset,
+   with the exact clearing item). `questions.html` renders the dated Answer column with counts. The
+   pass also caught **Q45 duplicating Q35 verbatim** — recorded as F70 rather than answered twice.
+
+4. **Rebased over four parallel PRs without losing either side.** `main` advanced mid-session (#49,
+   #51–#54). After the rebase, this session's register ids were shifted to `S94–S96 / F70 /
+   SG50–SG51` because the earlier-merged sessions already held `S89–S93 / F67–F69 / SG48–SG49`;
+   Q46 (theirs) was answered alongside the original 45; every pin and drift row was repaired and the
+   battery re-run: **344 tests, 57 pages, 0 unsourced rows, 19/19 drift pins**.
+
+### What this session did not do
+
+No canonical feed was promoted (Q44 open), no new official page types were captured (terms question
+Q18/Q42 open), and no previously published status was upgraded — scope not re-verified here keeps
+the status its earlier sessions gave it.
 
 ---
 
