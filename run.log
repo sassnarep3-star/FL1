@@ -1,0 +1,151 @@
+== connectivity ==
+date: 2026-11-17T03:00:55Z
+nfl.com/injuries/ -> 200
+static.www.nfl.com -> 404
+capturing official injury report …
+  injury report: 375712 bytes sha256=f68b59df0f949dce…
+capturing 134 official game book(s) for season 2026 …
+  [1/134] bears-at-panthers-2026-reg-1: page=200 pdf=200 sha=6a44773f1340
+  [2/134] broncos-at-chiefs-2026-reg-1: page=200 pdf=200 sha=a3e19937256b
+  [3/134] browns-at-jaguars-2026-reg-1: page=200 pdf=200 sha=b9192fe209c9
+  [4/134] buccaneers-at-bengals-2026-reg-1: page=200 pdf=200 sha=5b01e99a5954
+  [5/134] cardinals-at-chargers-2026-reg-1: page=200 pdf=200 sha=fac0be40b5b6
+  [6/134] commanders-at-eagles-2026-reg-1: page=200 pdf=200 sha=8d1457e5bcf1
+  [7/134] cowboys-at-giants-2026-reg-1: page=200 pdf=200 sha=5a19f188b488
+  [8/134] dolphins-at-raiders-2026-reg-1: page=200 pdf=200 sha=9e14388ce2cb
+  [9/134] falcons-at-steelers-2026-reg-1: page=200 pdf=200 sha=7da2e8e77bf7
+  [10/134] jets-at-titans-2026-reg-1: page=200 pdf=200 sha=5b71f57145e8
+  [11/134] packers-at-vikings-2026-reg-1: page=200 pdf=200 sha=efc959435ccc
+  [12/134] patriots-at-seahawks-2026-reg-1: page=200 pdf=200 sha=789e8a140b26
+  [13/134] ravens-at-colts-2026-reg-1: page=200 pdf=200 sha=6faad3e7c724
+  [14/134] saints-at-lions-2026-reg-1: page=200 pdf=200 sha=1f278ffaeaba
+  [15/134] bengals-at-texans-2026-reg-2: page=200 pdf=200 sha=f55d92d4ea78
+  [16/134] browns-at-buccaneers-2026-reg-2: page=200 pdf=200 sha=9fb40b26909d
+  [17/134] colts-at-chiefs-2026-reg-2: page=200 pdf=200 sha=dde28094fcb4
+  [18/134] commanders-at-cowboys-2026-reg-2: page=200 pdf=200 sha=b37574de99bf
+  [19/134] dolphins-at-49ers-2026-reg-2: page=200 pdf=200 sha=c5a71faff274
+  [20/134] eagles-at-titans-2026-reg-2: page=200 pdf=200 sha=9b04929b77de
+  [21/134] jaguars-at-broncos-2026-reg-2: page=200 pdf=200 sha=37cc96859450
+  [22/134] packers-at-jets-2026-reg-2: page=200 pdf=200 sha=26b049c510fb
+  [23/134] panthers-at-falcons-2026-reg-2: page=200 pdf=200 sha=b24a5da3f209
+  [24/134] raiders-at-chargers-2026-reg-2: page=200 pdf=200 sha=ae4eb6c1080a
+  [25/134] saints-at-ravens-2026-reg-2: page=200 pdf=200 sha=2c9285a148ef
+  [26/134] seahawks-at-cardinals-2026-reg-2: page=200 pdf=200 sha=ad2dc6dbce08
+  [27/134] steelers-at-patriots-2026-reg-2: page=200 pdf=200 sha=c29dc6493718
+  [28/134] vikings-at-bears-2026-reg-2: page=200 pdf=200 sha=5acd250bee7d
+  [29/134] bengals-at-steelers-2026-reg-3: page=200 pdf=200 sha=3dbf22741b1d
+  [30/134] cardinals-at-49ers-2026-reg-3: page=200 pdf=200 sha=4f40d88e1e9a
+  [31/134] chiefs-at-dolphins-2026-reg-3: page=200 pdf=200 sha=8c5d560ec7b3
+  [32/134] eagles-at-bears-2026-reg-3: page=200 pdf=200 sha=1e357e2076e3
+  [33/134] falcons-at-packers-2026-reg-3: page=200 pdf=200 sha=fd1aa3b7038a
+  [34/134] jets-at-lions-2026-reg-3: page=200 pdf=200 sha=13824f1031de
+  [35/134] panthers-at-browns-2026-reg-3: page=200 pdf=200 sha=471e4bc15539
+  [36/134] patriots-at-jaguars-2026-reg-3: page=200 pdf=200 sha=08d963f2d509
+  [37/134] raiders-at-saints-2026-reg-3: page=200 pdf=200 sha=33941176e611
+  [38/134] ravens-at-cowboys-2026-reg-3: page=200 pdf=200 sha=f30d73e336df
+  [39/134] seahawks-at-commanders-2026-reg-3: page=200 pdf=200 sha=b09d5a377d09
+  [40/134] texans-at-colts-2026-reg-3: page=200 pdf=200 sha=3df7cd77fca0
+  [41/134] titans-at-giants-2026-reg-3: page=200 pdf=200 sha=b6e54e844c9c
+  [42/134] vikings-at-buccaneers-2026-reg-3: page=200 pdf=200 sha=3879f1524b07
+  [43/134] broncos-at-49ers-2026-reg-4: page=200 pdf=200 sha=7e6994635833
+  [44/134] cardinals-at-giants-2026-reg-4: page=200 pdf=200 sha=9275947d2c6b
+  [45/134] chargers-at-seahawks-2026-reg-4: page=200 pdf=200 sha=f399b50bc930
+  [46/134] chiefs-at-raiders-2026-reg-4: page=200 pdf=200 sha=92561b2e5597
+  [47/134] colts-at-commanders-2026-reg-4: page=200 pdf=200 sha=b76b27570f5e
+  [48/134] cowboys-at-texans-2026-reg-4: page=200 pdf=200 sha=c4ad95a1a247
+  [49/134] dolphins-at-vikings-2026-reg-4: page=200 pdf=200 sha=204b05494cbe
+  [50/134] falcons-at-saints-2026-reg-4: page=200 pdf=200 sha=50be4ad2dbf0
+  [51/134] jaguars-at-bengals-2026-reg-4: page=200 pdf=200 sha=37430cbcd5f5
+  [52/134] jets-at-bears-2026-reg-4: page=200 pdf=200 sha=272dc1628b24
+  [53/134] lions-at-panthers-2026-reg-4: page=200 pdf=200 sha=a74a0cebf8ca
+  [54/134] packers-at-buccaneers-2026-reg-4: page=200 pdf=200 sha=f08a6b375801
+  [55/134] steelers-at-browns-2026-reg-4: page=200 pdf=200 sha=c96c2f1dfb74
+  [56/134] titans-at-ravens-2026-reg-4: page=200 pdf=200 sha=e9dc41547d7e
+  [57/134] 49ers-at-seahawks-2026-reg-5: page=200 pdf=200 sha=2ceeb63f1b0e
+  [58/134] bears-at-packers-2026-reg-5: page=200 pdf=200 sha=1823224a5388
+  [59/134] bengals-at-dolphins-2026-reg-5: page=200 pdf=200 sha=3042c1a58916
+  [60/134] broncos-at-chargers-2026-reg-5: page=200 pdf=200 sha=02f77aad0a59
+  [61/134] browns-at-jets-2026-reg-5: page=200 pdf=200 sha=d7d4cb7d0d62
+  [62/134] buccaneers-at-cowboys-2026-reg-5: page=200 pdf=200 sha=38916e7baf1f
+  [63/134] colts-at-steelers-2026-reg-5: page=200 pdf=200 sha=af861d919e58
+  [64/134] eagles-at-jaguars-2026-reg-5: page=200 pdf=200 sha=16cd6d1b6453
+  [65/134] giants-at-commanders-2026-reg-5: page=200 pdf=200 sha=7af620491c84
+  [66/134] lions-at-cardinals-2026-reg-5: page=200 pdf=200 sha=d19a9e6c3062
+  [67/134] raiders-at-patriots-2026-reg-5: page=200 pdf=200 sha=cdb5f0ef30a3
+  [68/134] ravens-at-falcons-2026-reg-5: page=200 pdf=200 sha=de2f5f881a71
+  [69/134] texans-at-titans-2026-reg-5: page=200 pdf=200 sha=4fac5fbf8482
+  [70/134] vikings-at-saints-2026-reg-5: page=200 pdf=200 sha=aea52e4eae6e
+  [71/134] bears-at-falcons-2026-reg-6: page=200 pdf=200 sha=321bd0ac177c
+  [72/134] chargers-at-chiefs-2026-reg-6: page=200 pdf=200 sha=95dc778dad28
+  [73/134] commanders-at-49ers-2026-reg-6: page=200 pdf=200 sha=8a201b8d27b8
+  [74/134] cowboys-at-packers-2026-reg-6: page=200 pdf=200 sha=03c7e7470fc2
+  [75/134] jets-at-patriots-2026-reg-6: page=200 pdf=200 sha=bc27ac71f4cc
+  [76/134] panthers-at-eagles-2026-reg-6: page=200 pdf=200 sha=24d779905a8f
+  [77/134] ravens-at-browns-2026-reg-6: page=200 pdf=200 sha=640db7fb1b77
+  [78/134] saints-at-giants-2026-reg-6: page=200 pdf=200 sha=1745831c6e08
+  [79/134] seahawks-at-broncos-2026-reg-6: page=200 pdf=200 sha=545ce33cf128
+  [80/134] steelers-at-buccaneers-2026-reg-6: page=200 pdf=200 sha=d12c5826c53a
+  [81/134] texans-at-jaguars-2026-reg-6: page=200 pdf=200 sha=bc0b2d0bef7f
+  [82/134] titans-at-colts-2026-reg-6: page=200 pdf=200 sha=03d3e5c663c0
+  [83/134] 49ers-at-falcons-2026-reg-7: page=200 pdf=200 sha=38a45c3f5077
+  [84/134] bengals-at-ravens-2026-reg-7: page=200 pdf=200 sha=68504ce3a781
+  [85/134] broncos-at-cardinals-2026-reg-7: page=200 pdf=200 sha=555f391bb3dd
+  [86/134] browns-at-titans-2026-reg-7: page=200 pdf=200 sha=f099d427bdd5
+  [87/134] buccaneers-at-panthers-2026-reg-7: page=200 pdf=200 sha=dc36b617548e
+  [88/134] chiefs-at-seahawks-2026-reg-7: page=200 pdf=200 sha=06a69b4b9cfe
+  [89/134] colts-at-vikings-2026-reg-7: page=200 pdf=200 sha=473d16ff2b55
+  [90/134] cowboys-at-eagles-2026-reg-7: page=200 pdf=200 sha=d4a4e2637535
+  [91/134] dolphins-at-jets-2026-reg-7: page=200 pdf=200 sha=0174a4ec1ef0
+  [92/134] giants-at-texans-2026-reg-7: page=200 pdf=200 sha=06d691416a2d
+  [93/134] packers-at-lions-2026-reg-7: page=200 pdf=200 sha=718d6d810d4e
+  [94/134] patriots-at-bears-2026-reg-7: page=200 pdf=200 sha=bf3f5691279c
+  [95/134] steelers-at-saints-2026-reg-7: page=200 pdf=200 sha=6697c8bddc0a
+  [96/134] bears-at-seahawks-2026-reg-8: page=200 pdf=200 sha=d0cfa9742e93
+  [97/134] browns-at-steelers-2026-reg-8: page=200 pdf=200 sha=37c67e73d17a
+  [98/134] cardinals-at-cowboys-2026-reg-8: page=200 pdf=200 sha=a601090f67b9
+  [99/134] chiefs-at-broncos-2026-reg-8: page=200 pdf=200 sha=17c2272e8cdf
+  [100/134] colts-at-jaguars-2026-reg-8: page=200 pdf=200 sha=1d198aec1906
+  [101/134] eagles-at-commanders-2026-reg-8: page=200 pdf=200 sha=6468d49d6ded
+  [102/134] falcons-at-buccaneers-2026-reg-8: page=200 pdf=200 sha=03edb7886a51
+  [103/134] panthers-at-packers-2026-reg-8: page=200 pdf=200 sha=3762b8d8e2b2
+  [104/134] patriots-at-dolphins-2026-reg-8: page=200 pdf=200 sha=4b261b95f4db
+  [105/134] raiders-at-jets-2026-reg-8: page=200 pdf=200 sha=27486bcd8910
+  [106/134] titans-at-bengals-2026-reg-8: page=200 pdf=200 sha=156c0df99330
+  [107/134] vikings-at-lions-2026-reg-8: page=200 pdf=200 sha=dffdb6bdcbe2
+  [108/134] bengals-at-falcons-2026-reg-9: page=200 pdf=200 sha=7af51dc2f802
+  [109/134] broncos-at-panthers-2026-reg-9: page=200 pdf=200 sha=713f8b211cba
+  [110/134] browns-at-saints-2026-reg-9: page=200 pdf=200 sha=868b36be59c7
+  [111/134] buccaneers-at-bears-2026-reg-9: page=200 pdf=200 sha=e3601a28db9f
+  [112/134] cardinals-at-seahawks-2026-reg-9: page=200 pdf=200 sha=6cad3f8fb512
+  [113/134] cowboys-at-colts-2026-reg-9: page=200 pdf=200 sha=b170db43856e
+  [114/134] giants-at-eagles-2026-reg-9: page=200 pdf=200 sha=737f2f8da91e
+  [115/134] jaguars-at-ravens-2026-reg-9: page=200 pdf=200 sha=88f002bb2f72
+  [116/134] jets-at-chiefs-2026-reg-9: page=200 pdf=200 sha=1df30a17cd7d
+  [117/134] lions-at-dolphins-2026-reg-9: page=200 pdf=200 sha=3f3f3a818f08
+  [118/134] packers-at-patriots-2026-reg-9: page=200 pdf=200 sha=bd057892de17
+  [119/134] raiders-at-49ers-2026-reg-9: page=200 pdf=200 sha=0e1895910aef
+  [120/134] texans-at-chargers-2026-reg-9: page=200 pdf=200 sha=a4f337554ea0
+  [121/134] 49ers-at-cowboys-2026-reg-10: page=200 pdf=200 sha=c5378c33a7fc
+  [122/134] bills-at-jets-2026-reg-10: page=200 pdf=200 sha=19f04098343b
+  [123/134] chargers-at-ravens-2026-reg-10: page=200 pdf=0 sha= ERR no gamebook pdf link on game centre page
+  [124/134] chiefs-at-falcons-2026-reg-10: page=200 pdf=200 sha=387e0e0fc327
+  [125/134] commanders-at-giants-2026-reg-10: page=200 pdf=200 sha=12c818cc2634
+  [126/134] dolphins-at-colts-2026-reg-10: page=200 pdf=200 sha=107be568d804
+  [127/134] jaguars-at-titans-2026-reg-10: page=200 pdf=200 sha=a3307c0f336e
+  [128/134] panthers-at-saints-2026-reg-10: page=200 pdf=200 sha=0145bf25a010
+  [129/134] patriots-at-lions-2026-reg-10: page=200 pdf=200 sha=26b3c925e5cd
+  [130/134] rams-at-cardinals-2026-reg-10: page=200 pdf=200 sha=5bc5f89cde8e
+  [131/134] seahawks-at-raiders-2026-reg-10: page=200 pdf=200 sha=2e5c44630e0f
+  [132/134] steelers-at-bengals-2026-reg-10: page=200 pdf=200 sha=ac36c23ed9f8
+  [133/134] texans-at-browns-2026-reg-10: page=200 pdf=200 sha=c46193bbb201
+  [134/134] vikings-at-packers-2026-reg-10: page=200 pdf=200 sha=d19ef8d9871d
+wrote /home/runner/work/_temp/vault/games_index.tsv
+summary: {"book_hash_collisions": 0, "injury_fail": 0, "injury_ok": 1, "no_pdf_link": 1, "page_fail": 0, "page_ok": 134, "pdf_fail": 0, "pdf_ok": 133}
+pdf_to_text: 266 written, 0 failed
+games visited: 134 | with a result upstream: 121
+game books retrieved: 133
+no game book yet (game not played): 1
+Traceback (most recent call last):
+  File "<stdin>", line 24, in <module>
+  File "<frozen os>", line 679, in __getitem__
+KeyError: 'VAULT'

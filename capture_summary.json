@@ -1,0 +1,15 @@
+{
+  "captured_at_utc": "2026-11-17T03:02:42Z",
+  "season": 2026,
+  "stats": {
+    "book_hash_collisions": 0,
+    "injury_fail": 0,
+    "injury_ok": 1,
+    "no_pdf_link": 1,
+    "page_fail": 0,
+    "page_ok": 134,
+    "pdf_fail": 0,
+    "pdf_ok": 133
+  },
+  "week": "all"
+}
