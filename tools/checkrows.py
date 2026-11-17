@@ -12,10 +12,11 @@ when it publishes no unsourced value:
     2. it carries any hyperlink (a source-registry or official URL), or
     3. its text references a registered source id (S01..S99 convention), or
     4. every one of its cells is blank/na/empty — it publishes nothing, or
-    5. it is on a register/spec page (DEF_PAGES below), where rows are authored
-       definitions and decision-support text rather than sourced data entries;
-       those pages carry their sources in the register files (data/*.json) and
-       in-page prose, and their audit is the register check, not this one.
+    5. it is on a register/decision page (DEF_PAGES below), where rows are
+       authored definitions and decision-support text rather than NFL data; or
+    6. it is on the explicitly labelled project-specification page (SPEC_PAGES),
+       whose rows are user-provided requirements, not NFL facts. That exemption
+       is valid only while the page carries its specification-provenance notice.
 
 Data pages — results, prices, boards, depth, standings, injuries, schedule,
 correlations, sources, flags — must satisfy 1-4 on every row. Run after
@@ -31,12 +32,18 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Register/spec pages: rows are definitions or decision text, not data entries.
+# Register/decision pages: authored definitions or planning rows, not NFL data entries.
 DEF_PAGES = {
     "questions.html", "suggestions.html", "requirements.html",
     "validation.html", "line-origination.html",
-    "readiness.html",  # session arena-fc0ed6e8-fl1: register/decision rows (targets, not data)
+    "readiness.html",  # register/decision rows (targets are not measured facts)
 }
+
+# This page is exempt from the NFL-fact source rule only because its rows are
+# explicitly labelled as user-provided project specifications in the page body.
+SPEC_PAGES = {"requirements-backlog.html"}
+SPEC_NOTICE = "spec-provenance"
+SPEC_NOTICE_TEXT = "user-provided project specifications"
 
 ROW_RE = re.compile(r"<tr>(.*?)</tr>", re.S)
 CELL_RE = re.compile(r"<td[^>]*>(.*?)</td>", re.S)
@@ -67,9 +74,10 @@ def row_ok(row):
 
 
 def check_page(path):
-    """Return (n_rows, offending row numbers, n_def_rows)."""
+    """Return (n_rows, offending row numbers, n_def_rows, n_spec_rows)."""
     name = os.path.basename(path)
-    html = open(path, encoding="utf-8").read()
+    with open(path, encoding="utf-8") as fh:
+        html = fh.read()
     bad = []
     row_no = 0
     for table_m in re.finditer(r"<table[^>]*>(.*?)</table>", html, re.S):
@@ -79,30 +87,44 @@ def check_page(path):
             row_no += 1
             if not row_ok(row_m.group(1)):
                 bad.append(row_no)
+    if name in SPEC_PAGES:
+        plain = " ".join(TAG_RE.sub(" ", html).split()).lower()
+        notice_present = (re.search(r'class="[^"]*\b%s\b[^"]*"' % SPEC_NOTICE, html)
+                          is not None and SPEC_NOTICE_TEXT in plain
+                          and "not nfl requirements" in plain)
+        return row_no, ([] if notice_present else [0]), 0, row_no if notice_present else 0
     if name in DEF_PAGES:
-        return row_no, [], row_no
-    return row_no, bad, 0
+        return row_no, [], row_no, 0
+    return row_no, bad, 0, 0
 
 
 def main():
     pages = sorted(glob.glob(os.path.join(ROOT, "*.html")))
     total_bad = 0
-    total_rows = def_rows = 0
+    total_rows = def_rows = spec_rows = 0
     for p in pages:
-        n, bad, d = check_page(p)
+        n, bad, d, s = check_page(p)
         total_rows += n
         def_rows += d
+        spec_rows += s
         if bad:
             total_bad += len(bad)
-            print("FAIL %s: %d of %d rows publish a value with no source link: %s"
-                  % (os.path.basename(p), len(bad), n, bad[:10]))
+            if bad == [0]:
+                print("FAIL %s: project-specification exemption lacks its provenance notice"
+                      % os.path.basename(p))
+            else:
+                print("FAIL %s: %d of %d rows publish a value with no source link: %s"
+                      % (os.path.basename(p), len(bad), n, bad[:10]))
     if total_bad:
-        print("\n%d offending row(s). Every data row either carries a source "
-              "link or publishes nothing." % total_bad)
+        print("\n%d row/source or provenance failure(s). Data rows need a source "
+              "link or must publish nothing; project-specification exemptions "
+              "must remain explicitly labelled." % total_bad)
         sys.exit(1)
-    print("OK: %d pages, %d rows audited (%d register/spec rows on DEF_PAGES, "
+    data_rows = total_rows - def_rows - spec_rows
+    print("OK: %d pages, %d rows audited (%d register/decision rows, "
+          "%d explicitly labelled user-provided specification rows, "
           "%d data rows satisfying rules 1-4)."
-          % (len(pages), total_rows, def_rows, total_rows - def_rows))
+          % (len(pages), total_rows, def_rows, spec_rows, data_rows))
 
 
 if __name__ == "__main__":

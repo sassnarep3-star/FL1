@@ -95,48 +95,62 @@ def backlog_page(ctx):
     body = ["""
 <section class="hero">
   <h1>Requirement backlog</h1>
-  <p class="lead">Every requirement line from the project brief, one row each.
-  For each row: <strong>the gate that blocks it</strong> and
-  <strong>the number that would clear it</strong>. A gate without a number is an
-  opinion; with a number it is a task that can be finished and checked.</p>
+  <p class="lead">Every tracked requirement line, with its repository status, current gate and
+  stated clearing criterion. The table is a planning view; it is not a table of NFL facts.</p>
   <p class="lead">%s</p>
+</section>
+
+<section class="callout warn spec-provenance">
+  <h2>Specification provenance</h2>
+  <p><strong>These rows transcribe user-provided project specifications.</strong> They are not
+  NFL requirements, NFL policy, or facts about the league. Statuses, blockers, evidence descriptions
+  and “number that would clear it” cells are FL1 project records or design targets. The evidence-link
+  last column carries source IDs copied from the register; they are not citations validating the
+  requirement text or every assertion in a gate/evidence cell. Numeric design targets are distinguished
+  from measured facts under <a href="flagged.html#F65">F65</a>.</p>
 </section>
 
 <section>
 <h2>How to read this page</h2>
 <div class="callout">
-  <h3>Four kinds of row</h3>
-  <p><strong>done</strong> &mdash; the artefact exists in this repository and is re-runnable.
-  <strong>partial</strong> &mdash; started, but the blocking gate is still open.
-  <strong>blocked</strong> &mdash; waiting on an official source that does not exist yet in
-  any form we can cite. <strong>not-started</strong> &mdash; nothing depends on it being blocked;
-  it simply has not been built. <strong>rejected</strong> rows are kept with their reason, because
-  a shortcut nobody records gets re-proposed next week.</p>
+  <h3>Repository status labels</h3>
+  <p><strong>done</strong> &mdash; the register marks the repository artefact as complete.
+  <strong>partial</strong> &mdash; work exists but the row's stated gate remains open.
+  <strong>blocked</strong> &mdash; the register identifies a dependency or evidence gap.
+  <strong>not-started</strong> &mdash; no implementation is recorded. <strong>decision-open</strong>
+  &mdash; an owner choice is unresolved. <strong>rejected</strong> rows are retained with their reason.
+  Check the row's evidence and linked source tier before treating any statement as a fact.</p>
 </div>
-<p class="caption">Rows R01&ndash;R28 come from the register built by earlier sessions
-(<code>data/requirements.json</code>); rows R29&ndash;R87 were added by this session from the
-brief lines that register did not yet track (<code>data/requirements_backlog.csv</code>).</p>
+<p class="caption">The register combines 28 core requirement rows from <code>data/requirements.json</code>
+with 59 additional backlog rows from <code>data/requirements_backlog.json</code>. Both sets belong to
+this project specification; neither is an NFL-issued requirements list.</p>
 </section>
 """ % chips]
 
-    head = ["ID", "Requirement", "Category", "Status", "Gate that blocks it",
-            "Number that would clear it", "Evidence in this repo", "Source"]
+    head = ["ID", "Specification text", "Category", "Specification provenance", "Status",
+            "Gate that blocks it", "Number that would clear it", "Evidence in this repo",
+            "Register source refs (not validation of the specification)"]
     table_rows = []
     for r in rows:
+        evidence_source_ids = [sid for sid in (r.get("sources") or "").split(";") if sid]
+        evidence_sources = (ctx["raw_src"](" ".join(
+            ctx["src_link"](sid, ctx["sources_by_id"]) for sid in evidence_source_ids))
+            if evidence_source_ids else
+            '<td class="blank" title="No evidence source is registered; the requirement itself is user-provided">—</td>')
         table_rows.append([
             "<td><code>%s</code></td>" % ctx["esc"](r["id"]),
             ctx["cell"](r["requirement"]),
             ctx["cell"](r["category"]),
+            ctx["cell"]("User-provided project specification"),
             "<td>%s</td>" % ctx["pill"](r["status"], STATUS_KIND.get(r["status"], "")),
             ctx["cell"](r["blocking_gate"] or r.get("blocking_gate", "")),
             ctx["cell"](r.get("clears_when", "")),
             ctx["cell"](r.get("evidence", "")),
-            ctx["raw_src"](ctx["src_link"](
-                (r.get("sources") or "S01").split(";")[0], ctx["sources_by_id"])),
+            evidence_sources,
         ])
     body.append(ctx["table"](head, table_rows, cls="searchable",
-                             caption="%d requirement rows. Filter by club, gate or id."
-                             % len(rows)))
+                             caption="%d user-provided specification rows. Filter by category, gate or id."
+                             % len(rows), require_source=False))
     return ctx["page"]("requirements-backlog.html", "Requirement Backlog",
                        "".join(body), wide=True)
 

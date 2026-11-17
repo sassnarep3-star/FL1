@@ -28,53 +28,90 @@ import site_g  # noqa: E402  (session arena/dbf11de0-fl1: backlog, luck, availab
 E = html.escape
 
 SITE = "FL1 — NFL Line Lab"
-TAGLINE = "Verified data, open questions, and a strategy leaderboard that refuses to guess."
+TAGLINE = "NFL evidence, model research, and open review questions."
+
+# The flat route list remains the canonical set (and is checked against the groups below).
+# Every root HTML page is assigned to exactly one topic group. Alternate implementations
+# remain separate links until the F66/SG47 owner review.
+SPECIFICATION_PAGES = {"requirements-backlog.html"}
 
 NAV = [
     ("index.html", "Dashboard"),
-    ("readiness.html", "Decision Readiness"),
     ("executive-summary.html", "Executive Summary"),
-    ("requirements.html", "Requirements"),
-    ("requirements-backlog.html", "Requirement Backlog"),
+    ("decision-desk.html", "Decision Desk"),
+    ("schedule.html", "Schedule 2026"),
+    ("standings.html", "Standings"),
+    ("results-feed.html", "Results Feed & Backtest"),
+    ("verified-results-feed.html", "Verified Results Feed"),
+    ("results-feed-market.html", "Verified Results Feed (spine)"),
     ("injuries.html", "Injuries"),
     ("team-availability.html", "Team Availability"),
     ("announced-starters.html", "Announced Starters"),
     ("availability-ledger.html", "Snapshot Ledger"),
     ("depth.html", "Backup Depth"),
     ("replacement-depth.html", "Replacement Depth"),
-    ("standings.html", "Standings"),
-    ("schedule.html", "Schedule 2026"),
-    ("results-feed.html", "Results Feed & Backtest"),
+    ("replacement-depth-market.html", "Replacement Depth (spine)"),
+    ("replacement-depth-r21r28.html", "Replacement Depth (R21–R28)"),
+    ("line-origination.html", "Line Origination"),
+    ("model-lines.html", "Model Lines"),
+    ("originations.html", "Originations"),
+    ("line-board.html", "Line Board"),
+    ("origination.html", "Origination Run"),
+    ("price-snapshots.html", "Price Snapshots"),
+    ("price-store.html", "Price Store"),
+    ("strategies.html", "Leaderboard"),
+    ("signal-vs-staking.html", "Signal vs Staking"),
+    ("signal-vs-staking-market.html", "Signal vs Staking (spine)"),
+    ("governance.html", "Signal & Demotion"),
+    ("validation.html", "Validation Gates"),
+    ("demotion-gate.html", "Demotion Gate"),
+    ("ablations.html", "Ablations"),
+    ("removal-of-luck.html", "Removal of Luck"),
     ("prop-correlations.html", "Prop Correlations"),
     ("official-correlations.html", "Official Correlations"),
     ("correlation-register.html", "Correlation Register"),
-
-    ("model-lines.html", "Model Lines & Price Store"),
-    ("line-origination.html", "Line Origination"),
-    ("originations.html", "Originations"),
-    ("line-board.html", "Line Board"),
-    ("price-snapshots.html", "Price Snapshots"),
-    ("verified-results-feed.html", "Verified Results Feed"),
-    ("strategies.html", "Leaderboard"),
-    ("signal-vs-staking.html", "Signal vs Staking"),
-    ("governance.html", "Signal & Demotion"),
-    ("validation.html", "Validation Gates"),
-    ("ablations.html", "Ablations"),
-    ("removal-of-luck.html", "Removal of Luck"),
+    ("correlation-gate.html", "Correlation Gate"),
+    ("requirements.html", "Requirements"),
+    ("requirements-backlog.html", "Requirement Backlog"),
+    ("readiness.html", "Decision Readiness"),
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
+    ("flagged.html", "Flagged for Review"),
     ("sources.html", "Sources"),
     ("verification.html", "Verification"),
-    ("price-store.html", "Price Store"),
-    ("results-feed-market.html", "Verified Results Feed (spine)"),
-    ("origination.html", "Origination Run"),
-    ("signal-vs-staking-market.html", "Signal vs Staking (spine)"),
-    ("replacement-depth-market.html", "Replacement Depth (spine)"),
-    ("correlation-gate.html", "Correlation Gate"),
-    ("demotion-gate.html", "Demotion Gate"),
-    ("decision-desk.html", "Decision Desk"),
-    ("flagged.html", "Flagged for Review"),
 ]
+
+NAV_GROUPS = [
+    ("Start", (
+        "index.html", "executive-summary.html", "decision-desk.html",
+    )),
+    ("Official evidence", (
+        "schedule.html", "standings.html", "results-feed.html",
+        "verified-results-feed.html", "results-feed-market.html", "injuries.html",
+        "team-availability.html", "announced-starters.html", "availability-ledger.html",
+        "depth.html", "replacement-depth.html", "replacement-depth-market.html",
+        "replacement-depth-r21r28.html",
+    )),
+    ("Lines & prices", (
+        "line-origination.html", "model-lines.html", "originations.html", "line-board.html",
+        "origination.html", "price-snapshots.html", "price-store.html",
+    )),
+    ("Evaluation & research", (
+        "strategies.html", "signal-vs-staking.html", "signal-vs-staking-market.html",
+        "governance.html", "validation.html", "demotion-gate.html", "ablations.html",
+        "removal-of-luck.html", "prop-correlations.html", "official-correlations.html",
+        "correlation-register.html", "correlation-gate.html",
+    )),
+    ("Requirements & review", (
+        "requirements.html", "requirements-backlog.html", "readiness.html", "questions.html",
+        "suggestions.html", "flagged.html", "sources.html", "verification.html",
+    )),
+]
+NAV_BY_HREF = dict(NAV)
+_NAV_GROUP_HREFS = [href for _label, hrefs in NAV_GROUPS for href in hrefs]
+if len(_NAV_GROUP_HREFS) != len(set(_NAV_GROUP_HREFS)) or set(_NAV_GROUP_HREFS) != set(NAV_BY_HREF):
+    raise ValueError("NAV_GROUPS must assign every root navigation route exactly once")
+
 
 
 def esc(v):
@@ -140,7 +177,8 @@ def _row_needs_source(cells_html):
     return bool(text.replace("\u2014", "").replace("-", "").strip())
 
 
-def table(headers, rows, cls="", caption=""):
+def table(headers, rows, cls="", caption="", require_source=True):
+    """Render a table; non-fact specification pages may explicitly disable source autofill."""
     out = ['<div class="twrap">']
     if caption:
         out.append('<p class="caption">%s</p>' % caption)
@@ -151,7 +189,7 @@ def table(headers, rows, cls="", caption=""):
     for r in rows:
         if isinstance(r, str):
             cells = r
-            if _row_needs_source(cells):
+            if require_source and _row_needs_source(cells):
                 cells = cells.replace("</tr>", _SRC_GEN + "</tr>")
                 if not cells.endswith("</tr>") and "<tr>" in cells:
                     cells = cells + _SRC_GEN
@@ -159,7 +197,7 @@ def table(headers, rows, cls="", caption=""):
             body.append(cells if cells.startswith("<tr>") else "<tr>" + cells + "</tr>")
         else:
             cells = "".join(r)
-            if _row_needs_source(cells):
+            if require_source and _row_needs_source(cells):
                 r = list(r) + [_SRC_GEN]
                 patched = True
             body.append("<tr>" + "".join(r) + "</tr>")
@@ -175,14 +213,24 @@ def table(headers, rows, cls="", caption=""):
 
 
 def page(filename, title, body, extra_head="", wide=False):
-    nav = "".join(
-        '<a href="%s"%s>%s</a>' % (href, ' class="on"' if href == filename else "", label)
-        for href, label in NAV
-    )
+    nav_groups = []
+    for group_label, hrefs in NAV_GROUPS:
+        entries = [(href, NAV_BY_HREF[href]) for href in hrefs]
+        active = filename in hrefs
+        links = []
+        for href, label in entries:
+            current = ' aria-current="page"' if href == filename else ""
+            links.append('<a href="%s"%s>%s</a>' % (esc(href), current, esc(label)))
+        nav_groups.append(
+            '<details class="nav-group%s"><summary>%s</summary>'
+            '<div class="nav-menu" role="group" aria-label="%s pages">%s</div></details>'
+            % (" active" if active else "", esc(group_label), esc(group_label), "".join(links))
+        )
+    nav = "".join(nav_groups)
 
     def _sweep_row(m):
         row = m.group(0)
-        if "<th" in row:
+        if "<th" in row or filename in SPECIFICATION_PAGES:
             return row
         if _row_needs_source(row):
             return row.replace("</tr>", _SRC_GEN + "</tr>")
@@ -201,17 +249,16 @@ def page(filename, title, body, extra_head="", wide=False):
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
-  <nav class="nav" aria-label="Sections">%s</nav>
+  <nav class="nav" aria-label="Pages grouped by topic">%s</nav>
 </header>
 <main id="main"%s>
 %s
 </main>
 <footer class="foot">
   <p><strong>%s</strong> — %s</p>
-  <p>Data captured 2026-11-14 and 2026-11-16 (UTC) from official league and club sources. Every value links to its source.
-  Values that could not be confirmed from an official source are left blank and listed on
-  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
-  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+  <p>Official-source citations identify dated observations; derived analyses identify their inputs, and third-party data are labelled.
+  User-provided requirements are project specifications, not NFL facts. Unconfirmed values remain blank and review flags remain visible.
+  Nothing on this site is a bet, an offer to wager, or advice.</p>
 </footer>
 <script src="assets/js/site.js" defer></script>
 </body>
@@ -788,19 +835,19 @@ official, so they cannot enter this register. They live on their own labelled pa
         ])
     out["decision_readiness"] = """
 <section id="decision-readiness">
-<h2>Decision-readiness — one row per requirement</h2>
-<p class="lead">What each requirement needs before a decision can rest on it: the gate that blocks it
-today, and the number that would clear that gate. Identity and status are read from the requirements
-register at build time; blockers cite published question and flag records; clearing numbers are this
-repo's own verification counts, and proposed thresholds are marked as proposals.</p>
+<h2>Decision-readiness — 2026-11-16 snapshot</h2>
+<p class="lead">This is a separately retained, user-provided project-readiness view from
+<code>data/decision_readiness.json</code>, updated 2026-11-16. Its status, evidence and clearing-number
+cells are a prior-session snapshot, not NFL facts and not recomputed against the 2026-11-17 captures.
+For example, it records 24/28 requirements complete and 68/74 sources verified; those are not current
+repository totals. Compare with the other <a href="readiness.html">Decision Readiness</a> view and
+<a href="requirements.html">Requirements</a>. Both are preserved pending F66/SG47 owner review.</p>
 %s
 </section>
-""" % table(["Req", "Requirement", "Status", "Delivered so far", "Gate that blocks it",
-             "Refs", "The number that would clear it"],
+""" % table(["Req", "Requirement", "Snapshot status", "Delivered (snapshot)",
+             "Gate (snapshot)", "Refs", "Clearing target (snapshot)"],
             dr_rows, cls="dense searchable",
-            caption="Built by <code>scripts/build_decision_readiness.py</code> from "
-                    "data/requirements.json + published registers. A blank blocker means the "
-                    "requirement is delivered and held open only by ongoing verification.")
+            caption="Prior-session snapshot loaded from <code>data/decision_readiness.json</code> (updated 2026-11-16); values are retained for comparison, not presented as today's counts.")
 
     # ------------------------------------------------------- N05 luck panel
     lk_rows = []
@@ -819,8 +866,13 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
     h = luck["headlines"]
     out["luck_panel"] = """
 <section id="removal-of-luck">
-<h2>Removal of luck &mdash; why the board is still empty</h2>
-<p class="lead">%s</p>
+<h2>Signal-versus-variance view — 2026-11-16</h2>
+<p class="lead">This is the separately retained luck-removed-edge view in
+<code>data/luck_panel_signal.json</code> (updated 2026-11-16), calculated on the third-party-backed
+computed research layer. It uses the 95%% hit-rate lower bound minus the standard -110 break-even;
+ROI is telemetry, not a ranking criterion. It is distinct from the family-wise p-value view below,
+and from the official-results-only 137-game panel on <a href="removal-of-luck.html">Removal of Luck</a>.
+%s</p>
 <div class="callout"><p><strong>The one-line proof.</strong> %s</p>
 <p><strong>Control baseline.</strong> %s</p>
 <p><strong>Multiplicity.</strong> %s</p></div>
@@ -1090,7 +1142,11 @@ The full register &mdash; including a line-by-line audit of every brief bullet &
         ])
     luck_dashboard = """
 <section>
-<h2 id="luck">Removal of luck</h2>
+<h2 id="luck">Family-wise signal and sample-floor view — 2026-11-16</h2>
+<p class="lead">This separately retained family-wise p-value analysis is loaded from
+<code>data/luck_panel_signals.json</code> (updated 2026-11-16) and uses the third-party-backed computed
+research layer. It differs from the signal-versus-variance hit-rate lower-bound panel above and from
+the official-results-only 137-game panel on <a href="removal-of-luck.html">Removal of Luck</a>.</p>
 <p class="lead"><strong>%(n_eval)d</strong> strategies evaluated &middot; <strong>%(n_proven)d</strong> proven &middot;
 verdict: <strong>%(verdict)s</strong>. The family-wise bar for a 16-strategy search is a p-value below
 <strong>%(bonf)s</strong> (Bonferroni &alpha;/16); the best raw p-value is <strong>%(bestp)s</strong>
@@ -1508,7 +1564,7 @@ def main():
         "raw_src": raw_src, "src_link": src_link, "esc": esc,
         "sources_by_id": sources_by_id,
     }
-    g_pages, g_sections = site_g.build(g_ctx)
+    g_pages, _g_sections = site_g.build(g_ctx)
 
     # Session arena-fc0ed6e8-fl1 (2026-11-16): decision-layer sections and pages.
     sess = session_sections(sources_by_id, readiness, luck_panel, ablations, announced,
@@ -1519,250 +1575,312 @@ def main():
     # ------------------------------------------------------------------ index
     n_sugg = len(suggestions)
     n_q = len(questions)
-    n_block = sum(1 for q in questions if str(q.get("blocking", "")).lower().startswith("yes"))
-    n_verified = sum(1 for s in sources if s["status"] == "VERIFIED")
-    n_404 = sum(1 for s in sources if s["status"] != "VERIFIED")
-    n_req_done = sum(1 for r in requirements if r["status"] == "done")
+    n_block = sum(1 for q in questions
+                  if str(q.get("blocking", "")).lower().startswith("yes"))
+    n_req_done = sum(1 for r in requirements if r.get("status") == "done")
+    backlog = build.load_json("requirements_backlog.json")
+    n_backlog_req = len(backlog["rows"])
 
-    cards = """
-<section class="hero">
-  <h1>What this site is</h1>
-  <p class="lead">A verified, auditable base for originating NFL lines. It separates three things that are
-  usually blurred together: <strong>what an official source actually says</strong>,
-  <strong>what we do not know yet</strong>, and <strong>what we propose to do about it</strong>.
-  Nothing here has been estimated to fill a gap. Where a number could not be confirmed, the cell is blank.</p>
-  <p class="lead">No strategy on this site has a performance figure, because no strategy has been run.
-  A blank leaderboard is the honest starting state.</p>
+    with open(os.path.join(build.DATA, "results_2026-11-17.tsv"),
+              encoding="utf-8", newline="") as fh:
+        latest_result_rows = [r for r in _csv.reader(fh, delimiter="\t") if r]
+    with open(os.path.join(build.DATA, "injuries_2026-11-16.tsv"),
+              encoding="utf-8", newline="") as fh:
+        injury_read_2 = [r for r in _csv.reader(fh, delimiter="\t") if r]
+    assert all(len(r) == 6 for r in latest_result_rows), \
+        "dated 2026-11-17 results rows must retain the six-field schema"
+    assert len(latest_result_rows) == 149, \
+        "dated 2026-11-17 result count changed; reconcile before publishing the dashboard"
+
+    dashboard = """
+<section class="hero dashboard-hero">
+  <p class="eyebrow">Research dashboard &middot; evidence read through 2026-11-17 UTC</p>
+  <h1>NFL evidence, model research, and open decisions</h1>
+  <p class="lead">FL1 is a static research and decision-support site, not an NFL publication or a
+  validated betting system. It keeps official records, derived analyses, third-party inputs and
+  user-provided project specifications distinct. Unsupported values remain blank and review flags
+  remain visible.</p>
+  <p class="note">Dated citations describe what a source showed at the recorded read; live pages can
+  change. The Dashboard links the full source record for manual review.</p>
 </section>
 
-<section class="grid">
+<section class="dashboard-section">
+<h2>Evidence snapshot</h2>
+<div class="metric-grid">
+  <article class="metric-card">
+    <p class="metric-label">Latest dated official results read</p>
+    <p class="metric-value">%(latest_results)s completed games</p>
+    <p>2026-11-17 capture; its standings reconcile for all 32 clubs. This is separate from the
+    frozen 137-game evaluation corpus.</p>
+    <p class="source-links">%(results_sources)s</p>
+  </article>
+  <article class="metric-card">
+    <p class="metric-label">Frozen evaluation corpus</p>
+    <p class="metric-value">%(frozen_results)s games</p>
+    <p>The official-results panel still uses this dated sample; it was not silently extended by the
+    later results read.</p>
+    <p class="source-links">%(frozen_sources)s</p>
+  </article>
+  <article class="metric-card">
+    <p class="metric-label">LAC at BAL — Week 10</p>
+    <p class="metric-value status-open">Open · no result recorded</p>
+    <p>F67 remains unresolved. Re-read the official Game Center after it says Final before adding a
+    result.</p>
+    <p class="source-links">%(live_sources)s</p>
+  </article>
+  <article class="metric-card">
+    <p class="metric-label">Week 10 injury captures</p>
+    <p class="metric-value">%(injury_read_1)s &rarr; %(injury_read_2)s rows</p>
+    <p>Separate 2026-11-14 and 2026-11-16 snapshots; neither is a live status claim.</p>
+    <p class="source-links">%(injury_sources)s</p>
+  </article>
+</div>
+</section>
+
+<section class="dashboard-section">
+<h2>Start here</h2>
+<div class="grid topic-grid">
   <a class="card" href="executive-summary.html"><h3>Executive Summary</h3>
-    <p>One page: what is verified, what is blocked, and the five decisions that unblock the rest.</p></a>
-  <a class="card" href="#decision-readiness"><h3>Decision-Readiness Table</h3>
-    <p>One row per requirement: the gate that blocks it and the number that would clear it.
-    <strong>24 of 28</strong> delivered, 4 partial with named gates.</p></a>
-  <a class="card" href="#removal-of-luck"><h3>Removal of Luck</h3>
-    <p>The luck-removed edge (95%% CI lower bound vs break-even) applied to all 16 computed entries:
-    <strong>0 proven</strong>, including every positive-ROI entry. See why before trusting any record.</p></a>
-  <a class="card" href="injuries.html"><h3>Injury Report</h3>
-    <p><strong>%(inj_rows)d</strong> player rows across <strong>%(inj_clubs)d of %(inj_clubs_total)d</strong> clubs, straight from the official
-    Week 10 report. Practice status and game status preserved exactly.</p></a>
-  <a class="card" href="depth.html"><h3>Backup Depth</h3>
-    <p><strong>%(depth_covered)d of %(depth_total)d</strong> club charts captured — <strong>%(depth_rows)d</strong> charted slots.
-    <strong>%(depth_starters_status)d</strong> first-string players carry an official Out / Doubtful / Questionable status,
-    each with the next player the club itself lists at that slot. No inferred ranking.</p></a>
-  <a class="card" href="questions.html"><h3>Open Questions</h3>
-    <p><strong>%(n_questions)d</strong> questions, <strong>%(n_blocking)d</strong> of them blocking, each stating what we know,
-    what we do not, and what data is missing.</p></a>
-  <a class="card" href="suggestions.html"><h3>Suggestions</h3>
-    <p><strong>%(n_suggestions)d</strong> proposals with options, trade-offs and one recommended path. Review before
-    anything is implemented.</p></a>
-  <a class="card" href="model-lines.html"><h3>Model Lines &amp; Price Store</h3>
-    <p>Our own fair side, total and moneyline for the 13 pending Week 10 games, in that order. Market and difference cells are blank: no official price source exists.</p></a>
-  <a class="card" href="results-feed.html"><h3>Results Feed &amp; Backtest</h3>
-    <p>137 final 2026 results and a strictly out-of-sample backtest. The model does not beat a constant benchmark on margin or total; ROI is blank.</p></a>
-  <a class="card" href="governance.html"><h3>Signal &amp; Demotion</h3>
-    <p>The leaderboard ranks on signal only, staking is shown beside it, the G-14 gate sends a live strategy back to paper, and correlations are withheld.</p></a>
-  <a class="card" href="line-board.html"><h3>Line Board</h3>
-    <p>Model fair line, market line and difference as three separate columns, in the mandated order:
-    side, then total, then moneyline. Every coefficient published with its n.</p></a>
-  <a class="card" href="price-snapshots.html"><h3>Price Snapshots &amp; Replacement Depth</h3>
-    <p>Opening and closing numbers for every market we originate (opens blank: no source exists), and the
-    string number of the next available player at every slot missing a starter.</p></a>
-  <a class="card" href="strategies.html"><h3>Leaderboard</h3>
-    <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
-  <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
-    <p>All 272 regular-season games, %(n_results)d results in so far, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
-  <a class="card" href="prop-correlations.html"><h3>Prop Correlations</h3>
-    <p>Empirical player-level correlations from 1999&ndash;2024 (closes Q-PROP-01); parlay lift math, QA gates, reproducible.</p></a>
-  <a class="card" href="originations.html"><h3>Originations</h3>
-    <p>Our own numbers, in order: side, then total, then moneyline &mdash; each published as fair line | market line | difference.</p></a>
-  <a class="card" href="signal-vs-staking.html"><h3>Signal vs Staking</h3>
-    <p>The leaderboard split that stops a lucky staking run masking a bad signal, plus the demotion gate that sends a live strategy back to paper.</p></a>
-  <a class="card" href="replacement-depth.html"><h3>Replacement Depth</h3>
-    <p>Which string replaces the missing starter, not just that a replacement exists &mdash; Week 10, 69 affected spots.</p></a>
-  <a class="card" href="official-correlations.html"><h3>Official Correlations</h3>
-    <p>Correlations computed only from officially sourced numbers, every value published with its n.</p></a>
-  <a class="card" href="price-store.html"><h3>Price-Snapshot Store</h3>
-    <p><strong>%(mk_snapshots)s</strong> append-only price rows with feed, field, capture timestamp and the
-    vintage the publisher actually asserted &mdash; plus the coverage that honest labelling leaves open, and the
-    cross-feed drift that averaging would hide.</p></a>
-  <a class="card" href="results-feed-market.html"><h3>Verified Results Feed</h3>
-    <p><strong>%(mk_verified)s of %(mk_games)s</strong> current-season games verified game-by-game against the
-    official transcription, with the season recount against the league table. Settlement refused where the
-    status is not earned.</p></a>
-  <a class="card" href="origination.html"><h3>Origination Run</h3>
-    <p>Side, then total, then moneyline &mdash; the order enforced in code. Fair line, market line and the
-    difference as three columns, with the model card and the tuning grid beside every number.</p></a>
-  <a class="card" href="signal-vs-staking-market.html"><h3>Signal vs Staking</h3>
-    <p>Two scorecards per strategy: a stake-free signal block ranked on its lower bound, and a staking block
-    that is published but never ranked on. <strong>%(mk_rewards)s</strong> reward units payable today.</p></a>
-  <a class="card" href="replacement-depth-market.html"><h3>Replacement Depth</h3>
-    <p><strong>%(mk_depth)s</strong> vacancies resolved to a named replacement with the depth it cost, instead
-    of a count of who is out.</p></a>
-  <a class="card" href="correlation-gate.html"><h3>Correlation Gate</h3>
-    <p>Official operands only, <em>n</em> on every row, and the pairs the gate refuses shown with their reason
-    instead of quietly dropped.</p></a>
-  <a class="card" href="demotion-gate.html"><h3>Demotion Gate</h3>
-    <p>Four monitors evaluated on a real bet log, with the earliest breach named by season, week and game.</p></a>
-  <a class="card" href="decision-desk.html"><h3>Decision Desk</h3>
-    <p>What this build opened, what it is waiting on, and the next five actions in order.</p></a>
-  <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
-    <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a></section>
+    <p>Dated official evidence, the analysis boundary, and the review issues that remain open.</p></a>
+  <a class="card" href="questions.html"><h3>Questions &amp; missing information</h3>
+    <p>%(n_questions)s registered questions, with gaps and paths to obtain missing information.</p></a>
+  <a class="card" href="suggestions.html"><h3>Suggestions &amp; decisions</h3>
+    <p>%(n_suggestions)s proposals with options and trade-offs; owner decisions remain open until recorded.</p></a>
+  <a class="card" href="requirements-backlog.html"><h3>Requirement Backlog</h3>
+    <p>User-provided project specifications and repository planning status — not NFL requirements or facts.</p></a>
+</div>
+</section>
+
+<section class="dashboard-section">
+<h2>Browse by topic</h2>
+<div class="topic-panel-grid">
+  <article class="topic-panel">
+    <h3>Official records &amp; availability</h3>
+    <p>Review dated schedules, results, injury snapshots, announced starters and the limits of club depth charts.</p>
+    <div class="topic-links">
+      <a href="schedule.html">Schedule</a><a href="standings.html">Standings</a>
+      <a href="verified-results-feed.html">Verified Results</a><a href="injuries.html">Injuries</a>
+      <a href="availability-ledger.html">Snapshot Ledger</a><a href="announced-starters.html">Announced Starters</a>
+      <a href="team-availability.html">Team Availability</a><a href="depth.html">Backup Depth</a>
+      <a href="replacement-depth.html">Replacement Depth</a>
+      <a href="replacement-depth-market.html">Replacement Depth (spine)</a>
+      <a href="replacement-depth-r21r28.html">Replacement Depth (R21–R28)</a>
+    </div>
+  </article>
+  <article class="topic-panel">
+    <h3>Lines, models &amp; prices</h3>
+    <p>Keep fair lines, market lines and differences distinct; inspect price-source provenance and blank cells.</p>
+    <div class="topic-links">
+      <a href="line-origination.html">Line Origination</a><a href="model-lines.html">Model Lines</a>
+      <a href="originations.html">Originations</a><a href="line-board.html">Line Board</a>
+      <a href="origination.html">Origination Run</a><a href="price-snapshots.html">Price Snapshots</a>
+      <a href="price-store.html">Price Store</a>
+    </div>
+  </article>
+  <article class="topic-panel">
+    <h3>Evaluation &amp; research</h3>
+    <p>Compare separate strategy, signal/staking, validation, ablation, correlation and luck analyses.</p>
+    <div class="topic-links">
+      <a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a>
+      <a href="signal-vs-staking-market.html">Signal vs Staking (spine)</a><a href="results-feed.html">Results &amp; Backtest</a>
+      <a href="results-feed-market.html">Results Feed (spine)</a><a href="governance.html">Signal &amp; Demotion</a>
+      <a href="validation.html">Validation Gates</a><a href="demotion-gate.html">Demotion Gate</a>
+      <a href="ablations.html">Ablations</a><a href="removal-of-luck.html">Removal of Luck</a>
+      <a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a>
+      <a href="correlation-gate.html">Correlation Gate</a><a href="prop-correlations.html">Prop Correlations</a>
+      <a href="docs/computed/index.html">Computed Research Layer</a>
+    </div>
+  </article>
+  <article class="topic-panel">
+    <h3>Requirements &amp; review</h3>
+    <p>The requirement rows are user-provided project specifications. Read their evidence and targets as repository planning, not NFL policy.</p>
+    <div class="topic-links">
+      <a href="requirements.html">Requirements</a><a href="requirements-backlog.html">Full Backlog</a>
+      <a href="readiness.html">Decision Readiness</a><a href="decision-desk.html">Decision Desk</a>
+      <a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a>
+      <a href="verification.html">Verification</a>
+    </div>
+  </article>
+</div>
+</section>
+
+<section class="dashboard-section" id="alternate-analyses">
+<h2>Alternate readiness and luck analyses — retained pending review</h2>
+<p class="lead">F66 / SG47 records overlapping implementations and leaves consolidation to an owner
+review. These views use different inputs, scopes or definitions. Keep them separate; no canonical
+winner is declared here. Every alternate page remains linked in the topic navigation.</p>
+<div class="analysis-view-grid">
+  <article class="analysis-view">
+    <h3>Decision readiness — three views</h3>
+    <ul class="tight">
+      <li><a href="requirements-backlog.html">Requirement Backlog</a> — full user-provided specification list.</li>
+      <li><a href="readiness.html">Decision Readiness</a> — a separate 2026-11-16 gates/targets and brief-audit view.</li>
+      <li><a href="#decision-readiness-view">2026-11-16 requirements-register snapshot</a> — includes old 24/28 and 68/74 counts; not current totals.</li>
+    </ul>
+  </article>
+  <article class="analysis-view">
+    <h3>Removal of luck — three views</h3>
+    <ul class="tight">
+      <li><a href="removal-of-luck.html">Official-results base-rate / Brier view</a>.</li>
+      <li><a href="#signal-variance-view">Signal-versus-variance view</a> — the alternate strategy panel below.</li>
+      <li><a href="#familywise-luck-view">Family-wise p-value and sample-floor view</a> — below and on <a href="readiness.html#luck">Decision Readiness</a>.</li>
+    </ul>
+  </article>
+</div>
+<div class="callout warn">
+  <p><strong>Do not blend the scores.</strong> The family-wise signal panel reports no strategy clearing
+  its threshold; it uses a third-party-backed research ledger. That is a model finding, not an NFL fact.
+  See <a href="flagged.html#F66">F66</a>, <a href="suggestions.html#SG47">SG47</a> and source
+  <a href="sources.html#S47">S47</a>.</p>
+</div>
+</section>
+
+<section class="dashboard-details">
+<details class="dashboard-disclosure">
+  <summary id="decision-readiness-view">Open the 2026-11-16 requirements-register snapshot (user-provided project specifications, not NFL facts)</summary>
+  %(readiness_28)s
+</details>
+<details class="dashboard-disclosure">
+  <summary id="signal-variance-view">Open the 2026-11-16 signal-versus-variance view (third-party-backed research)</summary>
+  %(luck_variance)s
+</details>
+<details class="dashboard-disclosure">
+  <summary id="familywise-luck-view">Open the 2026-11-16 family-wise p-value and sample-floor view (third-party-backed research)</summary>
+  %(luck_familywise)s
+</details>
+</section>
+
+<section class="callout warn">
+  <h2>Source citation under correction</h2>
+  <p><a href="schedule.html">Schedule 2026</a> currently attributes its dated announcement to S86,
+  but S86 in the current register is a third-party nflverse win-totals feed. The official announcement
+  is <a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14">on NFL.com</a>;
+  the source-ID/generator correction is logged in <a href="COORDINATION.md">COORDINATION.md</a> and
+  the S86 chip should not be used for that claim until corrected.</p>
+</section>
 """ % {
-       "inj_rows": lg["rows"],
-       "inj_clubs": lg["clubs"],
-       "inj_clubs_total": lg["clubsTotal"],
-       "depth_covered": depth_cov["covered"],
-       "depth_total": depth_cov["total"],
-       "depth_rows": depth_tot["rows"],
-       "depth_starters_status": depth_tot["startersWithStatus"],
-       "n_questions": n_q,
-       "n_blocking": n_block,
-       "n_suggestions": n_sugg,
-       "n_results": len(results),
-       "mk_snapshots": pages_market.summary_counts()["snapshots"],
-       "mk_verified": pages_market.summary_counts()["verified"],
-       "mk_games": pages_market.summary_counts()["games"],
-       "mk_rewards": pages_market.summary_counts()["rewards"],
-       "mk_depth": pages_market.summary_counts()["depth"],
-   }
+        "latest_results": len(latest_result_rows),
+        "frozen_results": len(results),
+        "injury_read_1": len(injuries),
+        "injury_read_2": len(injury_read_2),
+        "n_questions": n_q,
+        "n_suggestions": n_sugg,
+        "results_sources": " ".join((src_link("S89", sources_by_id),
+                                      src_link("S90", sources_by_id))),
+        "frozen_sources": " ".join((src_link("S52", sources_by_id),
+                                     '<a href="verified-results-feed.html">frozen results view</a>')),
+        "live_sources": " ".join((src_link("S91", sources_by_id),
+                                   '<a class="src" href="flagged.html#F67">F67</a>')),
+        "injury_sources": " ".join((src_link("S01", sources_by_id),
+                                     src_link("S80", sources_by_id))),
+        "readiness_28": sprint["decision_readiness"].strip(),
+        "luck_variance": sprint["luck_panel"].strip(),
+        "luck_familywise": sess["luck_dashboard"].strip(),
+    }
 
-    kpis = table(
-        ["Metric", "Value", "Basis", "Source"],
-        [
-            [cell("Injury rows captured"), cell(lg["rows"], "n"),
-             cell("Official Week 10 2026 report, one snapshot"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Clubs present in that report"), cell("%d of %d" % (lg["clubs"], lg["clubsTotal"]), "n"),
-             cell("Four clubs absent — see Flagged F06"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Players designated Out"), cell(lg["out"], "n"),
-             cell("Game status column reads Out"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Players designated Doubtful"), cell(lg["doubtful"], "n"),
-             cell("Game status column reads Doubtful"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Players designated Questionable"), cell(lg["questionable"], "n"),
-             cell("Game status column reads Questionable"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Did-not-participate practice rows"), cell(lg["dnp"], "n"),
-             cell("Practice status column reads Did Not Participate"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Rows marked not injury related"), cell(lg["nonInjury"], "n"),
-             cell("Injury text begins 'Not injury related'"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Sources verified"), cell("%d of %d" % (n_verified, len(sources)), "n"),
-             cell("Page loaded successfully in this session"), raw_src('<a href="sources.html">registry</a>')],
-            [cell("Sources that failed to load"), cell(n_404, "n"),
-             cell("Recorded as NOT VERIFIED, never cited as fact"), raw_src('<a href="flagged.html">flagged</a>')],
-            [cell("Strategies with a result"), cell("0 of %d" % len(strategies), "n"),
-             cell("Plan-level register (official data only); the computed-layer backtests are separate and flagged — see the Leaderboard page"),
-             raw_src('<a href="strategies.html">board</a>')],
-        ],
-        cls="kpi",
-        caption="Headline figures. Each is computed by <code>tools/build.py</code> from the data files, not typed in by hand.",
-    )
-
-    written.append(page("index.html", "Dashboard",
-                        cards + kpis + sprint["decision_readiness"]
-                        + sprint["luck_panel"] + g_sections
-                        + sess["landing_readiness"] + sess["luck_dashboard"]))
+    written.append(page("index.html", "Dashboard", dashboard))
 
     # ------------------------------------------------------- executive summary
-    total_out_def = sum(t["defOut"] for t in by_team)
-    total_out_off = sum(t["offOut"] for t in by_team)
+    official_luck = build.load_json("luck_panel.json")
+    official_luck_headline = official_luck["headline"]
+    injury_read_1 = len(injuries)
+    injury_read_2_count = len(injury_read_2)
+
+    def evidence_sources(*ids):
+        return raw_src(" ".join(src_link(sid, sources_by_id) for sid in ids))
+
+    summary_rows = [
+        [cell("Latest dated 2026 results read"),
+         cell("%d finals; standings reconcile for all 32 clubs" % len(latest_result_rows)),
+         evidence_sources("S89", "S90")],
+        [cell("Frozen evaluation corpus"),
+         cell("%d games; retained separately from the later dated read" % len(results)),
+         evidence_sources("S52")],
+        [cell("Week 10 injury captures"),
+         cell("%d rows (2026-11-14); %d rows (2026-11-16)" %
+              (injury_read_1, injury_read_2_count)),
+         evidence_sources("S01", "S80")],
+        [cell("LAC at BAL"),
+         cell("No result recorded; F67 remains open until the official page shows Final"),
+         evidence_sources("S91")],
+        [cell("Official-results luck sample"),
+         cell("%d games; %d home wins, %d away wins, %d tie; home-win rate %.1f%% "
+              "(95%% Wilson interval %.1f%%–%.1f%%)" %
+              (official_luck_headline["games"], official_luck_headline["home_wins"],
+               official_luck_headline["away_wins"], official_luck_headline["ties"],
+               100 * official_luck_headline["home_win_rate"],
+               100 * official_luck_headline["home_win_rate_wilson"][0],
+               100 * official_luck_headline["home_win_rate_wilson"][1])),
+         evidence_sources("S52")],
+    ]
+
     es = """
-<section>
+<section class="hero">
 <h1>Executive Summary</h1>
-<p class="lead">Status as of 2026-11-14. This page states only what can be traced to an official source,
-and marks everything else as open.</p>
+<p class="lead">Status of the committed evidence through 2026-11-17 UTC. FL1 is a research and
+ decision-support repository, not an NFL publication or a validated betting system. Official
+ observations, third-party inputs, computed analyses, and user-provided project specifications are
+ kept distinct.</p>
+<p class="note">The source links below identify official NFL records for manual review. They refer to
+ dated reads, not a guarantee that a live page still shows the same content.</p>
 </section>
 
 <section>
-<h2>1. What has been verified</h2>
-<p>The repository was empty apart from a five-byte README, so the entire base is new. Fifteen sources were
-attempted; <strong>%d loaded successfully</strong> and <strong>%d did not</strong>. The failed ones are
-recorded as unverified and are never used to support a claim.</p>
-<p>The most substantial verified artefact is the <strong>official Week 10, 2026 season injury report</strong>:
-%d player rows over %d clubs, with each player's practice status and game status reproduced exactly as published.
-Of those rows, %d carry a game status (Out, Doubtful or Questionable) and %d are recorded as did-not-participate
-in practice. Two rows are explicitly <em>not injury related</em>, which matters: counting them as injuries would
-inflate any injury rate.</p>
-<p>Alongside the injury data the site holds the official 2026 division and league standings for all 32 clubs,
-the Week 10 schedule with kickoff times and broadcasters, the league's tiebreaking procedures, and the official
-league calendar through Super Bowl LXI on 2027-02-14.</p>
+<h2>Official evidence and sample boundaries</h2>
+%s
+<p>The later 149-result read is preserved beside the frozen 137-game corpus. The official-results
+luck panel still uses that 137-game sample; its rate and interval must not be described as a
+149-game estimate. Injury captures are also dated snapshots, not a statement of today's active
+report.</p>
 </section>
 
 <section>
-<h2>2. What is blocked, and why</h2>
-<p>Three blockers stop the analytical work, and none of them can be solved by effort inside this repository.</p>
-<ol class="tight">
-<li><strong>No benchmark price.</strong> The league publishes results, statistics and schedules, not betting
-prices. Without a price there is no edge, no expected value and no closing-line value. Every such field on this
-site is blank. This is blocker #1 and it gates the entire leaderboard.</li>
-<li><strong>No official snap counts and no league-wide official depth chart.</strong>
-<code>nfl.com/depth-charts/</code> returns 404. Depth therefore has to be captured club by club, and each club
-titles its own chart <em>Unofficial Depth Chart</em>. %d of the 32 clubs publish one as a readable table; Houston
-publishes its as an image (<a href="flagged.html#F16">F16</a>). So &ldquo;which backup replaced which
-starter&rdquo; cannot be measured, only alleged. The site shows official absence and the club&rsquo;s own
-published ordering instead, and labels the depth layer as derived.</li>
-<li><strong>One snapshot, one season.</strong> Everything here is a single capture on a single day. No backtest,
-no persistence claim and no multi-season holdout is possible from this data.</li>
-</ol>
+<h2>What the analyses do — and do not — establish</h2>
+<p>The official-results panel computes a home-win rate over the frozen sample. It does not establish
+that a model has an edge. Separately, the 16-entry signal panel reports <strong>no strategy clearing
+its family-wise threshold</strong>. That panel is based on a third-party-backed research ledger, not
+an NFL publication; its result should not be combined with the official-results panel.</p>
+<p>F66 records overlapping readiness and luck implementations; SG47 leaves consolidation for owner
+review. The Dashboard and topic navigation keep the competing views available with their distinct
+inputs and definitions. No view is declared canonical here. See <a href="flagged.html#F66">F66</a>,
+<a href="suggestions.html#SG47">SG47</a>, <a href="sources.html#S47">S47</a>,
+<a href="readiness.html#luck">the family-wise signal panel</a>, and
+<a href="removal-of-luck.html">the official-results luck panel</a>.</p>
+<p>Some market and backtest outputs use third-party price data. They are labelled as third-party and
+remain subject to the unresolved source-policy question. They are not official NFL facts, and no
+result in this summary is a recommendation to wager.</p>
 </section>
 
 <section>
-<h2>3. What the injury data already shows</h2>
-<p>Among the clubs captured, %d players are designated Out, split <strong>%d on offense, %d on defense and %d on
-special teams</strong>. Defensive line and secondary depth is the most exposed area, which is the part of the
-brief about 2nd and 3rd string defenders being forced in.</p>
-<p>The pattern is concrete and checkable across the league: of the %d first-string slots charted, <strong>%d
-carry an official Out / Doubtful / Questionable status</strong> this week, and for each one the club&rsquo;s own
-chart names the next player at that same slot. Kansas City is worked end to end on
-<a href="depth.html">Backup Depth</a> — starting right tackle Out (ankle), starting running back Questionable
-after not practising (groin), second-string defensive tackle Out (neck). Those are observed facts with a source
-link. The claim that a specific backup took the snaps is <em>not</em> made, because no snap-count source was
-verified.</p>
+<h2>Project specifications and next review</h2>
+<p>The requirement registers contain %d core rows and %d backlog rows. These rows transcribe
+<strong>user-provided project specifications</strong>; they are not NFL requirements, NFL policy, or
+facts about the league. Their statuses and “number that would clear it” cells are repository
+planning criteria or design targets, not NFL-published thresholds. See
+<a href="requirements-backlog.html">Requirement Backlog</a>,
+<a href="readiness.html">Decision Readiness</a>, and <a href="flagged.html#F65">F65</a>.</p>
+<p>Questions and suggestions remain reviewable on <a href="questions.html">Open Questions</a> and
+<a href="suggestions.html">Suggestions</a>. The next result-data action is not to infer a score:
+re-read the official <a href="https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live">LAC–BAL
+Game Center</a> after it explicitly shows Final, then verify the quarter scores and standings delta
+before recording it. Until then F67 remains open.</p>
 </section>
 
-<section>
-<h2>4. The five decisions that unblock the rest</h2>
-<ol class="tight">
-<li><strong>Name one market to price first</strong> (Q01). Trying to price everything at once guarantees nothing
-reaches significance in an 18-week season.</li>
-<li><strong>Supply or accept a benchmark price source</strong> (Q03), or accept that the site publishes fair
-value only and grades on calibration instead of profit.</li>
-<li><strong>Accept that depth is derived, not official</strong> (Q04), and let the depth layer ship labelled as
-such.</li>
-<li><strong>Pre-register the validation gates</strong> (Q09, Q12, Q19) before any strategy is scored, so the
-target cannot be moved after the result is known.</li>
-<li><strong>Keep rewards non-monetary</strong> (Q13, Q14) and leave the legal question open rather than
-answering it.</li>
-</ol>
+<section class="callout warn">
+<h2>Schedule-announcement source citation under correction</h2>
+<p>The announcement paragraph on <a href="schedule.html">Schedule 2026</a> currently cites S86,
+which identifies a third-party nflverse win-totals feed in the current register. The announcement
+itself is on <a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14">NFL.com</a>.
+The source-ID and generator repair is logged in <a href="COORDINATION.md">COORDINATION.md</a> and
+remains a separate follow-up; do not rely on the S86 chip for that claim until it is corrected.</p>
 </section>
-
-<section>
-<h2>5. Recommendations, in order</h2>
-<p>Full reasoning and alternatives are on the <a href="suggestions.html">Suggestions</a> page. In short:</p>
-<ul class="tight">
-<li>Publish <em>fair value with an uncertainty band</em>, never an invented market price (SG01).</li>
-<li>Rank strategies on <em>calibration first</em>, profit second (SG02).</li>
-<li>Seal every prediction with a hash before kickoff (SG03) — it is almost free and it is what makes a record credible.</li>
-<li>Split the injury product into <em>observed absence</em> and <em>derived depth</em>, visibly (SG04, SG12).</li>
-<li>Require every strategy to beat a published naive baseline, or it does not get ranked (SG08).</li>
-<li>Sequence the work: team-level single market, then props, then combos, then correlations (SG07).</li>
-</ul>
-</section>
-
-<section>
-<h2>6. What this site deliberately does not do</h2>
-<p>It does not quote an injury-policy definition, because the official PDF returns 404. It does not claim any
-club has a bye, because no official bye table was verified. It does not resolve two places where official NFL.com
-pages contradict each other. It does not print a single performance number. Each of those is listed with links on
-<a href="flagged.html">Flagged for Review</a>.</p>
-</section>
-""" % (n_verified, n_404, lg["rows"], lg["clubs"], lg["withGameStatus"], lg["dnp"],
-       depth_cov["covered"],
-       lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
-       depth_tot["starters"], depth_tot["startersWithStatus"])
-    import brief as _brief  # session arena/685f958d-fl1
-    es = _brief.exec_banner() + site_g.exec_section(g_ctx) + es
-    written.append(page("executive-summary.html", "Executive Summary",
-                        es + sprint["exec_summary"]))
+""" % (
+        table(["Evidence", "Published state", "Official source"], summary_rows,
+              cls="dense", caption="Every row links to an official NFL record; derived values are explicitly described as such."),
+        len(requirements), n_backlog_req,
+    )
+    written.append(page("executive-summary.html", "Executive Summary", es))
 
     # ------------------------------------------------------------ requirements
     by_section = {}

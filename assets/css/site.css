@@ -373,3 +373,140 @@ pre.code {
   font: 13px/1.7 var(--mono);
   margin: 0 0 16px;
 }
+
+/* ------------------------------------------------ grouped topic navigation */
+nav.nav {
+  align-items: flex-start;
+  gap: 5px 7px;
+  padding: 8px 0 10px;
+}
+.nav-group { position: relative; }
+.nav-group > summary {
+  list-style: none;
+  cursor: pointer;
+  display: block;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 650;
+  padding: 7px 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  white-space: nowrap;
+}
+.nav-group > summary::-webkit-details-marker { display: none; }
+.nav-group > summary::after { content: "▾"; margin-left: 8px; color: var(--muted); }
+.nav-group[open] > summary::after { content: "▴"; }
+.nav-group > summary:hover,
+.nav-group > summary:focus-visible { background: var(--line-2); outline: 2px solid var(--accent-2); }
+.nav-group.active > summary { color: #fff; background: var(--accent); border-color: var(--accent); }
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  z-index: 40;
+  display: none;
+  grid-template-columns: minmax(190px, 1fr);
+  gap: 2px;
+  width: max-content;
+  min-width: 220px;
+  max-width: min(330px, calc(100vw - 28px));
+  max-height: min(72vh, 520px);
+  overflow: auto;
+  padding: 7px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  box-shadow: 0 8px 24px rgba(16, 24, 40, .18);
+}
+.nav-group[open] > .nav-menu { display: grid; }
+nav.nav .nav-menu a {
+  display: block;
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 13px;
+  padding: 7px 9px;
+  border-radius: 5px;
+  white-space: normal;
+}
+nav.nav .nav-menu a:hover,
+nav.nav .nav-menu a:focus-visible { background: var(--line-2); color: var(--ink); outline: none; }
+nav.nav .nav-menu a[aria-current="page"] { color: var(--accent); font-weight: 750; background: #eaf2f8; }
+.nav-group:last-child > .nav-menu { left: auto; right: 0; }
+
+/* -------------------------------------------------------- dashboard layout */
+.eyebrow, .metric-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.dashboard-hero { border-top: 4px solid var(--accent); }
+.dashboard-section { margin: 0 0 30px; }
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.metric-card, .topic-panel, .analysis-view {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 16px 17px;
+  box-shadow: var(--shadow);
+}
+.metric-card p { margin-bottom: 9px; }
+.metric-card .metric-label { margin-bottom: 5px; }
+.metric-value {
+  color: var(--ink);
+  font-size: 23px;
+  font-weight: 750;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+.metric-value.status-open { color: var(--warn-ink); font-size: 19px; }
+.source-links { margin: 10px 0 0; }
+.topic-panel-grid, .analysis-view-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+.topic-panel h3, .analysis-view h3 { margin-top: 0; }
+.topic-links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 11px; }
+.topic-links a {
+  display: inline-block;
+  background: #eaf2f8;
+  border: 1px solid #d3e3ee;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 12.5px;
+  text-decoration: none;
+}
+.topic-links a:hover { background: var(--accent); color: #fff; }
+.analysis-view-grid { margin-bottom: 16px; }
+.dashboard-details { display: grid; gap: 10px; margin: 0 0 30px; }
+.dashboard-disclosure {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 15px;
+}
+.dashboard-disclosure > summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--accent);
+  scroll-margin-top: 150px;
+}
+.dashboard-disclosure[open] > summary { padding-bottom: 8px; border-bottom: 1px solid var(--line-2); }
+.dashboard-disclosure > section { margin-top: 16px; }
+.spec-provenance { margin-bottom: 22px; }
+.spec-provenance h2 { margin-top: 4px; }
+
+@media (max-width: 680px) {
+  header.top { padding-left: 12px; padding-right: 12px; }
+  nav.nav { gap: 5px; }
+  .nav-group > summary { font-size: 12px; padding: 6px 8px; }
+  .nav-group:last-child > .nav-menu { left: auto; right: 0; }
+  .topic-panel-grid, .analysis-view-grid { grid-template-columns: 1fr; }
+  .metric-grid { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+}
