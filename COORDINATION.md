@@ -1,3 +1,41 @@
+## Task board — session `arena/3f12fa46-fl1` (matchup matrix, official game books, model-output ledger, weather overlay)
+
+**Session ID:** `arena-3f12fa46` · **Branch:** `arena/3f12fa46-fl1` (from `5a076a0` of `main`, PR #48 merged) ·
+**Claimed:** 2026-11-17 (UTC) · **Status:** active.
+
+**Pre-claim sweep:** `git fetch origin` → `origin/main` = `5a076a0`; `gh pr list --state open` → **no open PRs**;
+every `arena/*` branch in the repo is merged or abandoned, so no live session owns a scope below. This session
+works additively: new files under new names, new pages added to `NAV` in `tools/site.py`, registers appended to
+(never replaced). Shared files touched: `tools/site.py` (NAV + index cards only), `data/sources.tsv`,
+`data/flags.json`, `data/questions.json`, `data/suggestions.json`, `EXECUTIVE_SUMMARY.md`, `README.md`,
+`COORDINATION.md` — all logged here.
+
+### Why this session exists
+
+The board's last three sessions closed their own boards "complete", but the **requirement backlog itself**
+(`data/requirements_backlog.json`, 59 brief lines) still carried stale statuses: lines that had in fact been
+delivered were still marked `not-started`, and two named deliverables from the brief had no implementation at
+all. This session (1) re-audits the backlog against the committed evidence, row by row, (2) builds the missing
+deliverables, and (3) integrates, verifies and publishes.
+
+| ID | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|---|---|---|---|---|---|
+| H1 | Coordination claim, pushed before any task work | done | `arena-3f12fa46` | `COORDINATION.md` | `git fetch` + `gh pr list` sweep | — |
+| H2 | Official game-centre + **NFL Game Book** capture for the completed Week 10 slate: actual starters, official inactive list, official playing time (snaps), official stadium | in progress | `arena-3f12fa46` | `raw/gamebooks/`, `raw/gamecenters/`, `data/gamebooks_*.tsv`, `data/venue_official.csv`, `data/sources.tsv` | nfl.com game centre pages; `static.www.nfl.com` Game Book PDFs; `tools/verify_gamebooks.py` | see "capture notes" below |
+| H3 | **Offense vs Defense matchup deficiency matrix (1st–4th string)** — requirement R64 | pending | `arena-3f12fa46` | `scripts/build_matchup_matrix.py`, `data/matchup_matrix.tsv`, `matchup.html`, `tools/site_h.py` | club depth charts (S16–S46) + official injury report (S01) + H2 game books | — |
+| H4 | **Model output ledger: every model output stored as a probability plus its input vector** — requirement R35 | pending | `arena-3f12fa46` | `scripts/build_model_outputs.py`, `data/model_outputs.json`, `model-outputs.html` | official standings/results captures (S02/S03) + official availability | — |
+| H5 | **Stadium roof/surface + NWS hourly wind/precipitation overlay** — requirement R77 | pending | `arena-3f12fa46` | `scripts/build_weather_overlay.py`, `data/weather_overlay.tsv`, `weather.html` | api.weather.gov (NWS) grid forecasts; official stadium names from H2 | roof designation blank unless an official source publishes it |
+| H6 | **Backlog re-audit** — every brief line's status corrected against committed evidence, with the source that proves it | pending | `arena-3f12fa46` | `scripts/build_backlog_g.py` (rewrite of the builder), `data/requirements_backlog.json`, `requirements-backlog.html` | committed artefacts + official sources | — |
+| H7 | Registers append (flags / questions / suggestions / sources), NAV + index cards, unit tests | pending | `arena-3f12fa46` | `data/{flags,questions,suggestions}.json`, `data/sources.tsv`, `tools/site.py` (NAV/cards only), `tools/site_h.py`, `tests/test_session_h.py` | — | — |
+| H8 | Verification battery → PR → `main` → merge → GitHub Pages confirm → record here | pending | `arena-3f12fa46` | PR + this file | — | — |
+
+### Capture notes (recorded as they happen)
+
+- **2026-11-17 — Game Book PDF.** The official Game Book link on the NE@DET game centre is
+  `https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf`.
+  A first fetch of that URL **failed** ("Failed to fetch page"); retry recorded in the log below. No Game Book
+  value is published unless the PDF itself is read.
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
