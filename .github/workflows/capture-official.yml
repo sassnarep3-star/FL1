@@ -1,0 +1,156 @@
+name: capture-official
+
+# Official-source capture, into a durable vault that is NOT part of the published site.
+#
+# WHAT THIS WORKFLOW DOES
+#   1. Walks every completed 2026 regular-season game on nfl.com.
+#   2. Downloads the official NFL Game Book PDF for each one (the document that
+#      names the actual starting lineups, the substitutions, the "Did Not Play"
+#      list and the official "Not Active" list).
+#   3. Captures the live official injury report, stamped, on the Wednesday /
+#      Thursday / Friday cadence the brief asks for, so the report becomes a
+#      dated series rather than a weekly snapshot.
+#   4. Writes every artefact into `vault/` with its sha256 and byte count, and
+#      commits `vault/` to the **non-published** `vault` branch. GitHub Pages for
+#      this repository is pinned to `main` at path `/`, so nothing on the `vault`
+#      branch is served by the site.
+#
+# WHY A BRANCH AND NOT A FOLDER
+#   The published site is the whole `main` tree (legacy Pages builder, path `/`),
+#   so anything committed under `main/` is public. The raw, row-level captures
+#   therefore live on a branch the Pages build never sees. See
+#   `docs/PUBLIC_PRIVATE.md` for the full statement of the boundary and its limits.
+#
+# DEPENDENCIES
+#   `pypdf` is used ONLY to turn the captured PDF into text for the parser. It is
+#   installed in this job and never in the repository runtime, which stays
+#   standard-library only (see requirements.txt).
+#
+# DRIFT ALARM
+#   The capture job fails loudly when the number of Game Books it retrieved does
+#   not match the number of completed games it expected, and when a Game Book
+#   comes back empty. A silently missing field is the failure mode this whole
+#   repository exists to prevent, so it must fail the build, not publish a blank.
+
+on:
+  push:
+    branches:
+      - 'arena/143300b4-fl1'
+    paths:
+      - 'scripts/capture_official.py'
+      - 'scripts/pdf_to_text.py'
+      - '.github/workflows/capture-official.yml'
+  schedule:
+    # Wednesday, Thursday and Friday at 20:23 and 21:23 UTC. The NFL publishes
+    # the weekly injury report around 16:00 ET (20:00/21:00 UTC depending on
+    # daylight saving), so these two runs bracket publication on each day.
+    - cron: '23 20,21 * * 3,4,5'
+  workflow_dispatch:
+    inputs:
+      season:
+        description: 'Season to capture'
+        required: false
+        default: '2026'
+      week:
+        description: 'Week to capture (0 = every completed week)'
+        required: false
+        default: '0'
+      injuries_only:
+        description: 'Capture only the injury report'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-official
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PDF text extractor (CI only)
+        run: pip install --quiet pypdf
+
+      - name: Capture official sources into the vault
+        run: |
+          python3 scripts/capture_official.py \
+            --vault "$RUNNER_TEMP/vault" \
+            --season "${{ github.event.inputs.season || '2026' }}" \
+            --week "${{ github.event.inputs.week || '0' }}" \
+            ${{ github.event.inputs.injuries_only && '--injuries-only' || '' }}
+
+      - name: Render Game Books to text
+        run: python3 scripts/pdf_to_text.py "$RUNNER_TEMP/vault/pdf"
+
+      - name: Drift alarm — the capture must be complete, not merely present
+        run: |
+          python3 - <<'PY'
+          import csv, glob, json, os, sys
+          vault = os.environ["RUNNER_TEMP"] + "/vault"
+          games = list(csv.DictReader(open(vault + "/games_index.tsv"), delimiter="\t"))
+          expected = [g for g in games if g["away_score"] and g["home_score"]]
+          missing = [g for g in expected if not g["gamebook_sha256"]]
+          print("games captured:", len(games), "with a result:", len(expected))
+          print("game books retrieved:", len(expected) - len(missing))
+          if missing:
+              print("MISSING GAME BOOKS:")
+              for g in missing[:40]:
+                  print("  ", g["slug"], "page=", g["page_status"], "pdf=", g["pdf_status"], g["error"])
+              sys.exit(1)
+          empty = [p for p in glob.glob(vault + "/pdf/**/*.pdf", recursive=True)
+                   if os.path.getsize(p) < 5000]
+          if empty:
+              print("SUSPICIOUSLY SMALL GAME BOOKS:", empty[:10])
+              sys.exit(1)
+          print("DRIFT ALARM: clear")
+          PY
+
+      - name: Commit the vault to the non-published `vault` branch
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP/vault"
+          git init -q .
+          git config user.name "fl1-capture-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Vault unchanged this run."
+          else
+            git commit -q -m "capture: official game books and injury report, $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+              HEAD:refs/heads/vault
+          fi
+
+      - name: Publish the artefact index (public, derived — no row-level data)
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv, os, shutil, datetime
+          vault = os.environ["RUNNER_TEMP"] + "/vault"
+          rows = list(csv.DictReader(open(vault + "/manifest.tsv"), delimiter="\t"))
+          out = "data/snapshot_vault_index.tsv"
+          os.makedirs("data", exist_ok=True)
+          fields = ["artefact", "official_page", "source_url", "sha256", "bytes", "retrieved_at_utc"]
+          with open(out, "w", encoding="utf-8", newline="") as fh:
+              w = csv.DictWriter(fh, fieldnames=fields, delimiter="\t", lineterminator="\n")
+              w.writeheader()
+              for r in rows:
+                  w.writerow({k: r.get(k, "") for k in fields})
+          print("wrote", out, len(rows), "rows")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: official-snapshots
+          path: ${{ runner.temp }}/vault
+          retention-days: 90
+          if-no-files-found: error
