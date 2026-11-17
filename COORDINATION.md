@@ -1,3 +1,73 @@
+## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — COMPLETE
+
+**Session ID:** `arena-e97f05c3` · **Branch:** `arena/e97f05c3-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17 (UTC). **Branch note:** this session is bound to the single branch named above, so the
+per-task `session-<id>/<task>` branches in the brief are not used; claims are recorded here on that branch instead.
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| H0 | Claim + push this block | done | `arena-e97f05c3` | `COORDINATION.md` |
+| H1 | Week 10 Sunday-night final (PIT 18 at CIN 38) ingested from the official Game Center; reconciled against the live official standings; Monday-night game (LAC at BAL) kept **unrecorded** because it was still live (Q2, 17–7) at read time | done (MNF open → F67) | `arena-e97f05c3` | `data/results_2026-11-17.tsv`, `data/standings_2026-11-17.tsv`, `data/verification-2026-11-17.tsv`, `raw/results-week10-2026-2026-11-17.md`, `scripts/verify_results_2026_11_17.py`, `tests/test_results_2026_11_17.py`, `data/sources.tsv` (append S89–S91 only), `data/flags.json` (append F67 only), `data/raw/MANIFEST-h.json`, `tools/site_g.py` (one additive row in the Snapshot Ledger results table), `data/verification-2026-11-17.tsv` |
+| H2 | Integration: build, tests, link check, PR to `main`, merge, Pages check | done | `arena-e97f05c3` | PR + this record |
+
+### Integration record — H2 (2026-11-17, UTC)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/49 (`arena/e97f05c3-fl1` → `main`), CI check `verify` = pass
+  (run 44004284596), mergeability `MERGEABLE / CLEAN`.
+- **Merge:** `gh pr merge 49 --merge` at merge commit `09c5257` on 2026-11-17T02:37:43Z.
+- **GitHub Pages:** source `main` / path `/`, legacy build → status **`built`** (build 1376553096, no error).
+  Live check: https://sassnarep3-star.github.io/FL1/flagged.html shows **67 items** including F67;
+  https://sassnarep3-star.github.io/FL1/availability-ledger.html shows the 2026-11-17 results row (149 results, S89).
+- **Still open, not blocking (Flagged for Review, F67):** Monday night LAC at BAL. Re-read the official Game Center
+  page after it shows Final, then add it in a new dated results file.
+- **Scope honesty:** the rest of the brief (for example the 32-team sweep, the depth-source routes, the ablations)
+  was **not** re-verified in this session; those rows keep the status earlier sessions published. Nothing in this
+  session marks them verified.
+
+### Completion record — H1 (2026-11-17, UTC)
+
+**What was added.** One official final: **Steelers (PIT) 18 at Bengals (CIN) 38**, Week 10, Sunday 2026-11-15,
+Paycor Stadium. Recorded in `data/results_2026-11-17.tsv` (149 rows; the 2026-11-16 read had 148). Every other
+row is byte-identical to the 2026-11-16 read.
+
+**What was not added, and why.** Monday night **LAC at BAL** was *Live* at read time (Q2 01:56, Chargers 17, Ravens 7).
+A live score is not a result, so it is not in any results file. It is registered as open item **F67** with
+source **S91**, and it must be re-read after it shows Final.
+
+**Sources (each links to the official page):**
+- S89 Game Center, PIT at CIN, status Final: https://www.nfl.com/games/steelers-at-bengals-2026-reg-10 (quarter scores PIT 0-3-0-15, CIN 3-21-7-7; each sums to the total)
+- S90 Official standings, read 2026-11-17, all 32 clubs: https://www.nfl.com/standings/league/2026/REG
+- S49/S81 Official Week 10 schedule page (shows "Steelers 18, Bengals 38, FINAL"): https://www.nfl.com/schedules/2026/REG10/
+- S91 Game Center, LAC at BAL, Live (not recorded): https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live
+
+**Verification performed (all re-runnable):**
+- `python3 scripts/verify_results_2026_11_17.py` → GATE PASS: H-R1 (new = old + one row), H-R2 (results reproduce the
+  new official standings for 32/32 clubs on W/L/T/PF/PA), H-R3 (games = W+L+T for every club), H-R4 (the change between
+  the 2026-11-16 and 2026-11-17 standings is exactly this game; only CIN and PIT move, by 38/18 points and one win/loss),
+  H-R5 (frozen 137-game corpus still a prefix).
+- `python3 -m unittest discover -s tests -q` → 315 OK (6 new in `tests/test_results_2026_11_17.py`).
+- `python3 tools/build.py && python3 tools/site.py && python3 tools/checklinks.py` → every internal link and anchor resolves.
+- `/tmp/ci-venv/bin/python scripts/verify_site.py` (pandas venv, as CI does) → errors 0, warnings 0.
+- `python3 tools/checkrows.py` → 43 pages, 6,293 rows audited, every data row sourced.
+- `python3 tools/verify_drift.py` → 19 pins, 19 PASS. DR-10 (flags 66→67) and DR-14 (sources 80→83) were re-pinned on purpose.
+
+**Irregularities found (published on Flagged for Review as F67, and below):**
+1. **Monday night LAC at BAL is unrecorded and open** (F67). It is the only Week 10 game without a result.
+2. **Source-ID collision avoided.** The brief's next free IDs were S87/S88, but both were already taken on `main`
+   (S87 = repo capture manifest, S88 = 2025 standings). This session used S89–S91 instead.
+3. **Branch-naming conflict.** The brief asks each task to go on its own `session-<id>/<task>` branch. The session
+   branch note allows only `arena/e97f05c3-fl1`, so all work is on that single branch, and claims are logged here.
+4. **Pinned-count tests changed on purpose.** `tests/test_n01_n05.py` (sources 80→83) and the drift pin for
+   `data/flags.json` (66→67) were updated. This is the drift alarm working, not a silent change.
+5. **Scope not re-verified.** This session did not re-verify the rest of the brief (for example the 32-team depth
+   sweep, or the availability ledger). Those items keep the status their earlier sessions published.
+
+**Files changed:** `data/results_2026-11-17.tsv`, `data/standings_2026-11-17.tsv`, `data/verification-2026-11-17.tsv`,
+`data/raw/MANIFEST-h.json`, `raw/results-week10-2026-2026-11-17.md`, `scripts/verify_results_2026_11_17.py`,
+`tests/test_results_2026_11_17.py`, `tests/test_n01_n05.py` (count pin), `tools/verify_drift.py` (pin),
+`tools/site_g.py` (one row in the Snapshot Ledger), `data/sources.tsv` (S89–S91), `data/flags.json` (F67),
+regenerated site pages and `assets/js/data.js`.
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
@@ -108,17 +178,17 @@ never replaced. Registers are deduped on their id key at every append.
 
 | ID | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
 |---|------|--------|-------|----------------------|------------------------|----------------|
-| T1 | Element-level verification of live official pages and dated captures | done | arena-d50423eb-fl1 | `raw/live/2026-11-17-*`, `scripts/verify_live_d5.py`, `data/verification-live.tsv` | NFL injury report, standings, Week 10 schedule, Week 11 by-week page; hashes + 11 checks pass | injury delta preserved; F67/Q46 |
+| T1 | Element-level verification of live official pages and dated captures | done | arena-d50423eb-fl1 | `raw/live/2026-11-17-*`, `scripts/verify_live_d5.py`, `data/verification-live.tsv` | NFL injury report, standings, Week 10 schedule, Week 11 by-week page; hashes + 11 checks pass | injury delta preserved; F69/Q46 |
 | T2 | Decision ledger: questions/flags with known, unknown, gate, clearing number, owner action | done | arena-d50423eb-fl1 | `data/decision_ledger_d5.{csv,json}`, `scripts/build_d5_registers.py`, `tools/pages_d5.py`, `decision-ledger.html` | derived from registers; 113 rows; checkrows passes | clearing criteria blank where unavailable |
-| T3 | Reviewable suggestions pipeline | done | arena-d50423eb-fl1 | `data/suggestion_pipeline_d5.{csv,json}`, `tools/pages_d5.py`, `suggestions-pipeline.html` | 48 rows from suggestion register | all remain proposed; no manual approval assumed |
+| T3 | Reviewable suggestions pipeline | done | arena-d50423eb-fl1 | `data/suggestion_pipeline_d5.{csv,json}`, `tools/pages_d5.py`, `suggestions-pipeline.html` | 49 rows from suggestion register | all remain proposed; no manual approval assumed |
 | T4 | Availability and depth evidence matrix | needs review | arena-d50423eb-fl1 | `data/depth_matrix_d5.{csv,json}`, `data/availability_d5.json`, `tools/pages_d5.py`, `availability-matrix-d5.html` | official injury hub + captured club depth sources; exact-name join only | 30/32 chart clubs; charts do not prove actual starters or participation |
 | T5 | Strategy scorecard, proper-score engine, controls and qualification gates | done | arena-d50423eb-fl1 | `engine/scoreboard_d5.py`, `tests/test_d5.py`, `data/strategy_scorecard_d5.csv`, `data/scorecard_d5.json`, `scripts/build_d5.py`, `strategy-scorecard.html` | 11 candidate entries; 0 qualified; tests pass | Elo measurement retrospective only; candidate registry hashes not all committed/frozen |
 | T6 | Complete questions-and-answers register | done | arena-d50423eb-fl1 | `data/qa_register_d5.{csv,json}`, `tools/pages_d5.py`, `qa-d5.html` | 46 questions; checkrows passes | unresolved decisions explicitly listed |
 | T7 | Integration and PR | in progress | arena-d50423eb-fl1 | PR #53, all site outputs, this record | CI verify-research-build passed; local 316 tests and links/rows pass | Pages confirmation pending merge/deploy |
 
 **Shared files this session will touch (logged before touching):** `tools/site.py` (NAV entries +
-index cards + one import call, additive), `data/sources.tsv` (append S89+), `data/flags.json`
-(append F67+), `data/questions.json` (append Q46+), `data/suggestions.json` (append SG48+),
+index cards + one import call, additive), `data/sources.tsv` (append S93+), `data/flags.json`
+(append F69+), `data/questions.json` (append Q46+), `data/suggestions.json` (append SG48+),
 `data/requirements.json` (append R29+), `README.md` / `EXECUTIVE_SUMMARY.md` (append a dated block),
 `data/verification.tsv` (append rows). **No existing row in any register will be edited or
 renumbered.** If a later session needs one of these files mid-run, take `main`'s version and
@@ -130,7 +200,7 @@ re-append this block — that is the board's own rule.
 
 **D5 scorecard and pages.** Added `engine/scoreboard_d5.py`, frozen candidate registry `data/strategy_registry_d5.json`, `scripts/build_d5.py`, `tools/pages_d5.py`, and generated live-state, availability, scorecard, forecast-ledger and org-health files. The historical Elo output scores n=137 with BSS 0.1021 vs constant-0.5 baseline, 95% game-cluster interval [-0.0120, 0.2215]; it is explicitly retrospective, not prospective, and is not leaderboard eligible. No one of 11 registered entries qualifies. Market spread is not translated into win probability because no validated margin distribution exists. The captured depth data has 30/32 clubs; 108 injury rows have a game designation, 86 have a next listed player in the parsed depth slot (this is not proof of actual entry or starter status). 2,241 singles are the computed 80%-power planning bar for 55% vs 52.38% break-even. No season-long ROI or raw win-rate ranking is used.
 
-**Review registers.** Appended S89 (official Week-11 by-week schedule page), F67 (injury snapshot delta), Q46 (promotion policy), SG48 (immutable snapshot recommendation), and R29 (availability snapshot requirement); no existing register row replaced. The live vs committed injury discrepancy is preserved as a dated snapshot, not silently overwritten.
+**Review registers.** Appended S93 (official Week-11 by-week schedule page), F69 (injury snapshot delta), Q46 (promotion policy), SG48 (immutable snapshot recommendation), and R29 (availability snapshot requirement); no existing register row replaced. The live vs committed injury discrepancy is preserved as a dated snapshot, not silently overwritten.
 
 **Site integration.** Added D5 navigation and dashboard section additively in `tools/site.py`; ten D5 generated pages cover captures, live standings, finals, slate, strategy scorecard, readiness, availability matrix, decision questions, suggestions, and flags. Site now generates 53 pages. `python3 tools/build.py`, `python3 scripts/build_d5.py`, `python3 tools/site.py`, `python3 scripts/verify_live_d5.py`, `python3 -m unittest discover -s tests -q` (316 OK), `python3 tools/checklinks.py` (all internal links/anchors resolve) and `python3 tools/checkrows.py` (56 pages; 6,861 rows audited) pass. The full append-only decision ledger (113 questions/flags), suggestion pipeline (48 rows), Q&A register (46 questions), 252-row exact-join depth matrix, 11-row scorecard, and 4-row capture verification export were generated by `scripts/build_d5_registers.py`; corresponding pages are live in the checked-in site output. R29 is also included in the landing readiness register. Warnings: pre-existing ResourceWarnings from test code; external links are not fetched by checklinks. `scripts/verify_site.py` could not run in this sandbox because pandas is not installed (`ModuleNotFoundError`); no claim of that check passing. No external verification of all 259 outbound links is claimed here.
 
@@ -144,6 +214,7 @@ re-append this block — that is the board's own rule.
   source exists (F18 / GAP-01 on `main`); every market cell stays blank and labelled.
 * Not transcribe a depth chart by eye. Image-only charts (Texans) stay blank and flagged.
 * Not fill a blank to make a table look complete.
+
 
 # COORDINATION — Shared Task Board
 
@@ -1915,3 +1986,74 @@ python3 scripts/build_market_spine.py --check            # "rebuild is byte-iden
 python3 tools/build.py && python3 tools/site.py && python3 tools/checklinks.py
 /home/user/.ci-venv/bin/python scripts/verify_site.py    # errors 0, warnings 0
 ```
+
+## Current integration task — `arena/2493a657-fl1` (2026-11-17 UTC)
+
+**Role:** final integration and audit follow-up on the current Arena branch. The checkout is fixed to
+`arena/2493a657-fl1`; this session will not create or switch branches. Existing completed task records
+above are historical evidence and are not reopened.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| I01 | Audit row-level source strength and surface repository-generator placeholders separately from official evidence | done | `arena/2493a657-fl1` | `tools/source_audit.py`, `tools/checklinks.py` (correct external-fetch claim), `tools/verify_drift.py` (refresh register row-count pins), `data/verification-drift.tsv`, `tools/site.py` (NAV + generated audit page only), `source-audit.html`, `data/source_row_audit.tsv`, `data/sources.tsv` (append S92), `data/flags.json` (append F68), `data/suggestions.json` (append SG48), `tests/test_source_audit.py`, `tests/test_n01_n05.py` (source-count expectation updated for S92 after preserving S89-S91 from upstream), `docs/SOURCE_ROW_AUDIT.md`, this section of `COORDINATION.md` |
+
+This is an additive integration audit. It will not rewrite other session-owned market or injury data,
+will not promote third-party sources to official, and will classify unresolvable provenance as a review
+finding rather than inferring a source. No other session-owned file is being edited.
+
+### I01 completion record — 2026-11-17 UTC
+
+**Delivered:** `source-audit.html` (in the shared navigation), the deterministic full-row ledger at
+`data/source_row_audit.tsv`, the generator `tools/source_audit.py`, and the method note
+`docs/SOURCE_ROW_AUDIT.md`. `tools/checklinks.py` no longer refers to the absent
+`tools/verify_sources.py`; it explicitly says external URLs are not fetched by that checker. A linked
+repository generator is classified as build provenance, not as proof of an NFL fact. Exact URLs already
+present in the source registry can be matched to that registry; no trust is inferred merely from a familiar
+hostname. `F68` and `SG48` publish the issue and a reviewable path. `S92` identifies the audit itself as a
+non-official repository artifact, not an NFL source.
+
+**Current row classification (6,296 rendered table body rows; row counts, not unique claims):** 3,596
+point only to sources whose registry entries are marked Official + VERIFIED; 1,244 link only to repository
+code/artifacts; 178 have no detected source link; 94 have a direct link not registered by exact URL; 135
+cite a source not marked VERIFIED; 434 cite non-official registered sources; 615 combine official with
+non-official or unresolved registry references. The buckets are mutually exclusive in the audit ledger.
+The report classifies metadata; it does **not** open web pages, confirm their current availability, or verify
+the underlying values line by line. Values in unverified/nonofficial classes are not promoted to official.
+
+**Sources and verification:** S92 is the generated audit ledger (repository-only evidence). No NFL source
+was newly fetched for this audit. The older official source records are linked in `sources.html`; their
+historical registry status is not a fresh re-verification. `python3 tools/site.py` generated the page and
+ledger; `python3 tools/checklinks.py` → 44 pages, all internal links/anchors/source IDs resolve;
+`python3 tools/checkrows.py` → 44 pages, 6,419 table rows audited; `python3 tools/verify_drift.py` →
+19/19 PASS; `python3 tools/verify_injuries.py` → 345/345 exact rows; `python3 scripts/verify_recapture_g.py`
+→ PASS (no published injury row absent from the later read; 2 additions and 32 changes reported);
+`python3 scripts/verify_results_g.py` → PASS (32/32 standings reconciliation);
+`python3 -m unittest discover -s tests -q` → 315 OK. The first full test pass exposed the expected
+source-register count assertion; it was updated for S89 and the full suite passed afterward. Existing
+ResourceWarnings in older tests remain non-fatal.
+
+**Irregularities surfaced for review:** F67 is High severity because many rendered rows cite code or have
+no usable/registered citation. The audit is syntax/registry based and intentionally does not claim those
+values are wrong. `scripts/verify_site.py` could not be run in this environment because pandas is absent;
+that script requires pandas although the repo's runtime dependency note says no third-party packages are
+required. `checklinks.py` does not fetch external URLs. Both constraints are explicitly retained rather
+than reported as successful source verification.
+
+### Rebase reconciliation with upstream main (2026-11-17 UTC)
+
+`git pull --rebase origin main` found `origin/main` had advanced from the branch base at `5a076a0` to
+`8d41cbe` (PR #50). The incoming work added the official PIT@CIN final, the 2026-11-17 standings read,
+source records S89-S91 and F67 for the not-yet-final LAC@BAL game. The audit's original S89/F67 ids
+collided. Resolution preserved the incoming records and appended the audit as S92/F68; SG48 was unique.
+The source-count regression test now expects 84 rows, and the G-18 drift pins are 48 suggestions / 68
+flags. Generated HTML and `assets/js/data.js` were regenerated from the combined data; no upstream
+results, flags, sources, or site changes were discarded.
+
+### Final integration — PR #51 and Pages deployment
+
+**PR:** https://github.com/sassnarep3-star/FL1/pull/51 (`arena/2493a657-fl1` → `main`). Merged at
+2026-11-17T02:45:20Z with merge commit `00700fdb6d021abc05aef2113ffcbd63dfce5f64` after both
+`verify-research-build` checks completed SUCCESS. GitHub Pages is configured for `main` `/`; API build
+`1376567311` reports **built** for that merge commit (`https://sassnarep3-star.github.io/FL1/`). The site
+includes the Row-Level Source Audit in the global navigation. F68 remains a visible review item; it does
+not block publication.

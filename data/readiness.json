@@ -298,7 +298,7 @@
    "r_id": "R29",
    "requirement": "Preserve every official injury-hub read as an immutable dated snapshot with a retained hash and explicit delta; never overwrite earlier evidence.",
    "status": "partial",
-   "blocking_gate": "No scheduled immutable capture job or external retained storage yet (F67, Q46)",
+   "blocking_gate": "No scheduled immutable capture job or external retained storage yet (F69, Q46)",
    "number_that_clears": "every read has a dated unique path and matching retained hash; a delta report is replayable without overwriting prior rows",
    "page": "live-captures.html",
    "source_ids": [

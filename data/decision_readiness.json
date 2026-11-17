@@ -23,7 +23,7 @@
    "delivered": "data/sources.tsv register; only VERIFIED rows are citable",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "73 of 81 source records VERIFIED (page loaded and read this session)"
+   "clears": "76 of 85 source records VERIFIED (page loaded and read this session)"
   },
   {
    "id": "R03",
@@ -43,7 +43,7 @@
    "delivered": "flagged.html — Flagged for Review",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "67 irregularities published with source links (F01..F67)"
+   "clears": "69 irregularities published with source links (F01..F69)"
   },
   {
    "id": "R05",

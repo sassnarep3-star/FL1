@@ -1458,6 +1458,32 @@
  {
   "id": "FLAG-F67",
   "category": "Flagged",
+  "question": "Monday night LAC at BAL (Week 10, 2026-11-16) is in no results file: it was Live at the 2026-11-17 read (Q2 01:56, Chargers 17, Ravens 7)",
+  "known": "The Sunday-night PIT at CIN final (18-38) was added on 2026-11-17 from the official Game Center. The Monday-night game was not, because a live score is not a result. The official standings read of 2026-11-17 still shows LAC 0-8 and BAL 4-5, which is consistent with the game being unplayed in the standings. The record of this game is therefore absent, not wrong, and every Week 10 standings check excludes it.",
+  "unknown": "",
+  "missing_data": "Re-read https://www.nfl.com/games/chargers-at-ravens-2026-reg-10 after it shows Final. Confirm the final score and that the quarter scores sum to it, then add the row in a new dated results file and re-run the reconciliation (scripts/verify_results_2026_11_17.py is the template: standings delta must equal the game).",
+  "blocking_gate": "Review/verification gate",
+  "clearing_number": "",
+  "owner_action": "Re-read https://www.nfl.com/games/chargers-at-ravens-2026-reg-10 after it shows Final. Confirm the final score and that the quarter scores sum to it, then add the row in a new dated results file and re-run the reconciliation (scripts/verify_results_2026_11_17.py is the template: standings delta must equal the game).",
+  "priority": "Medium",
+  "source": "S91"
+ },
+ {
+  "id": "FLAG-F68",
+  "category": "Flagged",
+  "question": "Some rendered table rows link only to repository code or lack a registry-backed official citation",
+  "known": "The deterministic row-level audit in this render classifies 1,244 rows as REPOSITORY_LINK_ONLY, 178 as NO_SOURCE_LINK, 94 as DIRECT_LINK_UNREGISTERED, 135 as REGISTERED_NOT_VERIFIED, 434 as NONOFFICIAL_REGISTERED, 615 as MIXED_OR_UNRESOLVED_REGISTERED, and 3,596 as OFFICIAL_REGISTERED. These are row counts, not unique facts. Classification is syntactic and based on the source register; official means the referenced source record is marked Official and VERIFIED, not freshly fetched in this audit. Counts can change on rebuild; see source-audit.html and data/source_row_audit.tsv for the live ledger. The audit does not establish that any value is false.",
+  "unknown": "",
+  "missing_data": "Review the detailed ledger. Replace generator-only or unregistered citations with source IDs where a source can be verified; otherwise leave unsupported values blank and keep them flagged. Do not mark a row officially verified based only on a repository link.",
+  "blocking_gate": "Review/verification gate",
+  "clearing_number": "",
+  "owner_action": "Review the detailed ledger. Replace generator-only or unregistered citations with source IDs where a source can be verified; otherwise leave unsupported values blank and keep them flagged. Do not mark a row officially verified based only on a repository link.",
+  "priority": "High",
+  "source": "S92"
+ },
+ {
+  "id": "FLAG-F69",
+  "category": "Flagged",
   "question": "2026-11-17 official injury report differs from committed 2026-11-14 injury table",
   "known": "Re-parsed dated NFL injury hub capture: 347 rows / 28 clubs. Against committed data/injuries.tsv (345 rows), 2 live-only rows (BAL Calais Campbell and Ronnie Stanley) and 16 changed rows are observed; zero committed player rows are absent. Do not silently replace the earlier snapshot. The live raw capture and manifest preserve the new point-in-time read; the committed table remains unchanged pending snapshot-aware merge.",
   "unknown": "",

@@ -8,7 +8,7 @@ def writej(n,x):
 def writec(n,rows,fields=None):
  if fields is None: fields=list(rows[0]) if rows else []
  with open(os.path.join(D,n),'w',encoding='utf-8',newline='') as f:
-  w=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore'); w.writeheader(); w.writerows(rows)
+  w=csv.DictWriter(f,fieldnames=fields,extrasaction='ignore',lineterminator='\n'); w.writeheader(); w.writerows(rows)
 
 # Map every open question to a conservative gate/clearing criterion; these are
 # project decisions, not externally verified facts. A blank is preferable to a guess.
