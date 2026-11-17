@@ -1937,3 +1937,17 @@ python3 scripts/build_market_spine.py --check            # "rebuild is byte-iden
 python3 tools/build.py && python3 tools/site.py && python3 tools/checklinks.py
 /home/user/.ci-venv/bin/python scripts/verify_site.py    # errors 0, warnings 0
 ```
+
+## Current integration task — `arena/2493a657-fl1` (2026-11-17 UTC)
+
+**Role:** final integration and audit follow-up on the current Arena branch. The checkout is fixed to
+`arena/2493a657-fl1`; this session will not create or switch branches. Existing completed task records
+above are historical evidence and are not reopened.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| I01 | Audit row-level source strength and surface repository-generator placeholders separately from official evidence | in progress | `arena/2493a657-fl1` | `tools/source_audit.py`, `tools/site.py` (NAV + generated audit page only), `source-audit.html`, `data/source_row_audit.tsv`, `tests/test_source_audit.py`, `docs/SOURCE_ROW_AUDIT.md`, this section of `COORDINATION.md` |
+
+This is an additive integration audit. It will not rewrite other session-owned market or injury data,
+will not promote third-party sources to official, and will classify unresolvable provenance as a review
+finding rather than inferring a source. No other session-owned file is being edited.
