@@ -6,9 +6,15 @@ DR-04	data/schedule2026-d.csv	PASS	pinned	272	272
 DR-05	data/results_feed.csv	PASS	pinned	137	137
 DR-06	data/price_snapshots.csv	PASS	pinned	56	56
 DR-07	data/settled_markets.csv	PASS	pinned	548	548
+<<<<<<< HEAD
 DR-08	data/questions.json	PASS	pinned	46	46
 DR-09	data/suggestions.json	PASS	pinned	49	49
 DR-10	data/flags.json	PASS	pinned	69	69
+=======
+DR-08	data/questions.json	PASS	pinned	45	45
+DR-09	data/suggestions.json	WARN	row count grew - re-commit the pin with the growth	49	47
+DR-10	data/flags.json	WARN	row count grew - re-commit the pin with the growth	67	66
+>>>>>>> d0c6b1a (H4: answers layer for all 45 questions (12 answered / 15 partial / 18 open, each citing registers+files; Q45=Q35 duplication recorded as F67; SG48/SG49 added) + questions.html Answer column)
 DR-11	data/strategies.json	PASS	pinned	6	6
 DR-12	data/validation_gates.json	PASS	pinned	15	15
 DR-13	data/leaderboard_signal_staking.json	PASS	pinned	16	16

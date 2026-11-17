@@ -799,5 +799,14 @@
   ],
   "severity": "Medium",
   "action": "Review the 2 additions and 16 field changes against the dated live capture; retain both snapshots with separate timestamps and hashes."
+ },
+ {
+  "id": "F70",
+  "kind": "Register duplication (merge re-issue artefact)",
+  "item": "Q45 duplicates Q35 verbatim — the same open question is registered twice",
+  "detail": "data/questions.json carries Q35 and Q45 with identical question text (both ask whether the snapshot store should accept a fourth phase value for prices whose vintage the publisher never stated). The duplication was created when a session re-issued its own Q35 at a merge where origin/main already held a Q35 — the re-issue landed as Q45 without noticing the content collision. Both rows are answered identically in the 2026-11-17 answer layer and cross-reference this flag; they must be folded into one during the SG47 consolidation so future answers cannot drift apart.",
+  "sourceIds": [],
+  "severity": "Low",
+  "action": "Fold Q45 into Q35 during SG47 consolidation; until then treat Q35 as canonical (the answer layer marks both and cross-links here)."
  }
 ]

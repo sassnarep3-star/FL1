@@ -2754,12 +2754,37 @@ No strategy can be promoted to live until a price source is supplied and the dem
     q_by_cat = {}
     for q in questions:
         q_by_cat.setdefault(q["category"], []).append(q)
+    n_ans = sum(1 for q in questions if q.get("answer_state") == "answered")
+    n_part = sum(1 for q in questions if q.get("answer_state") == "partial")
+    n_open = sum(1 for q in questions if q.get("answer_state") == "open")
+    if n_ans + n_part + n_open != len(questions):
+        raise SystemExit("questions answer layer incomplete: %d/%d rows answered"
+                         % (n_ans + n_part + n_open, len(questions)))
+    ANS_KIND = {"answered": "ok", "partial": "warn", "open": "bad"}
+
+    def ans_cell(q):
+        st = q.get("answer_state", "")
+        # same linking rules as sprint_sections' qflink (Q -> questions.html#,
+        # F -> flagged.html#) — defined locally because that helper is out of scope
+        def _link(ref):
+            if ref.startswith("Q"):
+                return '<a href="questions.html#%s">%s</a>' % (ref, ref)
+            return '<a href="flagged.html#%s">%s</a>' % (ref, ref)
+        body = re.sub(r"\b([QF]\d{2})\b", lambda m: _link(m.group(1)),
+                      esc(q.get("answer", "")))
+        return '<td>%s %s</td>' % (pill(st, ANS_KIND.get(st, "")), body)
     q_html = ['<section><h1>Open Questions</h1>',
               '<p class="lead">Every question that must be answered before a decision can reasonably be made, '
-              'with what we know, what we do not know, what data is missing, and whether it blocks progress.</p>',
-              '<div class="callout"><p><strong>%d questions, %d blocking.</strong> A question is marked blocking '
+              'with what we know, what we do not know, what data is missing, and whether it blocks progress. '
+              'Since 2026-11-17 every row also carries a dated answer: what is already settled by evidence in '
+              'this repo, and — for everything else — exactly which decision or dataset would settle it.</p>',
+              '<div class="callout"><p><strong>%d questions, %d blocking; answers dated 2026-11-17: %d answered, '
+              '%d partial, %d open.</strong> A question is marked blocking '
               'when no defensible number can be produced until it is answered. The blocking ones are the reason '
-              'the leaderboard is empty.</p></div></section>' % (len(questions), n_block)]
+              'the leaderboard is empty. In the Answer column, <em>answered</em> means settled by a cited file or '
+              'official source, <em>partial</em> means the factual half is stated and a named gap remains, and '
+              '<em>open</em> means an owner decision or a missing dataset dominates.</p></div></section>'
+              % (len(questions), n_block, n_ans, n_part, n_open)]
     for cat, items in q_by_cat.items():
         rows = []
         for q in items:
@@ -2772,6 +2797,7 @@ No strategy can be promoted to live until a price source is supplied and the dem
                 '<td>%s</td>' % pill(q["blocking"], "bad" if q["blocking"].lower().startswith("yes") else "ok"),
                 cell(q["what_we_know"]),
                 cell(q["what_we_dont_know"]),
+                ans_cell(q),
                 cell(q["missing_data"]),
                 cell(q["recommended_path"]),
                 '<td>%s</td>' % (src_link(q["source"].split(",")[0].strip(), sources_by_id)
@@ -2780,7 +2806,8 @@ No strategy can be promoted to live until a price source is supplied and the dem
         q_html.append('<section><h2>%s</h2>%s</section>' % (
             esc(cat),
             table(["ID", "Question", "Priority", "Blocks progress?", "What we know",
-                   "What we do not know", "Missing data", "Recommended path", "Source"],
+                   "What we do not know", "Answer (2026-11-17)", "Missing data",
+                   "Recommended path", "Source"],
                   rows, cls="dense qtable")))
     q_html.append("""
 <section>

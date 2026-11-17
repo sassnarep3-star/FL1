@@ -10,7 +10,10 @@
   "missing_data": "A target market. A benchmark price source to compare against.",
   "source": "S03",
   "blocking": "Yes",
-  "recommended_path": "Start with a single market we can fully specify from official data (team spread), reach a validated result, then extend. Do not start with parlays: they multiply variance and hide which leg failed."
+  "recommended_path": "Start with a single market we can fully specify from official data (team spread), reach a validated result, then extend. Do not start with parlays: they multiply variance and hide which leg failed.",
+  "answer_state": "answered",
+  "answer": "Side first — the order is pre-registered: originate the side, then the total, then the moneyline (data/origination_order.json; brief audit D-03). model_lines.tsv prints the step order on every row ('1 side > 2 total > 3 moneyline') and publishes fair, market and difference as separate columns per market (D-04). The side is the anchor quantity: both other markets are downstream of the same scoring decomposition.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q02",
@@ -23,7 +26,10 @@
   "missing_data": "Historical closing lines and results to backtest against are not present in this repository and are not published as a bulk official dataset by the NFL.",
   "source": "S04",
   "blocking": "Yes",
-  "recommended_path": "Forward-testing with a sealed, timestamped record. Every prediction is written to disk before kickoff with a hash, so results cannot be edited afterwards."
+  "recommended_path": "Forward-testing with a sealed, timestamped record. Every prediction is written to disk before kickoff with a hash, so results cannot be edited afterwards.",
+  "answer_state": "answered",
+  "answer": "A repeatable pipeline. Every published line is regenerated from committed inputs on each rebuild (tools/build.py -> scripts/build_fair_lines_m.py -> data/model_lines.tsv and data/fair_lines.csv), and every row carries its model version and market provenance. One fair line per game per market at a time is the pipeline's scheduled output — not a hand-entry.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q03",
@@ -36,7 +42,10 @@
   "missing_data": "A licensed or user-supplied odds feed. Nothing of the kind exists in this repo.",
   "source": "S03",
   "blocking": "Yes",
-  "recommended_path": "Do not invent prices. Until a benchmark feed is supplied, output only a fair-value probability and a stated uncertainty, and grade strategies on calibration (predicted vs realised) rather than profit."
+  "recommended_path": "Do not invent prices. Until a benchmark feed is supplied, output only a fair-value probability and a stated uncertainty, and grade strategies on calibration (predicted vs realised) rather than profit.",
+  "answer_state": "partial",
+  "answer": "No official league source publishes betting prices; the board records this as GAP-01 and leaves market cells blank with the reason (model_lines.tsv market_status; F18). Market values that do appear come from a third-party feed and are labelled per row (market_provenance in data/fair_lines.csv). The open half is approval of a market-price source for headline numbers (Q21, Q30, Q32; D-20).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q04",
@@ -49,7 +58,10 @@
   "missing_data": "A league-wide official depth feed. Full 32-club depth chart capture.",
   "source": "S08, S13, S07",
   "blocking": "Yes — for the backup-deficiency feature",
-  "recommended_path": "Treat 'official depth chart' as unavailable. Rank depth explicitly from roster status codes plus published club depth charts, and label every derived rank as *derived*, never as official."
+  "recommended_path": "Treat 'official depth chart' as unavailable. Rank depth explicitly from roster status codes plus published club depth charts, and label every derived rank as *derived*, never as official.",
+  "answer_state": "answered",
+  "answer": "No. https://www.nfl.com/depth-charts/ returns 404 (S13). Depth comes from the clubs' own published chart pages — 30 clubs plus the special-cased Chiefs capture are registered URL-per-club in data/depth-sources.tsv — and every derived rank is labelled derived, never official (D-42; club-chart caveat F10).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q05",
@@ -62,7 +74,10 @@
   "missing_data": "Snap-count data. Not present in this repo and not retrievable from the pages verified here.",
   "source": "S01",
   "blocking": "No, but it caps the ceiling on the deficiency model",
-  "recommended_path": "Mark the deficiency model as specification-only until snap data exists. Do not fabricate snap shares."
+  "recommended_path": "Mark the deficiency model as specification-only until snap data exists. Do not fabricate snap shares.",
+  "answer_state": "open",
+  "answer": "Not established: no official snap-count file exists in this repo, which is exactly why the snap-count starter proxy is blocked (D-55, D-30). Until an official snap source covering all 32 clubs is verified (or club-chart coverage reaches 32/32 from 30/32 today), starter/replacement logic rests only on club charts and dated announced-starter evidence.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q06",
@@ -75,7 +90,10 @@
   "missing_data": "A time series of injury reports. This repo holds one snapshot only.",
   "source": "S01",
   "blocking": "Yes — for any injury-based signal",
-  "recommended_path": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now."
+  "recommended_path": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now.",
+  "answer_state": "partial",
+  "answer": "Method settled: each read is captured verbatim under raw/ with a clock-bracketed window (three dated reads: 2026-11-14, 2026-11-16, 2026-11-17), parsed by one shared grammar, its header row-claim asserted against the parser, and published as a delta — latest diff plus the earlier one under history in data/injury_hub_delta.json (D-21). Still open: which dated read a backtest may pin (Q40) and durable hash-pinned storage (D-28).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q07",
@@ -88,7 +106,10 @@
   "missing_data": "A retrievable official definition of each designation.",
   "source": "S12, S14, S01",
   "blocking": "No, but it is a flagged gap",
-  "recommended_path": "Record the observed categories as observed, and put the definition gap on the Flagged for Review page rather than paraphrasing a policy we could not retrieve."
+  "recommended_path": "Record the observed categories as observed, and put the definition gap on the Flagged for Review page rather than paraphrasing a policy we could not retrieve.",
+  "answer_state": "partial",
+  "answer": "Official text supplies labels only — Out/Doubtful/Questionable and the three practice statuses map 1:1 in the capture grammar, and no official percentages exist. The empirical meaning (play rate per designation with confidence intervals, joined to official inactives over several seasons) has not been measured (D-43, D-52), so no outside percentage may be quoted as fact. Clears when a multi-season join of official designations to official inactives yields play rates with confidence intervals.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q08",
@@ -101,7 +122,10 @@
   "missing_data": "An authoritative roster-move log to reconcile against.",
   "source": "S01, S10, S15",
   "blocking": "No",
-  "recommended_path": "Do not reconcile by hand. Publish the discrepancy verbatim with both source links on the Flagged for Review page and leave the affected cells as captured."
+  "recommended_path": "Do not reconcile by hand. Publish the discrepancy verbatim with both source links on the Flagged for Review page and leave the affected cells as captured.",
+  "answer_state": "answered",
+  "answer": "Published, never suppressed: every cross-source irregularity becomes a row on flagged.html with detail, action and source links (66 flags today; F61 was corrected 2026-11-17 after re-reading the official pages; F53 records the row-count discrepancy). Per the brief, flagged items do not block a merge, and a cell that cannot be confirmed from an official source stays blank and flagged rather than filled (tools/checkrows.py rules 1-4).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q09",
@@ -114,7 +138,10 @@
   "missing_data": "Historical graded results to estimate variance.",
   "source": "S05, S02",
   "blocking": "Yes — for the leaderboard",
-  "recommended_path": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate."
+  "recommended_path": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate.",
+  "answer_state": "partial",
+  "answer": "Answered per strategy by the removal-of-luck panels: skill means the 95% lower bound of hit rate clears the vig-adjusted break-even hurdle after a multiplicity adjustment for every trial run (the register's best ROI entry is rejected on exactly this: 936 settled bets, 51.07% lower bound vs 52.38% hurdle — data/luck_panel_signal.json). The open half: which number becomes the leaderboard's standing qualification bar (Q43).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q10",
@@ -127,7 +154,10 @@
   "missing_data": "A benchmark price feed for the CLV test.",
   "source": "S03",
   "blocking": "No",
-  "recommended_path": "Adopt all three as separate gates. A strategy must pass calibration first; CLV and persistence are additional. Never average them into one score."
+  "recommended_path": "Adopt all three as separate gates. A strategy must pass calibration first; CLV and persistence are additional. Never average them into one score.",
+  "answer_state": "answered",
+  "answer": "Operationally: benchmark-relative skill with uncertainty — the luck-removed edge (hit-rate lower bound minus hurdle), a game-cluster lower bound, a multiplicity adjustment, and control baselines, with PROVEN/NOT PROVEN verdicts published on removal-of-luck.html from data/luck_panel_signal.json and data/luck_panel.json. Win rate and ROI may be displayed but can never set a rank (D-37; season-long ROI ranking rejected, D-64).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q11",
@@ -140,7 +170,10 @@
   "missing_data": "Player game logs sufficient to estimate pairwise prop correlations.",
   "source": "S03",
   "blocking": "Yes — for parlay and combo products",
-  "recommended_path": "Start correlations at the team-total level where data exists. For player props, publish the method and mark correlations blank until the joint sample is adequate."
+  "recommended_path": "Start correlations at the team-total level where data exists. For player props, publish the method and mark correlations blank until the joint sample is adequate.",
+  "answer_state": "answered",
+  "answer": "From official rows only: data/correlations_official.json computes every value from rows transcribed from official league sources (S01/S03/S52) with n published per value (e.g. C-A1: n=32, r=0.8781), and engine/corr_official.py refuses non-official source ids — third-party measures stay in their own labelled registers (R27, D-07). A pair becomes usable for parlays/combos only through the joint-evidence gate (D-35).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q12",
@@ -153,7 +186,10 @@
   "missing_data": "Multiple completed seasons of the same official fields.",
   "source": "S03, S05",
   "blocking": "Yes",
-  "recommended_path": "Walk-forward validation only, no random shuffling. Freeze the holdout in a separate file and log every access to it."
+  "recommended_path": "Walk-forward validation only, no random shuffling. Freeze the holdout in a separate file and log every access to it.",
+  "answer_state": "answered",
+  "answer": "Chronologically, frozen before scoring: the ablation corpus splits train 1999-2019 / validation 2020-2021 / final holdout 2022-2025 (scored once, after freezing) with 2026 excluded as in-progress (data/ablations.json design.splits; D-69). Pre-registration (D-66, D-68) fixes rule text, sample window and gates in git before the evaluation window opens; a scored holdout is never reopened.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q13",
@@ -166,7 +202,10 @@
   "missing_data": "A decision from the user on any monetary component.",
   "source": "S03",
   "blocking": "No",
-  "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14."
+  "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14.",
+  "answer_state": "partial",
+  "answer": "What is ranked: luck-adjusted skill computed from a sealed, walk-forward bet log, gates first, with rewards conditional on passing them (data/leaderboard.json design; D-37). What is rewarded in value: nothing today — no payout, bankroll or currency mechanism exists anywhere in the repo (cf. economics OQ-02), so the reward design remains an owner decision.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q14",
@@ -179,7 +218,10 @@
   "missing_data": "Legal review. Regulator sources were not verified in this session.",
   "source": "S03",
   "blocking": "Only if money or prizes are introduced",
-  "recommended_path": "Keep the site informational and non-monetary. Put the open legal question on the Flagged for Review page and do not assert a legal conclusion."
+  "recommended_path": "Keep the site informational and non-monetary. Put the open legal question on the Flagged for Review page and do not assert a legal conclusion.",
+  "answer_state": "open",
+  "answer": "Not answerable from data or official sources: the legal/regulator question (Q14, SG11) has had no counsel input. Before any decision: the owner's jurisdiction and whether any stake is real (OQ-02). Nothing published here is legal advice or evidence of compliance.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q15",
@@ -192,7 +234,10 @@
   "missing_data": "An official 2026 bye-week table.",
   "source": "S01, S04",
   "blocking": "No",
-  "recommended_path": "Report the count as 28 of 32 clubs present, never as a league total, and flag the four missing clubs as an open question."
+  "recommended_path": "Report the count as 28 of 32 clubs present, never as a league total, and flag the four missing clubs as an open question.",
+  "answer_state": "answered",
+  "answer": "None in the current captures: the canonical table holds 345 rows across all 28 clubs that played Week 10 — every one of the 14 games has both teams' rows (data/injuries.tsv, S01) — and each of the three dated hub reads prints a section for each of the 14 games. The gaps behind this question belonged to the stale 254-row pages, replaced by the re-capture (D-48; F53 keeps the count discrepancy on record).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q16",
@@ -205,7 +250,10 @@
   "missing_data": "A definitive presence/absence reason per player.",
   "source": "S01",
   "blocking": "No",
-  "recommended_path": "Never bucket an empty injury field as an injury. Tag non-injury rows explicitly and exclude them from injury-rate denominators."
+  "recommended_path": "Never bucket an empty injury field as an injury. Tag non-injury rows explicitly and exclude them from injury-rate denominators.",
+  "answer_state": "answered",
+  "answer": "Carried verbatim from the league's own text and explicitly marked: the per-team availability build publishes a nonInjury count per club and its net-injury rule excludes rows the league marks 'Not injury related' (scripts/build_availability_g.py, netInjuryRule). They never enter the injury count silently.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q17",
@@ -218,7 +266,10 @@
   "missing_data": "Crew assignments; a roof and surface registry.",
   "source": "S10, S11, S04",
   "blocking": "No",
-  "recommended_path": "Use only the free official inputs first. Add each new input only after the base model is validated, one at a time, so its contribution can be measured."
+  "recommended_path": "Use only the free official inputs first. Add each new input only after the base model is validated, one at a time, so its contribution can be measured.",
+  "answer_state": "partial",
+  "answer": "Obtained official inputs are enumerated: 83 registered sources, 75 VERIFIED, each with URL and capture date (data/sources.tsv). Licensed vendors are not among them — money/contract items sit in the missing-data register as NOT-ATTEMPTED. Which to license (opening prices above all: Q21/Q30) is an owner decision.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q18",
@@ -231,7 +282,10 @@
   "missing_data": "A terms-of-use review.",
   "source": "S01",
   "blocking": "Yes — before any scheduled fetching",
-  "recommended_path": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached."
+  "recommended_path": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached.",
+  "answer_state": "open",
+  "answer": "No terms review exists, so no defensible yes/no. Practice so far: a handful of clock-bracketed dated reads per page with verbatim capture (raw/ headers), not continuous scraping. Before any cadence is automated (D-53) the owner must accept an acceptable-use position or name counsel to check (pairs Q14, OQ-02).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q19",
@@ -244,7 +298,10 @@
   "missing_data": "A stated baseline.",
   "source": "S03",
   "blocking": "Yes — for the leaderboard",
-  "recommended_path": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy."
+  "recommended_path": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy.",
+  "answer_state": "partial",
+  "answer": "Measured against vig-adjusted break-even hurdles plus a market control: betting every home team at the close runs 5,067 settled bets at -5.19% ROI — pure house margin (data/luck_panel_signal.json control_baseline). The random-picks and favourites-only controls the brief names are not yet in every run (D-56) — the open half is the owner's adoption of those two controls into every leaderboard run; the addition itself is mechanical.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q20",
@@ -257,7 +314,10 @@
   "missing_data": "None.",
   "source": "COORDINATION.md",
   "blocking": "No",
-  "recommended_path": "Keep the board current. Log every claim and every handoff with a UTC timestamp."
+  "recommended_path": "Keep the board current. Log every claim and every handoff with a UTC timestamp.",
+  "answer_state": "answered",
+  "answer": "Written in COORDINATION.md: read the board first; claim by pushing session id and file scope immediately; never start a claimed task; keep scopes non-overlapping on session branches; small frequent commits with pull --rebase; log cross-scope requests instead of editing; a claim idle over 60 minutes with no commits is open for takeover with a logged handoff; 'done' requires sources, verification and irregularities recorded. This session pushed its claim before any other work.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q21",
@@ -270,7 +330,10 @@
   "missing_data": "Licensed opening + closing line history (GAP-01).",
   "source": "data/price_snapshots.json; flags F23/F25",
   "blocking": "Yes",
-  "recommended_path": "Option A (SG21): buy licensed history. Interim (SG20): snapshot the market's open at the moment we publish our own line, prospectively from Week 11."
+  "recommended_path": "Option A (SG21): buy licensed history. Interim (SG20): snapshot the market's open at the moment we publish our own line, prospectively from Week 11.",
+  "answer_state": "open",
+  "answer": "No approved source. The price-snapshot store exists (D-01 store done) but opening values are blocked: no opening-price source has been chosen (D-01 'blocked (values)'; Q30), and the one captured opening line (2021 single-book) stays quarantined (Q37). Clearing: a named source, cadence and redistribution terms recorded in the register.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q22",
@@ -283,7 +346,10 @@
   "missing_data": "2026 moneyline prices (open and close).",
   "source": "data/price_snapshots.json; data/raw/MANIFEST.json",
   "blocking": "Yes",
-  "recommended_path": "Extend the capture pipeline to record moneyline odds alongside spread/total, or approve a feed that carries them."
+  "recommended_path": "Extend the capture pipeline to record moneyline odds alongside spread/total, or approve a feed that carries them.",
+  "answer_state": "open",
+  "answer": "Same gap as Q21 — no approved source for moneyline open/close. The store keeps what the labelled feed provides (close, when provided) and leaves the rest blank; blocked on the Q30 decision (source, cadence, redistribution).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q23",
@@ -296,7 +362,10 @@
   "missing_data": "None - this is a decision, not a data gap.",
   "source": "flags F23/F11; data/line_board.json",
   "blocking": "Yes",
-  "recommended_path": "A: publish with THIRD_PARTY badge + flag until C is affordable; B switches every market cell to blank with one edit; C needs Q21's purchase."
+  "recommended_path": "A: publish with THIRD_PARTY badge + flag until C is affordable; B switches every market cell to blank with one edit; C needs Q21's purchase.",
+  "answer_state": "open",
+  "answer": "Interim rule in force, ratification open: third-party-derived cells publish only with explicit labels/flags (market_provenance 'third-party ... flagged'; THIRD_PARTY badges on the boards). Promoting them to headline difference/staking numbers is the reserved owner call (Q32; D-20).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q24",
@@ -309,7 +378,10 @@
   "missing_data": "None - a rule choice.",
   "source": "engine/demotion.py; flag F28",
   "blocking": "No",
-  "recommended_path": "Adopt as written for the first season (SG22) and revisit after 300 settled bets of live history."
+  "recommended_path": "Adopt as written for the first season (SG22) and revisit after 300 settled bets of live history.",
+  "answer_state": "partial",
+  "answer": "Numbers exist and are frozen, but they are not the brief's sketch: data/market/demotion_config.json (2026-11-14) fixes a 200-bet window (min 60), D1 lower-bound fail < 0, D2 slope band 0.4-1.6, D3 caps 0.35/0.30/0.35, D4 price gap <= 5%, <= 2 demotions per season, reprobe >= 150 paper bets; G-16 demotes live -> paper automatically. Ratifying these instead of the 100-bet / 25-unit / p<0.10 sketch is the open half (Q33, SG17).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q25",
@@ -322,7 +394,10 @@
   "missing_data": "None - a rule choice.",
   "source": "engine/backtest.py; data/leaderboard_signal_staking.json",
   "blocking": "No",
-  "recommended_path": "Flat 1 unit for the scored sample; optional separate staking report capped at 2 units (matches the exposure cap in GateConfig)."
+  "recommended_path": "Flat 1 unit for the scored sample; optional separate staking report capped at 2 units (matches the exposure cap in GateConfig).",
+  "answer_state": "partial",
+  "answer": "Rank-side settled: staking can never affect a rank (signal/staking split, D-05), and each entry carries two-sided change-of-mind fields (D-17). The allowed plan list is not: Kelly-style sizing waits on bankroll, unit and jurisdiction (OQ-02), so paper entries run flat units by convention until the owner sets rules.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q26",
@@ -335,7 +410,10 @@
   "missing_data": "Multi-season official results feed (today: 2026 weeks 1-10 only).",
   "source": "data/line_board.json; data/models.json",
   "blocking": "No",
-  "recommended_path": "Keep the baseline published; schedule the first refit after two full official seasons are captured."
+  "recommended_path": "Keep the baseline published; schedule the first refit after two full official seasons are captured.",
+  "answer_state": "partial",
+  "answer": "Today no fitted coefficients populate published lines: output is the frozen pre-registered baseline fl1-elo-v1 (model_version column) with its calibration report (n=5,336 games; mean signed error -0.77 pts, MAE 2.89 pts vs close). Fitting starts only after acceptance criteria are frozen (Q31, open) and the switch itself is pre-registered (D-66, D-68).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q27",
@@ -348,7 +426,10 @@
   "missing_data": "Snap counts per game (GAP-05 family).",
   "source": "data/replacement_depth.tsv",
   "blocking": "No",
-  "recommended_path": "Add a snap-count source once one is verified; until then label every replacement as chart-based."
+  "recommended_path": "Add a snap-count source once one is verified; until then label every replacement as chart-based.",
+  "answer_state": "partial",
+  "answer": "Route (a) stands at 30/32 clubs: per-club chart pages registered URL-per-row (data/depth-sources.tsv) plus 11 dated, quoted announced-starter rows (data/announced_starters.csv) on a point-in-time ledger. Route (b), snap counts, is blocked — no official source (D-30, D-55). The gate (one verified route for all 32 clubs) is not cleared, so the backup-deficiency feature stays behind it (D-51).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q28",
@@ -361,7 +442,10 @@
   "missing_data": "Weekly official injury + results captures (grows C-A4's n).",
   "source": "data/correlations_official.json",
   "blocking": "No",
-  "recommended_path": "Pre-register the pairs now (SG23), capture weekly, publish n as it grows."
+  "recommended_path": "Pre-register the pairs now (SG23), capture weekly, publish n as it grows.",
+  "answer_state": "answered",
+  "answer": "The five published pairs in data/correlations_official.json (C-A1: season point differential vs win pct, n=32, r=0.8781; plus four more), each with its n, computed only from official rows (S01/S03/S52) by engine/corr_official.py; non-official rows are excluded by rule. The weekly capture cadence grows n on this same register.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q29",
@@ -374,7 +458,10 @@
   "missing_data": "None - this is a decision, not a data gap.",
   "source": "flag F31; COORDINATION.md reconciliation record",
   "blocking": "Yes",
-  "recommended_path": "SG29 option A: review each pair (price store, results feed, line model, signal/staking, demotion), pick one per requirement, archive the other with cross-links. The Q23 and Q24 decisions settle the two substantive divergences."
+  "recommended_path": "SG29 option A: review each pair (price store, results feed, line model, signal/staking, demotion), pick one per requirement, archive the other with cross-links. The Q23 and Q24 decisions settle the two substantive divergences.",
+  "answer_state": "open",
+  "answer": "Not decided: three sessions built overlapping readiness and luck views, all live and cross-linked (F66), with consolidation registered as SG47. The owner picks one readiness page and one luck panel (SG47 names recommendations), then the unused builders are retired.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q30",
@@ -387,7 +474,10 @@
   "missing_data": "A priced feed decision and its terms of use.",
   "source": "price-snapshots.html",
   "blocking": "Yes",
-  "recommended_path": "Choose one feed before the next slate. Capture open at market open and close at kickoff minus one minute, per market, into the existing store. If no feed is approved, say so publicly and keep the columns blank rather than backfilling from closes."
+  "recommended_path": "Choose one feed before the next slate. Capture open at market open and close at kickoff minus one minute, per market, into the existing store. If no feed is approved, say so publicly and keep the columns blank rather than backfilling from closes.",
+  "answer_state": "open",
+  "answer": "No source chosen: Q21/Q22 are blocked on exactly three unknowns — source name, capture cadence, redistribution terms. Classified NOT-ATTEMPTED in the missing-data register (needs a decision or money).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q31",
@@ -400,7 +490,10 @@
   "missing_data": "A pre-registered acceptance threshold set.",
   "source": "validation.html; line-board.html",
   "blocking": "Yes",
-  "recommended_path": "Pre-register in one commit: the model must beat the naive margin baseline on out-of-sample log loss, publish an uncertainty band with every fair line, and be sealed (hashed) before kickoff. Reject otherwise."
+  "recommended_path": "Pre-register in one commit: the model must beat the naive margin baseline on out-of-sample log loss, publish an uncertainty band with every fair line, and be sealed (hashed) before kickoff. Reject otherwise.",
+  "answer_state": "open",
+  "answer": "None frozen: the repo deliberately publishes the naive pre-registered baseline instead (Q26). Criteria for admitting a fitted model (calibration bounds, holdout behaviour, drift limits) must be written and committed before any fit is evaluated — owner/quant decision still to be made.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q32",
@@ -413,7 +506,10 @@
   "missing_data": "None - a policy choice.",
   "source": "flagged.html",
   "blocking": "Yes",
-  "recommended_path": "Keep headline registers official-only and keep labelled third-party appendices as they are. The cost of the strict rule is visible blank cells; the cost of the loose rule is invisible trust leakage. Revisit only with a licensed feed (Q21)."
+  "recommended_path": "Keep headline registers official-only and keep labelled third-party appendices as they are. The cost of the strict rule is visible blank cells; the cost of the loose rule is invisible trust leakage. Revisit only with a licensed feed (Q21).",
+  "answer_state": "open",
+  "answer": "Open by default: today's enforced rule is third-party values publish only as labelled/flagged cells, never as unsourced headline numbers (tools/checkrows.py; market_provenance). Making them first-class is the decision the brief reserves (pairs Q23; D-20).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q33",
@@ -426,7 +522,10 @@
   "missing_data": "A single pre-registration commit signed off before any live stake.",
   "source": "validation.html",
   "blocking": "Yes",
-  "recommended_path": "Freeze the thresholds in one commit before the first live stake, review them only on the gate-review schedule, and never after a losing streak."
+  "recommended_path": "Freeze the thresholds in one commit before the first live stake, review them only on the gate-review schedule, and never after a losing streak.",
+  "answer_state": "partial",
+  "answer": "Frozen, with a divergence to ratify: demotion_config.json (2026-11-14) fixes window=200 (min 60), D1 LB-fail < 0, D2 slope band 0.4-1.6, D3 caps 0.35/0.30/0.35, D4 price gap <= 5%, <= 2 demotions/season, reprobe >= 150 paper bets; G-16 defines live -> paper. The brief's sketch (100-bet window, 25-unit drawdown, p<0.10, 300-bet re-promotion) was not adopted verbatim — confirming the implemented numbers is the open half (pairs SG17).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q34",
@@ -439,7 +538,10 @@
   "missing_data": "A policy decision, same family as Q23.",
   "source": "results-feed.html",
   "blocking": "No",
-  "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
+  "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure.",
+  "answer_state": "partial",
+  "answer": "Labelled third-party history already powers the corpus: backtests span 2011-2026 by season with provenance per row (data/market/backtest_by_season.tsv; 13,310 graded trades), while the canonical feed stays official-only for 2026 (data/results.tsv). Extending the labelled backfill back to 1999 is the open policy half (owner; D-20).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q35",
@@ -452,7 +554,10 @@
   "missing_data": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
   "source": "S74",
   "blocking": "yes - it decides where live prices are written",
-  "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+  "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows.",
+  "answer_state": "open",
+  "answer": "Open — whether the store's phase enum gains a value for prices whose vintage the publisher never stated is a schema/owner decision. Interim: such rows are labelled CLOSE_OR_UNDOCUMENTED in the backtest bench and the 2021 opening line stays quarantined (Q37). NOTE: Q45 duplicates this question verbatim (merge re-issue) — see F67; folding them together belongs to SG47.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q36",
@@ -465,7 +570,10 @@
   "missing_data": "Nothing further is capturable from these feeds; the odds columns are empty upstream for those seasons.",
   "source": "S47,S74",
   "blocking": "no - the choice is presentational, the data does not change",
-  "recommended_path": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number."
+  "recommended_path": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number.",
+  "answer_state": "partial",
+  "answer": "Interim basis implemented: ROI publishes only where a posted price exists, with basis on the row (roi_basis=POSTED, price_basis=POSTED_IN_STORE in data/market/backtest_trades.tsv) and the benchmark labelled CLOSE_OR_UNDOCUMENTED; ROI is report-only and never ranks (D-64). The final headline basis waits on the price-source decisions (Q21, Q30).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q37",
@@ -478,7 +586,10 @@
   "missing_data": "A dated capture of the same book's line for the same games, which does not exist in any free source this environment can reach.",
   "source": "S72",
   "blocking": "no",
-  "recommended_path": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement."
+  "recommended_path": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement.",
+  "answer_state": "open",
+  "answer": "Open — it stays quarantined: a single 2021 single-book opening line cannot support a published movement table without a vintage/source policy (Q35) and an owner call on single-observation tables.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q38",
@@ -491,7 +602,10 @@
   "missing_data": "Nothing; the choice is editorial.",
   "source": "S47,S74",
   "blocking": "no",
-  "recommended_path": "Show them, with the delta column reading 'no market number captured' and the count of such rows stated above the table. Blank-plus-flag is the rule already on this site."
+  "recommended_path": "Show them, with the delta column reading 'no market number captured' and the count of such rows stated above the table. Blank-plus-flag is the rule already on this site.",
+  "answer_state": "answered",
+  "answer": "Current published behaviour: show the fair number, leave the market cell blank, print the reason — model_lines.tsv carries market_status 'no official NFL source publishes betting prices (GAP-01); market cell left blank, see Flagged F18' on every unlined 2026 game. Nothing is inferred into the blank; ratifying this behaviour as the standing rule is a formality.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q39",
@@ -504,7 +618,10 @@
   "missing_data": "A decision from the owner.",
   "source": "S74",
   "blocking": "no - the standing rule answers it for now",
-  "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
+  "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred.",
+  "answer_state": "open",
+  "answer": "Open — D4 (price-integrity quarantine: price gap > 5% or quarantine share > 0.5%, data/market/demotion_config.json) currently gates promotion and demotion decisions inside the market spine. Whether a D4 breach should also hard-fail CI and block a merge (like the sourcing rules in checkrows) or only block promotion is undecided.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q40",
@@ -517,7 +634,10 @@
   "missing_data": "A rule, written before the backtest runs, pinning the capture per game.",
   "source": "availability-ledger.html",
   "blocking": "Yes",
-  "recommended_path": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff."
+  "recommended_path": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff.",
+  "answer_state": "open",
+  "answer": "Open — three dated reads now exist (2026-11-14 canonical TSV, 2026-11-16, 2026-11-17) precisely because no rule says which one a backtest may pin. The canonical injuries.tsv stays on read 1 while later reads publish as deltas. Choosing first-pre-kickoff vs latest-before-kickoff is an owner decision that sets backtest reproducibility.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q41",
@@ -530,7 +650,10 @@
   "missing_data": "A presentation decision, not data.",
   "source": "availability-ledger.html",
   "blocking": "No",
-  "recommended_path": "Keep the snapshots separate and publish the diff, as the ledger page does now."
+  "recommended_path": "Keep the snapshots separate and publish the diff, as the ledger page does now.",
+  "answer_state": "partial",
+  "answer": "Implemented, awaiting ratification: later designations are never back-filled into the canonical table — injuries.tsv stays pinned to its dated capture and every subsequent change ships as a delta row with old/new values (data/injury_hub_delta.json, which also keeps the earlier delta under history). Ratify that, or switch to back-filling the latest read before kickoff — owner's call.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q42",
@@ -543,7 +666,10 @@
   "missing_data": "A read of the site's terms, or a licensed alternative.",
   "source": "availability-ledger.html",
   "blocking": "Yes",
-  "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear."
+  "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear.",
+  "answer_state": "open",
+  "answer": "Open — three clock-bracketed reads exist (11-14, 11-16, 11-17), but the Wednesday/Thursday/Friday cadence has not started because capture cadence bumps into the terms question first (D-53; acceptable use Q18). Clearing: owner/counsel OK, then a scheduled workflow extends the repo's existing weekly refresh (SG48).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q43",
@@ -556,7 +682,10 @@
   "missing_data": "A decision on the bar, frozen before any result exists (SG37).",
   "source": "removal-of-luck.html",
   "blocking": "Yes",
-  "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it."
+  "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it.",
+  "answer_state": "open",
+  "answer": "Open — both luck panels publish exactly the numbers such a bar would use (edge lower bound vs hurdle, multiplicity-adjusted verdicts, control baselines). Adopting them as the leaderboard's standing qualification rule is an owner choice; if adopted, write it into the leaderboard register as a frozen gate (D-66, D-68).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q44",
@@ -569,7 +698,10 @@
   "missing_data": "A promotion run after MNF finalizes: re-capture the week-10 page and the league standings (S71/S72 refresh), re-run scripts/build_week10_extension.py V1-V4, then promote into data/results.tsv + data/standings.tsv and rebuild the feed.",
   "source": "S81, S82",
   "blocking": "no",
-  "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG35)."
+  "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG35).",
+  "answer_state": "open",
+  "answer": "Open — today nobody promotes: the Week-10 close-out (13 finals plus the live Monday game) is published in data/week10_results_extension.json ['completion'] with checks C1-C5 while data/results.tsv stays untouched pending this policy (F61, SG37/SG45 lineage). A workable rule to ratify: auto-promote only when a fresh official read prints every game FINAL and all V-checks pass — then it can run inside the weekly refresh (SG49).",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q45",
@@ -596,5 +728,8 @@
   "source": "S01",
   "blocking": "yes - determines whether any historical row is replaced",
   "recommended_path": "Keep the new capture as an immutable dated snapshot; only update the canonical table through an append-only snapshot-aware process."
+  "answer_state": "open",
+  "answer": "Duplicate of Q35 (verbatim — a merge re-issue collision, recorded as F67). Treat Q35 as the live question; Q45's disposition is pending SG47's consolidation so the two are answered once, not twice.",
+  "answer_date": "2026-11-17"
  }
 ]
