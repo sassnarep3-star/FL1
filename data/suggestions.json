@@ -970,5 +970,27 @@
   ],
   "recommendation": "A. The brief makes the owner the reviewer; consolidation is a decision, not a unilateral edit.",
   "impact": "One table per concept on the landing page; no lost information."
+ },
+ {
+  "id": "SG48",
+  "title": "Keep every injury-hub read as a dated, hash-pinned immutable snapshot",
+  "category": "Availability",
+  "problem": "The latest official injury capture differs from committed injury data and an in-place rewrite would erase what was known at the earlier read time.",
+  "proposal": "Retain raw/live captures by timestamp with SHA-256; create an append-only snapshot index and a deterministic player-key diff. Never overwrite prior rows. Promote a latest view only as a derived projection.",
+  "evidence": "raw/live/MANIFEST-2026-11-17.json; F67; Q46; scripts/verify_live_d5.py.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "High",
+  "prerequisites": [
+   "F67",
+   "Q46"
+  ],
+  "options": [
+   "Append-only snapshots with latest projection (recommended)",
+   "Overwrite data/injuries.tsv in place",
+   "Leave the capture unindexed"
+  ],
+  "recommendation": "Use the append-only snapshot ledger; preserve the 2026-11-14 and 2026-11-17 reads independently.",
+  "impact": "Enables replay of practice/status changes without lookahead leakage."
  }
 ]

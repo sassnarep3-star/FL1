@@ -5487,6 +5487,16 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "All 32 club rows captured verbatim in raw/standings-2025-official.md (W/L/T, PCT, PF, PA, HOME, ROAD, DIV, CONF, NON-CONF, STRK, LAST 5) and parsed by scripts/build_market_spine.py, which requires exactly 32 clubs before it continues. Used only to reconcile the 2025 season at club level: 32 of 32 clubs match the game-level recount."
+  },
+  {
+   "id": "S89",
+   "title": "NFL Week 11 schedule — by-week page",
+   "publisher": "National Football League",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "tier": "Official (league)",
+   "checked": "2026-11-17",
+   "status": "VERIFIED",
+   "note": "Fetched via page reader in 3 chunks; used only for the captured 13-game schedule. The /schedules/2026/REG11/ season page is not the week page."
   }
  ],
  "schedule": [
@@ -32537,6 +32547,19 @@ window.DATA = {
    "source": "S74",
    "blocking": "yes - it decides where live prices are written",
    "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+  },
+  {
+   "id": "Q46",
+   "category": "Availability snapshot",
+   "priority": "High",
+   "question": "Should the 2026-11-17 injury-hub capture be promoted into the current table or retained only as a dated snapshot?",
+   "why_it_matters": "Replacing the prior table in place would destroy the point-in-time history and conceal 2 added rows and 16 field-level changes.",
+   "what_we_know": "The 2026-11-17 capture has 347 rows over 28 clubs; committed injuries.tsv has 345 rows; zero committed rows are missing; two BAL rows are new; 16 existing rows differ. The capture is hash pinned.",
+   "what_we_dont_know": "Whether data/injuries.tsv is intended as latest state or a frozen historical snapshot.",
+   "missing_data": "A documented canonical-table policy and explicit mapping of dated reads to the point-in-time ledger.",
+   "source": "S01",
+   "blocking": "yes - determines whether any historical row is replaced",
+   "recommended_path": "Keep the new capture as an immutable dated snapshot; only update the canonical table through an append-only snapshot-aware process."
   }
  ],
  "suggestions": [
@@ -33511,6 +33534,28 @@ window.DATA = {
    ],
    "recommendation": "A. The brief makes the owner the reviewer; consolidation is a decision, not a unilateral edit.",
    "impact": "One table per concept on the landing page; no lost information."
+  },
+  {
+   "id": "SG48",
+   "title": "Keep every injury-hub read as a dated, hash-pinned immutable snapshot",
+   "category": "Availability",
+   "problem": "The latest official injury capture differs from committed injury data and an in-place rewrite would erase what was known at the earlier read time.",
+   "proposal": "Retain raw/live captures by timestamp with SHA-256; create an append-only snapshot index and a deterministic player-key diff. Never overwrite prior rows. Promote a latest view only as a derived projection.",
+   "evidence": "raw/live/MANIFEST-2026-11-17.json; F67; Q46; scripts/verify_live_d5.py.",
+   "effort": "Low",
+   "risk": "Low",
+   "reversibility": "High",
+   "prerequisites": [
+    "F67",
+    "Q46"
+   ],
+   "options": [
+    "Append-only snapshots with latest projection (recommended)",
+    "Overwrite data/injuries.tsv in place",
+    "Leave the capture unindexed"
+   ],
+   "recommendation": "Use the append-only snapshot ledger; preserve the 2026-11-14 and 2026-11-17 reads independently.",
+   "impact": "Enables replay of practice/status changes without lookahead leakage."
   }
  ],
  "requirements": [
@@ -33737,6 +33782,14 @@ window.DATA = {
    "status": "done",
    "evidence": "engine/demotion.py: D1 signal decay (window hit rate below break-even, p<0.10), D2 drawdown (25 flat-stake units), D3 CLV rot; any one demotes LIVE->PAPER. Re-promotion needs 300 fresh settled bets passing the G-2b standard. Registered as G-14 in data/validation_gates.json; thresholds are proposed rules (flag F28).",
    "page": "validation.html"
+  },
+  {
+   "id": "R29",
+   "section": "Availability snapshots (2026-11-17)",
+   "requirement": "Preserve each official injury-hub read as an immutable dated snapshot with a retained hash and explicit delta; never overwrite earlier evidence.",
+   "status": "partial",
+   "evidence": "raw/live/2026-11-17-injury-report-week10.md and MANIFEST-2026-11-17.json preserve the new read; scripts/verify_live_d5.py verifies the hash, 347 rows, and the 2 additions / 16 field changes / 0 missing committed rows. Cross-snapshot typed delta artifact and daily scheduler/remote retention remain absent.",
+   "page": "live-captures.html"
   }
  ],
  "strategies": [
@@ -34667,6 +34720,17 @@ window.DATA = {
    ],
    "severity": "Low",
    "action": "Owner review (SG47): pick one canonical view per concept and fold the others into it; until then all are published with cross-links."
+  },
+  {
+   "id": "F67",
+   "kind": "Live capture conflict / preserve historical row set",
+   "item": "2026-11-17 official injury report differs from committed 2026-11-14 injury table",
+   "detail": "Re-parsed dated NFL injury hub capture: 347 rows / 28 clubs. Against committed data/injuries.tsv (345 rows), 2 live-only rows (BAL Calais Campbell and Ronnie Stanley) and 16 changed rows are observed; zero committed player rows are absent. Do not silently replace the earlier snapshot. The live raw capture and manifest preserve the new point-in-time read; the committed table remains unchanged pending snapshot-aware merge.",
+   "sourceIds": [
+    "S01"
+   ],
+   "severity": "Medium",
+   "action": "Review the 2 additions and 16 field changes against the dated live capture; retain both snapshots with separate timestamps and hashes."
   }
  ]
 };

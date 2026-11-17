@@ -583,5 +583,18 @@
   "source": "S74",
   "blocking": "yes - it decides where live prices are written",
   "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+ },
+ {
+  "id": "Q46",
+  "category": "Availability snapshot",
+  "priority": "High",
+  "question": "Should the 2026-11-17 injury-hub capture be promoted into the current table or retained only as a dated snapshot?",
+  "why_it_matters": "Replacing the prior table in place would destroy the point-in-time history and conceal 2 added rows and 16 field-level changes.",
+  "what_we_know": "The 2026-11-17 capture has 347 rows over 28 clubs; committed injuries.tsv has 345 rows; zero committed rows are missing; two BAL rows are new; 16 existing rows differ. The capture is hash pinned.",
+  "what_we_dont_know": "Whether data/injuries.tsv is intended as latest state or a frozen historical snapshot.",
+  "missing_data": "A documented canonical-table policy and explicit mapping of dated reads to the point-in-time ledger.",
+  "source": "S01",
+  "blocking": "yes - determines whether any historical row is replaced",
+  "recommended_path": "Keep the new capture as an immutable dated snapshot; only update the canonical table through an append-only snapshot-aware process."
  }
 ]

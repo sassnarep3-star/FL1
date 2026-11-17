@@ -222,5 +222,13 @@
   "status": "done",
   "evidence": "engine/demotion.py: D1 signal decay (window hit rate below break-even, p<0.10), D2 drawdown (25 flat-stake units), D3 CLV rot; any one demotes LIVE->PAPER. Re-promotion needs 300 fresh settled bets passing the G-2b standard. Registered as G-14 in data/validation_gates.json; thresholds are proposed rules (flag F28).",
   "page": "validation.html"
+ },
+ {
+  "id": "R29",
+  "section": "Availability snapshots (2026-11-17)",
+  "requirement": "Preserve each official injury-hub read as an immutable dated snapshot with a retained hash and explicit delta; never overwrite earlier evidence.",
+  "status": "partial",
+  "evidence": "raw/live/2026-11-17-injury-report-week10.md and MANIFEST-2026-11-17.json preserve the new read; scripts/verify_live_d5.py verifies the hash, 347 rows, and the 2 additions / 16 field changes / 0 missing committed rows. Cross-snapshot typed delta artifact and daily scheduler/remote retention remain absent.",
+  "page": "live-captures.html"
  }
 ]

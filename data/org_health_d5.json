@@ -1,0 +1,55 @@
+{
+ "availability": {
+  "report_rows": 347,
+  "clubs_on_report": 28,
+  "clubs_total": 32,
+  "blank_game_status": 176,
+  "out": 70,
+  "doubtful": 11,
+  "questionable": 90,
+  "designated_coverage": 0.4928,
+  "practice": {
+   "Did Not Participate In Practice": 94,
+   "Full Participation in Practice": 180,
+   "Limited Participation in Practice": 73
+  },
+  "added_since_1114": 2,
+  "moved_fields_since_1114": 16,
+  "invented_rows": 0
+ },
+ "depth": {
+  "clubs_with_chart": 30,
+  "clubs_total": 32,
+  "clubs_missing": [
+   "HOU",
+   "KC"
+  ],
+  "chart_slots": 524,
+  "injured_matched": 252,
+  "injured_total": 347,
+  "match_rate": 0.7262,
+  "designated": 108,
+  "replacement_named": 86,
+  "replacement_rate": 0.7963
+ },
+ "model_inputs": {
+  "games_2026": 272,
+  "with_fair_side": 272,
+  "with_market_side": 163,
+  "with_fair_total": 0,
+  "market_coverage": 0.5993,
+  "market_provenance": "third-party (nflverse/nfldata games.csv), flagged",
+  "scored_forecasts": 137,
+  "weeks_scored": 10
+ },
+ "price": {
+  "snapshots": 39,
+  "policy_decided": false,
+  "policy_note": "no official NFL price source exists; every market price in this repository is third-party or absent"
+ },
+ "leaderboard": {
+  "entries": 11,
+  "qualified": 0,
+  "controls": 2
+ }
+}
