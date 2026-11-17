@@ -780,6 +780,7 @@ official, so they cannot enter this register. They live on their own labelled pa
     luck = build.load_json("luck_panel_signal.json")
     delta = build.load_json("injury_hub_delta.json")
     w10x = build.load_json("week10_results_extension.json")
+    w10c = build.load_json("week10_closeout.json")
     strat_j = build.load_json("strategies.json")
 
     def qflink(ref):
@@ -1038,6 +1039,75 @@ time, so those two clubs show pre-game records on the page and blanks here.</p><
        table(["Date", "Away", "Pts", "Home", "Pts", "Status at read", "Game centre"],
              pend_rows, cls="dense"),
        comp_html)
+
+    # ------------------------------------- C1 week-10 closeout (2026-11-17)
+    co_rows = []
+    for f in w10c["finals"]:
+        co_rows.append([
+            cell(f["date"]),
+            cell(f["away"]),
+            cell(f["awayPts"], "n"),
+            cell(f["home"]),
+            cell(f["homePts"], "n"),
+            cell(f["note"] or "—"),
+            raw_src('<a href="%s">game centre</a>' % esc(f["game_url"])),
+        ])
+    new_rows = []
+    for f in w10c["new_since_frozen_corpus"]:
+        new_rows.append([
+            cell(f["date"]),
+            cell(f["away"]),
+            cell(f["awayPts"], "n"),
+            cell(f["home"]),
+            cell(f["homePts"], "n"),
+        ])
+    p_rows = []
+    for c in w10c["checks"]:
+        p_rows.append([
+            cell(c["id"], "n"),
+            cell(c["description"]),
+            '<td>%s</td>' % pill("pass" if c["result"] == "PASS" else c["result"].lower(),
+                                 "ok" if c["result"] == "PASS" else "bad"),
+            cell(c["detail"]),
+        ])
+    out["week10_closeout"] = """
+<section>
+<h2>Week 10 closeout &mdash; all 14 games FINAL, read 2026-11-17 (Q44 acceptance run)</h2>
+<p class="lead">The third dated read of the official week-10 page found the whole slate settled:
+the Sunday-night game the earlier reads saw live has finished (Pittsburgh 18, Cincinnati 38) and
+so has the Monday-night game (captured final below). This is the closeout capture Q44 names:
+every row transcribed from the official page at read time, nothing carried over from an in-progress
+score.</p>
+<h3>All 14 finals (%d)</h3>
+%s
+<h3>New against the frozen 137-game corpus (%d)</h3>
+%s
+<div class="callout"><p><strong>Acceptance checks &mdash; all %d PASS, enforced by
+<code>scripts/promote_week10.py</code>.</strong> P1 shape and fixture membership; P2 cross-read
+agreement (the 12 finals already on record equal this capture exactly); P3 the two late finals
+carry scores only here — the 2026-11-16 extension held them pending with blank scores;
+P4 this capture's standings arithmetic reproduces the fresh official league-standings read 32/32
+on W/L/T <em>and</em> PF/PA; P5 the frozen corpus is byte-identical as the first 137 rows
+(append-only); P6 per-club game counts equal W+L+T; P7 no duplicate fixture, no unknown club.
+The fresh standings read is <code>raw/standings-2026-20261117.tsv</code>; the raw schedule capture
+is <code>raw/schedule-results-2026-week10-closeout.tsv</code>.</p></div>
+<h3>Checks (%d)</h3>
+%s
+<div class="callout warn"><p><strong>Canonical feed not promoted — this is Q44's open policy
+half.</strong> The checks above are the acceptance gate; rolling <code>data/results.tsv</code> and
+<code>data/standings.tsv</code> forward would also refit every published model coefficient (they
+are computed from the canonical feed), so the corpus promotion remains the reviewer's choice
+(Q44, suggestion SG43). Until that choice, the promoted 150-row read is published beside the
+corpus as <code>data/results_2026-11-17.tsv</code> + <code>data/standings_2026-11-17.tsv</code>
+and this section is the live record of the week's finals.</p></div>
+</section>
+""" % (len(w10c["finals"]),
+       table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre"], co_rows, cls="dense"),
+       len(w10c["new_since_frozen_corpus"]),
+       table(["Date", "Away", "Pts", "Home", "Pts"], new_rows, cls="dense"),
+       sum(1 for c in w10c["checks"] if c["result"] == "PASS"),
+       len(w10c["checks"]),
+       table(["Gate", "What it proves", "Result", "Detail"], p_rows, cls="dense searchable"))
 
     # ------------------------------------- N02 two-sided change-our-mind fields
     cm_rows = []
@@ -3030,7 +3100,8 @@ verification note for each one.</p>
     written.append(page("line-board.html", "Line Board", sprint["line_board"], wide=True))
     written.append(page("price-snapshots.html", "Price Snapshots", sprint["price_snapshots"], wide=True))
     written.append(page("verified-results-feed.html", "Verified Results Feed",
-                        sprint["results_feed"] + sprint["week10_finals"], wide=True))
+                        sprint["results_feed"] + sprint["week10_finals"]
+                        + sprint["week10_closeout"], wide=True))
     # replacement-depth.html is generated merged by scripts/build_pages_m.py (final
     # integration: this sprint's 52-slot register AND the 69-spot week-10 analysis share
     # the page; both datasets preserved). The body computed here is kept verbatim on
