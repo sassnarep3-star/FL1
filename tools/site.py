@@ -926,6 +926,8 @@ publishing. Read 3's own diff against read 2 and read 2's against read 1 stay un
 %s
 <h3>Clubs whose row count moved</h3>
 %s
+<h3>Clubs whose row count moved, read 2 &rarr; read 3</h3>
+%s
 <h3>Reserve-list events referenced on the page (pointers)</h3>
 %s
 </section>
