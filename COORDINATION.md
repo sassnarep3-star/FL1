@@ -1999,3 +1999,12 @@ collided. Resolution preserved the incoming records and appended the audit as S9
 The source-count regression test now expects 84 rows, and the G-18 drift pins are 48 suggestions / 68
 flags. Generated HTML and `assets/js/data.js` were regenerated from the combined data; no upstream
 results, flags, sources, or site changes were discarded.
+
+### Final integration — PR #51 and Pages deployment
+
+**PR:** https://github.com/sassnarep3-star/FL1/pull/51 (`arena/2493a657-fl1` → `main`). Merged at
+2026-11-17T02:45:20Z with merge commit `00700fdb6d021abc05aef2113ffcbd63dfce5f64` after both
+`verify-research-build` checks completed SUCCESS. GitHub Pages is configured for `main` `/`; API build
+`1376567311` reports **built** for that merge commit (`https://sassnarep3-star.github.io/FL1/`). The site
+includes the Row-Level Source Audit in the global navigation. F68 remains a visible review item; it does
+not block publication.
