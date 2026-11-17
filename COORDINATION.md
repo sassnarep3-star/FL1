@@ -1,3 +1,15 @@
+## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — IN PROGRESS
+
+**Session ID:** `arena-e97f05c3` · **Branch:** `arena/e97f05c3-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17 (UTC). **Branch note:** this session is bound to the single branch named above, so the
+per-task `session-<id>/<task>` branches in the brief are not used; claims are recorded here on that branch instead.
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| H0 | Claim + push this block | in progress | `arena-e97f05c3` | `COORDINATION.md` |
+| H1 | Week 10 Sunday-night final (PIT 18 at CIN 38) ingested from the official Game Center; reconciled against the live official standings; Monday-night game (LAC at BAL) kept **unrecorded** because it was still live (Q2, 17–7) at read time | in progress | `arena-e97f05c3` | `data/results_2026-11-17.tsv`, `data/standings_2026-11-17.tsv`, `data/verification-2026-11-17.tsv`, `raw/results-week10-2026-2026-11-17.md`, `scripts/verify_results_2026_11_17.py`, `tests/test_results_2026_11_17.py`, `data/sources.tsv` (append S87–S88 only), `data/flags.json` (append only) |
+| H2 | Integration: build, tests, link check, PR to `main`, merge, Pages check | not started | `arena-e97f05c3` | PR + this record |
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
