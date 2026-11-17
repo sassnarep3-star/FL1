@@ -973,7 +973,6 @@
  },
  {
   "id": "SG48",
-<<<<<<< HEAD
   "title": "Replace generator-only row citations with provenance-backed sources",
   "category": "Trust",
   "problem": "A rendered-page link to the site generator proves how the HTML was produced, not that the row value came from an official source. The row audit also finds unregistered and not-verified citations (F67).",
@@ -1014,7 +1013,9 @@
   ],
   "recommendation": "Use the append-only snapshot ledger; preserve the 2026-11-14 and 2026-11-17 reads independently.",
   "impact": "Enables replay of practice/status changes without lookahead leakage."
-=======
+ },
+ {
+  "id": "SG50",
   "title": "Automate the dated injury-hub reads on the brief's cadence once Q42 clears",
   "category": "Data capture",
   "problem": "The brief asks for Wednesday/Thursday/Friday (daily-to-kickoff) injury-report history, but reads have been hand-timed (2026-11-14, 11-16, 11-17 — S01/S80/S89). Cadence is the difference between a series and three snapshots, and it is blocked only by the terms question (Q42, Q18).",
@@ -1029,7 +1030,7 @@
   "evidence": "Three dated reads with asserted row counts and published deltas (data/injury_hub_delta.json); clock windows recorded in every raw capture header."
  },
  {
-  "id": "SG49",
+  "id": "SG51",
   "title": "Promote finals into the verified feed under a frozen auto-rule (Q44)",
   "category": "Governance",
   "problem": "Week 10 now has 13 official finals (plus one live game) held only in the extension register (data/week10_results_extension.json ['completion'], checks C1-C5) because nobody is authorised to move them into canonical data/results.tsv — the promotion decision is open (Q44) and F61 keeps flagging the staleness.",
@@ -1042,6 +1043,5 @@
   "reversibility": "High — rows append with dates; a bad promotion is a revert.",
   "recommendation": "Freeze the rule now, before Week 11 results arrive.",
   "evidence": "C1-C5 all green on the 2026-11-17 close-out read (13 finals, standings 32/32 W/L/T + PF/PA); F61/Q44/SG37 record the gap."
->>>>>>> d0c6b1a (H4: answers layer for all 45 questions (12 answered / 15 partial / 18 open, each citing registers+files; Q45=Q35 duplication recorded as F67; SG48/SG49 added) + questions.html Answer column)
  }
 ]

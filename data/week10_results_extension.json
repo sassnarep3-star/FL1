@@ -238,8 +238,8 @@
   "schedule_capture": "raw/schedule-results-2026-week10-complete.md",
   "standings_capture": "raw/standings-2026-20261117.tsv",
   "source_ids": [
-   "S90",
-   "S91"
+   "S95",
+   "S96"
   ],
   "finals_on_page": 13,
   "page_finals": [
@@ -252,7 +252,7 @@
     "date": "2026-11-12",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -264,7 +264,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -276,7 +276,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -288,7 +288,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -300,7 +300,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -312,7 +312,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -324,7 +324,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -336,7 +336,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -348,7 +348,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -360,7 +360,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -372,7 +372,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -384,7 +384,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    },
    {
@@ -396,7 +396,7 @@
     "date": "2026-11-15",
     "week": 10,
     "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-    "source_id": "S90",
+    "source_id": "S95",
     "tier": "OFFICIAL"
    }
   ],
@@ -413,7 +413,7 @@
    "note": "Sunday Night Football — final at the 2026-11-17 read; in progress at the 2026-11-16 read",
    "game_url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-   "source_id": "S90",
+   "source_id": "S95",
    "tier": "OFFICIAL"
   },
   "still_live": {
@@ -424,7 +424,7 @@
    "status": "LIVE at read time — card printed Q2, Chargers 17, Ravens 7 (partial score, not a result)",
    "game_url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
-   "source_id": "S90"
+   "source_id": "S95"
   },
   "checks": {
    "C1_13_finals_and_one_live_card": true,

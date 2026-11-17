@@ -696,14 +696,14 @@
   "id": "F61",
   "kind": "Data freshness (verified 2026-11-16)",
   "item": "13 Week 10 finals are now official but the committed feed snapshot still holds blank scores for them",
-  "detail": "The official REG10 schedule page (S49) read 2026-11-16 shows all 14 Week 10 games FINAL (e.g. KC 35, ATL 13; NE 10, DET 35 in Munich; SF 46, DAL 40). The committed nflverse snapshot (data/raw/games.csv, S47) holds the Thursday final only; the other 13 rows carry blank scores. The repo's verified results feed therefore still counts 137 games. The scores were NOT back-filled by hand: results data is owned by the refresh pipeline and must be captured with its own official links (SG37). Cross-ref F59 (stale published snapshot, their read) and SG45; this flag records the 13-finals count verified 2026-11-16. UPDATE 2026-11-17 (session arena-7ac4e12e-fl1): the original detail's count/date does not survive a line-by-line re-read of the official pages on record. S49 is dated 2026-11-14 (a fixture cross-check, not a finals read); the S81 read of 2026-11-16T01:15-01:25Z printed 12 finals with the Sunday-night game in progress; and this session's S90 read of 2026-11-17T02:45-02:46Z prints 13 finals with Monday Night Football (LAC at BAL) LIVE in Q2 at 17-7 — a partial score is not a result. 'All 14 FINAL on 2026-11-16' cannot be true on any 2026-11-16 UTC read because the Monday game had not been played by then. Correct latest official count: 13 finals + 1 live. The new final (PIT 18, CIN 38) and the live status are now published in data/week10_results_extension.json under 'completion' with checks C1-C5 (fresh standings 32/32 W/L/T + PF/PA, S90/S91); promotion into the canonical feed remains Q44/SG37.",
+  "detail": "The official REG10 schedule page (S49) read 2026-11-16 shows all 14 Week 10 games FINAL (e.g. KC 35, ATL 13; NE 10, DET 35 in Munich; SF 46, DAL 40). The committed nflverse snapshot (data/raw/games.csv, S47) holds the Thursday final only; the other 13 rows carry blank scores. The repo's verified results feed therefore still counts 137 games. The scores were NOT back-filled by hand: results data is owned by the refresh pipeline and must be captured with its own official links (SG37). Cross-ref F59 (stale published snapshot, their read) and SG45; this flag records the 13-finals count verified 2026-11-16. UPDATE 2026-11-17 (session arena-7ac4e12e-fl1): the original detail's count/date does not survive a line-by-line re-read of the official pages on record. S49 is dated 2026-11-14 (a fixture cross-check, not a finals read); the S81 read of 2026-11-16T01:15-01:25Z printed 12 finals with the Sunday-night game in progress; and this session's S95 read of 2026-11-17T02:45-02:46Z prints 13 finals with Monday Night Football (LAC at BAL) LIVE in Q2 at 17-7 — a partial score is not a result. 'All 14 FINAL on 2026-11-16' cannot be true on any 2026-11-16 UTC read because the Monday game had not been played by then. Correct latest official count: 13 finals + 1 live. The new final (PIT 18, CIN 38) and the live status are now published in data/week10_results_extension.json under 'completion' with checks C1-C5 (fresh standings 32/32 W/L/T + PF/PA, S95/S96); promotion into the canonical feed remains Q44/SG37.",
   "sourceIds": [
    "S49",
    "S47",
    "S84",
    "S85",
-   "S90",
-   "S91"
+   "S95",
+   "S96"
   ],
   "severity": "Medium",
   "action": "Capture the 13 finals row-by-row with official links at the next refresh run (SG37); the drift-alarm pins (G-18) will WARN on the growth."

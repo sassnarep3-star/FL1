@@ -367,10 +367,10 @@ def main():
         "read_window_utc": "after 2026-11-17T02:45:45Z, before 2026-11-17T02:46:39Z",
         "schedule_capture": "raw/schedule-results-2026-week10-complete.md",
         "standings_capture": "raw/standings-2026-20261117.tsv",
-        "source_ids": ["S90", "S91"],
+        "source_ids": ["S95", "S96"],
         "finals_on_page": len(page_finals),
         "page_finals": [
-            {**r, "week": 10, "page_url": PAGE_URL, "source_id": "S90",
+            {**r, "week": 10, "page_url": PAGE_URL, "source_id": "S95",
              "tier": "OFFICIAL"}
             for r in sorted(page_finals, key=lambda r: (r["date"], r["away"]))
         ],
@@ -382,14 +382,14 @@ def main():
             "note": "Sunday Night Football — final at the 2026-11-17 read; "
                     "in progress at the 2026-11-16 read",
             "game_url": GAME_URLS[("PIT", "CIN")],
-            "page_url": PAGE_URL, "source_id": "S90", "tier": "OFFICIAL",
+            "page_url": PAGE_URL, "source_id": "S95", "tier": "OFFICIAL",
         },
         "still_live": {
             "week": 10, "date": "2026-11-16", "away": "LAC", "home": "BAL",
             "status": "LIVE at read time — card printed Q2, Chargers 17, Ravens 7 "
                       "(partial score, not a result)",
             "game_url": GAME_URLS[("LAC", "BAL")], "page_url": PAGE_URL,
-            "source_id": "S90",
+            "source_id": "S95",
         },
         "checks": {
             "C1_13_finals_and_one_live_card": True,

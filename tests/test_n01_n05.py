@@ -121,7 +121,7 @@ class TestN03InjuryHubDelta(unittest.TestCase):
         self.assertEqual(reads[0]["rows"], 345)
         self.assertEqual(reads[1]["rows"], 347)
         self.assertEqual(reads[2]["rows"], 347)
-        self.assertEqual(reads[2]["source_id"], "S89")
+        self.assertEqual(reads[2]["source_id"], "S94")
 
     def test_history_preserves_the_first_delta(self):
         h = self.delta["history"]
@@ -277,19 +277,13 @@ class TestSourcesS70S72(unittest.TestCase):
         # main (S01-S79, S53-S60 unused) + S80-S82 (session 38a78804)
         # + S83-S88 (session fc0ed6e8: renumbered second wave after both
         #   sessions independently claimed S70-S82 for different sources)
-<<<<<<< HEAD
         # + S89-S91 (session arena/e97f05c3-fl1: Week 10 Sunday-night final and
         #   the 2026-11-17 standings read; S91 is the live, not-yet-final MNF game)
         # + S92 (row-level citation audit; repository-only, not an NFL source)
         # + S93 (Week 11 by-week schedule; arena/d50423eb)
         # + S94 (session 7ac4e12e: third dated injury-hub read, 2026-11-17)
-        self.assertEqual(len(rows), 86)
-=======
-        # + S89-S91 (session 7ac4e12e: third dated injury-hub read + Week 10
-        #   close-out schedule/standings reads, 2026-11-17)
-        self.assertEqual(len(rows), 83)
-
->>>>>>> f6c5353 (H3: Week 10 close-out read (2026-11-17) — 13 finals incl new SNF PIT 18 CIN 38, MNF live Q2 (no score recorded), checks C1-C5 (standings 32/32 W/L/T+PF/PA), F61 count/date corrected, S90/S91 registered)
-
+                # + S95-S96 (session 7ac4e12e: Week 10 close-out schedule + standings
+        #   reads, 2026-11-17)
+        self.assertEqual(len(rows), 88)
 if __name__ == "__main__":
     unittest.main()

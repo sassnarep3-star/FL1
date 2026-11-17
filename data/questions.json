@@ -556,7 +556,7 @@
   "blocking": "yes - it decides where live prices are written",
   "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows.",
   "answer_state": "open",
-  "answer": "Open — whether the store's phase enum gains a value for prices whose vintage the publisher never stated is a schema/owner decision. Interim: such rows are labelled CLOSE_OR_UNDOCUMENTED in the backtest bench and the 2021 opening line stays quarantined (Q37). NOTE: Q45 duplicates this question verbatim (merge re-issue) — see F67; folding them together belongs to SG47.",
+  "answer": "Open — whether the store's phase enum gains a value for prices whose vintage the publisher never stated is a schema/owner decision. Interim: such rows are labelled CLOSE_OR_UNDOCUMENTED in the backtest bench and the 2021 opening line stays quarantined (Q37). NOTE: Q45 duplicates this question verbatim (merge re-issue) — see F70; folding them together belongs to SG47.",
   "answer_date": "2026-11-17"
  },
  {
@@ -668,7 +668,7 @@
   "blocking": "Yes",
   "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear.",
   "answer_state": "open",
-  "answer": "Open — three clock-bracketed reads exist (11-14, 11-16, 11-17), but the Wednesday/Thursday/Friday cadence has not started because capture cadence bumps into the terms question first (D-53; acceptable use Q18). Clearing: owner/counsel OK, then a scheduled workflow extends the repo's existing weekly refresh (SG48).",
+  "answer": "Open — three clock-bracketed reads exist (11-14, 11-16, 11-17), but the Wednesday/Thursday/Friday cadence has not started because capture cadence bumps into the terms question first (D-53; acceptable use Q18). Clearing: owner/counsel OK, then a scheduled workflow extends the repo's existing weekly refresh (SG50).",
   "answer_date": "2026-11-17"
  },
  {
@@ -700,7 +700,7 @@
   "blocking": "no",
   "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG35).",
   "answer_state": "open",
-  "answer": "Open — today nobody promotes: the Week-10 close-out (13 finals plus the live Monday game) is published in data/week10_results_extension.json ['completion'] with checks C1-C5 while data/results.tsv stays untouched pending this policy (F61, SG37/SG45 lineage). A workable rule to ratify: auto-promote only when a fresh official read prints every game FINAL and all V-checks pass — then it can run inside the weekly refresh (SG49).",
+  "answer": "Open — today nobody promotes: the Week-10 close-out (13 finals plus the live Monday game) is published in data/week10_results_extension.json ['completion'] with checks C1-C5 while data/results.tsv stays untouched pending this policy (F61, SG37/SG45 lineage). A workable rule to ratify: auto-promote only when a fresh official read prints every game FINAL and all V-checks pass — then it can run inside the weekly refresh (SG51).",
   "answer_date": "2026-11-17"
  },
  {
@@ -714,7 +714,10 @@
   "missing_data": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
   "source": "S74",
   "blocking": "yes - it decides where live prices are written",
-  "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+  "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows.",
+  "answer_state": "open",
+  "answer": "Duplicate of Q35 (verbatim — a merge re-issue collision, recorded as F70). Treat Q35 as the live question; Q45's disposition is pending SG47's consolidation so the two are answered once, not twice.",
+  "answer_date": "2026-11-17"
  },
  {
   "id": "Q46",
@@ -727,9 +730,9 @@
   "missing_data": "A documented canonical-table policy and explicit mapping of dated reads to the point-in-time ledger.",
   "source": "S01",
   "blocking": "yes - determines whether any historical row is replaced",
-  "recommended_path": "Keep the new capture as an immutable dated snapshot; only update the canonical table through an append-only snapshot-aware process."
-  "answer_state": "open",
-  "answer": "Duplicate of Q35 (verbatim — a merge re-issue collision, recorded as F67). Treat Q35 as the live question; Q45's disposition is pending SG47's consolidation so the two are answered once, not twice.",
+  "recommended_path": "Keep the new capture as an immutable dated snapshot; only update the canonical table through an append-only snapshot-aware process.",
+  "answer_state": "partial",
+  "answer": "Implemented, awaiting ratification: the 2026-11-17 capture is retained as an immutable dated snapshot (raw/ with its manifest) and published as a delta against the committed table — data/injuries.tsv is never rewritten in place (F69; the same never-back-fill rule as Q41, published through data/injury_hub_delta.json). The open half is the formal canonical-table policy — latest-state versus frozen-history — which is the same owner decision as Q40/Q41; SG51's append-only snapshot ledger is the recommended shape.",
   "answer_date": "2026-11-17"
  }
 ]

@@ -8,7 +8,7 @@ publish the delta, never the level."
 Inputs (raw captures, never edited after write once assembled):
   raw/injuries-week10-2026.md          read 1, 2026-11-14 (source S01)
   raw/injuries-week10-2026-read2.md    read 2, 2026-11-16 (source S80)
-  raw/injuries-week10-2026-read3.md    read 3, 2026-11-17 (source S89)
+  raw/injuries-week10-2026-read3.md    read 3, 2026-11-17 (source S94)
                                        (assembled from 8 fetched chunks by
                                         scripts/assemble_read3.py)
 
@@ -225,7 +225,7 @@ def main():
              "rows": len(r2), "week_shown": "WEEK 10", "source_id": "S80"},
             {"read": 3, "capture": "raw/injuries-week10-2026-read3.md",
              "read_window_utc": "after 2026-11-17T02:35:39Z, before 2026-11-17T02:36:52Z",
-             "rows": len(r3), "week_shown": "WEEK 10", "source_id": "S89"},
+             "rows": len(r3), "week_shown": "WEEK 10", "source_id": "S94"},
         ],
         "delta": delta23,
         "history": [delta12],
@@ -248,7 +248,7 @@ def main():
         ],
         "provenance": {
             "tier": "OFFICIAL",
-            "source_ids": ["S01", "S80", "S89"],
+            "source_ids": ["S01", "S80", "S94"],
             "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted "
                             "here, independently of tools/verify_injuries.py); reads 2 "
                             "and 3 parsed with the same grammar; every practice/game "

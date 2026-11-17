@@ -37,7 +37,7 @@ class TestQuestionAnswers(unittest.TestCase):
         cls.q_ids = {r["id"] for r in cls.q}
 
     def test_all_45_rows_answered(self):
-        self.assertEqual(len(self.q), 45)
+        self.assertEqual(len(self.q), 46)
         for r in self.q:
             self.assertIn("answer_state", r, r["id"])
             self.assertIn(r["answer_state"], STATES, r["id"])
@@ -48,7 +48,7 @@ class TestQuestionAnswers(unittest.TestCase):
         from collections import Counter
         c = Counter(r["answer_state"] for r in self.q)
         self.assertEqual(c["answered"], 12)
-        self.assertEqual(c["partial"], 15)
+        self.assertEqual(c["partial"], 16)
         self.assertEqual(c["open"], 18)
 
     def test_every_answer_cites_something_checkable(self):
@@ -87,19 +87,20 @@ class TestQuestionAnswers(unittest.TestCase):
     def test_q45_duplication_on_record(self):
         d = {r["id"]: r for r in self.q}
         self.assertEqual(d["Q35"]["question"], d["Q45"]["question"])
-        f67 = [f for f in self.flags if f["id"] == "F67"]
-        self.assertEqual(len(f67), 1)
-        self.assertIn("Q45", f67[0]["item"])
-        self.assertIn("F67", d["Q45"]["answer"])
+        f70 = [f for f in self.flags if f["id"] == "F70"]
+        self.assertEqual(len(f70), 1)
+        self.assertIn("Q45", f70[0]["item"])
+        self.assertIn("F70", d["Q45"]["answer"])
         self.assertIn("Q35", d["Q45"]["answer"])
+        self.assertIn("answer_state", d["Q46"])
 
-    def test_suggestions_sg48_sg49_exist(self):
+    def test_suggestions_sg50_sg51_exist(self):
         sugg = load("suggestions.json")
         if isinstance(sugg, dict):
             sugg = sugg.get("suggestions") or sugg["rows"]
         ids = {s["id"] for s in sugg}
-        self.assertIn("SG48", ids)
-        self.assertIn("SG49", ids)
+        self.assertIn("SG50", ids)
+        self.assertIn("SG51", ids)
 
 
 if __name__ == "__main__":

@@ -971,7 +971,7 @@ those clubs still show pre-game records. The page's NEWS section carried reserve
             cell(nf["home"]), cell(nf["homePts"], "n"),
             cell(nf["note"]),
             raw_src('<a href="%s">game centre</a>' % esc(nf["game_url"])),
-            raw_src(src_link("S90", sources_by_id)),
+            raw_src(src_link("S95", sources_by_id)),
         ]]
         live_rows = [[
             cell(sl["date"]),
@@ -979,7 +979,7 @@ those clubs still show pre-game records. The page's NEWS section carried reserve
             cell(sl["home"]), "<td class=\"blank\">—</td>",
             cell(sl["status"]),
             raw_src('<a href="%s">game centre</a>' % esc(sl["game_url"])),
-            raw_src(src_link("S90", sources_by_id)),
+            raw_src(src_link("S95", sources_by_id)),
         ]]
         comp_html = """
 <h3>Close-out read (%s, %s)</h3>
@@ -991,8 +991,8 @@ blank scores — a partial score is not a result. The %d completion checks
 C3 records <em>and</em> points vs the fresh official standings 32/32,
 C4 the live game's clubs byte-identical between standings reads,
 C5 bye records vs recompute) are enforced by
-<code>scripts/build_week10_extension.py</code>. Fresh sources: S90 (schedule),
-S91 (standings, <code>%s</code>) — corroborating only; the canonical
+<code>scripts/build_week10_extension.py</code>. Fresh sources: S95 (schedule),
+S96 (standings, <code>%s</code>) — corroborating only; the canonical
 <code>data/results.tsv</code> and <code>data/standings.tsv</code> are untouched, and
 promotion into the feed remains the owner decision Q44.</p>
 %s

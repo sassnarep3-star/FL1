@@ -27,7 +27,7 @@
    "read_window_utc": "after 2026-11-17T02:35:39Z, before 2026-11-17T02:36:52Z",
    "rows": 347,
    "week_shown": "WEEK 10",
-   "source_id": "S89"
+   "source_id": "S94"
   }
  ],
  "delta": {
@@ -465,7 +465,7 @@
   "source_ids": [
    "S01",
    "S80",
-   "S89"
+   "S94"
   ],
   "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted here, independently of tools/verify_injuries.py); reads 2 and 3 parsed with the same grammar; every practice/game value maps to a known designation; read 3's header row claim matches the parser; read 3 was assembled from 8 fetched chunks by scripts/assemble_read3.py, which asserts the seam-crossing rows rejoin correctly."
  }

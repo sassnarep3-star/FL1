@@ -50,7 +50,7 @@ class TestWeek10Completion(unittest.TestCase):
         self.assertEqual(self.comp["read"], "2026-11-17")
         self.assertIn("2026-11-17T02:45:45Z", self.comp["read_window_utc"])
         self.assertIn("2026-11-17T02:46:39Z", self.comp["read_window_utc"])
-        self.assertEqual(self.comp["source_ids"], ["S90", "S91"])
+        self.assertEqual(self.comp["source_ids"], ["S95", "S96"])
         self.assertEqual(self.comp["finals_on_page"], 13)
         self.assertEqual(len(self.comp["page_finals"]), 13)
         self.assertTrue(all(c for c in self.comp["checks"].values()))
@@ -70,7 +70,7 @@ class TestWeek10Completion(unittest.TestCase):
         self.assertEqual((nf["home"], nf["homePts"]), ("CIN", 38))
         self.assertEqual(nf["total"], 56)
         self.assertEqual(nf["margin_home"], 20)
-        self.assertEqual(nf["source_id"], "S90")
+        self.assertEqual(nf["source_id"], "S95")
         self.assertEqual(nf["date"], "2026-11-15")
         self.assertIn("steelers-at-bengals-2026-reg-10", nf["game_url"])
 
@@ -149,7 +149,7 @@ class TestWeek10Completion(unittest.TestCase):
         self.assertEqual(len(f61), 1)
         self.assertIn("UPDATE 2026-11-17", f61[0]["detail"])
         self.assertIn("13 finals + 1 live", f61[0]["detail"])
-        self.assertIn("S90", f61[0]["sourceIds"])
+        self.assertIn("S95", f61[0]["sourceIds"])
 
 
 if __name__ == "__main__":

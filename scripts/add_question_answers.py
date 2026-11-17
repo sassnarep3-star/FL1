@@ -17,9 +17,9 @@ the 45 register rows gains three fields:
   answer_date   "2026-11-17".
 
 Also appends (once) the register rows that this pass discovered:
-  F67  Q45 duplicates Q35 verbatim (merge re-issue artefact).
-  SG48 automate the dated injury-hub reads once Q42 clears.
-  SG49 promote finals into the verified feed under a frozen auto-rule (Q44).
+  F70  Q45 duplicates Q35 verbatim (merge re-issue artefact).
+  SG50 automate the dated injury-hub reads once Q42 clears.
+  SG51 promote finals into the verified feed under a frozen auto-rule (Q44).
 
 Idempotent: re-running leaves already-applied fields and register rows alone.
 
@@ -255,7 +255,7 @@ ANSWERS = {
             "vintage the publisher never stated is a schema/owner decision. Interim: "
             "such rows are labelled CLOSE_OR_UNDOCUMENTED in the backtest bench and the "
             "2021 opening line stays quarantined (Q37). NOTE: Q45 duplicates this "
-            "question verbatim (merge re-issue) — see F67; folding them together belongs "
+            "question verbatim (merge re-issue) — see F70; folding them together belongs "
             "to SG47."),
     "Q36": ("partial",
             "Interim basis implemented: ROI publishes only where a posted price exists, "
@@ -297,7 +297,7 @@ ANSWERS = {
             "Wednesday/Thursday/Friday cadence has not started because capture cadence "
             "bumps into the terms question first (D-53; acceptable use Q18). Clearing: "
             "owner/counsel OK, then a scheduled workflow extends the repo's existing "
-            "weekly refresh (SG48)."),
+            "weekly refresh (SG50)."),
     "Q43": ("open",
             "Open — both luck panels publish exactly the numbers such a bar would use "
             "(edge lower bound vs hurdle, multiplicity-adjusted verdicts, control "
@@ -310,15 +310,24 @@ ANSWERS = {
             "['completion'] with checks C1-C5 while data/results.tsv stays untouched "
             "pending this policy (F61, SG37/SG45 lineage). A workable rule to ratify: "
             "auto-promote only when a fresh official read prints every game FINAL and "
-            "all V-checks pass — then it can run inside the weekly refresh (SG49)."),
+            "all V-checks pass — then it can run inside the weekly refresh (SG51)."),
     "Q45": ("open",
-            "Duplicate of Q35 (verbatim — a merge re-issue collision, recorded as F67). "
+            "Duplicate of Q35 (verbatim — a merge re-issue collision, recorded as F70). "
             "Treat Q35 as the live question; Q45's disposition is pending SG47's "
             "consolidation so the two are answered once, not twice."),
+    "Q46": ("partial",
+            "Implemented, awaiting ratification: the 2026-11-17 capture is retained as an "
+            "immutable dated snapshot (raw/ with its manifest) and published as a delta "
+            "against the committed table — data/injuries.tsv is never rewritten in place "
+            "(F69; the same never-back-fill rule as Q41, published through "
+            "data/injury_hub_delta.json). The open half is the formal canonical-table "
+            "policy — latest-state versus frozen-history — which is the same owner "
+            "decision as Q40/Q41; SG51's append-only snapshot ledger is the recommended "
+            "shape."),
 }
 
 NEW_FLAG = {
-    "id": "F67",
+    "id": "F70",
     "kind": "Register duplication (merge re-issue artefact)",
     "item": "Q45 duplicates Q35 verbatim — the same open question is registered twice",
     "detail": "data/questions.json carries Q35 and Q45 with identical question text "
@@ -338,7 +347,7 @@ NEW_FLAG = {
 
 NEW_SUGGESTIONS = [
     {
-        "id": "SG48",
+        "id": "SG50",
         "title": "Automate the dated injury-hub reads on the brief's cadence once Q42 clears",
         "category": "Data capture",
         "problem": "The brief asks for Wednesday/Thursday/Friday (daily-to-kickoff) "
@@ -371,7 +380,7 @@ NEW_SUGGESTIONS = [
                     "capture header.",
     },
     {
-        "id": "SG49",
+        "id": "SG51",
         "title": "Promote finals into the verified feed under a frozen auto-rule (Q44)",
         "category": "Governance",
         "problem": "Week 10 now has 13 official finals (plus one live game) held only in "
@@ -433,8 +442,8 @@ def main():
 
     from collections import Counter
     counts = Counter(q["answer_state"] for q in questions)
-    if sum(counts.values()) != 45:
-        raise SystemExit("FAIL: expected 45 answered rows, got %d" % sum(counts.values()))
+    if sum(counts.values()) != 46:
+        raise SystemExit("FAIL: expected 46 answered rows, got %d" % sum(counts.values()))
     if set(counts) - {"answered", "partial", "open"}:
         raise SystemExit("FAIL: unexpected states %r" % set(counts))
 
@@ -442,21 +451,21 @@ def main():
         json.dump(questions, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
 
-    # ---- F67 (append once)
+    # ---- F70 (append once)
     with open(FPATH, encoding="utf-8") as fh:
         flags = json.load(fh)
     if isinstance(flags, dict):
         flags = flags.get("flags") or flags.get("rows")
-    if not any(f["id"] == "F67" for f in flags):
+    if not any(f["id"] == "F70" for f in flags):
         if any(f["id"] == NEW_FLAG["id"] for f in flags):
-            raise SystemExit("FAIL: F67 already used by a different row")
+            raise SystemExit("FAIL: F70 already used by a different row")
         flags.append(NEW_FLAG)
         with open(FPATH, "w", encoding="utf-8") as fh:
             json.dump(flags, fh, ensure_ascii=False, indent=1)
             fh.write("\n")
-        print("F67 appended")
+        print("F70 appended")
 
-    # ---- SG48/SG49 (append once)
+    # ---- SG50/SG51 (append once)
     with open(SPATH, encoding="utf-8") as fh:
         suggs = json.load(fh)
     if isinstance(suggs, dict):
