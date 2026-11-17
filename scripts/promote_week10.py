@@ -87,8 +87,8 @@ OUT_VERIFICATION = os.path.join(DATA, "verification-promote.tsv")
 
 PAGE_URL = "https://www.nfl.com/schedules/2026/REG10/"
 STANDINGS_URL = "https://www.nfl.com/standings/league/2026/REG"
-SOURCE_SCHEDULE = "S95"
-SOURCE_STANDINGS = "S96"
+SOURCE_SCHEDULE = "S98"
+SOURCE_STANDINGS = "S99"
 
 GAME_URLS = {
     ("WAS", "NYG"): "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",

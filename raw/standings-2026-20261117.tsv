@@ -1,57 +1,49 @@
-# RAW CAPTURE — NFL.com official league standings, 2026 regular season — CLOSEOUT READ (post-MNF)
+# RAW CAPTURE — NFL.com official league standings, 2026 regular season — READ 3
 #
-# URL (fresh data): https://www.nfl.com/standings/division/2026/REG
-# URL (stale at this read): https://www.nfl.com/standings/league/2026/REG
-# Read window (UTC): opened after 2026-11-17T04:39:46Z, completed before 2026-11-17T04:43:14Z
-#   (standings fetched in 2 content chunks by the session's page-fetch tool; window bracketed by
-#   sandbox clock readings). The Monday-night final (LAC 23, BAL 20) was decided at ~04:29Z.
-#
-# OFFICIAL-SOURCE OBSERVATION (recorded, not inferred): after the final, the league-standings
-# route printed the PRE-GAME state at four separate reads (04:30:44Z, 04:34:34Z, 04:39:46Z and
-# ~04:41Z: LAC 0-8, 121/219, 8L; BAL 4-5, 189/236, 4L — byte-identical to the pre-game values
-# derived from data/results_2026-11-16.tsv and to session e97f05c3's S90 read), while the
-# division-standings route of the SAME official site already carried the final result at the
-# same time (LAC 1-8, 144/239, 1W; BAL 4-6, 209/259, 5L). This capture therefore takes all 32
-# rows from the FRESH division route; the 30 clubs with no Monday game are byte-identical on
-# both routes. Column layout identical to the league route and to data/standings.tsv.
-# Purpose: the closeout points-arithmetic gate (promote_week10.py P4/P6) needs a standings
-# read that includes the Monday-night final; this is that read. It does NOT replace
-# data/standings.tsv (canonical capture, pre-registration corpus state) and does NOT replace
-# session e97f05c3's data/standings_2026-11-17.tsv (their pre-MNF same-day read, preserved).
-#
-# Columns: abbr(repo key)<TAB>w<TAB>l<TAB>t<TAB>pct<TAB>pf<TAB>pa<TAB>net<TAB>home<TAB>road
-#          <TAB>div<TAB>div_pct<TAB>conf<TAB>conf_pct<TAB>nonconf<TAB>streak<TAB>last5
-#   (page prints Los Angeles Rams with logo "LA" and Arizona Cardinals with logo "AZ";
-#    repo keys LAR/ARI used here as everywhere in data/)
-BUF	8	1	0	0.889	287	199	88	3-1-0	5-0-0	1-1-0	0.500	5-1-0	0.833	3-0-0	5W	5-0-0
-SF	8	1	0	0.889	281	196	85	5-0-0	3-1-0	3-0-0	1.000	5-1-0	0.833	3-0-0	2W	4-1-0
-CHI	7	2	0	0.778	241	184	57	4-1-0	3-1-0	0-2-0	0.000	5-2-0	0.714	2-0-0	4W	4-1-0
-CIN	7	2	0	0.778	278	193	85	3-1-0	4-1-0	2-1-0	0.667	5-2-0	0.714	2-0-0	5W	5-0-0
-DEN	7	2	0	0.778	198	186	12	4-0-0	3-2-0	2-1-0	0.667	3-1-0	0.750	4-1-0	5W	5-0-0
-DET	7	2	0	0.778	257	199	58	5-0-0	2-2-0	2-0-0	1.000	4-1-0	0.800	3-1-0	5W	5-0-0
-JAX	7	2	0	0.778	269	144	125	4-1-0	3-1-0	2-1-0	0.667	6-2-0	0.750	1-0-0	3W	4-1-0
-KC	7	2	0	0.778	237	156	81	4-0-0	3-2-0	3-1-0	0.750	6-1-0	0.857	1-1-0	2W	3-2-0
-MIN	7	2	0	0.778	176	126	50	3-1-0	4-1-0	3-1-0	0.750	5-1-0	0.833	2-1-0	1W	3-2-0
-PIT	6	3	0	0.667	198	182	16	4-0-0	2-3-0	2-2-0	0.500	3-3-0	0.500	3-0-0	1L	4-1-0
-NYG	5	3	1	0.611	203	196	7	3-2-0	2-1-1	2-1-1	0.625	3-3-1	0.500	2-0-0	1L	2-2-1
-CLE	6	4	0	0.600	188	220	-32	4-0-0	2-4-0	2-1-0	0.667	4-3-0	0.571	2-1-0	1W	3-2-0
-GB	6	4	0	0.600	226	221	5	3-2-0	3-2-0	1-3-0	0.250	4-4-0	0.500	2-0-0	1L	3-2-0
-LAR	6	4	0	0.600	248	187	61	2-3-0	4-1-0	1-2-0	0.333	4-2-0	0.667	2-2-0	4W	4-1-0
-SEA	6	4	0	0.600	223	175	48	4-2-0	2-2-0	2-1-0	0.667	2-3-0	0.400	4-1-0	2W	3-2-0
-NE	5	5	0	0.500	221	242	-21	3-1-0	2-4-0	3-0-0	1.000	5-1-0	0.833	0-4-0	2L	2-3-0
-CAR	4	5	0	0.444	219	236	-17	1-3-0	3-2-0	2-1-0	0.667	4-3-0	0.571	0-2-0	1W	2-3-0
-BAL	4	6	0	0.400	209	259	-50	1-4-0	3-2-0	0-2-0	0.000	2-5-0	0.286	2-1-0	5L	0-5-0
-DAL	4	6	0	0.400	286	282	4	1-4-0	3-2-0	2-1-0	0.667	2-5-0	0.286	2-1-0	1L	2-3-0
-LV	4	6	0	0.400	251	289	-38	1-4-0	3-2-0	1-1-0	0.500	3-3-0	0.500	1-3-0	2L	1-4-0
-WAS	3	5	1	0.389	196	223	-27	2-2-1	1-3-0	2-2-1	0.500	3-4-1	0.438	0-1-0	1W	2-2-1
-HOU	3	6	0	0.333	233	219	14	0-4-0	3-2-0	2-1-0	0.667	3-4-0	0.429	0-2-0	1L	3-2-0
-NO	3	6	0	0.333	202	236	-34	1-5-0	2-1-0	0-2-0	0.000	1-4-0	0.200	2-2-0	1L	2-3-0
-TB	3	6	0	0.333	202	178	24	1-4-0	2-2-0	2-0-0	1.000	3-3-0	0.500	0-3-0	1L	3-2-0
-ARI	3	7	0	0.300	184	289	-105	0-4-0	3-3-0	1-4-0	0.200	2-6-0	0.250	1-1-0	2L	2-3-0
-ATL	3	7	0	0.300	201	258	-57	1-5-0	2-2-0	1-2-0	0.333	3-3-0	0.500	0-4-0	3L	1-4-0
-IND	3	7	0	0.300	208	271	-63	2-3-0	1-4-0	1-2-0	0.333	2-5-0	0.286	1-2-0	1W	1-4-0
-PHI	2	7	0	0.222	148	221	-73	1-4-0	1-3-0	1-3-0	0.250	1-6-0	0.143	1-1-0	7L	0-5-0
-NYJ	2	8	0	0.200	194	254	-60	1-4-0	1-4-0	0-3-0	0.000	2-5-0	0.286	0-3-0	5L	0-5-0
-MIA	1	8	0	0.111	148	224	-76	0-4-0	1-4-0	1-1-0	0.500	1-5-0	0.167	0-3-0	3L	1-4-0
-TEN	1	8	0	0.111	167	239	-72	0-5-0	1-3-0	1-2-0	0.333	1-6-0	0.143	0-2-0	3L	1-4-0
-LAC	1	8	0	0.111	144	239	-95	0-4-0	1-4-0	0-3-0	0.000	1-5-0	0.167	0-3-0	1W	1-4-0
+# URL: https://www.nfl.com/standings/league/2026/REG
+# Read window (UTC): opened after 2026-11-17T02:45:45Z, completed before 2026-11-17T02:46:39Z
+#   (page fetched in 2 content chunks by the session's page-fetch tool).
+# Page title at capture: "2026 NFL League Standings"
+# Purpose: CORROBORATING EVIDENCE ONLY for data/week10_results_extension.json completion read
+#   (C3/C4 checks: data/results.tsv + the extension finals + the new Sunday-night final must
+#   reproduce every club's W/L/T and PF/PA exactly). This file does NOT replace
+#   data/standings.tsv, which remains the canonical capture behind the already-published
+#   registers and is unchanged.
+# State at read: 13 of 14 Week 10 games final. The Sunday Night Football result is INCLUDED
+#   (PIT 6-3, CIN 7-2 — vs PIT 6-2, CIN 6-2 in raw/standings-2026-20261116.tsv). Monday Night
+#   Football (LAC at BAL) was LIVE (Q2) at read time and is NOT counted: LAC 0-8 and BAL 4-5
+#   are pre-game figures, identical to the 2026-11-16 capture.
+# Columns: abbr(repo key)<TAB>w<TAB>l<TAB>t<TAB>pf<TAB>pa   (page prints Los Angeles Rams as
+#   "LA" and Arizona Cardinals as "AZ"; repo keys LAR/ARI used here, as everywhere in data/)
+BUF	8	1	0	287	199
+SF	8	1	0	281	196
+CHI	7	2	0	241	184
+CIN	7	2	0	278	193
+DEN	7	2	0	198	186
+DET	7	2	0	257	199
+JAX	7	2	0	269	144
+KC	7	2	0	237	156
+MIN	7	2	0	176	126
+PIT	6	3	0	198	182
+NYG	5	3	1	203	196
+CLE	6	4	0	188	220
+GB	6	4	0	226	221
+LAR	6	4	0	248	187
+SEA	6	4	0	223	175
+NE	5	5	0	221	242
+BAL	4	5	0	189	236
+CAR	4	5	0	219	236
+DAL	4	6	0	286	282
+LV	4	6	0	251	289
+WAS	3	5	1	196	223
+HOU	3	6	0	233	219
+NO	3	6	0	202	236
+TB	3	6	0	202	178
+ARI	3	7	0	184	289
+ATL	3	7	0	201	258
+IND	3	7	0	208	271
+PHI	2	7	0	148	221
+NYJ	2	8	0	194	254
+MIA	1	8	0	148	224
+TEN	1	8	0	167	239
+LAC	0	8	0	121	219

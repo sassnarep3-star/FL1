@@ -125,7 +125,7 @@ replaced; shared/generated files rebuilt through the standard builders after my 
 |---|------|--------|-------|----------------------|------------------------|----------------|
 | C0 | Coordination claim + immediate push | done | arena-a502c4e0 | `COORDINATION.md` | — | — |
 | C1 | Week 10 closeout + Q44 promotion **acceptance run**: fresh official read of the week-10 page and league standings once all games reach FINAL; closeout gates P1–P8 (`scripts/promote_week10.py`, new) run against the captures; dated side-reads published (`data/results_2026-11-17-closeout.tsv`, `data/standings_2026-11-17-closeout.tsv`) byte-chained after session e97f05c3's same-day 149-row SNF read; **canonical `data/results.tsv`/`data/standings.tsv` roll-forward deliberately NOT executed** — that half of Q44 is the owner's policy choice (refit would move every published model coefficient; the runner's `--promote` prints the full rebuild/verify sequence). Resolves open flag F67 (the prescribed re-read of the Monday-night game after Final). Scope note recorded here per the claim rule. | done | arena-a502c4e0 | `raw/schedule-results-2026-week10-closeout.tsv` (new), `raw/standings-2026-20261117.tsv` (new), `data/week10_closeout.json` (new), `scripts/promote_week10.py` (new), `data/results_2026-11-17-closeout.tsv` (new), `data/standings_2026-11-17-closeout.tsv` (new), generated `verified-results-feed.html`; **not** `data/results.tsv`/`data/standings.tsv`/`data/week10_results_extension.json`/`data/results_2026-11-17.tsv`/`data/standings_2026-11-17.tsv` | official https://www.nfl.com/schedules/2026/REG10/ and https://www.nfl.com/standings/league/2026/REG, fetched this session; P1–P8 in the runner | scope deviation vs original claim: staged closeout instead of canonical promotion — Q44 policy half left open; register-slip flag is F70 (renumbered after main took F67–F69) |
-| C2 | Fresh injury-hub read with clock time (2026-11-17) + published delta vs the 2026-11-16 read; never the level | done | arena-a502c4e0 | `raw/injuries-week10-2026-read3.md` (new), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py` (read-only + new read arg), generated `injuries.html` | official https://www.nfl.com/injuries/ | — |
+| C2 | Fresh injury-hub read with clock time (2026-11-17) + published delta vs the 2026-11-16 read; never the level | done | arena-a502c4e0 | `raw/injuries-week10-2026-read4.md` (new), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py` (read-only + new read arg), generated `injuries.html` | official https://www.nfl.com/injuries/ | — |
 | C3 | Full verification sweep on the final tree: unit tests, build, link check, row-sourcing check, injury/result verifiers | done | arena-a502c4e0 | none (read-only runs; results recorded in this board) | repo tooling | — |
 | C4 | Registers append (new sources, any new flags, Q44 answer/resolution), executive-summary touch, coordination completion record | done | arena-a502c4e0 | `data/{sources.tsv,flags.json,questions.json,suggestions.json}`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | each appended row carries its official URL | — |
 | C5 | Final integration: PR → `main`, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | claimed | arena-a502c4e0 | PR + this record | gh + Pages API | — |
@@ -137,9 +137,9 @@ prescribes. No other session has an open PR or an un-stale claim on these files 
 
 **Shared-file notice:** this session appends to `tools/site.py` (new closeout + read-3 injury
 sections; the file's own header already requires appending sections rather than rewriting), to
-`data/sources.tsv` (**S94–S96** — renumbered after main had taken S89–S93 mid-session),
-`data/flags.json` (**F70** — renumbered after main took F67–F69), `data/questions.json`
-(Q44 fields only), and `tools/verify_drift.py` (DR-10 pin → 70). `data/results.tsv`,
+`data/sources.tsv` (**S97–S99** — renumbered twice: main took S89–S93 mid-session, session 7ac4e12e then took S94–S96),
+`data/flags.json` (**F71–F72** — renumbered after main took F67–F69 and 7ac4e12e took F70), `data/questions.json`
+(Q44 fields only), and `tools/verify_drift.py` (DR-10 pin → 72). `data/results.tsv`,
 `data/standings.tsv`, `data/week10_results_extension.json`, `data/results_2026-11-17.tsv` and
 `data/standings_2026-11-17.tsv` (session e97f05c3) stay untouched (C1 scope note above).
 `tools/site_g.py` gets one additive Snapshot-Ledger row for the closeout read (mirrors the
@@ -152,26 +152,26 @@ Mid-session rebase onto `22482a9` (PRs #49–#54) completed with conflicts resol
 - **C0** claim `c9a1493` pushed at claim time (main was `5a076a0`, PR list empty).
 - **C1 closeout + Q44 acceptance run.** Monday-night final confirmed on the official Game
   Center (LAC 23 BAL 20, "Final", quarter scores 10-7-3-3 / 0-10-3-7). Clock-bracketed
-  reads → `raw/schedule-results-2026-week10-closeout.tsv` (S95, 14/14 FINAL) and
-  `raw/standings-2026-20261117.tsv` (S96, post-MNF 32 clubs; league route stale at four
-  post-final reads — see F71, division route fresh). `scripts/promote_week10.py` gates
+  reads → `raw/schedule-results-2026-week10-closeout.tsv` (S98, 14/14 FINAL) and
+  `raw/standings-2026-20261117-closeout.tsv` (S99, post-MNF 32 clubs; league route stale at four
+  post-final reads — see F72, division route fresh). `scripts/promote_week10.py` gates
   **P1–P8 ALL PASS** (`data/verification-promote.tsv`); `--execute` published
   `data/results_2026-11-17-closeout.tsv` (150 rows, byte-chained after e97f05c3's 149-row
   read) + `data/standings_2026-11-17-closeout.tsv`; register `data/week10_closeout.json`.
   **Canonical `data/results.tsv`/`data/standings.tsv` NOT promoted** (scope note above; Q44
   policy half). Open flag **F67 resolved** by the prescribed re-read (annotation appended;
   their 149-row read and gate files untouched — their H-gate still GATE PASS).
-- **C2 injury read 3** — `raw/injuries-week10-2026-read3.md` (window 02:33:27Z–02:43:50Z,
-  347 rows/28 clubs), `delta_2_3` = 3 practice changes / 0 added / 0 removed, source S94,
+- **C2 injury read 4** — `raw/injuries-week10-2026-read3.md` (window 02:33:27Z–02:43:50Z,
+  347 rows/28 clubs), `delta` (read 3 → read 4) = 2 practice changes / 0 added / 0 removed, source S97,
   N03 tests updated (3 reads), site section renders both deltas.
 - **C3 verification sweep (final tree):** 342 tests OK; build+site+checklinks (57 pages)
   + checkrows (7,046 rows) green; verify_results 32/32; verify_results_g PASS;
   verify_results_2026_11_17 GATE PASS (untouched); verify_injuries OK; verify_drift 19/19
   (DR-10 → 71, DR-08 → 46); verify_brief 10/10; verify_site 0/0 (CI pandas venv);
   CI six-builder rebuild byte-identical.
-- **C4 registers:** sources **S94** (injury read 3), **S95** (closeout schedule), **S96**
-  (post-MNF standings) — 88 rows; flags **F70** (Q44/SG43/F59 cross-reference slip;
-  Q44 recommended_path corrected to SG43), **F71** (league-route staleness), F67 annotated
+- **C4 registers:** sources **S97** (injury read 4), **S98** (closeout schedule), **S99**
+  (post-MNF standings) — 91 rows; flags **F71** (Q44/SG43/F59 cross-reference slip;
+  Q44 recommended_path corrected to SG43), **F72** (league-route staleness), F67 annotated
   RESOLVED; Q44 what_we_know/missing_data updated with the delivered acceptance run;
   DR pins re-pinned on purpose (flags 67→71 as entries landed, questions 45→46 by main);
   EXECUTIVE_SUMMARY new current block; README promote_week10 entry; Snapshot-Ledger row

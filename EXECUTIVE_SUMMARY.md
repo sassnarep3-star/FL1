@@ -79,7 +79,7 @@ site verified end to end.
 | Closeout register + gate table | `data/week10_closeout.json`, `data/verification-promote.tsv` | rebuilt by the runner |
 | Injury read 4 + delta | `raw/injuries-week10-2026-read4.md`, `data/injury_hub_delta.json` | `python3 scripts/build_injury_hub_delta.py` |
 | Site sections | verified-results-feed (closeout + gates), injuries (read-3 delta), Snapshot-Ledger row | `python3 tools/site.py` |
-| Registers | sources S97–S99, flags F71–F71, Q44 acceptance record, DR-10 pin 72 | appended, drift-checked |
+| Registers | sources S97–S99, flags F71–F72, Q44 acceptance record, DR-10 pin 72 | appended, drift-checked |
 
 ### Verification (2026-11-17, final sweep)
 

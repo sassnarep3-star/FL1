@@ -43,7 +43,7 @@ class TestCloseoutRegister(unittest.TestCase):
         for f in self.reg["finals"]:
             self.assertEqual(f["week"], 10)
             self.assertTrue(f["game_url"].startswith("https://www.nfl.com/games/"))
-            self.assertEqual(f["source_id"], "S95")
+            self.assertEqual(f["source_id"], "S98")
 
     def test_every_gate_passed(self):
         self.assertEqual(len(self.reg["checks"]), 8)  # P1-P8, incl. the 149-row chain

@@ -573,7 +573,7 @@ def ledger_page(ctx):
          ctx["raw_src"]('<a class="src" href="https://www.nfl.com/games/steelers-at-bengals-2026-reg-10" target="_blank" rel="noopener">S89</a>')],
         [ctx["cell"]("2026-11-17"), ctx["cell"]("150"), ctx["cell"]("data/results_2026-11-17-closeout.tsv"),
          ctx["cell"]("week-10 closeout read: all 14 finals, the Monday-night game captured FINAL after the re-read flag F67 asked for; byte-chained after the 149-row read (gate P8); reconciled 32/32. The canonical corpus was not promoted \u2014 Q44's policy half stays open."),
-         ctx["raw_src"]('<a class="src" href="https://www.nfl.com/schedules/2026/REG10/" target="_blank" rel="noopener">S95</a>')],
+         ctx["raw_src"]('<a class="src" href="https://www.nfl.com/schedules/2026/REG10/" target="_blank" rel="noopener">S98</a>')],
     ]
     ver_rows = []
     for row in ver:
