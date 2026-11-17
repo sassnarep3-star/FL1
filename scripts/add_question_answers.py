@@ -87,7 +87,7 @@ ANSWERS = {
             "official inactives yields play rates with confidence intervals."),
     "Q08": ("answered",
             "Published, never suppressed: every cross-source irregularity becomes a row "
-            "on flagged.html with detail, action and source links (66 flags today; F61 "
+            "on flagged.html with detail, action and source links (70 flags today; F61 "
             "was corrected 2026-11-17 after re-reading the official pages; F53 records "
             "the row-count discrepancy). Per the brief, flagged items do not block a "
             "merge, and a cell that cannot be confirmed from an official source stays "
