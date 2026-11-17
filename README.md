@@ -66,6 +66,9 @@ python3 tools/build.py           # regenerate data bundle + derived counts
 python3 tools/site.py            # regenerate all HTML pages
 python3 tools/checklinks.py      # fail if any internal link or anchor is broken
 python3 tools/verify_injuries.py # diff every injury row against the raw capture
+python3 scripts/promote_week10.py # Q44 week-10 closeout: acceptance checks P1-P7
+                                  # (--execute writes the dated side-reads; --promote
+                                  # is the gated canonical roll-forward)
 ```
 
 `checklinks.py` and `verify_injuries.py` both exit non-zero on failure, so they can gate a merge.

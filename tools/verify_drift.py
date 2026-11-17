@@ -53,7 +53,7 @@ PINS = [
      ["id", "question"], ["id", "question"]),
     ("DR-09", "data/suggestions.json", "json-list", None, 51,
      ["id", "title"], ["id", "title"]),
-    ("DR-10", "data/flags.json", "json-list", None, 70,  # F67-F69 from main + F70 (Q45 duplication)
+    ("DR-10", "data/flags.json", "json-list", None, 72,  # F67-F70 (main) + F71 (cross-ref slip) + F72 (route staleness)
      ["id", "item"], ["id", "item"]),
     ("DR-11", "data/strategies.json", "json-list", None, 6,
      ["id", "name", "change_of_mind"], ["id", "name", "change_of_mind"]),

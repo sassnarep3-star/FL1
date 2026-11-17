@@ -28,23 +28,42 @@
    "rows": 347,
    "week_shown": "WEEK 10",
    "source_id": "S94"
+  },
+  {
+   "read": 4,
+   "capture": "raw/injuries-week10-2026-read4.md",
+   "read_window_utc": "after 2026-11-17T02:33:27Z, before 2026-11-17T02:43:50Z (chunks interleaved with read 3; completed after it)",
+   "rows": 347,
+   "week_shown": "WEEK 10",
+   "source_id": "S97"
   }
  ],
  "delta": {
-  "between": "read 2 (2026-11-16) -> read 3 (2026-11-17)",
-  "older_label": "read 2 (2026-11-16)",
-  "newer_label": "read 3 (2026-11-17)",
+  "between": "read 3 (2026-11-17 02:36Z) -> read 4 (2026-11-17 02:43Z)",
+  "older_label": "read 3 (2026-11-17 02:36Z)",
+  "newer_label": "read 4 (2026-11-17 02:43Z)",
   "changed": [
    {
-    "team": "NO",
-    "player": "Travis Etienne",
-    "pos": "RB",
-    "injury": "Hamstring",
+    "team": "BUF",
+    "player": "Tyrell Shavers",
+    "pos": "WR",
+    "injury": "Knee",
     "practice": "LIMITED",
     "game": "Questionable",
     "field": "practice",
     "old": "FULL",
     "new": "LIMITED"
+   },
+   {
+    "team": "CIN",
+    "player": "Brian Parker II",
+    "pos": "G",
+    "injury": "Knee",
+    "practice": "DNP",
+    "game": "Doubtful",
+    "field": "practice",
+    "old": "FULL",
+    "new": "DNP"
    }
   ],
   "added": [],
@@ -436,6 +455,27 @@
      "newer": 10
     }
    ]
+  },
+  {
+   "between": "read 2 (2026-11-16) -> read 3 (2026-11-17)",
+   "older_label": "read 2 (2026-11-16)",
+   "newer_label": "read 3 (2026-11-17)",
+   "changed": [
+    {
+     "team": "NO",
+     "player": "Travis Etienne",
+     "pos": "RB",
+     "injury": "Hamstring",
+     "practice": "LIMITED",
+     "game": "Questionable",
+     "field": "practice",
+     "old": "FULL",
+     "new": "LIMITED"
+    }
+   ],
+   "added": [],
+   "removed": [],
+   "per_club_row_count_changes": []
   }
  ],
  "reserve_list_pointers": [
@@ -465,8 +505,9 @@
   "source_ids": [
    "S01",
    "S80",
-   "S94"
+   "S94",
+   "S97"
   ],
-  "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted here, independently of tools/verify_injuries.py); reads 2 and 3 parsed with the same grammar; every practice/game value maps to a known designation; read 3's header row claim matches the parser; read 3 was assembled from 8 fetched chunks by scripts/assemble_read3.py, which asserts the seam-crossing rows rejoin correctly."
+  "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted here, independently of tools/verify_injuries.py); reads 2 and 3 parsed with the same grammar; every practice/game value maps to a known designation; read 3's header row claim matches the parser; read 3 was assembled from 8 fetched chunks by scripts/assemble_read3.py, which asserts the seam-crossing rows rejoin correctly; read 4's header row claim matches the parser; each changed row of read 4 was re-checked line-by-line against reads 2 and 3 before publishing."
  }
 }

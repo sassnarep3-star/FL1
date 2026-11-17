@@ -1,12 +1,103 @@
 # FL1 — Executive Summary
 
-**Session:** `arena-7ac4e12e-fl1` · **Branch:** `arena/7ac4e12e-fl1` (from `5a076a0` of `main`) · **Built:** 2026-11-17
+**Session:** `arena/a502c4e0-fl1` · **Branch:** `arena/a502c4e0-fl1` (from `5a076a0` of `main`; rebased onto `22482a9` and `970f0ac`) · **Built:** 2026-11-17
 **Site:** https://sassnarep3-star.github.io/FL1/
 
 > **Reading note.** This file carries more than one session's summary. The block immediately
 > below is the current one (2026-11-17). Earlier blocks are preserved verbatim further down
 > because they record work that is still in the repository; where they conflict with a later
 > re-verification, the later one is marked as superseding.
+
+---
+
+## Session `arena/a502c4e0-fl1` — 2026-11-17 (Week-10 closeout, Q44 acceptance run, freshness sweep)
+
+### What this session set out to do
+
+Close Week 10 against official sources with no manual input: run the Q44 promotion
+acceptance checks the moment the last game reached FINAL, take a fresh dated injury-hub read,
+publish every register the brief requires, and land it all through a PR to `main` with the
+site verified end to end.
+
+### What it found
+
+1. **The week closed exactly as Q44 prescribed — and the acceptance run now exists.**
+   The Monday-night final (Chargers 23, Ravens 20; Game Center "Final", quarter scores
+   10-7-3-3 / 0-10-3-7 summing to the total) landed at ~04:29 UTC on 2026-11-17. A
+   clock-bracketed read of the official schedule page captured all 14 Week-10 games FINAL
+   (S98), and eight acceptance gates in `scripts/promote_week10.py` all PASS
+   (`data/verification-promote.tsv`): fixture membership, cross-read agreement with the
+   12 finals already on record, late-final provenance (no in-progress score was ever
+   carried forward), 32-of-32 W/L/T/PF/PA points arithmetic against a fresh standings read,
+   append-only prefix of the frozen corpus, per-club game counts, no duplicates, and the
+   byte-prefix chain **137 → 148 → 149 → 150** across four dated reads.
+
+2. **The canonical feed was deliberately NOT promoted.** Q44's policy half — rolling
+   `data/results.tsv` forward — would refit every published model coefficient computed from
+   it, and F59's doctrine ("a backtest corpus that silently grows is not a corpus") plus the
+   pre-registration requirements argue for a reviewer decision instead of a silent append.
+   The closeout is published as dated side-reads (`data/results_2026-11-17-closeout.tsv`,
+   150 rows; `data/standings_2026-11-17-closeout.tsv`), and the runner's `--promote` mode
+   prints the exact 13-step rebuild-and-re-verify sequence the owner would execute. The
+   earlier same-day 149-row SNF read (session e97f05c3) is preserved byte-identically as
+   its prefix; their gate files were never touched.
+
+3. **Parallel sessions merged mid-run — IDs were re-keyed, not overwritten.** Main advanced
+   from `5a076a0` to `22482a9` (PRs #49–#54) while this session worked, taking sources
+   S89–S93 and flags F67–F69. This session's additions were renumbered to **S97–S99 /
+   F71** in a clean rebase (conflicts resolved in COORDINATION.md, sources, flags,
+   verify_drift; the sources prefix S01–S88 restored intact). The new F67 (MNF open) was
+   resolved by exactly the re-read it asks for.
+
+4. **The league-standings route went stale after the final; the division route did not.**
+   Four reads of `nfl.com/standings/league/2026/REG` after the whistle still printed the
+   pre-game state (LAC 0-8/121/219, BAL 4-5/189/236), byte-identical to the pre-game
+   arithmetic — while `nfl.com/standings/division/2026/REG` already carried the settled
+   rows (LAC 1-8/144/239/1W, BAL 4-6/209/259/5L). The closeout capture takes the fresh
+   route, documents the stale reads with their clocks, and flags the divergence (F72).
+   Nothing was inferred: a stale row would have failed the points-arithmetic gate, and did.
+
+5. **Register cross-references were mis-wired (F71).** Q44 paired "SG35" (the prices
+   collector), F59 pointed at SG36 (undated-vintage labels), and SG43 — the actual
+   promotion suggestion — paired Q35 (the storage question). The three records describe one
+   decision family and were wired to three others. Q44's recommended_path now names SG43
+   with a pointer to F71; the other two remain as published history under the flag.
+
+6. **Injury hub read 4 is a delta, not a snapshot.** A clock-bracketed read
+   (2026-11-17T02:33:27Z–02:43:50Z, 8 chunks, 347 rows/28 clubs) against reads 1–2 moved
+   exactly two practice designations (BUF Shavers FULL→LIMITED, CIN Parker FULL→DNP), zero rows added or removed — each change re-checked line by
+   line against all three captures before publishing (S97; `delta (r3→r4) in
+   `data/injury_hub_delta.json`).
+
+### What it built
+
+| Artefact | File | Re-runnable |
+|---|---|---|
+| Week-10 closeout captures | `raw/schedule-results-2026-week10-closeout.tsv`, `raw/standings-2026-20261117.tsv` | clock-bracketed reads, verbatim |
+| Acceptance gates P1–P8 | `scripts/promote_week10.py` | `python3 scripts/promote_week10.py` (idempotent; `--execute` gated; `--promote` prints the owner sequence) |
+| Dated side-reads | `data/results_2026-11-17-closeout.tsv` (150), `data/standings_2026-11-17-closeout.tsv` (32) | produced by `--execute` |
+| Closeout register + gate table | `data/week10_closeout.json`, `data/verification-promote.tsv` | rebuilt by the runner |
+| Injury read 4 + delta | `raw/injuries-week10-2026-read4.md`, `data/injury_hub_delta.json` | `python3 scripts/build_injury_hub_delta.py` |
+| Site sections | verified-results-feed (closeout + gates), injuries (read-3 delta), Snapshot-Ledger row | `python3 tools/site.py` |
+| Registers | sources S97–S99, flags F71–F72, Q44 acceptance record, DR-10 pin 72 | appended, drift-checked |
+
+### Verification (2026-11-17, final sweep)
+
+342 unit tests OK · `tools/build.py` + `tools/site.py` + checklinks (57 pages) +
+checkrows (7,046 rows, every data row sourced) · verify_results PASS (32/32) ·
+verify_results_g PASS (G-R1–R4) · verify_results_2026_11_17 GATE PASS (their gates intact)
+· verify_injuries OK · verify_drift 19/19 · verify_brief 10/10 · verify_site (CI pandas
+venv) 0 errors / 0 warnings · CI-equivalent six-builder rebuild byte-identical (clean
+`data/`+`docs/` diff) · CI `verify` check green on every push.
+
+### Decisions left open (unchanged, by design)
+
+- **Q44 policy half:** execute `scripts/promote_week10.py --execute --promote` (canonical
+  roll-forward + 13-step refit sweep) or keep extending by dated reads. Acceptance checks
+  are done; the choice is the owner's, exactly as the registers require.
+- **Q46** (main's new question): whether the 2026-11-17 live injury capture joins the
+  current table — this session's read 3 stays a delta beside it, consistent with either
+  answer.
 
 ---
 

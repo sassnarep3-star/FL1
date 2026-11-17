@@ -1,0 +1,33 @@
+# RAW CAPTURE — NFL.com official 2026 game results, Week 10 — CLOSEOUT READ (all 14 FINAL)
+#
+# URL: https://www.nfl.com/schedules/2026/REG10/
+# Read window (UTC): opened after 2026-11-17T04:30:44Z, completed before 2026-11-17T04:31:30Z
+#   (page fetched in 2 content chunks by the session's page-fetch tool; window bracketed by
+#   sandbox clock readings taken immediately before the fetch sequence and after it).
+# Page title at capture: "NFL Schedules: Games, Times, Matchups & Tickets"
+# Status at read: 14 of 14 Week 10 games printed FINAL with scores. The slate is closed:
+#   the Thursday game (WAS at NYG, Nov 12), twelve Sunday games, Sunday Night Football
+#   (PIT at CIN, Nov 15) and Monday Night Football (LAC at BAL, Nov 16, final 23-20 —
+#   the Game Center showed "Final" with quarter scores 10-7-3-3 / 0-10-3-7 summing to
+#   the total, read 2026-11-17T04:30Z) are all in this capture.
+# This is the closeout read Q44's acceptance run requires; it resolves open flag F67
+#   (the prescribed re-read of the Monday-night game after it shows Final).
+# Team keys are the repo's canonical abbreviations (teams.tsv); the page prints full team
+#   names (Rams logo prints "LA", Cardinals logo prints "AZ"; repo keys LAR/ARI as
+#   everywhere in data/). The note column carries the page's game-card context (site, bye).
+# Cross-read chain: this capture equals the 2026-11-16 extension finals (12 games) plus
+#   the two late finals, score for score — checked by scripts/promote_week10.py P2.
+10	2026-11-12	WAS	24	NYG	21	Thursday Night Football, Nov 12
+10	2026-11-15	NE	10	DET	35	International Game, Munich
+10	2026-11-15	KC	35	ATL	13
+10	2026-11-15	HOU	24	CLE	27
+10	2026-11-15	MIN	30	GB	10
+10	2026-11-15	MIA	22	IND	24
+10	2026-11-15	CAR	20	NO	17
+10	2026-11-15	BUF	31	NYJ	12
+10	2026-11-15	JAX	40	TEN	23
+10	2026-11-15	LAR	34	ARI	6	page logo prints LA / AZ
+10	2026-11-15	SEA	21	LV	13
+10	2026-11-15	SF	46	DAL	40
+10	2026-11-15	PIT	18	CIN	38	Sunday Night Football
+10	2026-11-16	LAC	23	BAL	20	Monday Night Football; final read after F67 re-read

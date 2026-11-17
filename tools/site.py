@@ -780,6 +780,7 @@ official, so they cannot enter this register. They live on their own labelled pa
     luck = build.load_json("luck_panel_signal.json")
     delta = build.load_json("injury_hub_delta.json")
     w10x = build.load_json("week10_results_extension.json")
+    w10c = build.load_json("week10_closeout.json")
     strat_j = build.load_json("strategies.json")
 
     def qflink(ref):
@@ -855,7 +856,7 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
 
     # -------------------------------------------------- N03 injury-hub delta
     reads = delta["reads"]
-    dl = delta["delta"]  # latest diff (read 2 -> read 3)
+    dl = delta["delta"]  # latest diff (read 3 -> read 4)
     hist = delta.get("history", [])
     old_lbl = dl.get("older_label", "read 1")
     new_lbl = dl.get("newer_label", "read 2")
@@ -892,25 +893,31 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
                 for p in delta["reserve_list_pointers"]]
     hist_txt = ""
     if hist:
-        h0 = hist[0]
-        hist_txt = (" The earlier diff, read 1 &rarr; read 2, stays in "
+        parts = []
+        for h in hist:
+            parts.append("%s &rarr; %s: %d field changes, %d added, %d removed"
+                         % (h.get("older_label", "earlier read"),
+                            h.get("newer_label", "later read"),
+                            len(h["changed"]), len(h["added"]), len(h["removed"])))
+        hist_txt = (" The earlier diffs stay in "
                     "<code>data/injury_hub_delta.json</code> under <code>history</code>: "
-                    "%d field changes, %d added, %d removed."
-                    % (len(h0["changed"]), len(h0["added"]), len(h0["removed"])))
+                    + "; ".join(parts) + ".")
     out["injury_delta"] = """
 <section>
 <h2>Dated reads of the injury hub &mdash; delta, never the level</h2>
 <p class="lead">The hub is read with its clock time and each new read is published as the
 <em>difference</em> from the previous one, so a designation's history is a series, not a snapshot.
-All three captures are kept verbatim under <code>raw/</code> (read 3 was fetched in 8 chunks and
-rejoined character-exactly by <code>scripts/assemble_read3.py</code>).</p>
+All four captures are kept verbatim under <code>raw/</code> (read 3 was fetched in 8 chunks and
+rejoined character-exactly by <code>scripts/assemble_read3.py</code>; read 4's chunks were
+fetched in the interleaved window 02:33&ndash;02:44 UTC and completed after read 3).</p>
 %s
-<div class="callout"><p><strong>Read 3 (2026-11-17, 02:35&ndash;02:36 UTC).</strong> The hub still showed
-<em>WEEK 10</em>. Since read 2 the tables moved by %d field change(s), %d added and %d removed
-row(s). The Sunday-night headings now carry the final records the page printed for those games
-(PIT 6-3, CIN 7-2); the Monday-night game was still inside its broadcast window at read time, so
-those clubs still show pre-game records. The page's NEWS section carried reserve-list events
-(below) — recorded as pointers, never used as injury-table rows.%s</p></div>
+<div class="callout"><p><strong>Read 4 (2026-11-17, completed 02:44 UTC).</strong> The hub still
+showed <em>WEEK 10</em>. Since read 3 the tables moved by %d field change(s), %d added and %d
+removed row(s) &mdash; two practice designations (BUF Tyrell Shavers FULL&rarr;LIMITED, CIN
+Brian Parker II FULL&rarr;DNP), each re-checked line-by-line against reads 3 and 4 before
+publishing. Read 3's own diff against read 2 and read 2's against read 1 stay under
+<code>history</code> (summarised above). The page's NEWS section carried reserve-list events
+(below) &mdash; recorded as pointers, never used as injury-table rows.%s</p></div>
 <h3>Changed rows (%d)</h3>
 %s
 <h3>Added rows (%d)</h3>
@@ -1032,6 +1039,78 @@ time, so those two clubs show pre-game records on the page and blanks here.</p><
        table(["Date", "Away", "Pts", "Home", "Pts", "Status at read", "Game centre"],
              pend_rows, cls="dense"),
        comp_html)
+
+    # ------------------------------------- C1 week-10 closeout (2026-11-17)
+    co_rows = []
+    for f in w10c["finals"]:
+        co_rows.append([
+            cell(f["date"]),
+            cell(f["away"]),
+            cell(f["awayPts"], "n"),
+            cell(f["home"]),
+            cell(f["homePts"], "n"),
+            cell(f["note"] or "—"),
+            raw_src('<a href="%s">game centre</a>' % esc(f["game_url"])),
+        ])
+    new_rows = []
+    for f in w10c["new_since_frozen_corpus"]:
+        new_rows.append([
+            cell(f["date"]),
+            cell(f["away"]),
+            cell(f["awayPts"], "n"),
+            cell(f["home"]),
+            cell(f["homePts"], "n"),
+        ])
+    p_rows = []
+    for c in w10c["checks"]:
+        p_rows.append([
+            cell(c["id"], "n"),
+            cell(c["description"]),
+            '<td>%s</td>' % pill("pass" if c["result"] == "PASS" else c["result"].lower(),
+                                 "ok" if c["result"] == "PASS" else "bad"),
+            cell(c["detail"]),
+        ])
+    out["week10_closeout"] = """
+<section>
+<h2>Week 10 closeout &mdash; all 14 games FINAL, read 2026-11-17 (Q44 acceptance run)</h2>
+<p class="lead">The third dated read of the official week-10 page found the whole slate settled:
+the Sunday-night game the earlier reads saw live has finished (Pittsburgh 18, Cincinnati 38) and
+so has the Monday-night game (captured final below). This is the closeout capture Q44 names:
+every row transcribed from the official page at read time, nothing carried over from an in-progress
+score.</p>
+<h3>All 14 finals (%d)</h3>
+%s
+<h3>New against the frozen 137-game corpus (%d)</h3>
+%s
+<div class="callout"><p><strong>Acceptance checks &mdash; all %d PASS, enforced by
+<code>scripts/promote_week10.py</code>.</strong> P1 shape and fixture membership; P2 cross-read
+agreement (the 12 finals already on record equal this capture exactly); P3 the two late finals
+carry scores only here — the 2026-11-16 extension held them pending with blank scores;
+P4 this capture's standings arithmetic reproduces the fresh official league-standings read 32/32
+on W/L/T <em>and</em> PF/PA; P5 the frozen corpus is byte-identical as the first 137 rows
+(append-only); P6 per-club game counts equal W+L+T; P7 no duplicate fixture, no unknown club.
+The fresh standings read is <code>raw/standings-2026-20261117.tsv</code>; the raw schedule capture
+is <code>raw/schedule-results-2026-week10-closeout.tsv</code>.</p></div>
+<h3>Checks (%d)</h3>
+%s
+<div class="callout warn"><p><strong>Canonical feed not promoted — this is Q44's open policy
+half.</strong> The checks above are the acceptance gate; rolling <code>data/results.tsv</code> and
+<code>data/standings.tsv</code> forward would also refit every published model coefficient (they
+are computed from the canonical feed), so the corpus promotion remains the reviewer's choice
+(Q44, suggestion SG43). Until that choice, the promoted 150-row read is published beside the
+corpus as <code>data/results_2026-11-17-closeout.tsv</code> +
+<code>data/standings_2026-11-17-closeout.tsv</code>, chained byte-prefix to the earlier
+same-day SNF read (<code>data/results_2026-11-17.tsv</code>, gate P8: 137 &rarr; 148 &rarr; 149 &rarr; 150),
+and this section is the live record of the week's finals. It also resolves open flag F67:
+the Monday-night re-read this closeout performs is exactly the action F67 asks for.</p></div>
+</section>
+""" % (len(w10c["finals"]),
+       table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre"], co_rows, cls="dense"),
+       len(w10c["new_since_frozen_corpus"]),
+       table(["Date", "Away", "Pts", "Home", "Pts"], new_rows, cls="dense"),
+       sum(1 for c in w10c["checks"] if c["result"] == "PASS"),
+       len(w10c["checks"]),
+       table(["Gate", "What it proves", "Result", "Detail"], p_rows, cls="dense searchable"))
 
     # ------------------------------------- N02 two-sided change-our-mind fields
     cm_rows = []
@@ -3024,7 +3103,8 @@ verification note for each one.</p>
     written.append(page("line-board.html", "Line Board", sprint["line_board"], wide=True))
     written.append(page("price-snapshots.html", "Price Snapshots", sprint["price_snapshots"], wide=True))
     written.append(page("verified-results-feed.html", "Verified Results Feed",
-                        sprint["results_feed"] + sprint["week10_finals"], wide=True))
+                        sprint["results_feed"] + sprint["week10_finals"]
+                        + sprint["week10_closeout"], wide=True))
     # replacement-depth.html is generated merged by scripts/build_pages_m.py (final
     # integration: this sprint's 52-slot register AND the 69-spot week-10 analysis share
     # the page; both datasets preserved). The body computed here is kept verbatim on

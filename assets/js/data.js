@@ -5567,6 +5567,36 @@ window.DATA = {
    "checked": "2026-11-17",
    "status": "VERIFIED",
    "note": "Read 2026-11-17 between 02:45:45Z and 02:46:39Z (2 content chunks); all 32 club rows captured to raw/standings-2026-20261117.tsv (W/L/T, PF/PA). Includes the SNF result (PIT 6-3, CIN 7-2); excludes the live MNF (LAC 0-8, BAL 4-5 pre-game, unchanged from the 2026-11-16 capture). Corroborating evidence only — data/standings.tsv is not replaced."
+  },
+  {
+   "id": "S97",
+   "title": "NFL.com official injury report hub — read 4 (dated delta read)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/injuries/",
+   "tier": "Official (league)",
+   "checked": "2026-11-17",
+   "status": "VERIFIED",
+   "note": "Fourth dated read of the same hub; window after 2026-11-17T02:33:27Z, before 2026-11-17T02:43:50Z (8 content chunks; fetched interleaved with read 3/S94 and completed after it). Captured verbatim in raw/injuries-week10-2026-read4.md; 347 rows parsed, header row claim matches the parser. Published delta vs read 3: 2 practice changes (BUF Tyrell Shavers FULL->LIMITED, CIN Brian Parker II FULL->DNP), 0 added, 0 removed — each changed row re-checked line-by-line against reads 2, 3 and 4 before publishing. Hub still showed WEEK 10 at read time. Reads 1-3 preserved unchanged."
+  },
+  {
+   "id": "S98",
+   "title": "NFL.com 2026 Week 10 schedule page — closeout read (all 14 FINAL)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/2026/REG10/",
+   "tier": "Official (league)",
+   "checked": "2026-11-17",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-17 between 04:30:44Z and 04:31:30Z (2 content chunks; clock-bracketed), after the Monday-night final (LAC 23, BAL 20; Game Center \"Final\" with quarter scores 10-7-3-3 / 0-10-3-7 summing to the total). All 14 Week 10 games printed FINAL with scores and transcribed to raw/schedule-results-2026-week10-closeout.tsv. This is the closeout read for Q44's acceptance run (gates P1-P3 in scripts/promote_week10.py) and resolves flag F67's prescribed re-read; the two late finals were cross-checked against the 2026-11-16 extension (12 finals, gate P2) before recording."
+  },
+  {
+   "id": "S99",
+   "title": "NFL.com 2026 league standings — closeout read (post-MNF, division route)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/standings/division/2026/REG",
+   "tier": "Official (league)",
+   "checked": "2026-11-17",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-17 between 04:39:46Z and 04:43:14Z (2 content chunks; clock-bracketed). The league-standings route of the same site still printed the PRE-GAME state at four reads after the final (04:30:44Z-~04:41Z: LAC 0-8/121/219, BAL 4-5/189/236), so this capture takes all 32 rows from the fresh division route (LAC 1-8/144/239/1W, BAL 4-6/209/259/5L); the other 30 clubs are byte-identical on both routes. Full 17-column capture: raw/standings-2026-20261117-closeout.tsv. Used by the Q44 closeout points-arithmetic gates (P4/P6: staged 150-row read reproduces all 32 clubs on W/L/T/PF/PA). Route-staleness observation published as flag F72. Does NOT replace data/standings.tsv or session e97f05c3's pre-MNF data/standings_2026-11-17.tsv."
   }
  ],
  "schedule": [
@@ -32158,7 +32188,7 @@ window.DATA = {
    "blocking": "No",
    "recommended_path": "Do not reconcile by hand. Publish the discrepancy verbatim with both source links on the Flagged for Review page and leave the affected cells as captured.",
    "answer_state": "answered",
-   "answer": "Published, never suppressed: every cross-source irregularity becomes a row on flagged.html with detail, action and source links (66 flags today; F61 was corrected 2026-11-17 after re-reading the official pages; F53 records the row-count discrepancy). Per the brief, flagged items do not block a merge, and a cell that cannot be confirmed from an official source stays blank and flagged rather than filled (tools/checkrows.py rules 1-4).",
+   "answer": "Published, never suppressed: every cross-source irregularity becomes a row on flagged.html with detail, action and source links (70 flags today; F61 was corrected 2026-11-17 after re-reading the official pages; F53 records the row-count discrepancy). Per the brief, flagged items do not block a merge, and a cell that cannot be confirmed from an official source stays blank and flagged rather than filled (tools/checkrows.py rules 1-4).",
    "answer_date": "2026-11-17"
   },
   {
@@ -32302,7 +32332,7 @@ window.DATA = {
    "blocking": "No",
    "recommended_path": "Use only the free official inputs first. Add each new input only after the base model is validated, one at a time, so its contribution can be measured.",
    "answer_state": "partial",
-   "answer": "Obtained official inputs are enumerated: 83 registered sources, 75 VERIFIED, each with URL and capture date (data/sources.tsv). Licensed vendors are not among them — money/contract items sit in the missing-data register as NOT-ATTEMPTED. Which to license (opening prices above all: Q21/Q30) is an owner decision.",
+   "answer": "Obtained official inputs are enumerated: 88 registered sources, 79 VERIFIED, each with URL and capture date (data/sources.tsv). Licensed vendors are not among them — money/contract items sit in the missing-data register as NOT-ATTEMPTED. Which to license (opening prices above all: Q21/Q30) is an owner decision.",
    "answer_date": "2026-11-17"
   },
   {
@@ -32727,12 +32757,12 @@ window.DATA = {
    "priority": "High",
    "question": "When a week's games all reach FINAL, who promotes the captured finals into the canonical verified results feed (data/results.tsv) and re-captures the official standings — and what acceptance checks must pass first?",
    "why_it_matters": "The 2026-11-16 session published the 11 new Week 10 finals as a dated, verified EXTENSION register (V1-V4 checks) instead of editing the canonical feed, because the feed's standings reconciliation is pinned to its capture state and the two Monday/Sunday-night games were not final at read time. Without a promotion policy the canonical feed lags the live record and every downstream backtest silently uses stale data.",
-   "what_we_know": "The extension register and its four verification checks are re-runnable (scripts/build_week10_extension.py); the fresh standings capture (S72) is corroborating evidence, not a replacement for the canonical capture.",
+   "what_we_know": "The extension register and its four verification checks are re-runnable (scripts/build_week10_extension.py); the fresh standings capture (S72) is corroborating evidence, not a replacement for the canonical capture. The acceptance checks a promotion must pass first now exist and are enforced by scripts/promote_week10.py (P1 fixture membership, P2 cross-read agreement of the 12 already-recorded finals, P3 late finals carry no carried-forward score, P4 32-of-32 W/L/T/PF/PA points arithmetic against a fresh standings read, P5 the frozen corpus stays byte-identical as a prefix, P6 per-club game counts equal W+L+T, P7 no duplicate fixtures or unknown clubs). The runner is idempotent and refuses any canonical write while a check fails.",
    "what_we_dont_know": "Whether promotion should be manual (a session task), automated after the last kickoff, or gated on a fresh standings re-capture passing 32/32 - and whether the pinned reconciliation should roll forward with it.",
-   "missing_data": "A promotion run after MNF finalizes: re-capture the week-10 page and the league standings (S71/S72 refresh), re-run scripts/build_week10_extension.py V1-V4, then promote into data/results.tsv + data/standings.tsv and rebuild the feed.",
+   "missing_data": "DELIVERED as the acceptance run (not the promotion itself): closeout captures raw/schedule-results-2026-week10-closeout.tsv (S95, all 14 FINAL) and raw/standings-2026-20261117.tsv (S96, post-MNF, 32 clubs), gates P1-P8 all PASS (data/verification-promote.tsv), dated side-reads published (data/results_2026-11-17-closeout.tsv 150 rows, data/standings_2026-11-17-closeout.tsv) byte-chained after the 149-row SNF read. Still open for the owner: the canonical roll-forward itself — scripts/promote_week10.py --execute --promote plus the 13-step rebuild/re-verify sequence the runner prints (refit moves every published model coefficient; F59's dated-read doctrine argues for leaving the frozen corpus alone).",
    "source": "S81, S82",
    "blocking": "no",
-   "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG35).",
+   "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG43 — the earlier SG35 pairing was a register cross-reference slip; see flag F71).",
    "answer_state": "open",
    "answer": "Open — today nobody promotes: the Week-10 close-out (13 finals plus the live Monday game) is published in data/week10_results_extension.json ['completion'] with checks C1-C5 while data/results.tsv stays untouched pending this policy (F61, SG37/SG45 lineage). A workable rule to ratify: auto-promote only when a fresh official read prints every game FINAL and all V-checks pass — then it can run inside the weekly refresh (SG51).",
    "answer_date": "2026-11-17"
@@ -34986,7 +35016,7 @@ window.DATA = {
    "id": "F67",
    "kind": "Open item — official game not yet final",
    "item": "Monday night LAC at BAL (Week 10, 2026-11-16) is in no results file: it was Live at the 2026-11-17 read (Q2 01:56, Chargers 17, Ravens 7)",
-   "detail": "The Sunday-night PIT at CIN final (18-38) was added on 2026-11-17 from the official Game Center. The Monday-night game was not, because a live score is not a result. The official standings read of 2026-11-17 still shows LAC 0-8 and BAL 4-5, which is consistent with the game being unplayed in the standings. The record of this game is therefore absent, not wrong, and every Week 10 standings check excludes it.",
+   "detail": "The Sunday-night PIT at CIN final (18-38) was added on 2026-11-17 from the official Game Center. The Monday-night game was not, because a live score is not a result. The official standings read of 2026-11-17 still shows LAC 0-8 and BAL 4-5, which is consistent with the game being unplayed in the standings. The record of this game is therefore absent, not wrong, and every Week 10 standings check excludes it. RESOLVED 2026-11-17: after the final (Chargers 23, Ravens 20; Game Center \"Final\", quarter scores 10-7-3-3 / 0-10-3-7) the prescribed re-read was taken — closeout capture raw/schedule-results-2026-week10-closeout.tsv (source S95), recorded as the 150th row of data/results_2026-11-17-closeout.tsv with all Q44 acceptance gates P1-P8 PASS (data/verification-promote.tsv). The 149-row same-day read above is preserved unchanged.",
    "sourceIds": [
     "S91"
    ],
@@ -35025,6 +35055,29 @@ window.DATA = {
    "sourceIds": [],
    "severity": "Low",
    "action": "Fold Q45 into Q35 during SG47 consolidation; until then treat Q35 as canonical (the answer layer marks both and cross-links here)."
+  },
+  {
+   "id": "F71",
+   "kind": "Register cross-reference slip",
+   "item": "The three promotion-related entries cross-reference the wrong IDs: Q44 pairs SG35, F59 points at SG36, and SG43 pairs Q35 — none of them names the others",
+   "detail": "The results-promotion question Q44 (data/questions.json) says its recommended path 'pairs with suggestion SG35', but SG35 is the prices collector ('Run a dated snapshot collector before Week 12'). The stale-snapshot flag F59 (data/flags.json) says promoting the latest read 'requires the scheduling work in SG36', but SG36 is the undated-vintage price label. Meanwhile SG43 ('Automate the weekly results promotion (extension register -> canonical feed)') lists its prerequisite as Q35, the snapshot-store phase question — unrelated. The three records describe one decision family (weekly results promotion) and are wired to three other families (prices, storage). Verified line-by-line against the register files on 2026-11-17. Nothing was silently renumbered: the correction is published here and Q44's recommended_path now names SG43 with a pointer to this flag.",
+   "sourceIds": [
+    "S81"
+   ],
+   "severity": "Low",
+   "action": "Q44's recommended_path corrected to pair SG43 (this session); F59's action and SG43's prerequisites left as published history — read them with this flag. Future register writes should cross-check that a paired ID's title matches the subject."
+  },
+  {
+   "id": "F72",
+   "kind": "Official-source route divergence (stale page after a final)",
+   "item": "After the Monday-night final, the league-standings route kept printing the pre-game state while the division-standings route of the same site was already updated",
+   "detail": "The LAC 23-20 BAL final was decided ~2026-11-17T04:29Z (Game Center showed \"Final\"). Four subsequent reads of https://www.nfl.com/standings/league/2026/REG (04:30:44Z, 04:34:34Z, 04:39:46Z, ~04:41Z) still printed LAC 0-8 (121/219, 8L) and BAL 4-5 (189/236, 4L) — byte-identical to the pre-game values derivable from data/results_2026-11-16.tsv and to session e97f05c3's S90 read. At the same time https://www.nfl.com/standings/division/2026/REG printed the settled post-game state (LAC 1-8, 144/239, 1W; BAL 4-6, 209/259, 5L), whose arithmetic matches the official final exactly. Both routes are official; the divergence is a page/CDN refresh lag, not a data conflict. Recorded, not reconciled by inference: the closeout capture (S96) takes the fresh route and documents the stale reads in its header.",
+   "sourceIds": [
+    "S95",
+    "S96"
+   ],
+   "severity": "Low",
+   "action": "Future post-final standings reads should check BOTH official routes (or re-read until the league route matches the game arithmetic) and record the read route and clock in the capture header; never mix a stale-route row into a points-arithmetic gate."
   }
  ]
 };
