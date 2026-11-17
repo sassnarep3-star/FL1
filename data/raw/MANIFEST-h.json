@@ -1,0 +1,25 @@
+{
+  "_retrieved": "2026-11-17",
+  "_sources": [
+    "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+    "https://www.nfl.com/standings/league/2026/REG",
+    "https://www.nfl.com/schedules/2026/REG10/",
+    "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live"
+  ],
+  "results-week10-2026-2026-11-17.md": {
+    "bytes": 740,
+    "sha256": "f0a515eb8691265d75a39ba2917437dd8a268376a1b1597b8c0bf0d471757ee3"
+  },
+  "results_2026-11-17.tsv": {
+    "bytes": 3947,
+    "sha256": "141dcffd2dc01be7f19253df168d7531c95862481b43835a9d31577c94a8dbee"
+  },
+  "standings_2026-11-17.tsv": {
+    "bytes": 2503,
+    "sha256": "4da98e3aa5beb5700afce298d8ded00c687a9f1910f2ddb92404815335b53f7f"
+  },
+  "verification-2026-11-17.tsv": {
+    "bytes": 1078,
+    "sha256": "fc19de89dae2b4e76a72504688d554ebeee23bdb33417249d0c17375d161e1ac"
+  }
+}

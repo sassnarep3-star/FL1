@@ -53,7 +53,7 @@ PINS = [
      ["id", "question"], ["id", "question"]),
     ("DR-09", "data/suggestions.json", "json-list", None, 47,
      ["id", "title"], ["id", "title"]),
-    ("DR-10", "data/flags.json", "json-list", None, 66,
+    ("DR-10", "data/flags.json", "json-list", None, 67,  # F67 added 2026-11-17 (arena/e97f05c3-fl1)
      ["id", "item"], ["id", "item"]),
     ("DR-11", "data/strategies.json", "json-list", None, 6,
      ["id", "name", "change_of_mind"], ["id", "name", "change_of_mind"]),
