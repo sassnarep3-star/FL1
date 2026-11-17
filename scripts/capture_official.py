@@ -262,18 +262,49 @@ def discover_week_slugs(season: int, week: int) -> list:
 
 
 def find_gamebook_pdf(html_text: str) -> str:
-    """Pull the official Game Book PDF URL out of a Game Center page."""
+    """Pull the official Game Book PDF URL out of a Game Center page.
+
+    THE TRAP THIS FUNCTION EXISTS TO AVOID
+        A Game Center page does not contain only its own game. It also carries
+        links to *other* games - a "featured game" module, a schedule rail, a
+        highlights strip - and those links point at other game books. A naive
+        search for the first `gamecenter/*.pdf` on the page therefore picks up
+        whichever game the page happens to promote.
+
+        That is not hypothetical. It happened: the page for
+        `chargers-at-ravens-2026-reg-10` returned the PDF for
+        `commanders-at-giants-2026-reg-10`, and the capture stored the
+        Washington-New York book under the Chargers-Ravens slug. The book
+        itself was genuine, the hash was genuine, and the only thing wrong was
+        which game it belonged to - the worst kind of error, because every
+        integrity check short of reading the document passed.
+
+        So the link is not taken from anywhere on the page. It is taken from the
+        anchor whose label is the Game Book link, and when the page offers no
+        such anchor the function returns nothing and the caller FAILS LOUDLY
+        rather than guessing.
+
+    The verification that the returned book actually belongs to this game lives
+    in the parser, which reads the match-up line off the extracted text and
+    refuses a book whose match-up disagrees with the index. Two independent
+    checks are used because this failure mode defeats any single one.
+    """
     text = html_text.replace("\\/", "/").replace("&amp;", "&")
-    m = GAME_CENTER_PDF_RE.search(text)
-    if m:
-        return m.group(0)
-    # Fall back: any PDF near the "Download Game Book" label.
-    idx = text.lower().find("download game book")
-    if idx >= 0:
-        window = text[max(0, idx - 4000): idx + 4000]
-        for cand in ANY_PDF_RE.findall(window):
-            if "gamecenter" in cand.lower():
-                return cand
+
+    # 1. The labelled Game Book link. The label is what distinguishes this
+    #    game's book from every other book linked on the same page.
+    label = re.search(rf'(?is)<a[^>]+href="(?P<href>[^"]*gamecenter[^"]*\.pdf)"[^>]*>'
+                      r'(?:(?!</a>).){0,400}?(?:download\s+)?game\s*book', text)
+    if label:
+        return label.group("href")
+
+    # 2. A structured data or JSON reference that names the game book field.
+    field = re.search(r'(?i)"(?:gameBook|game_book|gamebook)[A-Za-z]*"\s*:\s*'
+                      r'"(?P<href>[^"]*gamecenter[^"]*\.pdf)"', text)
+    if field:
+        return field.group("href")
+
+    # Nothing labelled: report it. Do not fall back to "some PDF on the page".
     return ""
 
 
@@ -459,6 +490,30 @@ def main(argv=None) -> int:
                 + (f" ERR {g['error']}" if g.get("error") else ""))
             # a small delay keeps the capture polite and avoids a burst pattern
             time.sleep(0.35)
+        # A game book is a unique document. If two different games resolve to
+        # the same file, one of the two resolutions is wrong, and the wrongness
+        # is invisible in every hash and byte count - so it is caught HERE, by
+        # the only property the error cannot fake: two games cannot share a
+        # book. The capture fails rather than publishing the collision.
+        seen = {}
+        collisions = []
+        for g in rows:
+            sha = g.get("pdf_sha256")
+            if not sha:
+                continue
+            if sha in seen and seen[sha] != g["slug"]:
+                collisions.append((sha, seen[sha], g["slug"]))
+                g["error"] = ("this game book is byte-identical to the book "
+                              "resolved for %s; one of the two resolutions is "
+                              "wrong" % seen[sha])
+            else:
+                seen[sha] = g["slug"]
+        stats["book_hash_collisions"] = len(collisions)
+        if collisions:
+            log("GAME BOOK HASH COLLISION - two games resolved to one book:")
+            for sha, a, b in collisions:
+                log("  %s -> %s and %s" % (sha[:16], a, b))
+
         out = os.path.join(vault, "games_index.tsv")
         with open(out, "w", encoding="utf-8", newline="") as fh:
             w = csv.writer(fh, delimiter="\t", lineterminator="\n")

@@ -144,6 +144,13 @@ jobs:
           # link is a schema change in the page, and must fail loudly.
           broken = [g for g in games if g["page_status"] == "200" and not g["gamebook_sha256"]
                     and not g["error"]]
+          summary = os.path.join(os.environ['VAULT'], "capture_summary.json")
+          collisions = int(json.load(open(summary))["stats"].get(
+              "book_hash_collisions", 0)) if os.path.exists(summary) else 0
+          if collisions:
+              print("GAME BOOK HASH COLLISION: two games resolved to the same book.")
+              print("The capture refuses to publish a book that belongs to another game.")
+              sys.exit(1)
           if broken:
               print("PAGE RETURNED NO GAME BOOK LINK (schema change?):")
               for g in broken[:40]:

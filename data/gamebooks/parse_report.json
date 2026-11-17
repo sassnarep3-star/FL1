@@ -1,10 +1,17 @@
 {
-  "games_parsed": 121,
-  "games_rejected": [],
+  "games_parsed": 133,
+  "games_rejected": [
+    {
+      "problems": [
+        "the game book's own match-up line names 'washington commanders' as away, but the slug says 'chargers' - this book belongs to another game"
+      ],
+      "slug": "chargers-at-ravens-2026-reg-10"
+    }
+  ],
   "games_with_notes": {
     "jets-at-bears-2026-reg-4": [
       "the book lists 2 players at the position QB on home's offensive lineup (T.Bagent, C.Keenum)"
     ]
   },
-  "players": 13103
+  "players": 14400
 }

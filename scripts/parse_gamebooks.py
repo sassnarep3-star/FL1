@@ -204,7 +204,9 @@ def parse_gamebook(text: str) -> dict:
     out = {
         "date": "", "venue_stadium": "", "venue_city": "", "roof": "",
         "roof_state": "", "surface": "", "temp_f": "", "humidity_pct": "",
-        "wind": "", "weather_note": "", "roof_status": "", "away_team": "", "home_team": "", "away_score": "",
+        "wind": "", "weather_note": "", "roof_status": "",
+        "away_name": "", "home_name": "",
+        "away_team": "", "home_team": "", "away_score": "",
         "home_score": "", "starters": [], "substitutions": [],
         "did_not_play": [], "not_active": [], "problems": [],
     }
@@ -218,8 +220,12 @@ def parse_gamebook(text: str) -> dict:
             continue
         m = MATCHUP_RE.match(s)
         if m and not out["away_team"]:
-            out["away_team"] = _clean(m.group("away"))
-            out["home_team"] = _clean(m.group("home"))
+            out["away_name"] = _clean(m.group("away"))
+            out["home_name"] = _clean(m.group("home"))
+            # The abbreviation is only known for a book that is filed under
+            # the right game, and that is exactly what is being checked, so
+            # the name is kept as read and resolved against data/teams.tsv
+            # after the match-up check has passed.
             continue
         m = DATE_RE.search(s)
         if m:
@@ -352,6 +358,40 @@ def _one_block_side(block: list, starter_names: dict) -> str:
     return "visitor"
 
 
+SLUG_ALIASES = {
+    # the league's slug uses the club's nickname; the book uses its city name
+    "commanders": ("washington commanders",),
+    "giants": ("new york giants",),
+    "49ers": ("san francisco 49ers",),
+    "chargers": ("los angeles chargers",),
+    "ravens": ("baltimore ravens",),
+    "chiefs": ("kansas city chiefs",),
+    "falcons": ("atlanta falcons",),
+}
+
+
+def _matchup_mismatch(slug: str, game: dict) -> str:
+    """The book's own match-up line must agree with the slug it is filed under."""
+    try:
+        away_slug, rest = slug.split("-at-")
+        home_slug = rest.split("-2026-")[0]
+    except ValueError:
+        return "slug could not be split into away and home"
+    away_line = (game.get("away_name") or "").lower()
+    home_line = (game.get("home_name") or "").lower()
+    if not away_line or not home_line:
+        return "the book's match-up line did not name both clubs"
+    for token, line, which in ((away_slug, away_line, "away"),
+                               (home_slug, home_line, "home")):
+        token = token.replace("-", " ")
+        aliases = SLUG_ALIASES.get(token, ())
+        if token in line or any(a in line for a in aliases):
+            continue
+        return ("the game book's own match-up line names %r as %s, but the slug "
+                "says %r - this book belongs to another game" % (line, which, token))
+    return ""
+
+
 def validate(game: dict) -> tuple:
     """Check the game book, and return (errors, notes).
 
@@ -383,7 +423,7 @@ def validate(game: dict) -> tuple:
             if len(back) < 2:
                 notes.append("%s's defensive lineup lists fewer than two defensive backs"
                              % side)
-    if not game["away_team"] or not game["home_team"]:
+    if not game["away_name"] or not game["home_name"]:
         errors.append("match-up line not found")
     if not game["venue_stadium"]:
         errors.append("venue line not found")
@@ -435,18 +475,29 @@ def main(argv=None) -> int:
         idx = index.get(slug, {})
         season = idx.get("season", "2026")
         week = idx.get("week", "")
+        if not errors:
+            # A second, independent check that this book belongs to this game.
+            # The capture resolves each PDF from the league's own page, but a
+            # page links to more than its own game: a wrong resolution once
+            # stored the Washington-New York book under the Chargers-Ravens
+            # slug. The hash was right and the file was genuine - only the
+            # game was wrong - so the book is read and its own match-up line
+            # is compared against the slug. A mismatch is fatal.
+            mismatch = _matchup_mismatch(slug, game)
+            if mismatch:
+                errors.append(mismatch)
         if errors:
             report.append({"slug": slug, "problems": errors})
             continue
         if notes:
             notes_by_game[slug] = notes
-        away_abbr = team_names.get(game["away_team"], "")
-        home_abbr = team_names.get(game["home_team"], "")
+        away_abbr = team_names.get(game["away_name"], "")
+        home_abbr = team_names.get(game["home_name"], "")
         games.append({
             "slug": slug, "season": season, "week": week,
             "game_date": game["date"],
-            "away_team": away_abbr or game["away_team"],
-            "home_team": home_abbr or game["home_team"],
+            "away_team": away_abbr or game["away_name"],
+            "home_team": home_abbr or game["home_name"],
             "away_score": game["away_score"], "home_score": game["home_score"],
             "venue_stadium": game["venue_stadium"],
             "venue_city": game["venue_city"],
@@ -460,7 +511,7 @@ def main(argv=None) -> int:
         })
         side_team = {"visitor": away_abbr or game["away_team"],
                      "home": home_abbr or game["home_team"]}
-        side_name = {"visitor": game["away_team"], "home": game["home_team"]}
+        side_name = {"visitor": game["away_name"], "home": game["home_name"]}
         for s in game["starters"]:
             players.append({
                 "slug": slug, "season": season, "week": week,
