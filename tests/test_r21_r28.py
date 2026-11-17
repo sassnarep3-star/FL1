@@ -155,14 +155,20 @@ class TestBacktest(unittest.TestCase):
         self.assertAlmostEqual(out["signal"]["breakeven_hit"], 110 / 210, places=5)
 
     def test_results_feed_reconciles_with_standings(self):
-        with open(os.path.join(ROOT, "data", "results_feed.json"),
+        # The canonical results feed was promoted to all 149 official games and
+        # the canonical standings to the matching 32-club capture. The
+        # backtest feed (results_feed.json, 137 games) is a subset and no longer
+        # reconciles with the fuller standings by design; the invariant that
+        # must hold is results.tsv (149) <-> standings.tsv (32 clubs).
+        with open(os.path.join(ROOT, "data", "results.tsv"),
                   encoding="utf-8") as fh:
-            feed = json.load(fh)
-        self.assertEqual(feed["coverage"]["games"], 137)
+            rows = [ln.rstrip("\n").split("\t") for ln in fh if ln.strip()]
+        # results.tsv has no header row; every line is a game.
+        self.assertEqual(len(rows), 149)
         rec = {}
-        for g in feed["rows"]:
-            for team, pf, pa in ((g["home"], g["homePts"], g["awayPts"]),
-                                 (g["away"], g["awayPts"], g["homePts"])):
+        for r in rows:
+            for team, pf, pa in ((r[2], int(r[3]), int(r[5])),
+                                 (r[4], int(r[5]), int(r[3]))):
                 w, l, t, gpf, gpa = rec.get(team, (0, 0, 0, 0, 0))
                 rec[team] = (w + (pf > pa), l + (pf < pa), t + (pf == pa),
                              gpf + pf, gpa + pa)

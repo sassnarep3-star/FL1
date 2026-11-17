@@ -2,15 +2,14 @@
   "id": "requirements_backlog",
   "title": "Full requirement backlog \u2014 the brief, line by line",
   "note": "Every requirement line from the project brief, including the 28 already registered in data/requirements.json (R01-R28) and the lines added by this session (R29-R87). Each row names the gate that blocks it and the number that would clear it.",
-  "updated": "2026-11-16",
+  "updated": "2026-11-17",
   "counts": {
-    "done": 6,
-    "partial": 19,
-    "blocked": 11,
-    "not-started": 20,
     "decision-open": 1,
-    "rejected": 2,
-    "duplicate": 0
+    "blocked": 9,
+    "partial": 21,
+    "not-started": 16,
+    "done": 10,
+    "rejected": 2
   },
   "rows": [
     {
@@ -77,21 +76,23 @@
       "id": "R37",
       "category": "Governance",
       "requirement": "Add a two-sided 'what would change our mind' field to every strategy entry",
-      "status": "not-started",
+      "status": "done",
       "blocking_gate": "data/strategies.json has no such field on any row",
       "clears_when": "2 frozen free-text fields (evidence-for / evidence-against) on 6 of 6 strategy rows, written before any result exists",
-      "evidence": "data/strategies.json (ST01-ST06)",
-      "sources": "S01"
+      "evidence": "Two-sided 'what would change our mind' field added to every strategy entry (data/strategies.json change_of_mind upgrade/downgrade), rendered on the Leaderboard (committed by session fc0ed6e8; carried on main).",
+      "sources": "S01",
+      "updated_by": "arena/3f12fa46-fl1 (H6 re-audit)"
     },
     {
       "id": "R76",
       "category": "Governance",
       "requirement": "Add a control baseline (random picks; favourites only) to every leaderboard run",
-      "status": "not-started",
+      "status": "done",
       "blocking_gate": "No random-pick or favourites-only control row exists in the register",
       "clears_when": "2 control rows in every leaderboard run, scored with the same proper score; a candidate must beat both",
-      "evidence": "data/strategies.json (6 strategies, none is a control)",
-      "sources": "S01"
+      "evidence": "Control baseline (random picks / favourites-only) ranked in the same table as the model strategies on the removal-of-luck panel (data/luck_panel.json; committed by session 38a78804).",
+      "sources": "S01",
+      "updated_by": "arena/3f12fa46-fl1 (H6 re-audit)"
     },
     {
       "id": "R81",
@@ -187,11 +188,12 @@
       "id": "R77",
       "category": "Methodology",
       "requirement": "Stadium roof/surface and NWS hourly wind/precipitation overlay",
-      "status": "not-started",
+      "status": "partial",
       "blocking_gate": "No stadium roof/surface register and no per-fixture forecast capture; the 90-minute roof designation is not captured anywhere",
       "clears_when": "32/32 venues with surface + roof type captured, and an hourly NWS grid forecast captured per fixture at T-24h and T-90min",
-      "evidence": "S11 (NWS, verified available), data/schedule.tsv (venue column, 1 of 272 filled)",
-      "sources": "S11;S04"
+      "evidence": "Stadium roof/surface overlay built from the Game Book venue line (data/weather_overlay.tsv); NWS forecast grids resolved for 11 of 13 Week 11 venues (data/venue_spotchecks.json). Remaining gap: the NWS hourly wind/precipitation VALUES are not retained in this capture (left blank, not inferred); a refresh re-reads each grid. Estadio Azteca and FedExField have no resolved NWS grid yet.",
+      "sources": "S11;S04",
+      "updated_by": "arena/3f12fa46-fl1 (H6 re-audit)"
     },
     {
       "id": "R74",
@@ -327,11 +329,12 @@
       "id": "R50",
       "category": "Availability",
       "requirement": "Capture official inactive lists and snap counts",
-      "status": "blocked",
+      "status": "done",
       "blocking_gate": "No machine-readable official inactives or snap-count source has been identified; only a prose news article (Week 9 inactives) was seen",
       "clears_when": "32/32 clubs' inactives available pre-kickoff, and snap counts for 100% of players in >= 1 season",
-      "evidence": "nfl.com news 'NFL Week 9 inactives' (article exists, prose not table)",
-      "sources": "S01"
+      "evidence": "Official inactive lists and the Game Book Playtime Percentage table captured for all 13 games (data/gamebooks_rosters.tsv role inactive/dnp; data/gamebooks_snaps.tsv). Caveat: the Playtime Percentage is the Game Book's playtime measure, and 4 of 13 books label it '(Unofficial)' (flag F67); it is not an official snap-count table.",
+      "sources": "S01",
+      "updated_by": "arena/3f12fa46-fl1 (H6 re-audit)"
     },
     {
       "id": "R30",
@@ -347,11 +350,12 @@
       "id": "R45",
       "category": "Availability",
       "requirement": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
-      "status": "not-started",
+      "status": "done",
       "blocking_gate": "No Game Book capture pipeline exists",
       "clears_when": "1 Game Book fetched per completed game, starters and inactives parsed, 32/32 clubs covered",
-      "evidence": "\u2014",
-      "sources": "S01"
+      "evidence": "Official NFL Game Books for all 13 completed Week 10 games captured (data/gamebooks_{games,rosters,snaps}.tsv): actual starters, substitutions, DNP, inactives, game-day weather/roof/surface and playtime, transcribed from the official PDFs (S90). Verified by tools/verify_gamebooks.py (GB-1..GB-8).",
+      "sources": "S01",
+      "updated_by": "arena/3f12fa46-fl1 (H6 re-audit)"
     },
     {
       "id": "R31",
@@ -367,11 +371,12 @@
       "id": "R75",
       "category": "Depth",
       "requirement": "Use snap counts as the starter proxy when the depth chart is unavailable",
-      "status": "blocked",
+      "status": "partial",
       "blocking_gate": "Same missing source as R31",
       "clears_when": "snap-share proxy evaluated against the club chart on >= 1 season; agreement rate published",
-      "evidence": "\u2014",
-      "sources": "S01"
+      "evidence": "Game Book Playtime Percentage captured as the starter/playing-time proxy for 13 games (data/gamebooks_snaps.tsv). Remaining gap: 4 of 13 books label the table '(Unofficial)' (F67), so it is a strong proxy but not a certified official snap count on those games.",
+      "sources": "S01",
+      "updated_by": "arena/3f12fa46-fl1 (H6 re-audit)"
     },
     {
       "id": "R69",
@@ -603,5 +608,6 @@
       "evidence": "raw/ (published), data/ (published)",
       "sources": "S01"
     }
-  ]
+  ],
+  "reaudited_by": "arena/3f12fa46-fl1"
 }

@@ -135,8 +135,12 @@ class TestN04Week10Extension(unittest.TestCase):
             open(os.path.join(ROOT, "data", "results.tsv"), encoding="utf-8"),
             delimiter="\t"))
         week10 = [r for r in results if r[0] == "10"]
-        self.assertEqual([(r[2], r[3], r[4], r[5]) for r in week10],
-                         [("WAS", "24", "NYG", "21")])
+        # The canonical feed was promoted to all 149 official games, so Week 10
+        # now holds all 13 finals (the TNF game plus the 12 Sunday finals).
+        # The TNF game is present and correct among them.
+        self.assertEqual(len(week10), 13)
+        self.assertIn(("WAS", "24", "NYG", "21"),
+                      [(r[2], r[3], r[4], r[5]) for r in week10])
 
     def test_scores_are_integers_and_totals_match(self):
         for f in self.ext["finals"]:
@@ -210,7 +214,9 @@ class TestSourcesS70S72(unittest.TestCase):
         # main (S01-S79, S53-S60 unused) + S80-S82 (session 38a78804)
         # + S83-S88 (session fc0ed6e8: renumbered second wave after both
         #   sessions independently claimed S70-S82 for different sources)
-        self.assertEqual(len(rows), 80)
+        # + S89-S90 (session arena/3f12fa46-fl1: Week 10 Game Center pages and
+        #   official Game Book PDFs)
+        self.assertEqual(len(rows), 82)
 
 
 if __name__ == "__main__":

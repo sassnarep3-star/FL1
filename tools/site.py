@@ -73,6 +73,11 @@ NAV = [
     ("correlation-gate.html", "Correlation Gate"),
     ("demotion-gate.html", "Demotion Gate"),
     ("decision-desk.html", "Decision Desk"),
+    ("game-books.html", "Official Game Books"),
+    ("matchup-matrix.html", "Matchup Matrix"),
+    ("model-outputs.html", "Model Outputs Ledger"),
+    ("weather-overlay.html", "Weather Overlay"),
+    ("backlog-reaudit.html", "Requirements Re-audit"),
     ("flagged.html", "Flagged for Review"),
 ]
 
@@ -2937,6 +2942,14 @@ verification note for each one.</p>
     written.extend(pages_market.render_all())
 
     written.extend(g_pages)
+
+    # ------------------------------------------------------------- H2-H8 layer
+    # Session arena/3f12fa46-fl1: official Game Book capture, matchup matrix,
+    # model-output ledger, weather overlay, requirements re-audit. Rendered
+    # from data/gamebooks_*, data/matchup_matrix.tsv, data/model_outputs.json,
+    # data/weather_overlay.tsv by tools/site_h.py.
+    import site_h
+    written.extend(site_h.render_all(sys.modules[__name__], sources_by_id))
 
     print("wrote %d pages:" % len(written))
     for w in written:
