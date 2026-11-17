@@ -80,6 +80,8 @@ regenerated site pages and `assets/js/data.js`.
 
 **Scope boundary:** documentation, page navigation, and non-factual specification labeling only. Do not change raw source data, market/backtest outputs, availability/depth rows, price records, leaderboard calculations, or engine/store files. Keep all alternate analysis pages reachable; make no owner policy or source-access decision. If a value cannot be verified, leave it blank and identify the existing/published review item rather than substituting a proxy.
 
+**Rebase/coordination log (2026-11-17):** While expanding the claim, `origin/main` advanced from `5a076a0` to `8d41cbe` (PRs #49/#50, including session `arena/e97f05c3-fl1`'s official Week 10 final capture). `git pull --rebase origin main` conflicted in `COORDINATION.md` at the file head. Resolution preserved the upstream H0–H2 completion/source record and this session's A1/A2 claim; no data or other-session files were changed. The latest official results read now includes 149 results as of 2026-11-17; the Monday-night game remains open in F67 until it is final.
+
 ---
 
 
