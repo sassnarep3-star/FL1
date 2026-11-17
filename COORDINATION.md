@@ -124,7 +124,7 @@ replaced; shared/generated files rebuilt through the standard builders after my 
 | # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
 |---|------|--------|-------|----------------------|------------------------|----------------|
 | C0 | Coordination claim + immediate push | claimed | arena-a502c4e0 | `COORDINATION.md` | — | — |
-| C1 | Week 10 closeout + Q44 promotion run: fresh official read of the week-10 page and league standings once all games reach FINAL; extend the results extension (PIT@CIN final, LAC@BAL final); promote into the canonical `data/results.tsv` + `data/standings.tsv` per Q44's stated missing-data steps; rebuild and re-verify the results feed (V1–V4 + `tools/verify_results.py`) | claimed | arena-a502c4e0 | `raw/schedule-results-2026-week10-*.tsv`, `raw/standings-2026-*.tsv`, `data/week10_results_extension.json`, `scripts/build_week10_extension.py`, `scripts/promote_week10.py` (new), `data/results.tsv`, `data/standings.tsv`, generated `verified-results-feed.html` | official https://www.nfl.com/schedules/2026/REG10/ and https://www.nfl.com/standings/league/2026/REG, fetched this session | — |
+| C1 | Week 10 closeout + Q44 promotion **acceptance run**: fresh official read of the week-10 page and league standings once all games reach FINAL; closeout gates P1–P7 (`scripts/promote_week10.py`, new) run against the captures; dated side-reads published (`data/results_2026-11-17.tsv`, `data/standings_2026-11-17.tsv`); **canonical `data/results.tsv`/`data/standings.tsv` roll-forward deliberately NOT executed** — that half of Q44 is the owner's policy choice (refit would move every published model coefficient; the runner's `--promote` prints the full rebuild/verify sequence). Scope note recorded here per the claim rule. | claimed | arena-a502c4e0 | `raw/schedule-results-2026-week10-closeout.tsv` (new), `raw/standings-2026-20261117.tsv` (new), `data/week10_closeout.json` (new), `scripts/promote_week10.py` (new), `data/results_2026-11-17.tsv` (new), `data/standings_2026-11-17.tsv` (new), generated `verified-results-feed.html`; **not** `data/results.tsv`/`data/standings.tsv`/`data/week10_results_extension.json` | official https://www.nfl.com/schedules/2026/REG10/ and https://www.nfl.com/standings/league/2026/REG, fetched this session; P1–P7 in the runner | scope deviation vs original claim: staged closeout instead of canonical promotion — Q44 policy half left open (see F67 register-slip flag too) |
 | C2 | Fresh injury-hub read with clock time (2026-11-17) + published delta vs the 2026-11-16 read; never the level | claimed | arena-a502c4e0 | `raw/injuries-week10-2026-read3.md` (new), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py` (read-only + new read arg), generated `injuries.html` | official https://www.nfl.com/injuries/ | — |
 | C3 | Full verification sweep on the final tree: unit tests, build, link check, row-sourcing check, injury/result verifiers | claimed | arena-a502c4e0 | none (read-only runs; results recorded in this board) | repo tooling | — |
 | C4 | Registers append (new sources, any new flags, Q44 answer/resolution), executive-summary touch, coordination completion record | claimed | arena-a502c4e0 | `data/{sources.tsv,flags.json,questions.json,suggestions.json}`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | each appended row carries its official URL | — |
@@ -134,6 +134,12 @@ replaced; shared/generated files rebuilt through the standard builders after my 
 score is not a result, so C1 waits for the official FINAL before any promotion, exactly as Q44
 prescribes. No other session has an open PR or an un-stale claim on these files (latest merged tip
 `5a076a0`, PR list empty as of claim time).
+
+**Shared-file notice:** this session appends to `tools/site.py` (new closeout + read-3 injury
+sections; the file's own header already requires appending sections rather than rewriting), to
+`data/sources.tsv` (S89–S91), `data/flags.json` (F67), `data/questions.json` (Q44 fields only),
+and `tools/verify_drift.py` (DR-10 pin 66→67). `data/results.tsv`, `data/standings.tsv` and
+`data/week10_results_extension.json` stay untouched (C1 scope note above).
 
 ---
 
