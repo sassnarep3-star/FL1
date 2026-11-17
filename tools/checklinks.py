@@ -8,8 +8,8 @@ Checks:
   3. every asset referenced (css/js) exists
   4. every page appears in the navigation and is reachable from index.html
   5. no page references a data source ID that is not in data/sources.tsv
-  6. external links are counted and listed (they are not fetched here; see
-     tools/verify_sources.py for the fetch log)
+  6. external links are counted (they are not fetched here; source-registry
+     status is historical metadata, not a live availability check)
 
 Exit code is non-zero if anything is broken, so this can gate a merge.
 
@@ -115,7 +115,7 @@ def main():
                           "passed through cell() instead of raw_src()" % (p, escaped))
 
     print("pages checked: %d" % len(pages))
-    print("external links: %d (not fetched here; see tools/verify_sources.py)" % len(external))
+    print("external links: %d (not fetched by this check; source status is not live-verified)" % len(external))
     for w in warnings:
         print("WARN:", w)
     if errors:

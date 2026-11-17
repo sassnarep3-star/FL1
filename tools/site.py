@@ -64,6 +64,7 @@ NAV = [
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
     ("sources.html", "Sources"),
+    ("source-audit.html", "Row-Level Source Audit"),
     ("verification.html", "Verification"),
     ("price-store.html", "Price Store"),
     ("results-feed-market.html", "Verified Results Feed (spine)"),
@@ -1645,8 +1646,8 @@ def main():
              cell("Practice status column reads Did Not Participate"), raw_src(src_link("S01", sources_by_id))],
             [cell("Rows marked not injury related"), cell(lg["nonInjury"], "n"),
              cell("Injury text begins 'Not injury related'"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Sources verified"), cell("%d of %d" % (n_verified, len(sources)), "n"),
-             cell("Page loaded successfully in this session"), raw_src('<a href="sources.html">registry</a>')],
+            [cell("Registry records marked VERIFIED"), cell("%d of %d" % (n_verified, len(sources)), "n"),
+             cell("Registry metadata; not a live-fetch count"), raw_src('<a href="sources.html">registry</a>')],
             [cell("Sources that failed to load"), cell(n_404, "n"),
              cell("Recorded as NOT VERIFIED, never cited as fact"), raw_src('<a href="flagged.html">flagged</a>')],
             [cell("Strategies with a result"), cell("0 of %d" % len(strategies), "n"),
@@ -1674,9 +1675,11 @@ and marks everything else as open.</p>
 
 <section>
 <h2>1. What has been verified</h2>
-<p>The repository was empty apart from a five-byte README, so the entire base is new. Fifteen sources were
-attempted; <strong>%d loaded successfully</strong> and <strong>%d did not</strong>. The failed ones are
-recorded as unverified and are never used to support a claim.</p>
+<p>The source registry contains <strong>%d records</strong>: <strong>%d are marked VERIFIED</strong> and
+<strong>%d are marked NOT VERIFIED</strong>. These are registry statuses accumulated across sessions, not a
+claim that every URL was re-fetched in this build; the registry labels official league/club sources,
+third-party feeds, and repository-generated artifacts separately. Failed official sources remain flagged
+and are not cited as confirmed facts.</p>
 <p>The most substantial verified artefact is the <strong>official Week 10, 2026 season injury report</strong>:
 %d player rows over %d clubs, with each player's practice status and game status reproduced exactly as published.
 Of those rows, %d carry a game status (Out, Doubtful or Questionable) and %d are recorded as did-not-participate
@@ -1755,7 +1758,7 @@ club has a bye, because no official bye table was verified. It does not resolve 
 pages contradict each other. It does not print a single performance number. Each of those is listed with links on
 <a href="flagged.html">Flagged for Review</a>.</p>
 </section>
-""" % (n_verified, n_404, lg["rows"], lg["clubs"], lg["withGameStatus"], lg["dnp"],
+""" % (len(sources), n_verified, n_404, lg["rows"], lg["clubs"], lg["withGameStatus"], lg["dnp"],
        depth_cov["covered"],
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
@@ -2937,6 +2940,13 @@ verification note for each one.</p>
     written.extend(pages_market.render_all())
 
     written.extend(g_pages)
+
+    # Final integration audit: classify the source strength detected on every
+    # rendered data row. The audit runs after all source pages have been written.
+    import source_audit
+    audit_page, audit_counts, audit_rows = source_audit.render(sys.modules[__name__])
+    written.append(audit_page)
+    print("source-row audit: %d rows; classes=%s" % (audit_rows, dict(sorted(audit_counts.items()))))
 
     print("wrote %d pages:" % len(written))
     for w in written:

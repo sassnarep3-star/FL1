@@ -212,7 +212,8 @@ class TestSourcesS70S72(unittest.TestCase):
         #   sessions independently claimed S70-S82 for different sources)
         # + S89-S91 (session arena/e97f05c3-fl1: Week 10 Sunday-night final and
         #   the 2026-11-17 standings read; S91 is the live, not-yet-final MNF game)
-        self.assertEqual(len(rows), 83)
+        # + S92 (row-level citation audit; repository-only, not an NFL source)
+        self.assertEqual(len(rows), 84)
 
 
 if __name__ == "__main__":

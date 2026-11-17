@@ -51,9 +51,9 @@ PINS = [
      ["game_id", "market", "outcome"], ["game_id", "market", "outcome"]),
     ("DR-08", "data/questions.json", "json-list", None, 45,
      ["id", "question"], ["id", "question"]),
-    ("DR-09", "data/suggestions.json", "json-list", None, 47,
+    ("DR-09", "data/suggestions.json", "json-list", None, 48,
      ["id", "title"], ["id", "title"]),
-    ("DR-10", "data/flags.json", "json-list", None, 67,  # F67 added 2026-11-17 (arena/e97f05c3-fl1)
+    ("DR-10", "data/flags.json", "json-list", None, 68,  # F67 (results) + F68 (row citation audit)
      ["id", "item"], ["id", "item"]),
     ("DR-11", "data/strategies.json", "json-list", None, 6,
      ["id", "name", "change_of_mind"], ["id", "name", "change_of_mind"]),
