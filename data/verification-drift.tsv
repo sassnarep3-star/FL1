@@ -6,13 +6,13 @@ DR-04	data/schedule2026-d.csv	PASS	pinned	272	272
 DR-05	data/results_feed.csv	PASS	pinned	137	137
 DR-06	data/price_snapshots.csv	PASS	pinned	56	56
 DR-07	data/settled_markets.csv	PASS	pinned	548	548
-DR-08	data/questions.json	PASS	pinned	45	45
-DR-09	data/suggestions.json	PASS	pinned	48	48
-DR-10	data/flags.json	PASS	pinned	68	68
+DR-08	data/questions.json	PASS	pinned	46	46
+DR-09	data/suggestions.json	PASS	pinned	49	49
+DR-10	data/flags.json	PASS	pinned	69	69
 DR-11	data/strategies.json	PASS	pinned	6	6
 DR-12	data/validation_gates.json	PASS	pinned	15	15
 DR-13	data/leaderboard_signal_staking.json	PASS	pinned	16	16
-DR-14	data/sources.tsv	PASS	pinned	84	-
+DR-14	data/sources.tsv	PASS	pinned	85	-
 DR-15	data/reserve_list_2026-11.tsv	PASS	pinned	25	25
 DR-16	data/announced_starters_g.json	PASS	pinned	4	4
 DR-17	data/venue_spotchecks.json	PASS	pinned	2	2

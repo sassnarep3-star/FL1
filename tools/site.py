@@ -32,6 +32,19 @@ TAGLINE = "Verified data, open questions, and a strategy leaderboard that refuse
 
 NAV = [
     ("index.html", "Dashboard"),
+    ("live-captures.html", "Live Captures"),
+    ("live-standings.html", "Live Standings"),
+    ("live-finals.html", "Week 10 Finals"),
+    ("live-schedule.html", "Week 11 Schedule"),
+    ("strategy-scorecard.html", "D5 Scorecard"),
+    ("readiness-d5.html", "D5 Readiness"),
+    ("availability-matrix-d5.html", "Availability Matrix"),
+    ("decision-questions-d5.html", "Decision Questions"),
+    ("decision-ledger.html", "Decision Ledger"),
+    ("suggestions-pipeline.html", "Suggestion Pipeline"),
+    ("qa-d5.html", "Full Q&A Register"),
+    ("suggestions-d5.html", "D5 Suggestions"),
+    ("flagged-d5.html", "D5 Flags"),
     ("readiness.html", "Decision Readiness"),
     ("executive-summary.html", "Executive Summary"),
     ("requirements.html", "Requirements"),
@@ -1510,6 +1523,8 @@ def main():
         "sources_by_id": sources_by_id,
     }
     g_pages, g_sections = site_g.build(g_ctx)
+    import pages_d5
+    d5_pages, d5_sections = pages_d5.build(g_ctx)
 
     # Session arena-fc0ed6e8-fl1 (2026-11-16): decision-layer sections and pages.
     sess = session_sections(sources_by_id, readiness, luck_panel, ablations, announced,
@@ -1661,7 +1676,8 @@ def main():
     written.append(page("index.html", "Dashboard",
                         cards + kpis + sprint["decision_readiness"]
                         + sprint["luck_panel"] + g_sections
-                        + sess["landing_readiness"] + sess["luck_dashboard"]))
+                        + sess["landing_readiness"] + sess["luck_dashboard"]
+                        + "".join(d5_sections)))
 
     # ------------------------------------------------------- executive summary
     total_out_def = sum(t["defOut"] for t in by_team)
@@ -2940,6 +2956,7 @@ verification note for each one.</p>
     written.extend(pages_market.render_all())
 
     written.extend(g_pages)
+    written.extend(d5_pages)
 
     # Final integration audit: classify the source strength detected on every
     # rendered data row. The audit runs after all source pages have been written.

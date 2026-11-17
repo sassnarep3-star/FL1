@@ -167,6 +167,55 @@ The decisions that would unblock the most work are **Q40** (which dated read a b
 at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is
 answered).
 
+## Task board — session `arena/d50423eb-fl1` (2026-11-17) — LIVE, IN PROGRESS
+
+**Session ID:** `arena-d50423eb` · **Branch:** `arena/d50423eb-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17T02:34Z (UTC) · **Status:** active. Standing rule restated here and followed:
+**additive only**. New files added; existing shared files (`tools/site.py`, `data/sources.tsv`,
+`data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/requirements.json`,
+`COORDINATION.md`, `README.md`, `EXECUTIVE_SUMMARY.md`, `data/verification*.tsv`) are **appended to**,
+never replaced. Registers are deduped on their id key at every append.
+
+| ID | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| T1 | Element-level verification of live official pages and dated captures | done | arena-d50423eb-fl1 | `raw/live/2026-11-17-*`, `scripts/verify_live_d5.py`, `data/verification-live.tsv` | NFL injury report, standings, Week 10 schedule, Week 11 by-week page; hashes + 11 checks pass | injury delta preserved; F69/Q46 |
+| T2 | Decision ledger: questions/flags with known, unknown, gate, clearing number, owner action | done | arena-d50423eb-fl1 | `data/decision_ledger_d5.{csv,json}`, `scripts/build_d5_registers.py`, `tools/pages_d5.py`, `decision-ledger.html` | derived from registers; 113 rows; checkrows passes | clearing criteria blank where unavailable |
+| T3 | Reviewable suggestions pipeline | done | arena-d50423eb-fl1 | `data/suggestion_pipeline_d5.{csv,json}`, `tools/pages_d5.py`, `suggestions-pipeline.html` | 49 rows from suggestion register | all remain proposed; no manual approval assumed |
+| T4 | Availability and depth evidence matrix | needs review | arena-d50423eb-fl1 | `data/depth_matrix_d5.{csv,json}`, `data/availability_d5.json`, `tools/pages_d5.py`, `availability-matrix-d5.html` | official injury hub + captured club depth sources; exact-name join only | 30/32 chart clubs; charts do not prove actual starters or participation |
+| T5 | Strategy scorecard, proper-score engine, controls and qualification gates | done | arena-d50423eb-fl1 | `engine/scoreboard_d5.py`, `tests/test_d5.py`, `data/strategy_scorecard_d5.csv`, `data/scorecard_d5.json`, `scripts/build_d5.py`, `strategy-scorecard.html` | 11 candidate entries; 0 qualified; tests pass | Elo measurement retrospective only; candidate registry hashes not all committed/frozen |
+| T6 | Complete questions-and-answers register | done | arena-d50423eb-fl1 | `data/qa_register_d5.{csv,json}`, `tools/pages_d5.py`, `qa-d5.html` | 46 questions; checkrows passes | unresolved decisions explicitly listed |
+| T7 | Integration and PR | in progress | arena-d50423eb-fl1 | PR #53, all site outputs, this record | CI verify-research-build passed; local 316 tests and links/rows pass | Pages confirmation pending merge/deploy |
+
+**Shared files this session will touch (logged before touching):** `tools/site.py` (NAV entries +
+index cards + one import call, additive), `data/sources.tsv` (append S93+), `data/flags.json`
+(append F69+), `data/questions.json` (append Q46+), `data/suggestions.json` (append SG48+),
+`data/requirements.json` (append R29+), `README.md` / `EXECUTIVE_SUMMARY.md` (append a dated block),
+`data/verification.tsv` (append rows). **No existing row in any register will be edited or
+renumbered.** If a later session needs one of these files mid-run, take `main`'s version and
+re-append this block — that is the board's own rule.
+
+### D5 progress — 2026-11-17T02:40Z onward
+
+**Live capture and verification.** Added `raw/live/2026-11-17-{standings-league-reg,week10-finals,week11-slate}.tsv`, the official injury report text `raw/live/2026-11-17-injury-report-week10.md`, and `raw/live/MANIFEST-2026-11-17.json` with SHA-256 and byte counts for all four. `scripts/verify_live_d5.py` independently verifies the hashes, 32 standings rows, 13 Week-10 finals (excludes LAC–BAL, still partial), 13 Week-11 fixtures/six byes, the 347-row injury capture, 0 committed injury rows missing, 2 live-only BAL additions, 16 changed injury rows, SEA/CIN row counts, and results-vs-live-standings reconciliation. It also caught and prevented double-counting the already-committed Thursday game. All checks pass. Sources: `https://www.nfl.com/injuries/`, `https://www.nfl.com/standings/league/2026/REG`, `https://www.nfl.com/schedules/2026/REG10/`, `https://www.nfl.com/schedules/2026/by-week/week-11`.
+
+**D5 scorecard and pages.** Added `engine/scoreboard_d5.py`, frozen candidate registry `data/strategy_registry_d5.json`, `scripts/build_d5.py`, `tools/pages_d5.py`, and generated live-state, availability, scorecard, forecast-ledger and org-health files. The historical Elo output scores n=137 with BSS 0.1021 vs constant-0.5 baseline, 95% game-cluster interval [-0.0120, 0.2215]; it is explicitly retrospective, not prospective, and is not leaderboard eligible. No one of 11 registered entries qualifies. Market spread is not translated into win probability because no validated margin distribution exists. The captured depth data has 30/32 clubs; 108 injury rows have a game designation, 86 have a next listed player in the parsed depth slot (this is not proof of actual entry or starter status). 2,241 singles are the computed 80%-power planning bar for 55% vs 52.38% break-even. No season-long ROI or raw win-rate ranking is used.
+
+**Review registers.** Appended S93 (official Week-11 by-week schedule page), F69 (injury snapshot delta), Q46 (promotion policy), SG48 (immutable snapshot recommendation), and R29 (availability snapshot requirement); no existing register row replaced. The live vs committed injury discrepancy is preserved as a dated snapshot, not silently overwritten.
+
+**Site integration.** Added D5 navigation and dashboard section additively in `tools/site.py`; ten D5 generated pages cover captures, live standings, finals, slate, strategy scorecard, readiness, availability matrix, decision questions, suggestions, and flags. Site now generates 53 pages. `python3 tools/build.py`, `python3 scripts/build_d5.py`, `python3 tools/site.py`, `python3 scripts/verify_live_d5.py`, `python3 -m unittest discover -s tests -q` (316 OK), `python3 tools/checklinks.py` (all internal links/anchors resolve) and `python3 tools/checkrows.py` (56 pages; 6,861 rows audited) pass. The full append-only decision ledger (113 questions/flags), suggestion pipeline (48 rows), Q&A register (46 questions), 252-row exact-join depth matrix, 11-row scorecard, and 4-row capture verification export were generated by `scripts/build_d5_registers.py`; corresponding pages are live in the checked-in site output. R29 is also included in the landing readiness register. Warnings: pre-existing ResourceWarnings from test code; external links are not fetched by checklinks. `scripts/verify_site.py` could not run in this sandbox because pandas is not installed (`ModuleNotFoundError`); no claim of that check passing. No external verification of all 259 outbound links is claimed here.
+
+**PR / CI:** Opened [PR #53](https://github.com/sassnarep3-star/FL1/pull/53) from `arena/d50423eb-fl1` to `main`. Initial GitHub Actions `verify-research-build` run 44005490933 passed. `main` advanced with PR #49 during this run; the clean merge in commit `b6abb62` preserved that work, unioned non-conflicting register entries, and re-keyed this session's colliding live source/flag/suggestion additions to S93/F69/SG49 (main's S89–S92 and F67–F68 remain intact). Full local rebuild, 328 tests, live checks, drift pins, links, and row audits pass after the merge. The only local check unavailable was `scripts/verify_site.py` because pandas is absent in the sandbox; the workflow installs dependencies and ran its verification step on the initial head. The merge-resolution commit requires a fresh CI run; PR remains open and Pages deployment is pending.
+
+### What this session will NOT do
+
+* Not re-derive or overwrite another session's numbers. Where a live page contradicts a committed
+  value, the contradiction is published as a flag with both readings and neither is overwritten.
+* Not quote a betting price, an odds feed or a "market line" as official. No official NFL price
+  source exists (F18 / GAP-01 on `main`); every market cell stays blank and labelled.
+* Not transcribe a depth chart by eye. Image-only charts (Texans) stay blank and flagged.
+* Not fill a blank to make a table look complete.
+
+
 # COORDINATION — Shared Task Board
 
 > Read this **before** starting. Claim a task by writing your session ID and file scope, then commit

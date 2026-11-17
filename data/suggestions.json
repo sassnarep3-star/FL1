@@ -991,5 +991,27 @@
   ],
   "recommendation": "A, with C for any row whose evidence cannot be found. Never infer a source from the value shape or neighboring rows.",
   "impact": "Readers can distinguish official facts, derived values, third-party inputs, and unresolved rows before relying on a line or strategy."
+ },
+ {
+  "id": "SG49",
+  "title": "Keep every injury-hub read as a dated, hash-pinned immutable snapshot",
+  "category": "Availability",
+  "problem": "The latest official injury capture differs from committed injury data and an in-place rewrite would erase what was known at the earlier read time.",
+  "proposal": "Retain raw/live captures by timestamp with SHA-256; create an append-only snapshot index and a deterministic player-key diff. Never overwrite prior rows. Promote a latest view only as a derived projection.",
+  "evidence": "raw/live/MANIFEST-2026-11-17.json; F69; Q46; scripts/verify_live_d5.py.",
+  "effort": "Low",
+  "risk": "Low",
+  "reversibility": "High",
+  "prerequisites": [
+   "F69",
+   "Q46"
+  ],
+  "options": [
+   "Append-only snapshots with latest projection (recommended)",
+   "Overwrite data/injuries.tsv in place",
+   "Leave the capture unindexed"
+  ],
+  "recommendation": "Use the append-only snapshot ledger; preserve the 2026-11-14 and 2026-11-17 reads independently.",
+  "impact": "Enables replay of practice/status changes without lookahead leakage."
  }
 ]

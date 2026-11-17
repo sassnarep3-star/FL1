@@ -1,0 +1,1583 @@
+{
+ "captures": {
+  "standings": {
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "read_at": "2026-11-17T02:36Z",
+   "path": "raw/live/2026-11-17-standings-league-reg.tsv",
+   "sha256": "ac371a12315c6f48150cc49bc2463e50762904ca49b01d0b16636aea11790562",
+   "bytes": 3182
+  },
+  "week10": {
+   "url": "https://www.nfl.com/schedules/2026/REG10/",
+   "read_at": "2026-11-17T02:36Z",
+   "path": "raw/live/2026-11-17-week10-finals.tsv",
+   "sha256": "ebde3c00231e5af64da484409ddce57967275d15c17aa125c5e9164f9b8d8559",
+   "bytes": 1899
+  },
+  "week11": {
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "read_at": "2026-11-17T02:36Z",
+   "path": "raw/live/2026-11-17-week11-slate.tsv",
+   "sha256": "f873e1e2876829c448ae86162d295791f949d2d8107b2b97306e41909c8df359",
+   "bytes": 1782
+  },
+  "injuries": {
+   "url": "https://www.nfl.com/injuries/",
+   "read_at": "2026-11-17T02:39Z",
+   "path": "raw/live/2026-11-17-injury-report-week10.md",
+   "sha256": "5b80b09882c712e1a682f2ae69bafeb9bf18f7871a82e13bd74947c1d0bf1c03",
+   "bytes": 28343
+  }
+ },
+ "standings": [
+  {
+   "club": "ARI",
+   "live": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pct": "0.300",
+    "pf": 184,
+    "pa": 289,
+    "net": -105,
+    "home": "0-4-0",
+    "road": "3-3-0",
+    "div": "1-4-0",
+    "conf": "0.200",
+    "nonconf": "2-6-0",
+    "strk": "0.250",
+    "last5": "1-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pf": 184,
+    "pa": 289
+   },
+   "committed_site": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 178,
+    "pa": 255
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "ATL",
+   "live": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pct": "0.300",
+    "pf": 201,
+    "pa": 258,
+    "net": -57,
+    "home": "1-5-0",
+    "road": "2-2-0",
+    "div": "1-2-0",
+    "conf": "0.333",
+    "nonconf": "3-3-0",
+    "strk": "0.500",
+    "last5": "0-4-0"
+   },
+   "at_2026_11_16": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pf": 201,
+    "pa": 258
+   },
+   "committed_site": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 188,
+    "pa": 223
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "BAL",
+   "live": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pct": "0.444",
+    "pf": 189,
+    "pa": 236,
+    "net": -47,
+    "home": "1-3-0",
+    "road": "3-2-0",
+    "div": "0-2-0",
+    "conf": "0.000",
+    "nonconf": "2-4-0",
+    "strk": "0.333",
+    "last5": "2-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 189,
+    "pa": 236
+   },
+   "committed_site": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 189,
+    "pa": 236
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  },
+  {
+   "club": "BUF",
+   "live": {
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pct": "0.889",
+    "pf": 287,
+    "pa": 199,
+    "net": 88,
+    "home": "5-0-0",
+    "road": "5-1-0",
+    "div": "3-0-0",
+    "conf": "0.500",
+    "nonconf": "5-1-0",
+    "strk": "0.833",
+    "last5": "3-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pf": 287,
+    "pa": 199
+   },
+   "committed_site": {
+    "w": 7,
+    "l": 1,
+    "t": 0,
+    "pf": 256,
+    "pa": 187
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "CAR",
+   "live": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pct": "0.444",
+    "pf": 219,
+    "pa": 236,
+    "net": -17,
+    "home": "1-3-0",
+    "road": "3-2-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "4-3-0",
+    "strk": "0.571",
+    "last5": "0-2-0"
+   },
+   "at_2026_11_16": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 219,
+    "pa": 236
+   },
+   "committed_site": {
+    "w": 3,
+    "l": 5,
+    "t": 0,
+    "pf": 199,
+    "pa": 219
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "CHI",
+   "live": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": "0.778",
+    "pf": 241,
+    "pa": 184,
+    "net": 57,
+    "home": "4-1-0",
+    "road": "3-1-0",
+    "div": "0-2-0",
+    "conf": "0.000",
+    "nonconf": "5-2-0",
+    "strk": "0.714",
+    "last5": "2-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 241,
+    "pa": 184
+   },
+   "committed_site": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 241,
+    "pa": 184
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  },
+  {
+   "club": "CIN",
+   "live": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": "0.778",
+    "pf": 278,
+    "pa": 193,
+    "net": 85,
+    "home": "3-1-0",
+    "road": "4-1-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "5-2-0",
+    "strk": "0.714",
+    "last5": "2-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 240,
+    "pa": 175
+   },
+   "committed_site": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 240,
+    "pa": 175
+   },
+   "stale_vs_older": true,
+   "stale_vs_base": true
+  },
+  {
+   "club": "CLE",
+   "live": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": "0.600",
+    "pf": 188,
+    "pa": 220,
+    "net": -32,
+    "home": "4-0-0",
+    "road": "2-4-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "4-3-0",
+    "strk": "0.571",
+    "last5": "2-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 188,
+    "pa": 220
+   },
+   "committed_site": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 161,
+    "pa": 196
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "DAL",
+   "live": {
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pct": "0.400",
+    "pf": 286,
+    "pa": 282,
+    "net": 4,
+    "home": "1-4-0",
+    "road": "3-2-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "2-5-0",
+    "strk": "0.286",
+    "last5": "2-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pf": 286,
+    "pa": 282
+   },
+   "committed_site": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 246,
+    "pa": 236
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "DEN",
+   "live": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": "0.778",
+    "pf": 198,
+    "pa": 186,
+    "net": 12,
+    "home": "4-0-0",
+    "road": "3-2-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "3-1-0",
+    "strk": "0.750",
+    "last5": "4-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 198,
+    "pa": 186
+   },
+   "committed_site": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 198,
+    "pa": 186
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  },
+  {
+   "club": "DET",
+   "live": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": "0.778",
+    "pf": 257,
+    "pa": 199,
+    "net": 58,
+    "home": "5-0-0",
+    "road": "2-2-0",
+    "div": "2-0-0",
+    "conf": "1.000",
+    "nonconf": "4-1-0",
+    "strk": "0.800",
+    "last5": "3-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 257,
+    "pa": 199
+   },
+   "committed_site": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 222,
+    "pa": 189
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "GB",
+   "live": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": "0.600",
+    "pf": 226,
+    "pa": 221,
+    "net": 5,
+    "home": "3-2-0",
+    "road": "3-2-0",
+    "div": "1-3-0",
+    "conf": "0.250",
+    "nonconf": "4-4-0",
+    "strk": "0.500",
+    "last5": "2-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 226,
+    "pa": 221
+   },
+   "committed_site": {
+    "w": 6,
+    "l": 3,
+    "t": 0,
+    "pf": 216,
+    "pa": 191
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "HOU",
+   "live": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pct": "0.333",
+    "pf": 233,
+    "pa": 219,
+    "net": 14,
+    "home": "0-4-0",
+    "road": "3-2-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "3-4-0",
+    "strk": "0.429",
+    "last5": "0-2-0"
+   },
+   "at_2026_11_16": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 233,
+    "pa": 219
+   },
+   "committed_site": {
+    "w": 3,
+    "l": 5,
+    "t": 0,
+    "pf": 209,
+    "pa": 192
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "IND",
+   "live": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pct": "0.300",
+    "pf": 208,
+    "pa": 271,
+    "net": -63,
+    "home": "2-3-0",
+    "road": "1-4-0",
+    "div": "1-2-0",
+    "conf": "0.333",
+    "nonconf": "2-5-0",
+    "strk": "0.286",
+    "last5": "1-2-0"
+   },
+   "at_2026_11_16": {
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pf": 208,
+    "pa": 271
+   },
+   "committed_site": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 184,
+    "pa": 249
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "JAX",
+   "live": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": "0.778",
+    "pf": 269,
+    "pa": 144,
+    "net": 125,
+    "home": "4-1-0",
+    "road": "3-1-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "6-2-0",
+    "strk": "0.750",
+    "last5": "1-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 269,
+    "pa": 144
+   },
+   "committed_site": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 229,
+    "pa": 121
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "KC",
+   "live": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": "0.778",
+    "pf": 237,
+    "pa": 156,
+    "net": 81,
+    "home": "4-0-0",
+    "road": "3-2-0",
+    "div": "3-1-0",
+    "conf": "0.750",
+    "nonconf": "6-1-0",
+    "strk": "0.857",
+    "last5": "1-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 237,
+    "pa": 156
+   },
+   "committed_site": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 202,
+    "pa": 143
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "LAC",
+   "live": {
+    "w": 0,
+    "l": 8,
+    "t": 0,
+    "pct": "0.000",
+    "pf": 121,
+    "pa": 219,
+    "net": -98,
+    "home": "0-4-0",
+    "road": "0-4-0",
+    "div": "0-3-0",
+    "conf": "0.000",
+    "nonconf": "0-5-0",
+    "strk": "0.000",
+    "last5": "0-3-0"
+   },
+   "at_2026_11_16": {
+    "w": 0,
+    "l": 8,
+    "t": 0,
+    "pf": 121,
+    "pa": 219
+   },
+   "committed_site": {
+    "w": 0,
+    "l": 8,
+    "t": 0,
+    "pf": 121,
+    "pa": 219
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  },
+  {
+   "club": "LAR",
+   "live": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": "0.600",
+    "pf": 248,
+    "pa": 187,
+    "net": 61,
+    "home": "2-3-0",
+    "road": "4-1-0",
+    "div": "1-2-0",
+    "conf": "0.333",
+    "nonconf": "4-2-0",
+    "strk": "0.667",
+    "last5": "2-2-0"
+   },
+   "at_2026_11_16": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 248,
+    "pa": 187
+   },
+   "committed_site": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 214,
+    "pa": 181
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "LV",
+   "live": {
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pct": "0.400",
+    "pf": 251,
+    "pa": 289,
+    "net": -38,
+    "home": "1-4-0",
+    "road": "3-2-0",
+    "div": "1-1-0",
+    "conf": "0.500",
+    "nonconf": "3-3-0",
+    "strk": "0.500",
+    "last5": "1-3-0"
+   },
+   "at_2026_11_16": {
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pf": 251,
+    "pa": 289
+   },
+   "committed_site": {
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pf": 238,
+    "pa": 268
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "MIA",
+   "live": {
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pct": "0.111",
+    "pf": 148,
+    "pa": 224,
+    "net": -76,
+    "home": "0-4-0",
+    "road": "1-4-0",
+    "div": "1-1-0",
+    "conf": "0.500",
+    "nonconf": "1-5-0",
+    "strk": "0.167",
+    "last5": "0-3-0"
+   },
+   "at_2026_11_16": {
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pf": 148,
+    "pa": 224
+   },
+   "committed_site": {
+    "w": 1,
+    "l": 7,
+    "t": 0,
+    "pf": 126,
+    "pa": 200
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "MIN",
+   "live": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": "0.778",
+    "pf": 176,
+    "pa": 126,
+    "net": 50,
+    "home": "3-1-0",
+    "road": "4-1-0",
+    "div": "3-1-0",
+    "conf": "0.750",
+    "nonconf": "5-1-0",
+    "strk": "0.833",
+    "last5": "2-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pf": 176,
+    "pa": 126
+   },
+   "committed_site": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 146,
+    "pa": 116
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "NE",
+   "live": {
+    "w": 5,
+    "l": 5,
+    "t": 0,
+    "pct": "0.500",
+    "pf": 221,
+    "pa": 242,
+    "net": -21,
+    "home": "3-1-0",
+    "road": "2-4-0",
+    "div": "3-0-0",
+    "conf": "1.000",
+    "nonconf": "5-1-0",
+    "strk": "0.833",
+    "last5": "0-4-0"
+   },
+   "at_2026_11_16": {
+    "w": 5,
+    "l": 5,
+    "t": 0,
+    "pf": 221,
+    "pa": 242
+   },
+   "committed_site": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 211,
+    "pa": 207
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "NO",
+   "live": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pct": "0.333",
+    "pf": 202,
+    "pa": 236,
+    "net": -34,
+    "home": "1-5-0",
+    "road": "2-1-0",
+    "div": "0-2-0",
+    "conf": "0.000",
+    "nonconf": "1-4-0",
+    "strk": "0.200",
+    "last5": "2-2-0"
+   },
+   "at_2026_11_16": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 202,
+    "pa": 236
+   },
+   "committed_site": {
+    "w": 3,
+    "l": 5,
+    "t": 0,
+    "pf": 185,
+    "pa": 216
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "NYG",
+   "live": {
+    "w": 5,
+    "l": 3,
+    "t": 1,
+    "pct": "0.611",
+    "pf": 203,
+    "pa": 196,
+    "net": 7,
+    "home": "3-2-0",
+    "road": "2-1-1",
+    "div": "2-1-1",
+    "conf": "0.625",
+    "nonconf": "3-3-1",
+    "strk": "0.500",
+    "last5": "2-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 5,
+    "l": 3,
+    "t": 1,
+    "pf": 203,
+    "pa": 196
+   },
+   "committed_site": {
+    "w": 5,
+    "l": 3,
+    "t": 1,
+    "pf": 203,
+    "pa": 196
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  },
+  {
+   "club": "NYJ",
+   "live": {
+    "w": 2,
+    "l": 8,
+    "t": 0,
+    "pct": "0.200",
+    "pf": 194,
+    "pa": 254,
+    "net": -60,
+    "home": "1-4-0",
+    "road": "1-4-0",
+    "div": "0-3-0",
+    "conf": "0.000",
+    "nonconf": "2-5-0",
+    "strk": "0.286",
+    "last5": "0-3-0"
+   },
+   "at_2026_11_16": {
+    "w": 2,
+    "l": 8,
+    "t": 0,
+    "pf": 194,
+    "pa": 254
+   },
+   "committed_site": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 182,
+    "pa": 223
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "PHI",
+   "live": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pct": "0.222",
+    "pf": 148,
+    "pa": 221,
+    "net": -73,
+    "home": "1-4-0",
+    "road": "1-3-0",
+    "div": "1-3-0",
+    "conf": "0.250",
+    "nonconf": "1-6-0",
+    "strk": "0.143",
+    "last5": "1-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 148,
+    "pa": 221
+   },
+   "committed_site": {
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pf": 148,
+    "pa": 221
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  },
+  {
+   "club": "PIT",
+   "live": {
+    "w": 6,
+    "l": 3,
+    "t": 0,
+    "pct": "0.667",
+    "pf": 198,
+    "pa": 182,
+    "net": 16,
+    "home": "4-0-0",
+    "road": "2-3-0",
+    "div": "2-2-0",
+    "conf": "0.500",
+    "nonconf": "3-3-0",
+    "strk": "0.500",
+    "last5": "3-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 180,
+    "pa": 144
+   },
+   "committed_site": {
+    "w": 6,
+    "l": 2,
+    "t": 0,
+    "pf": 180,
+    "pa": 144
+   },
+   "stale_vs_older": true,
+   "stale_vs_base": true
+  },
+  {
+   "club": "SEA",
+   "live": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": "0.600",
+    "pf": 223,
+    "pa": 175,
+    "net": 48,
+    "home": "4-2-0",
+    "road": "2-2-0",
+    "div": "2-1-0",
+    "conf": "0.667",
+    "nonconf": "2-3-0",
+    "strk": "0.400",
+    "last5": "4-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pf": 223,
+    "pa": 175
+   },
+   "committed_site": {
+    "w": 5,
+    "l": 4,
+    "t": 0,
+    "pf": 202,
+    "pa": 162
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "SF",
+   "live": {
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pct": "0.889",
+    "pf": 281,
+    "pa": 196,
+    "net": 85,
+    "home": "5-0-0",
+    "road": "3-1-0",
+    "div": "3-0-0",
+    "conf": "1.000",
+    "nonconf": "5-1-0",
+    "strk": "0.833",
+    "last5": "3-0-0"
+   },
+   "at_2026_11_16": {
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pf": 281,
+    "pa": 196
+   },
+   "committed_site": {
+    "w": 7,
+    "l": 1,
+    "t": 0,
+    "pf": 235,
+    "pa": 156
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "TB",
+   "live": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pct": "0.333",
+    "pf": 202,
+    "pa": 178,
+    "net": 24,
+    "home": "1-4-0",
+    "road": "2-2-0",
+    "div": "2-0-0",
+    "conf": "1.000",
+    "nonconf": "3-3-0",
+    "strk": "0.500",
+    "last5": "0-3-0"
+   },
+   "at_2026_11_16": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 202,
+    "pa": 178
+   },
+   "committed_site": {
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pf": 202,
+    "pa": 178
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  },
+  {
+   "club": "TEN",
+   "live": {
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pct": "0.111",
+    "pf": 167,
+    "pa": 239,
+    "net": -72,
+    "home": "0-5-0",
+    "road": "1-3-0",
+    "div": "1-2-0",
+    "conf": "0.333",
+    "nonconf": "1-6-0",
+    "strk": "0.143",
+    "last5": "0-2-0"
+   },
+   "at_2026_11_16": {
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pf": 167,
+    "pa": 239
+   },
+   "committed_site": {
+    "w": 1,
+    "l": 7,
+    "t": 0,
+    "pf": 144,
+    "pa": 199
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": true
+  },
+  {
+   "club": "WAS",
+   "live": {
+    "w": 3,
+    "l": 5,
+    "t": 1,
+    "pct": "0.389",
+    "pf": 196,
+    "pa": 223,
+    "net": -27,
+    "home": "2-2-1",
+    "road": "1-3-0",
+    "div": "2-2-1",
+    "conf": "0.500",
+    "nonconf": "3-4-1",
+    "strk": "0.438",
+    "last5": "0-1-0"
+   },
+   "at_2026_11_16": {
+    "w": 3,
+    "l": 5,
+    "t": 1,
+    "pf": 196,
+    "pa": 223
+   },
+   "committed_site": {
+    "w": 3,
+    "l": 5,
+    "t": 1,
+    "pf": 196,
+    "pa": 223
+   },
+   "stale_vs_older": false,
+   "stale_vs_base": false
+  }
+ ],
+ "stale_vs_older": [
+  "CIN",
+  "PIT"
+ ],
+ "stale_vs_base": [
+  "ARI",
+  "ATL",
+  "BUF",
+  "CAR",
+  "CIN",
+  "CLE",
+  "DAL",
+  "DET",
+  "GB",
+  "HOU",
+  "IND",
+  "JAX",
+  "KC",
+  "LAR",
+  "LV",
+  "MIA",
+  "MIN",
+  "NE",
+  "NO",
+  "NYJ",
+  "PIT",
+  "SEA",
+  "SF",
+  "TEN"
+ ],
+ "week10_finals": [
+  {
+   "week": "10",
+   "date": "2026-11-12",
+   "away": "WAS",
+   "away_pts": 24,
+   "home": "NYG",
+   "home_pts": 21,
+   "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "NE",
+   "away_pts": 10,
+   "home": "DET",
+   "home_pts": 35,
+   "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "KC",
+   "away_pts": 35,
+   "home": "ATL",
+   "home_pts": 13,
+   "url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "HOU",
+   "away_pts": 24,
+   "home": "CLE",
+   "home_pts": 27,
+   "url": "https://www.nfl.com/games/texans-at-browns-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "MIN",
+   "away_pts": 30,
+   "home": "GB",
+   "home_pts": 10,
+   "url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "MIA",
+   "away_pts": 22,
+   "home": "IND",
+   "home_pts": 24,
+   "url": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "CAR",
+   "away_pts": 20,
+   "home": "NO",
+   "home_pts": 17,
+   "url": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "BUF",
+   "away_pts": 31,
+   "home": "NYJ",
+   "home_pts": 12,
+   "url": "https://www.nfl.com/games/bills-at-jets-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "JAX",
+   "away_pts": 40,
+   "home": "TEN",
+   "home_pts": 23,
+   "url": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "LAR",
+   "away_pts": 34,
+   "home": "ARI",
+   "home_pts": 6,
+   "url": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "SEA",
+   "away_pts": 21,
+   "home": "LV",
+   "home_pts": 13,
+   "url": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "SF",
+   "away_pts": 46,
+   "home": "DAL",
+   "home_pts": 40,
+   "url": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10"
+  },
+  {
+   "week": "10",
+   "date": "2026-11-15",
+   "away": "PIT",
+   "away_pts": 18,
+   "home": "CIN",
+   "home_pts": 38,
+   "url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10"
+  }
+ ],
+ "week11_slate": [
+  {
+   "date": "2026-11-19",
+   "kickoff_et": "8:15 PM",
+   "network": "PRIME",
+   "away": "IND",
+   "home": "HOU",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "1:00 PM",
+   "network": "CBS",
+   "away": "MIA",
+   "home": "BUF",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "1:00 PM",
+   "network": "FOX",
+   "away": "BAL",
+   "home": "CAR",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "1:00 PM",
+   "network": "FOX",
+   "away": "NO",
+   "home": "CHI",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "1:00 PM",
+   "network": "FOX",
+   "away": "TEN",
+   "home": "DAL",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "1:00 PM",
+   "network": "FOX",
+   "away": "TB",
+   "home": "DET",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "1:00 PM",
+   "network": "CBS",
+   "away": "ARI",
+   "home": "KC",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "1:00 PM",
+   "network": "CBS",
+   "away": "PIT",
+   "home": "PHI",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "4:05 PM",
+   "network": "FOX",
+   "away": "NYJ",
+   "home": "LAC",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "4:25 PM",
+   "network": "CBS",
+   "away": "JAX",
+   "home": "NYG",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "4:25 PM",
+   "network": "CBS",
+   "away": "LV",
+   "home": "DEN",
+   "venue": null,
+   "url": ""
+  },
+  {
+   "date": "2026-11-22",
+   "kickoff_et": "8:20 PM",
+   "network": "NBC",
+   "away": "MIN",
+   "home": "SF",
+   "venue": "Mexico City / Estadio Banorte",
+   "url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"
+  },
+  {
+   "date": "2026-11-23",
+   "kickoff_et": "8:15 PM",
+   "network": "ESPN",
+   "away": "CIN",
+   "home": "WAS",
+   "venue": null,
+   "url": ""
+  }
+ ],
+ "week11_venue_published": 1,
+ "injuries": {
+  "rows": 347,
+  "clubs": 28,
+  "by_club": {
+   "ARI": 15,
+   "ATL": 11,
+   "BAL": 10,
+   "BUF": 14,
+   "CAR": 12,
+   "CIN": 9,
+   "CLE": 12,
+   "DAL": 19,
+   "DET": 9,
+   "GB": 17,
+   "HOU": 16,
+   "IND": 14,
+   "JAX": 11,
+   "KC": 13,
+   "LAC": 19,
+   "LAR": 14,
+   "LV": 5,
+   "MIA": 11,
+   "MIN": 13,
+   "NE": 15,
+   "NO": 12,
+   "NYG": 11,
+   "NYJ": 9,
+   "PIT": 8,
+   "SEA": 15,
+   "SF": 12,
+   "TEN": 12,
+   "WAS": 9
+  },
+  "added_vs_2026_11_14": [
+   {
+    "club": "BAL",
+    "player": "Calais Campbell"
+   },
+   {
+    "club": "BAL",
+    "player": "Ronnie Stanley"
+   }
+  ],
+  "missing_vs_2026_11_14": [],
+  "field_moves": [
+   {
+    "club": "IND",
+    "player": "Arden Key",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "DE | Hamstring | Full Participation in Practice | Questionable",
+    "at_2026_11_17": "DE |  | Full Participation in Practice | "
+   },
+   {
+    "club": "LAC",
+    "player": "Kayode Awosika",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "G |  | Limited Participation in Practice | ",
+    "at_2026_11_17": "G | Fibula | Full Participation in Practice | Questionable"
+   },
+   {
+    "club": "LAC",
+    "player": "Bud Dupree",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "DE |  | Did Not Participate In Practice | ",
+    "at_2026_11_17": "DE |  | Full Participation in Practice | "
+   },
+   {
+    "club": "LAC",
+    "player": "Justin Eboigbe",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "DE |  | Limited Participation in Practice | ",
+    "at_2026_11_17": "DE | Ankle | Limited Participation in Practice | Questionable"
+   },
+   {
+    "club": "LAC",
+    "player": "Ladd McConkey",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "WR |  | Did Not Participate In Practice | ",
+    "at_2026_11_17": "WR | Back | Did Not Participate In Practice | Questionable"
+   },
+   {
+    "club": "LAC",
+    "player": "Keaton Mitchell",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "RB |  | Limited Participation in Practice | ",
+    "at_2026_11_17": "RB |  | Full Participation in Practice | "
+   },
+   {
+    "club": "LAC",
+    "player": "David Njoku",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "TE |  | Limited Participation in Practice | ",
+    "at_2026_11_17": "TE | Fibula | Full Participation in Practice | Questionable"
+   },
+   {
+    "club": "LAC",
+    "player": "Denzel Perryman",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "LB |  | Full Participation in Practice | ",
+    "at_2026_11_17": "LB | Pectoral | Full Participation in Practice | Questionable"
+   },
+   {
+    "club": "LAC",
+    "player": "Trey Pipkins",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "T |  | Did Not Participate In Practice | ",
+    "at_2026_11_17": "T | Not injury related - personal matter, Knee | Limited Participation in Practice | Questionable"
+   },
+   {
+    "club": "LAC",
+    "player": "Rodney Shelley",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "CB |  | Limited Participation in Practice | ",
+    "at_2026_11_17": "CB |  | Full Participation in Practice | "
+   },
+   {
+    "club": "LAC",
+    "player": "Branson Taylor",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "G |  | Did Not Participate In Practice | ",
+    "at_2026_11_17": "G | Ankle | Did Not Participate In Practice | Out"
+   },
+   {
+    "club": "LAC",
+    "player": "Brenen Thompson",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "WR |  | Did Not Participate In Practice | ",
+    "at_2026_11_17": "WR | Hamstring | Did Not Participate In Practice | Doubtful"
+   },
+   {
+    "club": "LAC",
+    "player": "Isas Waxter",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "CB |  | Did Not Participate In Practice | ",
+    "at_2026_11_17": "CB | Ankle | Did Not Participate In Practice | Out"
+   },
+   {
+    "club": "LAC",
+    "player": "Kendall Williamson",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "S |  | Did Not Participate In Practice | ",
+    "at_2026_11_17": "S | Calf | Did Not Participate In Practice | Out"
+   },
+   {
+    "club": "BAL",
+    "player": "Jaylinn Hawkins",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "S |  | Limited Participation in Practice | ",
+    "at_2026_11_17": "S | Knee | Limited Participation in Practice | Out"
+   },
+   {
+    "club": "BAL",
+    "player": "Adam Randall",
+    "field": "position/injury/practice/status",
+    "at_2026_11_14": "RB |  | Full Participation in Practice | ",
+    "at_2026_11_17": "RB | Neck, Hamstring | Full Participation in Practice | Questionable"
+   }
+  ],
+  "committed_rows": 345
+ }
+}

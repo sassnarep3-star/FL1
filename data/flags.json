@@ -786,5 +786,16 @@
   ],
   "severity": "High",
   "action": "Review the detailed ledger. Replace generator-only or unregistered citations with source IDs where a source can be verified; otherwise leave unsupported values blank and keep them flagged. Do not mark a row officially verified based only on a repository link."
+ },
+ {
+  "id": "F69",
+  "kind": "Live capture conflict / preserve historical row set",
+  "item": "2026-11-17 official injury report differs from committed 2026-11-14 injury table",
+  "detail": "Re-parsed dated NFL injury hub capture: 347 rows / 28 clubs. Against committed data/injuries.tsv (345 rows), 2 live-only rows (BAL Calais Campbell and Ronnie Stanley) and 16 changed rows are observed; zero committed player rows are absent. Do not silently replace the earlier snapshot. The live raw capture and manifest preserve the new point-in-time read; the committed table remains unchanged pending snapshot-aware merge.",
+  "sourceIds": [
+   "S01"
+  ],
+  "severity": "Medium",
+  "action": "Review the 2 additions and 16 field changes against the dated live capture; retain both snapshots with separate timestamps and hashes."
  }
 ]

@@ -182,6 +182,10 @@ def main():
                 "blocker": None, "blocker_refs": [],
                 "clears": "thresholds are proposed rules (F28) pending Q24/Q33 freeze; "
                           "0 live entries to demote yet"},
+        "R29": {"delivered": "raw/live dated injury capture + SHA-256 manifest + scripts/verify_live_d5.py",
+                "blocker": "No scheduled immutable capture job or external retained storage yet",
+                "blocker_refs": ["F67", "Q46"],
+                "clears": "every read has a dated unique path and matching retained hash; a delta report is replayable without overwriting prior rows"},
     }
 
     out_rows = []
