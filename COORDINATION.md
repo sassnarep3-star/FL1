@@ -1,3 +1,59 @@
+## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — IN PROGRESS
+
+**Session ID:** `arena-e97f05c3` · **Branch:** `arena/e97f05c3-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17 (UTC). **Branch note:** this session is bound to the single branch named above, so the
+per-task `session-<id>/<task>` branches in the brief are not used; claims are recorded here on that branch instead.
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| H0 | Claim + push this block | done | `arena-e97f05c3` | `COORDINATION.md` |
+| H1 | Week 10 Sunday-night final (PIT 18 at CIN 38) ingested from the official Game Center; reconciled against the live official standings; Monday-night game (LAC at BAL) kept **unrecorded** because it was still live (Q2, 17–7) at read time | done (MNF open → F67) | `arena-e97f05c3` | `data/results_2026-11-17.tsv`, `data/standings_2026-11-17.tsv`, `data/verification-2026-11-17.tsv`, `raw/results-week10-2026-2026-11-17.md`, `scripts/verify_results_2026_11_17.py`, `tests/test_results_2026_11_17.py`, `data/sources.tsv` (append S89–S91 only), `data/flags.json` (append F67 only), `data/raw/MANIFEST-h.json`, `tools/site_g.py` (one additive row in the Snapshot Ledger results table), `data/verification-2026-11-17.tsv` |
+| H2 | Integration: build, tests, link check, PR to `main`, merge, Pages check | in progress | `arena-e97f05c3` | PR + this record |
+
+### Completion record — H1 (2026-11-17, UTC)
+
+**What was added.** One official final: **Steelers (PIT) 18 at Bengals (CIN) 38**, Week 10, Sunday 2026-11-15,
+Paycor Stadium. Recorded in `data/results_2026-11-17.tsv` (149 rows; the 2026-11-16 read had 148). Every other
+row is byte-identical to the 2026-11-16 read.
+
+**What was not added, and why.** Monday night **LAC at BAL** was *Live* at read time (Q2 01:56, Chargers 17, Ravens 7).
+A live score is not a result, so it is not in any results file. It is registered as open item **F67** with
+source **S91**, and it must be re-read after it shows Final.
+
+**Sources (each links to the official page):**
+- S89 Game Center, PIT at CIN, status Final: https://www.nfl.com/games/steelers-at-bengals-2026-reg-10 (quarter scores PIT 0-3-0-15, CIN 3-21-7-7; each sums to the total)
+- S90 Official standings, read 2026-11-17, all 32 clubs: https://www.nfl.com/standings/league/2026/REG
+- S49/S81 Official Week 10 schedule page (shows "Steelers 18, Bengals 38, FINAL"): https://www.nfl.com/schedules/2026/REG10/
+- S91 Game Center, LAC at BAL, Live (not recorded): https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live
+
+**Verification performed (all re-runnable):**
+- `python3 scripts/verify_results_2026_11_17.py` → GATE PASS: H-R1 (new = old + one row), H-R2 (results reproduce the
+  new official standings for 32/32 clubs on W/L/T/PF/PA), H-R3 (games = W+L+T for every club), H-R4 (the change between
+  the 2026-11-16 and 2026-11-17 standings is exactly this game; only CIN and PIT move, by 38/18 points and one win/loss),
+  H-R5 (frozen 137-game corpus still a prefix).
+- `python3 -m unittest discover -s tests -q` → 315 OK (6 new in `tests/test_results_2026_11_17.py`).
+- `python3 tools/build.py && python3 tools/site.py && python3 tools/checklinks.py` → every internal link and anchor resolves.
+- `/tmp/ci-venv/bin/python scripts/verify_site.py` (pandas venv, as CI does) → errors 0, warnings 0.
+- `python3 tools/checkrows.py` → 43 pages, 6,293 rows audited, every data row sourced.
+- `python3 tools/verify_drift.py` → 19 pins, 19 PASS. DR-10 (flags 66→67) and DR-14 (sources 80→83) were re-pinned on purpose.
+
+**Irregularities found (published on Flagged for Review as F67, and below):**
+1. **Monday night LAC at BAL is unrecorded and open** (F67). It is the only Week 10 game without a result.
+2. **Source-ID collision avoided.** The brief's next free IDs were S87/S88, but both were already taken on `main`
+   (S87 = repo capture manifest, S88 = 2025 standings). This session used S89–S91 instead.
+3. **Branch-naming conflict.** The brief asks each task to go on its own `session-<id>/<task>` branch. The session
+   branch note allows only `arena/e97f05c3-fl1`, so all work is on that single branch, and claims are logged here.
+4. **Pinned-count tests changed on purpose.** `tests/test_n01_n05.py` (sources 80→83) and the drift pin for
+   `data/flags.json` (66→67) were updated. This is the drift alarm working, not a silent change.
+5. **Scope not re-verified.** This session did not re-verify the rest of the brief (for example the 32-team depth
+   sweep, or the availability ledger). Those items keep the status their earlier sessions published.
+
+**Files changed:** `data/results_2026-11-17.tsv`, `data/standings_2026-11-17.tsv`, `data/verification-2026-11-17.tsv`,
+`data/raw/MANIFEST-h.json`, `raw/results-week10-2026-2026-11-17.md`, `scripts/verify_results_2026_11_17.py`,
+`tests/test_results_2026_11_17.py`, `tests/test_n01_n05.py` (count pin), `tools/verify_drift.py` (pin),
+`tools/site_g.py` (one row in the Snapshot Ledger), `data/sources.tsv` (S89–S91), `data/flags.json` (F67),
+regenerated site pages and `assets/js/data.js`.
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·

@@ -5487,6 +5487,36 @@ window.DATA = {
    "checked": "2026-11-14",
    "status": "VERIFIED",
    "note": "All 32 club rows captured verbatim in raw/standings-2025-official.md (W/L/T, PCT, PF, PA, HOME, ROAD, DIV, CONF, NON-CONF, STRK, LAST 5) and parsed by scripts/build_market_spine.py, which requires exactly 32 clubs before it continues. Used only to reconcile the 2025 season at club level: 32 of 32 clubs match the game-level recount."
+  },
+  {
+   "id": "S89",
+   "title": "NFL Game Center — Week 10 2026, Steelers at Bengals (Final, Sunday Nov 15)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+   "tier": "Official (league)",
+   "checked": "2026-11-17",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-17 (UTC). Status 'Final'; PIT 18, CIN 38; quarter scores PIT 0-3-0-15, CIN 3-21-7-7 (each sums to the total); location Cincinnati, OH (Paycor Stadium). Recorded as the only row added to the 2026-11-16 read: data/results_2026-11-17.tsv has 149 rows (was 148)."
+  },
+  {
+   "id": "S90",
+   "title": "NFL 2026 league standings — read 3 (2026-11-17, all 32 clubs)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "tier": "Official (league)",
+   "checked": "2026-11-17",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-17. All 32 clubs transcribed to data/standings_2026-11-17.tsv. The results file reproduces W/L/T/PF/PA for 32/32 (H-R2); the change from the 2026-11-16 standings is exactly the PIT@CIN final and moves only CIN and PIT (H-R4). Checked by scripts/verify_results_2026_11_17.py."
+  },
+  {
+   "id": "S91",
+   "title": "NFL Game Center — Week 10 2026, Chargers at Ravens (LIVE at read time; not final)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live",
+   "tier": "Official (league)",
+   "checked": "2026-11-17",
+   "status": "PARTIAL",
+   "note": "Read 2026-11-17. Shown as 'Q2 01:56', LAC 17, BAL 7, status 'Live'. A live score is not a result: NOT recorded in any results file. Re-read required after the game shows 'Final'."
   }
  ],
  "schedule": [
@@ -34667,6 +34697,19 @@ window.DATA = {
    ],
    "severity": "Low",
    "action": "Owner review (SG47): pick one canonical view per concept and fold the others into it; until then all are published with cross-links."
+  },
+  {
+   "id": "F67",
+   "kind": "Open item — official game not yet final",
+   "item": "Monday night LAC at BAL (Week 10, 2026-11-16) is in no results file: it was Live at the 2026-11-17 read (Q2 01:56, Chargers 17, Ravens 7)",
+   "detail": "The Sunday-night PIT at CIN final (18-38) was added on 2026-11-17 from the official Game Center. The Monday-night game was not, because a live score is not a result. The official standings read of 2026-11-17 still shows LAC 0-8 and BAL 4-5, which is consistent with the game being unplayed in the standings. The record of this game is therefore absent, not wrong, and every Week 10 standings check excludes it.",
+   "sourceIds": [
+    "S91"
+   ],
+   "source": "NFL.com Game Center (official)",
+   "url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live",
+   "severity": "Medium",
+   "action": "Re-read https://www.nfl.com/games/chargers-at-ravens-2026-reg-10 after it shows Final. Confirm the final score and that the quarter scores sum to it, then add the row in a new dated results file and re-run the reconciliation (scripts/verify_results_2026_11_17.py is the template: standings delta must equal the game)."
   }
  ]
 };
