@@ -31,6 +31,11 @@ name: capture-official
 #   not match the number of completed games it expected, and when a Game Book
 #   comes back empty. A silently missing field is the failure mode this whole
 #   repository exists to prevent, so it must fail the build, not publish a blank.
+#
+# DIAGNOSTICS
+#   The Actions log host is not reachable from the authoring sandbox, so every
+#   step's output is tee'd to `run.log` and the log is committed to the vault
+#   branch alongside the captures. A failed run is still diagnosable.
 
 on:
   push:
@@ -80,30 +85,55 @@ jobs:
       - name: Install PDF text extractor (CI only)
         run: pip install --quiet pypdf
 
+      - name: Probe connectivity to the official host
+        run: |
+          set -o pipefail
+          {
+            echo "== connectivity =="
+            echo "date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            curl -sS -o /dev/null -w 'nfl.com/injuries/ -> %{http_code}\n' \
+              --max-time 30 https://www.nfl.com/injuries/ || echo "curl failed"
+            curl -sS -o /dev/null -w 'static.www.nfl.com -> %{http_code}\n' \
+              --max-time 30 https://static.www.nfl.com/ || echo "curl failed"
+          } 2>&1 | tee -a "$RUNNER_TEMP/run.log"
+
       - name: Capture official sources into the vault
         run: |
+          set -o pipefail
+          EXTRA=""
+          if [ "${{ github.event.inputs.injuries_only }}" = "true" ]; then
+            EXTRA="--injuries-only"
+          fi
           python3 scripts/capture_official.py \
             --vault "$RUNNER_TEMP/vault" \
             --season "${{ github.event.inputs.season || '2026' }}" \
             --week "${{ github.event.inputs.week || '0' }}" \
-            ${{ github.event.inputs.injuries_only && '--injuries-only' || '' }}
+            $EXTRA 2>&1 | tee -a "$RUNNER_TEMP/run.log"
 
       - name: Render Game Books to text
-        run: python3 scripts/pdf_to_text.py "$RUNNER_TEMP/vault/pdf"
+        if: always()
+        run: |
+          set -o pipefail
+          python3 scripts/pdf_to_text.py "$RUNNER_TEMP/vault/pdf" 2>&1 | tee -a "$RUNNER_TEMP/run.log"
 
       - name: Drift alarm — the capture must be complete, not merely present
         run: |
-          python3 - <<'PY'
-          import csv, glob, json, os, sys
+          set -o pipefail
+          python3 - <<'PY' 2>&1 | tee -a "$RUNNER_TEMP/run.log"
+          import csv, glob, os, sys
           vault = os.environ["RUNNER_TEMP"] + "/vault"
-          games = list(csv.DictReader(open(vault + "/games_index.tsv"), delimiter="\t"))
+          index = vault + "/games_index.tsv"
+          if not os.path.exists(index):
+              print("DRIFT ALARM: no games index produced")
+              sys.exit(1)
+          games = list(csv.DictReader(open(index), delimiter="\t"))
           expected = [g for g in games if g["away_score"] and g["home_score"]]
           missing = [g for g in expected if not g["gamebook_sha256"]]
           print("games captured:", len(games), "with a result:", len(expected))
           print("game books retrieved:", len(expected) - len(missing))
           if missing:
               print("MISSING GAME BOOKS:")
-              for g in missing[:40]:
+              for g in missing[:60]:
                   print("  ", g["slug"], "page=", g["page_status"], "pdf=", g["pdf_status"], g["error"])
               sys.exit(1)
           empty = [p for p in glob.glob(vault + "/pdf/**/*.pdf", recursive=True)
@@ -114,10 +144,12 @@ jobs:
           print("DRIFT ALARM: clear")
           PY
 
-      - name: Commit the vault to the non-published `vault` branch
+      - name: Commit the vault and the run log to the non-published `vault` branch
+        if: always()
         run: |
           set -euo pipefail
           cd "$RUNNER_TEMP/vault"
+          [ -f "$RUNNER_TEMP/run.log" ] && cp "$RUNNER_TEMP/run.log" ./run.log || true
           git init -q .
           git config user.name "fl1-capture-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -131,15 +163,17 @@ jobs:
           fi
 
       - name: Publish the artefact index (public, derived — no row-level data)
+        if: always()
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import csv, os, shutil, datetime
+          import csv, os
           vault = os.environ["RUNNER_TEMP"] + "/vault"
-          rows = list(csv.DictReader(open(vault + "/manifest.tsv"), delimiter="\t"))
+          index = vault + "/manifest.tsv"
           out = "data/snapshot_vault_index.tsv"
           os.makedirs("data", exist_ok=True)
           fields = ["artefact", "official_page", "source_url", "sha256", "bytes", "retrieved_at_utc"]
+          rows = list(csv.DictReader(open(index), delimiter="\t")) if os.path.exists(index) else []
           with open(out, "w", encoding="utf-8", newline="") as fh:
               w = csv.DictWriter(fh, fieldnames=fields, delimiter="\t", lineterminator="\n")
               w.writeheader()
@@ -149,8 +183,9 @@ jobs:
           PY
 
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: official-snapshots
           path: ${{ runner.temp }}/vault
           retention-days: 90
-          if-no-files-found: error
+          if-no-files-found: warn
