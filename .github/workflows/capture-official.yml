@@ -108,6 +108,7 @@ jobs:
             --vault "$RUNNER_TEMP/vault" \
             --season "${{ github.event.inputs.season || '2026' }}" \
             --week "${{ github.event.inputs.week || '0' }}" \
+            --discover-weeks "${{ github.event.inputs.discover_weeks || '10' }}" \
             $EXTRA 2>&1 | tee -a "$RUNNER_TEMP/run.log"
 
       - name: Render Game Books to text
@@ -129,12 +130,24 @@ jobs:
           games = list(csv.DictReader(open(index), delimiter="\t"))
           expected = [g for g in games if g["away_score"] and g["home_score"]]
           missing = [g for g in expected if not g["gamebook_sha256"]]
-          print("games captured:", len(games), "with a result:", len(expected))
-          print("game books retrieved:", len(expected) - len(missing))
+          pending = [g for g in games if not g["gamebook_sha256"]]
+          print("games visited:", len(games), "| with a result upstream:", len(expected))
+          print("game books retrieved:", len(games) - len(pending))
+          print("no game book yet (game not played):", len(pending))
           if missing:
-              print("MISSING GAME BOOKS:")
+              print("MISSING GAME BOOKS for games with a result:")
               for g in missing[:60]:
                   print("  ", g["slug"], "page=", g["page_status"], "pdf=", g["pdf_status"], g["error"])
+              sys.exit(1)
+          # Every visited game page must have returned a game book unless the
+          # game has not been played yet. A page that returned 200 but no PDF
+          # link is a schema change in the page, and must fail loudly.
+          broken = [g for g in games if g["page_status"] == "200" and not g["gamebook_sha256"]
+                    and not g["error"]]
+          if broken:
+              print("PAGE RETURNED NO GAME BOOK LINK (schema change?):")
+              for g in broken[:40]:
+                  print("  ", g["slug"], g["error"])
               sys.exit(1)
           empty = [p for p in glob.glob(vault + "/pdf/**/*.pdf", recursive=True)
                    if os.path.getsize(p) < 5000]

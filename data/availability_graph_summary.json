@@ -1,0 +1,16 @@
+{
+  "by_outcome": {
+    "DID_NOT_PLAY": 0,
+    "DID_NOT_START": 8,
+    "NOT_ON_THE_GAME_DAY_ROSTER": 9,
+    "OUT_INACTIVE": 0,
+    "STARTED_AS_CHARTED": 31,
+    "STARTED_FROM_DEEPER_ON_THE_CHART": 9,
+    "STARTED_NOT_ON_THE_CHART": 4
+  },
+  "chart_capture": "club depth charts captured for Week 10 of 2026; the graph is therefore built for Week 10 games only",
+  "clubs": 2,
+  "games": 1,
+  "rows": 61,
+  "week": "10"
+}

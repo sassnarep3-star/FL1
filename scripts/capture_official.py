@@ -230,6 +230,37 @@ def load_games(season: int) -> list:
     return uniq
 
 
+WEEK_SLUG_RE = re.compile(
+    r"([a-z0-9\-]+)-at-([a-z0-9\-]+)-(?P<season>20\d{2})-(?P<type>reg|post)-(?P<week>\d{1,2})"
+)
+
+
+def discover_week_slugs(season: int, week: int) -> list:
+    """Ask the official schedule page which games are in a week.
+
+    The upstream games feed this repository already carries (nflverse) can lag
+    the league: on 2026-11-17 it still had no result for thirteen of the
+    fourteen Week 10 games that had already been played, so a capture driven
+    from that feed alone would have silently skipped thirteen official game
+    books. The league's own schedule page is therefore the authority on WHICH
+    games exist, and the feed is used only for cross-checking.
+
+    Returns a list of slugs. An empty list means the page could not be read,
+    which the caller reports rather than treating as "no games".
+    """
+    url = "https://www.nfl.com/schedules/%d/REG%d/" % (season, week)
+    status, body, err = fetch(url)
+    if status != 200:
+        return []
+    text = body.decode("utf-8", "replace").replace("\\/", "/")
+    slugs = []
+    for m in WEEK_SLUG_RE.finditer(text):
+        slug = m.group(0)
+        if slug not in slugs:
+            slugs.append(slug)
+    return sorted(slugs)
+
+
 def find_gamebook_pdf(html_text: str) -> str:
     """Pull the official Game Book PDF URL out of a Game Center page."""
     text = html_text.replace("\\/", "/").replace("&amp;", "&")
@@ -375,7 +406,11 @@ def main(argv=None) -> int:
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--include-unplayed", action="store_true",
                     help="also request game books for games with no result yet")
+    ap.add_argument("--discover-weeks", default="",
+                    help="comma-separated weeks to enumerate from the league's "
+                         "own schedule pages (e.g. 10,11)")
     args = ap.parse_args(argv)
+    args.discover_weeks = [int(x) for x in args.discover_weeks.split(",") if x.strip()]
 
     vault = os.path.abspath(args.vault)
     os.makedirs(vault, exist_ok=True)
@@ -395,6 +430,25 @@ def main(argv=None) -> int:
             games = [g for g in games if g["played"]]
         if args.limit:
             games = games[: args.limit]
+        # Add any game the league's own schedule page lists but the upstream
+        # feed has no result for. A game with no result in the feed is still
+        # played if the league says it is on the schedule, and its game book
+        # exists once the game is over.
+        if args.discover_weeks:
+            known = {g["slug"] for g in games}
+            for wk in args.discover_weeks:
+                for slug in discover_week_slugs(args.season, wk):
+                    if slug in known:
+                        continue
+                    away, home = slug.split("-at-")[0], slug.split("-at-")[1].split("-2026-")[0]
+                    games.append({
+                        "game_id": slug, "season": args.season, "week": wk,
+                        "away": away, "home": home, "away_score": "",
+                        "home_score": "", "old_game_id": "", "slug": slug,
+                        "played": True,
+                    })
+                    known.add(slug)
+            games.sort(key=lambda r: (r["week"], r["slug"]))
         log(f"capturing {len(games)} official game book(s) for season {args.season} …")
         rows = []
         for i, g in enumerate(games, 1):
