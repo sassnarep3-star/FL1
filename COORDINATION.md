@@ -97,6 +97,42 @@ The decisions that would unblock the most work are **Q40** (which dated read a b
 at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is
 answered).
 
+## Task board — session `arena/d50423eb-fl1` (2026-11-17) — LIVE, IN PROGRESS
+
+**Session ID:** `arena-d50423eb` · **Branch:** `arena/d50423eb-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17T02:34Z (UTC) · **Status:** active. Standing rule restated here and followed:
+**additive only**. New files added; existing shared files (`tools/site.py`, `data/sources.tsv`,
+`data/flags.json`, `data/questions.json`, `data/suggestions.json`, `data/requirements.json`,
+`COORDINATION.md`, `README.md`, `EXECUTIVE_SUMMARY.md`, `data/verification*.tsv`) are **appended to**,
+never replaced. Registers are deduped on their id key at every append.
+
+| ID | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| T1 | Element-level verification of the *live official* pages this session cites (injury hub, standings, week-11 schedule, results) and a dated capture of each | in progress | arena-d50423eb-fl1 | `raw/live-2026-11-17-*.md`, `scripts/live_verify_d5.py`, `data/verification-live.tsv` | live nfl.com pages, hashed into `data/raw/MANIFEST-live.json` | TBD |
+| T2 | **Decision ledger**: every open decision as one row — question, what we know, what we do not, the gate, the number that clears it, owner action. One page, sortable by blocking | in progress | arena-d50423eb-fl1 | `data/decision_ledger.{csv,json}`, `scripts/build_decision_ledger_d5.py`, `tools/pages_d5.py`, `decision-ledger.html` | derived from `questions.json`/`flags.json`/`requirements.json` + T1 captures | TBD |
+| T3 | **Suggestions pipeline** with explicit review states (proposed → accepted → building → shipped) and a score per suggestion (impact, cost, reversibility, prerequisite) so a reader can pick a path | in progress | arena-d50423eb-fl1 | `data/suggestion_pipeline.{csv,json}`, `scripts/build_suggestion_pipeline_d5.py`, `tools/pages_d5.py`, `suggestions-pipeline.html` | derived from `suggestions.json`; no new external facts | TBD |
+| T4 | **Availability & depth evidence matrix**: per club, per unit, expected starter → published status → named replacement → the depth penalty expressed as a string gap, never a fixed point value. Every cell either an official quote+link or a blank | in progress | arena-d50423eb-fl1 | `data/depth_matrix_d5.{csv,json}`, `scripts/build_depth_matrix_d5.py`, `tools/pages_d5.py`, `depth-matrix.html` | live injury hub (S89), depth captures already on `main` | TBD |
+| T5 | **Strategy lab scorecard**: the competition format itself — divisions (singles / parlays / SGP / prop combos), the gates each entry must pass, the pre-registration hash, and a leaderboard that ranks on benchmark-relative Brier skill with a clustered lower bound, never on win rate or ROI. Includes the control baselines (random, favourites-only) | in progress | arena-d50423eb-fl1 | `engine/scoreboard_d5.py`, `tests/test_d5_session.py`, `data/strategy_scorecard.{csv,json}`, `scripts/build_strategy_scorecard_d5.py`, `strategy-lab.html` | derived; pre-registration hashes committed | TBD |
+| T6 | **Questions-and-answers register**: the explicit pre-decision Q&A the brief asks for — what we know / do not know / how we would find out / what it unblocks | in progress | arena-d50423eb-fl1 | `data/qa_register.{csv,json}`, `scripts/build_qa_d5.py`, `tools/pages_d5.py`, `qa.html` | derived from registers + T1 | TBD |
+| T7 | **Integration**: rebuild every artefact, run every gate, re-verify the combined data line by line, open PR → `main`, merge, confirm Pages, record here | unclaimed | — | — | — | — |
+
+**Shared files this session will touch (logged before touching):** `tools/site.py` (NAV entries +
+index cards + one import call, additive), `data/sources.tsv` (append S89+), `data/flags.json`
+(append F67+), `data/questions.json` (append Q46+), `data/suggestions.json` (append SG48+),
+`data/requirements.json` (append R29+), `README.md` / `EXECUTIVE_SUMMARY.md` (append a dated block),
+`data/verification.tsv` (append rows). **No existing row in any register will be edited or
+renumbered.** If a later session needs one of these files mid-run, take `main`'s version and
+re-append this block — that is the board's own rule.
+
+### What this session will NOT do
+
+* Not re-derive or overwrite another session's numbers. Where a live page contradicts a committed
+  value, the contradiction is published as a flag with both readings and neither is overwritten.
+* Not quote a betting price, an odds feed or a "market line" as official. No official NFL price
+  source exists (F18 / GAP-01 on `main`); every market cell stays blank and labelled.
+* Not transcribe a depth chart by eye. Image-only charts (Texans) stay blank and flagged.
+* Not fill a blank to make a table look complete.
+
 # COORDINATION — Shared Task Board
 
 > Read this **before** starting. Claim a task by writing your session ID and file scope, then commit
