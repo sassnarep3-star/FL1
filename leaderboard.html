@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proper-Score Leaderboard · FL1 — NFL Line Lab</title>
+<meta name="description" content="Verified data, open questions, and a strategy leaderboard that refuses to guess.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="brand"><a href="index.html"><span class="mark">FL1</span> <span class="word">NFL Line Lab</span></a></div>
+  <nav class="nav" aria-label="Sections"><a href="index.html">Dashboard</a><a href="readiness.html">Decision Readiness</a><a href="executive-summary.html">Executive Summary</a><a href="requirements.html">Requirements</a><a href="requirements-backlog.html">Requirement Backlog</a><a href="injuries.html">Injuries</a><a href="team-availability.html">Team Availability</a><a href="announced-starters.html">Announced Starters</a><a href="gamebooks.html">Official Game Books</a><a href="availability-graph.html">Availability Graph</a><a href="depth-slots.html">Depth Slots</a><a href="leaderboard.html" class="on">Proper-Score Leaderboard</a><a href="availability-ledger.html">Snapshot Ledger</a><a href="depth.html">Backup Depth</a><a href="replacement-depth.html">Replacement Depth</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule 2026</a><a href="results-feed.html">Results Feed & Backtest</a><a href="prop-correlations.html">Prop Correlations</a><a href="official-correlations.html">Official Correlations</a><a href="correlation-register.html">Correlation Register</a><a href="model-lines.html">Model Lines & Price Store</a><a href="line-origination.html">Line Origination</a><a href="originations.html">Originations</a><a href="line-board.html">Line Board</a><a href="price-snapshots.html">Price Snapshots</a><a href="verified-results-feed.html">Verified Results Feed</a><a href="strategies.html">Leaderboard</a><a href="signal-vs-staking.html">Signal vs Staking</a><a href="governance.html">Signal & Demotion</a><a href="validation.html">Validation Gates</a><a href="ablations.html">Ablations</a><a href="removal-of-luck.html">Removal of Luck</a><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="sources.html">Sources</a><a href="verification.html">Verification</a><a href="price-store.html">Price Store</a><a href="results-feed-market.html">Verified Results Feed (spine)</a><a href="origination.html">Origination Run</a><a href="signal-vs-staking-market.html">Signal vs Staking (spine)</a><a href="replacement-depth-market.html">Replacement Depth (spine)</a><a href="correlation-gate.html">Correlation Gate</a><a href="demotion-gate.html">Demotion Gate</a><a href="decision-desk.html">Decision Desk</a><a href="flagged.html">Flagged for Review</a></nav>
+</header>
+<main id="main" class="wide">
+
+<section class="hero">
+  <h1>The leaderboard this repository wants</h1>
+  <p class="lead">Most model leaderboards rank strategies by win rate or by
+  season-long return. Both are noise. Ten bets can produce a 90% hit rate from
+  a coin, and a season's return can be one lucky Sunday. This page ranks by a
+  <em>proper score</em> instead: a score that a forecast cannot improve by
+  lying, measured against the market's own de-vigged probability, with an
+  uncertainty interval and a multiplicity correction. Then it shows the whole
+  table going the other way, because that is what the data says.</p>
+</section>
+
+<h2>What the page is built from</h2>
+<div class="twrap"><table class="kpi"><thead><tr><th>Figure</th><th>Value</th><th>Basis</th><th>Method</th></tr></thead><tbody><tr><td>Scoring rule</td><td>Brier</td><td>a proper scoring rule: minimised by the true probability, so it cannot be gamed the way a hit rate can</td><td><a class="src" href="#method">method</a></td></tr><tr><td>Benchmark</td><td>de-vigged market price</td><td>the market&#x27;s own probability of the same event, from the two posted prices</td><td><a class="src" href="#method">method</a></td></tr><tr><td>Strategies ranked</td><td class="num">9</td><td>the singles division; the combo divisions are gated</td><td><a class="src" href="#divisions">divisions</a></td></tr><tr><td>Strategies that cleared stage one</td><td class="num">0</td><td>cluster lower bound above zero, Holm-adjusted p below 0.05, and both controls beaten</td><td><a class="src" href="#method">method</a></td></tr><tr><td>Game spread error, market</td><td>12.68 pts</td><td>standard deviation of the market line&#x27;s own error over 6049 settled bets</td><td><a class="src" href="#method">method</a></td></tr><tr><td>Bootstrap draws</td><td class="num">2000</td><td>resampling GAMES, not bets, so bets inside one game move together</td><td><a class="src" href="#method">method</a></td></tr></tbody></table></div>
+
+<h2>The result, stated plainly</h2>
+<div class="callout bad">
+  <h3>No strategy in this corpus has demonstrated skill</h3>
+  <p>Every strategy's proper-score skill against the de-vigged market is
+  <strong>negative</strong>, and every game-cluster lower bound is below zero.
+  The best entry is the least negative, not a winner. Two things follow, and
+  both are published rather than buried:</p>
+  <p><strong>1.</strong> A negative skill here means the model's line is a worse
+  probability forecast than the price it was betting against. The model's lines
+  are more accurate than the market's lines in points — see
+  <a href="origination.html">the origination page</a> — but a line is not a
+  probability, and when both are converted to probabilities with the same
+  residual scale, the market's price wins.</p>
+  <p><strong>2.</strong> The strategy that looks best by <em>return</em> is not
+  the strategy that looks best by proper score, and neither qualifies. The
+  staking ledger is published separately, on its own page, and is never merged
+  into this ranking.</p>
+  <p>The two-stage rule therefore ends at stage one for every entry: none is
+  promoted to paper, and none is on the live leaderboard. The demo division
+  exists to be honest, not to be populated.</p>
+</div>
+
+<div class="twrap"><table class="data"><thead><tr><th>Rank</th><th>Strategy</th><th>Markets</th><th>Bets</th><th>Games</th><th>Brier model</th><th>Brier market</th><th>Skill</th><th>Lower 95 pct</th><th>Holm p</th><th>Control: random</th><th>Control: favourite</th><th>Hit rate</th><th>Line skill</th><th>Division</th><th>Source</th></tr></thead><tbody><tr><td class="num">1</td><td>SIDE_EDGE_1.0</td><td>SIDE</td><td class="num">1943</td><td class="num">1943</td><td class="num">0.25494</td><td class="num">0.24349</td><td>-0.0470</td><td>-0.0650</td><td>1.0000</td><td>-0.0414</td><td>-0.0032</td><td class="num">0.497</td><td>-0.0510</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">2</td><td>SIDE_EDGE_1.5</td><td>SIDE</td><td class="num">1678</td><td class="num">1678</td><td class="num">0.25626</td><td class="num">0.24345</td><td>-0.0526</td><td>-0.0741</td><td>1.0000</td><td>-0.0487</td><td>-0.0025</td><td class="num">0.499</td><td>-0.0584</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">3</td><td>SIDE_EDGE_2.0</td><td>SIDE</td><td class="num">1436</td><td class="num">1436</td><td class="num">0.25735</td><td class="num">0.24358</td><td>-0.0565</td><td>-0.0809</td><td>1.0000</td><td>-0.0581</td><td>-0.0029</td><td class="num">0.510</td><td>-0.0624</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">4</td><td>SIDE_EDGE_3.0</td><td>SIDE</td><td class="num">992</td><td class="num">992</td><td class="num">0.26196</td><td class="num">0.24395</td><td>-0.0738</td><td>-0.1052</td><td>1.0000</td><td>-0.0708</td><td>-0.0025</td><td class="num">0.509</td><td>-0.0809</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">5</td><td>TOTAL_EDGE_2.0</td><td>TOTAL</td><td class="num">1658</td><td class="num">1658</td><td class="num">0.27386</td><td class="num">0.24765</td><td>-0.1059</td><td>-0.1285</td><td>1.0000</td><td>-0.0902</td><td>-0.0019</td><td class="num">0.491</td><td>-0.0925</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">6</td><td>ML_EDGE_3PP</td><td>MONEYLINE</td><td class="num">1924</td><td class="num">1924</td><td class="num">0.23136</td><td class="num">0.20827</td><td>-0.1109</td><td>-0.1352</td><td>1.0000</td><td>-0.1403</td><td>-0.5871</td><td class="num">0.404</td><td>—</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">7</td><td>ML_EDGE_5PP</td><td>MONEYLINE</td><td class="num">1630</td><td class="num">1630</td><td class="num">0.23238</td><td class="num">0.20596</td><td>-0.1283</td><td>-0.1576</td><td>1.0000</td><td>-0.1344</td><td>-0.6246</td><td class="num">0.398</td><td>—</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">8</td><td>TOTAL_EDGE_3.0</td><td>TOTAL</td><td class="num">1301</td><td class="num">1301</td><td class="num">0.27987</td><td class="num">0.24729</td><td>-0.1317</td><td>-0.1627</td><td>1.0000</td><td>-0.1528</td><td>-0.0021</td><td class="num">0.486</td><td>-0.1141</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr><tr><td class="num">9</td><td>TOTAL_EDGE_4.5</td><td>TOTAL</td><td class="num">748</td><td class="num">748</td><td class="num">0.29666</td><td class="num">0.24655</td><td>-0.2032</td><td>-0.2496</td><td>1.0000</td><td>-0.2153</td><td>-0.0024</td><td class="num">0.467</td><td>-0.1798</td><td><span class="pill bad">not qualified</span></td><td><a class="src" href="requirements-backlog.html">backlog</a></td></tr></tbody></table></div>
+
+<h2>Every ranked strategy</h2>
+<p class="caption">Sorted by the game-cluster lower bound, not by return. A
+strategy is only "qualified" when its lower bound beats zero, its
+multiplicity-adjusted p-value beats 0.05, and it beats both controls. Notice
+that <em>hit rate</em> is in the table and is never used to sort it.</p>
+%s
+
+<div class="twrap"><table class="data"><thead><tr><th>Division</th><th>Status</th><th>Entries</th><th>Why</th><th>Method</th></tr></thead><tbody><tr><td>game parlays</td><td><span class="pill bad">GATED</span></td><td class="num">0</td><td>no directly validated joint probability exists for any combo in this corpus; multiplying marginal probabilities is invalid under dependence</td><td><a class="src" href="#divisions">method</a></td></tr><tr><td>same-game parlays</td><td><span class="pill bad">GATED</span></td><td class="num">0</td><td>legs inside one game are dependent by construction; no joint probability has been validated</td><td><a class="src" href="#divisions">method</a></td></tr><tr><td>prop combos</td><td><span class="pill bad">GATED</span></td><td class="num">0</td><td>player props are conditioned on the same game&#x27;s script; no joint probability has been validated and no void/push rule is documented</td><td><a class="src" href="#divisions">method</a></td></tr></tbody></table></div>
+
+<h2 id="divisions">The four divisions, and their gates</h2>
+<p class="caption">Singles are ranked. Every combo division is gated, because a
+combo priced by multiplying marginal probabilities is invalid: the legs are
+dependent. A combo can only enter when a directly validated joint probability
+exists AND the operator's void/push rules are documented. Neither exists in
+this repository, so the gate is closed and the reason is published.</p>
+%s
+
+<h2 id="method">How the numbers are made</h2>
+<section class="prose">
+  <h3>The score</h3>
+  <p>Every settled trade is a probability forecast of a binary event. The
+  <strong>Brier score</strong> is the mean squared distance between the forecast
+  and the outcome. It is a proper scoring rule: the forecast that minimises it
+  is the true probability, so a forecast cannot do better by being less honest.
+  <strong>Skill</strong> is measured against the market:</p>
+  <pre>BSS = 1 - Brier(model) / Brier(market)</pre>
+  <p>Zero means &ldquo;no sharper than the price&rdquo;; a positive number means sharper.
+  The market's probability is taken from <em>both</em> posted prices with the
+  vig removed, because comparing a vig-free model probability against a
+  vig-inflated price would flatter the model for a reason that has nothing to do
+  with skill.</p>
+
+  <h3>Turning a line into a probability</h3>
+  <p>A line is not a probability. To compare a line against a price, the line
+  has to be converted. The conversion uses one shared residual scale — the
+  standard deviation of the market line's own error, measured over every settled
+  bet (12.68 points for spreads, 13.21 for totals). Using one scale for both sides is
+  deliberate: it isolates the comparison onto the line, which is what is being
+  originated, and stops a flatter forecast from winning on calibration alone.
+  Line accuracy in points is published on its own column, so a reader who cares
+  about the line can read the line.</p>
+
+  <h3>Uncertainty that respects the game</h3>
+  <p>Bets inside one game are not independent: a model that is wrong about one
+  club is usually wrong about its opponent, and one bad weather read hits both.
+  The interval is therefore a <strong>cluster bootstrap</strong> that resamples
+  <em>games</em>, not bets. The published bound is the 5th percentile — the
+  pessimistic end of 2,000 draws.</p>
+
+  <h3>Multiplicity</h3>
+  <p>If many strategies are ranked on the same data, the best is partly luck.
+  The one-sided p-value that each strategy's skill exceeds zero is adjusted
+  across all strategies with the <strong>Holm step-down</strong> procedure, so a
+  strategy cannot win by being the luckiest of many.</p>
+
+  <h3>The controls</h3>
+  <p><strong>Random picks</strong> draw the same number of bets from the same
+  games at random. <strong>Favourites only</strong> always takes the side the
+  market priced shorter. A strategy that cannot beat both has demonstrated a
+  run, not skill. Both are scored with the same metric, so the comparison is
+  like for like.</p>
+
+  <h3>The split</h3>
+  <p>Seasons are assigned to train, validation and a final holdout
+  <em>before</em> any number is computed, and the assignment is committed at
+  <code>data/splits.json</code>. The holdout is counted here so its size is on
+  the record, but no published number on this site is computed from it, and the
+  rule for reading it is written down rather than remembered.</p>
+
+  <h3>The two stages</h3>
+  <p><strong>Stage one</strong> is the proper score: cluster lower bound above
+  zero, Holm-adjusted p below 0.05, and both controls beaten. <strong>Stage
+  two</strong> is a prospective CLV/ROI escrow that only accepts bets made
+  <em>after</em> the pre-registration commit. The backtest corpus contains no
+  prospective bets, so no strategy can reach stage two from it. That is the
+  point of the escrow: it cannot be satisfied by data that already existed when
+  the rule was written.</p>
+</section>
+
+</main>
+<footer class="foot">
+  <p><strong>FL1 — NFL Line Lab</strong> — Verified data, open questions, and a strategy leaderboard that refuses to guess.</p>
+  <p>Data captured 2026-11-14 and 2026-11-16 (UTC) from official league and club sources. Every value links to its source.
+  Values that could not be confirmed from an official source are left blank and listed on
+  <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
+  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+</footer>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>

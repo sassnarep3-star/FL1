@@ -1,0 +1,35 @@
+{
+  "bets_per_split": {
+    "final_holdout": 2622,
+    "train": 9094,
+    "validation": 1594
+  },
+  "final_holdout": {
+    "purpose": "read once, at the end, for the final number",
+    "seasons": [
+      "2025",
+      "2026"
+    ],
+    "status": "NOT YET READ by any published number on this site; the corpus exists and is counted, but no published figure is computed on it"
+  },
+  "note_on_holdout": "The holdout corpus is counted here so its size is on the record, but no published number on this site is computed from it. That is the whole point of a holdout.",
+  "registered": "2026-11-17",
+  "rule": "Seasons are assigned to exactly one split. The final holdout is never read while a rule, a threshold, a parameter or a feature is being chosen. A rule that has been tuned against the holdout stops being a holdout, and the repository records the date that happened rather than pretending otherwise.",
+  "train": {
+    "purpose": "fit scoring levels, fit parameters, choose rules",
+    "seasons": [
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ]
+  },
+  "validation": {
+    "purpose": "choose among already-fitted rules; no refitting",
+    "seasons": [
+      "2024"
+    ]
+  }
+}

@@ -43,6 +43,7 @@ NAV = [
     ("gamebooks.html", "Official Game Books"),
     ("availability-graph.html", "Availability Graph"),
     ("depth-slots.html", "Depth Slots"),
+    ("leaderboard.html", "Proper-Score Leaderboard"),
     ("availability-ledger.html", "Snapshot Ledger"),
     ("depth.html", "Backup Depth"),
     ("replacement-depth.html", "Replacement Depth"),

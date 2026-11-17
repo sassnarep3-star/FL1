@@ -390,6 +390,9 @@ def build(ctx):
         availability_graph_page(ctx),
         depth_slots_page(ctx),
     ]
+    lb = leaderboard_page(ctx)
+    if lb:
+        pages.append(lb)
     return pages, ""
 
 
@@ -432,3 +435,233 @@ is published here with an official link on every row.</p>
 %s
 </section>
 """ % ctx["table"](["Figure", "Value", "Basis", "Where"], rows, cls="kpi")
+
+
+# ---------------------------------------------------------------------------
+# Proper-score leaderboard
+# ---------------------------------------------------------------------------
+def _f(x, digits=4):
+    """Format a number, or a dash when it is missing. Never invent a zero."""
+    try:
+        v = float(x)
+    except (TypeError, ValueError):
+        return "—"
+    if v != v:
+        return "—"
+    return ("%%.%df" % digits) % v
+
+
+def leaderboard_page(ctx):
+    import engine.proper_scores as psmod
+    path = os.path.join(DATA, "leaderboard_divisions.tsv")
+    if not os.path.exists(path):
+        return None
+    rows = load_csv("leaderboard_divisions.tsv")
+    meta = load_json("leaderboard_divisions.json")
+    splits = load_json("splits.json")
+
+    ranked = [r for r in rows if r.get("division") == "singles"]
+
+    def grade(r):
+        # the two-stage rule, in the order the brief applies it
+        if r["stage1_qualified"] != "yes":
+            return ("not qualified", "bad")
+        return ("paper", "warn")
+
+    body_rows = []
+    for r in ranked:
+        label, kind = grade(r)
+        body_rows.append([
+            ctx["cell"](r["rank"], "n"),
+            ctx["cell"](r["strategy_id"]),
+            ctx["cell"](r["markets"]),
+            ctx["cell"](r["n_bets"], "n"),
+            ctx["cell"](r["n_games"], "n"),
+            ctx["cell"](_f(r["brier_model"], 5), "n"),
+            ctx["cell"](_f(r["brier_benchmark"], 5), "n"),
+            ctx["cell"](_f(r["brier_skill"])),
+            ctx["cell"](_f(r["skill_lower_95"])),
+            ctx["cell"](_f(r["p_holm_adjusted"])),
+            ctx["cell"](_f(r["control_random"])),
+            ctx["cell"](_f(r["control_favourite"])),
+            ctx["cell"](_f(r["hit_rate"], 3), "n"),
+            ctx["cell"](_f(r["line_skill_vs_market_line"])),
+            "<td>%s</td>" % ctx["pill"](label, kind),
+            ctx["raw_src"]('<a class="src" href="requirements-backlog.html">'
+                           'backlog</a>'),
+        ])
+
+    kpis = [
+        [ctx["cell"]("Scoring rule"), ctx["cell"]("Brier"),
+         ctx["cell"]("a proper scoring rule: minimised by the true probability, "
+                     "so it cannot be gamed the way a hit rate can"),
+         ctx["raw_src"]('<a class="src" href="#method">method</a>')],
+        [ctx["cell"]("Benchmark"), ctx["cell"]("de-vigged market price"),
+         ctx["cell"]("the market's own probability of the same event, from the "
+                     "two posted prices"),
+         ctx["raw_src"]('<a class="src" href="#method">method</a>')],
+        [ctx["cell"]("Strategies ranked"), ctx["cell"](len(ranked), "n"),
+         ctx["cell"]("the singles division; the combo divisions are gated"),
+         ctx["raw_src"]('<a class="src" href="#divisions">divisions</a>')],
+        [ctx["cell"]("Strategies that cleared stage one"),
+         ctx["cell"](sum(1 for r in ranked if r["stage1_qualified"] == "yes"), "n"),
+         ctx["cell"]("cluster lower bound above zero, Holm-adjusted p below 0.05, "
+                     "and both controls beaten"),
+         ctx["raw_src"]('<a class="src" href="#method">method</a>')],
+        [ctx["cell"]("Game spread error, market"), ctx["cell"](_f(meta.get("sigma_margin"), 2) + " pts"),
+         ctx["cell"]("standard deviation of the market line's own error over %d "
+                     "settled bets" % meta.get("n_margin_residuals", 0)),
+         ctx["raw_src"]('<a class="src" href="#method">method</a>')],
+        [ctx["cell"]("Bootstrap draws"), ctx["cell"](2000, "n"),
+         ctx["cell"]("resampling GAMES, not bets, so bets inside one game move "
+                     "together"),
+         ctx["raw_src"]('<a class="src" href="#method">method</a>')],
+    ]
+
+    gated = meta.get("divisions", {})
+    gated_rows = []
+    for name in ("game parlays", "same-game parlays", "prop combos"):
+        d = gated.get(name, {})
+        gated_rows.append([
+            ctx["cell"](name),
+            "<td>%s</td>" % ctx["pill"](d.get("status", "GATED"), "bad"),
+            ctx["cell"](d.get("entries", 0), "n"),
+            ctx["cell"](d.get("reason", "")),
+            ctx["raw_src"]('<a class="src" href="#divisions">method</a>')],
+        )
+
+    body = """
+<section class="hero">
+  <h1>The leaderboard this repository wants</h1>
+  <p class="lead">Most model leaderboards rank strategies by win rate or by
+  season-long return. Both are noise. Ten bets can produce a 90% hit rate from
+  a coin, and a season's return can be one lucky Sunday. This page ranks by a
+  <em>proper score</em> instead: a score that a forecast cannot improve by
+  lying, measured against the market's own de-vigged probability, with an
+  uncertainty interval and a multiplicity correction. Then it shows the whole
+  table going the other way, because that is what the data says.</p>
+</section>
+
+<h2>What the page is built from</h2>
+__KPI_TABLE__
+
+<h2>The result, stated plainly</h2>
+<div class="callout bad">
+  <h3>No strategy in this corpus has demonstrated skill</h3>
+  <p>Every strategy's proper-score skill against the de-vigged market is
+  <strong>negative</strong>, and every game-cluster lower bound is below zero.
+  The best entry is the least negative, not a winner. Two things follow, and
+  both are published rather than buried:</p>
+  <p><strong>1.</strong> A negative skill here means the model's line is a worse
+  probability forecast than the price it was betting against. The model's lines
+  are more accurate than the market's lines in points — see
+  <a href="origination.html">the origination page</a> — but a line is not a
+  probability, and when both are converted to probabilities with the same
+  residual scale, the market's price wins.</p>
+  <p><strong>2.</strong> The strategy that looks best by <em>return</em> is not
+  the strategy that looks best by proper score, and neither qualifies. The
+  staking ledger is published separately, on its own page, and is never merged
+  into this ranking.</p>
+  <p>The two-stage rule therefore ends at stage one for every entry: none is
+  promoted to paper, and none is on the live leaderboard. The demo division
+  exists to be honest, not to be populated.</p>
+</div>
+
+__LEADERBOARD_TABLE__
+
+<h2>Every ranked strategy</h2>
+<p class="caption">Sorted by the game-cluster lower bound, not by return. A
+strategy is only "qualified" when its lower bound beats zero, its
+multiplicity-adjusted p-value beats 0.05, and it beats both controls. Notice
+that <em>hit rate</em> is in the table and is never used to sort it.</p>
+%s
+
+__GATED_TABLE__
+
+<h2 id="divisions">The four divisions, and their gates</h2>
+<p class="caption">Singles are ranked. Every combo division is gated, because a
+combo priced by multiplying marginal probabilities is invalid: the legs are
+dependent. A combo can only enter when a directly validated joint probability
+exists AND the operator's void/push rules are documented. Neither exists in
+this repository, so the gate is closed and the reason is published.</p>
+%s
+
+<h2 id="method">How the numbers are made</h2>
+<section class="prose">
+  <h3>The score</h3>
+  <p>Every settled trade is a probability forecast of a binary event. The
+  <strong>Brier score</strong> is the mean squared distance between the forecast
+  and the outcome. It is a proper scoring rule: the forecast that minimises it
+  is the true probability, so a forecast cannot do better by being less honest.
+  <strong>Skill</strong> is measured against the market:</p>
+  <pre>BSS = 1 - Brier(model) / Brier(market)</pre>
+  <p>Zero means &ldquo;no sharper than the price&rdquo;; a positive number means sharper.
+  The market's probability is taken from <em>both</em> posted prices with the
+  vig removed, because comparing a vig-free model probability against a
+  vig-inflated price would flatter the model for a reason that has nothing to do
+  with skill.</p>
+
+  <h3>Turning a line into a probability</h3>
+  <p>A line is not a probability. To compare a line against a price, the line
+  has to be converted. The conversion uses one shared residual scale — the
+  standard deviation of the market line's own error, measured over every settled
+  bet (__SIGMA_MARGIN__ points for spreads, __SIGMA_TOTAL__ for totals). Using one scale for both sides is
+  deliberate: it isolates the comparison onto the line, which is what is being
+  originated, and stops a flatter forecast from winning on calibration alone.
+  Line accuracy in points is published on its own column, so a reader who cares
+  about the line can read the line.</p>
+
+  <h3>Uncertainty that respects the game</h3>
+  <p>Bets inside one game are not independent: a model that is wrong about one
+  club is usually wrong about its opponent, and one bad weather read hits both.
+  The interval is therefore a <strong>cluster bootstrap</strong> that resamples
+  <em>games</em>, not bets. The published bound is the 5th percentile — the
+  pessimistic end of 2,000 draws.</p>
+
+  <h3>Multiplicity</h3>
+  <p>If many strategies are ranked on the same data, the best is partly luck.
+  The one-sided p-value that each strategy's skill exceeds zero is adjusted
+  across all strategies with the <strong>Holm step-down</strong> procedure, so a
+  strategy cannot win by being the luckiest of many.</p>
+
+  <h3>The controls</h3>
+  <p><strong>Random picks</strong> draw the same number of bets from the same
+  games at random. <strong>Favourites only</strong> always takes the side the
+  market priced shorter. A strategy that cannot beat both has demonstrated a
+  run, not skill. Both are scored with the same metric, so the comparison is
+  like for like.</p>
+
+  <h3>The split</h3>
+  <p>Seasons are assigned to train, validation and a final holdout
+  <em>before</em> any number is computed, and the assignment is committed at
+  <code>data/splits.json</code>. The holdout is counted here so its size is on
+  the record, but no published number on this site is computed from it, and the
+  rule for reading it is written down rather than remembered.</p>
+
+  <h3>The two stages</h3>
+  <p><strong>Stage one</strong> is the proper score: cluster lower bound above
+  zero, Holm-adjusted p below 0.05, and both controls beaten. <strong>Stage
+  two</strong> is a prospective CLV/ROI escrow that only accepts bets made
+  <em>after</em> the pre-registration commit. The backtest corpus contains no
+  prospective bets, so no strategy can reach stage two from it. That is the
+  point of the escrow: it cannot be satisfied by data that already existed when
+  the rule was written.</p>
+</section>
+"""
+    body = body.replace("__LEADERBOARD_TABLE__",
+                        ctx["table"](["Rank", "Strategy", "Markets", "Bets", "Games",
+                                      "Brier model", "Brier market", "Skill",
+                                      "Lower 95 pct", "Holm p",
+                                      "Control: random", "Control: favourite",
+                                      "Hit rate", "Line skill", "Division",
+                                      "Source"], body_rows, cls="data"))
+    body = body.replace("__GATED_TABLE__",
+                        ctx["table"](["Division", "Status", "Entries", "Why",
+                                      "Method"], gated_rows, cls="data"))
+    body = body.replace("__KPI_TABLE__",
+                        ctx["table"](["Figure", "Value", "Basis", "Method"],
+                                     kpis, cls="kpi"))
+    body = body.replace("__SIGMA_MARGIN__", _f(meta.get("sigma_margin"), 2))
+    body = body.replace("__SIGMA_TOTAL__", _f(meta.get("sigma_total"), 2))
+    body = body.replace("__N_GAMES_RANKED__", str(len(ranked)))
+    return ctx["page"]("leaderboard.html", "Proper-Score Leaderboard", body, wide=True)
