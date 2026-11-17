@@ -115,6 +115,27 @@ source **S91**, and it must be re-read after it shows Final.
 `tests/test_results_2026_11_17.py`, `tests/test_n01_n05.py` (count pin), `tools/verify_drift.py` (pin),
 `tools/site_g.py` (one row in the Snapshot Ledger), `data/sources.tsv` (S89–S91), `data/flags.json` (F67),
 regenerated site pages and `assets/js/data.js`.
+## Task board — session `arena/a502c4e0-fl1` (2026-11-17) — Week-10 promotion (Q44) + freshness sweep
+
+**Session ID:** `arena-a502c4e0` · **Branch:** `arena/a502c4e0-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17T02:35Z · **Status:** active. Work is additive; registers appended, never
+replaced; shared/generated files rebuilt through the standard builders after my scoped edits.
+
+| # | Task | Status | Owner | File scope (claimed) | Sources / verification | Irregularities |
+|---|------|--------|-------|----------------------|------------------------|----------------|
+| C0 | Coordination claim + immediate push | claimed | arena-a502c4e0 | `COORDINATION.md` | — | — |
+| C1 | Week 10 closeout + Q44 promotion run: fresh official read of the week-10 page and league standings once all games reach FINAL; extend the results extension (PIT@CIN final, LAC@BAL final); promote into the canonical `data/results.tsv` + `data/standings.tsv` per Q44's stated missing-data steps; rebuild and re-verify the results feed (V1–V4 + `tools/verify_results.py`) | claimed | arena-a502c4e0 | `raw/schedule-results-2026-week10-*.tsv`, `raw/standings-2026-*.tsv`, `data/week10_results_extension.json`, `scripts/build_week10_extension.py`, `scripts/promote_week10.py` (new), `data/results.tsv`, `data/standings.tsv`, generated `verified-results-feed.html` | official https://www.nfl.com/schedules/2026/REG10/ and https://www.nfl.com/standings/league/2026/REG, fetched this session | — |
+| C2 | Fresh injury-hub read with clock time (2026-11-17) + published delta vs the 2026-11-16 read; never the level | claimed | arena-a502c4e0 | `raw/injuries-week10-2026-read3.md` (new), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py` (read-only + new read arg), generated `injuries.html` | official https://www.nfl.com/injuries/ | — |
+| C3 | Full verification sweep on the final tree: unit tests, build, link check, row-sourcing check, injury/result verifiers | claimed | arena-a502c4e0 | none (read-only runs; results recorded in this board) | repo tooling | — |
+| C4 | Registers append (new sources, any new flags, Q44 answer/resolution), executive-summary touch, coordination completion record | claimed | arena-a502c4e0 | `data/{sources.tsv,flags.json,questions.json,suggestions.json}`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | each appended row carries its official URL | — |
+| C5 | Final integration: PR → `main`, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | claimed | arena-a502c4e0 | PR + this record | gh + Pages API | — |
+
+**Notes:** MNF (LAC at BAL) was live in Q2 at claim time (2026-11-17T02:33Z official read) — a live
+score is not a result, so C1 waits for the official FINAL before any promotion, exactly as Q44
+prescribes. No other session has an open PR or an un-stale claim on these files (latest merged tip
+`5a076a0`, PR list empty as of claim time).
+
+---
 
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
