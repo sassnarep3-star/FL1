@@ -855,10 +855,14 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
 
     # -------------------------------------------------- N03 injury-hub delta
     reads = delta["reads"]
-    ch = delta["delta"]["changed"]
-    add = delta["delta"]["added"]
-    rem = delta["delta"]["removed"]
-    pc = delta["delta"]["per_club_row_count_changes"]
+    dl = delta["delta"]  # latest diff (read 2 -> read 3)
+    hist = delta.get("history", [])
+    old_lbl = dl.get("older_label", "read 1")
+    new_lbl = dl.get("newer_label", "read 2")
+    ch = dl["changed"]
+    add = dl["added"]
+    rem = dl["removed"]
+    pc = dl["per_club_row_count_changes"]
     read_rows = []
     for r in reads:
         when = r.get("read_window_utc") or r.get("captured", "")
@@ -883,22 +887,30 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
                  cell(a["injury"] or "—"), cell(a["practice"] or "—"),
                  cell(a["game"] or "—")] for a in add]
     rem_rows = [[cell(d["team"]), cell(d["player"]), cell(d["pos"])] for d in rem]
-    pc_rows = [[cell(p["team"]), cell(p["read1"], "n"), cell(p["read2"], "n")] for p in pc]
+    pc_rows = [[cell(p["team"]), cell(p["older"], "n"), cell(p["newer"], "n")] for p in pc]
     res_rows = [[cell(p["text"]), raw_src('<a href="%s">%s</a>' % (p["url"], "nfl.com/news"))]
                 for p in delta["reserve_list_pointers"]]
+    hist_txt = ""
+    if hist:
+        h0 = hist[0]
+        hist_txt = (" The earlier diff, read 1 &rarr; read 2, stays in "
+                    "<code>data/injury_hub_delta.json</code> under <code>history</code>: "
+                    "%d field changes, %d added, %d removed."
+                    % (len(h0["changed"]), len(h0["added"]), len(h0["removed"])))
     out["injury_delta"] = """
 <section>
 <h2>Dated reads of the injury hub &mdash; delta, never the level</h2>
 <p class="lead">The hub is read with its clock time and each new read is published as the
 <em>difference</em> from the previous one, so a designation's history is a series, not a snapshot.
-Both captures are kept verbatim under <code>raw/</code>.</p>
+All three captures are kept verbatim under <code>raw/</code> (read 3 was fetched in 8 chunks and
+rejoined character-exactly by <code>scripts/assemble_read3.py</code>).</p>
 %s
-<div class="callout"><p><strong>Read 2 (2026-11-16, ~01:15&ndash;01:25 UTC).</strong> The hub still showed
-<em>WEEK 10</em>. The %d field changes and %d added rows since read 1 all belong to clubs whose
-report was still evolving (the Monday-night clubs and one Colts row that cleared); the three Lions
-game-status designations flagged earlier are already populated in read 1, so the 2026-11-14
-re-capture had fixed them. The page's NEWS section also carried reserve-list events (below) —
-recorded as pointers, never used as injury-table rows.</p></div>
+<div class="callout"><p><strong>Read 3 (2026-11-17, 02:35&ndash;02:36 UTC).</strong> The hub still showed
+<em>WEEK 10</em>. Since read 2 the tables moved by %d field change(s), %d added and %d removed
+row(s). The Sunday-night headings now carry the final records the page printed for those games
+(PIT 6-3, CIN 7-2); the Monday-night game was still inside its broadcast window at read time, so
+those clubs still show pre-game records. The page's NEWS section carried reserve-list events
+(below) — recorded as pointers, never used as injury-table rows.%s</p></div>
 <h3>Changed rows (%d)</h3>
 %s
 <h3>Added rows (%d)</h3>
@@ -911,16 +923,17 @@ recorded as pointers, never used as injury-table rows.</p></div>
 %s
 </section>
 """ % (table(["Read", "When (UTC)", "Rows parsed", "Week shown", "Source"], read_rows, cls="dense"),
-       len(ch), len(add), len(ch),
-       table(["Club", "Player", "Pos", "Field", "At read 1 (2026-11-14)", "At read 2 (2026-11-16)"],
+       len(ch), len(add), len(rem), hist_txt,
+       len(ch),
+       table(["Club", "Player", "Pos", "Field", "At %s" % old_lbl, "At %s" % new_lbl],
              ch_rows, cls="dense searchable"),
        len(add),
        table(["Club", "Player", "Pos", "Injury", "Practice", "Game"], add_rows, cls="dense"),
        len(rem),
        (table(["Club", "Player", "Pos"], rem_rows, cls="dense") if rem_rows
-        else '<p class="caption">No row disappeared between the two reads.</p>'),
-       (table(["Club", "Read 1", "Read 2"], pc_rows, cls="dense") if pc_rows
-        else '<p class="caption">No club row count changed.</p>'),
+        else '<p class="caption">No row disappeared between these two reads.</p>'),
+       (table(["Club", old_lbl, new_lbl], pc_rows, cls="dense") if pc_rows
+        else '<p class="caption">No club row count changed between these two reads.</p>'),
        table(["Event as headlined on the hub", "Link"], res_rows, cls="dense"))
 
     # --------------------------------------------- N04 week-10 finals extension
