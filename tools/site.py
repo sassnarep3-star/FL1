@@ -1100,8 +1100,11 @@ half.</strong> The checks above are the acceptance gate; rolling <code>data/resu
 <code>data/standings.tsv</code> forward would also refit every published model coefficient (they
 are computed from the canonical feed), so the corpus promotion remains the reviewer's choice
 (Q44, suggestion SG43). Until that choice, the promoted 150-row read is published beside the
-corpus as <code>data/results_2026-11-17.tsv</code> + <code>data/standings_2026-11-17.tsv</code>
-and this section is the live record of the week's finals.</p></div>
+corpus as <code>data/results_2026-11-17-closeout.tsv</code> +
+<code>data/standings_2026-11-17-closeout.tsv</code>, chained byte-prefix to the earlier
+same-day SNF read (<code>data/results_2026-11-17.tsv</code>, gate P8: 137 &rarr; 148 &rarr; 149 &rarr; 150),
+and this section is the live record of the week's finals. It also resolves open flag F67:
+the Monday-night re-read this closeout performs is exactly the action F67 asks for.</p></div>
 </section>
 """ % (len(w10c["finals"]),
        table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre"], co_rows, cls="dense"),

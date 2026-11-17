@@ -43,7 +43,7 @@ class TestCloseoutRegister(unittest.TestCase):
         for f in self.reg["finals"]:
             self.assertEqual(f["week"], 10)
             self.assertTrue(f["game_url"].startswith("https://www.nfl.com/games/"))
-            self.assertEqual(f["source_id"], "S90")
+            self.assertEqual(f["source_id"], "S95")
 
     def test_every_gate_passed(self):
         self.assertEqual(len(self.reg["checks"]), 7)
@@ -70,14 +70,14 @@ class TestCloseoutRegister(unittest.TestCase):
 
 class TestDatedSideRead(unittest.TestCase):
     def test_results_read_is_150_and_append_only(self):
-        staged = rows("results_2026-11-17.tsv")
+        staged = rows("results_2026-11-17-closeout.tsv")
         frozen = rows("results.tsv")
         self.assertEqual(len(frozen), 137)
         self.assertEqual(len(staged), 150)
         self.assertEqual(staged[:137], frozen)
 
     def test_week10_rows_complete(self):
-        staged = rows("results_2026-11-17.tsv")
+        staged = rows("results_2026-11-17-closeout.tsv")
         w10 = [r for r in staged if r[0] == "10"]
         self.assertEqual(len(w10), 14)
         tnf = [r for r in w10 if r[2] == "WAS" and r[4] == "NYG"]
@@ -85,11 +85,18 @@ class TestDatedSideRead(unittest.TestCase):
         pit = [r for r in w10 if r[2] == "PIT" and r[4] == "CIN"]
         self.assertEqual((pit[0][3], pit[0][5]), ("18", "38"))
 
+    def test_closeout_chains_after_the_snf_read(self):
+        prior = rows("results_2026-11-17.tsv")          # their same-day SNF read
+        staged = rows("results_2026-11-17-closeout.tsv")  # this session's closeout
+        self.assertEqual(len(prior), 149)
+        self.assertEqual(staged[:149], prior)
+        self.assertEqual(len(staged), 150)
+
     def test_standings_read_reproduces_from_results(self):
-        stand = {r[0]: r for r in rows("standings_2026-11-17.tsv")}
+        stand = {r[0]: r for r in rows("standings_2026-11-17-closeout.tsv")}
         self.assertEqual(len(stand), 32)
         derived = {k: [0, 0, 0, 0, 0] for k in stand}  # w l t pf pa
-        for r in rows("results_2026-11-17.tsv"):
+        for r in rows("results_2026-11-17-closeout.tsv"):
             ap, hp = int(r[3]), int(r[5])
             for team, pf, pa in ((r[2], ap, hp), (r[4], hp, ap)):
                 d = derived[team]

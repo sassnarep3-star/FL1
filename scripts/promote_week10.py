@@ -15,6 +15,7 @@ Inputs (dated captures, never edited after write):
   data/results.tsv                                the frozen 137-game corpus (read only)
   data/week10_results_extension.json              the 2026-11-16 dated extension (read only)
   data/schedule.tsv                               the published fixture list (read only)
+  data/results_2026-11-17.tsv                     the earlier same-day SNF read (read only)
 
 Acceptance checks (all must PASS before any write):
   P1  the closeout capture holds exactly 14 rows, each a published Week 10
@@ -32,6 +33,9 @@ Acceptance checks (all must PASS before any write):
   P6  per-club game count equals W+L+T in the fresh standings for all 32 clubs
   P7  no duplicate (week, away, home) in the staged corpus; every club key is a
       known team in data/teams.tsv
+  P8  the 2026-11-17 SNF read (data/results_2026-11-17.tsv, 149 rows, session
+      e97f05c3) is a byte-prefix of the staged closeout — the chain of dated
+      reads is unbroken: 137 -> 148 -> 149 -> 150
 
 Modes:
   default        run every check, write data/week10_closeout.json (a dated
@@ -77,14 +81,14 @@ STAND_FIELDS = ["abbr", "w", "l", "t", "pct", "pf", "pa", "net", "home", "road",
                 "div", "div_pct", "conf", "conf_pct", "nonconf", "streak", "last5"]
 
 OUT_REGISTER = os.path.join(DATA, "week10_closeout.json")
-OUT_RESULTS_DATED = os.path.join(DATA, "results_2026-11-17.tsv")
-OUT_STANDINGS_DATED = os.path.join(DATA, "standings_2026-11-17.tsv")
+OUT_RESULTS_DATED = os.path.join(DATA, "results_2026-11-17-closeout.tsv")
+OUT_STANDINGS_DATED = os.path.join(DATA, "standings_2026-11-17-closeout.tsv")
 OUT_VERIFICATION = os.path.join(DATA, "verification-promote.tsv")
 
 PAGE_URL = "https://www.nfl.com/schedules/2026/REG10/"
 STANDINGS_URL = "https://www.nfl.com/standings/league/2026/REG"
-SOURCE_SCHEDULE = "S90"
-SOURCE_STANDINGS = "S91"
+SOURCE_SCHEDULE = "S95"
+SOURCE_STANDINGS = "S96"
 
 GAME_URLS = {
     ("WAS", "NYG"): "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
@@ -332,6 +336,21 @@ def main():
     gate("P7", "no duplicate (week, away, home); every club key known to teams.tsv",
          not p7_bad, "problems: %s" % (p7_bad or "none"))
 
+    # ---- P8: chain of dated reads — their same-day SNF read is our prefix ----
+    prior_path = os.path.join(DATA, "results_2026-11-17.tsv")
+    if os.path.exists(prior_path):
+        prior = [ln.rstrip("\n") for ln in open(prior_path, encoding="utf-8")
+                 if ln.strip()]
+        chain_ok = staged_lines[:len(prior)] == prior
+        chain_detail = ("%d-row SNF read is %sa prefix of the %d-row closeout"
+                        % (len(prior), "" if chain_ok else "NOT ",
+                           len(staged_lines)))
+    else:
+        chain_ok, chain_detail = False, "data/results_2026-11-17.tsv missing"
+    gate("P8", "chain of dated reads: the 2026-11-17 SNF read (149 rows) is a "
+               "byte-prefix of the staged closeout (137 -> 148 -> 149 -> 150)",
+         chain_ok, chain_detail)
+
     all_ok = all(c[2] == "PASS" for c in checks)
 
     # ---- write the verification table (additive register) -----------------
@@ -355,6 +374,9 @@ def main():
         "source_ids": [SOURCE_SCHEDULE, SOURCE_STANDINGS],
         "status": "checks %s" % ("ALL PASS" if all_ok else "FAILED"),
         "canonical_promoted": False,
+        "resolves_flag": "F67 (the Monday-night game was left open at the "
+                         "earlier same-day read; this closeout is the "
+                         "prescribed re-read after it showed Final)",
         "finals": [
             {"week": 10, "date": r["date"], "away": r["away"],
              "awayPts": int(r["away_pts"]), "home": r["home"],
