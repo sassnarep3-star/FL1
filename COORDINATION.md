@@ -128,7 +128,7 @@ replaced; shared/generated files rebuilt through the standard builders after my 
 | C2 | Fresh injury-hub read with clock time (2026-11-17) + published delta vs the 2026-11-16 read; never the level | done | arena-a502c4e0 | `raw/injuries-week10-2026-read4.md` (new), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py` (read-only + new read arg), generated `injuries.html` | official https://www.nfl.com/injuries/ | — |
 | C3 | Full verification sweep on the final tree: unit tests, build, link check, row-sourcing check, injury/result verifiers | done | arena-a502c4e0 | none (read-only runs; results recorded in this board) | repo tooling | — |
 | C4 | Registers append (new sources, any new flags, Q44 answer/resolution), executive-summary touch, coordination completion record | done | arena-a502c4e0 | `data/{sources.tsv,flags.json,questions.json,suggestions.json}`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md` | each appended row carries its official URL | — |
-| C5 | Final integration: PR → `main`, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | claimed | arena-a502c4e0 | PR + this record | gh + Pages API | — |
+| C5 | Final integration: PR → `main`, merge without waiting for review, confirm GitHub Pages deploy, record PR link + merge result here | done | arena-a502c4e0 | PR + this record | gh + Pages API | — |
 
 **Notes:** MNF (LAC at BAL) was live in Q2 at claim time (2026-11-17T02:33Z official read) — a live
 score is not a result, so C1 waits for the official FINAL before any promotion, exactly as Q44
@@ -164,11 +164,21 @@ Mid-session rebase onto `22482a9` (PRs #49–#54) completed with conflicts resol
 - **C2 injury read 4** — `raw/injuries-week10-2026-read3.md` (window 02:33:27Z–02:43:50Z,
   347 rows/28 clubs), `delta` (read 3 → read 4) = 2 practice changes / 0 added / 0 removed, source S97,
   N03 tests updated (3 reads), site section renders both deltas.
-- **C3 verification sweep (final tree):** 342 tests OK; build+site+checklinks (57 pages)
+- **C3 verification sweep (final tree):** 356 tests OK; build+site+checklinks (57 pages)
   + checkrows (7,046 rows) green; verify_results 32/32; verify_results_g PASS;
   verify_results_2026_11_17 GATE PASS (untouched); verify_injuries OK; verify_drift 19/19
   (DR-10 → 71, DR-08 → 46); verify_brief 10/10; verify_site 0/0 (CI pandas venv);
   CI six-builder rebuild byte-identical.
+- **C5 integration:** PR [**#58**](https://github.com/sassnarep3-star/FL1/pull/58)
+  (`arena/a502c4e0-fl1` → `main`), CI check `verify` = pass (run 44023753512), mergeability
+  `MERGEABLE / CLEAN`. Merged with `gh pr merge 58 --merge` at merge commit `addeb0a`
+  (2026-11-17, UTC). GitHub Pages: source `main` / path `/` → status **`built`**, and the
+  `pages build and deployment` workflow run on `main` = **completed / success**
+  (https://sassnarep3-star.github.io/FL1/). The branch was rebased twice mid-session
+  (`22482a9`, then `970f0ac` after PRs #55/#56 landed) and force-pushed with
+  `--force-with-lease`; register IDs were re-keyed at each step (final: S97–S99, F71–F72)
+  with both other sessions' entries preserved untouched. Open PR #57 (session 3f12fa46)
+  was not disturbed.
 - **C4 registers:** sources **S97** (injury read 4), **S98** (closeout schedule), **S99**
   (post-MNF standings) — 91 rows; flags **F71** (Q44/SG43/F59 cross-reference slip;
   Q44 recommended_path corrected to SG43), **F72** (league-route staleness), F67 annotated
