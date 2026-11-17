@@ -77,14 +77,16 @@ class TestN02ChangeOurMind(unittest.TestCase):
 
 
 class TestN03InjuryHubDelta(unittest.TestCase):
-    """Three dated reads of the official hub; the register publishes the LATEST
-    delta (read 2 -> read 3) and keeps read 1 -> read 2 under `history`. Every
-    delta row is re-checked here against the verbatim raw captures."""
+    """Four dated reads of the official hub; the register publishes the LATEST
+    delta (read 3 -> read 4) and keeps read 1 -> read 2 and read 2 -> read 3
+    under `history`. Every delta row is re-checked here against the verbatim
+    raw captures."""
 
     READS = {
         1: "injuries-week10-2026.md",
         2: "injuries-week10-2026-read2.md",
         3: "injuries-week10-2026-read3.md",
+        4: "injuries-week10-2026-read4.md",
     }
     PRACTICE_TEXT = {
         "FULL": "Full Participation in Practice",
@@ -112,39 +114,54 @@ class TestN03InjuryHubDelta(unittest.TestCase):
                     return cells
         return None
 
-    def test_three_dated_reads(self):
+    def test_four_dated_reads(self):
         reads = self.delta["reads"]
-        self.assertEqual(len(reads), 3)
+        self.assertEqual(len(reads), 4)
         self.assertEqual(reads[0]["captured"], "2026-11-14")
         self.assertIn("2026-11-16", reads[1]["read_window_utc"])
         self.assertIn("2026-11-17", reads[2]["read_window_utc"])
+        self.assertIn("2026-11-17", reads[3]["read_window_utc"])
         self.assertEqual(reads[0]["rows"], 345)
         self.assertEqual(reads[1]["rows"], 347)
         self.assertEqual(reads[2]["rows"], 347)
+        self.assertEqual(reads[3]["rows"], 347)
         self.assertEqual(reads[2]["source_id"], "S94")
+        self.assertEqual(reads[3]["source_id"], "S97")
 
-    def test_history_preserves_the_first_delta(self):
+    def test_history_preserves_the_earlier_deltas(self):
         h = self.delta["history"]
-        self.assertEqual(len(h), 1)
+        self.assertEqual(len(h), 2)
         d = h[0]
         self.assertEqual(d["older_label"], "read 1 (2026-11-14)")
         self.assertEqual(d["newer_label"], "read 2 (2026-11-16)")
         self.assertEqual(len(d["changed"]), 32)
         self.assertEqual(len(d["added"]), 2)
         self.assertEqual(len(d["removed"]), 0)
+        d2 = h[1]
+        self.assertEqual(d2["older_label"], "read 2 (2026-11-16)")
+        self.assertEqual(d2["newer_label"], "read 3 (2026-11-17 02:36Z)")
+        self.assertEqual(len(d2["changed"]), 1)
+        self.assertEqual(len(d2["added"]), 0)
+        self.assertEqual(len(d2["removed"]), 0)
+        c2 = d2["changed"][0]
+        self.assertEqual((c2["team"], c2["player"], c2["field"]),
+                         ("NO", "Travis Etienne", "practice"))
+        self.assertEqual((c2["old"], c2["new"]), ("FULL", "LIMITED"))
 
-    def test_published_delta_is_read2_to_read3(self):
+    def test_published_delta_is_read3_to_read4(self):
         d = self.delta["delta"]
-        self.assertEqual(d["older_label"], "read 2 (2026-11-16)")
-        self.assertEqual(d["newer_label"], "read 3 (2026-11-17)")
-        # observed at the 2026-11-17 read: exactly one field edit
-        self.assertEqual(len(d["changed"]), 1)
+        self.assertEqual(d["older_label"], "read 3 (2026-11-17 02:36Z)")
+        self.assertEqual(d["newer_label"], "read 4 (2026-11-17 02:43Z)")
+        # between the two interleaved 2026-11-17 reads: two field edits
+        self.assertEqual(len(d["changed"]), 2)
         self.assertEqual(len(d["added"]), 0)
         self.assertEqual(len(d["removed"]), 0)
-        c = d["changed"][0]
-        self.assertEqual((c["team"], c["player"], c["field"]),
-                         ("NO", "Travis Etienne", "practice"))
-        self.assertEqual((c["old"], c["new"]), ("FULL", "LIMITED"))
+        got = {(c["team"], c["player"], c["field"], c["old"], c["new"])
+               for c in d["changed"]}
+        self.assertEqual(got, {
+            ("BUF", "Tyrell Shavers", "practice", "FULL", "LIMITED"),
+            ("CIN", "Brian Parker II", "practice", "FULL", "DNP"),
+        })
 
     def _check_pair(self, d, older_read, newer_read):
         for c in d["changed"]:
@@ -167,8 +184,9 @@ class TestN03InjuryHubDelta(unittest.TestCase):
             self.assertIsNone(self._row_cells(newer_read, r["team"], r["player"], r["pos"]), r)
 
     def test_every_delta_row_ties_back_to_the_raw_captures(self):
-        self._check_pair(self.delta["delta"], 2, 3)
+        self._check_pair(self.delta["delta"], 3, 4)
         self._check_pair(self.delta["history"][0], 1, 2)
+        self._check_pair(self.delta["history"][1], 2, 3)
 
     def test_per_club_counts_arithmetic(self):
         for d in [self.delta["delta"]] + self.delta["history"]:
@@ -282,8 +300,10 @@ class TestSourcesS70S72(unittest.TestCase):
         # + S92 (row-level citation audit; repository-only, not an NFL source)
         # + S93 (Week 11 by-week schedule; arena/d50423eb)
         # + S94 (session 7ac4e12e: third dated injury-hub read, 2026-11-17)
-                # + S95-S96 (session 7ac4e12e: Week 10 close-out schedule + standings
+        # + S95-S96 (session 7ac4e12e: Week 10 close-out schedule + standings
         #   reads, 2026-11-17)
-        self.assertEqual(len(rows), 88)
+        # + S97-S99 (session arena/a502c4e0-fl1: injury-hub read 4, week-10
+        #   closeout schedule, post-MNF standings closeout)
+        self.assertEqual(len(rows), 91)
 if __name__ == "__main__":
     unittest.main()

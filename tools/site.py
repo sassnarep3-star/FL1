@@ -855,7 +855,7 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
 
     # -------------------------------------------------- N03 injury-hub delta
     reads = delta["reads"]
-    dl = delta["delta"]  # latest diff (read 2 -> read 3)
+    dl = delta["delta"]  # latest diff (read 3 -> read 4)
     hist = delta.get("history", [])
     old_lbl = dl.get("older_label", "read 1")
     new_lbl = dl.get("newer_label", "read 2")
@@ -892,25 +892,31 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
                 for p in delta["reserve_list_pointers"]]
     hist_txt = ""
     if hist:
-        h0 = hist[0]
-        hist_txt = (" The earlier diff, read 1 &rarr; read 2, stays in "
+        parts = []
+        for h in hist:
+            parts.append("%s &rarr; %s: %d field changes, %d added, %d removed"
+                         % (h.get("older_label", "earlier read"),
+                            h.get("newer_label", "later read"),
+                            len(h["changed"]), len(h["added"]), len(h["removed"])))
+        hist_txt = (" The earlier diffs stay in "
                     "<code>data/injury_hub_delta.json</code> under <code>history</code>: "
-                    "%d field changes, %d added, %d removed."
-                    % (len(h0["changed"]), len(h0["added"]), len(h0["removed"])))
+                    + "; ".join(parts) + ".")
     out["injury_delta"] = """
 <section>
 <h2>Dated reads of the injury hub &mdash; delta, never the level</h2>
 <p class="lead">The hub is read with its clock time and each new read is published as the
 <em>difference</em> from the previous one, so a designation's history is a series, not a snapshot.
-All three captures are kept verbatim under <code>raw/</code> (read 3 was fetched in 8 chunks and
-rejoined character-exactly by <code>scripts/assemble_read3.py</code>).</p>
+All four captures are kept verbatim under <code>raw/</code> (read 3 was fetched in 8 chunks and
+rejoined character-exactly by <code>scripts/assemble_read3.py</code>; read 4's chunks were
+fetched in the interleaved window 02:33&ndash;02:44 UTC and completed after read 3).</p>
 %s
-<div class="callout"><p><strong>Read 3 (2026-11-17, 02:35&ndash;02:36 UTC).</strong> The hub still showed
-<em>WEEK 10</em>. Since read 2 the tables moved by %d field change(s), %d added and %d removed
-row(s). The Sunday-night headings now carry the final records the page printed for those games
-(PIT 6-3, CIN 7-2); the Monday-night game was still inside its broadcast window at read time, so
-those clubs still show pre-game records. The page's NEWS section carried reserve-list events
-(below) — recorded as pointers, never used as injury-table rows.%s</p></div>
+<div class="callout"><p><strong>Read 4 (2026-11-17, completed 02:44 UTC).</strong> The hub still
+showed <em>WEEK 10</em>. Since read 3 the tables moved by %d field change(s), %d added and %d
+removed row(s) &mdash; two practice designations (BUF Tyrell Shavers FULL&rarr;LIMITED, CIN
+Brian Parker II FULL&rarr;DNP), each re-checked line-by-line against reads 3 and 4 before
+publishing. Read 3's own diff against read 2 and read 2's against read 1 stay under
+<code>history</code> (summarised above). The page's NEWS section carried reserve-list events
+(below) &mdash; recorded as pointers, never used as injury-table rows.%s</p></div>
 <h3>Changed rows (%d)</h3>
 %s
 <h3>Added rows (%d)</h3>

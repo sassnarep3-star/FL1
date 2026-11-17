@@ -8,7 +8,9 @@ publish the delta, never the level."
 Inputs (raw captures, never edited after write once assembled):
   raw/injuries-week10-2026.md          read 1, 2026-11-14 (source S01)
   raw/injuries-week10-2026-read2.md    read 2, 2026-11-16 (source S80)
-  raw/injuries-week10-2026-read3.md    read 3, 2026-11-17 (source S94)
+  raw/injuries-week10-2026-read3.md    read 3, 2026-11-17T02:35-02:36Z (source S94, session 7ac4e12e)
+  raw/injuries-week10-2026-read4.md    read 4, 2026-11-17T02:33-02:43Z window, completed after
+                                       read 3 (source S97, session a502c4e0)
                                        (assembled from 8 fetched chunks by
                                         scripts/assemble_read3.py)
 
@@ -39,6 +41,7 @@ OUT = os.path.join(ROOT, "data", "injury_hub_delta.json")
 READ1 = os.path.join(ROOT, "raw", "injuries-week10-2026.md")
 READ2 = os.path.join(ROOT, "raw", "injuries-week10-2026-read2.md")
 READ3 = os.path.join(ROOT, "raw", "injuries-week10-2026-read3.md")
+READ4 = os.path.join(ROOT, "raw", "injuries-week10-2026-read4.md")
 
 CLUBS = {
     "Commanders", "Giants", "Patriots", "Lions", "Chiefs", "Falcons", "Vikings",
@@ -179,6 +182,7 @@ def diff(old_rows, new_rows, older_label, newer_label):
 
 def main():
     r1, r2, r3 = parse_capture(READ1), parse_capture(READ2), parse_capture(READ3)
+    r4 = parse_capture(READ4)
 
     # like-for-like sanity: read 1 must still reproduce the canonical TSV
     tsv = []
@@ -206,8 +210,20 @@ def main():
         raise SystemExit("FAIL: read-3 header claims %s rows, parser produced %d"
                          % (m.group(1), len(r3)))
 
+    # read 4's header carries its own row claim (written after parse); the
+    # claim and the parser must agree before any delta is published.
+    with open(READ4, encoding="utf-8") as fh:
+        read4_text = fh.read()
+    m = re.search(r"^[\-\s]*Rows parsed: (\d+)", read4_text, flags=re.M)
+    if not m:
+        raise SystemExit("FAIL: read-4 capture has no 'Rows parsed:' header claim")
+    if int(m.group(1)) != len(r4):
+        raise SystemExit("FAIL: read-4 header claims %s rows, parser produced %d"
+                         % (m.group(1), len(r4)))
+
     delta12 = diff(r1, r2, "read 1 (2026-11-14)", "read 2 (2026-11-16)")
     delta23 = diff(r2, r3, "read 2 (2026-11-16)", "read 3 (2026-11-17)")
+    delta34 = diff(r3, r4, "read 3 (2026-11-17 02:36Z)", "read 4 (2026-11-17 02:43Z)")
 
     payload = {
         "id": "injury_hub_delta",
@@ -226,9 +242,13 @@ def main():
             {"read": 3, "capture": "raw/injuries-week10-2026-read3.md",
              "read_window_utc": "after 2026-11-17T02:35:39Z, before 2026-11-17T02:36:52Z",
              "rows": len(r3), "week_shown": "WEEK 10", "source_id": "S94"},
+            {"read": 4, "capture": "raw/injuries-week10-2026-read4.md",
+             "read_window_utc": "after 2026-11-17T02:33:27Z, before 2026-11-17T02:43:50Z "
+                                "(chunks interleaved with read 3; completed after it)",
+             "rows": len(r4), "week_shown": "WEEK 10", "source_id": "S97"},
         ],
-        "delta": delta23,
-        "history": [delta12],
+        "delta": delta34,
+        "history": [delta12, delta23],
         "reserve_list_pointers": [
             {"text": "NFL news roundup: Vikings WR Jordan Addison needs thumb surgery, "
                      "could go to IR; Buccaneers add QB",
@@ -248,14 +268,17 @@ def main():
         ],
         "provenance": {
             "tier": "OFFICIAL",
-            "source_ids": ["S01", "S80", "S94"],
+            "source_ids": ["S01", "S80", "S94", "S97"],
             "verification": "read 1 re-parses to data/injuries.tsv exactly (asserted "
                             "here, independently of tools/verify_injuries.py); reads 2 "
                             "and 3 parsed with the same grammar; every practice/game "
                             "value maps to a known designation; read 3's header row "
                             "claim matches the parser; read 3 was assembled from 8 "
                             "fetched chunks by scripts/assemble_read3.py, which asserts "
-                            "the seam-crossing rows rejoin correctly.",
+                            "the seam-crossing rows rejoin correctly; read 4's header "
+                            "row claim matches the parser; each changed row of read 4 "
+                            "was re-checked line-by-line against reads 2 and 3 before "
+                            "publishing.",
         },
     }
 
@@ -263,20 +286,21 @@ def main():
         json.dump(payload, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
 
-    print("read1 rows=%d  read2 rows=%d  read3 rows=%d" % (len(r1), len(r2), len(r3)))
-    for d in (delta12, delta23):
+    print("read1 rows=%d  read2 rows=%d  read3 rows=%d  read4 rows=%d"
+          % (len(r1), len(r2), len(r3), len(r4)))
+    for d in (delta12, delta23, delta34):
         print("%s: changed=%d added=%d removed=%d" %
               (d["between"], len(d["changed"]), len(d["added"]), len(d["removed"])))
-    print("published delta = read 2 -> read 3:")
-    for c in delta23["changed"]:
+    print("published delta = read 3 -> read 4:")
+    for c in delta34["changed"]:
         print("  %s %s (%s): %s '%s' -> '%s'"
               % (c["team"], c["player"], c["field"], c["pos"], c["old"], c["new"]))
-    for a in delta23["added"]:
+    for a in delta34["added"]:
         print("  + %s %s (%s) %s | %s | %s"
               % (a["team"], a["player"], a["pos"], a["injury"], a["practice"], a["game"]))
-    for d in delta23["removed"]:
+    for d in delta34["removed"]:
         print("  - %s %s (%s)" % (d["team"], d["player"], d["pos"]))
-    for p in delta23["per_club_row_count_changes"]:
+    for p in delta34["per_club_row_count_changes"]:
         print("  club row count: %s %d -> %d" % (p["team"], p["older"], p["newer"]))
     return 0
 
