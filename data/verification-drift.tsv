@@ -8,7 +8,7 @@ DR-06	data/price_snapshots.csv	PASS	pinned	56	56
 DR-07	data/settled_markets.csv	PASS	pinned	548	548
 DR-08	data/questions.json	PASS	pinned	46	46
 DR-09	data/suggestions.json	PASS	pinned	51	51
-DR-10	data/flags.json	PASS	pinned	70	70
+DR-10	data/flags.json	PASS	pinned	71	71
 DR-11	data/strategies.json	PASS	pinned	6	6
 DR-12	data/validation_gates.json	PASS	pinned	15	15
 DR-13	data/leaderboard_signal_staking.json	PASS	pinned	16	16

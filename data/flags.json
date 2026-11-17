@@ -808,5 +808,16 @@
   "sourceIds": [],
   "severity": "Low",
   "action": "Fold Q45 into Q35 during SG47 consolidation; until then treat Q35 as canonical (the answer layer marks both and cross-links here)."
+ },
+ {
+  "id": "F71",
+  "kind": "Register cross-reference slip",
+  "item": "The three promotion-related entries cross-reference the wrong IDs: Q44 pairs SG35, F59 points at SG36, and SG43 pairs Q35 — none of them names the others",
+  "detail": "The results-promotion question Q44 (data/questions.json) says its recommended path 'pairs with suggestion SG35', but SG35 is the prices collector ('Run a dated snapshot collector before Week 12'). The stale-snapshot flag F59 (data/flags.json) says promoting the latest read 'requires the scheduling work in SG36', but SG36 is the undated-vintage price label. Meanwhile SG43 ('Automate the weekly results promotion (extension register -> canonical feed)') lists its prerequisite as Q35, the snapshot-store phase question — unrelated. The three records describe one decision family (weekly results promotion) and are wired to three other families (prices, storage). Verified line-by-line against the register files on 2026-11-17. Nothing was silently renumbered: the correction is published here and Q44's recommended_path now names SG43 with a pointer to this flag.",
+  "sourceIds": [
+   "S81"
+  ],
+  "severity": "Low",
+  "action": "Q44's recommended_path corrected to pair SG43 (this session); F59's action and SG43's prerequisites left as published history — read them with this flag. Future register writes should cross-check that a paired ID's title matches the subject."
  }
 ]
