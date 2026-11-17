@@ -30,10 +30,14 @@ Run:  python3 scripts/build_week10_extension.py
 
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(ROOT, "raw", "schedule-results-2026-week10-finals.tsv")
+RAW_COMPLETE = os.path.join(ROOT, "raw", "schedule-results-2026-week10-complete.md")
+STANDINGS_1117 = os.path.join(ROOT, "raw", "standings-2026-20261117.tsv")
+STANDINGS_1116 = os.path.join(ROOT, "raw", "standings-2026-20261116.tsv")
 SCHED = os.path.join(ROOT, "data", "schedule.tsv")
 RESULTS = os.path.join(ROOT, "data", "results.tsv")
 OUT = os.path.join(ROOT, "data", "week10_results_extension.json")
@@ -203,10 +207,207 @@ def main():
                   file=sys.stderr)
         return 1
 
+    # ------------------------------------------------- close-out read (2026-11-17)
+    # Second dated read of the same official page plus a fresh standings read.
+    # C1  every game bullet on the fresh capture parses; exactly 13 FINAL and one
+    #     live card (LAC at BAL, Q2) — a partial score is never a result;
+    # C2  the 12 rows of the original extension reappear verbatim on the fresh
+    #     read, and the one extra FINAL is exactly SNF (PIT 18, CIN 38);
+    # C3  feed + extension + the new SNF final reproduces the fresh official
+    #     standings for all 32 clubs (W/L/T AND PF/PA);
+    # C4  the live MNF clubs' standings rows are byte-identical to the 2026-11-16
+    #     capture (the in-progress game is not counted anywhere);
+    # C5  the four bye-club records printed on the fresh page equal the recompute.
+    with open(RAW_COMPLETE, encoding="utf-8") as fh:
+        comp_text = fh.read()
+
+    NAME2ABBR = {
+        "Commanders": "WAS", "Giants": "NYG", "Patriots": "NE", "Lions": "DET",
+        "Chiefs": "KC", "Falcons": "ATL", "Texans": "HOU", "Browns": "CLE",
+        "Vikings": "MIN", "Packers": "GB", "Dolphins": "MIA", "Colts": "IND",
+        "Panthers": "CAR", "Saints": "NO", "Bills": "BUF", "Jets": "NYJ",
+        "Jaguars": "JAX", "Titans": "TEN", "Rams": "LAR", "Cardinals": "ARI",
+        "Seahawks": "SEA", "Raiders": "LV", "49ers": "SF", "Cowboys": "DAL",
+        "Steelers": "PIT", "Bengals": "CIN", "Chargers": "LAC", "Ravens": "BAL",
+    }
+    BULLET = re.compile(
+        r"^- \[([A-Za-z0-9.]+) (\d+), ([A-Za-z0-9.]+) (\d+), (FINAL|Q\d), "
+        r"([^\]]+)\]\((https://www\.nfl\.com/games/[^)]+)\)$")
+
+    page_finals, live_cards = [], []
+    for ln in comp_text.splitlines():
+        m = BULLET.match(ln)
+        if not m:
+            continue
+        away_n, ap, home_n, hp, status, tail, url = m.groups()
+        row = {"away": NAME2ABBR[away_n], "awayPts": int(ap),
+               "home": NAME2ABBR[home_n], "homePts": int(hp),
+               "game_url": url}
+        if status == "FINAL":
+            day = re.search(r"November (\d+)(?:st|nd|rd|th)", tail)
+            if not day:
+                raise SystemExit("FAIL C1: FINAL bullet has no date: %r" % ln)
+            row["date"] = "2026-11-%02d" % int(day.group(1))
+            page_finals.append(row)
+        else:
+            row["status"] = "%s (%s)" % (status, tail)
+            live_cards.append(row)
+    if len(page_finals) != 13:
+        raise SystemExit("FAIL C1: expected 13 FINAL bullets, parsed %d"
+                         % len(page_finals))
+    if len(live_cards) != 1 or live_cards[0]["away"] != "LAC" \
+            or live_cards[0]["home"] != "BAL" or not live_cards[0]["status"].startswith("Q2"):
+        raise SystemExit("FAIL C1: expected exactly one live card (LAC at BAL, Q2), got %r"
+                         % live_cards)
+    for r in page_finals + live_cards:
+        k = (r["away"], r["home"])
+        if k not in GAME_URLS:
+            raise SystemExit("FAIL C1: %s @ %s has no gamecentre URL" % k)
+        if r["game_url"] != GAME_URLS[k]:
+            raise SystemExit("FAIL C1: bullet URL %s != registered gamecentre %s"
+                             % (r["game_url"], GAME_URLS[k]))
+
+    # C1b: the TSV rows in the same capture agree with the bullet lines.
+    comp_tsv = [r for r in read_tsv(RAW_COMPLETE,
+                                    ["week", "date", "away", "away_pts", "home",
+                                     "home_pts", "note"])
+                if r["week"] == "10"]
+    b_key = sorted((r["away"], r["awayPts"], r["home"], r["homePts"])
+                   for r in page_finals)
+    t_key = sorted((r["away"], int(r["away_pts"]), r["home"], int(r["home_pts"]))
+                   for r in comp_tsv)
+    if b_key != t_key:
+        raise SystemExit("FAIL C1b: bullet lines and TSV rows disagree:\n bullets=%r\n tsv=%r"
+                         % (b_key, t_key))
+
+    # C2: the original extension reappears verbatim; the extra final is SNF.
+    ext_key = sorted((r["away"], int(r["away_pts"]), r["home"], int(r["home_pts"]))
+                     for r in raw)
+    missing = [k for k in ext_key if k not in b_key]
+    extra = [k for k in b_key if k not in ext_key]
+    if missing:
+        raise SystemExit("FAIL C2: extension rows missing from the fresh read: %r" % missing)
+    if extra != [("PIT", 18, "CIN", 38)]:
+        raise SystemExit("FAIL C2: expected exactly [PIT 18, CIN 38] as the new final, got %r"
+                         % extra)
+    snf = [r for r in page_finals if (r["away"], r["home"]) == ("PIT", "CIN")][0]
+
+    # C3: recompute WITH the SNF final and compare to the fresh standings read.
+    rec2, pf_pa2 = dict(rec), dict(pf_pa)
+    for team, pf, pa in (("PIT", 18, 38), ("CIN", 38, 18)):
+        w, l, t = rec2[team]
+        rec2[team] = (w + (1 if pf > pa else 0),
+                      l + (1 if pf < pa else 0),
+                      t + (1 if pf == pa else 0))
+        p, q = pf_pa2[team]
+        pf_pa2[team] = (p + pf, q + pa)
+    stand3 = read_tsv(STANDINGS_1117, ["abbr", "w", "l", "t", "pf", "pa"])
+    if len(stand3) != 32:
+        raise SystemExit("FAIL C3: standings capture has %d rows, expected 32" % len(stand3))
+    c3_mismatch = []
+    for s in stand3:
+        ab = s["abbr"]
+        got = (rec2.get(ab), pf_pa2.get(ab, (0, 0)))
+        want = ((int(s["w"]), int(s["l"]), int(s["t"])),
+                (int(s["pf"]), int(s["pa"])))
+        if got != want:
+            c3_mismatch.append((ab, got, want))
+    if c3_mismatch:
+        for ab, got, want in c3_mismatch:
+            print("FAIL C3: %s computed %s vs standings %s" % (ab, got, want),
+                  file=sys.stderr)
+        return 1
+
+    # C4: the live MNF clubs' rows are unchanged between the two standings reads.
+    stand2 = {r["abbr"]: r for r in read_tsv(STANDINGS_1116,
+                                             ["abbr", "w", "l", "t", "pf", "pa"])}
+    stand3d = {r["abbr"]: r for r in stand3}
+    for ab in ("LAC", "BAL"):
+        if stand2.get(ab) != stand3d.get(ab):
+            raise SystemExit("FAIL C4: %s standings row moved between reads although the "
+                             "game was live: %r -> %r"
+                             % (ab, stand2.get(ab), stand3d.get(ab)))
+
+    # C5: bye records printed on the fresh page equal the recompute.
+    # The page glues record and wins text into one line:
+    #   "7-27 wins, 2 losses, 0 ties" == record "7-2" + "7 wins, 2 losses, 0 ties".
+    # Parse the words first (unambiguous), then rebuild the whole line from the
+    # parsed numbers and require an exact match before trusting the parse.
+    BYE_LINES = re.compile(
+        # non-greedy abbr + lookahead so "TBTampa Bay" yields TB, not TBT
+        r"^- ([A-Z]{2,3}?)(?=[A-Z][a-z])([A-Za-z .]+)\n"
+        r"(\d+(?:-\d+)+(?: wins, \d+ losses, \d+ ties)+)\s*$", flags=re.M)
+    # Full-line parse with the glued structure enforced: record "w-l" is
+    # immediately followed by the wins word "w wins", so every occurrence of the
+    # number must agree — that is what disambiguates "7-2" + "7 wins" from 27.
+    GLUED = re.compile(r"^(\d+)-(\d+)(\d+) wins, (\d+) losses, (\d+) ties$")
+    byes_found = 0
+    for m in BYE_LINES.finditer(comp_text):
+        ab, _name, line3 = m.groups()
+        gm = GLUED.match(line3)
+        if not gm:
+            raise SystemExit("FAIL C5: cannot parse bye line for %s: %r" % (ab, line3))
+        rec_w, rec_l, word_w, word_l, ti = (int(x) for x in gm.groups())
+        if ti != 0:
+            raise SystemExit("FAIL C5: bye line with a tie not handled: %r" % line3)
+        if (rec_w, rec_l) != (word_w, word_l):
+            raise SystemExit("FAIL C5: %s line %r is internally inconsistent "
+                             "(record %d-%d vs words %d-%d)"
+                             % (ab, line3, rec_w, rec_l, word_w, word_l))
+        if rec2.get(ab) != (rec_w, rec_l, ti):
+            raise SystemExit("FAIL C5: bye %s printed %d-%d-%d, recompute says %r"
+                             % (ab, rec_w, rec_l, ti, rec2.get(ab)))
+        byes_found += 1
+    if byes_found != 4:
+        raise SystemExit("FAIL C5: expected 4 bye records on the page, parsed %d"
+                         % byes_found)
+
+    completion = {
+        "read": "2026-11-17",
+        "read_window_utc": "after 2026-11-17T02:45:45Z, before 2026-11-17T02:46:39Z",
+        "schedule_capture": "raw/schedule-results-2026-week10-complete.md",
+        "standings_capture": "raw/standings-2026-20261117.tsv",
+        "source_ids": ["S90", "S91"],
+        "finals_on_page": len(page_finals),
+        "page_finals": [
+            {**r, "week": 10, "page_url": PAGE_URL, "source_id": "S90",
+             "tier": "OFFICIAL"}
+            for r in sorted(page_finals, key=lambda r: (r["date"], r["away"]))
+        ],
+        "new_final": {
+            "week": 10, "date": snf["date"], "away": "PIT", "awayPts": 18,
+            "home": "CIN", "homePts": 38,
+            "result": "PIT 18, CIN 38",
+            "margin_home": 20, "total": 56,
+            "note": "Sunday Night Football — final at the 2026-11-17 read; "
+                    "in progress at the 2026-11-16 read",
+            "game_url": GAME_URLS[("PIT", "CIN")],
+            "page_url": PAGE_URL, "source_id": "S90", "tier": "OFFICIAL",
+        },
+        "still_live": {
+            "week": 10, "date": "2026-11-16", "away": "LAC", "home": "BAL",
+            "status": "LIVE at read time — card printed Q2, Chargers 17, Ravens 7 "
+                      "(partial score, not a result)",
+            "game_url": GAME_URLS[("LAC", "BAL")], "page_url": PAGE_URL,
+            "source_id": "S90",
+        },
+        "checks": {
+            "C1_13_finals_and_one_live_card": True,
+            "C1b_bullets_match_tsv_rows": True,
+            "C2_original_rows_reappear_plus_snf": True,
+            "C3_records_and_points_vs_fresh_standings_32_of_32": True,
+            "C4_live_mnf_clubs_unchanged_between_standings_reads": True,
+            "C5_bye_records_match_recompute": True,
+        },
+        "note": "data/results.tsv and data/standings.tsv remain untouched; promoting "
+                "these finals into the canonical feed is the owner decision Q44 "
+                "(tracked by F61/SG37).",
+    }
+
     payload = {
         "id": "week10_results_extension",
         "title": "Week 10 finals captured after the 2026-11-14 read",
-        "updated": "2026-11-16",
+        "updated": "2026-11-17",
         "read_window_utc": READ_WINDOW,
         "page_url": PAGE_URL,
         "source_id": SOURCE_ID,
@@ -252,6 +453,7 @@ def main():
         },
         "provenance": {"tier": "OFFICIAL", "source_id": SOURCE_ID,
                        "capture": "raw/schedule-results-2026-week10-finals.tsv"},
+        "completion": completion,
     }
 
     with open(OUT, "w", encoding="utf-8") as fh:
@@ -262,6 +464,11 @@ def main():
           (len(payload["finals"]), len(payload["pending"])))
     print("V3 record arithmetic: all 32 clubs reproduce the page-printed records")
     print("V4 points arithmetic: feed + finals reproduce the fresh standings capture (32/32)")
+    print("completion read 2026-11-17: %d finals on page, new final %s, still live %s"
+          % (len(page_finals), completion["new_final"]["result"],
+             completion["still_live"]["status"]))
+    print("C1-C5 all pass (fresh standings 32/32 W/L/T + PF/PA, bye records, "
+          "live MNF excluded)")
     return 0
 
 

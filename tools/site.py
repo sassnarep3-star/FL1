@@ -959,6 +959,51 @@ those clubs still show pre-game records. The page's NEWS section carried reserve
             cell(p["status"]),
             raw_src('<a href="%s">game centre</a>' % esc(p["game_url"])),
         ])
+    comp = w10x.get("completion") or {}
+    comp_html = ""
+    if comp:
+        nf = comp["new_final"]
+        sl = comp["still_live"]
+        n_checks = len(comp["checks"])
+        comp_rows = [[
+            cell(nf["date"]),
+            cell(nf["away"]), cell(nf["awayPts"], "n"),
+            cell(nf["home"]), cell(nf["homePts"], "n"),
+            cell(nf["note"]),
+            raw_src('<a href="%s">game centre</a>' % esc(nf["game_url"])),
+            raw_src(src_link("S90", sources_by_id)),
+        ]]
+        live_rows = [[
+            cell(sl["date"]),
+            cell(sl["away"]), "<td class=\"blank\">—</td>",
+            cell(sl["home"]), "<td class=\"blank\">—</td>",
+            cell(sl["status"]),
+            raw_src('<a href="%s">game centre</a>' % esc(sl["game_url"])),
+            raw_src(src_link("S90", sources_by_id)),
+        ]]
+        comp_html = """
+<h3>Close-out read (%s, %s)</h3>
+<p>A second dated read of the same official page: <strong>%d of the 14 Week 10 games
+printed FINAL</strong>. The Sunday-night game finished between the reads and is the one
+new final below; the Monday-night game was still live, so it stays a status row with
+blank scores — a partial score is not a result. The %d completion checks
+(C1 bullet lines vs TSV rows, C2 original rows reappear plus the new final,
+C3 records <em>and</em> points vs the fresh official standings 32/32,
+C4 the live game's clubs byte-identical between standings reads,
+C5 bye records vs recompute) are enforced by
+<code>scripts/build_week10_extension.py</code>. Fresh sources: S90 (schedule),
+S91 (standings, <code>%s</code>) — corroborating only; the canonical
+<code>data/results.tsv</code> and <code>data/standings.tsv</code> are untouched, and
+promotion into the feed remains the owner decision Q44.</p>
+%s
+%s
+""" % (esc(comp["read"]), esc(comp["read_window_utc"]),
+       comp["finals_on_page"], n_checks,
+       esc(comp["standings_capture"]),
+       table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre", "Source"],
+             comp_rows, cls="dense"),
+           table(["Date", "Away", "Pts", "Home", "Pts", "Status at read",
+                  "Game centre", "Source"], live_rows, cls="dense"))
     out["week10_finals"] = """
 <section>
 <h2>Week 10 finals &mdash; captured 2026-11-16 after the 2026-11-14 read</h2>
@@ -979,12 +1024,14 @@ league standings (W/L/T <em>and</em> PF/PA, 32 of 32) captured at the same read 
 <code>raw/standings-2026-20261116.tsv</code>, corroborating evidence only; the canonical standings
 capture is unchanged. The Sunday-night game was in progress and the Monday game unplayed at read
 time, so those two clubs show pre-game records on the page and blanks here.</p></div>
+%s
 </section>
 """ % (len(w10x["finals"]),
        table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre"], fin_rows, cls="dense"),
        len(w10x["pending"]),
        table(["Date", "Away", "Pts", "Home", "Pts", "Status at read", "Game centre"],
-             pend_rows, cls="dense"))
+             pend_rows, cls="dense"),
+       comp_html)
 
     # ------------------------------------- N02 two-sided change-our-mind fields
     cm_rows = []

@@ -1,7 +1,7 @@
 {
  "id": "week10_results_extension",
  "title": "Week 10 finals captured after the 2026-11-14 read",
- "updated": "2026-11-16",
+ "updated": "2026-11-17",
  "read_window_utc": "after 2026-11-16T01:14:56Z, before 2026-11-16T01:25:00Z",
  "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
  "source_id": "S81",
@@ -231,5 +231,209 @@
   "tier": "OFFICIAL",
   "source_id": "S81",
   "capture": "raw/schedule-results-2026-week10-finals.tsv"
+ },
+ "completion": {
+  "read": "2026-11-17",
+  "read_window_utc": "after 2026-11-17T02:45:45Z, before 2026-11-17T02:46:39Z",
+  "schedule_capture": "raw/schedule-results-2026-week10-complete.md",
+  "standings_capture": "raw/standings-2026-20261117.tsv",
+  "source_ids": [
+   "S90",
+   "S91"
+  ],
+  "finals_on_page": 13,
+  "page_finals": [
+   {
+    "away": "WAS",
+    "awayPts": 24,
+    "home": "NYG",
+    "homePts": 21,
+    "game_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+    "date": "2026-11-12",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "BUF",
+    "awayPts": 31,
+    "home": "NYJ",
+    "homePts": 12,
+    "game_url": "https://www.nfl.com/games/bills-at-jets-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "CAR",
+    "awayPts": 20,
+    "home": "NO",
+    "homePts": 17,
+    "game_url": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "HOU",
+    "awayPts": 24,
+    "home": "CLE",
+    "homePts": 27,
+    "game_url": "https://www.nfl.com/games/texans-at-browns-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "JAX",
+    "awayPts": 40,
+    "home": "TEN",
+    "homePts": 23,
+    "game_url": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "KC",
+    "awayPts": 35,
+    "home": "ATL",
+    "homePts": 13,
+    "game_url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "LAR",
+    "awayPts": 34,
+    "home": "ARI",
+    "homePts": 6,
+    "game_url": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "MIA",
+    "awayPts": 22,
+    "home": "IND",
+    "homePts": 24,
+    "game_url": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "MIN",
+    "awayPts": 30,
+    "home": "GB",
+    "homePts": 10,
+    "game_url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "NE",
+    "awayPts": 10,
+    "home": "DET",
+    "homePts": 35,
+    "game_url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "PIT",
+    "awayPts": 18,
+    "home": "CIN",
+    "homePts": 38,
+    "game_url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "SEA",
+    "awayPts": 21,
+    "home": "LV",
+    "homePts": 13,
+    "game_url": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   },
+   {
+    "away": "SF",
+    "awayPts": 46,
+    "home": "DAL",
+    "homePts": 40,
+    "game_url": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10",
+    "date": "2026-11-15",
+    "week": 10,
+    "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "source_id": "S90",
+    "tier": "OFFICIAL"
+   }
+  ],
+  "new_final": {
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "PIT",
+   "awayPts": 18,
+   "home": "CIN",
+   "homePts": 38,
+   "result": "PIT 18, CIN 38",
+   "margin_home": 20,
+   "total": 56,
+   "note": "Sunday Night Football — final at the 2026-11-17 read; in progress at the 2026-11-16 read",
+   "game_url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+   "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "source_id": "S90",
+   "tier": "OFFICIAL"
+  },
+  "still_live": {
+   "week": 10,
+   "date": "2026-11-16",
+   "away": "LAC",
+   "home": "BAL",
+   "status": "LIVE at read time — card printed Q2, Chargers 17, Ravens 7 (partial score, not a result)",
+   "game_url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+   "page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "source_id": "S90"
+  },
+  "checks": {
+   "C1_13_finals_and_one_live_card": true,
+   "C1b_bullets_match_tsv_rows": true,
+   "C2_original_rows_reappear_plus_snf": true,
+   "C3_records_and_points_vs_fresh_standings_32_of_32": true,
+   "C4_live_mnf_clubs_unchanged_between_standings_reads": true,
+   "C5_bye_records_match_recompute": true
+  },
+  "note": "data/results.tsv and data/standings.tsv remain untouched; promoting these finals into the canonical feed is the owner decision Q44 (tracked by F61/SG37)."
  }
 }

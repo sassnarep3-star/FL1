@@ -12,7 +12,11 @@ DR-10	data/flags.json	PASS	pinned	69	69
 DR-11	data/strategies.json	PASS	pinned	6	6
 DR-12	data/validation_gates.json	PASS	pinned	15	15
 DR-13	data/leaderboard_signal_staking.json	PASS	pinned	16	16
+<<<<<<< HEAD
 DR-14	data/sources.tsv	PASS	pinned	86	-
+=======
+DR-14	data/sources.tsv	PASS	pinned	83	-
+>>>>>>> f6c5353 (H3: Week 10 close-out read (2026-11-17) — 13 finals incl new SNF PIT 18 CIN 38, MNF live Q2 (no score recorded), checks C1-C5 (standings 32/32 W/L/T+PF/PA), F61 count/date corrected, S90/S91 registered)
 DR-15	data/reserve_list_2026-11.tsv	PASS	pinned	25	25
 DR-16	data/announced_starters_g.json	PASS	pinned	4	4
 DR-17	data/venue_spotchecks.json	PASS	pinned	2	2

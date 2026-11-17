@@ -1,0 +1,49 @@
+# RAW CAPTURE — NFL.com official league standings, 2026 regular season — READ 3
+#
+# URL: https://www.nfl.com/standings/league/2026/REG
+# Read window (UTC): opened after 2026-11-17T02:45:45Z, completed before 2026-11-17T02:46:39Z
+#   (page fetched in 2 content chunks by the session's page-fetch tool).
+# Page title at capture: "2026 NFL League Standings"
+# Purpose: CORROBORATING EVIDENCE ONLY for data/week10_results_extension.json completion read
+#   (C3/C4 checks: data/results.tsv + the extension finals + the new Sunday-night final must
+#   reproduce every club's W/L/T and PF/PA exactly). This file does NOT replace
+#   data/standings.tsv, which remains the canonical capture behind the already-published
+#   registers and is unchanged.
+# State at read: 13 of 14 Week 10 games final. The Sunday Night Football result is INCLUDED
+#   (PIT 6-3, CIN 7-2 — vs PIT 6-2, CIN 6-2 in raw/standings-2026-20261116.tsv). Monday Night
+#   Football (LAC at BAL) was LIVE (Q2) at read time and is NOT counted: LAC 0-8 and BAL 4-5
+#   are pre-game figures, identical to the 2026-11-16 capture.
+# Columns: abbr(repo key)<TAB>w<TAB>l<TAB>t<TAB>pf<TAB>pa   (page prints Los Angeles Rams as
+#   "LA" and Arizona Cardinals as "AZ"; repo keys LAR/ARI used here, as everywhere in data/)
+BUF	8	1	0	287	199
+SF	8	1	0	281	196
+CHI	7	2	0	241	184
+CIN	7	2	0	278	193
+DEN	7	2	0	198	186
+DET	7	2	0	257	199
+JAX	7	2	0	269	144
+KC	7	2	0	237	156
+MIN	7	2	0	176	126
+PIT	6	3	0	198	182
+NYG	5	3	1	203	196
+CLE	6	4	0	188	220
+GB	6	4	0	226	221
+LAR	6	4	0	248	187
+SEA	6	4	0	223	175
+NE	5	5	0	221	242
+BAL	4	5	0	189	236
+CAR	4	5	0	219	236
+DAL	4	6	0	286	282
+LV	4	6	0	251	289
+WAS	3	5	1	196	223
+HOU	3	6	0	233	219
+NO	3	6	0	202	236
+TB	3	6	0	202	178
+ARI	3	7	0	184	289
+ATL	3	7	0	201	258
+IND	3	7	0	208	271
+PHI	2	7	0	148	221
+NYJ	2	8	0	194	254
+MIA	1	8	0	148	224
+TEN	1	8	0	167	239
+LAC	0	8	0	121	219
