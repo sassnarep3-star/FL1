@@ -23,7 +23,7 @@
    "delivered": "data/sources.tsv register; only VERIFIED rows are citable",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "68 of 74 source records VERIFIED (page loaded and read this session)"
+   "clears": "76 of 85 source records VERIFIED (page loaded and read this session)"
   },
   {
    "id": "R03",
@@ -43,7 +43,7 @@
    "delivered": "flagged.html — Flagged for Review",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "60 irregularities published with source links (F01..F60)"
+   "clears": "69 irregularities published with source links (F01..F69)"
   },
   {
    "id": "R05",
@@ -93,7 +93,7 @@
    "delivered": "data/questions.json + questions.html",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "44 questions with what-we-know / what-we-miss / how-to-find-it"
+   "clears": "46 questions with what-we-know / what-we-miss / how-to-find-it"
   },
   {
    "id": "R10",
@@ -284,6 +284,19 @@
    "blocker": null,
    "blocker_refs": [],
    "clears": "thresholds are proposed rules (F28) pending Q24/Q33 freeze; 0 live entries to demote yet"
+  },
+  {
+   "id": "R29",
+   "requirement": "Preserve each official injury-hub read as an immutable dated snapshot with a retained hash and explicit delta; never overwrite earlier evidence.",
+   "status": "partial",
+   "page": "live-captures.html",
+   "delivered": "raw/live dated injury capture + SHA-256 manifest + scripts/verify_live_d5.py",
+   "blocker": "No scheduled immutable capture job or external retained storage yet",
+   "blocker_refs": [
+    "F67",
+    "Q46"
+   ],
+   "clears": "every read has a dated unique path and matching retained hash; a delta report is replayable without overwriting prior rows"
   }
  ],
  "provenance": {

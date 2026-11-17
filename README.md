@@ -105,6 +105,21 @@ activity in any jurisdiction. No regulator or tax source was verified.
 
 ---
 
+## Session `arena/7ac4e12e-fl1` additions (2026-11-17)
+
+- **Injury hub read 3 as a delta only** (`scripts/build_injury_hub_delta.py`,
+  `data/injury_hub_delta.json`): three dated reads, one published change (NO Travis Etienne practice
+  FULL → LIMITED), canonical 345-row table untouched.
+- **Week-10 close-out** (`scripts/build_week10_extension.py`): 13 official finals + the live Monday
+  game as a status row; SNF `PIT 18, CIN 38` added under `completion` with checks C1–C5 (fresh
+  standings 32/32 W/L/T + PF/PA); F61 corrected with a dated re-read.
+- **Answers layer on every question** (`scripts/add_question_answers.py`): all 46 register rows carry
+  `answer_state` (`answered` 12 / `partial` 16 / `open` 18), a cited `answer`, and `answer_date`;
+  rendered as the dated Answer column on `questions.html`. Q45's verbatim duplication of Q35 is
+  registered as F70; new suggestions SG50 (cadence automation) and SG51 (frozen promotion rule).
+- Reconciled over parallel PRs #49 and #51–#54: session ids `S94–S96`, `F70`, `SG50–SG51`; pins and
+  drift rows updated; battery green (344 tests, 57 pages, 19/19 drift).
+
 ## Session `arena/dbf11de0-fl1` additions (2026-11-16)
 
 **New pages** (all generated, all re-runnable):

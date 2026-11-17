@@ -1,0 +1,7 @@
+check	description	result	detail	source
+H-R1	new results = 2026-11-16 results + exactly one row (the PIT@CIN final)	PASS	149 rows (was 148)	https://www.nfl.com/games/steelers-at-bengals-2026-reg-10
+H-R2	new results reproduce the 2026-11-17 official standings, 32 clubs, W/L/T/PF/PA	PASS	32 clubs, 0 mismatches	https://www.nfl.com/games/steelers-at-bengals-2026-reg-10
+H-R3	games played per club = W+L+T (official)	PASS	0 clubs with a count mismatch	https://www.nfl.com/games/steelers-at-bengals-2026-reg-10
+H-R4	standings change between the two reads = exactly the new game (only CIN and PIT move)	PASS	32 clubs, 0 unexplained changes	https://www.nfl.com/standings/league/2026/REG
+H-R5	frozen 137-game corpus data/results.tsv is still a prefix of the results	PASS	137 corpus rows; prefix intact: True	https://www.nfl.com/games/steelers-at-bengals-2026-reg-10
+H-N1	Monday night LAC@BAL NOT recorded: live at read time (Q2 01:56, LAC 17, BAL 7)	OPEN	not final; re-read required before it can enter any results file	https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live

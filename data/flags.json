@@ -696,12 +696,14 @@
     "id": "F61",
     "kind": "Data freshness (verified 2026-11-16)",
     "item": "13 Week 10 finals are now official but the committed feed snapshot still holds blank scores for them",
-    "detail": "The official REG10 schedule page (S49) read 2026-11-16 shows all 14 Week 10 games FINAL (e.g. KC 35, ATL 13; NE 10, DET 35 in Munich; SF 46, DAL 40). The committed nflverse snapshot (data/raw/games.csv, S47) holds the Thursday final only; the other 13 rows carry blank scores. The repo's verified results feed therefore still counts 137 games. The scores were NOT back-filled by hand: results data is owned by the refresh pipeline and must be captured with its own official links (SG37). Cross-ref F59 (stale published snapshot, their read) and SG45; this flag records the 13-finals count verified 2026-11-16.",
+    "detail": "The official REG10 schedule page (S49) read 2026-11-16 shows all 14 Week 10 games FINAL (e.g. KC 35, ATL 13; NE 10, DET 35 in Munich; SF 46, DAL 40). The committed nflverse snapshot (data/raw/games.csv, S47) holds the Thursday final only; the other 13 rows carry blank scores. The repo's verified results feed therefore still counts 137 games. The scores were NOT back-filled by hand: results data is owned by the refresh pipeline and must be captured with its own official links (SG37). Cross-ref F59 (stale published snapshot, their read) and SG45; this flag records the 13-finals count verified 2026-11-16. UPDATE 2026-11-17 (session arena-7ac4e12e-fl1): the original detail's count/date does not survive a line-by-line re-read of the official pages on record. S49 is dated 2026-11-14 (a fixture cross-check, not a finals read); the S81 read of 2026-11-16T01:15-01:25Z printed 12 finals with the Sunday-night game in progress; and this session's S95 read of 2026-11-17T02:45-02:46Z prints 13 finals with Monday Night Football (LAC at BAL) LIVE in Q2 at 17-7 \u2014 a partial score is not a result. 'All 14 FINAL on 2026-11-16' cannot be true on any 2026-11-16 UTC read because the Monday game had not been played by then. Correct latest official count: 13 finals + 1 live. The new final (PIT 18, CIN 38) and the live status are now published in data/week10_results_extension.json under 'completion' with checks C1-C5 (fresh standings 32/32 W/L/T + PF/PA, S95/S96); promotion into the canonical feed remains Q44/SG37.",
     "sourceIds": [
       "S49",
       "S47",
       "S84",
-      "S85"
+      "S85",
+      "S95",
+      "S96"
     ],
     "severity": "Medium",
     "action": "Capture the 13 finals row-by-row with official links at the next refresh run (SG37); the drift-alarm pins (G-18) will WARN on the growth."
@@ -765,28 +767,46 @@
   },
   {
     "id": "F67",
-    "title": "Game Book playtime table is labelled \"(Unofficial)\" on 4 of 13 games",
-    "severity": "medium",
-    "status": "open",
-    "detail": "The official Game Book's Playtime Percentage table is prefixed 'Percent of playtime per player on offense, defense and special teams (Unofficial)' for HOUCL, LARARI, SEALV and BUFNYJ. The other nine books do not carry that qualifier. The snap-percentage values are transcribed verbatim and each row carries its own source_label (Official/Unofficial), so the table is published with the NFL's own caveat rather than silently promoted to an official snap count.",
-    "action": "Published on the Game Books page with per-row source labels; no resolution applied.",
-    "kind": "Source label",
-    "item": "Game Book playtime table is labelled \"(Unofficial)\" on 4 of 13 games",
+    "kind": "Open item \u2014 official game not yet final",
+    "item": "Monday night LAC at BAL (Week 10, 2026-11-16) is in no results file: it was Live at the 2026-11-17 read (Q2 01:56, Chargers 17, Ravens 7)",
+    "detail": "The Sunday-night PIT at CIN final (18-38) was added on 2026-11-17 from the official Game Center. The Monday-night game was not, because a live score is not a result. The official standings read of 2026-11-17 still shows LAC 0-8 and BAL 4-5, which is consistent with the game being unplayed in the standings. The record of this game is therefore absent, not wrong, and every Week 10 standings check excludes it.",
     "sourceIds": [
-      "S90"
-    ]
+      "S91"
+    ],
+    "source": "NFL.com Game Center (official)",
+    "url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10?tab=live",
+    "severity": "Medium",
+    "action": "Re-read https://www.nfl.com/games/chargers-at-ravens-2026-reg-10 after it shows Final. Confirm the final score and that the quarter scores sum to it, then add the row in a new dated results file and re-run the reconciliation (scripts/verify_results_2026_11_17.py is the template: standings delta must equal the game)."
   },
   {
     "id": "F68",
-    "title": "LAC@BAL Monday-night game not in the Game Book capture",
-    "severity": "low",
-    "status": "open",
-    "detail": "At capture time (2026-11-17 UTC) the Chargers-at-Ravens Monday-night game was still in progress (halftime, LAC 17-BAL 10) and exposed no final Game Book URL. A partial score is not a result, so the game is excluded from the 13-game Game Book capture and from the 149-game dated results snapshot. It will be added by a later refresh once the game reaches final and a Game Book PDF is published.",
-    "action": "Excluded deliberately; recorded so the gap is visible rather than silent.",
-    "kind": "Capture gap",
-    "item": "LAC@BAL Monday-night game not in the Game Book capture",
+    "kind": "Row citation provenance gap",
+    "item": "Some rendered table rows link only to repository code or lack a registry-backed official citation",
+    "detail": "The deterministic row-level audit in this render classifies 1,244 rows as REPOSITORY_LINK_ONLY, 178 as NO_SOURCE_LINK, 94 as DIRECT_LINK_UNREGISTERED, 135 as REGISTERED_NOT_VERIFIED, 434 as NONOFFICIAL_REGISTERED, 615 as MIXED_OR_UNRESOLVED_REGISTERED, and 3,596 as OFFICIAL_REGISTERED. These are row counts, not unique facts. Classification is syntactic and based on the source register; official means the referenced source record is marked Official and VERIFIED, not freshly fetched in this audit. Counts can change on rebuild; see source-audit.html and data/source_row_audit.tsv for the live ledger. The audit does not establish that any value is false.",
     "sourceIds": [
-      "S89"
-    ]
+      "S92"
+    ],
+    "severity": "High",
+    "action": "Review the detailed ledger. Replace generator-only or unregistered citations with source IDs where a source can be verified; otherwise leave unsupported values blank and keep them flagged. Do not mark a row officially verified based only on a repository link."
+  },
+  {
+    "id": "F69",
+    "kind": "Live capture conflict / preserve historical row set",
+    "item": "2026-11-17 official injury report differs from committed 2026-11-14 injury table",
+    "detail": "Re-parsed dated NFL injury hub capture: 347 rows / 28 clubs. Against committed data/injuries.tsv (345 rows), 2 live-only rows (BAL Calais Campbell and Ronnie Stanley) and 16 changed rows are observed; zero committed player rows are absent. Do not silently replace the earlier snapshot. The live raw capture and manifest preserve the new point-in-time read; the committed table remains unchanged pending snapshot-aware merge.",
+    "sourceIds": [
+      "S01"
+    ],
+    "severity": "Medium",
+    "action": "Review the 2 additions and 16 field changes against the dated live capture; retain both snapshots with separate timestamps and hashes."
+  },
+  {
+    "id": "F70",
+    "kind": "Register duplication (merge re-issue artefact)",
+    "item": "Q45 duplicates Q35 verbatim \u2014 the same open question is registered twice",
+    "detail": "data/questions.json carries Q35 and Q45 with identical question text (both ask whether the snapshot store should accept a fourth phase value for prices whose vintage the publisher never stated). The duplication was created when a session re-issued its own Q35 at a merge where origin/main already held a Q35 \u2014 the re-issue landed as Q45 without noticing the content collision. Both rows are answered identically in the 2026-11-17 answer layer and cross-reference this flag; they must be folded into one during the SG47 consolidation so future answers cannot drift apart.",
+    "sourceIds": [],
+    "severity": "Low",
+    "action": "Fold Q45 into Q35 during SG47 consolidation; until then treat Q35 as canonical (the answer layer marks both and cross-links here)."
   }
 ]

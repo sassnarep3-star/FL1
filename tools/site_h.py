@@ -83,7 +83,7 @@ def render_game_books(site, sources_by_id):
         vrows_out.append([
             esc(g[2] + " @ " + g[3]), esc(stadium), esc(city), esc(roof),
             esc(surface), esc(" / ".join(sorted(teams))),
-            _src("S90", sources_by_id)])
+            _src("S98", sources_by_id)])
 
     # --- per-game roster + playtime summary ---
     sections = []
@@ -155,7 +155,7 @@ def render_game_books(site, sources_by_id):
         '<p class="muted">Sources: %s (Game Center pages) and %s (Game Book PDFs). '
         'The Monday LAC@BAL game was still in progress at capture and is excluded '
         '(flag F68).</p>'
-        % (_src("S89", sources_by_id), _src("S90", sources_by_id)),
+        % (_src("S97", sources_by_id), _src("S98", sources_by_id)),
     ]
     return site.page("game-books.html", "Official Game Books — Week 10 2026",
                      "\n".join(body), wide=True)
@@ -192,7 +192,7 @@ def render_matchup_matrix(site, sources_by_id):
         'reported in the note, never silently assigned a string.</p>',
         site.table(head, out, caption="Offense vs defense deficiency, 1st-4th string, Week 10 2026."),
         '<p class="muted">Sources: %s (Game Book inactives/DNP) and the club '
-        'depth charts (S16&ndash;S46).</p>' % _src("S90", sources_by_id),
+        'depth charts (S16&ndash;S46).</p>' % _src("S98", sources_by_id),
     ]
     return site.page("matchup-matrix.html", "Matchup Matrix — Week 10 2026",
                      "\n".join(body), wide=True)
@@ -233,7 +233,7 @@ def render_model_outputs(site, sources_by_id):
         'publishes betting prices (flag F18).</p>',
         site.table(head, out, caption="Model outputs: fair value, implied probability and input vector."),
         '<p class="muted">%d model outputs. Source: %s (Game Center anchors).</p>'
-        % (doc["count"], _src("S89", sources_by_id)),
+        % (doc["count"], _src("S97", sources_by_id)),
     ]
     return site.page("model-outputs.html", "Model Outputs Ledger",
                      "\n".join(body), wide=True)
@@ -272,7 +272,7 @@ def render_weather_overlay(site, sources_by_id):
         'refresh fills the hourly columns from the live NWS response.</p>',
         site.table(head, out, caption="Week 11 2026 venue roof/surface + NWS grid overlay."),
         '<p class="muted">Sources: %s (Game Book roof/surface) and the NWS '
-        'forecast grids (api.weather.gov).</p>' % _src("S90", sources_by_id),
+        'forecast grids (api.weather.gov).</p>' % _src("S98", sources_by_id),
     ]
     return site.page("weather-overlay.html", "Weather Overlay — Week 11 2026",
                      "\n".join(body), wide=True)

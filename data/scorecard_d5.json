@@ -1,0 +1,928 @@
+{
+ "divisions": [
+  "singles",
+  "game_parlay",
+  "same_game_parlay",
+  "prop_combo"
+ ],
+ "registry": [
+  {
+   "id": "D5S01",
+   "division": "singles",
+   "family": "baseline",
+   "name": "Control \u2014 random side, every game",
+   "role": "CONTROL. Never eligible for a reward; its only job is to be the floor.",
+   "rule": "For every game on the slate, take a side by a coin flip fixed in advance by the game_id hash. Stake 1 unit at -110.",
+   "inputs": "game_id only",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "control, not a hypothesis; no result may be used to tune it"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null,
+    "scored_note": "no scored forecasts"
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "expected_from_control": "break-even hit rate 52.38%; any edge over this must survive G4 and G5 before it is called skill",
+   "what_would_change_our_mind": "Nothing. A control that starts beating the field means the scoring, not the control, is broken.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 2
+  },
+  {
+   "id": "D5S02",
+   "division": "singles",
+   "family": "baseline",
+   "name": "Control \u2014 favourites only",
+   "role": "CONTROL. The most common 'system' in sports betting; included so it is measured, not assumed.",
+   "rule": "Bet the side with the higher published win-differential, at -110, in every game where a market price exists.",
+   "inputs": "official standings W-L (S03) at the time of the bet",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "control, not a hypothesis"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "expected_from_control": "a record-based rule is public information; if it beat the market consistently, the market would already move",
+   "what_would_change_our_mind": "Sustained positive CLV on a pre-registered, frozen version. A season of profit alone would not.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 3
+  },
+  {
+   "id": "D5S03",
+   "division": "singles",
+   "family": "team_strength",
+   "name": "Scoring-margin baseline (PF-PA per game)",
+   "role": "CANDIDATE. Deliberately the simplest strength model: if a complex model cannot beat this, it is not earning its complexity.",
+   "rule": "Rating = (PF - PA) / games played, from the official league table, computed only from games completed before the kickoff being forecast. Home-side rating difference plus a fixed home-field constant of 3.0 points is the fair spread.",
+   "inputs": "official PF, PA, W, L, T per club (S03 at the time of the bet)",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "rule text above is the freeze candidate; it is not yet committed as a hash-pinned registration"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "power_note": "needs 1,540 scored forecasts to detect a 55% vs 52.4% edge at 80% power",
+   "what_would_change_our_mind": "BSS lower bound below zero for two consecutive registered windows; or the Elo model beating it on the same window by more than the interval width.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 4
+  },
+  {
+   "id": "D5S04",
+   "division": "singles",
+   "family": "team_strength",
+   "name": "Causal Elo (fl1-elo-v1), frozen",
+   "role": "CANDIDATE. Exists in this repository as a model version string; it has never been scored against a benchmark.",
+   "rule": "Elo with K=20, home-field 48 rating points, inter-season regression x0.75 toward 1505, margin-of-victory multiplier. Spread = 10.8*log10(p/(1-p)). Version string recorded per row in data/fair_lines.csv.",
+   "inputs": "game results before kickoff only (causal), from the official results feed",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "the version string is recorded per row, but no commit hash freezes the code that produced it"
+   },
+   "signal": {
+    "n": 137,
+    "bss": 0.10213,
+    "bss_lo": -0.01197,
+    "bss_hi": 0.22147
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "what_would_change_our_mind": "It is beaten on the same window by the PF-PA baseline; the spread constant (10.8) is not validated against a price, only against itself.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "note": "this entry's own recorded probabilities were scored ex post, not pre-registered: the number shows the model exists and can be evaluated, and it does NOT count as a prospective record",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": true,
+     "detail": "137 scored forecasts",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "137 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "BSS 0.1021, game-cluster 95% lower bound -0.0120",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 1,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 1
+  },
+  {
+   "id": "D5S05",
+   "division": "singles",
+   "family": "availability",
+   "name": "Availability-surprise overlay",
+   "role": "CANDIDATE. The brief's central modelling idea: an injury signal must be a surprise, never a level.",
+   "rule": "For each club, compute an availability index as the sum over unavailable starters of a *string gap*, and forecast the change in the index between the last pre-kickoff snapshot and the season average. A club whose index is worse than its own trailing distribution is a candidate; the size of the deviation, not the count of injured players, is the input.",
+   "inputs": "official injury report snapshots (S89 for the Week 10 capture), club depth charts with their source ids, and the published designation",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "blocked: needs at least two dated pre-kickoff snapshots per game, which the repository does not yet hold"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "blocking_gate": "D5-G2 and D5-G3: no snapshot pair exists for any game, so no forecast can be scored",
+   "what_would_change_our_mind": "An ablation that shows the personnel features add nothing to BSS on chronological holdouts (that ablation is registered as D5S11).",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 5
+  },
+  {
+   "id": "D5S06",
+   "division": "game_parlay",
+   "family": "combination",
+   "name": "Two-leg game parlay (side + total, different games)",
+   "role": "CANDIDATE. Cross-game, so independence is *approximately* defensible \u2014 but it is an assumption, not a validated fact.",
+   "rule": "Combine the best-ranked side from one game with the best-ranked total from another, when both legs independently clear G4.",
+   "inputs": "the singles candidates' probabilities",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "not registered: no leg has cleared G4 yet"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "joint_validation": {
+    "validated": false,
+    "void_rules": false,
+    "detail": "the product of two marginals is used as the joint; no realised joint outcome has been checked against it"
+   },
+   "multiplicity_pass": false,
+   "what_would_change_our_mind": "A measured cross-game correlation whose upper bound is below the level at which multiplying marginals is unbiased.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 3362 forecasts",
+     "clears_when": "3362 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    },
+    {
+     "gate": "D5-G7",
+     "name": "Joint probability directly validated",
+     "passed": false,
+     "detail": "the product of two marginals is used as the joint; no realised joint outcome has been checked against it",
+     "clears_when": "a joint probability estimated from realised joint outcomes, plus the operator's void/push rules"
+    },
+    {
+     "gate": "D5-G8",
+     "name": "Operator void/push rules on file",
+     "passed": false,
+     "detail": "a same-game parlay's void rule changes its settlement, and no operator's rules are on file",
+     "clears_when": "the operator's written void/push rules are registered against the combo"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 8,
+   "qualified": false,
+   "rank": 6
+  },
+  {
+   "id": "D5S07",
+   "division": "same_game_parlay",
+   "family": "combination",
+   "name": "Same-game parlay (side + total, one game)",
+   "role": "CANDIDATE, gated. Multiplication of marginals is invalid here, and the repository says so everywhere.",
+   "rule": "Combine a side and a total in the same game. Only rankable when a directly validated joint probability exists.",
+   "inputs": "in-game joint outcomes",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "not registered: blocked by its own gate"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "joint_validation": {
+    "validated": false,
+    "void_rules": false,
+    "detail": "side and total in the same game share pace and script; the product of their marginals is not the joint"
+   },
+   "multiplicity_pass": false,
+   "what_would_change_our_mind": "A directly estimated joint probability from realised same-game outcomes that beats the product of the marginals by more than its interval.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 4482 forecasts",
+     "clears_when": "4482 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    },
+    {
+     "gate": "D5-G7",
+     "name": "Joint probability directly validated",
+     "passed": false,
+     "detail": "side and total in the same game share pace and script; the product of their marginals is not the joint",
+     "clears_when": "a joint probability estimated from realised joint outcomes, plus the operator's void/push rules"
+    },
+    {
+     "gate": "D5-G8",
+     "name": "Operator void/push rules on file",
+     "passed": false,
+     "detail": "a same-game parlay's void rule changes its settlement, and no operator's rules are on file",
+     "clears_when": "the operator's written void/push rules are registered against the combo"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 8,
+   "qualified": false,
+   "rank": 7
+  },
+  {
+   "id": "D5S08",
+   "division": "prop_combo",
+   "family": "combination",
+   "name": "Player-prop combo (QB passing + WR receiving)",
+   "role": "CANDIDATE, gated. The repository already publishes an empirical QB-WR correlation from an in-repo dataset (flagged third-party).",
+   "rule": "Combine a QB passing-yards over with the same team's WR1 receiving-yards over. Use the measured correlation, not independence.",
+   "inputs": "third-party player-week stats (flagged; not an official NFL feed) and the operator's prop rules",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "not registered: the input feed is third-party and flagged"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "joint_validation": {
+    "validated": false,
+    "void_rules": false,
+    "detail": "the correlation is measured, but a measured marginal correlation is not a validated joint probability for the pair of lines actually being priced"
+   },
+   "multiplicity_pass": false,
+   "what_would_change_our_mind": "A joint model calibrated on realised joint outcomes, with the operator's void rules applied, clearing its own Brier test.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 4482 forecasts",
+     "clears_when": "4482 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    },
+    {
+     "gate": "D5-G7",
+     "name": "Joint probability directly validated",
+     "passed": false,
+     "detail": "the correlation is measured, but a measured marginal correlation is not a validated joint probability for the pair of lines actually being priced",
+     "clears_when": "a joint probability estimated from realised joint outcomes, plus the operator's void/push rules"
+    },
+    {
+     "gate": "D5-G8",
+     "name": "Operator void/push rules on file",
+     "passed": false,
+     "detail": "a same-game parlay's void rule changes its settlement, and no operator's rules are on file",
+     "clears_when": "the operator's written void/push rules are registered against the combo"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 8,
+   "qualified": false,
+   "rank": 8
+  },
+  {
+   "id": "D5S09",
+   "division": "singles",
+   "family": "rejected",
+   "name": "REJECTED \u2014 rank by season-long ROI",
+   "role": "REJECTED by the brief itself. Kept in the register so the rejection is visible, not silent.",
+   "rule": "Rank strategies by realised return over the season.",
+   "inputs": "settled returns",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "rejected before evaluation, which is the correct time to reject a rule"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "rejection_reason": "Season-long ROI is dominated by variance at this sample size: one 5-unit dog at +400 moves a whole-season number more than a real 2% edge over 100 bets. It is a staking statistic masquerading as a skill statistic.",
+   "what_would_change_our_mind": "Nothing on this timeline. It could be revisited only as a secondary display once G4 is passed by a pre-registered rule.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 9
+  },
+  {
+   "id": "D5S10",
+   "division": "singles",
+   "family": "rejected",
+   "name": "REJECTED \u2014 derive depth order from jersey number, experience or salary",
+   "role": "REJECTED. It is the tempting shortcut that would fabricate a starter the club never named.",
+   "rule": "Infer the starter at each slot from roster attributes on the official roster page.",
+   "inputs": "roster attributes",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "rejected"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "rejection_reason": "Jersey order is not depth order. The repository already carried the counter-example: a rank-1 player who is a veteran backup, and clubs that list three rank-1 receivers.",
+   "what_would_change_our_mind": "An official league-wide depth publication with dated slots. None exists at nfl.com/depth-charts/ (F02).",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 10
+  },
+  {
+   "id": "D5S11",
+   "division": "singles",
+   "family": "ablation",
+   "name": "Ablation \u2014 personnel features on vs off",
+   "role": "CANDIDATE (method). The brief asks for ablations instead of fixed point penalties; this is that ablation, registered as its own entry.",
+   "rule": "Run the identical singles model twice, once with verified availability features and once without, on the same chronological holdouts. Report the BSS difference with its game-cluster interval. A fixed 'starter out = -2 points' penalty is forbidden.",
+   "inputs": "the two model configurations",
+   "registration": {
+    "committed": false,
+    "hash": "",
+    "note": "blocked on D5S05's snapshot requirement"
+   },
+   "signal": {
+    "n": 0,
+    "bss": null,
+    "bss_lo": null
+   },
+   "staking": {
+    "n": 0
+   },
+   "multiplicity_pass": false,
+   "what_would_change_our_mind": "A difference interval that spans zero: then the personnel features are not earning their data cost, and should be dropped rather than tuned.",
+   "multiplicity_detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+   "gates": [
+    {
+     "gate": "D5-G1",
+     "name": "Pre-registered before results",
+     "passed": false,
+     "detail": "no committed rule text: the definition could still be changed after seeing results",
+     "clears_when": "commit the rule text, window and gates to git; the commit hash is the registration"
+    },
+    {
+     "gate": "D5-G2",
+     "name": "Prospective forecast record",
+     "passed": false,
+     "detail": "0 forecasts have been recorded against a benchmark for this strategy",
+     "clears_when": "one forecast per selection, logged before kickoff, with the probability"
+    },
+    {
+     "gate": "D5-G3",
+     "name": "Sample clears the power bar",
+     "passed": false,
+     "detail": "0 of 2241 forecasts",
+     "clears_when": "2241 scored forecasts at a 55% edge against a 52.4% break-even"
+    },
+    {
+     "gate": "D5-G4",
+     "name": "Benchmark-relative skill lower bound > 0",
+     "passed": false,
+     "detail": "no forecasts, so no skill interval",
+     "clears_when": "the lower bound of the clustered BSS interval is above zero"
+    },
+    {
+     "gate": "D5-G5",
+     "name": "Survives multiplicity adjustment",
+     "passed": false,
+     "detail": "not tested: n=0 forecasts, p=1.0 after BH across 11 registered hypotheses",
+     "clears_when": "Benjamini-Hochberg q=0.05 across all registered hypotheses"
+    },
+    {
+     "gate": "D5-G6",
+     "name": "Staking cannot mask the signal",
+     "passed": false,
+     "detail": "0 settled stakes; market cells blank because no official price source exists",
+     "clears_when": "both the signal bound and the staking bound are positive, and the rank is unchanged"
+    }
+   ],
+   "gates_passed": 0,
+   "gates_total": 6,
+   "qualified": false,
+   "rank": 11
+  }
+ ],
+ "sample_bars": {
+  "singles": 2241,
+  "game_parlay": 3362,
+  "same_game_parlay": 4482,
+  "prop_combo": 4482
+ },
+ "power": {
+  "edge": 0.55,
+  "breakeven": 0.5238,
+  "power": 0.8,
+  "n": 2241
+ },
+ "controls": {
+  "price": -110,
+  "payout_per_unit": 0.9091,
+  "breakeven_hit": 0.52381,
+  "random_side_expected_hit": 0.5,
+  "random_side_expected_yield": -0.04545,
+  "random_side_expected_hit_ci_at_n": {
+   "n": 100,
+   "lo": 0.4038,
+   "hi": 0.5962
+  },
+  "favourite_note": "a favourites-only rule must clear 0.5238 to break even at -110; it has no skill until it does",
+  "slate_games": 13,
+  "power": {
+   "edge_p1": 0.55,
+   "breakeven_p0": 0.5238,
+   "power": 0.8,
+   "bets_for_55_vs_524": 2241
+  }
+ },
+ "n_hypotheses": 11,
+ "measured": {
+  "bss": 0.10212643634744512,
+  "lo": -0.01196918399416047,
+  "hi": 0.2214658491532846,
+  "n": 137,
+  "clusters": 137,
+  "reps": 1000,
+  "note": "cluster bootstrap over games, 1000 reps, seed 20261117",
+  "log_loss": 0.63789,
+  "brier": 0.22447,
+  "bench_brier": 0.25,
+  "benchmark_note": "constant 0.5 outcome baseline only; spread prices cannot be converted to win probabilities without a validated margin distribution, so no market skill claim is made"
+ },
+ "qualified_count": 0,
+ "reward_pool_basis": "a reward is payable only when qualified; 0 of 11 entries are qualified right now",
+ "divisions_note": "singles, game parlay, same-game parlay and prop combo are scored in separate divisions because their variance and their dependence structure differ; ranking them together would let a high-variance division top a table on one good week"
+}

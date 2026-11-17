@@ -77,40 +77,107 @@ class TestN02ChangeOurMind(unittest.TestCase):
 
 
 class TestN03InjuryHubDelta(unittest.TestCase):
+    """Three dated reads of the official hub; the register publishes the LATEST
+    delta (read 2 -> read 3) and keeps read 1 -> read 2 under `history`. Every
+    delta row is re-checked here against the verbatim raw captures."""
+
+    READS = {
+        1: "injuries-week10-2026.md",
+        2: "injuries-week10-2026-read2.md",
+        3: "injuries-week10-2026-read3.md",
+    }
+    PRACTICE_TEXT = {
+        "FULL": "Full Participation in Practice",
+        "LIMITED": "Limited Participation in Practice",
+        "DNP": "Did Not Participate In Practice",
+        "": "",
+    }
+    CELL = {"injury": 2, "practice": 3, "game": 4}
+
     def setUp(self):
         self.delta = load("injury_hub_delta.json")
 
-    def test_two_dated_reads(self):
+    def _row_cells(self, read_no, team, player, pos):
+        """Return the 5 cells of that player's row in a raw capture, or None."""
+        path = os.path.join(ROOT, "raw", self.READS[read_no])
+        with open(path, encoding="utf-8") as fh:
+            for ln in fh:
+                if not ln.startswith("| ["):
+                    continue
+                if ("| [" + player + "](") not in ln:
+                    continue
+                cells = [c.strip() for c in ln.strip().strip("|").split("|")]
+                self.assertEqual(len(cells), 5, ln.strip())
+                if cells[1] == pos:
+                    return cells
+        return None
+
+    def test_three_dated_reads(self):
         reads = self.delta["reads"]
-        self.assertEqual(len(reads), 2)
+        self.assertEqual(len(reads), 3)
         self.assertEqual(reads[0]["captured"], "2026-11-14")
         self.assertIn("2026-11-16", reads[1]["read_window_utc"])
+        self.assertIn("2026-11-17", reads[2]["read_window_utc"])
         self.assertEqual(reads[0]["rows"], 345)
         self.assertEqual(reads[1]["rows"], 347)
+        self.assertEqual(reads[2]["rows"], 347)
+        self.assertEqual(reads[2]["source_id"], "S94")
 
-    def test_delta_totals_consistent(self):
-        d = self.delta["delta"]
+    def test_history_preserves_the_first_delta(self):
+        h = self.delta["history"]
+        self.assertEqual(len(h), 1)
+        d = h[0]
+        self.assertEqual(d["older_label"], "read 1 (2026-11-14)")
+        self.assertEqual(d["newer_label"], "read 2 (2026-11-16)")
         self.assertEqual(len(d["changed"]), 32)
         self.assertEqual(len(d["added"]), 2)
         self.assertEqual(len(d["removed"]), 0)
-        self.assertEqual(sum(p["read2"] - p["read1"] for p in d["per_club_row_count_changes"]),
-                         len(d["added"]) - len(d["removed"]))
 
-    def test_changes_carry_old_and_new(self):
-        designations = {"", "Out", "Doubtful", "Questionable"}
-        practices = {"", "FULL", "LIMITED", "DNP"}
-        for c in self.delta["delta"]["changed"]:
+    def test_published_delta_is_read2_to_read3(self):
+        d = self.delta["delta"]
+        self.assertEqual(d["older_label"], "read 2 (2026-11-16)")
+        self.assertEqual(d["newer_label"], "read 3 (2026-11-17)")
+        # observed at the 2026-11-17 read: exactly one field edit
+        self.assertEqual(len(d["changed"]), 1)
+        self.assertEqual(len(d["added"]), 0)
+        self.assertEqual(len(d["removed"]), 0)
+        c = d["changed"][0]
+        self.assertEqual((c["team"], c["player"], c["field"]),
+                         ("NO", "Travis Etienne", "practice"))
+        self.assertEqual((c["old"], c["new"]), ("FULL", "LIMITED"))
+
+    def _check_pair(self, d, older_read, newer_read):
+        for c in d["changed"]:
             self.assertIn(c["field"], ("injury", "practice", "game"))
             self.assertNotEqual(c["old"], c["new"])
-            if c["field"] == "game":
-                self.assertIn(c["old"], designations)
-                self.assertIn(c["new"], designations)
-            if c["field"] == "practice":
-                self.assertIn(c["old"], practices)
-                self.assertIn(c["new"], practices)
+            old_cells = self._row_cells(older_read, c["team"], c["player"], c["pos"])
+            new_cells = self._row_cells(newer_read, c["team"], c["player"], c["pos"])
+            self.assertIsNotNone(old_cells, c)
+            self.assertIsNotNone(new_cells, c)
+            idx = self.CELL[c["field"]]
+            exp_old = self.PRACTICE_TEXT.get(c["old"], c["old"])
+            exp_new = self.PRACTICE_TEXT.get(c["new"], c["new"])
+            self.assertEqual(old_cells[idx], exp_old, c)
+            self.assertEqual(new_cells[idx], exp_new, c)
+        for a in d["added"]:
+            self.assertIsNotNone(self._row_cells(newer_read, a["team"], a["player"], a["pos"]), a)
+            self.assertIsNone(self._row_cells(older_read, a["team"], a["player"], a["pos"]), a)
+        for r in d["removed"]:
+            self.assertIsNotNone(self._row_cells(older_read, r["team"], r["player"], r["pos"]), r)
+            self.assertIsNone(self._row_cells(newer_read, r["team"], r["player"], r["pos"]), r)
+
+    def test_every_delta_row_ties_back_to_the_raw_captures(self):
+        self._check_pair(self.delta["delta"], 2, 3)
+        self._check_pair(self.delta["history"][0], 1, 2)
+
+    def test_per_club_counts_arithmetic(self):
+        for d in [self.delta["delta"]] + self.delta["history"]:
+            self.assertEqual(
+                sum(p["newer"] - p["older"] for p in d["per_club_row_count_changes"]),
+                len(d["added"]) - len(d["removed"]), d["between"])
 
     def test_added_rows_are_baltimore(self):
-        for a in self.delta["delta"]["added"]:
+        for a in self.delta["history"][0]["added"]:
             self.assertEqual(a["team"], "BAL")
 
     def test_reserve_pointers_are_nfl_news(self):
@@ -137,7 +204,6 @@ class TestN04Week10Extension(unittest.TestCase):
         week10 = [r for r in results if r[0] == "10"]
         # The canonical feed was promoted to all 149 official games, so Week 10
         # now holds all 13 finals (the TNF game plus the 12 Sunday finals).
-        # The TNF game is present and correct among them.
         self.assertEqual(len(week10), 13)
         self.assertIn(("WAS", "24", "NYG", "21"),
                       [(r[2], r[3], r[4], r[5]) for r in week10])
@@ -214,10 +280,13 @@ class TestSourcesS70S72(unittest.TestCase):
         # main (S01-S79, S53-S60 unused) + S80-S82 (session 38a78804)
         # + S83-S88 (session fc0ed6e8: renumbered second wave after both
         #   sessions independently claimed S70-S82 for different sources)
-        # + S89-S90 (session arena/3f12fa46-fl1: Week 10 Game Center pages and
-        #   official Game Book PDFs)
-        self.assertEqual(len(rows), 82)
-
-
+        # + S89-S91 (session arena/e97f05c3-fl1: Week 10 Sunday-night final and
+        #   the 2026-11-17 standings read; S91 is the live, not-yet-final MNF game)
+        # + S92 (row-level citation audit; repository-only, not an NFL source)
+        # + S93 (Week 11 by-week schedule; arena/d50423eb)
+        # + S94 (session 7ac4e12e: third dated injury-hub read, 2026-11-17)
+                # + S95-S96 (session 7ac4e12e: Week 10 close-out schedule + standings
+        #   reads, 2026-11-17)
+        self.assertEqual(len(rows), 90)
 if __name__ == "__main__":
     unittest.main()

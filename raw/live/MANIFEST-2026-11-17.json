@@ -1,0 +1,28 @@
+{
+ "captured": "2026-11-17T02:36Z (standings, week 10 finals, week 11 slate); 2026-11-17T02:39Z (injury report)",
+ "by": "session arena/d50423eb-fl1",
+ "transport": "page-fetch tool (markdown render of the official nfl.com URL); transcribed row by row",
+ "note": "sha256 over the committed file bytes. scripts/verify_live_d5.py recomputes them; a changed official page must be captured under a new dated filename, never overwritten.",
+ "files": [
+  {
+   "path": "raw/live/2026-11-17-standings-league-reg.tsv",
+   "sha256": "ac371a12315c6f48150cc49bc2463e50762904ca49b01d0b16636aea11790562",
+   "bytes": 3182
+  },
+  {
+   "path": "raw/live/2026-11-17-week10-finals.tsv",
+   "sha256": "ebde3c00231e5af64da484409ddce57967275d15c17aa125c5e9164f9b8d8559",
+   "bytes": 1899
+  },
+  {
+   "path": "raw/live/2026-11-17-week11-slate.tsv",
+   "sha256": "f873e1e2876829c448ae86162d295791f949d2d8107b2b97306e41909c8df359",
+   "bytes": 1782
+  },
+  {
+   "path": "raw/live/2026-11-17-injury-report-week10.md",
+   "sha256": "5b80b09882c712e1a682f2ae69bafeb9bf18f7871a82e13bd74947c1d0bf1c03",
+   "bytes": 28343
+  }
+ ]
+}

@@ -32,6 +32,19 @@ TAGLINE = "Verified data, open questions, and a strategy leaderboard that refuse
 
 NAV = [
     ("index.html", "Dashboard"),
+    ("live-captures.html", "Live Captures"),
+    ("live-standings.html", "Live Standings"),
+    ("live-finals.html", "Week 10 Finals"),
+    ("live-schedule.html", "Week 11 Schedule"),
+    ("strategy-scorecard.html", "D5 Scorecard"),
+    ("readiness-d5.html", "D5 Readiness"),
+    ("availability-matrix-d5.html", "Availability Matrix"),
+    ("decision-questions-d5.html", "Decision Questions"),
+    ("decision-ledger.html", "Decision Ledger"),
+    ("suggestions-pipeline.html", "Suggestion Pipeline"),
+    ("qa-d5.html", "Full Q&A Register"),
+    ("suggestions-d5.html", "D5 Suggestions"),
+    ("flagged-d5.html", "D5 Flags"),
     ("readiness.html", "Decision Readiness"),
     ("executive-summary.html", "Executive Summary"),
     ("requirements.html", "Requirements"),
@@ -64,6 +77,7 @@ NAV = [
     ("questions.html", "Open Questions"),
     ("suggestions.html", "Suggestions"),
     ("sources.html", "Sources"),
+    ("source-audit.html", "Row-Level Source Audit"),
     ("verification.html", "Verification"),
     ("price-store.html", "Price Store"),
     ("results-feed-market.html", "Verified Results Feed (spine)"),
@@ -846,10 +860,14 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
 
     # -------------------------------------------------- N03 injury-hub delta
     reads = delta["reads"]
-    ch = delta["delta"]["changed"]
-    add = delta["delta"]["added"]
-    rem = delta["delta"]["removed"]
-    pc = delta["delta"]["per_club_row_count_changes"]
+    dl = delta["delta"]  # latest diff (read 2 -> read 3)
+    hist = delta.get("history", [])
+    old_lbl = dl.get("older_label", "read 1")
+    new_lbl = dl.get("newer_label", "read 2")
+    ch = dl["changed"]
+    add = dl["added"]
+    rem = dl["removed"]
+    pc = dl["per_club_row_count_changes"]
     read_rows = []
     for r in reads:
         when = r.get("read_window_utc") or r.get("captured", "")
@@ -874,22 +892,30 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
                  cell(a["injury"] or "—"), cell(a["practice"] or "—"),
                  cell(a["game"] or "—")] for a in add]
     rem_rows = [[cell(d["team"]), cell(d["player"]), cell(d["pos"])] for d in rem]
-    pc_rows = [[cell(p["team"]), cell(p["read1"], "n"), cell(p["read2"], "n")] for p in pc]
+    pc_rows = [[cell(p["team"]), cell(p["older"], "n"), cell(p["newer"], "n")] for p in pc]
     res_rows = [[cell(p["text"]), raw_src('<a href="%s">%s</a>' % (p["url"], "nfl.com/news"))]
                 for p in delta["reserve_list_pointers"]]
+    hist_txt = ""
+    if hist:
+        h0 = hist[0]
+        hist_txt = (" The earlier diff, read 1 &rarr; read 2, stays in "
+                    "<code>data/injury_hub_delta.json</code> under <code>history</code>: "
+                    "%d field changes, %d added, %d removed."
+                    % (len(h0["changed"]), len(h0["added"]), len(h0["removed"])))
     out["injury_delta"] = """
 <section>
 <h2>Dated reads of the injury hub &mdash; delta, never the level</h2>
 <p class="lead">The hub is read with its clock time and each new read is published as the
 <em>difference</em> from the previous one, so a designation's history is a series, not a snapshot.
-Both captures are kept verbatim under <code>raw/</code>.</p>
+All three captures are kept verbatim under <code>raw/</code> (read 3 was fetched in 8 chunks and
+rejoined character-exactly by <code>scripts/assemble_read3.py</code>).</p>
 %s
-<div class="callout"><p><strong>Read 2 (2026-11-16, ~01:15&ndash;01:25 UTC).</strong> The hub still showed
-<em>WEEK 10</em>. The %d field changes and %d added rows since read 1 all belong to clubs whose
-report was still evolving (the Monday-night clubs and one Colts row that cleared); the three Lions
-game-status designations flagged earlier are already populated in read 1, so the 2026-11-14
-re-capture had fixed them. The page's NEWS section also carried reserve-list events (below) —
-recorded as pointers, never used as injury-table rows.</p></div>
+<div class="callout"><p><strong>Read 3 (2026-11-17, 02:35&ndash;02:36 UTC).</strong> The hub still showed
+<em>WEEK 10</em>. Since read 2 the tables moved by %d field change(s), %d added and %d removed
+row(s). The Sunday-night headings now carry the final records the page printed for those games
+(PIT 6-3, CIN 7-2); the Monday-night game was still inside its broadcast window at read time, so
+those clubs still show pre-game records. The page's NEWS section carried reserve-list events
+(below) — recorded as pointers, never used as injury-table rows.%s</p></div>
 <h3>Changed rows (%d)</h3>
 %s
 <h3>Added rows (%d)</h3>
@@ -902,16 +928,17 @@ recorded as pointers, never used as injury-table rows.</p></div>
 %s
 </section>
 """ % (table(["Read", "When (UTC)", "Rows parsed", "Week shown", "Source"], read_rows, cls="dense"),
-       len(ch), len(add), len(ch),
-       table(["Club", "Player", "Pos", "Field", "At read 1 (2026-11-14)", "At read 2 (2026-11-16)"],
+       len(ch), len(add), len(rem), hist_txt,
+       len(ch),
+       table(["Club", "Player", "Pos", "Field", "At %s" % old_lbl, "At %s" % new_lbl],
              ch_rows, cls="dense searchable"),
        len(add),
        table(["Club", "Player", "Pos", "Injury", "Practice", "Game"], add_rows, cls="dense"),
        len(rem),
        (table(["Club", "Player", "Pos"], rem_rows, cls="dense") if rem_rows
-        else '<p class="caption">No row disappeared between the two reads.</p>'),
-       (table(["Club", "Read 1", "Read 2"], pc_rows, cls="dense") if pc_rows
-        else '<p class="caption">No club row count changed.</p>'),
+        else '<p class="caption">No row disappeared between these two reads.</p>'),
+       (table(["Club", old_lbl, new_lbl], pc_rows, cls="dense") if pc_rows
+        else '<p class="caption">No club row count changed between these two reads.</p>'),
        table(["Event as headlined on the hub", "Link"], res_rows, cls="dense"))
 
     # --------------------------------------------- N04 week-10 finals extension
@@ -937,6 +964,51 @@ recorded as pointers, never used as injury-table rows.</p></div>
             cell(p["status"]),
             raw_src('<a href="%s">game centre</a>' % esc(p["game_url"])),
         ])
+    comp = w10x.get("completion") or {}
+    comp_html = ""
+    if comp:
+        nf = comp["new_final"]
+        sl = comp["still_live"]
+        n_checks = len(comp["checks"])
+        comp_rows = [[
+            cell(nf["date"]),
+            cell(nf["away"]), cell(nf["awayPts"], "n"),
+            cell(nf["home"]), cell(nf["homePts"], "n"),
+            cell(nf["note"]),
+            raw_src('<a href="%s">game centre</a>' % esc(nf["game_url"])),
+            raw_src(src_link("S95", sources_by_id)),
+        ]]
+        live_rows = [[
+            cell(sl["date"]),
+            cell(sl["away"]), "<td class=\"blank\">—</td>",
+            cell(sl["home"]), "<td class=\"blank\">—</td>",
+            cell(sl["status"]),
+            raw_src('<a href="%s">game centre</a>' % esc(sl["game_url"])),
+            raw_src(src_link("S95", sources_by_id)),
+        ]]
+        comp_html = """
+<h3>Close-out read (%s, %s)</h3>
+<p>A second dated read of the same official page: <strong>%d of the 14 Week 10 games
+printed FINAL</strong>. The Sunday-night game finished between the reads and is the one
+new final below; the Monday-night game was still live, so it stays a status row with
+blank scores — a partial score is not a result. The %d completion checks
+(C1 bullet lines vs TSV rows, C2 original rows reappear plus the new final,
+C3 records <em>and</em> points vs the fresh official standings 32/32,
+C4 the live game's clubs byte-identical between standings reads,
+C5 bye records vs recompute) are enforced by
+<code>scripts/build_week10_extension.py</code>. Fresh sources: S95 (schedule),
+S96 (standings, <code>%s</code>) — corroborating only; the canonical
+<code>data/results.tsv</code> and <code>data/standings.tsv</code> are untouched, and
+promotion into the feed remains the owner decision Q44.</p>
+%s
+%s
+""" % (esc(comp["read"]), esc(comp["read_window_utc"]),
+       comp["finals_on_page"], n_checks,
+       esc(comp["standings_capture"]),
+       table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre", "Source"],
+             comp_rows, cls="dense"),
+           table(["Date", "Away", "Pts", "Home", "Pts", "Status at read",
+                  "Game centre", "Source"], live_rows, cls="dense"))
     out["week10_finals"] = """
 <section>
 <h2>Week 10 finals &mdash; captured 2026-11-16 after the 2026-11-14 read</h2>
@@ -957,12 +1029,14 @@ league standings (W/L/T <em>and</em> PF/PA, 32 of 32) captured at the same read 
 <code>raw/standings-2026-20261116.tsv</code>, corroborating evidence only; the canonical standings
 capture is unchanged. The Sunday-night game was in progress and the Monday game unplayed at read
 time, so those two clubs show pre-game records on the page and blanks here.</p></div>
+%s
 </section>
 """ % (len(w10x["finals"]),
        table(["Date", "Away", "Pts", "Home", "Pts", "Note", "Game centre"], fin_rows, cls="dense"),
        len(w10x["pending"]),
        table(["Date", "Away", "Pts", "Home", "Pts", "Status at read", "Game centre"],
-             pend_rows, cls="dense"))
+             pend_rows, cls="dense"),
+       comp_html)
 
     # ------------------------------------- N02 two-sided change-our-mind fields
     cm_rows = []
@@ -1514,6 +1588,8 @@ def main():
         "sources_by_id": sources_by_id,
     }
     g_pages, g_sections = site_g.build(g_ctx)
+    import pages_d5
+    d5_pages, d5_sections = pages_d5.build(g_ctx)
 
     # Session arena-fc0ed6e8-fl1 (2026-11-16): decision-layer sections and pages.
     sess = session_sections(sources_by_id, readiness, luck_panel, ablations, announced,
@@ -1650,8 +1726,8 @@ def main():
              cell("Practice status column reads Did Not Participate"), raw_src(src_link("S01", sources_by_id))],
             [cell("Rows marked not injury related"), cell(lg["nonInjury"], "n"),
              cell("Injury text begins 'Not injury related'"), raw_src(src_link("S01", sources_by_id))],
-            [cell("Sources verified"), cell("%d of %d" % (n_verified, len(sources)), "n"),
-             cell("Page loaded successfully in this session"), raw_src('<a href="sources.html">registry</a>')],
+            [cell("Registry records marked VERIFIED"), cell("%d of %d" % (n_verified, len(sources)), "n"),
+             cell("Registry metadata; not a live-fetch count"), raw_src('<a href="sources.html">registry</a>')],
             [cell("Sources that failed to load"), cell(n_404, "n"),
              cell("Recorded as NOT VERIFIED, never cited as fact"), raw_src('<a href="flagged.html">flagged</a>')],
             [cell("Strategies with a result"), cell("0 of %d" % len(strategies), "n"),
@@ -1665,7 +1741,8 @@ def main():
     written.append(page("index.html", "Dashboard",
                         cards + kpis + sprint["decision_readiness"]
                         + sprint["luck_panel"] + g_sections
-                        + sess["landing_readiness"] + sess["luck_dashboard"]))
+                        + sess["landing_readiness"] + sess["luck_dashboard"]
+                        + "".join(d5_sections)))
 
     # ------------------------------------------------------- executive summary
     total_out_def = sum(t["defOut"] for t in by_team)
@@ -1679,9 +1756,11 @@ and marks everything else as open.</p>
 
 <section>
 <h2>1. What has been verified</h2>
-<p>The repository was empty apart from a five-byte README, so the entire base is new. Fifteen sources were
-attempted; <strong>%d loaded successfully</strong> and <strong>%d did not</strong>. The failed ones are
-recorded as unverified and are never used to support a claim.</p>
+<p>The source registry contains <strong>%d records</strong>: <strong>%d are marked VERIFIED</strong> and
+<strong>%d are marked NOT VERIFIED</strong>. These are registry statuses accumulated across sessions, not a
+claim that every URL was re-fetched in this build; the registry labels official league/club sources,
+third-party feeds, and repository-generated artifacts separately. Failed official sources remain flagged
+and are not cited as confirmed facts.</p>
 <p>The most substantial verified artefact is the <strong>official Week 10, 2026 season injury report</strong>:
 %d player rows over %d clubs, with each player's practice status and game status reproduced exactly as published.
 Of those rows, %d carry a game status (Out, Doubtful or Questionable) and %d are recorded as did-not-participate
@@ -1760,7 +1839,7 @@ club has a bye, because no official bye table was verified. It does not resolve 
 pages contradict each other. It does not print a single performance number. Each of those is listed with links on
 <a href="flagged.html">Flagged for Review</a>.</p>
 </section>
-""" % (n_verified, n_404, lg["rows"], lg["clubs"], lg["withGameStatus"], lg["dnp"],
+""" % (len(sources), n_verified, n_404, lg["rows"], lg["clubs"], lg["withGameStatus"], lg["dnp"],
        depth_cov["covered"],
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
@@ -2680,12 +2759,37 @@ No strategy can be promoted to live until a price source is supplied and the dem
     q_by_cat = {}
     for q in questions:
         q_by_cat.setdefault(q["category"], []).append(q)
+    n_ans = sum(1 for q in questions if q.get("answer_state") == "answered")
+    n_part = sum(1 for q in questions if q.get("answer_state") == "partial")
+    n_open = sum(1 for q in questions if q.get("answer_state") == "open")
+    if n_ans + n_part + n_open != len(questions):
+        raise SystemExit("questions answer layer incomplete: %d/%d rows answered"
+                         % (n_ans + n_part + n_open, len(questions)))
+    ANS_KIND = {"answered": "ok", "partial": "warn", "open": "bad"}
+
+    def ans_cell(q):
+        st = q.get("answer_state", "")
+        # same linking rules as sprint_sections' qflink (Q -> questions.html#,
+        # F -> flagged.html#) — defined locally because that helper is out of scope
+        def _link(ref):
+            if ref.startswith("Q"):
+                return '<a href="questions.html#%s">%s</a>' % (ref, ref)
+            return '<a href="flagged.html#%s">%s</a>' % (ref, ref)
+        body = re.sub(r"\b([QF]\d{2})\b", lambda m: _link(m.group(1)),
+                      esc(q.get("answer", "")))
+        return '<td>%s %s</td>' % (pill(st, ANS_KIND.get(st, "")), body)
     q_html = ['<section><h1>Open Questions</h1>',
               '<p class="lead">Every question that must be answered before a decision can reasonably be made, '
-              'with what we know, what we do not know, what data is missing, and whether it blocks progress.</p>',
-              '<div class="callout"><p><strong>%d questions, %d blocking.</strong> A question is marked blocking '
+              'with what we know, what we do not know, what data is missing, and whether it blocks progress. '
+              'Since 2026-11-17 every row also carries a dated answer: what is already settled by evidence in '
+              'this repo, and — for everything else — exactly which decision or dataset would settle it.</p>',
+              '<div class="callout"><p><strong>%d questions, %d blocking; answers dated 2026-11-17: %d answered, '
+              '%d partial, %d open.</strong> A question is marked blocking '
               'when no defensible number can be produced until it is answered. The blocking ones are the reason '
-              'the leaderboard is empty.</p></div></section>' % (len(questions), n_block)]
+              'the leaderboard is empty. In the Answer column, <em>answered</em> means settled by a cited file or '
+              'official source, <em>partial</em> means the factual half is stated and a named gap remains, and '
+              '<em>open</em> means an owner decision or a missing dataset dominates.</p></div></section>'
+              % (len(questions), n_block, n_ans, n_part, n_open)]
     for cat, items in q_by_cat.items():
         rows = []
         for q in items:
@@ -2698,6 +2802,7 @@ No strategy can be promoted to live until a price source is supplied and the dem
                 '<td>%s</td>' % pill(q["blocking"], "bad" if q["blocking"].lower().startswith("yes") else "ok"),
                 cell(q["what_we_know"]),
                 cell(q["what_we_dont_know"]),
+                ans_cell(q),
                 cell(q["missing_data"]),
                 cell(q["recommended_path"]),
                 '<td>%s</td>' % (src_link(q["source"].split(",")[0].strip(), sources_by_id)
@@ -2706,7 +2811,8 @@ No strategy can be promoted to live until a price source is supplied and the dem
         q_html.append('<section><h2>%s</h2>%s</section>' % (
             esc(cat),
             table(["ID", "Question", "Priority", "Blocks progress?", "What we know",
-                   "What we do not know", "Missing data", "Recommended path", "Source"],
+                   "What we do not know", "Answer (2026-11-17)", "Missing data",
+                   "Recommended path", "Source"],
                   rows, cls="dense qtable")))
     q_html.append("""
 <section>
@@ -2942,6 +3048,14 @@ verification note for each one.</p>
     written.extend(pages_market.render_all())
 
     written.extend(g_pages)
+    written.extend(d5_pages)
+
+    # Final integration audit: classify the source strength detected on every
+    # rendered data row. The audit runs after all source pages have been written.
+    import source_audit
+    audit_page, audit_counts, audit_rows = source_audit.render(sys.modules[__name__])
+    written.append(audit_page)
+    print("source-row audit: %d rows; classes=%s" % (audit_rows, dict(sorted(audit_counts.items()))))
 
     # ------------------------------------------------------------- H2-H8 layer
     # Session arena/3f12fa46-fl1: official Game Book capture, matchup matrix,
