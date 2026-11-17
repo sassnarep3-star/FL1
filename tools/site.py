@@ -24,6 +24,7 @@ sys.path.insert(0, os.path.join(ROOT, "tools"))
 
 import build  # noqa: E402  (shares the loaders and derived analysis)
 import site_g  # noqa: E402  (session arena/dbf11de0-fl1: backlog, luck, availability, ledger)
+import pages_1433  # noqa: E402  (session arena/143300b4-fl1: game books, availability graph, depth slots)
 
 E = html.escape
 
@@ -39,6 +40,9 @@ NAV = [
     ("injuries.html", "Injuries"),
     ("team-availability.html", "Team Availability"),
     ("announced-starters.html", "Announced Starters"),
+    ("gamebooks.html", "Official Game Books"),
+    ("availability-graph.html", "Availability Graph"),
+    ("depth-slots.html", "Depth Slots"),
     ("availability-ledger.html", "Snapshot Ledger"),
     ("depth.html", "Backup Depth"),
     ("replacement-depth.html", "Replacement Depth"),
@@ -1510,6 +1514,10 @@ def main():
     }
     g_pages, g_sections = site_g.build(g_ctx)
 
+    # Session arena/143300b4-fl1 (2026-11-17): official game books, the
+    # availability graph and depth slot groups.
+    x_pages, x_sections = pages_1433.build(g_ctx)
+
     # Session arena-fc0ed6e8-fl1 (2026-11-16): decision-layer sections and pages.
     sess = session_sections(sources_by_id, readiness, luck_panel, ablations, announced,
                             venue_checks, reserve_rows)
@@ -1760,7 +1768,7 @@ pages contradict each other. It does not print a single performance number. Each
        lg["out"], total_out_off, total_out_def, sum(t["stOut"] for t in by_team),
        depth_tot["starters"], depth_tot["startersWithStatus"])
     import brief as _brief  # session arena/685f958d-fl1
-    es = _brief.exec_banner() + site_g.exec_section(g_ctx) + es
+    es = _brief.exec_banner() + site_g.exec_section(g_ctx) + pages_1433.exec_section(g_ctx) + es
     written.append(page("executive-summary.html", "Executive Summary",
                         es + sprint["exec_summary"]))
 
@@ -2937,6 +2945,7 @@ verification note for each one.</p>
     written.extend(pages_market.render_all())
 
     written.extend(g_pages)
+    written.extend(x_pages)
 
     print("wrote %d pages:" % len(written))
     for w in written:
