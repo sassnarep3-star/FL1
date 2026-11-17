@@ -1,0 +1,295 @@
+{
+  "clubs": [
+    "ARI",
+    "ATL",
+    "BAL",
+    "BUF",
+    "CAR",
+    "CHI",
+    "CIN",
+    "CLE",
+    "DAL",
+    "DEN",
+    "DET",
+    "GB",
+    "IND",
+    "JAX",
+    "KC",
+    "LAC",
+    "LAR",
+    "LV",
+    "MIA",
+    "MIN",
+    "NE",
+    "NO",
+    "NYG",
+    "NYJ",
+    "PHI",
+    "PIT",
+    "SEA",
+    "SF",
+    "TB",
+    "TEN",
+    "WAS"
+  ],
+  "clubs_with_no_chart": [
+    "HOU"
+  ],
+  "empty": 4,
+  "empty_slots": {
+    "BAL-Special Teams-K-1": [
+      ""
+    ],
+    "MIA-Special Teams-K-1": [
+      ""
+    ],
+    "NYJ-Defense-DL-2": [
+      "",
+      "Jack Heflin"
+    ],
+    "PHI-Defense-DT-2": [
+      "",
+      "Ty Robinson"
+    ]
+  },
+  "n_clubs": 31,
+  "shared": 19,
+  "shared_slots": {
+    "ARI-Defense-OLB-2": [
+      "Baron Browning",
+      "Zaven Collins"
+    ],
+    "DAL-Defense-LB-2": [
+      "Jaishawn Barham",
+      "Shemar James"
+    ],
+    "DAL-Defense-S-1": [
+      "Markquese Bell",
+      "P.J. Locke"
+    ],
+    "DAL-Offense-TE-1": [
+      "Brevyn Spann-Ford",
+      "Jake Ferguson"
+    ],
+    "JAX-Defense-LB-2": [
+      "Branson Combs",
+      "Ventrell Miller"
+    ],
+    "JAX-Offense-RB-1": [
+      "Bhayshul Tuten",
+      "Chris Rodriguez Jr."
+    ],
+    "KC-Defense-CB-1": [
+      "Nohl Williams",
+      "Mansoor Delane"
+    ],
+    "KC-Defense-DE-1": [
+      "Felix Anudike-Uzomah",
+      "George Karlaftis"
+    ],
+    "KC-Defense-DT-1": [
+      "Chris Jones",
+      "Khyiris Tonga"
+    ],
+    "KC-Defense-LB-1": [
+      "Jack Cochrane",
+      "Nick Bolton",
+      "Drue Tranquill"
+    ],
+    "KC-Defense-S-1": [
+      "Alohi Gilman",
+      "Chamarri Conner"
+    ],
+    "LAR-Defense-CB-2": [
+      "Emmanuel Forbes Jr.",
+      "Josh Wallace"
+    ],
+    "LAR-Offense-TE-1": [
+      "Davis Allen",
+      "Tyler Higbee"
+    ],
+    "MIN-Offense-RB-1": [
+      "Aaron Jones Sr.",
+      "Jordan Mason"
+    ],
+    "NO-Defense-EDGE-1": [
+      "Carl Granderson",
+      "Chase Young"
+    ],
+    "PHI-Defense-EDGE-1": [
+      "Jalyx Hunt",
+      "Jonathan Greenard"
+    ],
+    "PHI-Defense-EDGE-2": [
+      "Jonathan Greenard",
+      "Nolan Smith Jr."
+    ],
+    "PIT-Offense-TE-1": [
+      "Darnell Washington",
+      "Pat Freiermuth"
+    ],
+    "SEA-Offense-WR-1": [
+      "Cooper Kupp",
+      "Rashid Shaheed"
+    ]
+  },
+  "single": 714,
+  "slot_groups": 737,
+  "source_capture": {
+    "ARI": {
+      "chart_date": "",
+      "source": "S16",
+      "url": "https://www.azcardinals.com/team/depth-chart"
+    },
+    "ATL": {
+      "chart_date": "",
+      "source": "S17",
+      "url": "https://www.atlantafalcons.com/team/depth-chart"
+    },
+    "BAL": {
+      "chart_date": "",
+      "source": "S18",
+      "url": "https://www.baltimoreravens.com/team/depth-chart"
+    },
+    "BUF": {
+      "chart_date": "",
+      "source": "S19",
+      "url": "https://www.buffalobills.com/team/depth-chart"
+    },
+    "CAR": {
+      "chart_date": "",
+      "source": "S20",
+      "url": "https://www.panthers.com/team/depth-chart"
+    },
+    "CHI": {
+      "chart_date": "2026-10-31",
+      "source": "S21",
+      "url": "https://www.chicagobears.com/team/depth-chart"
+    },
+    "CIN": {
+      "chart_date": "",
+      "source": "S22",
+      "url": "https://www.bengals.com/team/depth-chart"
+    },
+    "CLE": {
+      "chart_date": "",
+      "source": "S23",
+      "url": "https://www.clevelandbrowns.com/team/depth-chart"
+    },
+    "DAL": {
+      "chart_date": "",
+      "source": "S24",
+      "url": "https://www.dallascowboys.com/team/depth-chart"
+    },
+    "DEN": {
+      "chart_date": "",
+      "source": "S25",
+      "url": "https://www.denverbroncos.com/team/depth-chart/"
+    },
+    "DET": {
+      "chart_date": "",
+      "source": "S26",
+      "url": "https://www.detroitlions.com/team/depth-chart"
+    },
+    "GB": {
+      "chart_date": "2026-11-10",
+      "source": "S27",
+      "url": "https://www.packers.com/team/depth-chart"
+    },
+    "IND": {
+      "chart_date": "",
+      "source": "S28",
+      "url": "https://www.colts.com/team/depth-chart"
+    },
+    "JAX": {
+      "chart_date": "",
+      "source": "S29",
+      "url": "https://www.jaguars.com/team/depth-chart"
+    },
+    "KC": {
+      "chart_date": "",
+      "source": "S08",
+      "url": "https://www.chiefs.com/team/depth-chart"
+    },
+    "LAC": {
+      "chart_date": "",
+      "source": "S30",
+      "url": "https://www.chargers.com/team/depth-chart"
+    },
+    "LAR": {
+      "chart_date": "",
+      "source": "S31",
+      "url": "https://www.therams.com/team/depth-chart"
+    },
+    "LV": {
+      "chart_date": "2026-11-10",
+      "source": "S32",
+      "url": "https://www.raiders.com/team/depth-chart"
+    },
+    "MIA": {
+      "chart_date": "",
+      "source": "S33",
+      "url": "https://www.miamidolphins.com/team/depth-chart"
+    },
+    "MIN": {
+      "chart_date": "",
+      "source": "S34",
+      "url": "https://www.vikings.com/team/depth-chart"
+    },
+    "NE": {
+      "chart_date": "",
+      "source": "S35",
+      "url": "https://www.patriots.com/team/depth-chart"
+    },
+    "NO": {
+      "chart_date": "",
+      "source": "S36",
+      "url": "https://www.neworleanssaints.com/team/depth-chart"
+    },
+    "NYG": {
+      "chart_date": "",
+      "source": "S37",
+      "url": "https://www.giants.com/team/depth-chart"
+    },
+    "NYJ": {
+      "chart_date": "",
+      "source": "S38",
+      "url": "https://www.newyorkjets.com/team/depth-chart"
+    },
+    "PHI": {
+      "chart_date": "",
+      "source": "S39",
+      "url": "https://www.philadelphiaeagles.com/team/depth-chart"
+    },
+    "PIT": {
+      "chart_date": "",
+      "source": "S40",
+      "url": "https://www.steelers.com/team/depth-chart"
+    },
+    "SEA": {
+      "chart_date": "",
+      "source": "S41",
+      "url": "https://www.seahawks.com/team/depth-chart/"
+    },
+    "SF": {
+      "chart_date": "2026-11-10",
+      "source": "S42",
+      "url": "https://www.49ers.com/team/depth-chart"
+    },
+    "TB": {
+      "chart_date": "",
+      "source": "S43",
+      "url": "https://www.buccaneers.com/team/depth-chart"
+    },
+    "TEN": {
+      "chart_date": "2026-11-10",
+      "source": "S44",
+      "url": "https://www.tennesseetitans.com/team/depth-chart"
+    },
+    "WAS": {
+      "chart_date": "",
+      "source": "S45",
+      "url": "https://www.commanders.com/team/depth-chart"
+    }
+  }
+}
