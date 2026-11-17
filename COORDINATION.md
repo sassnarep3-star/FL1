@@ -13,9 +13,28 @@ logged here, per the standing additive rule.
 | H2 | Dated read 3 of the official injury hub (2026-11-17, clock-bracketed) parsed with the shared grammar; publish the **read-3 delta** (added / changed / removed) against the 2026-11-16 read — delta, never the level | done (e5ef4af) | `arena-7ac4e12e-fl1` | `raw/injuries-week10-2026-read3.md` (new), `scripts/build_injury_hub_delta.py` (extend to read 3), `data/injury_hub_delta.json`, `data/sources.tsv` (next S id), generated `injuries.html`, `tests/test_injury_delta_h.py` (new) |
 | H3 | Week 10 close-out: official re-read of the week-10 schedule page (are all 13 games FINAL?) plus a fresh standings read to corroborate; extend the published finals extension with SNF/MNF now that they are final; publish the delta and update flag F61's detail. Canonical `data/results.tsv` / `data/standings.tsv` **not** touched (promotion remains Q44's owner decision) | done (1ad7387) | `arena-7ac4e12e-fl1` | `raw/schedule-results-2026-week10-complete.md` (new), `raw/standings-2026-20261117.tsv` (new), `scripts/build_week10_extension.py` (extend), `data/week10_results_extension.json`, `data/flags.json` (F61 detail append), `data/sources.tsv` (next S ids), generated `verified-results-feed.html` |
 | H4 | **Answers layer on the open-questions register**: every Q row gains an evidence-backed answer state — either an answer now (citing the verified evidence that settles it) or an explicit OPEN state naming the exact decision/data that would answer it and who must supply it; rendered as a new column on `questions.html` with a per-page answered/open count | done (0620bff) | `arena-7ac4e12e-fl1` | `data/questions.json` (append `answer` + `answer_state` fields to all 45 rows), `tools/site.py` (questions section only), generated `questions.html`, `tests/test_questions_h.py` (new) |
-| H5 | Registers append, exec-summary/README addendum, full verification battery, coordination completion record, PR → `main`, merge without waiting, confirm GitHub Pages deploy | in progress | `arena-7ac4e12e-fl1` | `data/{flags,suggestions}.json`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md`, PR |
+| H5 | Registers append, exec-summary/README addendum, full verification battery, coordination completion record, PR → `main`, merge without waiting, confirm GitHub Pages deploy | done (PR #55) | `arena-7ac4e12e-fl1` | `data/{flags,suggestions}.json`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md`, PR |
 
 **First push = this claim, per the brief.**
+
+### Integration record — H5 (2026-11-17, UTC)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/55 (`arena/7ac4e12e-fl1` → `main`), titled
+  "H1-H5: dated injury read 3 (delta), Week-10 close-out (13 finals + live MNF, C1-C5), answers for
+  all 46 questions, reconciliation over PRs #49/#51-54".
+- **Merge:** `gh pr merge 55 --merge` — state `MERGED` at 2026-11-17T03:26:52Z, merge commit
+  `c592121cad9dc360293b18d4ab8e0463e98789d6` on `main`.
+- **GitHub Pages:** status went `building` → **`built`** after the merge. Live verification:
+  `questions.html` prints "46 questions … answers dated 2026-11-17: 12 answered, 16 partial, 18 open"
+  with the dated Answer column; `verified-results-feed.html` prints the Close-out read (13 finals,
+  PIT 18–CIN 38 with S95, live MNF row with blank scores); `injuries.html` prints Read 3 (2026-11-17)
+  with S94 and the single-change delta; `flagged.html` carries F61's dated correction and F70;
+  `suggestions.html` carries SG50/SG51; `sources.html` lists S94–S96.
+- **Battery at merge:** 344 tests OK · 57 pages · checkrows 6,976 rows, 0 unsourced · checklinks OK ·
+  drift 19/19 · verify_results / verify_injuries OK · verify_site 0 errors, 0 warnings.
+- **Still open (non-blocking):** MNF LAC at BAL pending its Final re-read (their F67); Q44 promotion
+  rule (SG51); Q42 cadence/terms (SG50); all other `open`/`partial` answers as listed on
+  `questions.html`. Nothing was marked verified without an official source link.
 
 **Reconciliation note (2026-11-17, after H4).** While this session worked, `main` advanced through PRs
 #49 (session `arena/e97f05c3-fl1` — Week-10 SNF final ingested as dated results files, MNF kept out and

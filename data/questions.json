@@ -124,7 +124,7 @@
   "blocking": "No",
   "recommended_path": "Do not reconcile by hand. Publish the discrepancy verbatim with both source links on the Flagged for Review page and leave the affected cells as captured.",
   "answer_state": "answered",
-  "answer": "Published, never suppressed: every cross-source irregularity becomes a row on flagged.html with detail, action and source links (66 flags today; F61 was corrected 2026-11-17 after re-reading the official pages; F53 records the row-count discrepancy). Per the brief, flagged items do not block a merge, and a cell that cannot be confirmed from an official source stays blank and flagged rather than filled (tools/checkrows.py rules 1-4).",
+  "answer": "Published, never suppressed: every cross-source irregularity becomes a row on flagged.html with detail, action and source links (70 flags today; F61 was corrected 2026-11-17 after re-reading the official pages; F53 records the row-count discrepancy). Per the brief, flagged items do not block a merge, and a cell that cannot be confirmed from an official source stays blank and flagged rather than filled (tools/checkrows.py rules 1-4).",
   "answer_date": "2026-11-17"
  },
  {
@@ -268,7 +268,7 @@
   "blocking": "No",
   "recommended_path": "Use only the free official inputs first. Add each new input only after the base model is validated, one at a time, so its contribution can be measured.",
   "answer_state": "partial",
-  "answer": "Obtained official inputs are enumerated: 83 registered sources, 75 VERIFIED, each with URL and capture date (data/sources.tsv). Licensed vendors are not among them — money/contract items sit in the missing-data register as NOT-ATTEMPTED. Which to license (opening prices above all: Q21/Q30) is an owner decision.",
+  "answer": "Obtained official inputs are enumerated: 88 registered sources, 79 VERIFIED, each with URL and capture date (data/sources.tsv). Licensed vendors are not among them — money/contract items sit in the missing-data register as NOT-ATTEMPTED. Which to license (opening prices above all: Q21/Q30) is an owner decision.",
   "answer_date": "2026-11-17"
  },
  {
