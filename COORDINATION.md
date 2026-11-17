@@ -1,3 +1,22 @@
+## Task board — session `arena/7ac4e12e-fl1` (2026-11-17 — dated re-reads + answers layer + Week-10 close-out)
+
+**Session ID:** `arena-7ac4e12e-fl1` · **Branch:** `arena/7ac4e12e-fl1` (from `5a076a0` of `main`, PR #48 merged) ·
+**Claimed:** 2026-11-17T02:34Z · **Status:** active.
+**Pre-claim sweep:** `gh pr list --state open` → none; `origin/main` = `5a076a0` = branch base; no session has
+work in flight, so every scope below is free. Shared files (`tools/site.py`, `data/sources.tsv`,
+`data/flags.json`, `data/questions.json`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`) are touched only as
+logged here, per the standing additive rule.
+
+| # | Task | Status | Owner | File scope (claimed) |
+|---|------|--------|-------|----------------------|
+| H1 | Coordination claim + immediate push | claimed | `arena-7ac4e12e-fl1` | `COORDINATION.md` |
+| H2 | Dated read 3 of the official injury hub (2026-11-17, clock-bracketed) parsed with the shared grammar; publish the **read-3 delta** (added / changed / removed) against the 2026-11-16 read — delta, never the level | claimed | `arena-7ac4e12e-fl1` | `raw/injuries-week10-2026-read3.md` (new), `scripts/build_injury_hub_delta.py` (extend to read 3), `data/injury_hub_delta.json`, `data/sources.tsv` (next S id), generated `injuries.html`, `tests/test_injury_delta_h.py` (new) |
+| H3 | Week 10 close-out: official re-read of the week-10 schedule page (are all 13 games FINAL?) plus a fresh standings read to corroborate; extend the published finals extension with SNF/MNF now that they are final; publish the delta and update flag F61's detail. Canonical `data/results.tsv` / `data/standings.tsv` **not** touched (promotion remains Q44's owner decision) | claimed | `arena-7ac4e12e-fl1` | `raw/schedule-results-2026-week10-complete.md` (new), `raw/standings-2026-20261117.tsv` (new), `scripts/build_week10_extension.py` (extend), `data/week10_results_extension.json`, `data/flags.json` (F61 detail append), `data/sources.tsv` (next S ids), generated `verified-results-feed.html` |
+| H4 | **Answers layer on the open-questions register**: every Q row gains an evidence-backed answer state — either an answer now (citing the verified evidence that settles it) or an explicit OPEN state naming the exact decision/data that would answer it and who must supply it; rendered as a new column on `questions.html` with a per-page answered/open count | claimed | `arena-7ac4e12e-fl1` | `data/questions.json` (append `answer` + `answer_state` fields to all 45 rows), `tools/site.py` (questions section only), generated `questions.html`, `tests/test_questions_h.py` (new) |
+| H5 | Registers append, exec-summary/README addendum, full verification battery, coordination completion record, PR → `main`, merge without waiting, confirm GitHub Pages deploy | claimed | `arena-7ac4e12e-fl1` | `data/{flags,suggestions}.json`, `data/sources.tsv`, `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md`, PR |
+
+**First push = this claim, per the brief.**
+
 ## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — COMPLETE
 
 **Session ID:** `arena-e97f05c3` · **Branch:** `arena/e97f05c3-fl1` (from `5a076a0` of `main`) ·
