@@ -1937,3 +1937,65 @@ python3 scripts/build_market_spine.py --check            # "rebuild is byte-iden
 python3 tools/build.py && python3 tools/site.py && python3 tools/checklinks.py
 /home/user/.ci-venv/bin/python scripts/verify_site.py    # errors 0, warnings 0
 ```
+
+## Current integration task — `arena/2493a657-fl1` (2026-11-17 UTC)
+
+**Role:** final integration and audit follow-up on the current Arena branch. The checkout is fixed to
+`arena/2493a657-fl1`; this session will not create or switch branches. Existing completed task records
+above are historical evidence and are not reopened.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| I01 | Audit row-level source strength and surface repository-generator placeholders separately from official evidence | done | `arena/2493a657-fl1` | `tools/source_audit.py`, `tools/checklinks.py` (correct external-fetch claim), `tools/verify_drift.py` (refresh register row-count pins), `data/verification-drift.tsv`, `tools/site.py` (NAV + generated audit page only), `source-audit.html`, `data/source_row_audit.tsv`, `data/sources.tsv` (append S92), `data/flags.json` (append F68), `data/suggestions.json` (append SG48), `tests/test_source_audit.py`, `tests/test_n01_n05.py` (source-count expectation updated for S92 after preserving S89-S91 from upstream), `docs/SOURCE_ROW_AUDIT.md`, this section of `COORDINATION.md` |
+
+This is an additive integration audit. It will not rewrite other session-owned market or injury data,
+will not promote third-party sources to official, and will classify unresolvable provenance as a review
+finding rather than inferring a source. No other session-owned file is being edited.
+
+### I01 completion record — 2026-11-17 UTC
+
+**Delivered:** `source-audit.html` (in the shared navigation), the deterministic full-row ledger at
+`data/source_row_audit.tsv`, the generator `tools/source_audit.py`, and the method note
+`docs/SOURCE_ROW_AUDIT.md`. `tools/checklinks.py` no longer refers to the absent
+`tools/verify_sources.py`; it explicitly says external URLs are not fetched by that checker. A linked
+repository generator is classified as build provenance, not as proof of an NFL fact. Exact URLs already
+present in the source registry can be matched to that registry; no trust is inferred merely from a familiar
+hostname. `F68` and `SG48` publish the issue and a reviewable path. `S92` identifies the audit itself as a
+non-official repository artifact, not an NFL source.
+
+**Current row classification (6,296 rendered table body rows; row counts, not unique claims):** 3,596
+point only to sources whose registry entries are marked Official + VERIFIED; 1,244 link only to repository
+code/artifacts; 178 have no detected source link; 94 have a direct link not registered by exact URL; 135
+cite a source not marked VERIFIED; 434 cite non-official registered sources; 615 combine official with
+non-official or unresolved registry references. The buckets are mutually exclusive in the audit ledger.
+The report classifies metadata; it does **not** open web pages, confirm their current availability, or verify
+the underlying values line by line. Values in unverified/nonofficial classes are not promoted to official.
+
+**Sources and verification:** S92 is the generated audit ledger (repository-only evidence). No NFL source
+was newly fetched for this audit. The older official source records are linked in `sources.html`; their
+historical registry status is not a fresh re-verification. `python3 tools/site.py` generated the page and
+ledger; `python3 tools/checklinks.py` → 44 pages, all internal links/anchors/source IDs resolve;
+`python3 tools/checkrows.py` → 44 pages, 6,419 table rows audited; `python3 tools/verify_drift.py` →
+19/19 PASS; `python3 tools/verify_injuries.py` → 345/345 exact rows; `python3 scripts/verify_recapture_g.py`
+→ PASS (no published injury row absent from the later read; 2 additions and 32 changes reported);
+`python3 scripts/verify_results_g.py` → PASS (32/32 standings reconciliation);
+`python3 -m unittest discover -s tests -q` → 315 OK. The first full test pass exposed the expected
+source-register count assertion; it was updated for S89 and the full suite passed afterward. Existing
+ResourceWarnings in older tests remain non-fatal.
+
+**Irregularities surfaced for review:** F67 is High severity because many rendered rows cite code or have
+no usable/registered citation. The audit is syntax/registry based and intentionally does not claim those
+values are wrong. `scripts/verify_site.py` could not be run in this environment because pandas is absent;
+that script requires pandas although the repo's runtime dependency note says no third-party packages are
+required. `checklinks.py` does not fetch external URLs. Both constraints are explicitly retained rather
+than reported as successful source verification.
+
+### Rebase reconciliation with upstream main (2026-11-17 UTC)
+
+`git pull --rebase origin main` found `origin/main` had advanced from the branch base at `5a076a0` to
+`8d41cbe` (PR #50). The incoming work added the official PIT@CIN final, the 2026-11-17 standings read,
+source records S89-S91 and F67 for the not-yet-final LAC@BAL game. The audit's original S89/F67 ids
+collided. Resolution preserved the incoming records and appended the audit as S92/F68; SG48 was unique.
+The source-count regression test now expects 84 rows, and the G-18 drift pins are 48 suggestions / 68
+flags. Generated HTML and `assets/js/data.js` were regenerated from the combined data; no upstream
+results, flags, sources, or site changes were discarded.
