@@ -202,8 +202,11 @@ class TestN04Week10Extension(unittest.TestCase):
             open(os.path.join(ROOT, "data", "results.tsv"), encoding="utf-8"),
             delimiter="\t"))
         week10 = [r for r in results if r[0] == "10"]
-        self.assertEqual([(r[2], r[3], r[4], r[5]) for r in week10],
-                         [("WAS", "24", "NYG", "21")])
+        # The canonical feed was promoted to all 149 official games, so Week 10
+        # now holds all 13 finals (the TNF game plus the 12 Sunday finals).
+        self.assertEqual(len(week10), 13)
+        self.assertIn(("WAS", "24", "NYG", "21"),
+                      [(r[2], r[3], r[4], r[5]) for r in week10])
 
     def test_scores_are_integers_and_totals_match(self):
         for f in self.ext["finals"]:
@@ -284,6 +287,6 @@ class TestSourcesS70S72(unittest.TestCase):
         # + S94 (session 7ac4e12e: third dated injury-hub read, 2026-11-17)
                 # + S95-S96 (session 7ac4e12e: Week 10 close-out schedule + standings
         #   reads, 2026-11-17)
-        self.assertEqual(len(rows), 88)
+        self.assertEqual(len(rows), 90)
 if __name__ == "__main__":
     unittest.main()

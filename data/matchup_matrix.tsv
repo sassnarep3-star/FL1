@@ -1,0 +1,53 @@
+game_key	date	away_team	home_team	string_level	away_offense_missing	home_defense_missing	away_defense_missing	home_offense_missing	away_offense_names	home_defense_names	away_defense_names	home_offense_names	note
+WASNYG	2026-11-12	WAS	NYG	1	0	0	0	0					
+WASNYG	2026-11-12	WAS	NYG	2	3	1	0	1	C.Yankoff; M.Gulbin; M.Mariota	P.Adebo		J.Davis	
+WASNYG	2026-11-12	WAS	NYG	3	1	1	0	1	A.Kaliakmanis	N.Reed		J.Sills	
+WASNYG	2026-11-12	WAS	NYG	4	0	0	0	0					
+BUFNYJ	2026-11-15	BUF	NYJ	1	0	0	0	0					
+BUFNYJ	2026-11-15	BUF	NYJ	2	2	1	2	2	A.Reed-Adams; J.Bowry	T.Wallace	G.Gaines; J.Kilgore	J.Woods; T.Patrick	
+BUFNYJ	2026-11-15	BUF	NYJ	3	0	1	1	0		N.Lynn	M.Danna		
+BUFNYJ	2026-11-15	BUF	NYJ	4	0	0	0	0					
+CARNO	2026-11-15	CAR	NO	1	0	0	1	2			B.Okereke	E.McCoy; T.Fuaga	
+CARNO	2026-11-15	CAR	NO	2	1	1	1	0	S.Hecht	M.Reid	T.Edwards		
+CARNO	2026-11-15	CAR	NO	3	2	1	0	2	A.Dillon; H.King	J.Ford		C.Donaldson; Z.Wilson	
+CARNO	2026-11-15	CAR	NO	4	1	0	0	0	J.Sanders				
+HOUCL	2026-11-15	HOU	CLE	1	0	1	0	0		R.Hickman			
+HOUCL	2026-11-15	HOU	CLE	2	0	1	0	1		J.Jefferson		S.Sanders	
+HOUCL	2026-11-15	HOU	CLE	3	0	1	0	2		N.Igbinoghene		D.Gabriel; P.Brailsford	
+HOUCL	2026-11-15	HOU	CLE	4	0	0	0	1				T.Green	
+JAXTEN	2026-11-15	JAX	TEN	1	0	1	1	1		C.Barton	J.Davis	C.Tate	
+JAXTEN	2026-11-15	JAX	TEN	2	2	1	0	3	C.Williams; Q.Ewers	J.Jones		B.Crenshaw-Dickson; M.Trubisky; N.Singleton	
+JAXTEN	2026-11-15	JAX	TEN	3	0	1	2	0		J.Marshall	A.Regis; W.Williams		
+JAXTEN	2026-11-15	JAX	TEN	4	0	0	0	0					
+KCATL	2026-11-15	KC	ATL	1	0	0	0	0					
+KCATL	2026-11-15	KC	ATL	2	0	0	0	1				T.Tagovailoa	
+KCATL	2026-11-15	KC	ATL	3	0	0	0	0					
+KCATL	2026-11-15	KC	ATL	4	0	0	0	0					
+LARARI	2026-11-15	LAR	ARI	1	1	0	0	2	S.Avila			H.Froholdt; J.Williams	
+LARARI	2026-11-15	LAR	ARI	2	1	0	0	1	K.Trost			J.Johnson	
+LARARI	2026-11-15	LAR	ARI	3	1	1	2	2	T.Simpson	E.Leota	D.Johnson; M.Pulley	A.Reese; J.Aguilar	
+LARARI	2026-11-15	LAR	ARI	4	0	0	0	0					
+MIAIND	2026-11-15	MIA	IND	1	2	1	0	1	A.Brewer; C.Bell	J.Carlies		J.Travis	
+MIAIND	2026-11-15	MIA	IND	2	1	1	0	1	J.Wayne	J.Tillery		C.Heck	
+MIAIND	2026-11-15	MIA	IND	3	1	0	0	1	C.Haynes			R.Leonard	
+MIAIND	2026-11-15	MIA	IND	4	1	0	0	1	J.Joly			W.Mallory	
+MINGB	2026-11-15	MIN	GB	1	4	1	2	2	J.Addison; J.Jennings; K.Murray; T.Hockenson	Z.Franklin	B.Cashman; T.Ingram-Dawkins	J.Jacobs; S.Rhyan	
+MINGB	2026-11-15	MIN	GB	2	1	0	0	2	C.Wentz			J.Burton; K.Zeitler	
+MINGB	2026-11-15	MIN	GB	3	0	0	0	1				D.Jennings	
+MINGB	2026-11-15	MIN	GB	4	0	0	0	0					
+NEDET	2026-11-15	NE	DET	1	0	1	0	1		D.Reed		C.Mays	
+NEDET	2026-11-15	NE	DET	2	1	1	0	0	D.Crownover	A.Ogbongbemiga			
+NEDET	2026-11-15	NE	DET	3	1	2	1	0	B.Morton	A.Hassanein; M.Wingo	B.Schooler		
+NEDET	2026-11-15	NE	DET	4	0	0	0	0					
+PITCIN	2026-11-15	PIT	CIN	1	0	0	0	0					
+PITCIN	2026-11-15	PIT	CIN	2	0	1	2	2		K.Dugger	D.Elliott; S.Murphy-Bunting	C.Lew; M.Hinton	
+PITCIN	2026-11-15	PIT	CIN	3	2	1	0	0	E.Heidenreich; W.Howard	L.Robinson			
+PITCIN	2026-11-15	PIT	CIN	4	1	0	0	0	D.Allar				
+SEALV	2026-11-15	SEA	LV	1	3	0	1	0	C.Cross; Q.Nelson; S.Darnold		L.Williams		
+SEALV	2026-11-15	SEA	LV	2	1	1	1	3	O.Oluwatimi	D.Johnson	A.Smith	A.O'Connell; B.Cabeldue; M.Benson	
+SEALV	2026-11-15	SEA	LV	3	2	1	1	0	E.Wilson; J.Milroe	T.McCollum	D.Eastern		
+SEALV	2026-11-15	SEA	LV	4	0	0	0	0					
+SFDAL	2026-11-15	SF	DAL	1	1	1	0	1	M.Evans	P.Locke		J.Ferguson	
+SFDAL	2026-11-15	SF	DAL	2	1	1	1	3	M.Jones	J.Thomas	T.Bethune	A.Cornelius; J.Mingo; S.Howell	
+SFDAL	2026-11-15	SF	DAL	3	2	0	0	0	B.Cooks; K.Rourke				
+SFDAL	2026-11-15	SF	DAL	4	0	0	0	0					

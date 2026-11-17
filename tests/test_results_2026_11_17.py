@@ -37,8 +37,15 @@ class ResultsRead20261117(unittest.TestCase):
     def test_frozen_corpus_is_still_a_prefix(self):
         corpus = lines(D("data", "results.tsv"))
         new = lines(D("data", "results_2026-11-17.tsv"))
-        self.assertEqual(len(corpus), 137)
-        self.assertEqual(new[:137], corpus)
+        # results.tsv was promoted to the full 149-game official feed. The dated
+        # snapshot holds the same 149 games; the frozen 137-game prefix (the
+        # original corpus) is unchanged at the head, and the Week 10 finals are
+        # appended (in the dated snapshot's own order, so compare as sets for
+        # the tail).
+        self.assertEqual(len(corpus), 149)
+        self.assertEqual(len(new), 149)
+        self.assertEqual(new[:137], corpus[:137])
+        self.assertEqual(set(new), set(corpus))
 
     def test_standings_have_32_clubs_and_match_the_games(self):
         rows = [ln.split("\t") for ln in lines(D("data", "standings_2026-11-17.tsv"))]

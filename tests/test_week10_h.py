@@ -93,15 +93,12 @@ class TestWeek10Completion(unittest.TestCase):
         results = read_tsv("data/results.tsv",
                            ["week", "date", "away", "awayPts", "home", "homePts"])
         rec, pf_pa = {}, {}
+        # results.tsv is now the complete 149-game official feed (it already
+        # includes every Week 10 final), so records are computed from it alone;
+        # the extension/new-final additions are no longer appended (they would
+        # double-count the games already in the feed).
         games = [(r["away"], int(r["awayPts"]), r["home"], int(r["homePts"]))
                  for r in results]
-        # extension finals except the TNF duplicate already in the feed
-        for f in self.ext["finals"]:
-            if (f["away"], f["home"]) == ("WAS", "NYG"):
-                continue
-            games.append((f["away"], f["awayPts"], f["home"], f["homePts"]))
-        nf = self.comp["new_final"]
-        games.append((nf["away"], nf["awayPts"], nf["home"], nf["homePts"]))
         for a, ap, h, hp in games:
             for team, pf, pa in ((a, ap, hp), (h, hp, ap)):
                 w, l, t = rec.get(team, (0, 0, 0))

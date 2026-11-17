@@ -2105,3 +2105,39 @@ results, flags, sources, or site changes were discarded.
 `1376567311` reports **built** for that merge commit (`https://sassnarep3-star.github.io/FL1/`). The site
 includes the Row-Level Source Audit in the global navigation. F68 remains a visible review item; it does
 not block publication.
+
+
+---
+
+## Task board — session `arena/3f12fa46-fl1` (H2–H8: official game books, matchup matrix, model-output ledger, weather overlay, backlog re-audit)
+
+**Session ID:** `arena-3f12fa46` · **Branch:** `arena/3f12fa46-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17 (UTC) · **Status:** active.
+
+| ID | Task | Status | Owner | File scope | Verification |
+|---|---|---|---|---|---|
+| H1 | Coordination claim, pushed before any task work | done | `arena-3f12fa46` | `COORDINATION.md` | `git fetch` + `gh pr list` sweep |
+| H2 | Official Game Book capture: actual starters, inactives, DNP, playtime, venue/roof/surface | done | `arena-3f12fa46` | `raw/gamebooks/`, `data/gamebooks_{games,rosters,snaps}.tsv`, `data/venue_official.csv` | `tools/verify_gamebooks.py` GB-1..GB-8 PASS |
+| H3 | Offense vs Defense matchup deficiency matrix (1st–4th string) — R64 | done | `arena-3f12fa46` | `scripts/build_matchup_matrix_h.py`, `data/matchup_matrix.tsv`, `matchup-matrix.html` | built from Game Book inactives resolved to depth-chart strings |
+| H4 | Model output ledger: every output as a probability + input vector — R35 | done | `arena-3f12fa46` | `scripts/build_model_outputs_h.py`, `data/model_outputs.json`, `model-outputs.html` | 39 outputs, 26 with derived probability |
+| H5 | Stadium roof/surface + NWS grid overlay — R77 | partial | `arena-3f12fa46` | `scripts/build_weather_overlay_h.py`, `data/weather_overlay.tsv`, `weather-overlay.html` | roof/surface official for 2 venues; NWS grids resolved for 11; hourly values not retained (blank) |
+| H6 | Backlog re-audit: every brief line's status corrected against committed evidence | done | `arena-3f12fa46` | `scripts/build_backlog_g_h.py`, `data/requirements_backlog.json`, `backlog-reaudit.html` | R37/R45/R50/R76 -> done; R75/R77 -> partial |
+| H7 | Registers append (sources/flags), NAV + index cards, unit tests | done | `arena-3f12fa46` | `data/sources.tsv` (S97–S98), `data/flags.json` (F67–F68), `tools/site.py` NAV, `tests/` | 309 tests OK |
+| H8 | Verification battery → PR → merge → Pages confirm → record here | in progress | `arena-3f12fa46` | PR + this file | see integration record below |
+
+### H2 capture notes
+- All 13 completed Week 10 Game Book PDFs transcribed: starters (11 per unit per side),
+  substitutions, Did Not Play, Not Active (inactives), game-day weather/roof/surface, and the
+  Playtime Percentage table. Four books (HOUCL, LARARI, SEALV, BUFNYJ) label the playtime table
+  "(Unofficial)" — flag F67, carried per-row.
+- LAC@BAL was live at halftime at capture and is excluded (flag F68).
+- Source ids S89/S90 collided with main's S89–S96 and were re-issued as **S97/S98**.
+
+### Integration record (H8)
+- PR #57 (`arena/3f12fa46-fl1` → `main`). Merged after reconciling with `origin/main`:
+  generated HTML resolved to this branch then regenerated from the merged generators;
+  `data/flags.json` and `data/sources.tsv` unioned (my ids re-issued S97/S98);
+  `COORDINATION.md` = main's board with this record appended; no other session's work discarded.
+- Gates re-run on the merged tree: 309 unit tests OK · `verify_gamebooks` GB-1..GB-8 PASS ·
+  `verify_results` PASS · `verify_injuries` 345/345 · `checklinks` 48 pages OK ·
+  `checkrows` 48 pages / 7735 rows OK.

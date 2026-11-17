@@ -1,0 +1,27 @@
+game_key,stadium,city_state,roof,surface,team_abbr,game_book_url
+WASNYG,MetLife Stadium,"East Rutherford, NJ",Open Stadium,Field Turf,WAS,https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf
+WASNYG,MetLife Stadium,"East Rutherford, NJ",Open Stadium,Field Turf,NYG,https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf
+BUFNYJ,MetLife Stadium,"East Rutherford, NJ",Open Stadium,Field Turf,BUF,https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789ac9-4feb-11f1-abca-2c54536568a9.pdf
+BUFNYJ,MetLife Stadium,"East Rutherford, NJ",Open Stadium,Field Turf,NYJ,https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789ac9-4feb-11f1-abca-2c54536568a9.pdf
+CARNO,Caesars Superdome,"New Orleans, LA",Closed Stadium,Field Turf,CAR,https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab789769-4feb-11f1-abca-2c54536568a9.pdf
+CARNO,Caesars Superdome,"New Orleans, LA",Closed Stadium,Field Turf,NO,https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab789769-4feb-11f1-abca-2c54536568a9.pdf
+HOUCL,Huntington Bank Field,"Cleveland, OH",Open Stadium,Natural Grass,HOU,https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab583279-4feb-11f1-abca-2c54536568a9.pdf
+HOUCL,Huntington Bank Field,"Cleveland, OH",Open Stadium,Natural Grass,CLE,https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab583279-4feb-11f1-abca-2c54536568a9.pdf
+JAXTEN,Nissan Stadium,"Nashville, TN",Open Stadium,Field Turf,JAX,https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789e15-4feb-11f1-abca-2c54536568a9.pdf
+JAXTEN,Nissan Stadium,"Nashville, TN",Open Stadium,Field Turf,TEN,https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab789e15-4feb-11f1-abca-2c54536568a9.pdf
+KCATL,Mercedes-Benz Stadium,"Atlanta, GA",Retractable Roof - Closed,Field Turf,KC,https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab582f5b-4feb-11f1-abca-2c54536568a9.pdf
+KCATL,Mercedes-Benz Stadium,"Atlanta, GA",Retractable Roof - Closed,Field Turf,ATL,https://static.www.nfl.com/image/upload/v1794829722/gamecenter/ab582f5b-4feb-11f1-abca-2c54536568a9.pdf
+LARARI,State Farm Stadium,"Glendale, AZ",Retractable Roof - Open,Natural Grass,LAR,https://static.www.nfl.com/image/upload/v1794854921/gamecenter/ab78a133-4feb-11f1-abca-2c54536568a9.pdf
+LARARI,State Farm Stadium,"Glendale, AZ",Retractable Roof - Open,Natural Grass,ARI,https://static.www.nfl.com/image/upload/v1794854921/gamecenter/ab78a133-4feb-11f1-abca-2c54536568a9.pdf
+MIAIND,Lucas Oil Stadium,"Indianapolis, IN",Retractable Roof - Closed,Field Turf,MIA,https://static.www.nfl.com/image/upload/v1794829723/gamecenter/ab789365-4feb-11f1-abca-2c54536568a9.pdf
+MIAIND,Lucas Oil Stadium,"Indianapolis, IN",Retractable Roof - Closed,Field Turf,IND,https://static.www.nfl.com/image/upload/v1794829723/gamecenter/ab789365-4feb-11f1-abca-2c54536568a9.pdf
+MINGB,Lambeau Field,"Green Bay, WI",Open Stadium,Natural Grass,MIN,https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab788967-4feb-11f1-abca-2c54536568a9.pdf
+MINGB,Lambeau Field,"Green Bay, WI",Open Stadium,Natural Grass,GB,https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab788967-4feb-11f1-abca-2c54536568a9.pdf
+NEDET,Allianz Arena,"Munich, Germany",Open Stadium,Natural Grass,NE,https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf
+NEDET,Allianz Arena,"Munich, Germany",Open Stadium,Natural Grass,DET,https://static.www.nfl.com/image/upload/v1794829721/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf
+PITCIN,Paycor Stadium,"Cincinnati, OH",Open Stadium,Field Turf,PIT,https://static.www.nfl.com/image/upload/v1794829727/gamecenter/ab78aa48-4feb-11f1-abca-2c54536568a9.pdf
+PITCIN,Paycor Stadium,"Cincinnati, OH",Open Stadium,Field Turf,CIN,https://static.www.nfl.com/image/upload/v1794829727/gamecenter/ab78aa48-4feb-11f1-abca-2c54536568a9.pdf
+SEALV,Allegiant Stadium,"Las Vegas, NV",Closed Stadium,Natural Grass,SEA,https://static.www.nfl.com/image/upload/v1794829726/gamecenter/ab78a43c-4feb-11f1-abca-2c54536568a9.pdf
+SEALV,Allegiant Stadium,"Las Vegas, NV",Closed Stadium,Natural Grass,LV,https://static.www.nfl.com/image/upload/v1794829726/gamecenter/ab78a43c-4feb-11f1-abca-2c54536568a9.pdf
+SFDAL,AT&T Stadium,"Arlington, TX",Retractable Roof - Closed,Field Turf,SF,https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab78a748-4feb-11f1-abca-2c54536568a9.pdf
+SFDAL,AT&T Stadium,"Arlington, TX",Retractable Roof - Closed,Field Turf,DAL,https://static.www.nfl.com/image/upload/v1794829724/gamecenter/ab78a748-4feb-11f1-abca-2c54536568a9.pdf

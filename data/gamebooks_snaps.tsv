@@ -1,0 +1,1162 @@
+game_key	date	team	position	name	offense_pct	defense_pct	special_teams_pct	source_label
+WASNYG	2026-11-12	NYG	LB	A.Carter		62	4	Official
+WASNYG	2026-11-12	NYG	LB	A.Reese		69	4	Official
+WASNYG	2026-11-12	NYG	OL	A.Stinnie		4		Official
+WASNYG	2026-11-12	NYG	T	A.Thomas	65			Official
+WASNYG	2026-11-12	NYG	C	B.Hudson	65		4	Official
+WASNYG	2026-11-12	NYG	DL	B.Jamison-Travis		23	4	Official
+WASNYG	2026-11-12	NYG	LS	B.Mann		9		Official
+WASNYG	2026-11-12	NYG	CB	C.Hood		8		Official
+WASNYG	2026-11-12	NYG	WR	C.Jones		4		Official
+WASNYG	2026-11-12	NYG	TE	C.Manhertz	14		9	Official
+WASNYG	2026-11-12	NYG	LB	C.Martin		22		Official
+WASNYG	2026-11-12	NYG	RB	C.Skattebo	58			Official
+WASNYG	2026-11-12	NYG	DL	D.Alexander		27	4	Official
+WASNYG	2026-11-12	NYG	CB	D.Banks		69		Official
+WASNYG	2026-11-12	NYG	WR	D.Mooney	46			Official
+WASNYG	2026-11-12	NYG	RB	D.Singletary	5		5	Official
+WASNYG	2026-11-12	NYG	LB	D.Smoot		23		Official
+WASNYG	2026-11-12	NYG	K	D.Zvada		8		Official
+WASNYG	2026-11-12	NYG	DB	E.Campbell		22		Official
+WASNYG	2026-11-12	NYG	OL	F.Mauigoa	65		4	Official
+WASNYG	2026-11-12	NYG	RB	G.Desrosiers		10		Official
+WASNYG	2026-11-12	NYG	CB	G.Newsome		69	4	Official
+WASNYG	2026-11-12	NYG	TE	I.Likely	57			Official
+WASNYG	2026-11-12	NYG	OL	J.Eluemunor	64		4	Official
+WASNYG	2026-11-12	NYG	S	J.Holland		69	1	Official
+WASNYG	2026-11-12	NYG	WR	J.Hyatt	3			Official
+WASNYG	2026-11-12	NYG	QB	J.McCarthy	62			Official
+WASNYG	2026-11-12	NYG	S	J.Pinnock		15	2	Official
+WASNYG	2026-11-12	NYG	G	J.Runyan	65		4	Official
+WASNYG	2026-11-12	NYG	P	J.Stout		9		Official
+WASNYG	2026-11-12	NYG	QB	J.Winston	3			Official
+WASNYG	2026-11-12	NYG	LB	K.Thibodeaux		52	4	Official
+WASNYG	2026-11-12	NYG	WR	M.Fields	58			Official
+WASNYG	2026-11-12	NYG	OL	M.Mbow		4		Official
+WASNYG	2026-11-12	NYG	LB	M.McFadden		69	1	Official
+WASNYG	2026-11-12	NYG	WR	M.Nabers	52			Official
+WASNYG	2026-11-12	NYG	CB	N.Jones		22		Official
+WASNYG	2026-11-12	NYG	FB	P.Ricard	13			Official
+WASNYG	2026-11-12	NYG	DL	S.Harris		45	4	Official
+WASNYG	2026-11-12	NYG	LB	T.Ford		10	22	Official
+WASNYG	2026-11-12	NYG	TE	T.Johnson	18		18	Official
+WASNYG	2026-11-12	NYG	S	T.Nubin		10	22	Official
+WASNYG	2026-11-12	NYG	LB	Z.Barnes		22		Official
+WASNYG	2026-11-12	WAS	RB	A.Ekeler	30			Official
+WASNYG	2026-11-12	WAS	LB	A.Kaho		16	62	Official
+WASNYG	2026-11-12	WAS	CB	A.Robertson		64		Official
+WASNYG	2026-11-12	WAS	WR	A.Williams	59			Official
+WASNYG	2026-11-12	WAS	T/G	A.Wylie		4	15	Official
+WASNYG	2026-11-12	WAS	T/G	B.Coleman	69			Official
+WASNYG	2026-11-12	WAS	TE	B.Sinnott	24			Official
+WASNYG	2026-11-12	WAS	TE	C.Okonkwo	41			Official
+WASNYG	2026-11-12	WAS	DE	C.Omenihu		38		Official
+WASNYG	2026-11-12	WAS	G	C.Paul	69			Official
+WASNYG	2026-11-12	WAS	LB	D.Armstrong		25	4	Official
+WASNYG	2026-11-12	WAS	K	D.Stevens		9	35	Official
+WASNYG	2026-11-12	WAS	DE	D.Wise		21		Official
+WASNYG	2026-11-12	WAS	LB	F.Luvu		65		Official
+WASNYG	2026-11-12	WAS	CB	F.Moreau		8	31	Official
+WASNYG	2026-11-12	WAS	TE	J.Bates	28			Official
+WASNYG	2026-11-12	WAS	T	J.Conerly	69			Official
+WASNYG	2026-11-12	WAS	QB	J.Daniels	69			Official
+WASNYG	2026-11-12	WAS	LB	J.Josephs		10	14	Official
+WASNYG	2026-11-12	WAS	LB	J.Magee		22		Official
+WASNYG	2026-11-12	WAS	DT	J.Newton		21	4	Official
+WASNYG	2026-11-12	WAS	S	J.Reaves		54	9	Official
+WASNYG	2026-11-12	WAS	LB	K.Chaisson		48		Official
+WASNYG	2026-11-12	WAS	LB	K.Medrano		18	69	Official
+WASNYG	2026-11-12	WAS	WR	L.McCaffrey	14			Official
+WASNYG	2026-11-12	WAS	CB	M.Sainristil		14	54	Official
+WASNYG	2026-11-12	WAS	C/G	N.Allegretti	69			Official
+WASNYG	2026-11-12	WAS	S	N.Cross		65		Official
+WASNYG	2026-11-12	WAS	LB	O.Oweh		48		Official
+WASNYG	2026-11-12	WAS	S	P.Butler		16	18	Official
+WASNYG	2026-11-12	WAS	S	Q.Martin		34	18	Official
+WASNYG	2026-11-12	WAS	CB	R.Douglas		18	2	Official
+WASNYG	2026-11-12	WAS	RB	R.Henry	3			Official
+WASNYG	2026-11-12	WAS	RB	R.White	36			Official
+WASNYG	2026-11-12	WAS	G	S.Cosmi	69			Official
+WASNYG	2026-11-12	WAS	WR	S.Diggs	44			Official
+WASNYG	2026-11-12	WAS	LB	S.Styles		65		Official
+WASNYG	2026-11-12	WAS	DT	S.Tuttle		34	6	Official
+WASNYG	2026-11-12	WAS	CB	T.Amos		62		Official
+WASNYG	2026-11-12	WAS	WR	T.Burks	42			Official
+WASNYG	2026-11-12	WAS	LS	T.Ott		8	31	Official
+WASNYG	2026-11-12	WAS	S	T.Owens		21	81	Official
+WASNYG	2026-11-12	WAS	DT	T.Settle		27	6	Official
+WASNYG	2026-11-12	WAS	P	T.Way		8	31	Official
+WASNYG	2026-11-12	WAS	WR	V.Jefferson	24			Official
+BUFNYJ	2026-11-15	BUF	C/G	A.Anderson	54		5	Unofficial
+BUFNYJ	2026-11-15	BUF	G/C	A.Corbett	4		5	Unofficial
+BUFNYJ	2026-11-15	BUF	S	A.Hooker		71		Unofficial
+BUFNYJ	2026-11-15	BUF	LB	B.Chubb		42		Unofficial
+BUFNYJ	2026-11-15	BUF	CB	C.Benford		53		Unofficial
+BUFNYJ	2026-11-15	BUF	S	C.Bishop		68	4	Unofficial
+BUFNYJ	2026-11-15	BUF	C/G	C.McGovern	54			Unofficial
+BUFNYJ	2026-11-15	BUF	CB	D.Alford		20	2	Unofficial
+BUFNYJ	2026-11-15	BUF	DL	D.Carter		17	4	Unofficial
+BUFNYJ	2026-11-15	BUF	T	D.Dawkins	57		5	Unofficial
+BUFNYJ	2026-11-15	BUF	S	D.Hamlin		17	17	Unofficial
+BUFNYJ	2026-11-15	BUF	CB	D.Igbinosun		66	1	Unofficial
+BUFNYJ	2026-11-15	BUF	TE	D.Kincaid	26			Unofficial
+BUFNYJ	2026-11-15	BUF	TE	D.Knox	41			Unofficial
+BUFNYJ	2026-11-15	BUF	WR	D.Moore	33			Unofficial
+BUFNYJ	2026-11-15	BUF	DL	D.Walker		47	8	Unofficial
+BUFNYJ	2026-11-15	BUF	LB	D.Williams		32	6	Unofficial
+BUFNYJ	2026-11-15	BUF	DL	E.Oliver		47		Unofficial
+BUFNYJ	2026-11-15	BUF	WR	G.Dortch	2		10	Unofficial
+BUFNYJ	2026-11-15	BUF	LB	G.Rousseau		42	4	Unofficial
+BUFNYJ	2026-11-15	BUF	QB	J.Allen	54			Unofficial
+BUFNYJ	2026-11-15	BUF	LB	J.Andreessen		1	22	Unofficial
+BUFNYJ	2026-11-15	BUF	RB	J.Cook	35			Unofficial
+BUFNYJ	2026-11-15	BUF	DB	J.Hancock		35	17	Unofficial
+BUFNYJ	2026-11-15	BUF	TE	J.Hawes	26		8	Unofficial
+BUFNYJ	2026-11-15	BUF	LB	J.Solomon		12	18	Unofficial
+BUFNYJ	2026-11-15	BUF	QB	K.Allen	3			Unofficial
+BUFNYJ	2026-11-15	BUF	WR	K.Coleman	30			Unofficial
+BUFNYJ	2026-11-15	BUF	LB	K.Elarms-Orr		25	15	Unofficial
+BUFNYJ	2026-11-15	BUF	TE	K.Latu	13		18	Unofficial
+BUFNYJ	2026-11-15	BUF	WR	K.Shakir	36			Unofficial
+BUFNYJ	2026-11-15	BUF	C	L.Cushenberry	3		5	Unofficial
+BUFNYJ	2026-11-15	BUF	DL	L.Jackson		26	9	Unofficial
+BUFNYJ	2026-11-15	BUF	CB	M.Hairston		23	13	Unofficial
+BUFNYJ	2026-11-15	BUF	LB	M.Hoecht		11	17	Unofficial
+BUFNYJ	2026-11-15	BUF	G	O.Torrence	57		5	Unofficial
+BUFNYJ	2026-11-15	BUF	RB	R.Davis	12		10	Unofficial
+BUFNYJ	2026-11-15	BUF	LS	R.Ferguson		8		Unofficial
+BUFNYJ	2026-11-15	BUF	WR	S.Bell	20			Unofficial
+BUFNYJ	2026-11-15	BUF	T	S.Brown	54			Unofficial
+BUFNYJ	2026-11-15	BUF	DB	S.Franklin		22		Unofficial
+BUFNYJ	2026-11-15	BUF	K	T.Bass		6		Unofficial
+BUFNYJ	2026-11-15	BUF	LB	T.Bernard		60		Unofficial
+BUFNYJ	2026-11-15	BUF	P	T.Doman		14		Unofficial
+BUFNYJ	2026-11-15	BUF	T/G	T.Grable	3		5	Unofficial
+BUFNYJ	2026-11-15	BUF	RB	T.Johnson	10		3	Unofficial
+BUFNYJ	2026-11-15	BUF	LB	T.Parker		39	11	Unofficial
+BUFNYJ	2026-11-15	BUF	DL	T.Sanders		27	1	Unofficial
+BUFNYJ	2026-11-15	NYJ	FB	A.Beck	2			Unofficial
+BUFNYJ	2026-11-15	NYJ	P	A.McNamara		8		Unofficial
+BUFNYJ	2026-11-15	NYJ	T	A.Membou	71		4	Unofficial
+BUFNYJ	2026-11-15	NYJ	WR	A.Mitchell	62			Unofficial
+BUFNYJ	2026-11-15	NYJ	CB	A.Thomas		57	5	Unofficial
+BUFNYJ	2026-11-15	NYJ	RB	B.Allen	34		4	Unofficial
+BUFNYJ	2026-11-15	NYJ	RB	B.Hall	41			Unofficial
+BUFNYJ	2026-11-15	NYJ	RB	B.Hall		41		Unofficial
+BUFNYJ	2026-11-15	NYJ	CB	B.Stephens		55		Unofficial
+BUFNYJ	2026-11-15	NYJ	QB	C.Klubnik	37			Unofficial
+BUFNYJ	2026-11-15	NYJ	OL	C.Okorafor		4		Unofficial
+BUFNYJ	2026-11-15	NYJ	S	D.Belton		57	10	Unofficial
+BUFNYJ	2026-11-15	NYJ	LB	D.Davis		56	5	Unofficial
+BUFNYJ	2026-11-15	NYJ	DE	D.Jackson		47	5	Unofficial
+BUFNYJ	2026-11-15	NYJ	RB	D.Parham	13		11	Unofficial
+BUFNYJ	2026-11-15	NYJ	CB	D.Ponds		16		Unofficial
+BUFNYJ	2026-11-15	NYJ	QB	G.Smith	37			Unofficial
+BUFNYJ	2026-11-15	NYJ	WR	G.Wilson	67			Unofficial
+BUFNYJ	2026-11-15	NYJ	DL	H.Phillips		30	4	Unofficial
+BUFNYJ	2026-11-15	NYJ	RB	I.Davis		23		Unofficial
+BUFNYJ	2026-11-15	NYJ	WR	I.Williams	50		5	Unofficial
+BUFNYJ	2026-11-15	NYJ	DL	J.Briggs		39	9	Unofficial
+BUFNYJ	2026-11-15	NYJ	DE	J.Heflin		28	23	Unofficial
+BUFNYJ	2026-11-15	NYJ	LB	J.Keller		85		Unofficial
+BUFNYJ	2026-11-15	NYJ	OL	J.Meredith	58			Unofficial
+BUFNYJ	2026-11-15	NYJ	C	J.Myers	71		4	Unofficial
+BUFNYJ	2026-11-15	NYJ	LB	J.Newton		2		Unofficial
+BUFNYJ	2026-11-15	NYJ	DL	J.Ossai		27	8	Unofficial
+BUFNYJ	2026-11-15	NYJ	TE	J.Ruckert	15			Unofficial
+BUFNYJ	2026-11-15	NYJ	K	J.Sanders		4		Unofficial
+BUFNYJ	2026-11-15	NYJ	LB	J.Sherwood		57		Unofficial
+BUFNYJ	2026-11-15	NYJ	C	J.Tippmann	71		4	Unofficial
+BUFNYJ	2026-11-15	NYJ	DE	K.Enagbare		34	9	Unofficial
+BUFNYJ	2026-11-15	NYJ	RB	K.Nwangwu		8		Unofficial
+BUFNYJ	2026-11-15	NYJ	TE	K.Sadiq	29			Unofficial
+BUFNYJ	2026-11-15	NYJ	S	M.Fitzpatrick		57		Unofficial
+BUFNYJ	2026-11-15	NYJ	WR	M.McClain	1		18	Unofficial
+BUFNYJ	2026-11-15	NYJ	TE	M.Taylor	53			Unofficial
+BUFNYJ	2026-11-15	NYJ	DB	N.Wright		7		Unofficial
+BUFNYJ	2026-11-15	NYJ	WR	O.Cooper	1		23	Unofficial
+BUFNYJ	2026-11-15	NYJ	OL	O.Fashanu	71		4	Unofficial
+BUFNYJ	2026-11-15	NYJ	DL	P.Page		4		Unofficial
+BUFNYJ	2026-11-15	NYJ	CB	Q.Stiggers		2	7	Unofficial
+BUFNYJ	2026-11-15	NYJ	LS	T.Hennessy		14		Unofficial
+BUFNYJ	2026-11-15	NYJ	LB	T.Reeder		18		Unofficial
+BUFNYJ	2026-11-15	NYJ	S	V.Payne		18		Unofficial
+BUFNYJ	2026-11-15	NYJ	LB	W.McDonald		33	5	Unofficial
+CARNO	2026-11-15	CAR	DT	A.Hall		2	3	Official
+CARNO	2026-11-15	CAR	RB	A.Tyus		12		Official
+CARNO	2026-11-15	CAR	DT	B.Brown		10	3	Official
+CARNO	2026-11-15	CAR	LB	B.Martin-Scott		20		Official
+CARNO	2026-11-15	CAR	WR	B.Tremayne	12		17	Official
+CARNO	2026-11-15	CAR	QB	B.Young	70			Official
+CARNO	2026-11-15	CAR	RB	C.Hubbard	59			Official
+CARNO	2026-11-15	CAR	CB	C.Smith-Wade		63	3	Official
+CARNO	2026-11-15	CAR	CB	C.Thornton		32	4	Official
+CARNO	2026-11-15	CAR	DT	D.Brown		43	2	Official
+CARNO	2026-11-15	CAR	G	D.Lewis	70		5	Official
+CARNO	2026-11-15	CAR	LB	D.Lloyd		59		Official
+CARNO	2026-11-15	CAR	TE	D.Waller	43			Official
+CARNO	2026-11-15	CAR	TE	F.Franks	2		17	Official
+CARNO	2026-11-15	CAR	S	I.Simmons		20		Official
+CARNO	2026-11-15	CAR	WR	J.Coker	56			Official
+CARNO	2026-11-15	CAR	LS	J.Jansen		10		Official
+CARNO	2026-11-15	CAR	LB	J.Kuwatch		4	20	Official
+CARNO	2026-11-15	CAR	WR	J.Metchie	23			Official
+CARNO	2026-11-15	CAR	LB	J.Phillips		55		Official
+CARNO	2026-11-15	CAR	C	L.Fortner	70			Official
+CARNO	2026-11-15	CAR	DT	L.Hunter		15	1	Official
+CARNO	2026-11-15	CAR	S	L.Ransom		20		Official
+CARNO	2026-11-15	CAR	CB	M.DeWalt		13		Official
+CARNO	2026-11-15	CAR	TE	M.Evans	35		14	Official
+CARNO	2026-11-15	CAR	T	M.Freeling	70		5	Official
+CARNO	2026-11-15	CAR	CB	M.Wilson		63	3	Official
+CARNO	2026-11-15	CAR	LB	N.Hampton		17		Official
+CARNO	2026-11-15	CAR	S	N.Scott		28	4	Official
+CARNO	2026-11-15	CAR	LB	P.Jones		48	3	Official
+CARNO	2026-11-15	CAR	LB	P.Umanmielen		28		Official
+CARNO	2026-11-15	CAR	K	R.Fitzgerald		9		Official
+CARNO	2026-11-15	CAR	G	R.Hunt	70		5	Official
+CARNO	2026-11-15	CAR	T	R.Walker	64		5	Official
+CARNO	2026-11-15	CAR	T	S.Forsythe	10		5	Official
+CARNO	2026-11-15	CAR	P	S.Martin		10		Official
+CARNO	2026-11-15	CAR	LB	T.Dodson		63		Official
+CARNO	2026-11-15	CAR	RB	T.Etienne	11		8	Official
+CARNO	2026-11-15	CAR	LB	T.Gipson		11	4	Official
+CARNO	2026-11-15	CAR	WR	T.McMillan	56			Official
+CARNO	2026-11-15	CAR	S	T.Moehrig		63		Official
+CARNO	2026-11-15	CAR	G	T.Simpkins		5		Official
+CARNO	2026-11-15	CAR	TE	T.Tremble	47			Official
+CARNO	2026-11-15	CAR	DT	T.Wharton		43	3	Official
+CARNO	2026-11-15	CAR	WR	X.Legette	2			Official
+CARNO	2026-11-15	CAR	S	Z.Wheatley		63		Official
+CARNO	2026-11-15	NO	RB	A.Estime	27		6	Official
+CARNO	2026-11-15	NO	DE	A.Jennings		17	17	Official
+CARNO	2026-11-15	NO	RB	A.Kamara	16			Official
+CARNO	2026-11-15	NO	RB	A.Kamara		25		Official
+CARNO	2026-11-15	NO	OL	A.Richards	51		1	Official
+CARNO	2026-11-15	NO	WR	B.Brown	2		9	Official
+CARNO	2026-11-15	NO	WR	B.Lance	9		4	Official
+CARNO	2026-11-15	NO	DE	C.Granderson		54	6	Official
+CARNO	2026-11-15	NO	RB	C.Hubbard		59		Official
+CARNO	2026-11-15	NO	WR	C.Olave	56			Official
+CARNO	2026-11-15	NO	G	C.Ruiz	63		3	Official
+CARNO	2026-11-15	NO	CB	C.Smith-Wade		63		Official
+CARNO	2026-11-15	NO	K	C.Smyth		7		Official
+CARNO	2026-11-15	NO	DE	C.Young		54		Official
+CARNO	2026-11-15	NO	G	D.Edwards	63		3	Official
+CARNO	2026-11-15	NO	LB	D.Stutsman		43	22	Official
+CARNO	2026-11-15	NO	WR	D.Vele	55			Official
+CARNO	2026-11-15	NO	T	E.Kilty		2		Official
+CARNO	2026-11-15	NO	LB	I.Stalbird		22		Official
+CARNO	2026-11-15	NO	S	J.Blackmon		59		Official
+CARNO	2026-11-15	NO	TE	J.Johnson	43			Official
+CARNO	2026-11-15	NO	S	J.Reid		55	5	Official
+CARNO	2026-11-15	NO	DL	J.Ridgeway		14	5	Official
+CARNO	2026-11-15	NO	S	J.Sanker		45	5	Official
+CARNO	2026-11-15	NO	WR	J.Tyson	45			Official
+CARNO	2026-11-15	NO	WR	J.Tyson		11		Official
+CARNO	2026-11-15	NO	G	J.Wright	63		3	Official
+CARNO	2026-11-15	NO	T	K.Banks	63		3	Official
+CARNO	2026-11-15	NO	DE	K.Boyd		39	5	Official
+CARNO	2026-11-15	NO	LB	K.Elliss		70		Official
+CARNO	2026-11-15	NO	CB	K.McKinstry		69		Official
+CARNO	2026-11-15	NO	DB	L.Styles		88		Official
+CARNO	2026-11-15	NO	CB	M.Emerson		40		Official
+CARNO	2026-11-15	NO	T	M.Murphy	12		3	Official
+CARNO	2026-11-15	NO	TE	N.Fant	28		4	Official
+CARNO	2026-11-15	NO	DL	N.Shepherd		36	5	Official
+CARNO	2026-11-15	NO	TE	O.Delp	7		16	Official
+CARNO	2026-11-15	NO	P	R.Wright		7		Official
+CARNO	2026-11-15	NO	RB	T.Etienne	21			Official
+CARNO	2026-11-15	NO	QB	T.Shough	63			Official
+CARNO	2026-11-15	NO	DE	T.Wilson		4	9	Official
+CARNO	2026-11-15	NO	DL	V.Broughton		42	4	Official
+CARNO	2026-11-15	NO	LS	Z.Wood		7		Official
+HOUCL	2026-11-15	CLE	T	A.Barber	68		6	Unofficial
+HOUCL	2026-11-15	CLE	DT	A.Huntington		12	9	Unofficial
+HOUCL	2026-11-15	CLE	K	A.Szmyt		11		Unofficial
+HOUCL	2026-11-15	CLE	TE	B.Whiteheart	26		22	Unofficial
+HOUCL	2026-11-15	CLE	P	C.Bojorquez		11		Unofficial
+HOUCL	2026-11-15	CLE	LB	C.Schwesinger		67	4	Unofficial
+HOUCL	2026-11-15	CLE	DE	D.Barnett		20	3	Unofficial
+HOUCL	2026-11-15	CLE	WR	D.Boston	58		7	Unofficial
+HOUCL	2026-11-15	CLE	T	D.Jones		6		Unofficial
+HOUCL	2026-11-15	CLE	RB	D.Sampson	35			Unofficial
+HOUCL	2026-11-15	CLE	S	D.Thomas		11	23	Unofficial
+HOUCL	2026-11-15	CLE	CB	D.Ward		67		Unofficial
+HOUCL	2026-11-15	CLE	QB	D.Watson	68			Unofficial
+HOUCL	2026-11-15	CLE	C/G	E.Jenkins	68			Unofficial
+HOUCL	2026-11-15	CLE	S	E.McNeil-Warren		67	6	Unofficial
+HOUCL	2026-11-15	CLE	S	G.Delpit		67	4	Unofficial
+HOUCL	2026-11-15	CLE	TE	H.Fannin	59			Unofficial
+HOUCL	2026-11-15	CLE	WR	I.Bond		1		Unofficial
+HOUCL	2026-11-15	CLE	DE	I.McGuire		46	1	Unofficial
+HOUCL	2026-11-15	CLE	WR	J.Jeudy	37			Unofficial
+HOUCL	2026-11-15	CLE	RB	J.McLaughlin		1		Unofficial
+HOUCL	2026-11-15	CLE	DE	J.Verse		42	4	Unofficial
+HOUCL	2026-11-15	CLE	WR	K.Concepcion	54			Unofficial
+HOUCL	2026-11-15	CLE	C	L.Wypler		6		Unofficial
+HOUCL	2026-11-15	CLE	DT	M.Collins		41		Unofficial
+HOUCL	2026-11-15	CLE	WR	M.Corley	21		16	Unofficial
+HOUCL	2026-11-15	CLE	DT	M.Graham		48		Unofficial
+HOUCL	2026-11-15	CLE	CB	M.Harden		53	6	Unofficial
+HOUCL	2026-11-15	CLE	RB	Q.Judkins	32			Unofficial
+HOUCL	2026-11-15	CLE	LB	Q.Williams		62		Unofficial
+HOUCL	2026-11-15	CLE	LS	R.Sunahara				Unofficial
+HOUCL	2026-11-15	CLE	T	S.Fano	68		6	Unofficial
+HOUCL	2026-11-15	CLE	DT	S.Kamara		25	4	Unofficial
+HOUCL	2026-11-15	CLE	CB	T.Campbell		64	4	Unofficial
+HOUCL	2026-11-15	CLE	T	T.Howard	68		6	Unofficial
+HOUCL	2026-11-15	CLE	WR	T.Wallace		16		Unofficial
+HOUCL	2026-11-15	CLE	G	Z.Johnson	68		6	Unofficial
+HOUCL	2026-11-15	CLE	TE	Z.Mitchell-Paden		19		Unofficial
+HOUCL	2026-11-15	CLE	G	Z.Zinter		6		Unofficial
+HOUCL	2026-11-15	HOU	LS	A.Brinkman		11		Unofficial
+HOUCL	2026-11-15	HOU	T	A.Ersery	67		4	Unofficial
+HOUCL	2026-11-15	HOU	S	C.Bullock		68		Unofficial
+HOUCL	2026-11-15	HOU	LB	C.Muma		20		Unofficial
+HOUCL	2026-11-15	HOU	TE	C.Stover		19		Unofficial
+HOUCL	2026-11-15	HOU	QB	C.Stroud	67			Unofficial
+HOUCL	2026-11-15	HOU	RB	D.Ogunbowale	15		14	Unofficial
+HOUCL	2026-11-15	HOU	DE	D.Robinson		22	22	Unofficial
+HOUCL	2026-11-15	HOU	TE	D.Schultz	44			Unofficial
+HOUCL	2026-11-15	HOU	CB	D.Stingley		68	3	Unofficial
+HOUCL	2026-11-15	HOU	C/G	E.Brown	67			Unofficial
+HOUCL	2026-11-15	HOU	RB	E.Demercado	22			Unofficial
+HOUCL	2026-11-15	HOU	G	E.Ingram	67		4	Unofficial
+HOUCL	2026-11-15	HOU	TE	F.Moreau	22		14	Unofficial
+HOUCL	2026-11-15	HOU	G	F.Nwaiwu	67		4	Unofficial
+HOUCL	2026-11-15	HOU	C	J.Andrews		4		Unofficial
+HOUCL	2026-11-15	HOU	DE	J.Clowney		52	2	Unofficial
+HOUCL	2026-11-15	HOU	LB	J.Hansen		66	9	Unofficial
+HOUCL	2026-11-15	HOU	LB	J.Hummel		21		Unofficial
+HOUCL	2026-11-15	HOU	S	J.Ingram		1	23	Unofficial
+HOUCL	2026-11-15	HOU	S	J.Pitre		68		Unofficial
+HOUCL	2026-11-15	HOU	S	J.Uche		2		Unofficial
+HOUCL	2026-11-15	HOU	WR	K.Boutte	47			Unofficial
+HOUCL	2026-11-15	HOU	K	K.Fairbairn		9		Unofficial
+HOUCL	2026-11-15	HOU	P	K.Kroeger		11		Unofficial
+HOUCL	2026-11-15	HOU	CB	K.Lassiter		68	3	Unofficial
+HOUCL	2026-11-15	HOU	DT	K.McDonald		14	6	Unofficial
+HOUCL	2026-11-15	HOU	S	K.Ramsey		20		Unofficial
+HOUCL	2026-11-15	HOU	DT	L.Hall		28	6	Unofficial
+HOUCL	2026-11-15	HOU	S	M.Stewart		65	8	Unofficial
+HOUCL	2026-11-15	HOU	WR	N.Collins	57			Unofficial
+HOUCL	2026-11-15	HOU	DT	N.Jones		15	6	Unofficial
+HOUCL	2026-11-15	HOU	WR	N.Remigio		11		Unofficial
+HOUCL	2026-11-15	HOU	T	N.Thomas		4		Unofficial
+HOUCL	2026-11-15	HOU	S	R.Blankenship		2	12	Unofficial
+HOUCL	2026-11-15	HOU	DT	S.Rankins		45	2	Unofficial
+HOUCL	2026-11-15	HOU	T	T.Brown	67		4	Unofficial
+HOUCL	2026-11-15	HOU	WR	T.Dell	33			Unofficial
+HOUCL	2026-11-15	HOU	LB	T.Gipson		11		Unofficial
+HOUCL	2026-11-15	HOU	CB	T.Smith		29		Unofficial
+HOUCL	2026-11-15	HOU	DT	T.Togiai		44	2	Unofficial
+HOUCL	2026-11-15	HOU	DE	W.Anderson		54	8	Unofficial
+HOUCL	2026-11-15	HOU	RB	W.Marks	30			Unofficial
+HOUCL	2026-11-15	HOU	LB	W.Woodaz		29		Unofficial
+HOUCL	2026-11-15	HOU	WR	X.Hutchinson	51			Unofficial
+JAXTEN	2026-11-15	JAX	RB	A.Abdullah		6		Official
+JAXTEN	2026-11-15	JAX	DT	A.Armstead		41		Official
+JAXTEN	2026-11-15	JAX	S	A.Johnson		57	4	Official
+JAXTEN	2026-11-15	JAX	LB	B.Combs		1	21	Official
+JAXTEN	2026-11-15	JAX	TE	B.Strange	57			Official
+JAXTEN	2026-11-15	JAX	RB	B.Tuten	51			Official
+JAXTEN	2026-11-15	JAX	WR	Bri.Thomas	35			Official
+JAXTEN	2026-11-15	JAX	DE	Bry.Thomas		11	10	Official
+JAXTEN	2026-11-15	JAX	K	C.Little		16		Official
+JAXTEN	2026-11-15	JAX	RB	C.Rodriguez	10		2	Official
+JAXTEN	2026-11-15	JAX	OL	C.Van Lanen	73			Official
+JAXTEN	2026-11-15	JAX	OL	D.Faalele		8		Official
+JAXTEN	2026-11-15	JAX	LB	D.Gardeck		28	20	Official
+JAXTEN	2026-11-15	JAX	DT	D.Godchaux		17		Official
+JAXTEN	2026-11-15	JAX	DE	D.Striggow		2	6	Official
+JAXTEN	2026-11-15	JAX	OL	E.Cleveland	73		8	Official
+JAXTEN	2026-11-15	JAX	OL	E.Pregnon	73		8	Official
+JAXTEN	2026-11-15	JAX	LB	F.Oluokun		57	5	Official
+JAXTEN	2026-11-15	JAX	WR	J.Cameron	24		17	Official
+JAXTEN	2026-11-15	JAX	DE	J.Hines-Allen		48	5	Official
+JAXTEN	2026-11-15	JAX	S	J.Huskey		2		Official
+JAXTEN	2026-11-15	JAX	CB	J.Lewis		24		Official
+JAXTEN	2026-11-15	JAX	LB	J.Mcleod		21		Official
+JAXTEN	2026-11-15	JAX	WR	J.Meyers	59			Official
+JAXTEN	2026-11-15	JAX	OL	J.Monheim	33		8	Official
+JAXTEN	2026-11-15	JAX	LB	J.Tavai		17		Official
+JAXTEN	2026-11-15	JAX	CB	Jar.Jones		35	3	Official
+JAXTEN	2026-11-15	JAX	CB	Jay.Jones		11		Official
+JAXTEN	2026-11-15	JAX	S	K.Merriweather		10	1	Official
+JAXTEN	2026-11-15	JAX	RB	L.Allen	12		10	Official
+JAXTEN	2026-11-15	JAX	P	L.Cooke		9		Official
+JAXTEN	2026-11-15	JAX	CB	M.Brown		43	5	Official
+JAXTEN	2026-11-15	JAX	DT	M.Dickerson		16	12	Official
+JAXTEN	2026-11-15	JAX	TE	N.Boerkircher	36		6	Official
+JAXTEN	2026-11-15	JAX	WR	P.Washington	56		2	Official
+JAXTEN	2026-11-15	JAX	TE	Q.Morris	6		23	Official
+JAXTEN	2026-11-15	JAX	OL	R.Hainsey	40			Official
+JAXTEN	2026-11-15	JAX	S	R.Lane		56	17	Official
+JAXTEN	2026-11-15	JAX	LS	R.Matiscik		9		Official
+JAXTEN	2026-11-15	JAX	DT	R.Orhorhoro		29	5	Official
+JAXTEN	2026-11-15	JAX	WR/CB	T.Hunter	6		56	Official
+JAXTEN	2026-11-15	JAX	TE	T.Koziol	7		6	Official
+JAXTEN	2026-11-15	JAX	QB	T.Lawrence	73			Official
+JAXTEN	2026-11-15	JAX	DE	T.Walker		53	5	Official
+JAXTEN	2026-11-15	JAX	LB	V.Miller		43	1	Official
+JAXTEN	2026-11-15	JAX	OL	W.Little	73		8	Official
+JAXTEN	2026-11-15	JAX	OL	W.Milum	6		8	Official
+JAXTEN	2026-11-15	TEN	G	A.Mafi	57		5	Official
+JAXTEN	2026-11-15	TEN	C	A.Schlottmann	57			Official
+JAXTEN	2026-11-15	TEN	CB	A.Taylor		61		Official
+JAXTEN	2026-11-15	TEN	WR	C.Dike	54		9	Official
+JAXTEN	2026-11-15	TEN	CB	C.Flott		73		Official
+JAXTEN	2026-11-15	TEN	LB	C.Gray		67	8	Official
+JAXTEN	2026-11-15	TEN	WR	C.Ridley	4			Official
+JAXTEN	2026-11-15	TEN	QB	C.Ward	57			Official
+JAXTEN	2026-11-15	TEN	G	C.Zavala	57		5	Official
+JAXTEN	2026-11-15	TEN	TE	D.Bellinge	28			Official
+JAXTEN	2026-11-15	TEN	LB	D.Hampton		17		Official
+JAXTEN	2026-11-15	TEN	TE	D.Martin-Robinson	1		22	Official
+JAXTEN	2026-11-15	TEN	LB	D.Mausi		64	8	Official
+JAXTEN	2026-11-15	TEN	T	D.Moore	57		5	Official
+JAXTEN	2026-11-15	TEN	WR	E.Ayomanor	54			Official
+JAXTEN	2026-11-15	TEN	G	G.Dellinger		5		Official
+JAXTEN	2026-11-15	TEN	TE	G.Helm	47		5	Official
+JAXTEN	2026-11-15	TEN	S	I.Oliver		26	4	Official
+JAXTEN	2026-11-15	TEN	RB	J.Chestnut		25		Official
+JAXTEN	2026-11-15	TEN	DL	J.Franklin-Myers		38		Official
+JAXTEN	2026-11-15	TEN	T	J.Hudson	1		5	Official
+JAXTEN	2026-11-15	TEN	DE	J.Johnson		51	6	Official
+JAXTEN	2026-11-15	TEN	T	J.Latham	57			Official
+JAXTEN	2026-11-15	TEN	DT	J.Laulu		20	2	Official
+JAXTEN	2026-11-15	TEN	DE	J.Martin		46	8	Official
+JAXTEN	2026-11-15	TEN	K	J.Slye		11		Official
+JAXTEN	2026-11-15	TEN	CB	Jo.Williams		73		Official
+JAXTEN	2026-11-15	TEN	DE	K.Faulk		24		Official
+JAXTEN	2026-11-15	TEN	S	K.Winston		73		Official
+JAXTEN	2026-11-15	TEN	LS	M.Cox		7		Official
+JAXTEN	2026-11-15	TEN	LB	M.Diabate		9	16	Official
+JAXTEN	2026-11-15	TEN	CB	M.Harris		17		Official
+JAXTEN	2026-11-15	TEN	CB	M.Robinson		25		Official
+JAXTEN	2026-11-15	TEN	DT	N.Stackhouse		22	8	Official
+JAXTEN	2026-11-15	TEN	DE	O.Oladejo		9	14	Official
+JAXTEN	2026-11-15	TEN	C	P.Coogan		5		Official
+JAXTEN	2026-11-15	TEN	DT	S.Thomas		40		Official
+JAXTEN	2026-11-15	TEN	S	T.Adams		55		Official
+JAXTEN	2026-11-15	TEN	S	T.Burgess		9	25	Official
+JAXTEN	2026-11-15	TEN	DT	T.Horne		39	8	Official
+JAXTEN	2026-11-15	TEN	DE	T.Jones		4	25	Official
+JAXTEN	2026-11-15	TEN	P	T.Morstead		7		Official
+JAXTEN	2026-11-15	TEN	RB	T.Pollard	41			Official
+JAXTEN	2026-11-15	TEN	RB	T.Spears	16			Official
+JAXTEN	2026-11-15	TEN	WR	W.Robinson	20			Official
+JAXTEN	2026-11-15	TEN	WR	X.Restrepo	19		14	Official
+KCATL	2026-11-15	ATL	TE	A.Hooper	11		1	Official
+KCATL	2026-11-15	ATL	CB	A.Terrell		65		Official
+KCATL	2026-11-15	ATL	G	A.Vorhees		2		Official
+KCATL	2026-11-15	ATL	WR	B.Collins	25		6	Official
+KCATL	2026-11-15	ATL	DL	B.Dorlus		40		Official
+KCATL	2026-11-15	ATL	RB	B.Robinson	51			Official
+KCATL	2026-11-15	ATL	WR	C.Blair	15		17	Official
+KCATL	2026-11-15	ATL	CB	C.Henderson		65		Official
+KCATL	2026-11-15	ATL	C/G	C.Levin	72		3	Official
+KCATL	2026-11-15	ATL	G	C.Lindstrom	72		3	Official
+KCATL	2026-11-15	ATL	DE	C.Snowden		21		Official
+KCATL	2026-11-15	ATL	DE	C.Thomas		45		Official
+KCATL	2026-11-15	ATL	TE	C.Woerner	32		16	Official
+KCATL	2026-11-15	ATL	S	D.Hellams		62	13	Official
+KCATL	2026-11-15	ATL	WR	D.London	59			Official
+KCATL	2026-11-15	ATL	T	E.Onianwa		3		Official
+KCATL	2026-11-15	ATL	DT	G.Dexter		42		Official
+KCATL	2026-11-15	ATL	P	J.Bailey		10		Official
+KCATL	2026-11-15	ATL	WR	J.Dotson	52			Official
+KCATL	2026-11-15	ATL	T	J.Matthews	72		3	Official
+KCATL	2026-11-15	ATL	K	J.Moody		7		Official
+KCATL	2026-11-15	ATL	DE	J.Pearce		16		Official
+KCATL	2026-11-15	ATL	S	J.Robinson		24		Official
+KCATL	2026-11-15	ATL	T	J.Taylor	72			Official
+KCATL	2026-11-15	ATL	LB	J.Woods		15		Official
+KCATL	2026-11-15	ATL	LB	K.Daniels		65	2	Official
+KCATL	2026-11-15	ATL	RB	K.Herbert	21		11	Official
+KCATL	2026-11-15	ATL	OL	K.Hinton		3		Official
+KCATL	2026-11-15	ATL	TE	K.Pitts	55			Official
+KCATL	2026-11-15	ATL	LS	L.McCullough		10		Official
+KCATL	2026-11-15	ATL	OL	M.Bergeron	72		1	Official
+KCATL	2026-11-15	ATL	CB	M.Hughes		3		Official
+KCATL	2026-11-15	ATL	QB	M.Penix	72			Official
+KCATL	2026-11-15	ATL	TE	N.Muse	10		26	Official
+KCATL	2026-11-15	ATL	WR	O.Zaccheaus	29		14	Official
+KCATL	2026-11-15	ATL	LB	T.Quinn		21		Official
+KCATL	2026-11-15	ATL	S	X.Watts		65	3	Official
+KCATL	2026-11-15	ATL	DE	Z.Smith		17		Official
+KCATL	2026-11-15	KC	WR	A.Armstrong	17		21	Official
+KCATL	2026-11-15	KC	DE	A.Gillotte		54	4	Official
+KCATL	2026-11-15	KC	S	A.Gilman		63	1	Official
+KCATL	2026-11-15	KC	DT	B.Eason		11	4	Official
+KCATL	2026-11-15	KC	WR	C.Allen	23		1	Official
+KCATL	2026-11-15	KC	DB	C.Conner		67	1	Official
+KCATL	2026-11-15	KC	C	C.Humphrey	64		5	Official
+KCATL	2026-11-15	KC	DT	C.Jones		55		Official
+KCATL	2026-11-15	KC	LB	C.McDonald		1	1	Official
+KCATL	2026-11-15	KC	CB	C.Roland-Wallace		57		Official
+KCATL	2026-11-15	KC	T	D.Pounds	5		5	Official
+KCATL	2026-11-15	KC	LB	D.Tranquill		53	4	Official
+KCATL	2026-11-15	KC	RB	E.Johnson	57			Official
+KCATL	2026-11-15	KC	DE	F.Anudike-Uzomah		35		Official
+KCATL	2026-11-15	KC	DE	G.Karlaftis		59	4	Official
+KCATL	2026-11-15	KC	K	H.Butker		12		Official
+KCATL	2026-11-15	KC	OL	H.Nourzad	10		6	Official
+KCATL	2026-11-15	KC	LB	J.Bassa		1	23	Official
+KCATL	2026-11-15	KC	TE	J.Briningstool	17		23	Official
+KCATL	2026-11-15	KC	DB	J.Canady		26	18	Official
+KCATL	2026-11-15	KC	LB	J.Cochrane		10	27	Official
+KCATL	2026-11-15	KC	WR	J.De Jesus		9		Official
+KCATL	2026-11-15	KC	WR	J.Downs	11		8	Official
+KCATL	2026-11-15	KC	OL	J.Ezeudu	60		6	Official
+KCATL	2026-11-15	KC	QB	J.Fields	4			Official
+KCATL	2026-11-15	KC	DB	J.Hicks		9	17	Official
+KCATL	2026-11-15	KC	WR	J.Royals	19		17	Official
+KCATL	2026-11-15	KC	TE	J.Wiley	2			Official
+KCATL	2026-11-15	KC	LS	J.Winchester		13		Official
+KCATL	2026-11-15	KC	T	K.Benson	65		6	Official
+KCATL	2026-11-15	KC	CB	K.Fulton		31	6	Official
+KCATL	2026-11-15	KC	OL	K.Suamataia	65		6	Official
+KCATL	2026-11-15	KC	NT	K.Tonga		16	4	Official
+KCATL	2026-11-15	KC	P	M.Araiza		13		Official
+KCATL	2026-11-15	KC	OL	M.Caliendo	51		6	Official
+KCATL	2026-11-15	KC	CB	M.Delane		40	1	Official
+KCATL	2026-11-15	KC	DT	M.Harris		12		Official
+KCATL	2026-11-15	KC	LB	N.Bolton		67	4	Official
+KCATL	2026-11-15	KC	RB	N.Carter	8		6	Official
+KCATL	2026-11-15	KC	TE	N.Gray	55		17	Official
+KCATL	2026-11-15	KC	DB	N.Williams		72	5	Official
+KCATL	2026-11-15	KC	QB	P.Mahomes	62			Official
+KCATL	2026-11-15	KC	WR	R.Rice	30			Official
+KCATL	2026-11-15	KC	DE	R.Thomas		48	7	Official
+KCATL	2026-11-15	KC	TE	T.Kelce	20			Official
+KCATL	2026-11-15	KC	G	Tr.Smith	14		1	Official
+KCATL	2026-11-15	KC	S	X.Nwankpa		5	26	Official
+KCATL	2026-11-15	KC	WR	X.Worthy	57		1	Official
+LARARI	2026-11-15	ARI	DE	A.Billings		17		Unofficial
+LARARI	2026-11-15	ARI	S	A.Wingard		76		Unofficial
+LARARI	2026-11-15	ARI	S	B.Baker		74		Unofficial
+LARARI	2026-11-15	ARI	LB	B.Browning		55	7	Unofficial
+LARARI	2026-11-15	ARI	P	B.Gillikin		5		Unofficial
+LARARI	2026-11-15	ARI	QB	C.Beck	35			Unofficial
+LARARI	2026-11-15	ARI	LS	C.Kreiter		5		Unofficial
+LARARI	2026-11-15	ARI	K	C.Ryland		5		Unofficial
+LARARI	2026-11-15	ARI	LB	C.Simon		40	20	Unofficial
+LARARI	2026-11-15	ARI	CB	D.Burke		71		Unofficial
+LARARI	2026-11-15	ARI	WR	D.Duvernay	10		8	Unofficial
+LARARI	2026-11-15	ARI	DL	D.Robinson		35		Unofficial
+LARARI	2026-11-15	ARI	TE	E.Higgins	24		13	Unofficial
+LARARI	2026-11-15	ARI	RB	E.Hull		9		Unofficial
+LARARI	2026-11-15	ARI	OL	E.Wilkinson	35		2	Unofficial
+LARARI	2026-11-15	ARI	CB	G.Williams		4		Unofficial
+LARARI	2026-11-15	ARI	OL	H.Conner	35		2	Unofficial
+LARARI	2026-11-15	ARI	TE	H.Long	20		7	Unofficial
+LARARI	2026-11-15	ARI	WR	H.Wallace	5		4	Unofficial
+LARARI	2026-11-15	ARI	OL	I.Adams	35		2	Unofficial
+LARARI	2026-11-15	ARI	OL	I.Seumalo	35		2	Unofficial
+LARARI	2026-11-15	ARI	LB	J.Burch		2		Unofficial
+LARARI	2026-11-15	ARI	OL	J.Fryar	35		2	Unofficial
+LARARI	2026-11-15	ARI	LB	J.Gibbons		36	5	Unofficial
+LARARI	2026-11-15	ARI	DE	J.Sweat		52		Unofficial
+LARARI	2026-11-15	ARI	WR	J.Tyson		11		Unofficial
+LARARI	2026-11-15	ARI	OL	J.Wills		2		Unofficial
+LARARI	2026-11-15	ARI	CB	K.Clark		58	7	Unofficial
+LARARI	2026-11-15	ARI	S	K.Crawford		2	20	Unofficial
+LARARI	2026-11-15	ARI	OL	K.Eguakun		2		Unofficial
+LARARI	2026-11-15	ARI	DL	L.Collier		35	6	Unofficial
+LARARI	2026-11-15	ARI	CB	M.Melton		23	13	Unofficial
+LARARI	2026-11-15	ARI	LB	Ma.Wilson		76		Unofficial
+LARARI	2026-11-15	ARI	WR	R.Virgil	16			Unofficial
+LARARI	2026-11-15	ARI	WR	S.Fehoko	26		10	Unofficial
+LARARI	2026-11-15	ARI	RB	T.Allgeier	16			Unofficial
+LARARI	2026-11-15	ARI	TE	T.McBride	29			Unofficial
+LARARI	2026-11-15	ARI	TE	T.Quitoriano	3		12	Unofficial
+LARARI	2026-11-15	ARI	DT	W.Nolen		41		Unofficial
+LARARI	2026-11-15	ARI	LB	Z.Collins		46	10	Unofficial
+LARARI	2026-11-15	ARI	WR	Z.Jones	7			Unofficial
+LARARI	2026-11-15	ARI	RB	Z.Knight	19			Unofficial
+LARARI	2026-11-15	ARI	RB	Z.Knight		25		Unofficial
+LARARI	2026-11-15	LAR	DE	A.Donald		23		Unofficial
+LARARI	2026-11-15	LAR	OL	A.Jackson	74		6	Unofficial
+LARARI	2026-11-15	LAR	RB	B.Corum	39			Unofficial
+LARARI	2026-11-15	LAR	DE	B.Fiske		20	2	Unofficial
+LARARI	2026-11-15	LAR	OL	B.Limmer	76		6	Unofficial
+LARARI	2026-11-15	LAR	K	B.McManus		6		Unofficial
+LARARI	2026-11-15	LAR	OL	B.Murray	49		8	Unofficial
+LARARI	2026-11-15	LAR	WR	B.Presley	2		3	Unofficial
+LARARI	2026-11-15	LAR	LB	B.Young		22	2	Unofficial
+LARARI	2026-11-15	LAR	WR	C.Daniels	46			Unofficial
+LARARI	2026-11-15	LAR	CB	C.Lampkin		1	14	Unofficial
+LARARI	2026-11-15	LAR	TE	C.Parkinson	53			Unofficial
+LARARI	2026-11-15	LAR	OL	C.Shelton	17			Unofficial
+LARARI	2026-11-15	LAR	TE	D.Allen	52		4	Unofficial
+LARARI	2026-11-15	LAR	OL	D.McMahon	10		1	Unofficial
+LARARI	2026-11-15	LAR	OL	D.Quessenberry	6		6	Unofficial
+LARARI	2026-11-15	LAR	CB	D.Williams		13		Unofficial
+LARARI	2026-11-15	LAR	P	E.Evans		7		Unofficial
+LARARI	2026-11-15	LAR	CB	E.Forbes		21	6	Unofficial
+LARARI	2026-11-15	LAR	LB	G.Stuard		14		Unofficial
+LARARI	2026-11-15	LAR	K	J.Karty		7		Unofficial
+LARARI	2026-11-15	LAR	S	J.McCollough		6	16	Unofficial
+LARARI	2026-11-15	LAR	LS	J.McQuade		7		Unofficial
+LARARI	2026-11-15	LAR	LB	J.Stewart		18	9	Unofficial
+LARARI	2026-11-15	LAR	CB	J.Wallace		30	2	Unofficial
+LARARI	2026-11-15	LAR	S	K.Curl		30		Unofficial
+LARARI	2026-11-15	LAR	OL	K.Dotson	76		6	Unofficial
+LARARI	2026-11-15	LAR	S	K.Kinchens		25	8	Unofficial
+LARARI	2026-11-15	LAR	WR	K.Mumpfield	48			Unofficial
+LARARI	2026-11-15	LAR	RB	K.Williams	39		3	Unofficial
+LARARI	2026-11-15	LAR	DE	L.Murchison		9	5	Unofficial
+LARARI	2026-11-15	LAR	LB	M.Garrett		17		Unofficial
+LARARI	2026-11-15	LAR	TE	M.Klare	4		6	Unofficial
+LARARI	2026-11-15	LAR	QB	M.Stafford	76			Unofficial
+LARARI	2026-11-15	LAR	LB	N.Landman		20	3	Unofficial
+LARARI	2026-11-15	LAR	LB	O.Speights		13	13	Unofficial
+LARARI	2026-11-15	LAR	S	Q.Lake		35	2	Unofficial
+LARARI	2026-11-15	LAR	RB	R.Rivers	17		6	Unofficial
+LARARI	2026-11-15	LAR	LB	S.Dolac		13	16	Unofficial
+LARARI	2026-11-15	LAR	WR	T.Atwell	16			Unofficial
+LARARI	2026-11-15	LAR	DE	T.Davis		22	2	Unofficial
+LARARI	2026-11-15	LAR	NT	T.Hamilton		15		Unofficial
+LARARI	2026-11-15	LAR	TE	T.Higbee	51		9	Unofficial
+LARARI	2026-11-15	LAR	CB	T.McDuffie		30		Unofficial
+LARARI	2026-11-15	LAR	LB	W.Bailey		15	10	Unofficial
+LARARI	2026-11-15	LAR	OL	W.McClendon	76		6	Unofficial
+LARARI	2026-11-15	LAR	WR	X.Smith	9		7	Unofficial
+MIAIND	2026-11-15	IND	DT	A.Adebawore		62	6	Official
+MIAIND	2026-11-15	IND	LB	A.Ajiake		16	24	Official
+MIAIND	2026-11-15	IND	WR	A.Dulin	13		14	Official
+MIAIND	2026-11-15	IND	CB	A.Gardner		41	1	Official
+MIAIND	2026-11-15	IND	WR	A.Gould	32		3	Official
+MIAIND	2026-11-15	IND	S	A.Haulcy		59	1	Official
+MIAIND	2026-11-15	IND	DE	A.Key		36	5	Official
+MIAIND	2026-11-15	IND	TE	A.Ogletree	30		20	Official
+MIAIND	2026-11-15	IND	LB	B.Boettcher		53	6	Official
+MIAIND	2026-11-15	IND	T	B.Raimann	6			Official
+MIAIND	2026-11-15	IND	LB	C.Allen		59		Official
+MIAIND	2026-11-15	IND	S	C.Bynum		69	6	Official
+MIAIND	2026-11-15	IND	DE	C.Curry		13	18	Official
+MIAIND	2026-11-15	IND	CB	C.Ward		35		Official
+MIAIND	2026-11-15	IND	WR	D.Burks	34		4	Official
+MIAIND	2026-11-15	IND	RB	D.Giddens	2			Official
+MIAIND	2026-11-15	IND	QB	D.Jones	59			Official
+MIAIND	2026-11-15	IND	G	D.Tucker	59		4	Official
+MIAIND	2026-11-15	IND	DE	G.Gumbs		12		Official
+MIAIND	2026-11-15	IND	DT	G.Stewart		46	10	Official
+MIAIND	2026-11-15	IND	S	H.Wohler		10	12	Official
+MIAIND	2026-11-15	IND	LS	J.Bobenmoyer		10		Official
+MIAIND	2026-11-15	IND	DE	J.Brents		42		Official
+MIAIND	2026-11-15	IND	G	J.Farmer	59		4	Official
+MIAIND	2026-11-15	IND	RB	J.Taylor	40			Official
+MIAIND	2026-11-15	IND	DE	J.Tuimoloau		42	6	Official
+MIAIND	2026-11-15	IND	CB	J.Walley		54	6	Official
+MIAIND	2026-11-15	IND	LB	J.Walley		20		Official
+MIAIND	2026-11-15	IND	DT	K.Givens		24		Official
+MIAIND	2026-11-15	IND	DT	K.Harris		28	2	Official
+MIAIND	2026-11-15	IND	DE	L.Latu		58	1	Official
+MIAIND	2026-11-15	IND	WR	L.Treadwell	52			Official
+MIAIND	2026-11-15	IND	G	M.Goncalves	59		4	Official
+MIAIND	2026-11-15	IND	WR	N.Westbrook-Ikhine	11		12	Official
+MIAIND	2026-11-15	IND	TE	P.Brown	13		15	Official
+MIAIND	2026-11-15	IND	P	R.Sanchez		10		Official
+MIAIND	2026-11-15	IND	RB	S.McGowan	17		12	Official
+MIAIND	2026-11-15	IND	K	S.Shrader		9		Official
+MIAIND	2026-11-15	IND	C	T.Bortolini	59			Official
+MIAIND	2026-11-15	IND	LB	T.Chambers		23		Official
+MIAIND	2026-11-15	IND	DT	T.Smith		5		Official
+MIAIND	2026-11-15	IND	TE	T.Warren	51			Official
+MIAIND	2026-11-15	MIA	T	A.Jackson	69		5	Official
+MIAIND	2026-11-15	MIA	C	A.Meyer	67			Official
+MIAIND	2026-11-15	MIA	P	B.Pinion		13		Official
+MIAIND	2026-11-15	MIA	WR	C.Douglas	58			Official
+MIAIND	2026-11-15	MIA	G/T	C.Godrick		5		Official
+MIAIND	2026-11-15	MIA	CB	C.Johnson		59	10	Official
+MIAIND	2026-11-15	MIA	DE	C.Robinson		50		Official
+MIAIND	2026-11-15	MIA	FB	D.Herman	36		4	Official
+MIAIND	2026-11-15	MIA	S	D.Trader		1	19	Official
+MIAIND	2026-11-15	MIA	TE	G.Dulcich	42		8	Official
+MIAIND	2026-11-15	MIA	CB	J.Brents		42		Official
+MIAIND	2026-11-15	MIA	LB	J.Brooks		59		Official
+MIAIND	2026-11-15	MIA	G/T	J.Kingston	10		10	Official
+MIAIND	2026-11-15	MIA	CB	J.Marshall		31	10	Official
+MIAIND	2026-11-15	MIA	DL	J.Phillips		32	4	Official
+MIAIND	2026-11-15	MIA	WR	J.Reagor	8		1	Official
+MIAIND	2026-11-15	MIA	LB	J.Rodriguez		59	4	Official
+MIAIND	2026-11-15	MIA	G	J.Savaiinaea	69		5	Official
+MIAIND	2026-11-15	MIA	CB	J.Simpson		9		Official
+MIAIND	2026-11-15	MIA	WR	J.Tolbert	11		5	Official
+MIAIND	2026-11-15	MIA	DE	J.Uche		44		Official
+MIAIND	2026-11-15	MIA	S	J.Wood		19		Official
+MIAIND	2026-11-15	MIA	RB	J.Wright	12		5	Official
+MIAIND	2026-11-15	MIA	RB	K.Allen	2		12	Official
+MIAIND	2026-11-15	MIA	WR	K.Coleman	34			Official
+MIAIND	2026-11-15	MIA	DL	K.Cooper		30	4	Official
+MIAIND	2026-11-15	MIA	DL	K.Grant		41	4	Official
+MIAIND	2026-11-15	MIA	S	K.Louis		25	19	Official
+MIAIND	2026-11-15	MIA	QB	K.McCord	69			Official
+MIAIND	2026-11-15	MIA	G/T	K.Proctor	69		5	Official
+MIAIND	2026-11-15	MIA	DE	M.Herring		18	4	Official
+MIAIND	2026-11-15	MIA	S	M.Taaffe		59	4	Official
+MIAIND	2026-11-15	MIA	WR	M.Washington	59		6	Official
+MIAIND	2026-11-15	MIA	RB	O.Gordon	49			Official
+MIAIND	2026-11-15	MIA	T	P.Paul	69		5	Official
+MIAIND	2026-11-15	MIA	DE	R.McGraw		9	10	Official
+MIAIND	2026-11-15	MIA	LB	S.Heyward		19		Official
+MIAIND	2026-11-15	MIA	TE	S.Traore	6		23	Official
+MIAIND	2026-11-15	MIA	LS	T.Addington		8		Official
+MIAIND	2026-11-15	MIA	TE	W.Kacmarek	20		9	Official
+MIAIND	2026-11-15	MIA	S	Z.Anderson		1	19	Official
+MIAIND	2026-11-15	MIA	DL	Z.Biggers		11	1	Official
+MIAIND	2026-11-15	MIA	K	Z.Gonzalez		9		Official
+MINGB	2026-11-15	GB	G/T	A.Belton	55		3	Official
+MINGB	2026-11-15	GB	CB	B.Cisse		14		Official
+MINGB	2026-11-15	GB	DE	B.Cox		35	6	Official
+MINGB	2026-11-15	GB	WR	B.Melton		10		Official
+MINGB	2026-11-15	GB	DE	B.Sorrell		34	19	Official
+MINGB	2026-11-15	GB	RB	C.Brooks	26		13	Official
+MINGB	2026-11-15	GB	DT	C.McClellan		32	7	Official
+MINGB	2026-11-15	GB	CB	C.Valentine		55	3	Official
+MINGB	2026-11-15	GB	WR	C.Watson	47			Official
+MINGB	2026-11-15	GB	TE	D.Dabney	3		8	Official
+MINGB	2026-11-15	GB	DE	D.Dennis-Sutton		34	12	Official
+MINGB	2026-11-15	GB	P	D.Whelan		7		Official
+MINGB	2026-11-15	GB	DT	D.Wyatt		42		Official
+MINGB	2026-11-15	GB	S	E.Williams		69	9	Official
+MINGB	2026-11-15	GB	LB	I.McDuffie		68	3	Official
+MINGB	2026-11-15	GB	S	J.Bullard		36		Official
+MINGB	2026-11-15	GB	QB	J.Love	52			Official
+MINGB	2026-11-15	GB	T/G	J.Morgan	55		3	Official
+MINGB	2026-11-15	GB	DT	J.Riley		28		Official
+MINGB	2026-11-15	GB	TE	J.Smith	20		7	Official
+MINGB	2026-11-15	GB	WR	J.Sturdivant	9		16	Official
+MINGB	2026-11-15	GB	G	J.Williams	55		3	Official
+MINGB	2026-11-15	GB	DT	K.Brooks		42	3	Official
+MINGB	2026-11-15	GB	CB	K.Hadden		2	15	Official
+MINGB	2026-11-15	GB	RB	K.Johnson	14			Official
+MINGB	2026-11-15	GB	CB	K.Nixon		69		Official
+MINGB	2026-11-15	GB	LB	K.Welch		20		Official
+MINGB	2026-11-15	GB	G	L.Tomlinson	55		3	Official
+MINGB	2026-11-15	GB	DE	L.Van Ness		37	4	Official
+MINGB	2026-11-15	GB	G	M.Becton	3		3	Official
+MINGB	2026-11-15	GB	WR	M.Golden	46		2	Official
+MINGB	2026-11-15	GB	RB	M.Lloyd	14			Official
+MINGB	2026-11-15	GB	RB	M.Lloyd		9		Official
+MINGB	2026-11-15	GB	LS	M.Orzech		7		Official
+MINGB	2026-11-15	GB	TE	M.Redman	21		9	Official
+MINGB	2026-11-15	GB	LB	N.Niemann		1	23	Official
+MINGB	2026-11-15	GB	WR	S.Moore		3		Official
+MINGB	2026-11-15	GB	WR	S.Williams	20		4	Official
+MINGB	2026-11-15	GB	G/T	T.Glover	55			Official
+MINGB	2026-11-15	GB	LB	T.Hopper		67	10	Official
+MINGB	2026-11-15	GB	TE	T.Kraft	52			Official
+MINGB	2026-11-15	GB	K	T.Smack		6		Official
+MINGB	2026-11-15	GB	QB	T.Taylor	3			Official
+MINGB	2026-11-15	GB	S	X.McKinney		69	6	Official
+MINGB	2026-11-15	MIN	LS	A.DePaola		9		Official
+MINGB	2026-11-15	MIN	RB	A.Jones	30			Official
+MINGB	2026-11-15	MIN	LB	A.Van Ginkel		36		Official
+MINGB	2026-11-15	MIN	C	B.Brandel	69		6	Official
+MINGB	2026-11-15	MIN	CB	B.Murphy		51		Official
+MINGB	2026-11-15	MIN	T	B.O'Neill	69			Official
+MINGB	2026-11-15	MIN	LB	B.Richter		2		Official
+MINGB	2026-11-15	MIN	P	B.Thorson		9		Official
+MINGB	2026-11-15	MIN	TE	B.Yurosek	40		13	Official
+MINGB	2026-11-15	MIN	DL	C.Banks		17	3	Official
+MINGB	2026-11-15	MIN	LB	C.Chambliss		20		Official
+MINGB	2026-11-15	MIN	T	C.Darrisaw	69			Official
+MINGB	2026-11-15	MIN	CB	C.Demmings		5		Official
+MINGB	2026-11-15	MIN	T	C.Tiernan	3		6	Official
+MINGB	2026-11-15	MIN	TE	D.Culp		13		Official
+MINGB	2026-11-15	MIN	RB	D.Dallas	2		17	Official
+MINGB	2026-11-15	MIN	DL	D.Orange		7	3	Official
+MINGB	2026-11-15	MIN	LB	D.Turner		47		Official
+MINGB	2026-11-15	MIN	DL	E.Williams		21	8	Official
+MINGB	2026-11-15	MIN	LB	E.Wilson		55		Official
+MINGB	2026-11-15	MIN	TE	G.Bartholomew	53			Official
+MINGB	2026-11-15	MIN	S	H.Smith		27		Official
+MINGB	2026-11-15	MIN	LB	I.Pace		42	15	Official
+MINGB	2026-11-15	MIN	CB	I.Rodgers		44	3	Official
+MINGB	2026-11-15	MIN	LB	J.Golday		18	20	Official
+MINGB	2026-11-15	MIN	G	J.Huber	69		6	Official
+MINGB	2026-11-15	MIN	S	J.Jackson		41	3	Official
+MINGB	2026-11-15	MIN	WR	J.Jefferson	63			Official
+MINGB	2026-11-15	MIN	WR	J.Jones	6		11	Official
+MINGB	2026-11-15	MIN	RB	J.Mason	37			Official
+MINGB	2026-11-15	MIN	S	J.Metellus		55		Official
+MINGB	2026-11-15	MIN	CB	J.Pierre		27	7	Official
+MINGB	2026-11-15	MIN	DL	J.Redmond		48	3	Official
+MINGB	2026-11-15	MIN	S	J.Ward		17		Official
+MINGB	2026-11-15	MIN	S	Jac.Thomas		17		Official
+MINGB	2026-11-15	MIN	QB	K.Cousins	69			Official
+MINGB	2026-11-15	MIN	LB	K.Van Noy		32		Official
+MINGB	2026-11-15	MIN	DL	L.Rodriguez		37	3	Official
+MINGB	2026-11-15	MIN	FB	M.Bredeson	19		3	Official
+MINGB	2026-11-15	MIN	C	M.Jurgens		6		Official
+MINGB	2026-11-15	MIN	WR	M.Price	33		7	Official
+MINGB	2026-11-15	MIN	T	R.Van Demark		6		Official
+MINGB	2026-11-15	MIN	WR	T.Felton	59			Official
+MINGB	2026-11-15	MIN	G	W.Fries	69		6	Official
+MINGB	2026-11-15	MIN	K	W.Reichard		13		Official
+MINGB	2026-11-15	MIN	CB	Z.Vaughn		9		Official
+NEDET	2026-11-15	DET	S	A.Cisco		5	5	Official
+NEDET	2026-11-15	DET	DE	A.Hutchinson		9		Official
+NEDET	2026-11-15	DET	DL	A.McNeill		42	2	Official
+NEDET	2026-11-15	DET	WR	A.St. Brown	47			Official
+NEDET	2026-11-15	DET	DB	B.Branch		59	1	Official
+NEDET	2026-11-15	DET	T	B.Miller	71		5	Official
+NEDET	2026-11-15	DET	TE	B.Wright	39		9	Official
+NEDET	2026-11-15	DET	S	C.Clark		57	3	Official
+NEDET	2026-11-15	DET	DB	C.Izien		1	16	Official
+NEDET	2026-11-15	DET	OL	C.Mahogany	71		5	Official
+NEDET	2026-11-15	DET	LB	D.Barnes		59	1	Official
+NEDET	2026-11-15	DET	WR	D.Carter	5		11	Official
+NEDET	2026-11-15	DET	DE	D.Moore		40	3	Official
+NEDET	2026-11-15	DET	DE	D.Wonnum		44	3	Official
+NEDET	2026-11-15	DET	DE	E.O'Neill		7	11	Official
+NEDET	2026-11-15	DET	CB	E.Rakestraw		5	7	Official
+NEDET	2026-11-15	DET	LS	H.Hatten		9		Official
+NEDET	2026-11-15	DET	WR	I.TeSlaa	46			Official
+NEDET	2026-11-15	DET	DE	J.Bachie		1	20	Official
+NEDET	2026-11-15	DET	K	J.Bates		11		Official
+NEDET	2026-11-15	DET	QB	J.Dobbs	10			Official
+NEDET	2026-11-15	DET	P	J.Fox		9		Official
+NEDET	2026-11-15	DET	RB	J.Gibbs	49			Official
+NEDET	2026-11-15	DET	QB	J.Goff	61			Official
+NEDET	2026-11-15	DET	RB	J.Saylors	6		20	Official
+NEDET	2026-11-15	DET	OL	J.Scruggs	61		5	Official
+NEDET	2026-11-15	DET	WR	J.Williams	56			Official
+NEDET	2026-11-15	DET	CB	K.Dorsey		21	18	Official
+NEDET	2026-11-15	DET	OL	L.Borom	10		5	Official
+NEDET	2026-11-15	DET	OL	M.Frazier	10		5	Official
+NEDET	2026-11-15	DET	LB	M.Rodriguez		34	2	Official
+NEDET	2026-11-15	DET	LB	O.Pappoe		20		Official
+NEDET	2026-11-15	DET	T	P.Sewell	61			Official
+NEDET	2026-11-15	DET	CB	R.McCreary		59	3	Official
+NEDET	2026-11-15	DET	CB	R.Ya-Sin		55	1	Official
+NEDET	2026-11-15	DET	DL	S.Gill-Howard		31	3	Official
+NEDET	2026-11-15	DET	TE	S.LaPorta	56			Official
+NEDET	2026-11-15	DET	C	S.McLaughlin	10			Official
+NEDET	2026-11-15	DET	RB	S.Vaki	18		20	Official
+NEDET	2026-11-15	DET	TE	T.Conklin	22			Official
+NEDET	2026-11-15	DET	WR	T.Martin	11		20	Official
+NEDET	2026-11-15	DET	LB	T.Nowaske		33	22	Official
+NEDET	2026-11-15	DET	OL	T.Ratledge	61		5	Official
+NEDET	2026-11-15	NE	K	A.Borregales		5		Official
+NEDET	2026-11-15	NE	WR	A.Brown	28			Official
+NEDET	2026-11-15	NE	G	A.Rupcich	6		2	Official
+NEDET	2026-11-15	NE	DT	C.Barmore		22		Official
+NEDET	2026-11-15	NE	CB	C.Canada		7	18	Official
+NEDET	2026-11-15	NE	DT	C.Durden		32	5	Official
+NEDET	2026-11-15	NE	LB	C.Elliss		62		Official
+NEDET	2026-11-15	NE	CB	C.Gonzalez		64		Official
+NEDET	2026-11-15	NE	RB	C.Kiner	25		6	Official
+NEDET	2026-11-15	NE	TE	C.Latu	1		23	Official
+NEDET	2026-11-15	NE	T	C.Lomu	15		2	Official
+NEDET	2026-11-15	NE	CB	C.Woods		34	9	Official
+NEDET	2026-11-15	NE	S	C.Woodson		57	2	Official
+NEDET	2026-11-15	NE	WR	D.Douglas	38			Official
+NEDET	2026-11-15	NE	QB	D.Maye	10			Official
+NEDET	2026-11-15	NE	LB	D.Muasau		23	26	Official
+NEDET	2026-11-15	NE	DT	Da.Jones		30	5	Official
+NEDET	2026-11-15	NE	LB	Dr.Jones		36		Official
+NEDET	2026-11-15	NE	WR	E.Chism	8			Official
+NEDET	2026-11-15	NE	LB	E.Hunter		7	22	Official
+NEDET	2026-11-15	NE	LB	E.Ponder		45	13	Official
+NEDET	2026-11-15	NE	TE	E.Raridon	37			Official
+NEDET	2026-11-15	NE	LB	G.Jacas		44		Official
+NEDET	2026-11-15	NE	OL	G.Van Roten	59		2	Official
+NEDET	2026-11-15	NE	TE	H.Henry	33			Official
+NEDET	2026-11-15	NE	LS	J.Ashby		10		Official
+NEDET	2026-11-15	NE	DT	J.Farmer		27	5	Official
+NEDET	2026-11-15	NE	S	J.Reed		20	18	Official
+NEDET	2026-11-15	NE	OL	J.Wilson	53		2	Official
+NEDET	2026-11-15	NE	S	K.Byard		62		Official
+NEDET	2026-11-15	NE	CB	K.Prunty		9	18	Official
+NEDET	2026-11-15	NE	WR	K.Williams	23			Official
+NEDET	2026-11-15	NE	RB	L.Larison	8		21	Official
+NEDET	2026-11-15	NE	DL	L.Taylor		24	2	Official
+NEDET	2026-11-15	NE	S	M.Brown		9	26	Official
+NEDET	2026-11-15	NE	T	M.Bryant	6		2	Official
+NEDET	2026-11-15	NE	WR	M.Hollins	54			Official
+NEDET	2026-11-15	NE	CB	M.Jones		64	4	Official
+NEDET	2026-11-15	NE	T	M.Moses	45			Official
+NEDET	2026-11-15	NE	OL	M.Pryor	59		2	Official
+NEDET	2026-11-15	NE	DT	M.Williams		46	5	Official
+NEDET	2026-11-15	NE	P	M.Wishnowsky		10		Official
+NEDET	2026-11-15	NE	LB	N.Obiazor		9	26	Official
+NEDET	2026-11-15	NE	FB	R.Gilliam	13		17	Official
+NEDET	2026-11-15	NE	LB	R.Spillane		48		Official
+NEDET	2026-11-15	NE	RB	R.Stevenson	26			Official
+NEDET	2026-11-15	NE	QB	T.DeVito	49			Official
+NEDET	2026-11-15	NE	T	W.Campbell	53			Official
+PITCIN	2026-11-15	CIN	T	A.Mims	63		7	Official
+PITCIN	2026-11-15	CIN	LB	B.Carter		61	2	Official
+PITCIN	2026-11-15	CIN	S	B.Cook		61		Official
+PITCIN	2026-11-15	CIN	DT	B.Hill		36		Official
+PITCIN	2026-11-15	CIN	DE	B.Mafe		42		Official
+PITCIN	2026-11-15	CIN	HB	C.Brown	48			Official
+PITCIN	2026-11-15	CIN	TE	C.Grandy	3		11	Official
+PITCIN	2026-11-15	CIN	G	D.Fairchild	63		7	Official
+PITCIN	2026-11-15	CIN	CB	D.Hill		50	2	Official
+PITCIN	2026-11-15	CIN	CB	D.Ivey		2		Official
+PITCIN	2026-11-15	CIN	LB	D.Knight		51		Official
+PITCIN	2026-11-15	CIN	NT	D.Lawrence		44		Official
+PITCIN	2026-11-15	CIN	TE	D.Sample	42		13	Official
+PITCIN	2026-11-15	CIN	CB	D.Turner		53		Official
+PITCIN	2026-11-15	CIN	K	E.McPherson		14		Official
+PITCIN	2026-11-15	CIN	DT	J.Allen		48		Official
+PITCIN	2026-11-15	CIN	S	J.Battle		61	4	Official
+PITCIN	2026-11-15	CIN	QB	J.Burrow	63			Official
+PITCIN	2026-11-15	CIN	WR	J.Chase	59			Official
+PITCIN	2026-11-15	CIN	TE	J.Endries	13		12	Official
+PITCIN	2026-11-15	CIN	QB	J.Flacco	3			Official
+PITCIN	2026-11-15	CIN	T	J.Foster	3			Official
+PITCIN	2026-11-15	CIN	LB	J.Giles-Harris		19		Official
+PITCIN	2026-11-15	CIN	LB	J.Kiser		16		Official
+PITCIN	2026-11-15	CIN	CB	J.Newton		52		Official
+PITCIN	2026-11-15	CIN	G	J.Rivers	34		7	Official
+PITCIN	2026-11-15	CIN	TE	M.Gesicki	27		2	Official
+PITCIN	2026-11-15	CIN	DE	M.Murphy		44	2	Official
+PITCIN	2026-11-15	CIN	WR	M.Tinsley	6		2	Official
+PITCIN	2026-11-15	CIN	T	O.Brown	66		7	Official
+PITCIN	2026-11-15	CIN	S	P.Jules		18		Official
+PITCIN	2026-11-15	CIN	P	R.Rehkow		9		Official
+PITCIN	2026-11-15	CIN	S	R.Yeast		12		Official
+PITCIN	2026-11-15	CIN	RB	S.Perine	20		13	Official
+PITCIN	2026-11-15	CIN	DE	S.Stewart		30		Official
+PITCIN	2026-11-15	CIN	HB	T.Brooks	3		17	Official
+PITCIN	2026-11-15	CIN	CB	T.Davis		13		Official
+PITCIN	2026-11-15	CIN	WR	T.Higgins	51		2	Official
+PITCIN	2026-11-15	CIN	C	T.Karras	66		7	Official
+PITCIN	2026-11-15	CIN	DT	T.Slaton		18		Official
+PITCIN	2026-11-15	CIN	LS	W.Wagner		9		Official
+PITCIN	2026-11-15	PIT	LB	A.Highsmith		44		Official
+PITCIN	2026-11-15	PIT	QB	A.Rodgers	50			Official
+PITCIN	2026-11-15	PIT	CB	A.Samuel		46		Official
+PITCIN	2026-11-15	PIT	CB	B.Echols		18		Official
+PITCIN	2026-11-15	PIT	G	B.Hoffman	61		2	Official
+PITCIN	2026-11-15	PIT	WR	B.Skowronek	10		16	Official
+PITCIN	2026-11-15	PIT	WR	B.Smith	47		2	Official
+PITCIN	2026-11-15	PIT	K	C.Boswell		6		Official
+PITCIN	2026-11-15	PIT	LB	C.Bruener		25		Official
+PITCIN	2026-11-15	PIT	DT	C.Heyward		40	5	Official
+PITCIN	2026-11-15	PIT	P	C.Johnston		7		Official
+PITCIN	2026-11-15	PIT	LS	C.Kuntz		7		Official
+PITCIN	2026-11-15	PIT	T	D.Cook		2		Official
+PITCIN	2026-11-15	PIT	WR	D.Metcalf	50			Official
+PITCIN	2026-11-15	PIT	DB	D.Slaughter		9		Official
+PITCIN	2026-11-15	PIT	TE	D.Washington	30		2	Official
+PITCIN	2026-11-15	PIT	WR	G.Bernard	58			Official
+PITCIN	2026-11-15	PIT	S	J.Brisker		66		Official
+PITCIN	2026-11-15	PIT	CB	J.Dean		65		Official
+PITCIN	2026-11-15	PIT	CB	J.Ramsey		66		Official
+PITCIN	2026-11-15	PIT	RB	J.Warren	23			Official
+PITCIN	2026-11-15	PIT	DT	K.Benton		36	4	Official
+PITCIN	2026-11-15	PIT	DL	K.Jobity		13		Official
+PITCIN	2026-11-15	PIT	WR	K.Wetjen		9		Official
+PITCIN	2026-11-15	PIT	RB	L.Nichols	9		13	Official
+PITCIN	2026-11-15	PIT	T	M.Iheanachor	61		2	Official
+PITCIN	2026-11-15	PIT	G	M.McCormick	21			Official
+PITCIN	2026-11-15	PIT	QB	M.Rudolph	11			Official
+PITCIN	2026-11-15	PIT	TE	P.Freiermuth	33		7	Official
+PITCIN	2026-11-15	PIT	LB	P.Queen		66		Official
+PITCIN	2026-11-15	PIT	LB	P.Wilson		61	5	Official
+PITCIN	2026-11-15	PIT	RB	R.Dowdle	30			Official
+PITCIN	2026-11-15	PIT	C	R.McCollum		2		Official
+PITCIN	2026-11-15	PIT	FB	R.Nowakowski	3		18	Official
+PITCIN	2026-11-15	PIT	S	R.Spears-Jennings		51	13	Official
+PITCIN	2026-11-15	PIT	TE	R.Tonyan	9		7	Official
+PITCIN	2026-11-15	PIT	OL	S.Anderson	41		2	Official
+PITCIN	2026-11-15	PIT	T	T.Fautanu	61		2	Official
+PITCIN	2026-11-15	PIT	RB	T.Homer	2		18	Official
+PITCIN	2026-11-15	PIT	LB	T.Watt		40		Official
+PITCIN	2026-11-15	PIT	DL	Y.Black		30	9	Official
+PITCIN	2026-11-15	PIT	C	Z.Frazier	61			Official
+SEALV	2026-11-15	LV	DT	A.Butler		32		Unofficial
+SEALV	2026-11-15	LV	P	A.Cole		10		Unofficial
+SEALV	2026-11-15	LV	RB	A.Jeanty	42			Unofficial
+SEALV	2026-11-15	LV	LS	A.Ward		10		Unofficial
+SEALV	2026-11-15	LV	K	A.Ward		7		Unofficial
+SEALV	2026-11-15	LV	TE	B.Bowers	11			Unofficial
+SEALV	2026-11-15	LV	T	C.Grant		3		Unofficial
+SEALV	2026-11-15	LV	FB	C.Heyward	16		18	Unofficial
+SEALV	2026-11-15	LV	LB	C.Lindenberg		22		Unofficial
+SEALV	2026-11-15	LV	G	C.Rogers		3		Unofficial
+SEALV	2026-11-15	LV	TE	C.Runyon	2		18	Unofficial
+SEALV	2026-11-15	LV	WR	C.White	4		3	Unofficial
+SEALV	2026-11-15	LV	T	D.Glaze	59		3	Unofficial
+SEALV	2026-11-15	LV	RB	D.Laube		22		Unofficial
+SEALV	2026-11-15	LV	CB	D.Luter		22		Unofficial
+SEALV	2026-11-15	LV	DE	D.Porter		30		Unofficial
+SEALV	2026-11-15	LV	CB	D.Porter		22		Unofficial
+SEALV	2026-11-15	LV	WR	D.Young	1		18	Unofficial
+SEALV	2026-11-15	LV	CB	E.Stokes		52		Unofficial
+SEALV	2026-11-15	LV	DT	F.Fatukasi		31		Unofficial
+SEALV	2026-11-15	LV	QB	F.Mendoza	59			Unofficial
+SEALV	2026-11-15	LV	CB	H.Masses		23		Unofficial
+SEALV	2026-11-15	LV	LB	I.Pola-Mao		22		Unofficial
+SEALV	2026-11-15	LV	TE	I.Thomas	17		4	Unofficial
+SEALV	2026-11-15	LV	WR	J.Bech	33			Unofficial
+SEALV	2026-11-15	LV	S	J.Chinn		57		Unofficial
+SEALV	2026-11-15	LV	CB	J.McCoy		9	3	Unofficial
+SEALV	2026-11-15	LV	CB	J.McCoy		22		Unofficial
+SEALV	2026-11-15	LV	WR	J.Nailor	51			Unofficial
+SEALV	2026-11-15	LV	G/C	J.Powers-Johnson		3		Unofficial
+SEALV	2026-11-15	LV	T	K.Miller	59		3	Unofficial
+SEALV	2026-11-15	LV	DE	K.Paye		39		Unofficial
+SEALV	2026-11-15	LV	DE	M.Crosby		53	4	Unofficial
+SEALV	2026-11-15	LV	K	M.Gay		7		Unofficial
+SEALV	2026-11-15	LV	DE	M.Koonce		26		Unofficial
+SEALV	2026-11-15	LV	TE	M.Mayer	49		4	Unofficial
+SEALV	2026-11-15	LV	RB	M.Washington	17			Unofficial
+SEALV	2026-11-15	LV	LB	N.Dean		57		Unofficial
+SEALV	2026-11-15	LV	LB	Q.Walker		57		Unofficial
+SEALV	2026-11-15	LV	G	S.Burford	59		3	Unofficial
+SEALV	2026-11-15	LV	LB	S.Olubi		22		Unofficial
+SEALV	2026-11-15	LV	LB	T.Eichenberg		5	22	Unofficial
+SEALV	2026-11-15	LV	DT	T.Hemingway		35	7	Unofficial
+SEALV	2026-11-15	LV	CB	T.Johnson		35		Unofficial
+SEALV	2026-11-15	LV	C	T.Linderbaum	59			Unofficial
+SEALV	2026-11-15	LV	S	T.Stukes		57	8	Unofficial
+SEALV	2026-11-15	LV	WR	T.Tucker	52			Unofficial
+SEALV	2026-11-15	LV	G	T.Zuhn	59		3	Unofficial
+SEALV	2026-11-15	SEA	TE	A.Barner	48			Unofficial
+SEALV	2026-11-15	SEA	G	A.Bradford	57		4	Unofficial
+SEALV	2026-11-15	SEA	T	A.Lucas	13		1	Unofficial
+SEALV	2026-11-15	SEA	T	B.Hart	44			Unofficial
+SEALV	2026-11-15	SEA	NT	B.Murphy		42	3	Unofficial
+SEALV	2026-11-15	SEA	NT	B.Pili		12		Unofficial
+SEALV	2026-11-15	SEA	FB	B.Russell	12		22	Unofficial
+SEALV	2026-11-15	SEA	G	B.Stephens		4		Unofficial
+SEALV	2026-11-15	SEA	WR	C.Kupp	35			Unofficial
+SEALV	2026-11-15	SEA	LB	C.O'Toole		5	15	Unofficial
+SEALV	2026-11-15	SEA	LS	C.Stoll		7		Unofficial
+SEALV	2026-11-15	SEA	LB	C.Surratt		18		Unofficial
+SEALV	2026-11-15	SEA	LB	D.Fowler		20	1	Unofficial
+SEALV	2026-11-15	SEA	LB	D.Hall		31	3	Unofficial
+SEALV	2026-11-15	SEA	LB	D.Lawrence		36	2	Unofficial
+SEALV	2026-11-15	SEA	QB	D.Lock	57			Unofficial
+SEALV	2026-11-15	SEA	LB	D.Thomas		39		Unofficial
+SEALV	2026-11-15	SEA	CB	D.Witherspoon		59	1	Unofficial
+SEALV	2026-11-15	SEA	LB	E.Jones		59	3	Unofficial
+SEALV	2026-11-15	SEA	TE	E.Saubert	26		11	Unofficial
+SEALV	2026-11-15	SEA	RB	G.Holani		1		Unofficial
+SEALV	2026-11-15	SEA	G	G.Zabel	57		4	Unofficial
+SEALV	2026-11-15	SEA	WR	I.Charles	3		20	Unofficial
+SEALV	2026-11-15	SEA	CB	J.Jobe		58	1	Unofficial
+SEALV	2026-11-15	SEA	G/T	J.Jones	57		3	Unofficial
+SEALV	2026-11-15	SEA	S	J.Love		59	3	Unofficial
+SEALV	2026-11-15	SEA	K	J.Myers		8		Unofficial
+SEALV	2026-11-15	SEA	RB	J.Price	16		1	Unofficial
+SEALV	2026-11-15	SEA	DE	J.Reed		26	3	Unofficial
+SEALV	2026-11-15	SEA	WR	J.Smith-Njigba	43			Unofficial
+SEALV	2026-11-15	SEA	C	J.Sundell	57		4	Unofficial
+SEALV	2026-11-15	SEA	P	M.Dickson		7		Unofficial
+SEALV	2026-11-15	SEA	DE	M.Morris		14	14	Unofficial
+SEALV	2026-11-15	SEA	S	N.Emmanwori		57	3	Unofficial
+SEALV	2026-11-15	SEA	TE	N.Kallerup	26		10	Unofficial
+SEALV	2026-11-15	SEA	CB	N.Pritchett		12	16	Unofficial
+SEALV	2026-11-15	SEA	LB	P.O'Connell		1	18	Unofficial
+SEALV	2026-11-15	SEA	DT	R.Mills		24	6	Unofficial
+SEALV	2026-11-15	SEA	WR	R.Shaheed	25		10	Unofficial
+SEALV	2026-11-15	SEA	S	R.Thomas		18		Unofficial
+SEALV	2026-11-15	SEA	CB	T.Diggs		9	8	Unofficial
+SEALV	2026-11-15	SEA	WR	T.Horton	10		3	Unofficial
+SEALV	2026-11-15	SEA	LB	T.Knight		18		Unofficial
+SEALV	2026-11-15	SEA	S	T.Okada		59	1	Unofficial
+SEALV	2026-11-15	SEA	LB	U.Nwosu		27		Unofficial
+SEALV	2026-11-15	SEA	RB	Z.Charbonnet	41			Unofficial
+SFDAL	2026-11-15	DAL	S	A.Clark		6	27	Official
+SFDAL	2026-11-15	DAL	CB	A.Speed		15	16	Official
+SFDAL	2026-11-15	DAL	P	B.Anger		7		Official
+SFDAL	2026-11-15	DAL	K	B.Aubrey		13		Official
+SFDAL	2026-11-15	DAL	T	B.Jones	6		3	Official
+SFDAL	2026-11-15	DAL	TE	B.Spann-Ford	55		2	Official
+SFDAL	2026-11-15	DAL	C	C.Beebe	83		5	Official
+SFDAL	2026-11-15	DAL	WR	C.Brown	6		12	Official
+SFDAL	2026-11-15	DAL	DB	C.Downs		65	8	Official
+SFDAL	2026-11-15	DAL	CB	C.Durant		53		Official
+SFDAL	2026-11-15	DAL	WR	C.Lamb	72			Official
+SFDAL	2026-11-15	DAL	LB	D.Overshown		5	27	Official
+SFDAL	2026-11-15	DAL	QB	D.Prescott	83			Official
+SFDAL	2026-11-15	DAL	T	D.Shelton		5		Official
+SFDAL	2026-11-15	DAL	LB	D.Winters		58		Official
+SFDAL	2026-11-15	DAL	DT	E.Garcia		22	6	Official
+SFDAL	2026-11-15	DAL	WR	G.Pickens	74			Official
+SFDAL	2026-11-15	DAL	FB	H.Luepke	24		13	Official
+SFDAL	2026-11-15	DAL	RB	I.Abanikanda	6		8	Official
+SFDAL	2026-11-15	DAL	LB	J.Barham		21	20	Official
+SFDAL	2026-11-15	DAL	LB	J.Barron		28		Official
+SFDAL	2026-11-15	DAL	DT	J.Bullard		19	6	Official
+SFDAL	2026-11-15	DAL	LB	J.Houston		37	9	Official
+SFDAL	2026-11-15	DAL	TE	J.Mitchell	5		12	Official
+SFDAL	2026-11-15	DAL	WR	J.Patrick		5		Official
+SFDAL	2026-11-15	DAL	CB	J.Porter		57		Official
+SFDAL	2026-11-15	DAL	RB	J.Williams	58			Official
+SFDAL	2026-11-15	DAL	DT	K.Clark		38	1	Official
+SFDAL	2026-11-15	DAL	WR	K.Turpin	14		4	Official
+SFDAL	2026-11-15	DAL	DT	L.Overton		5	26	Official
+SFDAL	2026-11-15	DAL	TE	L.Schoonmaker	28		15	Official
+SFDAL	2026-11-15	DAL	S	M.Bell		42	18	Official
+SFDAL	2026-11-15	DAL	S	M.Hooker		48		Official
+SFDAL	2026-11-15	DAL	LB	M.Liufau		2	28	Official
+SFDAL	2026-11-15	DAL	DT	O.Ogbonnia		29	6	Official
+SFDAL	2026-11-15	DAL	DT	Q.Williams		43	5	Official
+SFDAL	2026-11-15	DAL	LB	R.Gary		45		Official
+SFDAL	2026-11-15	DAL	LB	S.James		65	2	Official
+SFDAL	2026-11-15	DAL	CB	S.Revel		3	19	Official
+SFDAL	2026-11-15	DAL	G	T.Bass	50		5	Official
+SFDAL	2026-11-15	DAL	G	T.Booker	33		2	Official
+SFDAL	2026-11-15	DAL	T	T.Guyton	83		5	Official
+SFDAL	2026-11-15	DAL	LS	T.Sieg		7		Official
+SFDAL	2026-11-15	DAL	G	T.Smith	83		5	Official
+SFDAL	2026-11-15	DAL	T	T.Steele	83		5	Official
+SFDAL	2026-11-15	DAL	LB	V.Miller		28		Official
+SFDAL	2026-11-15	SF	S	A.Davis		26		Official
+SFDAL	2026-11-15	SF	QB	B.Purdy	65			Official
+SFDAL	2026-11-15	SF	TE	B.Willis		27		Official
+SFDAL	2026-11-15	SF	OL	C.Colby	65		6	Official
+SFDAL	2026-11-15	SF	RB	C.McCaffrey	39		1	Official
+SFDAL	2026-11-15	SF	OL	C.McKivitz	65		6	Official
+SFDAL	2026-11-15	SF	P	C.Waitman		18		Official
+SFDAL	2026-11-15	SF	OL	C.Willis		6		Official
+SFDAL	2026-11-15	SF	DL	D.Buckner		58	1	Official
+SFDAL	2026-11-15	SF	LB	D.Greenlaw		72	1	Official
+SFDAL	2026-11-15	SF	DB	D.Lenoir		83	5	Official
+SFDAL	2026-11-15	SF	OL	D.Puni	65		6	Official
+SFDAL	2026-11-15	SF	WR	D.Robinson	21			Official
+SFDAL	2026-11-15	SF	WR	D.Samuel	44		4	Official
+SFDAL	2026-11-15	SF	K	E.Pineiro		6		Official
+SFDAL	2026-11-15	SF	CB	E.Prysock		30	13	Official
+SFDAL	2026-11-15	SF	LB	F.Warner		83	7	Official
+SFDAL	2026-11-15	SF	TE	G.Kittle	61			Official
+SFDAL	2026-11-15	SF	LB	G.Wallow		5	21	Official
+SFDAL	2026-11-15	SF	OL	J.Brendel	65			Official
+SFDAL	2026-11-15	SF	S	J.Brown		61	7	Official
+SFDAL	2026-11-15	SF	WR	J.Cowing	12		7	Official
+SFDAL	2026-11-15	SF	LB	J.Dugger		12	20	Official
+SFDAL	2026-11-15	SF	RB	J.James		8		Official
+SFDAL	2026-11-15	SF	OL	J.Patterson		6		Official
+SFDAL	2026-11-15	SF	DL	J.Thompson		19		Official
+SFDAL	2026-11-15	SF	WR	J.Watkins	44		1	Official
+SFDAL	2026-11-15	SF	LS	J.Weeks		10		Official
+SFDAL	2026-11-15	SF	WR	K.Allen	31			Official
+SFDAL	2026-11-15	SF	RB	K.Black	26			Official
+SFDAL	2026-11-15	SF	FB	K.Juszczyk	29		5	Official
+SFDAL	2026-11-15	SF	DL	K.Kareem		3	13	Official
+SFDAL	2026-11-15	SF	DL	K.White		43	5	Official
+SFDAL	2026-11-15	SF	TE	L.Farrell	18		27	Official
+SFDAL	2026-11-15	SF	LB	L.Gifford		26		Official
+SFDAL	2026-11-15	SF	S	M.Mustapha		64		Official
+SFDAL	2026-11-15	SF	S	M.Sigle		45	22	Official
+SFDAL	2026-11-15	SF	DL	M.Williams		31	5	Official
+SFDAL	2026-11-15	SF	DL	N.Bosa		57	1	Official
+SFDAL	2026-11-15	SF	DL	O.Odighizuwa		54	6	Official
+SFDAL	2026-11-15	SF	CB	R.Green		53	1	Official
+SFDAL	2026-11-15	SF	DL	R.Height		45	1	Official
+SFDAL	2026-11-15	SF	DB	S.Neal		25		Official
+SFDAL	2026-11-15	SF	DL	S.Valdez		25	5	Official
+SFDAL	2026-11-15	SF	T	T.Williams	65			Official
+SFDAL	2026-11-15	SF	CB	U.Stout		70	1	Official
+SFDAL	2026-11-15	SF	T	V.Lowe		6		Official

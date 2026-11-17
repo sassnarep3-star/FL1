@@ -116,7 +116,10 @@ def main():
           "%d clubs moved between the 2026-11-16 read and the 2026-11-17T02:36Z read%s"
           % (len(moved), (": " + ", ".join(moved)) if moved else ""))
 
-    # committed data/standings.tsv (the one tools/build.py renders) is older still
+    # committed data/standings.tsv (the one tools/build.py renders) was refreshed
+    # by session arena/3f12fa46-fl1 to the current 149-game official capture, so
+    # it now matches the live read on every club. The check verifies it is NOT
+    # accidentally stale (stale count must be 0).
     base = {}
     for f in rows_of(os.path.join(ROOT, "data", "standings.tsv")):
         base[f[0]] = {"w": int(f[1]), "l": int(f[2]), "t": int(f[3]),
@@ -124,7 +127,7 @@ def main():
     stale = sorted(a for a in live if a in base and
                    (live[a]["w"], live[a]["l"], live[a]["t"], live[a]["pf"], live[a]["pa"]) !=
                    (base[a]["w"], base[a]["l"], base[a]["t"], base[a]["pf"], base[a]["pa"]))
-    check("D5-V9b", len(stale) == 24,
+    check("D5-V9b", len(stale) == 0,
           "data/standings.tsv (rendered by tools/build.py) is stale on %d of 32 clubs" % len(stale))
 
     # ---------------------------------------------------------------- D5-V2 / V3

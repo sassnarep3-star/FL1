@@ -1,0 +1,1350 @@
+game_key	date	team	role	unit	position	jersey	name
+WASNYG	2026-11-12	NYG	dnp		C	61	J.Schmitz
+WASNYG	2026-11-12	NYG	inactive		CB	21	P.Adebo
+WASNYG	2026-11-12	NYG	inactive		CB	35	N.Reed
+WASNYG	2026-11-12	NYG	inactive		LB	54	M.Harrison
+WASNYG	2026-11-12	NYG	inactive		OL	67	J.Sills
+WASNYG	2026-11-12	NYG	inactive		OL	74	J.Davis
+WASNYG	2026-11-12	NYG	inactive		TE	86	T.Fidone
+WASNYG	2026-11-12	NYG	inactive		DL	99	B.Okoye
+WASNYG	2026-11-12	NYG	starter	Offense	WR	17	D.Mooney
+WASNYG	2026-11-12	NYG	starter	Offense	TE	84	T.Johnson
+WASNYG	2026-11-12	NYG	starter	Offense	LT	78	A.Thomas
+WASNYG	2026-11-12	NYG	starter	Offense	LG	76	J.Runyan
+WASNYG	2026-11-12	NYG	starter	Offense	C	60	B.Hudson
+WASNYG	2026-11-12	NYG	starter	Offense	RG	65	F.Mauigoa
+WASNYG	2026-11-12	NYG	starter	Offense	RT	72	J.Eluemunor
+WASNYG	2026-11-12	NYG	starter	Offense	WR	1	M.Nabers
+WASNYG	2026-11-12	NYG	starter	Offense	TE	9	I.Likely
+WASNYG	2026-11-12	NYG	starter	Offense	QB	18	J.McCarthy
+WASNYG	2026-11-12	NYG	starter	Offense	RB	44	C.Skattebo
+WASNYG	2026-11-12	NYG	starter	Defense	OLB	5	K.Thibodeaux
+WASNYG	2026-11-12	NYG	starter	Defense	DL	93	S.Harris
+WASNYG	2026-11-12	NYG	starter	Defense	DL	97	B.Jamison-Travis
+WASNYG	2026-11-12	NYG	starter	Defense	DL	98	D.Reader
+WASNYG	2026-11-12	NYG	starter	Defense	OLB	3	A.Carter
+WASNYG	2026-11-12	NYG	starter	Defense	LB	41	M.McFadden
+WASNYG	2026-11-12	NYG	starter	Defense	LB	52	A.Reese
+WASNYG	2026-11-12	NYG	starter	Defense	CB	20	G.Newsome
+WASNYG	2026-11-12	NYG	starter	Defense	CB	2	D.Banks
+WASNYG	2026-11-12	NYG	starter	Defense	S	8	J.Holland
+WASNYG	2026-11-12	NYG	starter	Defense	S	24	A.Washington
+WASNYG	2026-11-12	NYG	sub		CB	12	C.Hood
+WASNYG	2026-11-12	NYG	sub		P	15	J.Stout
+WASNYG	2026-11-12	NYG	sub		QB	19	J.Winston
+WASNYG	2026-11-12	NYG	sub		CB	22	A.Phillips
+WASNYG	2026-11-12	NYG	sub		S	25	J.Pinnock
+WASNYG	2026-11-12	NYG	sub		RB	26	D.Singletary
+WASNYG	2026-11-12	NYG	sub		S	27	T.Nubin
+WASNYG	2026-11-12	NYG	sub		DB	28	E.Campbell
+WASNYG	2026-11-12	NYG	sub		RB	30	G.Desrosiers
+WASNYG	2026-11-12	NYG	sub		CB	31	N.Jones
+WASNYG	2026-11-12	NYG	sub		K	34	D.Zvada
+WASNYG	2026-11-12	NYG	sub		FB	45	P.Ricard
+WASNYG	2026-11-12	NYG	sub		LB	46	Z.Barnes
+WASNYG	2026-11-12	NYG	sub		OL	48	T.Ford
+WASNYG	2026-11-12	NYG	sub		LB	51	J.Kelly
+WASNYG	2026-11-12	NYG	sub		LB	55	C.Martin
+WASNYG	2026-11-12	NYG	sub		LS	58	B.Mann
+WASNYG	2026-11-12	NYG	sub		OL	64	A.Stinnie
+WASNYG	2026-11-12	NYG	sub		OL	71	M.Mbow
+WASNYG	2026-11-12	NYG	sub		WR	81	J.Hyatt
+WASNYG	2026-11-12	NYG	sub		TE	85	C.Manhertz
+WASNYG	2026-11-12	NYG	sub		WR	88	M.Fields
+WASNYG	2026-11-12	NYG	sub		WR	89	C.Jones
+WASNYG	2026-11-12	NYG	sub		DL	91	D.Alexander
+WASNYG	2026-11-12	NYG	sub		OL	B	96 D.Smoot
+WASNYG	2026-11-12	WAS	dnp		QB	8	M.Mariota
+WASNYG	2026-11-12	WAS	dnp		C/G	61	J.Good-Jones
+WASNYG	2026-11-12	WAS	dnp		C	66	M.Gulbin
+WASNYG	2026-11-12	WAS	inactive		3QB	16	A.Kaliakmanis
+WASNYG	2026-11-12	WAS	inactive		CB	37	I.Yiadom
+WASNYG	2026-11-12	WAS	inactive		DT	50	R.Barber
+WASNYG	2026-11-12	WAS	inactive		G	62	T.Togiai
+WASNYG	2026-11-12	WAS	inactive		G	63	L.Patrick
+WASNYG	2026-11-12	WAS	inactive		TE	80	C.Yankoff
+WASNYG	2026-11-12	WAS	starter	Offense	WR	14	A.Williams
+WASNYG	2026-11-12	WAS	starter	Offense	TE	87	J.Bates
+WASNYG	2026-11-12	WAS	starter	Offense	LT	74	B.Coleman
+WASNYG	2026-11-12	WAS	starter	Offense	LG	75	C.Paul
+WASNYG	2026-11-12	WAS	starter	Offense	C	67	N.Allegretti
+WASNYG	2026-11-12	WAS	starter	Offense	RG	76	S.Cosmi
+WASNYG	2026-11-12	WAS	starter	Offense	RT	72	J.Conerly
+WASNYG	2026-11-12	WAS	starter	Offense	TE	82	B.Sinnott
+WASNYG	2026-11-12	WAS	starter	Offense	WR	13	T.Burks
+WASNYG	2026-11-12	WAS	starter	Offense	QB	5	J.Daniels
+WASNYG	2026-11-12	WAS	starter	Offense	RB	1	R.White
+WASNYG	2026-11-12	WAS	starter	Defense	OLB	98	O.Oweh
+WASNYG	2026-11-12	WAS	starter	Defense	DT	97	T.Settle
+WASNYG	2026-11-12	WAS	starter	Defense	DT	96	S.Tuttle
+WASNYG	2026-11-12	WAS	starter	Defense	OLB	45	K.Chaisson
+WASNYG	2026-11-12	WAS	starter	Defense	LB	52	S.Styles
+WASNYG	2026-11-12	WAS	starter	Defense	LB	4	F.Luvu
+WASNYG	2026-11-12	WAS	starter	Defense	CB	23	T.Amos
+WASNYG	2026-11-12	WAS	starter	Defense	CB	2	A.Robertson
+WASNYG	2026-11-12	WAS	starter	Defense	S	39	J.Reaves
+WASNYG	2026-11-12	WAS	starter	Defense	S	25	N.Cross
+WASNYG	2026-11-12	WAS	starter	Defense	S	20	Q.Martin
+WASNYG	2026-11-12	WAS	sub		CB	0	M.Sainristil
+WASNYG	2026-11-12	WAS	sub		WR	3	S.Diggs
+WASNYG	2026-11-12	WAS	sub		P	10	T.Way
+WASNYG	2026-11-12	WAS	sub		WR	11	L.McCaffrey
+WASNYG	2026-11-12	WAS	sub		WR	12	V.Jefferson
+WASNYG	2026-11-12	WAS	sub		S	18	T.Owens
+WASNYG	2026-11-12	WAS	sub		K	19	D.Stevens
+WASNYG	2026-11-12	WAS	sub		CB	24	F.Moreau
+WASNYG	2026-11-12	WAS	sub		CB	29	R.Douglas
+WASNYG	2026-11-12	WAS	sub		RB	30	A.Ekeler
+WASNYG	2026-11-12	WAS	sub		RB	34	R.Henry
+WASNYG	2026-11-12	WAS	sub		S	35	P.Butler
+WASNYG	2026-11-12	WAS	sub		OL	B	48 J.Josephs
+WASNYG	2026-11-12	WAS	sub		LB	51	A.Kaho
+WASNYG	2026-11-12	WAS	sub		LB	56	K.Medrano
+WASNYG	2026-11-12	WAS	sub		LB	58	J.Magee
+WASNYG	2026-11-12	WAS	sub		LS	69	T.Ott
+WASNYG	2026-11-12	WAS	sub		T/G	71	A.Wylie
+WASNYG	2026-11-12	WAS	sub		TE	85	C.Okonkwo
+WASNYG	2026-11-12	WAS	sub		DE	90	C.Omenihu
+WASNYG	2026-11-12	WAS	sub		DE	91	D.Wise
+WASNYG	2026-11-12	WAS	sub		OL	B	92 D.Armstrong
+WASNYG	2026-11-12	WAS	sub		DT	95	J.Newton
+BUFNYJ	2026-11-15	BUF	dnp		T	76	B.Freeland
+BUFNYJ	2026-11-15	BUF	inactive		QB	6	S.Buechele
+BUFNYJ	2026-11-15	BUF	inactive		S	29	J.Kilgore
+BUFNYJ	2026-11-15	BUF	inactive		OLB	51	M.Danna
+BUFNYJ	2026-11-15	BUF	inactive		G	60	A.Reed-Adams
+BUFNYJ	2026-11-15	BUF	inactive		T/G	74	J.Bowry
+BUFNYJ	2026-11-15	BUF	inactive		DL	97	G.Gaines
+BUFNYJ	2026-11-15	BUF	starter	Offense	TE	88	D.Knox
+BUFNYJ	2026-11-15	BUF	starter	Offense	LT	73	D.Dawkins
+BUFNYJ	2026-11-15	BUF	starter	Offense	LG	70	A.Anderson
+BUFNYJ	2026-11-15	BUF	starter	Offense	C	66	C.McGovern
+BUFNYJ	2026-11-15	BUF	starter	Offense	RG	64	O.Torrence
+BUFNYJ	2026-11-15	BUF	starter	Offense	RT	79	S.Brown
+BUFNYJ	2026-11-15	BUF	starter	Offense	WR	0	K.Coleman
+BUFNYJ	2026-11-15	BUF	starter	Offense	TE	86	D.Kincaid
+BUFNYJ	2026-11-15	BUF	starter	Offense	WR	2	D.Moore
+BUFNYJ	2026-11-15	BUF	starter	Offense	QB	17	J.Allen
+BUFNYJ	2026-11-15	BUF	starter	Offense	RB	4	J.Cook
+BUFNYJ	2026-11-15	BUF	starter	Defense	OLB	15	G.Rousseau
+BUFNYJ	2026-11-15	BUF	starter	Defense	DL	91	E.Oliver
+BUFNYJ	2026-11-15	BUF	starter	Defense	DL	96	D.Walker
+BUFNYJ	2026-11-15	BUF	starter	Defense	DL	94	L.Jackson
+BUFNYJ	2026-11-15	BUF	starter	Defense	OLB	9	B.Chubb
+BUFNYJ	2026-11-15	BUF	starter	Defense	ILB	8	T.Bernard
+BUFNYJ	2026-11-15	BUF	starter	Defense	CB	23	D.Alford
+BUFNYJ	2026-11-15	BUF	starter	Defense	CB	21	D.Igbinosun
+BUFNYJ	2026-11-15	BUF	starter	Defense	CB	47	C.Benford
+BUFNYJ	2026-11-15	BUF	starter	Defense	S	24	C.Bishop
+BUFNYJ	2026-11-15	BUF	starter	Defense	S	22	A.Hooker
+BUFNYJ	2026-11-15	BUF	sub		CB	1	M.Hairston
+BUFNYJ	2026-11-15	BUF	sub		S	3	D.Hamlin
+BUFNYJ	2026-11-15	BUF	sub		RB	7	R.Davis
+BUFNYJ	2026-11-15	BUF	sub		WR	10	K.Shakir
+BUFNYJ	2026-11-15	BUF	sub		QB	11	K.Allen
+BUFNYJ	2026-11-15	BUF	sub		WR	13	S.Bell
+BUFNYJ	2026-11-15	BUF	sub		K	16	T.Bass
+BUFNYJ	2026-11-15	BUF	sub		WR	19	G.Dortch
+BUFNYJ	2026-11-15	BUF	sub		RB	26	T.Johnson
+BUFNYJ	2026-11-15	BUF	sub		DB	28	S.Franklin
+BUFNYJ	2026-11-15	BUF	sub		DB	37	J.Hancock
+BUFNYJ	2026-11-15	BUF	sub		P	39	T.Doman
+BUFNYJ	2026-11-15	BUF	sub		ILB	42	D.Williams
+BUFNYJ	2026-11-15	BUF	sub		ILB	44	J.Andreessen
+BUFNYJ	2026-11-15	BUF	sub		LB	52	K.Elarms-Orr
+BUFNYJ	2026-11-15	BUF	sub		C	53	L.Cushenberry
+BUFNYJ	2026-11-15	BUF	sub		OLB	55	M.Hoecht
+BUFNYJ	2026-11-15	BUF	sub		OLB	56	J.Solomon
+BUFNYJ	2026-11-15	BUF	sub		G/C	63	A.Corbett
+BUFNYJ	2026-11-15	BUF	sub		T/G	68	T.Grable
+BUFNYJ	2026-11-15	BUF	sub		LS	69	R.Ferguson
+BUFNYJ	2026-11-15	BUF	sub		TE	83	K.Latu
+BUFNYJ	2026-11-15	BUF	sub		TE	85	J.Hawes
+BUFNYJ	2026-11-15	BUF	sub		DL	90	D.Carter
+BUFNYJ	2026-11-15	BUF	sub		DL	98	T.Sanders
+BUFNYJ	2026-11-15	BUF	sub		OLB	99	T.Parker
+BUFNYJ	2026-11-15	NYJ	inactive		DB	2	J.Brownlee
+BUFNYJ	2026-11-15	NYJ	inactive		WR	17	T.Patrick
+BUFNYJ	2026-11-15	NYJ	inactive		LB	49	T.Wallace
+BUFNYJ	2026-11-15	NYJ	inactive		TE	86	J.Woods
+BUFNYJ	2026-11-15	NYJ	inactive		DE	92	N.Lynn
+BUFNYJ	2026-11-15	NYJ	starter	Offense	WR	5	G.Wilson
+BUFNYJ	2026-11-15	NYJ	starter	Offense	LT	74	O.Fashanu
+BUFNYJ	2026-11-15	NYJ	starter	Offense	LG	64	D.Parham
+BUFNYJ	2026-11-15	NYJ	starter	Offense	C	71	J.Myers
+BUFNYJ	2026-11-15	NYJ	starter	Offense	RG	66	J.Tippmann
+BUFNYJ	2026-11-15	NYJ	starter	Offense	RT	70	A.Membou
+BUFNYJ	2026-11-15	NYJ	starter	Offense	TE	85	M.Taylor
+BUFNYJ	2026-11-15	NYJ	starter	Offense	WR	11	O.Cooper
+BUFNYJ	2026-11-15	NYJ	starter	Offense	TE	16	K.Sadiq
+BUFNYJ	2026-11-15	NYJ	starter	Offense	QB	7	G.Smith
+BUFNYJ	2026-11-15	NYJ	starter	Offense	RB	20	B.Hall
+BUFNYJ	2026-11-15	NYJ	starter	Defense	DE	52	K.Enagbare
+BUFNYJ	2026-11-15	NYJ	starter	Defense	DL	91	J.Briggs
+BUFNYJ	2026-11-15	NYJ	starter	Defense	DL	95	D.Jackson
+BUFNYJ	2026-11-15	NYJ	starter	Defense	DL	97	H.Phillips
+BUFNYJ	2026-11-15	NYJ	starter	Defense	DE	31	D.Bailey
+BUFNYJ	2026-11-15	NYJ	starter	Defense	LB	44	J.Sherwood
+BUFNYJ	2026-11-15	NYJ	starter	Defense	LB	56	D.Davis
+BUFNYJ	2026-11-15	NYJ	starter	Defense	CB	21	B.Stephens
+BUFNYJ	2026-11-15	NYJ	starter	Defense	CB	1	A.Thomas
+BUFNYJ	2026-11-15	NYJ	starter	Defense	S	6	D.Belton
+BUFNYJ	2026-11-15	NYJ	starter	Defense	S	29	M.Fitzpatrick
+BUFNYJ	2026-11-15	NYJ	sub		RB	0	B.Allen
+BUFNYJ	2026-11-15	NYJ	sub		RB	3	K.Nwangwu
+BUFNYJ	2026-11-15	NYJ	sub		DE	9	W.McDonald
+BUFNYJ	2026-11-15	NYJ	sub		QB	10	C.Klubnik
+BUFNYJ	2026-11-15	NYJ	sub		P	14	A.McNamara
+BUFNYJ	2026-11-15	NYJ	sub		WR	15	A.Mitchell
+BUFNYJ	2026-11-15	NYJ	sub		WR	18	I.Williams
+BUFNYJ	2026-11-15	NYJ	sub		K	19	J.Sanders
+BUFNYJ	2026-11-15	NYJ	sub		CB	23	D.Ponds
+BUFNYJ	2026-11-15	NYJ	sub		DB	26	N.Wright
+BUFNYJ	2026-11-15	NYJ	sub		DB	27	M.Moore
+BUFNYJ	2026-11-15	NYJ	sub		RB	32	I.Davis
+BUFNYJ	2026-11-15	NYJ	sub		S	34	V.Payne
+BUFNYJ	2026-11-15	NYJ	sub		CB	37	Q.Stiggers
+BUFNYJ	2026-11-15	NYJ	sub		LS	42	T.Hennessy
+BUFNYJ	2026-11-15	NYJ	sub		DE	46	J.Ossai
+BUFNYJ	2026-11-15	NYJ	sub		FB	47	A.Beck
+BUFNYJ	2026-11-15	NYJ	sub		LB	48	J.Keller
+BUFNYJ	2026-11-15	NYJ	sub		LB	50	T.Reeder
+BUFNYJ	2026-11-15	NYJ	sub		OL	67	J.Meredith
+BUFNYJ	2026-11-15	NYJ	sub		OL	79	C.Okorafor
+BUFNYJ	2026-11-15	NYJ	sub		WR	84	M.McClain
+BUFNYJ	2026-11-15	NYJ	sub		TE	89	J.Ruckert
+BUFNYJ	2026-11-15	NYJ	sub		DL	96	J.Heflin
+BUFNYJ	2026-11-15	NYJ	sub		DL	98	P.Page
+CARNO	2026-11-15	CAR	inactive		TE	0	J.Sanders
+CARNO	2026-11-15	CAR	inactive		3QB	16	H.King
+CARNO	2026-11-15	CAR	inactive		CB	24	W.Lee
+CARNO	2026-11-15	CAR	inactive		RB	28	A.Dillon
+CARNO	2026-11-15	CAR	inactive		LB	58	B.Okereke
+CARNO	2026-11-15	CAR	inactive		C	75	S.Hecht
+CARNO	2026-11-15	CAR	inactive		DT	93	T.Edwards
+CARNO	2026-11-15	CAR	starter	Offense	TE	88	D.Waller
+CARNO	2026-11-15	CAR	starter	Offense	LT	63	R.Walker
+CARNO	2026-11-15	CAR	starter	Offense	LG	68	D.Lewis
+CARNO	2026-11-15	CAR	starter	Offense	C	77	L.Fortner
+CARNO	2026-11-15	CAR	starter	Offense	RG	50	R.Hunt
+CARNO	2026-11-15	CAR	starter	Offense	RT	57	M.Freeling
+CARNO	2026-11-15	CAR	starter	Offense	TE	82	T.Tremble
+CARNO	2026-11-15	CAR	starter	Offense	WR	18	J.Coker
+CARNO	2026-11-15	CAR	starter	Offense	WR	4	T.McMillan
+CARNO	2026-11-15	CAR	starter	Offense	QB	9	B.Young
+CARNO	2026-11-15	CAR	starter	Offense	RB	30	C.Hubbard
+CARNO	2026-11-15	CAR	starter	Defense	OLB	91	P.Jones
+CARNO	2026-11-15	CAR	starter	Defense	DT	98	T.Wharton
+CARNO	2026-11-15	CAR	starter	Defense	DT	95	D.Brown
+CARNO	2026-11-15	CAR	starter	Defense	OLB	5	J.Phillips
+CARNO	2026-11-15	CAR	starter	Defense	LB	33	T.Dodson
+CARNO	2026-11-15	CAR	starter	Defense	LB	55	D.Lloyd
+CARNO	2026-11-15	CAR	starter	Defense	CB	26	C.Smith-Wade
+CARNO	2026-11-15	CAR	starter	Defense	CB	35	M.Wilson
+CARNO	2026-11-15	CAR	starter	Defense	S	20	Z.Wheatley
+CARNO	2026-11-15	CAR	starter	Defense	S	7	T.Moehrig
+CARNO	2026-11-15	CAR	starter	Defense	S	21	N.Scott
+CARNO	2026-11-15	CAR	sub		OLB	3	P.Umanmielen
+CARNO	2026-11-15	CAR	sub		P	6	S.Martin
+CARNO	2026-11-15	CAR	sub		K	10	R.Fitzgerald
+CARNO	2026-11-15	CAR	sub		WR	13	J.Metchie
+CARNO	2026-11-15	CAR	sub		WR	17	X.Legette
+CARNO	2026-11-15	CAR	sub		S	22	L.Ransom
+CARNO	2026-11-15	CAR	sub		RB	23	T.Etienne
+CARNO	2026-11-15	CAR	sub		S	27	I.Simmons
+CARNO	2026-11-15	CAR	sub		CB	31	C.Thornton
+CARNO	2026-11-15	CAR	sub		RB	34	A.Tyus
+CARNO	2026-11-15	CAR	sub		CB	36	M.DeWalt
+CARNO	2026-11-15	CAR	sub		OLB	39	N.Hampton
+CARNO	2026-11-15	CAR	sub		LS	44	J.Jansen
+CARNO	2026-11-15	CAR	sub		LB	46	J.Kuwatch
+CARNO	2026-11-15	CAR	sub		OLB	52	T.Gipson
+CARNO	2026-11-15	CAR	sub		LB	54	B.Martin-Scott
+CARNO	2026-11-15	CAR	sub		G	65	T.Simpkins
+CARNO	2026-11-15	CAR	sub		T	67	C.Bullock
+CARNO	2026-11-15	CAR	sub		T	73	S.Forsythe
+CARNO	2026-11-15	CAR	sub		TE	81	F.Franks
+CARNO	2026-11-15	CAR	sub		TE	84	M.Evans
+CARNO	2026-11-15	CAR	sub		WR	87	B.Tremayne
+CARNO	2026-11-15	CAR	sub		DT	92	L.Hunter
+CARNO	2026-11-15	CAR	sub		DT	94	A.Hall
+CARNO	2026-11-15	CAR	sub		DT	97	B.Brown
+CARNO	2026-11-15	NO	inactive		3QB	11	Z.Wilson
+CARNO	2026-11-15	NO	inactive		S	42	M.Reid
+CARNO	2026-11-15	NO	inactive		RB	43	C.Donaldson
+CARNO	2026-11-15	NO	inactive		LB	53	J.Ford
+CARNO	2026-11-15	NO	inactive		T	75	T.Fuaga
+CARNO	2026-11-15	NO	inactive		C	78	E.McCoy
+CARNO	2026-11-15	NO	starter	Offense	TE	83	J.Johnson
+CARNO	2026-11-15	NO	starter	Offense	TE	87	N.Fant
+CARNO	2026-11-15	NO	starter	Offense	LT	71	K.Banks
+CARNO	2026-11-15	NO	starter	Offense	LG	76	D.Edwards
+CARNO	2026-11-15	NO	starter	Offense	C	51	C.Ruiz
+CARNO	2026-11-15	NO	starter	Offense	RG	65	J.Wright
+CARNO	2026-11-15	NO	starter	Offense	RT	72	A.Richards
+CARNO	2026-11-15	NO	starter	Offense	WR	14	D.Vele
+CARNO	2026-11-15	NO	starter	Offense	WR	12	C.Olave
+CARNO	2026-11-15	NO	starter	Offense	QB	6	T.Though
+CARNO	2026-11-15	NO	starter	Offense	RB	3	T.Etienne
+CARNO	2026-11-15	NO	starter	Defense	DE	99	C.Young
+CARNO	2026-11-15	NO	starter	Defense	DL	93	N.Shepherd
+CARNO	2026-11-15	NO	starter	Defense	DL	91	V.Broughton
+CARNO	2026-11-15	NO	starter	Defense	DE	96	C.Granderson
+CARNO	2026-11-15	NO	starter	Defense	LB	55	K.Elliss
+CARNO	2026-11-15	NO	starter	Defense	LB	20	P.Werner
+CARNO	2026-11-15	NO	starter	Defense	CB	22	M.Emerson
+CARNO	2026-11-15	NO	starter	Defense	CB	1	K.McKinstry
+CARNO	2026-11-15	NO	starter	Defense	S	23	J.Blackmon
+CARNO	2026-11-15	NO	starter	Defense	S	21	J.Reid
+CARNO	2026-11-15	NO	starter	Defense	S	7	J.Sanker
+CARNO	2026-11-15	NO	sub		WR	0	J.Tyson
+CARNO	2026-11-15	NO	sub		TE	4	O.Delp
+CARNO	2026-11-15	NO	sub		P	17	R.Wright
+CARNO	2026-11-15	NO	sub		WR	18	B.Lance
+CARNO	2026-11-15	NO	sub		WR/RS	19	B.Brown
+CARNO	2026-11-15	NO	sub		CB	25	D.Richardson
+CARNO	2026-11-15	NO	sub		LB	28	D.Stutsman
+CARNO	2026-11-15	NO	sub		CB	29	Q.Riley
+CARNO	2026-11-15	NO	sub		RB	30	A.Estime
+CARNO	2026-11-15	NO	sub		DB	31	J.Howden
+CARNO	2026-11-15	NO	sub		DE	33	A.Jennings
+CARNO	2026-11-15	NO	sub		DB	36	L.Styles
+CARNO	2026-11-15	NO	sub		K	39	C.Smyth
+CARNO	2026-11-15	NO	sub		RB	41	A.Kamara
+CARNO	2026-11-15	NO	sub		LB	44	I.Stalbird
+CARNO	2026-11-15	NO	sub		LS	49	Z.Wood
+CARNO	2026-11-15	NO	sub		DL	50	C.Wooden
+CARNO	2026-11-15	NO	sub		LB	58	C.Rumph
+CARNO	2026-11-15	NO	sub		G	66	W.Sherman
+CARNO	2026-11-15	NO	sub		T	73	E.Kilty
+CARNO	2026-11-15	NO	sub		T	74	M.Murphy
+CARNO	2026-11-15	NO	sub		DE	94	C.Jordan
+CARNO	2026-11-15	NO	sub		DL	95	J.Ridgeway
+CARNO	2026-11-15	NO	sub		DL	97	K.Boyd
+CARNO	2026-11-15	NO	sub		DE	98	T.Wilson
+HOUCL	2026-11-15	CLE	dnp		QB	2	S.Sanders
+HOUCL	2026-11-15	CLE	inactive		3QB	6	D.Gabriel
+HOUCL	2026-11-15	CLE	inactive		QB	15	T.Green
+HOUCL	2026-11-15	CLE	inactive		LB	17	J.Jefferson
+HOUCL	2026-11-15	CLE	inactive		CB	20	N.Igbinoghene
+HOUCL	2026-11-15	CLE	inactive		S	33	R.Hickman
+HOUCL	2026-11-15	CLE	inactive		C	52	P.Brailsford
+HOUCL	2026-11-15	CLE	starter	Offense	TE	44	H.Fannin
+HOUCL	2026-11-15	CLE	starter	Offense	LT	55	S.Fano
+HOUCL	2026-11-15	CLE	starter	Offense	LG	77	Z.Johnson
+HOUCL	2026-11-15	CLE	starter	Offense	C	74	E.Jenkins
+HOUCL	2026-11-15	CLE	starter	Offense	RG	58	A.Barber
+HOUCL	2026-11-15	CLE	starter	Offense	RT	71	T.Howard
+HOUCL	2026-11-15	CLE	starter	Offense	TE	86	B.Whiteheart
+HOUCL	2026-11-15	CLE	starter	Offense	WR	1	K.Concepcion
+HOUCL	2026-11-15	CLE	starter	Offense	WR	12	D.Boston
+HOUCL	2026-11-15	CLE	starter	Offense	QB	4	D.Watson
+HOUCL	2026-11-15	CLE	starter	Offense	RB	10	Q.Judkins
+HOUCL	2026-11-15	CLE	starter	Defense	DE	8	J.Verse
+HOUCL	2026-11-15	CLE	starter	Defense	DT	94	M.Graham
+HOUCL	2026-11-15	CLE	starter	Defense	DT	96	M.Collins
+HOUCL	2026-11-15	CLE	starter	Defense	DE	57	I.McGuire
+HOUCL	2026-11-15	CLE	starter	Defense	LB	5	Q.Williams
+HOUCL	2026-11-15	CLE	starter	Defense	LB	49	C.Schwesinger
+HOUCL	2026-11-15	CLE	starter	Defense	CB	26	M.Harden
+HOUCL	2026-11-15	CLE	starter	Defense	CB	21	D.Ward
+HOUCL	2026-11-15	CLE	starter	Defense	CB	7	T.Campbell
+HOUCL	2026-11-15	CLE	starter	Defense	S	28	E.McNeil-Warren
+HOUCL	2026-11-15	CLE	starter	Defense	S	9	G.Delpit
+HOUCL	2026-11-15	CLE	sub		WR	0	I.Bond
+HOUCL	2026-11-15	CLE	sub		WR	3	J.Jeudy
+HOUCL	2026-11-15	CLE	sub		WR	11	M.Corley
+HOUCL	2026-11-15	CLE	sub		P	13	C.Bojorquez
+HOUCL	2026-11-15	CLE	sub		WR	16	T.Wallace
+HOUCL	2026-11-15	CLE	sub		RB	22	D.Sampson
+HOUCL	2026-11-15	CLE	sub		S	24	D.Thomas
+HOUCL	2026-11-15	CLE	sub		K	25	A.Szmyt
+HOUCL	2026-11-15	CLE	sub		CB	29	M.Blackmon
+HOUCL	2026-11-15	CLE	sub		S	31	D.McMillon
+HOUCL	2026-11-15	CLE	sub		CB	35	T.Pride
+HOUCL	2026-11-15	CLE	sub		RB	38	J.McLaughlin
+HOUCL	2026-11-15	CLE	sub		LB	42	E.Mascarenas-Arnold
+HOUCL	2026-11-15	CLE	sub		TE	48	C.Ryan
+HOUCL	2026-11-15	CLE	sub		LS	50	R.Sunahara
+HOUCL	2026-11-15	CLE	sub		DT	51	M.Hall
+HOUCL	2026-11-15	CLE	sub		DE	54	S.Williams
+HOUCL	2026-11-15	CLE	sub		C	56	L.Wypler
+HOUCL	2026-11-15	CLE	sub		LB	59	W.Reid
+HOUCL	2026-11-15	CLE	sub		G	70	Z.Zinter
+HOUCL	2026-11-15	CLE	sub		T	79	D.Jones
+HOUCL	2026-11-15	CLE	sub		TE	80	Z.Mitchell-Paden
+HOUCL	2026-11-15	CLE	sub		DT	92	S.Kamara
+HOUCL	2026-11-15	CLE	sub		DE	97	D.Barnett
+HOUCL	2026-11-15	CLE	sub		DT	98	A.Huntington
+HOUCL	2026-11-15	HOU	dnp		QB	10	D.Mills
+HOUCL	2026-11-15	HOU	dnp		T	71	B.Smith
+HOUCL	2026-11-15	HOU	inactive		LB	0	A.Al-Shaair
+HOUCL	2026-11-15	HOU	inactive		TE	9	B.Jordan
+HOUCL	2026-11-15	HOU	inactive		WR	18	M.Harrison
+HOUCL	2026-11-15	HOU	inactive		RB	32	D.Montgomery
+HOUCL	2026-11-15	HOU	inactive		DE	55	D.Hunter
+HOUCL	2026-11-15	HOU	inactive		C/G	66	K.Rutledge
+HOUCL	2026-11-15	HOU	inactive		G	75	W.Teller
+HOUCL	2026-11-15	HOU	starter	Offense	WR	12	N.Collins
+HOUCL	2026-11-15	HOU	starter	Offense	LT	79	A.Ersery
+HOUCL	2026-11-15	HOU	starter	Offense	LG	64	F.Nwaiwu
+HOUCL	2026-11-15	HOU	starter	Offense	C	63	E.Brown
+HOUCL	2026-11-15	HOU	starter	Offense	RG	69	E.Ingram
+HOUCL	2026-11-15	HOU	starter	Offense	RT	77	T.Brown
+HOUCL	2026-11-15	HOU	starter	Offense	TE	86	D.Schultz
+HOUCL	2026-11-15	HOU	starter	Offense	WR	14	K.Boutte
+HOUCL	2026-11-15	HOU	starter	Offense	WR	19	X.Hutchinson
+HOUCL	2026-11-15	HOU	starter	Offense	QB	7	C.Stroud
+HOUCL	2026-11-15	HOU	starter	Offense	RB	4	W.Marks
+HOUCL	2026-11-15	HOU	starter	Defense	DE	90	J.Clowney
+HOUCL	2026-11-15	HOU	starter	Defense	DT	72	T.Togiai
+HOUCL	2026-11-15	HOU	starter	Defense	DT	98	S.Rankins
+HOUCL	2026-11-15	HOU	starter	Defense	DE	51	W.Anderson
+HOUCL	2026-11-15	HOU	starter	Defense	CB	24	D.Stingley
+HOUCL	2026-11-15	HOU	starter	Defense	CB	3	K.Lassiter
+HOUCL	2026-11-15	HOU	starter	Defense	LB	35	J.Hansen
+HOUCL	2026-11-15	HOU	starter	Defense	LB	39	H.To'oTo'o
+HOUCL	2026-11-15	HOU	starter	Defense	S	2	C.Bullock
+HOUCL	2026-11-15	HOU	starter	Defense	S	5	J.Pitre
+HOUCL	2026-11-15	HOU	starter	Defense	S	29	M.Stewart
+HOUCL	2026-11-15	HOU	sub		WR	1	T.Dell
+HOUCL	2026-11-15	HOU	sub		S	6	R.Blankenship
+HOUCL	2026-11-15	HOU	sub		TE	8	C.Stover
+HOUCL	2026-11-15	HOU	sub		CB	11	T.Smith
+HOUCL	2026-11-15	HOU	sub		K	15	K.Fairbairn
+HOUCL	2026-11-15	HOU	sub		S	20	J.Ingram
+HOUCL	2026-11-15	HOU	sub		RB	21	E.Demercado
+HOUCL	2026-11-15	HOU	sub		RB	23	D.Ogunbowale
+HOUCL	2026-11-15	HOU	sub		S	27	K.Ramsey
+HOUCL	2026-11-15	HOU	sub		LB	30	W.Woodaz
+HOUCL	2026-11-15	HOU	sub		LB	33	J.Hummel
+HOUCL	2026-11-15	HOU	sub		P	38	K.Kroeger
+HOUCL	2026-11-15	HOU	sub		LS	40	A.Brinkman
+HOUCL	2026-11-15	HOU	sub		LB	49	C.Muma
+HOUCL	2026-11-15	HOU	sub		T	57	B.Fisher
+HOUCL	2026-11-15	HOU	sub		C	60	J.Andrews
+HOUCL	2026-11-15	HOU	sub		T	78	N.Thomas
+HOUCL	2026-11-15	HOU	sub		TE	83	M.Klein
+HOUCL	2026-11-15	HOU	sub		TE	87	F.Moreau
+HOUCL	2026-11-15	HOU	sub		WR	88	N.Remigio
+HOUCL	2026-11-15	HOU	sub		DT	91	N.Jones
+HOUCL	2026-11-15	HOU	sub		DT	93	K.McDonald
+HOUCL	2026-11-15	HOU	sub		DE	94	D.Robinson
+HOUCL	2026-11-15	HOU	sub		DT	96	L.Hall
+JAXTEN	2026-11-15	JAX	dnp		QB	10	Q.Ewers
+JAXTEN	2026-11-15	JAX	inactive		S	0	J.Bates
+JAXTEN	2026-11-15	JAX	inactive		WR	18	C.Williams
+JAXTEN	2026-11-15	JAX	inactive		DT	90	J.Davis
+JAXTEN	2026-11-15	JAX	inactive		DE	97	W.Williams
+JAXTEN	2026-11-15	JAX	inactive		DT	98	A.Regis
+JAXTEN	2026-11-15	JAX	starter	Offense	WR	3	J.Meyers
+JAXTEN	2026-11-15	JAX	starter	Offense	TE	85	B.Strange
+JAXTEN	2026-11-15	JAX	starter	Offense	LT	72	W.Little
+JAXTEN	2026-11-15	JAX	starter	Offense	LG	75	E.Pregnon
+JAXTEN	2026-11-15	JAX	starter	Offense	C	73	R.Hainsey
+JAXTEN	2026-11-15	JAX	starter	Offense	RG	76	E.Cleveland
+JAXTEN	2026-11-15	JAX	starter	Offense	RT	70	C.Van Lanen
+JAXTEN	2026-11-15	JAX	starter	Offense	WR	11	P.Washington
+JAXTEN	2026-11-15	JAX	starter	Offense	WR	7	Bri.Thomas
+JAXTEN	2026-11-15	JAX	starter	Offense	QB	16	T.Lawrence
+JAXTEN	2026-11-15	JAX	starter	Offense	RB	33	B.Tuten
+JAXTEN	2026-11-15	JAX	starter	Defense	DE	41	J.Hines-Allen
+JAXTEN	2026-11-15	JAX	starter	Defense	DT	91	A.Armstead
+JAXTEN	2026-11-15	JAX	starter	Defense	DT	93	M.Dickerson
+JAXTEN	2026-11-15	JAX	starter	Defense	DE	44	T.Walker
+JAXTEN	2026-11-15	JAX	starter	Defense	LB	23	F.Oluokun
+JAXTEN	2026-11-15	JAX	starter	Defense	LB	51	V.Miller
+JAXTEN	2026-11-15	JAX	starter	Defense	CB	12	T.Hunter
+JAXTEN	2026-11-15	JAX	starter	Defense	CB	1	M.Brown
+JAXTEN	2026-11-15	JAX	starter	Defense	S	26	K.Merriweather
+JAXTEN	2026-11-15	JAX	starter	Defense	S	6	A.Johnson
+JAXTEN	2026-11-15	JAX	starter	Defense	S	25	R.Lane
+JAXTEN	2026-11-15	JAX	sub		CB	2	J.Lewis
+JAXTEN	2026-11-15	JAX	sub		CB	4	Jar.Jones
+JAXTEN	2026-11-15	JAX	sub		RB	5	L.Allen
+JAXTEN	2026-11-15	JAX	sub		P	9	L.Cooke
+JAXTEN	2026-11-15	JAX	sub		WR	19	J.Cameron
+JAXTEN	2026-11-15	JAX	sub		RB	20	A.Abdullah
+JAXTEN	2026-11-15	JAX	sub		S	22	J.Huskey
+JAXTEN	2026-11-15	JAX	sub		RB	24	C.Rodriguez
+JAXTEN	2026-11-15	JAX	sub		LB	31	J.Tavai
+JAXTEN	2026-11-15	JAX	sub		LB	35	J.Mcleod
+JAXTEN	2026-11-15	JAX	sub		CB	36	Jay.Jones
+JAXTEN	2026-11-15	JAX	sub		K	39	C.Little
+JAXTEN	2026-11-15	JAX	sub		LS	46	R.Matiscik
+JAXTEN	2026-11-15	JAX	sub		LB	47	D.Gardeck
+JAXTEN	2026-11-15	JAX	sub		LB	50	B.Combs
+JAXTEN	2026-11-15	JAX	sub		DE	57	Bry.Thomas
+JAXTEN	2026-11-15	JAX	sub		OL	60	J.Monheim
+JAXTEN	2026-11-15	JAX	sub		OL	64	W.Milum
+JAXTEN	2026-11-15	JAX	sub		OL	68	D.Faalele
+JAXTEN	2026-11-15	JAX	sub		TE	80	Q.Morris
+JAXTEN	2026-11-15	JAX	sub		TE	87	N.Boerkircher
+JAXTEN	2026-11-15	JAX	sub		TE	88	T.Koziol
+JAXTEN	2026-11-15	JAX	sub		DE	92	D.Striggow
+JAXTEN	2026-11-15	JAX	sub		DT	94	D.Godchaux
+JAXTEN	2026-11-15	JAX	sub		DT	99	R.Orhorhoro
+JAXTEN	2026-11-15	TEN	dnp		QB	10	M.Trubisky
+JAXTEN	2026-11-15	TEN	inactive		WR	14	C.Tate
+JAXTEN	2026-11-15	TEN	inactive		RB	32	N.Singleton
+JAXTEN	2026-11-15	TEN	inactive		CB	42	J.Jones
+JAXTEN	2026-11-15	TEN	inactive		LB	50	C.Barton
+JAXTEN	2026-11-15	TEN	inactive		LB	53	A.Hill
+JAXTEN	2026-11-15	TEN	inactive		T	78	B.Crenshaw-Dickson
+JAXTEN	2026-11-15	TEN	inactive		DT	96	J.Marshall
+JAXTEN	2026-11-15	TEN	starter	Offense	TE	82	D.Bellinger
+JAXTEN	2026-11-15	TEN	starter	Offense	TE	84	G.Helm
+JAXTEN	2026-11-15	TEN	starter	Offense	WR	17	C.Dike
+JAXTEN	2026-11-15	TEN	starter	Offense	LT	75	D.Moore
+JAXTEN	2026-11-15	TEN	starter	Offense	LG	76	C.Zavala
+JAXTEN	2026-11-15	TEN	starter	Offense	C	51	A.Schlottmann
+JAXTEN	2026-11-15	TEN	starter	Offense	RG	70	A.Mafi
+JAXTEN	2026-11-15	TEN	starter	Offense	RT	55	J.Latham
+JAXTEN	2026-11-15	TEN	starter	Offense	WR	5	E.Ayomanor
+JAXTEN	2026-11-15	TEN	starter	Offense	QB	1	C.Ward
+JAXTEN	2026-11-15	TEN	starter	Offense	RB	20	T.Pollard
+JAXTEN	2026-11-15	TEN	starter	Defense	DE	57	J.Martin
+JAXTEN	2026-11-15	TEN	starter	Defense	DL	91	J.Franklin-Myers
+JAXTEN	2026-11-15	TEN	starter	Defense	DT	90	S.Thomas
+JAXTEN	2026-11-15	TEN	starter	Defense	DE	11	J.Johnson
+JAXTEN	2026-11-15	TEN	starter	Defense	LB	33	C.Gray
+JAXTEN	2026-11-15	TEN	starter	Defense	LB	54	D.Mausi
+JAXTEN	2026-11-15	TEN	starter	Defense	CB	25	Jo.Williams
+JAXTEN	2026-11-15	TEN	starter	Defense	CB	24	A.Taylor
+JAXTEN	2026-11-15	TEN	starter	Defense	CB	18	C.Flott
+JAXTEN	2026-11-15	TEN	starter	Defense	S	29	T.Adams
+JAXTEN	2026-11-15	TEN	starter	Defense	S	23	K.Winston
+JAXTEN	2026-11-15	TEN	sub		WR	0	C.Ridley
+JAXTEN	2026-11-15	TEN	sub		RB	2	T.Spears
+JAXTEN	2026-11-15	TEN	sub		WR	4	W.Robinson
+JAXTEN	2026-11-15	TEN	sub		K	6	J.Slye
+JAXTEN	2026-11-15	TEN	sub		DE	7	O.Oladejo
+JAXTEN	2026-11-15	TEN	sub		P	13	T.Morstead
+JAXTEN	2026-11-15	TEN	sub		DE	15	K.Faulk
+JAXTEN	2026-11-15	TEN	sub		CB	21	M.Robinson
+JAXTEN	2026-11-15	TEN	sub		CB	26	M.Harris
+JAXTEN	2026-11-15	TEN	sub		S	28	I.Oliver
+JAXTEN	2026-11-15	TEN	sub		RB	36	J.Chestnut
+JAXTEN	2026-11-15	TEN	sub		S	38	T.Burgess
+JAXTEN	2026-11-15	TEN	sub		LB	40	D.Hampton
+JAXTEN	2026-11-15	TEN	sub		LB	44	M.Diabate
+JAXTEN	2026-11-15	TEN	sub		LS	46	M.Cox
+JAXTEN	2026-11-15	TEN	sub		DE	56	T.Jones
+JAXTEN	2026-11-15	TEN	sub		T	59	J.Hudson
+JAXTEN	2026-11-15	TEN	sub		G	71	G.Dellinger
+JAXTEN	2026-11-15	TEN	sub		C	79	P.Coogan
+JAXTEN	2026-11-15	TEN	sub		TE	86	K.Granson
+JAXTEN	2026-11-15	TEN	sub		WR	87	X.Restrepo
+JAXTEN	2026-11-15	TEN	sub		TE	88	D.Martin-Robinson
+JAXTEN	2026-11-15	TEN	sub		DT	93	N.Stackhouse
+JAXTEN	2026-11-15	TEN	sub		DT	94	T.Horne
+JAXTEN	2026-11-15	TEN	sub		DT	99	J.Laulu
+KCATL	2026-11-15	ATL	dnp		QB	1	T.Tagovailoa
+KCATL	2026-11-15	ATL	starter	Offense	WR	4	J.Dotson
+KCATL	2026-11-15	ATL	starter	Offense	TE	8	K.Pitts
+KCATL	2026-11-15	ATL	starter	Offense	LT	70	J.Matthews
+KCATL	2026-11-15	ATL	starter	Offense	LG	65	M.Bergeron
+KCATL	2026-11-15	ATL	starter	Offense	C	62	C.Levin
+KCATL	2026-11-15	ATL	starter	Offense	RG	63	C.Lindstrom
+KCATL	2026-11-15	ATL	starter	Offense	RT	71	J.Taylor
+KCATL	2026-11-15	ATL	starter	Offense	TE	89	C.Woerner
+KCATL	2026-11-15	ATL	starter	Offense	WR	5	D.London
+KCATL	2026-11-15	ATL	starter	Offense	QB	9	M.Penix
+KCATL	2026-11-15	ATL	starter	Offense	RB	7	B.Robinson
+KCATL	2026-11-15	ATL	starter	Defense	DL	54	B.Dorlus
+KCATL	2026-11-15	ATL	starter	Defense	DL	92	M.Smith
+KCATL	2026-11-15	ATL	starter	Defense	DT	95	G.Dexter
+KCATL	2026-11-15	ATL	starter	Defense	DE	99	C.Thomas
+KCATL	2026-11-15	ATL	starter	Defense	LB	53	K.Daniels
+KCATL	2026-11-15	ATL	starter	Defense	LB	42	J.Woods
+KCATL	2026-11-15	ATL	starter	Defense	DB	29	S.Brown
+KCATL	2026-11-15	ATL	starter	Defense	CB	24	A.Terrell
+KCATL	2026-11-15	ATL	starter	Defense	CB	26	C.Henderson
+KCATL	2026-11-15	ATL	starter	Defense	S	23	D.Hellams
+KCATL	2026-11-15	ATL	starter	Defense	S	31	X.Watts
+KCATL	2026-11-15	ATL	sub		WR	14	O.Zaccheaus
+KCATL	2026-11-15	ATL	sub		P	16	J.Bailey
+KCATL	2026-11-15	ATL	sub		WR	19	C.Blair
+KCATL	2026-11-15	ATL	sub		CB	21	M.Hughes
+KCATL	2026-11-15	ATL	sub		LB	22	Y.Abdullah
+KCATL	2026-11-15	ATL	sub		RB	25	K.Herbert
+KCATL	2026-11-15	ATL	sub		DE	27	J.Pearce
+KCATL	2026-11-15	ATL	sub		CB	28	M.Ford
+KCATL	2026-11-15	ATL	sub		CB	33	B.Bowman
+KCATL	2026-11-15	ATL	sub		S	34	J.Robinson
+KCATL	2026-11-15	ATL	sub		K	39	J.Moody
+KCATL	2026-11-15	ATL	sub		LB	43	T.Quinn
+KCATL	2026-11-15	ATL	sub		LB	45	C.Harris
+KCATL	2026-11-15	ATL	sub		DE	47	C.Snowden
+KCATL	2026-11-15	ATL	sub		LS	49	L.McCullough
+KCATL	2026-11-15	ATL	sub		DE	55	Z.Smith
+KCATL	2026-11-15	ATL	sub		LB	56	H.Perkins
+KCATL	2026-11-15	ATL	sub		OL	68	K.Hinton
+KCATL	2026-11-15	ATL	sub		G	74	A.Vorhees
+KCATL	2026-11-15	ATL	sub		T	75	E.Onianwa
+KCATL	2026-11-15	ATL	sub		TE	81	A.Hooper
+KCATL	2026-11-15	ATL	sub		TE	87	N.Muse
+KCATL	2026-11-15	ATL	sub		WR	88	B.Collins
+KCATL	2026-11-15	ATL	sub		DL	94	L.London
+KCATL	2026-11-15	ATL	sub		DL	96	Z.Harrison
+KCATL	2026-11-15	KC	dnp		RB	9	K.Walker
+KCATL	2026-11-15	KC	dnp		3QB	19	G.Nussmeier
+KCATL	2026-11-15	KC	dnp		RB	34	J.Ott
+KCATL	2026-11-15	KC	dnp		CB	39	M.Smith
+KCATL	2026-11-15	KC	dnp		FB	47	B.VanSumeren
+KCATL	2026-11-15	KC	dnp		OL	77	J.Moore
+KCATL	2026-11-15	KC	dnp		DL	99	P.Woods
+KCATL	2026-11-15	KC	inactive		ILB	0	D.Deablo
+KCATL	2026-11-15	KC	inactive		CB	12	Av.Terrell
+KCATL	2026-11-15	KC	inactive		3QB	13	A.Dalton
+KCATL	2026-11-15	KC	inactive		WR	17	Z.Branch
+KCATL	2026-11-15	KC	inactive		QB	18	J.Strand
+KCATL	2026-11-15	KC	inactive		CB	37	R.Longerbeam
+KCATL	2026-11-15	KC	inactive		T	73	C.Williams
+KCATL	2026-11-15	KC	starter	Offense	WR	1	X.Worthy
+KCATL	2026-11-15	KC	starter	Offense	TE	87	T.Kelce
+KCATL	2026-11-15	KC	starter	Offense	LT	70	K.Benson
+KCATL	2026-11-15	KC	starter	Offense	LG	76	K.Suamataia
+KCATL	2026-11-15	KC	starter	Offense	C	52	C.Humphrey
+KCATL	2026-11-15	KC	starter	Offense	RG	65	Tr.Smith
+KCATL	2026-11-15	KC	starter	Offense	RT	73	J.Ezeudu
+KCATL	2026-11-15	KC	starter	Offense	TE	83	N.Gray
+KCATL	2026-11-15	KC	starter	Offense	WR	4	R.Rice
+KCATL	2026-11-15	KC	starter	Offense	RB	10	E.Johnson
+KCATL	2026-11-15	KC	starter	Offense	QB	15	P.Mahomes
+KCATL	2026-11-15	KC	starter	Defense	DE	56	G.Karlaftis
+KCATL	2026-11-15	KC	starter	Defense	NT	92	K.Tonga
+KCATL	2026-11-15	KC	starter	Defense	DT	95	C.Jones
+KCATL	2026-11-15	KC	starter	Defense	DE	91	F.Anudike-Uzomah
+KCATL	2026-11-15	KC	starter	Defense	LB	43	J.Cochrane
+KCATL	2026-11-15	KC	starter	Defense	LB	23	D.Tranquill
+KCATL	2026-11-15	KC	starter	Defense	LB	32	N.Bolton
+KCATL	2026-11-15	KC	starter	Defense	DB	27	C.Conner
+KCATL	2026-11-15	KC	starter	Defense	DB	20	N.Williams
+KCATL	2026-11-15	KC	starter	Defense	CB	5	M.Delane
+KCATL	2026-11-15	KC	starter	Defense	S	17	A.Gilman
+KCATL	2026-11-15	KC	sub		QB	6	J.Fields
+KCATL	2026-11-15	KC	sub		K	7	H.Butker
+KCATL	2026-11-15	KC	sub		CB	8	K.Fulton
+KCATL	2026-11-15	KC	sub		WR	11	J.Royals
+KCATL	2026-11-15	KC	sub		WR	12	J.Downs
+KCATL	2026-11-15	KC	sub		WR	13	C.Allen
+KCATL	2026-11-15	KC	sub		P	14	M.Araiza
+KCATL	2026-11-15	KC	sub		DB	21	J.Hicks
+KCATL	2026-11-15	KC	sub		DB	22	J.Canady
+KCATL	2026-11-15	KC	sub		S	29	X.Nwankpa
+KCATL	2026-11-15	KC	sub		CB	30	C.Roland-Wallace
+KCATL	2026-11-15	KC	sub		LB	31	J.Bassa
+KCATL	2026-11-15	KC	sub		RB	35	N.Carter
+KCATL	2026-11-15	KC	sub		LS	41	J.Winchester
+KCATL	2026-11-15	KC	sub		LB	44	C.McDonald
+KCATL	2026-11-15	KC	sub		DE	51	R.Thomas
+KCATL	2026-11-15	KC	sub		T	61	D.Pounds
+KCATL	2026-11-15	KC	sub		OL	64	H.Nourzad
+KCATL	2026-11-15	KC	sub		OL	66	M.Caliendo
+KCATL	2026-11-15	KC	sub		WR	82	J.De Jesus
+KCATL	2026-11-15	KC	sub		WR	85	A.Armstrong
+KCATL	2026-11-15	KC	sub		TE	88	J.Briningstool
+KCATL	2026-11-15	KC	sub		TE	89	J.Wiley
+KCATL	2026-11-15	KC	sub		DT	94	B.Eason
+KCATL	2026-11-15	KC	sub		DT	96	M.Harris
+KCATL	2026-11-15	KC	sub		DE	97	A.Gillotte
+LARARI	2026-11-15	ARI	dnp		QB	9	J.Johnson
+LARARI	2026-11-15	ARI	dnp		OL	76	A.Reese
+LARARI	2026-11-15	ARI	inactive		3QB	18	J.Aguilar
+LARARI	2026-11-15	ARI	inactive		CB	24	S.Thomas
+LARARI	2026-11-15	ARI	inactive		OLB	54	E.Leota
+LARARI	2026-11-15	ARI	inactive		OL	66	J.Williams
+LARARI	2026-11-15	ARI	inactive		OL	71	J.Gaines
+LARARI	2026-11-15	ARI	inactive		OL	72	H.Froholdt
+LARARI	2026-11-15	ARI	starter	Offense	WR	80	S.Fehoko
+LARARI	2026-11-15	ARI	starter	Offense	TE	84	E.Higgins
+LARARI	2026-11-15	ARI	starter	Offense	TE	89	H.Long
+LARARI	2026-11-15	ARI	starter	Offense	LT	78	J.Fryar
+LARARI	2026-11-15	ARI	starter	Offense	LG	73	I.Seumalo
+LARARI	2026-11-15	ARI	starter	Offense	C	58	H.Conner
+LARARI	2026-11-15	ARI	starter	Offense	RG	74	I.Adams
+LARARI	2026-11-15	ARI	starter	Offense	RT	65	E.Wilkinson
+LARARI	2026-11-15	ARI	starter	Offense	TE	85	T.McBride
+LARARI	2026-11-15	ARI	starter	Offense	QB	19	C.Beck
+LARARI	2026-11-15	ARI	starter	Offense	RB	22	T.Allgeier
+LARARI	2026-11-15	ARI	starter	Defense	OLB	10	J.Sweat
+LARARI	2026-11-15	ARI	starter	Defense	DT	97	W.Nolen
+LARARI	2026-11-15	ARI	starter	Defense	DT	55	D.Stills
+LARARI	2026-11-15	ARI	starter	Defense	OLB	25	Z.Collins
+LARARI	2026-11-15	ARI	starter	Defense	ILB	50	J.Gibbons
+LARARI	2026-11-15	ARI	starter	Defense	ILB	1	Ma.Wilson
+LARARI	2026-11-15	ARI	starter	Defense	CB	35	K.King
+LARARI	2026-11-15	ARI	starter	Defense	CB	29	D.Burke
+LARARI	2026-11-15	ARI	starter	Defense	CB	13	K.Clark
+LARARI	2026-11-15	ARI	starter	Defense	S	28	A.Wingard
+LARARI	2026-11-15	ARI	starter	Defense	S	3	B.Baker
+LARARI	2026-11-15	ARI	sub		ILB	0	C.Simon
+LARARI	2026-11-15	ARI	sub		OLB	5	B.Browning
+LARARI	2026-11-15	ARI	sub		WR	7	Z.Jones
+LARARI	2026-11-15	ARI	sub		P	12	B.Gillikin
+LARARI	2026-11-15	ARI	sub		CB	16	M.Melton
+LARARI	2026-11-15	ARI	sub		RB	20	Z.Knight
+LARARI	2026-11-15	ARI	sub		CB	21	G.Williams
+LARARI	2026-11-15	ARI	sub		RB	26	E.Hull
+LARARI	2026-11-15	ARI	sub		S	36	K.Crawford
+LARARI	2026-11-15	ARI	sub		K	38	C.Ryland
+LARARI	2026-11-15	ARI	sub		S	42	D.Taylor-Demerson
+LARARI	2026-11-15	ARI	sub		ILB	43	K.Sharar
+LARARI	2026-11-15	ARI	sub		TE	47	T.Quitoriano
+LARARI	2026-11-15	ARI	sub		DL	51	R.Lopez
+LARARI	2026-11-15	ARI	sub		OLB	52	J.Burch
+LARARI	2026-11-15	ARI	sub		DL	56	D.Robinson
+LARARI	2026-11-15	ARI	sub		LS	59	C.Kreiter
+LARARI	2026-11-15	ARI	sub		OL	64	K.Eguakun
+LARARI	2026-11-15	ARI	sub		OL	79	J.Wills
+LARARI	2026-11-15	ARI	sub		WR	81	D.Duvernay
+LARARI	2026-11-15	ARI	sub		WR	82	R.Virgil
+LARARI	2026-11-15	ARI	sub		WR	83	H.Wallace
+LARARI	2026-11-15	ARI	sub		DL	91	L.Collier
+LARARI	2026-11-15	ARI	sub		DL	95	A.Billings
+LARARI	2026-11-15	LAR	dnp		QB	13	S.Bennett
+LARARI	2026-11-15	LAR	inactive		3QB	15	T.Simpson
+LARARI	2026-11-15	LAR	inactive		S	36	M.Pulley
+LARARI	2026-11-15	LAR	inactive		LS	49	J.Cardona
+LARARI	2026-11-15	LAR	inactive		OLB	59	D.Peterson
+LARARI	2026-11-15	LAR	inactive		OL	73	S.Avila
+LARARI	2026-11-15	LAR	inactive		OL	79	K.Trost
+LARARI	2026-11-15	LAR	inactive		OLB	94	D.Johnson
+LARARI	2026-11-15	LAR	starter	Offense	WR	4	K.Mumpfield
+LARARI	2026-11-15	LAR	starter	Offense	LT	77	A.Jackson
+LARARI	2026-11-15	LAR	starter	Offense	LG	50	B.Limmer
+LARARI	2026-11-15	LAR	starter	Offense	C	65	C.Shelton
+LARARI	2026-11-15	LAR	starter	Offense	RG	69	K.Dotson
+LARARI	2026-11-15	LAR	starter	Offense	RT	71	W.McClendon
+LARARI	2026-11-15	LAR	starter	Offense	WR	14	X.Smith
+LARARI	2026-11-15	LAR	starter	Offense	WR	6	C.Daniels
+LARARI	2026-11-15	LAR	starter	Offense	QB	9	M.Stafford
+LARARI	2026-11-15	LAR	starter	Offense	RB	24	B.Corum
+LARARI	2026-11-15	LAR	starter	Offense	RB	23	K.Williams
+LARARI	2026-11-15	LAR	starter	Defense	OLB	95	M.Garrett
+LARARI	2026-11-15	LAR	starter	Defense	DE	99	A.Donald
+LARARI	2026-11-15	LAR	starter	Defense	DE	90	T.Davis
+LARARI	2026-11-15	LAR	starter	Defense	DE	55	B.Fiske
+LARARI	2026-11-15	LAR	starter	Defense	OLB	0	B.Young
+LARARI	2026-11-15	LAR	starter	Defense	ILB	48	O.Speights
+LARARI	2026-11-15	LAR	starter	Defense	ILB	53	N.Landman
+LARARI	2026-11-15	LAR	starter	Defense	CB	30	J.Wallace
+LARARI	2026-11-15	LAR	starter	Defense	CB	22	T.McDuffie
+LARARI	2026-11-15	LAR	starter	Defense	S	37	Q.Lake
+LARARI	2026-11-15	LAR	starter	Defense	S	3	K.Curl
+LARARI	2026-11-15	LAR	sub		CB	1	E.Forbes
+LARARI	2026-11-15	LAR	sub		S	2	J.McCollough
+LARARI	2026-11-15	LAR	sub		S	5	K.Kinchens
+LARARI	2026-11-15	LAR	sub		WR	8	T.Atwell
+LARARI	2026-11-15	LAR	sub		OLB	10	J.Stewart
+LARARI	2026-11-15	LAR	sub		K	16	J.Karty
+LARARI	2026-11-15	LAR	sub		K	19	B.McManus
+LARARI	2026-11-15	LAR	sub		RB	20	R.Rivers
+LARARI	2026-11-15	LAR	sub		CB	21	C.Lampkin
+LARARI	2026-11-15	LAR	sub		CB	26	D.Williams
+LARARI	2026-11-15	LAR	sub		P	42	E.Evans
+LARARI	2026-11-15	LAR	sub		LS	43	J.McQuade
+LARARI	2026-11-15	LAR	sub		ILB	44	G.Stuard
+LARARI	2026-11-15	LAR	sub		OLB	47	W.Bailey
+LARARI	2026-11-15	LAR	sub		DE	52	L.Murchison
+LARARI	2026-11-15	LAR	sub		ILB	56	S.Dolac
+LARARI	2026-11-15	LAR	sub		NT	57	T.Hamilton
+LARARI	2026-11-15	LAR	sub		OL	63	D.McMahon
+LARARI	2026-11-15	LAR	sub		OL	66	B.Murray
+LARARI	2026-11-15	LAR	sub		OL	68	D.Quessenberry
+LARARI	2026-11-15	LAR	sub		WR	81	B.Presley
+LARARI	2026-11-15	LAR	sub		TE	84	C.Parkinson
+LARARI	2026-11-15	LAR	sub		TE	86	M.Klare
+LARARI	2026-11-15	LAR	sub		TE	87	D.Allen
+LARARI	2026-11-15	LAR	sub		TE	89	T.Higbee
+MIAIND	2026-11-15	IND	dnp		QB	5	A.Richardson
+MIAIND	2026-11-15	IND	dnp		WR	9	Q.Watkins
+MIAIND	2026-11-15	IND	dnp		T	73	C.Heck
+MIAIND	2026-11-15	IND	inactive		3QB	15	R.Leonard
+MIAIND	2026-11-15	IND	inactive		LS	46	L.Rhodes
+MIAIND	2026-11-15	IND	inactive		LB	57	J.Carlies
+MIAIND	2026-11-15	IND	inactive		T	75	J.Travis
+MIAIND	2026-11-15	IND	inactive		TE	86	W.Mallory
+MIAIND	2026-11-15	IND	inactive		DT	94	J.Tillery
+MIAIND	2026-11-15	IND	starter	Offense	WR	80	D.Burks
+MIAIND	2026-11-15	IND	starter	Offense	WR	13	L.Treadwell
+MIAIND	2026-11-15	IND	starter	Offense	TE	84	T.Warren
+MIAIND	2026-11-15	IND	starter	Offense	LT	79	B.Raimann
+MIAIND	2026-11-15	IND	starter	Offense	LG	62	J.Farmer
+MIAIND	2026-11-15	IND	starter	Offense	C	60	T.Bortolini
+MIAIND	2026-11-15	IND	starter	Offense	RG	68	D.Tucker
+MIAIND	2026-11-15	IND	starter	Offense	RT	71	M.Goncalves
+MIAIND	2026-11-15	IND	starter	Offense	WR	6	A.Gould
+MIAIND	2026-11-15	IND	starter	Offense	QB	17	D.Jones
+MIAIND	2026-11-15	IND	starter	Offense	RB	28	J.Taylor
+MIAIND	2026-11-15	IND	starter	Defense	DE	98	A.Key
+MIAIND	2026-11-15	IND	starter	Defense	DT	74	K.Givens
+MIAIND	2026-11-15	IND	starter	Defense	DT	90	G.Stewart
+MIAIND	2026-11-15	IND	starter	Defense	DT	95	A.Adebawore
+MIAIND	2026-11-15	IND	starter	Defense	DE	97	L.Latu
+MIAIND	2026-11-15	IND	starter	Defense	LB	50	B.Boettcher
+MIAIND	2026-11-15	IND	starter	Defense	LB	53	C.Allen
+MIAIND	2026-11-15	IND	starter	Defense	CB	1	A.Gardner
+MIAIND	2026-11-15	IND	starter	Defense	CB	7	C.Ward
+MIAIND	2026-11-15	IND	starter	Defense	S	25	A.Haulcy
+MIAIND	2026-11-15	IND	starter	Defense	S	0	C.Bynum
+MIAIND	2026-11-15	IND	sub		K	3	S.Shrader
+MIAIND	2026-11-15	IND	sub		P	8	R.Sanchez
+MIAIND	2026-11-15	IND	sub		WR	12	N.Westbrook-Ikhine
+MIAIND	2026-11-15	IND	sub		WR	16	A.Dulin
+MIAIND	2026-11-15	IND	sub		RB	20	S.McGowan
+MIAIND	2026-11-15	IND	sub		RB	21	D.Giddens
+MIAIND	2026-11-15	IND	sub		CB	27	J.Walley
+MIAIND	2026-11-15	IND	sub		S	30	H.Wohler
+MIAIND	2026-11-15	IND	sub		CB	33	K.Harris
+MIAIND	2026-11-15	IND	sub		CB	34	K.Gushiken
+MIAIND	2026-11-15	IND	sub		S	38	J.Owens
+MIAIND	2026-11-15	IND	sub		LB	44	T.Chambers
+MIAIND	2026-11-15	IND	sub		LB	47	W.Weeks
+MIAIND	2026-11-15	IND	sub		LS	48	J.Bobenmoyer
+MIAIND	2026-11-15	IND	sub		TE	49	P.Brown
+MIAIND	2026-11-15	IND	sub		DE	52	G.Gumbs
+MIAIND	2026-11-15	IND	sub		DE	55	C.Curry
+MIAIND	2026-11-15	IND	sub		LB	58	A.Ajiake
+MIAIND	2026-11-15	IND	sub		C	63	S.Van Pran-Granger
+MIAIND	2026-11-15	IND	sub		T	67	L.Tenuta
+MIAIND	2026-11-15	IND	sub		TE	85	A.Ogletree
+MIAIND	2026-11-15	IND	sub		DE	91	J.Tuimoloau
+MIAIND	2026-11-15	IND	sub		DT	93	T.Smith
+MIAIND	2026-11-15	MIA	dnp		QB	15	B.Cook
+MIAIND	2026-11-15	MIA	dnp		G	64	C.Haynes
+MIAIND	2026-11-15	MIA	inactive		WR	18	C.Bell
+MIAIND	2026-11-15	MIA	inactive		CB	24	M.Dial
+MIAIND	2026-11-15	MIA	inactive		C	55	A.Brewer
+MIAIND	2026-11-15	MIA	inactive		G/T	77	C.Wallace
+MIAIND	2026-11-15	MIA	inactive		TE	80	J.Joly
+MIAIND	2026-11-15	MIA	inactive		WR	86	J.Wayne
+MIAIND	2026-11-15	MIA	starter	Offense	WR	7	C.Douglas
+MIAIND	2026-11-15	MIA	starter	Offense	LT	52	P.Paul
+MIAIND	2026-11-15	MIA	starter	Offense	LG	74	K.Proctor
+MIAIND	2026-11-15	MIA	starter	Offense	C	60	A.Meyer
+MIAIND	2026-11-15	MIA	starter	Offense	RG	71	J.Savaiinaea
+MIAIND	2026-11-15	MIA	starter	Offense	RT	73	A.Jackson
+MIAIND	2026-11-15	MIA	starter	Offense	TE	85	G.Dulcich
+MIAIND	2026-11-15	MIA	starter	Offense	FB	34	D.Herman
+MIAIND	2026-11-15	MIA	starter	Offense	WR	6	M.Washington
+MIAIND	2026-11-15	MIA	starter	Offense	QB	14	K.McCord
+MIAIND	2026-11-15	MIA	starter	Offense	RB	0	O.Gordon
+MIAIND	2026-11-15	MIA	starter	Defense	DE	9	J.Uche
+MIAIND	2026-11-15	MIA	starter	Defense	DL	94	J.Phillips
+MIAIND	2026-11-15	MIA	starter	Defense	DL	78	K.Grant
+MIAIND	2026-11-15	MIA	starter	Defense	DE	44	C.Robinson
+MIAIND	2026-11-15	MIA	starter	Defense	ILB	10	J.Rodriguez
+MIAIND	2026-11-15	MIA	starter	Defense	ILB	20	J.Brooks
+MIAIND	2026-11-15	MIA	starter	Defense	CB	3	C.Johnson
+MIAIND	2026-11-15	MIA	starter	Defense	CB	8	J.Brents
+MIAIND	2026-11-15	MIA	starter	Defense	S	16	M.Taaffe
+MIAIND	2026-11-15	MIA	starter	Defense	S	11	D.Trader
+MIAIND	2026-11-15	MIA	starter	Defense	S	19	K.Louis
+MIAIND	2026-11-15	MIA	sub		WR	1	J.Tolbert
+MIAIND	2026-11-15	MIA	sub		CB	4	J.Marshall
+MIAIND	2026-11-15	MIA	sub		RB	5	J.Wright
+MIAIND	2026-11-15	MIA	sub		WR	21	K.Coleman
+MIAIND	2026-11-15	MIA	sub		S	23	Z.Anderson
+MIAIND	2026-11-15	MIA	sub		S	25	J.Wood
+MIAIND	2026-11-15	MIA	sub		RB	30	K.Allen
+MIAIND	2026-11-15	MIA	sub		K	31	Z.Gonzalez
+MIAIND	2026-11-15	MIA	sub		CB	32	J.Simpson
+MIAIND	2026-11-15	MIA	sub		ILB	40	W.Gay
+MIAIND	2026-11-15	MIA	sub		ILB	42	J.Woodard
+MIAIND	2026-11-15	MIA	sub		LB	45	S.Heyward
+MIAIND	2026-11-15	MIA	sub		LS	46	T.Addington
+MIAIND	2026-11-15	MIA	sub		P	48	B.Pinion
+MIAIND	2026-11-15	MIA	sub		DE	58	J.Kromah
+MIAIND	2026-11-15	MIA	sub		DE	59	R.McGraw
+MIAIND	2026-11-15	MIA	sub		G/T	62	J.Kingston
+MIAIND	2026-11-15	MIA	sub		T	79	C.Godrick
+MIAIND	2026-11-15	MIA	sub		TE	83	S.Traore
+MIAIND	2026-11-15	MIA	sub		WR	88	J.Reagor
+MIAIND	2026-11-15	MIA	sub		TE	89	W.Kacmarek
+MIAIND	2026-11-15	MIA	sub		DE	90	M.Herring
+MIAIND	2026-11-15	MIA	sub		DL	93	Z.Biggers
+MIAIND	2026-11-15	MIA	sub		DL	97	K.Cooper
+MINGB	2026-11-15	GB	dnp		C/G	52	J.Burton
+MINGB	2026-11-15	GB	inactive		RB	8	J.Jacobs
+MINGB	2026-11-15	GB	inactive		RB	22	P.Strong
+MINGB	2026-11-15	GB	inactive		LB	44	Z.Franklin
+MINGB	2026-11-15	GB	inactive		G/T	67	D.Jennings
+MINGB	2026-11-15	GB	inactive		G	70	K.Zeitler
+MINGB	2026-11-15	GB	inactive		C/G	75	S.Rhyan
+MINGB	2026-11-15	GB	starter	Offense	WR	0	M.Golden
+MINGB	2026-11-15	GB	starter	Offense	LT	77	J.Morgan
+MINGB	2026-11-15	GB	starter	Offense	LG	72	L.Tomlinson
+MINGB	2026-11-15	GB	starter	Offense	C	73	J.Williams
+MINGB	2026-11-15	GB	starter	Offense	RG	79	T.Glover
+MINGB	2026-11-15	GB	starter	Offense	RT	71	A.Belton
+MINGB	2026-11-15	GB	starter	Offense	TE	85	T.Kraft
+MINGB	2026-11-15	GB	starter	Offense	WR	9	C.Watson
+MINGB	2026-11-15	GB	starter	Offense	TE	86	M.Redman
+MINGB	2026-11-15	GB	starter	Offense	QB	10	J.Love
+MINGB	2026-11-15	GB	starter	Offense	RB	30	C.Brooks
+MINGB	2026-11-15	GB	starter	Defense	EDGE	90	L.Van Ness
+MINGB	2026-11-15	GB	starter	Defense	DT	94	K.Brooks
+MINGB	2026-11-15	GB	starter	Defense	DT	95	D.Wyatt
+MINGB	2026-11-15	GB	starter	Defense	DT	55	C.McClellan
+MINGB	2026-11-15	GB	starter	Defense	EDGE	99	B.Sorrell
+MINGB	2026-11-15	GB	starter	Defense	LB	58	I.McDuffie
+MINGB	2026-11-15	GB	starter	Defense	LB	59	T.Hopper
+MINGB	2026-11-15	GB	starter	Defense	CB	2	B.Cisse
+MINGB	2026-11-15	GB	starter	Defense	CB	25	K.Nixon
+MINGB	2026-11-15	GB	starter	Defense	S	29	X.McKinney
+MINGB	2026-11-15	GB	starter	Defense	S	33	E.Williams
+MINGB	2026-11-15	GB	sub		QB	6	T.Taylor
+MINGB	2026-11-15	GB	sub		S	7	J.Bullard
+MINGB	2026-11-15	GB	sub		WR	16	B.Melton
+MINGB	2026-11-15	GB	sub		TE	18	J.Smith
+MINGB	2026-11-15	GB	sub		P	19	D.Whelan
+MINGB	2026-11-15	GB	sub		CB	21	B.St-Juste
+MINGB	2026-11-15	GB	sub		WR	23	S.Moore
+MINGB	2026-11-15	GB	sub		CB	24	C.Valentine
+MINGB	2026-11-15	GB	sub		RB	26	K.Johnson
+MINGB	2026-11-15	GB	sub		S	27	K.Oladapo
+MINGB	2026-11-15	GB	sub		K	28	T.Smack
+MINGB	2026-11-15	GB	sub		LB	31	N.Niemann
+MINGB	2026-11-15	GB	sub		RB	32	M.Lloyd
+MINGB	2026-11-15	GB	sub		CB	36	K.Hadden
+MINGB	2026-11-15	GB	sub		LS	42	M.Orzech
+MINGB	2026-11-15	GB	sub		TE	49	D.Dabney
+MINGB	2026-11-15	GB	sub		DE	51	D.Dennis-Sutton
+MINGB	2026-11-15	GB	sub		LB	54	K.Welch
+MINGB	2026-11-15	GB	sub		DE	J.Sturdivant	
+MINGB	2026-11-15	GB	sub		DT	93	A.Campbell
+MINGB	2026-11-15	GB	sub		DT	97	J.Riley
+MINGB	2026-11-15	MIN	dnp		QB	11	C.Wentz
+MINGB	2026-11-15	MIN	inactive		QB	1	K.Murray
+MINGB	2026-11-15	MIN	inactive		WR	3	J.Addison
+MINGB	2026-11-15	MIN	inactive		3QB	12	M.Broser
+MINGB	2026-11-15	MIN	inactive		WR	14	J.Jennings
+MINGB	2026-11-15	MIN	inactive		LB	51	B.Cashman
+MINGB	2026-11-15	MIN	inactive		TE	87	T.Hockenson
+MINGB	2026-11-15	MIN	inactive		DL	90	T.Ingram-Dawkins
+MINGB	2026-11-15	MIN	starter	Offense	TE	85	B.Yurosek
+MINGB	2026-11-15	MIN	starter	Offense	LT	71	C.Darrisaw
+MINGB	2026-11-15	MIN	starter	Offense	LG	60	J.Huber
+MINGB	2026-11-15	MIN	starter	Offense	C	64	B.Brandel
+MINGB	2026-11-15	MIN	starter	Offense	RG	76	W.Fries
+MINGB	2026-11-15	MIN	starter	Offense	RT	75	B.O'Neill
+MINGB	2026-11-15	MIN	starter	Offense	WR	18	J.Jefferson
+MINGB	2026-11-15	MIN	starter	Offense	WR	13	T.Felton
+MINGB	2026-11-15	MIN	starter	Offense	QB	8	K.Cousins
+MINGB	2026-11-15	MIN	starter	Offense	RB	33	A.Jones
+MINGB	2026-11-15	MIN	starter	Offense	FB	45	M.Bredeson
+MINGB	2026-11-15	MIN	starter	Defense	OLB	15	D.Turner
+MINGB	2026-11-15	MIN	starter	Defense	DL	95	C.Banks
+MINGB	2026-11-15	MIN	starter	Defense	DL	50	L.Rodriguez
+MINGB	2026-11-15	MIN	starter	Defense	DL	61	J.Redmond
+MINGB	2026-11-15	MIN	starter	Defense	OLB	43	A.Van Ginkel
+MINGB	2026-11-15	MIN	starter	Defense	LB	0	I.Pace
+MINGB	2026-11-15	MIN	starter	Defense	LB	55	E.Wilson
+MINGB	2026-11-15	MIN	starter	Defense	CB	2	I.Rodgers
+MINGB	2026-11-15	MIN	starter	Defense	CB	7	B.Murphy
+MINGB	2026-11-15	MIN	starter	Defense	S	26	J.Jackson
+MINGB	2026-11-15	MIN	starter	Defense	S	44	J.Metellus
+MINGB	2026-11-15	MIN	sub		WR	4	M.Price
+MINGB	2026-11-15	MIN	sub		CB	5	Z.Vaughn
+MINGB	2026-11-15	MIN	sub		S	6	Jak.Thomas
+MINGB	2026-11-15	MIN	sub		K	16	W.Reichard
+MINGB	2026-11-15	MIN	sub		OLB	17	K.Van Noy
+MINGB	2026-11-15	MIN	sub		P	19	B.Thorson
+MINGB	2026-11-15	MIN	sub		CB	20	C.Demmings
+MINGB	2026-11-15	MIN	sub		S	22	H.Smith
+MINGB	2026-11-15	MIN	sub		CB	23	J.Pierre
+MINGB	2026-11-15	MIN	sub		S	24	J.Ward
+MINGB	2026-11-15	MIN	sub		RB	27	J.Mason
+MINGB	2026-11-15	MIN	sub		S	29	Jac.Thomas
+MINGB	2026-11-15	MIN	sub		RB	31	D.Dallas
+MINGB	2026-11-15	MIN	sub		OLB	32	C.Chambliss
+MINGB	2026-11-15	MIN	sub		LB	41	J.Golday
+MINGB	2026-11-15	MIN	sub		LS	42	A.DePaola
+MINGB	2026-11-15	MIN	sub		TE	48	D.Culp
+MINGB	2026-11-15	MIN	sub		C	65	M.Jurgens
+MINGB	2026-11-15	MIN	sub		T	72	R.Van Demark
+MINGB	2026-11-15	MIN	sub		T	78	C.Tiernan
+MINGB	2026-11-15	MIN	sub		WR	82	J.Jones
+MINGB	2026-11-15	MIN	sub		TE	86	G.Bartholomew
+MINGB	2026-11-15	MIN	sub		DL	97	D.Orange
+MINGB	2026-11-15	MIN	sub		OLB	98	B.Richter
+MINGB	2026-11-15	MIN	sub		DL	99	E.Williams
+NEDET	2026-11-15	DET	inactive		CB	4	D.Reed
+NEDET	2026-11-15	DET	inactive		CB	6	K.Abney
+NEDET	2026-11-15	DET	inactive		LB	57	A.Ogbongbemiga
+NEDET	2026-11-15	DET	inactive		C	64	C.Mays
+NEDET	2026-11-15	DET	inactive		DL	94	M.Wingo
+NEDET	2026-11-15	DET	inactive		DE	99	A.Hassanein
+NEDET	2026-11-15	DET	starter	Offense	WR	18	I.TeSlaa
+NEDET	2026-11-15	DET	starter	Offense	TE	87	S.LaPorta
+NEDET	2026-11-15	DET	starter	Offense	LT	58	P.Sewell
+NEDET	2026-11-15	DET	starter	Offense	LG	73	C.Mahogany
+NEDET	2026-11-15	DET	starter	Offense	C	70	J.Scruggs
+NEDET	2026-11-15	DET	starter	Offense	RG	69	T.Ratledge
+NEDET	2026-11-15	DET	starter	Offense	RT	76	B.Miller
+NEDET	2026-11-15	DET	starter	Offense	WR	1	J.Williams
+NEDET	2026-11-15	DET	starter	Offense	WR	14	A.St. Brown
+NEDET	2026-11-15	DET	starter	Offense	QB	16	J.Goff
+NEDET	2026-11-15	DET	starter	Offense	RB	0	J.Gibbs
+NEDET	2026-11-15	DET	starter	Defense	DE	97	A.Hutchinson
+NEDET	2026-11-15	DET	starter	Defense	DL	54	A.McNeill
+NEDET	2026-11-15	DET	starter	Defense	DL	91	T.Williams
+NEDET	2026-11-15	DET	starter	Defense	DL	93	T.Lacy
+NEDET	2026-11-15	DET	starter	Defense	LB	53	T.Nowaske
+NEDET	2026-11-15	DET	starter	Defense	LB	44	M.Rodriguez
+NEDET	2026-11-15	DET	starter	Defense	LB	55	D.Barnes
+NEDET	2026-11-15	DET	starter	Defense	DB	32	B.Branch
+NEDET	2026-11-15	DET	starter	Defense	CB	23	R.Ya-Sin
+NEDET	2026-11-15	DET	starter	Defense	CB	21	R.McCreary
+NEDET	2026-11-15	DET	starter	Defense	S	36	C.Clark
+NEDET	2026-11-15	DET	sub		CB	2	E.Rakestraw
+NEDET	2026-11-15	DET	sub		P	3	J.Fox
+NEDET	2026-11-15	DET	sub		DB	5	C.Izien
+NEDET	2026-11-15	DET	sub		DE	8	D.Moore
+NEDET	2026-11-15	DET	sub		QB	11	J.Dobbs
+NEDET	2026-11-15	DET	sub		WR	17	T.Martin
+NEDET	2026-11-15	DET	sub		RB	25	J.Saylors
+NEDET	2026-11-15	DET	sub		S	28	A.Cisco
+NEDET	2026-11-15	DET	sub		CB	30	K.Dorsey
+NEDET	2026-11-15	DET	sub		RB	33	S.Vaki
+NEDET	2026-11-15	DET	sub		LB	35	J.Bachie
+NEDET	2026-11-15	DET	sub		CB	38	N.Whiteside
+NEDET	2026-11-15	DET	sub		K	39	J.Bates
+NEDET	2026-11-15	DET	sub		LB	40	K.Britt
+NEDET	2026-11-15	DET	sub		LS	49	H.Hatten
+NEDET	2026-11-15	DET	sub		DL	50	S.Gill-Howard
+NEDET	2026-11-15	DET	sub		LB	51	O.Pappoe
+NEDET	2026-11-15	DET	sub		C	65	S.McLaughlin
+NEDET	2026-11-15	DET	sub		DE	66	E.O'Neill
+NEDET	2026-11-15	DET	sub		OL	71	M.Frazier
+NEDET	2026-11-15	DET	sub		OL	79	L.Borom
+NEDET	2026-11-15	DET	sub		TE	83	T.Conklin
+NEDET	2026-11-15	DET	sub		WR	86	D.Carter
+NEDET	2026-11-15	DET	sub		TE	89	B.Wright
+NEDET	2026-11-15	DET	sub		DL	95	L.Onwuzurike
+NEDET	2026-11-15	DET	sub		DE	98	D.Wonnum
+NEDET	2026-11-15	NE	inactive		CB	7	C.Davis
+NEDET	2026-11-15	NE	inactive		3QB	15	B.Morton
+NEDET	2026-11-15	NE	inactive		S	41	B.Schooler
+NEDET	2026-11-15	NE	inactive		T	68	D.Crownover
+NEDET	2026-11-15	NE	inactive		OL	72	W.Rouse
+NEDET	2026-11-15	NE	inactive		C	77	B.Brown
+NEDET	2026-11-15	NE	starter	Offense	LT	66	W.Campbell
+NEDET	2026-11-15	NE	starter	Offense	LG	70	G.Van Roten
+NEDET	2026-11-15	NE	starter	Offense	C	55	J.Wilson
+NEDET	2026-11-15	NE	starter	Offense	RG	65	M.Pryor
+NEDET	2026-11-15	NE	starter	Offense	RT	76	M.Moses
+NEDET	2026-11-15	NE	starter	Offense	TE	85	H.Henry
+NEDET	2026-11-15	NE	starter	Offense	TE	82	E.Raridon
+NEDET	2026-11-15	NE	starter	Offense	QB	10	D.Maye
+NEDET	2026-11-15	NE	starter	Offense	RB	38	R.Stevenson
+NEDET	2026-11-15	NE	starter	Offense	WR	1	A.Brown
+NEDET	2026-11-15	NE	starter	Offense	WR	13	M.Hollins
+NEDET	2026-11-15	NE	starter	Defense	OLB	5	Dr.Jones
+NEDET	2026-11-15	NE	starter	Defense	DT	97	M.Williams
+NEDET	2026-11-15	NE	starter	Defense	DT	94	C.Durden
+NEDET	2026-11-15	NE	starter	Defense	OLB	91	E.Ponder
+NEDET	2026-11-15	NE	starter	Defense	LB	14	R.Spillane
+NEDET	2026-11-15	NE	starter	Defense	LB	53	C.Elliss
+NEDET	2026-11-15	NE	starter	Defense	CB	0	C.Gonzalez
+NEDET	2026-11-15	NE	starter	Defense	CB	25	M.Jones
+NEDET	2026-11-15	NE	starter	Defense	CB	22	C.Woods
+NEDET	2026-11-15	NE	starter	Defense	S	4	C.Woodson
+NEDET	2026-11-15	NE	starter	Defense	S	31	K.Byard
+NEDET	2026-11-15	NE	sub		WR	3	D.Douglas
+NEDET	2026-11-15	NE	sub		K	8	A.Borregales
+NEDET	2026-11-15	NE	sub		RB	9	C.Kiner
+NEDET	2026-11-15	NE	sub		QB	16	T.DeVito
+NEDET	2026-11-15	NE	sub		WR	18	K.Williams
+NEDET	2026-11-15	NE	sub		P	19	M.Wishnowsky
+NEDET	2026-11-15	NE	sub		CB	21	K.Prunty
+NEDET	2026-11-15	NE	sub		S	23	J.Reed
+NEDET	2026-11-15	NE	sub		CB	29	C.Canada
+NEDET	2026-11-15	NE	sub		S	33	M.Brown
+NEDET	2026-11-15	NE	sub		RB	34	L.Larison
+NEDET	2026-11-15	NE	sub		TE	36	C.Latu
+NEDET	2026-11-15	NE	sub		FB	44	R.Gilliam
+NEDET	2026-11-15	NE	sub		LS	47	J.Ashby
+NEDET	2026-11-15	NE	sub		LB	48	N.Obiazor
+NEDET	2026-11-15	NE	sub		LB	49	E.Hunter
+NEDET	2026-11-15	NE	sub		LB	50	G.Jacas
+NEDET	2026-11-15	NE	sub		T	52	M.Bryant
+NEDET	2026-11-15	NE	sub		LB	54	D.Muasau
+NEDET	2026-11-15	NE	sub		G	67	A.Rupcich
+NEDET	2026-11-15	NE	sub		T	74	C.Lomu
+NEDET	2026-11-15	NE	sub		WR	86	E.Chism
+NEDET	2026-11-15	NE	sub		DT	90	C.Barmore
+NEDET	2026-11-15	NE	sub		DT	92	J.Farmer
+NEDET	2026-11-15	NE	sub		DL	93	L.Taylor
+NEDET	2026-11-15	NE	sub		DT	99	Da.Jones
+PITCIN	2026-11-15	CIN	inactive		S	29	K.Dugger
+PITCIN	2026-11-15	CIN	inactive		C	65	C.Lew
+PITCIN	2026-11-15	CIN	inactive		T	77	M.Hinton
+PITCIN	2026-11-15	CIN	inactive		DT	96	L.Robinson
+PITCIN	2026-11-15	CIN	starter	Offense	WR	1	J.Chase
+PITCIN	2026-11-15	CIN	starter	Offense	LOT	75	O.Brown
+PITCIN	2026-11-15	CIN	starter	Offense	LG	63	D.Fairchild
+PITCIN	2026-11-15	CIN	starter	Offense	C	64	T.Karras
+PITCIN	2026-11-15	CIN	starter	Offense	RG	66	D.Risner
+PITCIN	2026-11-15	CIN	starter	Offense	ROT	71	A.Mims
+PITCIN	2026-11-15	CIN	starter	Offense	TE	88	M.Gesicki
+PITCIN	2026-11-15	CIN	starter	Offense	WR	81	D.Meyers
+PITCIN	2026-11-15	CIN	starter	Offense	WR	5	T.Higgins
+PITCIN	2026-11-15	CIN	starter	Offense	QB	9	J.Burrow
+PITCIN	2026-11-15	CIN	starter	Offense	HB	30	C.Brown
+PITCIN	2026-11-15	CIN	starter	Defense	LDE	99	M.Murphy
+PITCIN	2026-11-15	CIN	starter	Defense	DT	93	J.Allen
+PITCIN	2026-11-15	CIN	starter	Defense	NT	97	D.Lawrence
+PITCIN	2026-11-15	CIN	starter	Defense	DT	92	B.Hill
+PITCIN	2026-11-15	CIN	starter	Defense	RDE	53	B.Mafe
+PITCIN	2026-11-15	CIN	starter	Defense	LB	49	B.Carter
+PITCIN	2026-11-15	CIN	starter	Defense	LB	44	D.Knight
+PITCIN	2026-11-15	CIN	starter	Defense	CB	23	D.Hill
+PITCIN	2026-11-15	CIN	starter	Defense	CB	0	D.Turner
+PITCIN	2026-11-15	CIN	starter	Defense	S	6	B.Cook
+PITCIN	2026-11-15	CIN	starter	Defense	S	27	J.Battle
+PITCIN	2026-11-15	CIN	sub		K	2	E.McPherson
+PITCIN	2026-11-15	CIN	sub		P	8	R.Rehkow
+PITCIN	2026-11-15	CIN	sub		QB	16	J.Flacco
+PITCIN	2026-11-15	CIN	sub		CB	20	T.Davis
+PITCIN	2026-11-15	CIN	sub		S	22	R.Yeast
+PITCIN	2026-11-15	CIN	sub		HB	25	T.Brooks
+PITCIN	2026-11-15	CIN	sub		CB	28	J.Newton
+PITCIN	2026-11-15	CIN	sub		HB	34	S.Perine
+PITCIN	2026-11-15	CIN	sub		S	37	P.Jules
+PITCIN	2026-11-15	CIN	sub		CB	38	D.Ivey
+PITCIN	2026-11-15	CIN	sub		LB	42	O.Burks
+PITCIN	2026-11-15	CIN	sub		LB	43	J.Giles-Harris
+PITCIN	2026-11-15	CIN	sub		LB	45	J.Kiser
+PITCIN	2026-11-15	CIN	sub		LS	46	W.Wagner
+PITCIN	2026-11-15	CIN	sub		DE	52	C.Johnson
+PITCIN	2026-11-15	CIN	sub		G	69	J.Bayer
+PITCIN	2026-11-15	CIN	sub		T	73	J.Foster
+PITCIN	2026-11-15	CIN	sub		G	74	J.Rivers
+PITCIN	2026-11-15	CIN	sub		WR	82	M.Tinsley
+PITCIN	2026-11-15	CIN	sub		TE	84	J.Endries
+PITCIN	2026-11-15	CIN	sub		TE	85	C.Grandy
+PITCIN	2026-11-15	CIN	sub		WR	86	C.Young
+PITCIN	2026-11-15	CIN	sub		TE	89	D.Sample
+PITCIN	2026-11-15	CIN	sub		DT	90	K.Jenkins
+PITCIN	2026-11-15	CIN	sub		DE	94	S.Stewart
+PITCIN	2026-11-15	CIN	sub		DT	98	T.Slaton
+PITCIN	2026-11-15	PIT	inactive		QB	16	D.Allar
+PITCIN	2026-11-15	PIT	inactive		3QB	18	W.Howard
+PITCIN	2026-11-15	PIT	inactive		S	25	D.Elliott
+PITCIN	2026-11-15	PIT	inactive		CB	27	S.Murphy-Bunting
+PITCIN	2026-11-15	PIT	inactive		RB/WR	29	E.Heidenreich
+PITCIN	2026-11-15	PIT	starter	Offense	WR	4	D.Metcalf
+PITCIN	2026-11-15	PIT	starter	Offense	LT	76	T.Fautanu
+PITCIN	2026-11-15	PIT	starter	Offense	LG	66	M.McCormick
+PITCIN	2026-11-15	PIT	starter	Offense	C	54	Z.Frazier
+PITCIN	2026-11-15	PIT	starter	Offense	RG	67	B.Hoffman
+PITCIN	2026-11-15	PIT	starter	Offense	RT	71	M.Iheanachor
+PITCIN	2026-11-15	PIT	starter	Offense	TE	80	D.Washington
+PITCIN	2026-11-15	PIT	starter	Offense	TE	88	P.Freiermuth
+PITCIN	2026-11-15	PIT	starter	Offense	WR	17	G.Bernard
+PITCIN	2026-11-15	PIT	starter	Offense	QB	8	A.Rodgers
+PITCIN	2026-11-15	PIT	starter	Offense	RB	30	J.Warren
+PITCIN	2026-11-15	PIT	starter	Defense	LB	56	A.Highsmith
+PITCIN	2026-11-15	PIT	starter	Defense	DT	97	C.He yard
+PITCIN	2026-11-15	PIT	starter	Defense	DT	95	K.Benton
+PITCIN	2026-11-15	PIT	starter	Defense	LB	90	T.Watt
+PITCIN	2026-11-15	PIT	starter	Defense	LB	41	P.Wilson
+PITCIN	2026-11-15	PIT	starter	Defense	LB	6	P.Queen
+PITCIN	2026-11-15	PIT	starter	Defense	CB	35	J.Dean
+PITCIN	2026-11-15	PIT	starter	Defense	CB	22	A.Samuel
+PITCIN	2026-11-15	PIT	starter	Defense	CB	5	J.Ramsey
+PITCIN	2026-11-15	PIT	starter	Defense	S	28	R.Spears-Jennings
+PITCIN	2026-11-15	PIT	starter	Defense	S	3	J.Brisker
+PITCIN	2026-11-15	PIT	sub		QB	2	M.Rudolph
+PITCIN	2026-11-15	PIT	sub		K	9	C.Boswell
+PITCIN	2026-11-15	PIT	sub		WR	10	K.Wetjen
+PITCIN	2026-11-15	PIT	sub		RB	13	R.Dowdle
+PITCIN	2026-11-15	PIT	sub		WR	15	B.Skowronek
+PITCIN	2026-11-15	PIT	sub		P	19	C.Johnston
+PITCIN	2026-11-15	PIT	sub		RB	21	T.Homer
+PITCIN	2026-11-15	PIT	sub		CB	23	D.Everette
+PITCIN	2026-11-15	PIT	sub		CB	26	B.Echols
+PITCIN	2026-11-15	PIT	sub		RB	31	L.Nichols
+PITCIN	2026-11-15	PIT	sub		LB	33	J.Sawyer
+PITCIN	2026-11-15	PIT	sub		FB	37	R.Nowakowski
+PITCIN	2026-11-15	PIT	sub		DB	40	D.Slaughter
+PITCIN	2026-11-15	PIT	sub		LB	44	C.Bruener
+PITCIN	2026-11-15	PIT	sub		LS	46	C.Kuntz
+PITCIN	2026-11-15	PIT	sub		LB	51	N.Herbig
+PITCIN	2026-11-15	PIT	sub		LB	55	C.Holcomb
+PITCIN	2026-11-15	PIT	sub		T	60	D.Cook
+PITCIN	2026-11-15	PIT	sub		C	62	R.McCollum
+PITCIN	2026-11-15	PIT	sub		OL	74	S.Anderson
+PITCIN	2026-11-15	PIT	sub		TE	85	R.Tonyan
+PITCIN	2026-11-15	PIT	sub		WR	87	B.Smith
+PITCIN	2026-11-15	PIT	sub		DL	92	K.Jobity
+PITCIN	2026-11-15	PIT	sub		DL	94	Y.Black
+PITCIN	2026-11-15	PIT	sub		DE	96	G.Rubio
+PITCIN	2026-11-15	PIT	sub		DT	99	D.Harmon
+SEALV	2026-11-15	LV	dnp		QB	12	A.O'Connell
+SEALV	2026-11-15	LV	inactive		WR	10	D.Thornton
+SEALV	2026-11-15	LV	inactive		WR	19	M.Benson
+SEALV	2026-11-15	LV	inactive		S	27	T.McCollum
+SEALV	2026-11-15	LV	inactive		S	43	D.Johnson
+SEALV	2026-11-15	LV	inactive		G	77	B.Cabeldue
+SEALV	2026-11-15	LV	inactive		DT	99	T.Booker
+SEALV	2026-11-15	LV	starter	Offense	TE	89	B.Bowers
+SEALV	2026-11-15	LV	starter	Offense	LT	74	K.Miller
+SEALV	2026-11-15	LV	starter	Offense	LG	70	S.Burford
+SEALV	2026-11-15	LV	starter	Offense	C	65	T.Linderbaum
+SEALV	2026-11-15	LV	starter	Offense	RG	66	T.Zuhn
+SEALV	2026-11-15	LV	starter	Offense	RT	71	D.Glaze
+SEALV	2026-11-15	LV	starter	Offense	TE	87	M.Mayer
+SEALV	2026-11-15	LV	starter	Offense	WR	1	T.Tucker
+SEALV	2026-11-15	LV	starter	Offense	QB	15	F.Mendoza
+SEALV	2026-11-15	LV	starter	Offense	FB	34	C.Heyward
+SEALV	2026-11-15	LV	starter	Offense	RB	2	A.Jeanty
+SEALV	2026-11-15	LV	starter	Defense	DE	95	K.Paye
+SEALV	2026-11-15	LV	starter	Defense	DT	94	F.Fatukasi
+SEALV	2026-11-15	LV	starter	Defense	DT	69	A.Butler
+SEALV	2026-11-15	LV	starter	Defense	DE	98	M.Crosby
+SEALV	2026-11-15	LV	starter	Defense	LB	17	N.Dean
+SEALV	2026-11-15	LV	starter	Defense	LB	7	Q.Walker
+SEALV	2026-11-15	LV	starter	Defense	CB	35	H.Masses
+SEALV	2026-11-15	LV	starter	Defense	CB	3	T.Johnson
+SEALV	2026-11-15	LV	starter	Defense	CB	5	E.Stokes
+SEALV	2026-11-15	LV	starter	Defense	S	11	J.Chinn
+SEALV	2026-11-15	LV	starter	Defense	S	31	T.Stukes
+SEALV	2026-11-15	SEA	dnp		QB	6	J.Milroe
+SEALV	2026-11-15	SEA	dnp		C	55	O.Oluwatimi
+SEALV	2026-11-15	SEA	inactive		QB	14	S.Darnold
+SEALV	2026-11-15	SEA	inactive		RB	23	E.Wilson
+SEALV	2026-11-15	SEA	inactive		CB	27	A.Smith
+SEALV	2026-11-15	SEA	inactive		G	53	Q.Nelson
+SEALV	2026-11-15	SEA	inactive		T	67	C.Cross
+SEALV	2026-11-15	SEA	inactive		NT	97	D.Eastern
+SEALV	2026-11-15	SEA	inactive		DT	99	L.Williams
+SEALV	2026-11-15	SEA	starter	Offense	WR	11	J.Smith-Njigba
+SEALV	2026-11-15	SEA	starter	Offense	WR	10	C.Kupp
+SEALV	2026-11-15	SEA	starter	Offense	TE	81	E.Saubert
+SEALV	2026-11-15	SEA	starter	Offense	LT	74	J.Jones
+SEALV	2026-11-15	SEA	starter	Offense	LG	76	G.Zabel
+SEALV	2026-11-15	SEA	starter	Offense	C	61	J.Sundell
+SEALV	2026-11-15	SEA	starter	Offense	RG	75	A.Bradford
+SEALV	2026-11-15	SEA	starter	Offense	RT	72	A.Lucas
+SEALV	2026-11-15	SEA	starter	Offense	TE	88	A.Barner
+SEALV	2026-11-15	SEA	starter	Offense	QB	2	D.Lock
+SEALV	2026-11-15	SEA	starter	Offense	RB	26	Z.Charbonnet
+SEALV	2026-11-15	SEA	starter	Defense	DE	91	B.Murphy
+SEALV	2026-11-15	SEA	starter	Defense	DE	90	J.Reed
+SEALV	2026-11-15	SEA	starter	Defense	LB	0	D.Lawrence
+SEALV	2026-11-15	SEA	starter	Defense	LB	58	D.Hall
+SEALV	2026-11-15	SEA	starter	Defense	LB	32	D.Thomas
+SEALV	2026-11-15	SEA	starter	Defense	LB	13	E.Jones
+SEALV	2026-11-15	SEA	starter	Defense	CB	21	D.Witherspoon
+SEALV	2026-11-15	SEA	starter	Defense	CB	29	J.Jobe
+SEALV	2026-11-15	SEA	starter	Defense	S	3	N.Emmanwori
+SEALV	2026-11-15	SEA	starter	Defense	S	39	T.Okada
+SEALV	2026-11-15	SEA	starter	Defense	S	20	J.Love
+SFDAL	2026-11-15	DAL	dnp		QB	16	S.Howell
+SFDAL	2026-11-15	DAL	inactive		S	1	P.Locke
+SFDAL	2026-11-15	DAL	inactive		OL	B	6 D.Ezeiruaku
+SFDAL	2026-11-15	DAL	inactive		CB	15	D.Kendrick
+SFDAL	2026-11-15	DAL	inactive		WR	18	J.Mingo
+SFDAL	2026-11-15	DAL	inactive		S	43	J.Thomas
+SFDAL	2026-11-15	DAL	inactive		T	65	A.Cornelius
+SFDAL	2026-11-15	DAL	inactive		TE	87	J.Ferguson
+SFDAL	2026-11-15	DAL	starter	Offense	WR	88	C.Lamb
+SFDAL	2026-11-15	DAL	starter	Offense	WR	19	R.Flournoy
+SFDAL	2026-11-15	DAL	starter	Offense	LT	60	T.Guyton
+SFDAL	2026-11-15	DAL	starter	Offense	LG	73	T.Smith
+SFDAL	2026-11-15	DAL	starter	Offense	C	56	C.Beebe
+SFDAL	2026-11-15	DAL	starter	Offense	RG	52	T.Booker
+SFDAL	2026-11-15	DAL	starter	Offense	RT	78	T.Steele
+SFDAL	2026-11-15	DAL	starter	Offense	TE	89	B.Spann-Ford
+SFDAL	2026-11-15	DAL	starter	Offense	WR	3	G.Pickens
+SFDAL	2026-11-15	DAL	starter	Offense	QB	4	D.Prescott
+SFDAL	2026-11-15	DAL	starter	Offense	RB	33	J.Williams
+SFDAL	2026-11-15	DAL	starter	Defense	OLB	40	
+SFDAL	2026-11-15	DAL	starter	Defense	DT	92	
+SFDAL	2026-11-15	DAL	starter	Defense	DT	97	
+SFDAL	2026-11-15	DAL	starter	Defense	OLB	7	
+SFDAL	2026-11-15	DAL	starter	Defense	LB	53	
+SFDAL	2026-11-15	DAL	starter	Defense	LB	50	
+SFDAL	2026-11-15	DAL	starter	Defense	DB	13	
+SFDAL	2026-11-15	DAL	starter	Defense	CB	25	
+SFDAL	2026-11-15	DAL	starter	Defense	CB	26	
+SFDAL	2026-11-15	DAL	starter	Defense	S	14	
+SFDAL	2026-11-15	DAL	starter	Defense	S	24	
+SFDAL	2026-11-15	DAL	sub		LB	0	D.Overshown
+SFDAL	2026-11-15	DAL	sub		CB	2	C.Durant
+SFDAL	2026-11-15	DAL	sub		P	5	B.Anger
+SFDAL	2026-11-15	DAL	sub		WR	9	K.Turpin
+SFDAL	2026-11-15	DAL	sub		S	11	A.Clark
+SFDAL	2026-11-15	DAL	sub		K	17	B.Aubrey
+SFDAL	2026-11-15	DAL	sub		CB	23	A.Speed
+SFDAL	2026-11-15	DAL	sub		CB	28	S.Revel
+SFDAL	2026-11-15	DAL	sub		FB	30	H.Luepke
+SFDAL	2026-11-15	DAL	sub		OL	B	35 J.Barron
+SFDAL	2026-11-15	DAL	sub		LB	55	J.Barham
+SFDAL	2026-11-15	DAL	sub		G	66	T.Bass
+SFDAL	2026-11-15	DAL	sub		T	67	D.Shelton
+SFDAL	2026-11-15	DAL	sub		T	77	B.Jones
+SFDAL	2026-11-15	DAL	sub		WR	80	C.Brown
+SFDAL	2026-11-15	DAL	sub		TE	84	J.Mitchell
+SFDAL	2026-11-15	DAL	sub		TE	86	L.Schoonmaker
+SFDAL	2026-11-15	DAL	sub		DT	90	J.Bullard
+SFDAL	2026-11-15	DAL	sub		DT	91	O.Ogbonna
+SFDAL	2026-11-15	DAL	sub		DT	93	E.Garcia
+SFDAL	2026-11-15	DAL	sub		DT	99	L.Overton
+SFDAL	2026-11-15	SF	dnp		QB	10	M.Jones
+SFDAL	2026-11-15	SF	inactive		WR	5	M.Evans
+SFDAL	2026-11-15	SF	inactive		3QB	14	K.Rourke
+SFDAL	2026-11-15	SF	inactive		LB	48	T.Bethune
+SFDAL	2026-11-15	SF	inactive		OL	69	E.Cruz
+SFDAL	2026-11-15	SF	inactive		WR	84	B.Cooks
+SFDAL	2026-11-15	SF	starter	Offense	WR	19	D.Samuel
+SFDAL	2026-11-15	SF	starter	Offense	FB	44	K.Juszczyk
+SFDAL	2026-11-15	SF	starter	Offense	TE	85	G.Kittle
+SFDAL	2026-11-15	SF	starter	Offense	LT	71	T.Williams
+SFDAL	2026-11-15	SF	starter	Offense	LG	75	C.Colby
+SFDAL	2026-11-15	SF	starter	Offense	C	64	J.Brendel
+SFDAL	2026-11-15	SF	starter	Offense	RG	77	D.Puni
+SFDAL	2026-11-15	SF	starter	Offense	RT	68	C.McKivitz
+SFDAL	2026-11-15	SF	starter	Offense	WR	17	J.Watkins
+SFDAL	2026-11-15	SF	starter	Offense	QB	13	B.Purdy
+SFDAL	2026-11-15	SF	starter	Offense	RB	23	C.McCaffrey
+SFDAL	2026-11-15	SF	starter	Defense	DL	97	N.Bosa
+SFDAL	2026-11-15	SF	starter	Defense	DL	99	D.Buckner
+SFDAL	2026-11-15	SF	starter	Defense	DL	92	O.Odighizuwa
+SFDAL	2026-11-15	SF	starter	Defense	DL	56	K.White
+SFDAL	2026-11-15	SF	starter	Defense	LB	57	D.Greenlaw
+SFDAL	2026-11-15	SF	starter	Defense	LB	54	F.Warner
+SFDAL	2026-11-15	SF	starter	Defense	DB	2	D.Lenoir
+SFDAL	2026-11-15	SF	starter	Defense	CB	20	U.Stout
+SFDAL	2026-11-15	SF	starter	Defense	CB	0	R.Green
+SFDAL	2026-11-15	SF	starter	Defense	S	27	J.Brown
+SFDAL	2026-11-15	SF	starter	Defense	S	6	M.Mustapha
+SFDAL	2026-11-15	SF	sub		WR	3	K.Allen
+SFDAL	2026-11-15	SF	sub		WR	4	J.Cowing
+SFDAL	2026-11-15	SF	sub		TE	9	B.Willis
+SFDAL	2026-11-15	SF	sub		WR	11	D.Robinson
+SFDAL	2026-11-15	SF	sub		P	15	C.Waitman
+SFDAL	2026-11-15	SF	sub		K	18	E.Pineiro
+SFDAL	2026-11-15	SF	sub		S	24	A.Davis
+SFDAL	2026-11-15	SF	sub		RB	26	K.Black
+SFDAL	2026-11-15	SF	sub		CB	28	E.Prysock
+SFDAL	2026-11-15	SF	sub		RB	29	J.James
+SFDAL	2026-11-15	SF	sub		DB	33	S.Neal
+SFDAL	2026-11-15	SF	sub		S	36	M.Sigle
+SFDAL	2026-11-15	SF	sub		LS	46	J.Weeks
+SFDAL	2026-11-15	SF	sub		DL	47	K.Kareem
+SFDAL	2026-11-15	SF	sub		LB	49	G.Wallow
+SFDAL	2026-11-15	SF	sub		LB	51	L.Gifford
+SFDAL	2026-11-15	SF	sub		LB	53	J.Dugger
+SFDAL	2026-11-15	SF	sub		DL	55	S.Valdez
+SFDAL	2026-11-15	SF	sub		OL	58	J.Patterson
+SFDAL	2026-11-15	SF	sub		OL	74	C.Willis
+SFDAL	2026-11-15	SF	sub		OL	76	V.Lowe
+SFDAL	2026-11-15	SF	sub		TE	89	L.Farrell
+SFDAL	2026-11-15	SF	sub		DL	94	R.Height
+SFDAL	2026-11-15	SF	sub		DL	96	J.Thompson
+SFDAL	2026-11-15	SF	sub		DL	98	M.Williams

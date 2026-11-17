@@ -1,0 +1,14 @@
+venue	stadium	city_state	roof	surface	nws_office	nws_grid_x	nws_grid_y	forecast_hour_utc	temperature_f	precip_prob_pct	wind_dir	wind_mph	forecast_text	source_label
+AT&T Stadium		Arlington, TX	Retractable Roof - Closed	Field Turf	FWD	78	103	(refresh to fill)						Game Book (Week 10 official venue line) + NWS grid resolved (hourly values not retained in this capture)
+Arrowhead Stadium		Kansas City, MO			EAX	47	48	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+Bank of America Stadium		Charlotte, NC			GSP	118	65	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+Empower Field		Denver, CO			BOU	62	62	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+Estadio Azteca														blank — no official Game Book roof/surface for this venue yet; NWS grid NOT resolved at capture
+FedExField														blank — no official Game Book roof/surface for this venue yet; NWS grid NOT resolved at capture
+Ford Field		Detroit, MI			DTX	66	34	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+Highmark Stadium		Orchard Park, NY			BUF	39	42	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+Lincoln Financial Field		Philadelphia, PA			PHI	50	76	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+MetLife Stadium		East Rutherford, NJ	Open Stadium	Field Turf	OKX	30	46	(refresh to fill)						Game Book (Week 10 official venue line) + NWS grid resolved (hourly values not retained in this capture)
+NRG Stadium		Houston, TX			HGX	61	91	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+SoFi Stadium		Inglewood, CA			LOX	151	41	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
+Soldier Field		Chicago, IL			LOT	76	72	(refresh to fill)						blank — no official Game Book roof/surface for this venue yet + NWS grid resolved (hourly values not retained in this capture)
