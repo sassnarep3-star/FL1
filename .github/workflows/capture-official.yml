@@ -146,21 +146,47 @@ jobs:
 
       - name: Commit the vault and the run log to the non-published `vault` branch
         if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          cd "$RUNNER_TEMP/vault"
-          [ -f "$RUNNER_TEMP/run.log" ] && cp "$RUNNER_TEMP/run.log" ./run.log || true
-          git init -q .
+          set -uo pipefail
+          mkdir -p "$RUNNER_TEMP/vault"
+          cd "$RUNNER_TEMP/vault" || exit 0
+          git init -q . 2>&1 | tee -a "$RUNNER_TEMP/run.log" || true
           git config user.name "fl1-capture-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "Vault unchanged this run."
+          git config --add safe.directory "$RUNNER_TEMP/vault" || true
+          if [ -f "$RUNNER_TEMP/run.log" ]; then cp "$RUNNER_TEMP/run.log" ./run.log; fi
+          git add -A 2>&1 | tee -a "$RUNNER_TEMP/run.log" || true
+          git commit -q -m "capture: official game books and injury report, $(date -u +%Y-%m-%dT%H:%M:%SZ)" 2>&1 | tee -a "$RUNNER_TEMP/run.log" || true
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            HEAD:refs/heads/vault 2>&1 | tee -a "$RUNNER_TEMP/run.log" || echo "VAULT PUSH FAILED"
+
+      - name: Publish the run log to the non-published `capture-log` branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -uo pipefail
+          LOGDIR="$RUNNER_TEMP/logbranch"
+          mkdir -p "$LOGDIR"
+          cd "$LOGDIR" || exit 0
+          if [ -f "$RUNNER_TEMP/run.log" ]; then
+            cp "$RUNNER_TEMP/run.log" ./run.log
           else
-            git commit -q -m "capture: official game books and injury report, $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
-              HEAD:refs/heads/vault
+            echo "no run log was produced" > ./run.log
           fi
+          echo "run id: ${{ github.run_id }}" >> ./run.log
+          echo "attempt: ${{ github.run_attempt }}" >> ./run.log
+          echo "sha: ${{ github.sha }}" >> ./run.log
+          git init -q . 2>&1 | tee -a ./run.log || true
+          git config user.name "fl1-capture-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git config --add safe.directory "$LOGDIR" || true
+          git add -A || true
+          git commit -q -m "capture run log ${{ github.run_id }}" || true
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" \
+            HEAD:refs/heads/capture-log 2>&1 | tee -a ./run.log || echo "LOG PUSH FAILED"
 
       - name: Publish the artefact index (public, derived — no row-level data)
         if: always()

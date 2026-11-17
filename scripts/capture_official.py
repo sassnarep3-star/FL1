@@ -170,7 +170,7 @@ def write_immutable(root: str, relpath: str, data: bytes) -> str:
     digest = sha256(data)
     directory = os.path.dirname(relpath)
     if directory:
-        os.makedirs(directory, exist_ok=True)
+        os.makedirs(os.path.join(root, directory), exist_ok=True)
     final = os.path.join(root, relpath)
     if os.path.exists(final):
         with open(final, "rb") as fh:
