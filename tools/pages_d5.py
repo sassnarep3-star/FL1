@@ -188,6 +188,37 @@ needed to confirm actual starters and replacements. Current chart source coverag
     sh = _section("Suggestions for better decisions — review before implementation", _table(["ID", "Suggestion", "Priority", "Evidence needed first"], suggestions))
     pages.append(page("suggestions-d5.html", "Suggestions & Evidence Pipeline", sh + "</section>", wide=True))
 
+    # Full derived registers: preserve every existing question and suggestion, not only
+    # the short D5 decision examples above.
+    def load_rows(name):
+        with open(os.path.join(DATA, name), encoding="utf-8") as f:
+            return json.load(f)
+    decision_rows = load_rows("decision_ledger_d5.json")
+    rows = []
+    for r in decision_rows:
+        sid = r.get("source", "")
+        ids = [x.strip() for x in sid.replace(" ", "").split(",") if x.strip().startswith("S")]
+        source = ", ".join('<a href="sources.html#%s">%s</a>' % (_e(x), _e(x)) for x in ids) if ids else "—"
+        rows.append([r["id"], r["category"], r["question"], r["known"], r["unknown"],
+                     r["blocking_gate"], r["clearing_number"], r["owner_action"], source])
+    dh = _section("Full decision ledger", "<p>Questions and flags carried from the existing registers; blank clearing criteria are intentionally not invented. Source IDs link to the source registry.</p>" +
+        _table(["ID", "Category", "Question / issue", "Known", "Unknown", "Blocking gate", "Clearing number", "Owner action", "Source"], rows))
+    pages.append(page("decision-ledger.html", "Decision Ledger", dh + "</section>", wide=True))
+
+    pipe = load_rows("suggestion_pipeline_d5.json")
+    rows = [[r["id"], r["title"], r["review_state"], r["impact"], r["effort"], r["reversibility"],
+             r["prerequisites"], r["proposal"], r["evidence"]] for r in pipe]
+    ph = _section("Suggestion pipeline", "<p>All suggestions are in proposed state until an explicit owner decision; nothing is auto-accepted or auto-implemented. Impact values are shown only when the source register supplies them.</p>" +
+        _table(["ID", "Suggestion", "Review state", "Impact", "Cost", "Reversibility", "Prerequisites", "Proposal", "Evidence"], rows))
+    pages.append(page("suggestions-pipeline.html", "Suggestion Review Pipeline", ph + "</section>", wide=True))
+
+    qa_rows = load_rows("qa_register_d5.json")
+    rows = [[r["id"], r["category"], r["priority"], r["question"], r["answer_now"], r["unknown"],
+             r["missing_information"], r["how_to_find_out"], r["source"]] for r in qa_rows]
+    qh = _section("Complete Q&A register", "<p>All existing questions are shown; a missing value stays blank rather than receiving an inferred answer.</p>" +
+        _table(["ID", "Category", "Priority", "Question", "Known answer", "Unknown", "Missing information", "How to find out", "Source"], rows))
+    pages.append(page("qa-d5.html", "Complete Questions & Answers", qh + "</section>", wide=True))
+
     # source-backed flags
     flags = [
         ["F-D5-01", "Committed standings are stale", "24/32 club records differ from the 17 Nov official capture; live values are shown separately.", src_stand],

@@ -1,0 +1,5 @@
+check_id,status,read_at_utc,source_url,raw_path,sha256,bytes,verification
+D5-CAP-standings,PASS,2026-11-17T02:36Z,https://www.nfl.com/standings/league/2026/REG,raw/live/2026-11-17-standings-league-reg.tsv,ac371a12315c6f48150cc49bc2463e50762904ca49b01d0b16636aea11790562,3182,manifest hash matched by scripts/verify_live_d5.py
+D5-CAP-week10,PASS,2026-11-17T02:36Z,https://www.nfl.com/schedules/2026/REG10/,raw/live/2026-11-17-week10-finals.tsv,ebde3c00231e5af64da484409ddce57967275d15c17aa125c5e9164f9b8d8559,1899,manifest hash matched by scripts/verify_live_d5.py
+D5-CAP-week11,PASS,2026-11-17T02:36Z,https://www.nfl.com/schedules/2026/by-week/week-11,raw/live/2026-11-17-week11-slate.tsv,f873e1e2876829c448ae86162d295791f949d2d8107b2b97306e41909c8df359,1782,manifest hash matched by scripts/verify_live_d5.py
+D5-CAP-injuries,PASS,2026-11-17T02:39Z,https://www.nfl.com/injuries/,raw/live/2026-11-17-injury-report-week10.md,5b80b09882c712e1a682f2ae69bafeb9bf18f7871a82e13bd74947c1d0bf1c03,28343,manifest hash matched by scripts/verify_live_d5.py
