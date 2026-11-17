@@ -1,0 +1,9 @@
+check	description	result	detail	source
+P1	closeout capture holds 14 FINAL rows, each a published Week 10 fixture with an official gamecentre URL	PASS	14 rows; problems: none	https://www.nfl.com/schedules/2026/REG10/
+P2	cross-read agreement: the 12 finals already on record equal the closeout capture exactly (frozen corpus TNF + 2026-11-16 extension)	PASS	12 extension finals re-checked; problems: none	https://www.nfl.com/schedules/2026/REG10/
+P3	the two late finals carry scores only in the closeout capture; the extension held them pending with blank scores	PASS	problems: none	https://www.nfl.com/schedules/2026/REG10/
+P4	staged corpus (frozen 137 + 13 new) reproduces the fresh standings capture for all 32 clubs on W/L/T/PF/PA	PASS	32 clubs; 0 unreadable rows; mismatches: none	https://www.nfl.com/standings/league/2026/REG
+P5	append-only: the first 137 rows of the staged corpus are byte-identical to data/results.tsv	PASS	137 frozen rows, drift=False; 13 rows appended	https://www.nfl.com/schedules/2026/REG10/
+P6	per-club game count equals W+L+T in the fresh standings (32 clubs)	PASS	mismatches: none	https://www.nfl.com/standings/league/2026/REG
+P7	no duplicate (week, away, home); every club key known to teams.tsv	PASS	problems: none	https://www.nfl.com/schedules/2026/REG10/
+P8	chain of dated reads: the 2026-11-17 SNF read (149 rows) is a byte-prefix of the staged closeout (137 -> 148 -> 149 -> 150)	PASS	149-row SNF read is a prefix of the 150-row closeout	https://www.nfl.com/schedules/2026/REG10/

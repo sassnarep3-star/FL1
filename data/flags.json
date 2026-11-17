@@ -769,7 +769,7 @@
   "id": "F67",
   "kind": "Open item — official game not yet final",
   "item": "Monday night LAC at BAL (Week 10, 2026-11-16) is in no results file: it was Live at the 2026-11-17 read (Q2 01:56, Chargers 17, Ravens 7)",
-  "detail": "The Sunday-night PIT at CIN final (18-38) was added on 2026-11-17 from the official Game Center. The Monday-night game was not, because a live score is not a result. The official standings read of 2026-11-17 still shows LAC 0-8 and BAL 4-5, which is consistent with the game being unplayed in the standings. The record of this game is therefore absent, not wrong, and every Week 10 standings check excludes it.",
+  "detail": "The Sunday-night PIT at CIN final (18-38) was added on 2026-11-17 from the official Game Center. The Monday-night game was not, because a live score is not a result. The official standings read of 2026-11-17 still shows LAC 0-8 and BAL 4-5, which is consistent with the game being unplayed in the standings. The record of this game is therefore absent, not wrong, and every Week 10 standings check excludes it. RESOLVED 2026-11-17: after the final (Chargers 23, Ravens 20; Game Center \"Final\", quarter scores 10-7-3-3 / 0-10-3-7) the prescribed re-read was taken — closeout capture raw/schedule-results-2026-week10-closeout.tsv (source S95), recorded as the 150th row of data/results_2026-11-17-closeout.tsv with all Q44 acceptance gates P1-P8 PASS (data/verification-promote.tsv). The 149-row same-day read above is preserved unchanged.",
   "sourceIds": [
    "S91"
   ],
@@ -819,5 +819,17 @@
   ],
   "severity": "Low",
   "action": "Q44's recommended_path corrected to pair SG43 (this session); F59's action and SG43's prerequisites left as published history — read them with this flag. Future register writes should cross-check that a paired ID's title matches the subject."
+ },
+ {
+  "id": "F72",
+  "kind": "Official-source route divergence (stale page after a final)",
+  "item": "After the Monday-night final, the league-standings route kept printing the pre-game state while the division-standings route of the same site was already updated",
+  "detail": "The LAC 23-20 BAL final was decided ~2026-11-17T04:29Z (Game Center showed \"Final\"). Four subsequent reads of https://www.nfl.com/standings/league/2026/REG (04:30:44Z, 04:34:34Z, 04:39:46Z, ~04:41Z) still printed LAC 0-8 (121/219, 8L) and BAL 4-5 (189/236, 4L) — byte-identical to the pre-game values derivable from data/results_2026-11-16.tsv and to session e97f05c3's S90 read. At the same time https://www.nfl.com/standings/division/2026/REG printed the settled post-game state (LAC 1-8, 144/239, 1W; BAL 4-6, 209/259, 5L), whose arithmetic matches the official final exactly. Both routes are official; the divergence is a page/CDN refresh lag, not a data conflict. Recorded, not reconciled by inference: the closeout capture (S96) takes the fresh route and documents the stale reads in its header.",
+  "sourceIds": [
+   "S95",
+   "S96"
+  ],
+  "severity": "Low",
+  "action": "Future post-final standings reads should check BOTH official routes (or re-read until the league route matches the game arithmetic) and record the read route and clock in the capture header; never mix a stale-route row into a points-arithmetic gate."
  }
 ]

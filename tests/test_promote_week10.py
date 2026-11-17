@@ -46,7 +46,7 @@ class TestCloseoutRegister(unittest.TestCase):
             self.assertEqual(f["source_id"], "S95")
 
     def test_every_gate_passed(self):
-        self.assertEqual(len(self.reg["checks"]), 7)
+        self.assertEqual(len(self.reg["checks"]), 8)  # P1-P8, incl. the 149-row chain
         for c in self.reg["checks"]:
             self.assertEqual(c["result"], "PASS", c)
 

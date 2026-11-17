@@ -11,7 +11,7 @@ is written unless --promote is passed AFTER Q44's owner has chosen that path.
 
 Inputs (dated captures, never edited after write):
   raw/schedule-results-2026-week10-closeout.tsv   all 14 Week 10 games FINAL
-  raw/standings-2026-20261117.tsv                 fresh official league standings
+  raw/standings-2026-20261117-closeout.tsv                 fresh official league standings
   data/results.tsv                                the frozen 137-game corpus (read only)
   data/week10_results_extension.json              the 2026-11-16 dated extension (read only)
   data/schedule.tsv                               the published fixture list (read only)
@@ -69,7 +69,7 @@ RAW = os.path.join(ROOT, "raw")
 DATA = os.path.join(ROOT, "data")
 
 CLOSEOUT_RAW = os.path.join(RAW, "schedule-results-2026-week10-closeout.tsv")
-STANDINGS_RAW = os.path.join(RAW, "standings-2026-20261117.tsv")
+STANDINGS_RAW = os.path.join(RAW, "standings-2026-20261117-closeout.tsv")
 RESULTS = os.path.join(DATA, "results.tsv")
 EXTENSION = os.path.join(DATA, "week10_results_extension.json")
 SCHEDULE = os.path.join(DATA, "schedule.tsv")
@@ -415,7 +415,7 @@ def main():
         "provenance": {
             "tier": "OFFICIAL",
             "captures": ["raw/schedule-results-2026-week10-closeout.tsv",
-                         "raw/standings-2026-20261117.tsv"],
+                         "raw/standings-2026-20261117-closeout.tsv"],
             "verification": "P1-P7 enforced by scripts/promote_week10.py; the "
                             "same script produces this register, so the page "
                             "and the checks cannot disagree",
