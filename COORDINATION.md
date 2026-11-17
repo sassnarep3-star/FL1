@@ -142,6 +142,8 @@ sections; the file's own header already requires appending sections rather than 
 (Q44 fields only), and `tools/verify_drift.py` (DR-10 pin → 70). `data/results.tsv`,
 `data/standings.tsv`, `data/week10_results_extension.json`, `data/results_2026-11-17.tsv` and
 `data/standings_2026-11-17.tsv` (session e97f05c3) stay untouched (C1 scope note above).
+`tools/site_g.py` gets one additive Snapshot-Ledger row for the closeout read (mirrors the
+row session e97f05c3 added for the 149-row read).
 Mid-session rebase onto `22482a9` (PRs #49–#54) completed with conflicts resolved in
 `COORDINATION.md`, `data/sources.tsv`, `data/flags.json`, `tools/verify_drift.py`.
 
