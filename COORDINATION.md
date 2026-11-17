@@ -1,4 +1,4 @@
-## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — IN PROGRESS
+## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — COMPLETE
 
 **Session ID:** `arena-e97f05c3` · **Branch:** `arena/e97f05c3-fl1` (from `5a076a0` of `main`) ·
 **Claimed:** 2026-11-17 (UTC). **Branch note:** this session is bound to the single branch named above, so the
@@ -8,7 +8,21 @@ per-task `session-<id>/<task>` branches in the brief are not used; claims are re
 |----|------|--------|-------|------------|
 | H0 | Claim + push this block | done | `arena-e97f05c3` | `COORDINATION.md` |
 | H1 | Week 10 Sunday-night final (PIT 18 at CIN 38) ingested from the official Game Center; reconciled against the live official standings; Monday-night game (LAC at BAL) kept **unrecorded** because it was still live (Q2, 17–7) at read time | done (MNF open → F67) | `arena-e97f05c3` | `data/results_2026-11-17.tsv`, `data/standings_2026-11-17.tsv`, `data/verification-2026-11-17.tsv`, `raw/results-week10-2026-2026-11-17.md`, `scripts/verify_results_2026_11_17.py`, `tests/test_results_2026_11_17.py`, `data/sources.tsv` (append S89–S91 only), `data/flags.json` (append F67 only), `data/raw/MANIFEST-h.json`, `tools/site_g.py` (one additive row in the Snapshot Ledger results table), `data/verification-2026-11-17.tsv` |
-| H2 | Integration: build, tests, link check, PR to `main`, merge, Pages check | in progress | `arena-e97f05c3` | PR + this record |
+| H2 | Integration: build, tests, link check, PR to `main`, merge, Pages check | done | `arena-e97f05c3` | PR + this record |
+
+### Integration record — H2 (2026-11-17, UTC)
+
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/49 (`arena/e97f05c3-fl1` → `main`), CI check `verify` = pass
+  (run 44004284596), mergeability `MERGEABLE / CLEAN`.
+- **Merge:** `gh pr merge 49 --merge` at merge commit `09c5257` on 2026-11-17T02:37:43Z.
+- **GitHub Pages:** source `main` / path `/`, legacy build → status **`built`** (build 1376553096, no error).
+  Live check: https://sassnarep3-star.github.io/FL1/flagged.html shows **67 items** including F67;
+  https://sassnarep3-star.github.io/FL1/availability-ledger.html shows the 2026-11-17 results row (149 results, S89).
+- **Still open, not blocking (Flagged for Review, F67):** Monday night LAC at BAL. Re-read the official Game Center
+  page after it shows Final, then add it in a new dated results file.
+- **Scope honesty:** the rest of the brief (for example the 32-team sweep, the depth-source routes, the ablations)
+  was **not** re-verified in this session; those rows keep the status earlier sessions published. Nothing in this
+  session marks them verified.
 
 ### Completion record — H1 (2026-11-17, UTC)
 
