@@ -1,3 +1,66 @@
+## Task board — session `arena/143300b4-fl1` (official game-book evidence + proper-score leaderboard)
+
+**Session ID:** `arena-143300b4` · **Branch:** `arena/143300b4-fl1` (from `5a076a0` of `main`) ·
+**Claimed:** 2026-11-17 (UTC) · **Status:** active.
+**Rule I am following:** every published table row carries a link to an official source. A value
+that cannot be confirmed from an official source is left blank and flagged. Nothing is inferred.
+
+**Why this session exists.** The board shows 20 `not-started` and 19 `partial` requirement rows.
+The largest single blocker across them is the same missing evidence: the repository has an
+official *injury report* capture and an official *depth chart* capture, but **no official
+game-day record**. Without the official NFL Game Book there is no way to know who actually
+started, who was inactive, how long each player played, where the game was played, or what the
+weather was. Every one of R30 (availability graph), R45 (game books), R50 (inactives + snaps),
+R31/R75 (depth from playing time), R43 (venue) and R66 (point-in-time ledger) is blocked on that
+one artefact. This session captures it, at scale, from the official NFL Game Center.
+
+**Verified reachable at claim time (2026-11-17):** `https://www.nfl.com/games/commanders-at-giants-2026-reg-10`
+exposes a "Download Game Book (PDF)" link on `static.www.nfl.com`. The parsed PDF contains, for
+both clubs: **starting lineup by unit and position**, **Substitutions**, **Did Not Play**,
+**Not Active** (the official inactive list), field goals, the venue line
+("MetLife Stadium, East Rutherford, NJ"), the game-day weather line ("Open Stadium on Field
+Turf", temp/humidity/wind) and the full individual statistics. That single document closes the
+"who was expected to start, who actually did" gap with an official citation per player.
+
+### Scopes claimed (no other session has claimed these files)
+
+| ID | Requirement(s) | Task | Status | File scope (claimed) |
+|----|-----------------|------|--------|----------------------|
+| P01 | R45, R50, R43, R31, R75, R66 | Capture official NFL Game Books for every 2026 game to date → starters, subs, DNP, **inactive list**, snaps, venue, weather; parse to `data/gamebooks/` | in progress | `.github/workflows/capture-official.yml`, `scripts/capture_official.py`, `scripts/parse_gamebooks.py`, `engine/gamebooks.py`, `data/gamebooks/` |
+| P02 | R30 | Availability graph as a first-class dataset: expected starter (club depth chart) vs actual starter (official game book) | claimed | `engine/availability_graph.py`, `data/availability_graph.tsv`, `availability-graph.html` |
+| P03 | R52, R70 | Model depth slots as **groups**: slots with more than one rank-1 player, and empty slots, represented faithfully instead of being flattened to a single "starter" | claimed | `engine/depth_slots.py`, `data/depth_slots.tsv`, `depth-slots.html` |
+| P04 | R65 | Flag stale depth rows against the official transactions log | claimed | `data/transactions.tsv`, `engine/stale_depth.py`, `transactions.html` |
+| P05 | R33 | 32-team roster/IR sweep before any team-level model is trusted | claimed | `data/roster_sweep.tsv`, `scripts/build_roster_sweep.py` (page section on `transactions.html`) |
+| P06 | R56, R57, R76, R78, R55 | Proper-score leaderboard divisions (singles / game parlays / same-game parlays / prop combos), benchmark-relative Brier skill with game-cluster lower bound and multiplicity adjustment, control baselines (random / favourites), joint-evidence gate for parlays and props, two-stage CLV/ROI escrow | claimed | `engine/proper_scores.py`, `engine/control_baselines.py`, `data/leaderboard_divisions.tsv`, `data/control_baselines.tsv`, `leaderboard-divisions.html` |
+| P07 | R87, R29, R39 | Train / validation / final-holdout season split; pre-registration freeze (rule text + sample window + gates committed before the window opens) | claimed | `engine/splits.py`, `data/splits.json`, `data/preregistration.json`, `pre-registration.html` |
+| P08 | R38, R79 | Price a line ourselves and publish the residual against the market on a schedule; vig-free market consensus vs originated fair-line decomposition | claimed | `engine/market_consensus.py`, `data/residual_vs_market.tsv`, `data/vigfree_consensus.tsv`, `residual-vs-market.html` |
+| P09 | R81 | Publish every model total twice until one wins (two estimators side by side with a gap column) | claimed | `engine/dual_total.py`, `data/dual_totals.tsv`, `dual-totals.html` |
+| P10 | R80 | Weekly "what changed" diff instead of a static snapshot | claimed | `engine/weekly_diff.py`, `data/weekly_diff.tsv`, `weekly-diff.html` |
+| P11 | R44 | Publish the league's dated schedule announcement beside the live schedule page | claimed | `data/schedule_announcements.tsv`, `schedule-announcement.html` |
+| P12 | R32, R63, R72 | Injury signal as a surprise not a level; empirical "Questionable" calibration; designation reliability scored against official inactive lists | claimed | `engine/injury_surprise.py`, `data/injury_surprise.tsv`, `data/designation_reliability.tsv`, `injury-signal.html` |
+| P13 | R58, R82 | Durable snapshot storage outside the static site; freshness monitoring and source/schema-change alerts; drift alarm on every scraper | claimed | `engine/snapshot_vault.py`, `scripts/snapshot_vault.py`, `data/snapshot_vault_index.tsv`, `snapshot-vault.html`, `.github/workflows/capture-official.yml` |
+| P14 | R59 | Split the site into a public analysis layer and a private data layer | claimed | `tools/site_public.py`, `docs/PUBLIC_PRIVATE.md` (page wiring only) |
+| P15 | R77 | Stadium roof/surface and NWS hourly wind/precipitation overlay | claimed | `data/stadium_weather.tsv`, `scripts/build_stadium_weather.py` (page section on `gamebooks.html`) |
+
+**Shared files I touch — additive only:** `tools/site.py` (NAV tuples + one index card block + page
+imports), `data/sources.tsv` (append S80+), `data/flags.json` / `data/questions.json` /
+`data/suggestions.json` (append only), `data/requirements_backlog.json` (status flips only, via the
+backlog builder), `README.md` / `EXECUTIVE_SUMMARY.md` (append-only addenda), `COORDINATION.md`.
+
+**New pages I own outright (no other session has claimed these filenames):**
+`gamebooks.html`, `availability-graph.html`, `depth-slots.html`, `transactions.html`,
+`leaderboard-divisions.html`, `pre-registration.html`, `residual-vs-market.html`,
+`dual-totals.html`, `weekly-diff.html`, `schedule-announcement.html`, `injury-signal.html`,
+`snapshot-vault.html`.
+
+### Log
+
+| When (UTC) | Entry |
+|---|---|
+| 2026-11-17T00:05Z | Read the board. `main` @ `5a076a0` (PR #48 merge). No open PRs on the remote; every `arena/*` branch listed by `git ls-remote` is merged or abandoned. Baseline on this tree: `python3 -m unittest discover -s tests -q` → **309 OK**. |
+| 2026-11-17T00:12Z | Reachability checked. **The sandbox shell cannot reach nfl.com** (only github/npm/pypi are allowed outbound), but the `fetch_page` tool and GitHub Actions runners can. So official captures are taken either through `fetch_page` (one document at a time, quoted into `raw/`) or through a scheduled GitHub Actions capture (many documents at once, committed with hashes). Both routes keep an official URL per row. |
+| 2026-11-17T00:18Z | Official Game Book format confirmed by parsing one live document (`commanders-at-giants-2026-reg-10`). It carries starting lineups, substitutions, DNP, **Not Active**, venue, weather and individual statistics — i.e. exactly the evidence P01–P03, P04 and P15 need. Captured verbatim into `raw/` with its sha256 and retrieval time. |
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
