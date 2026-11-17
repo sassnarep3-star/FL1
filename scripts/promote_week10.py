@@ -43,8 +43,8 @@ Modes:
                  exactly what the gated modes would do. No canonical file is
                  touched. Exit 0 when all checks pass.
   --execute      additionally write the dated side-reads:
-                 data/results_2026-11-17.tsv (150 rows) and
-                 data/standings_2026-11-17.tsv (32 clubs)
+                 data/results_2026-11-17-closeout.tsv (150 rows) and
+                 data/standings_2026-11-17-closeout.tsv (32 clubs)
   --promote      (requires --execute) roll the canonical feed forward:
                  data/results.tsv, data/standings.tsv,
                  data/schedule2026-d.csv played flags — then print the
@@ -406,7 +406,7 @@ def main():
         "staged_corpus": {
             "rows": len(staged_lines),
             "note": "frozen corpus + 13 new finals; written to "
-                    "data/results_2026-11-17.tsv by --execute",
+                    "data/results_2026-11-17-closeout.tsv by --execute",
         },
         "checks": [
             {"id": cid, "description": desc, "result": res, "detail": detail}
@@ -481,7 +481,8 @@ def main():
     if not args.execute and not args.promote:
         print("\nAll acceptance checks PASS. Q44's policy half remains open:")
         print("  --execute   publish the dated side-reads "
-              "(data/results_2026-11-17.tsv, data/standings_2026-11-17.tsv)")
+              "(data/results_2026-11-17-closeout.tsv, "
+              "data/standings_2026-11-17-closeout.tsv)")
         print("  --promote   ONLY after the Q44 owner chooses the canonical "
               "roll-forward")
         print("Canonical files touched in this mode: none.")
