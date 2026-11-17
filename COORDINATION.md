@@ -1,3 +1,30 @@
+## Task board — session `arena/9559a4aa-fl1` (2026-11-17)
+
+**Session ID:** `arena-9559a4aa` · **Branch:** `arena/9559a4aa-fl1` (from `5a076a0` of `main`, rebased
+onto `8d41cbe` = PR #50 before any work) · **Claimed:** 2026-11-17T03:2xZ · **Status:** active.
+**Branch note:** the brief's per-task `session-<id>/<task>` branches are not available; this session is
+bound to `arena/9559a4aa-fl1`, so claims are recorded here (same resolution as `arena/e97f05c3-fl1`).
+**Pre-claim sweep:** `origin/main` = `8d41cbe` (PR #50, session `arena/e97f05c3-fl1`, COMPLETE); zero open
+PRs; no other session's claim is live. Next free register ids: **S92+** (sources), **F68+** (flags),
+**Q46+** (questions), **SG48+** (suggestions).
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| K0 | Claim + push this block | done | `arena-9559a4aa` | `COORDINATION.md` |
+| K1 | Close F67: re-read the Monday-night Game Center (LAC at BAL) after it shows **Final**; ingest the result in a new dated results file; reconcile against a fresh official standings read (template: `scripts/verify_results_2026_11_17.py`) | claimed | `arena-9559a4aa` | new `data/results_2026-11-17-mnf.tsv`, `data/standings_2026-11-17-mnf.tsv`, `raw/results-week10-2026-mnf.md`, `scripts/verify_results_mnf.py`, `tests/test_results_mnf.py`, `data/sources.tsv` (append S92+), `data/flags.json` (F67 resolution note only) |
+| K2 | R41/R74/R80: third dated injury-report read (2026-11-17) with UTC clock time + sha256; publish the **delta across all three reads** (never the level); publish a weekly "what changed" diff panel (results / standings-rank / availability changes between the dated reads) | claimed | `arena-9559a4aa` | `raw/injuries-week10-2026-read3.{md,tsv}`, `data/injury_hub_delta.json` + `scripts/build_injury_hub_delta.py` (extend to 3 reads), new `data/what_changed.json` + `scripts/build_what_changed.py`, new page `what-changed.html` via `tools/site.py` (additive: NAV entry + one page fn — **shared file, logged here per rule**), `data/sources.tsv` (append), regenerated pages |
+| K3 | R76: add a **random-picks** control and a **favourites-only** control to every leaderboard run, scored through the same gates as every candidate; re-pin drift counts deliberately | claimed | `arena-9559a4aa` | `scripts/strategy_lab.py`, `data/leaderboard.csv`, `data/leaderboard_by_season.csv`, `data/strategies.csv`, `data/leaderboard_signal_staking.json` (regenerated), `scripts/build_signal_staking.py` / luck-panel builders if needed, `tools/verify_drift.py` (DR-13/DR-18 pins), `tests/test_n01_n05.py` (count pins), `tests/test_strategy_controls.py` (new) |
+| K4 | R37 line-by-line verification: the backlog says the two-sided "what would change our mind" field is absent from every strategy row — verify against `data/strategies.json` and correct the backlog row with evidence | claimed | `arena-9559a4aa` | `scripts/build_backlog_g.py`, `data/requirements_backlog.{csv,json}`, `requirements-backlog.html` (regenerated) |
+| K5 | R81: publish **every model total twice** — two independent totals estimators side by side with a gap column on the model-lines page | claimed | `arena-9559a4aa` | `engine/originate.py` (second estimator, if not already present), `tools/brief.py`, `data/model_lines.tsv`, `model-lines.html` (regenerated), `tools/verify_brief.py` + `tests/test_brief.py` (extended) |
+| K6 | R73 mechanism: scheduled Wed/Thu/Fri injury-report capture workflow (raw store + sha256 + append-only history, fails loudly on parse drift); trigger once manually from this session to prove the run | claimed | `arena-9559a4aa` | new `.github/workflows/injury-snapshot.yml`, new `scripts/capture_injuries.py` (+ fixture test), `data/raw/` capture dir (append-only) |
+| K7 | Final integration: full gate battery, exec-summary touch-up, PR → `main`, merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | claimed | `arena-9559a4aa` | PR + this record + `EXECUTIVE_SUMMARY.md` (append-only section) |
+
+**Requests to other sessions:** none. **Shared-file edits this session:** `tools/site.py` (one NAV entry +
+one page function for K2), `data/sources.tsv` / `data/flags.json` (append-only), `tools/verify_drift.py`
+(pin re-commits for K3, documented as drift-alarm working as designed).
+
+---
+
 ## Task board — session `arena/e97f05c3-fl1` (2026-11-17) — COMPLETE
 
 **Session ID:** `arena-e97f05c3` · **Branch:** `arena/e97f05c3-fl1` (from `5a076a0` of `main`) ·
