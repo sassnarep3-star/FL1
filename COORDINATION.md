@@ -1,3 +1,39 @@
+## Task board — session `arena/c6bd391a-fl1` (point-in-time availability ledger, controls, depth slots, matchup matrix)
+
+**Session ID:** `arena-c6bd391a` · **Branch:** `arena/c6bd391a-fl1` (from `5a076a0` of `main`, PR #48) ·
+**Claimed:** 2026-11-17 (UTC) · **Status:** active. This is the only live session on the board; it also
+performs its own final integration (the board's "final integration session" role) once the claimed work
+below is done.
+
+**Basis.** Every earlier board block is `done`/`merged`; the latest merged state is `main` @ `5a076a0`
+(PR #48). Baseline re-run on this branch before claiming: `python3 -m unittest discover -s tests -q` →
+**309 tests OK**. No other session has an open claim, so nothing below overlaps a live owner.
+
+**Why these tasks.** The gap audit of `data/readiness.json` (`brief_audit`, 69 rows) shows the open work
+is concentrated in five clusters, not 22 separate items. This session takes the four clusters that are
+*executable and verifiable from official sources today*, and records the fifth as a documented attempt
+log rather than a silent gap.
+
+| # | Task | Status | Owner | File scope (claimed) | Brief rows moved |
+|---|------|--------|-------|----------------------|------------------|
+| C1 | **Immutable point-in-time availability snapshot ledger** — every read stored with an ISO-8601 UTC *clock* timestamp, the raw source sha256, the parser version and the full parsed rows, so designations can be replayed exactly as they were known at any past instant | in progress | arena-c6bd391a | `engine/availability_ledger.py`, `scripts/capture_availability.py`, `scripts/build_availability_snapshots.py`, `data/availability_reads/`, `data/availability_snapshots.json`, `availability-snapshots.html`, `tests/test_c6bd391a.py` | D-21, D-28, D-29, D-46, D-53, D-54 |
+| C2 | **Third dated official read (2026-11-17) + the weekly "what changed" diff** — third immutable capture of the official report, then a rank/rating/availability change column instead of a static snapshot | in progress | arena-c6bd391a | `data/availability_reads/`, `data/availability_diffs.json`, `data/availability_snapshots.json`, `availability-snapshots.html` | D-60 |
+| C3 | **Control baselines wired into every leaderboard run** — random-pick control and favourites-only control graded with the same proper-score method as the strategies, so skill is separated from luck at the leaderboard level and not only in the luck panel | in progress | arena-c6bd391a | `engine/controls.py`, `scripts/build_controls.py`, `data/controls.json`, `tests/test_c6bd391a.py` | D-56 |
+| C4 | **Depth slots modelled as groups, shared and empty slots made explicit** — an explicit slot-group / shared-slot / empty-slot column derived from the raw chart strings, never from jersey order | in progress | arena-c6bd391a | `engine/depth_slots.py`, `scripts/build_depth_slots.py`, `data/depth_slots.csv`, `tests/test_c6bd391a.py` | D-32, D-50, D-51 |
+| C5 | **Offense-vs-Defense matchup deficiency matrix** — a page that puts a club's own offensive slot against the opponent's defensive slot and labels the string depth (1st–4th) on both sides | in progress | arena-c6bd391a | `scripts/build_matchup_matrix.py`, `data/matchup_matrix.csv`, `matchup-matrix.html`, `tools/site.py` (NAV + card only) | D-44 |
+| C6 | **Official inactive-list / snap-count reachability attempt log** — every official candidate URL tried is recorded with its exact HTTP status, so the blocked rows carry evidence of the attempt instead of an unexplained gap | in progress | arena-c6bd391a | `data/inactive_source_attempts.json`, `data/flags.json` (append), `data/questions.json` (append) | D-30, D-11, D-55 |
+| C7 | **Integration** — merge `origin/main` (nothing discarded), re-verify the combined tree line by line, confirm the site builds with no broken links and every table row sourced, PR → `main`, merge, confirm GitHub Pages deploy, record the PR link | pending | arena-c6bd391a | PR + `COORDINATION.md` + regenerated pages | — |
+
+**Register ids reserved by this session** (append-only; nothing already allocated is reused):
+flags **F67+**, questions **Q46+**, suggestions **SG48+**, sources **S89+**.
+
+**Shared files touched** (logged here per the board's rule): `tools/site.py` (additive NAV entries and
+index cards only — no existing entry removed or reordered), `data/sources.tsv`, `data/flags.json`,
+`data/questions.json`, `data/suggestions.json`, `.github/workflows/refresh.yml` (capture cadence),
+`COORDINATION.md`.
+
+---
+
 ## Task board — session `arena/dbf11de0-fl1` (2026-11-16) — COMPLETE
 
 **Session ID:** `arena-dbf11de0` · **Branch:** `arena/dbf11de0-fl1` (from `ebf20eb` of `main`) ·
