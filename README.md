@@ -1,377 +1,79 @@
 # FL1 — NFL Line Lab
 
-A verified, auditable base for originating NFL lines: official injury data, a decision register,
-and a strategy leaderboard that refuses to guess.
+A static, evidence-oriented project for NFL line origination research. It separates sourced observations, model outputs, evaluation, and review decisions; a blank means the project has not established a value and must not be read as zero or as availability.
 
-**Live site:** https://sassnarep3-star.github.io/FL1/
+**Published site:** <https://sassnarep3-star.github.io/FL1/>\
+**Start here:** [Dashboard](index.html) · [Executive summary](executive-summary.html) · [Review guide](REVIEW.md)
 
----
+## What the project can and cannot establish
 
-## What this is
+This repository contains a substantial requirements register, data/evidence pages, model and evaluation code, and governance proposals. It is a research and audit workspace, not a currently qualified betting product. A repository artifact or generated table is not, by itself, independent verification of the underlying NFL fact. Check the evidence and verification status shown on the relevant page before relying on any row.
 
-The site is a static dashboard. It separates three things that are usually blurred together:
+The [row-level source audit](source-audit.html) distinguishes official-source references from repository build artifacts, unregistered links, non-official sources, and missing citations. It audits citation metadata; it does **not** fetch every external URL or independently re-check every claim. The [Flagged for Review page](flagged.html) records unresolved discrepancies and unverified items. Do not treat a value marked unverified, stale, partial, or flagged as confirmed.
 
-1. **What an official source actually says** — every value links to the live page it came from.
-2. **What we do not know yet** — twenty open questions, each with the missing data named.
-3. **What we propose to do about it** — fifteen suggestions with options, costs, risks and one
-   recommended path, for review before anything is implemented.
+The project has code and ledgers for line origination, prices/results, strategy evaluation, injuries, availability, depth, correlations, and model outputs. Their presence does not mean that a strategy passed its gates, that all-market opening/closing prices are complete, or that a feature is ready for wagering. Read the [readiness table](readiness.html), [validation gates](validation.html), [strategy scorecard](strategy-scorecard.html), and [suggestions](suggestions.html) for the current state and blockers. In particular, backtest, paper, and prospective evidence must not be conflated; consult each strategy's registration and evidence window.
 
-Where a number could not be confirmed from an official source, the cell is left **blank** and listed
-on the *Flagged for Review* page. Nothing is estimated to fill a gap.
+No user action is required to reproduce the local static build, but not every data source is automatically refreshed. The scheduled workflow documents its limited scope; it is not a guarantee of daily collection for every feed. Freshness and coverage should be checked on the relevant ledger before use.
 
-**No line has been originated and no strategy has a result.** That is deliberate: a line needs a
-fitted model *and* a benchmark price, and the second does not exist in this repository.
+## Decision-making paths
 
-## Pages
+| Need | Start here | How to use it |
+|---|---|---|
+| Understand the project and immediate blockers | [Executive Summary](executive-summary.html), [Readiness](readiness.html) | Review the status and gate for each requirement. Treat blanks and partial states literally. |
+| See what is known, what remains unknown, and what would resolve it | [Questions](questions.html) | Each question includes an answer state; open or partial entries name the unresolved decision or missing evidence. |
+| Review options before implementation | [Suggestions](suggestions.html), [Suggestions pipeline](suggestions-pipeline.html), [Decision desk](decision-desk.html) | Compare the proposed paths, trade-offs, dependencies, and linked questions. A suggestion is not an approved change. |
+| Inspect problems that need human attention | [Flagged for Review](flagged.html) | Review the cited source, discrepancy, and stated limitation before promoting a value or method. |
+| Trace provenance | [Sources](sources.html), [Source audit](source-audit.html), [Verification](verification.html) | Check each source's declared status and each verifier's actual scope; an internal link checker is not an external fact check. |
+| Review lines, prices, outcomes, and strategy skill | [Origination](line-origination.html), [Price snapshots](price-snapshots.html), [Results feed](verified-results-feed.html), [Strategies](strategies.html), [Removal of luck](removal-of-luck.html) | Separate fair estimate, market observation, settlement, signal quality, and staking results. Confirm sample size and evidence stage. |
+| Examine injury and lineup evidence | [Availability ledger](availability-ledger.html), [Injuries](injuries.html), [Team availability](team-availability.html), [Depth](depth.html), [Matchup matrix](availability-matrix-d5.html) | Distinguish dated official evidence from derived or unavailable depth; do not infer a replacement from a blank. |
+| Inspect model and statistical inputs | [Model lines](model-lines.html), [Ablations](ablations.html), [Correlations](correlation-register.html) | Check provenance, input definitions, sample size, and validation status before interpreting an estimate. |
 
-| Page | Contents |
-|---|---|
-| `index.html` | Dashboard and headline figures |
-| `executive-summary.html` | One-page brief |
-| `requirements.html` | Full requirement decomposition with evidence |
-| `injuries.html` | Official Week 10 2026 injury report, 345 rows |
-| `depth.html` | Backup depth, observed vs derived, one club worked |
-| `standings.html` | Official 2026 standings, schedule, tiebreakers |
-| `line-origination.html` | How a line would be produced, and where it stops |
-| `strategies.html` | Leaderboard and ranking rule |
-| `validation.html` | The eight validation gates and luck controls |
-| `questions.html` | Twenty open questions |
-| `suggestions.html` | Fifteen suggestions with options and recommendations |
-| `sources.html` | Source registry with verification status |
-| `flagged.html` | Fifteen flagged items |
-| `verification.html` | Every check performed, and how to re-run it |
+The site has additional category pages; navigation is available from each page. The registers and data files under `data/` are the durable inputs for generated views. Historical session notes in `EXECUTIVE_SUMMARY.md` and `COORDINATION.md` document how artifacts were produced, but later dated reads and flags supersede earlier statements where they conflict.
 
 ## Repository layout
 
 ```
-index.html … flagged.html     the published site (generated, committed)
-assets/css/site.css           one stylesheet, no framework, no CDN
-assets/js/site.js             optional filter/highlight helpers
-assets/js/data.js             generated data bundle
-data/*.tsv                    normalised source data, one row per fact
-data/*.json                   registers (questions, suggestions, requirements, strategies, flags)
-raw/                          verbatim page captures used for verification
-tools/build.py                data -> assets/js/data.js, and all derived arithmetic
-tools/site.py                 data -> the HTML pages
-tools/checklinks.py           internal link + anchor + reachability check
-tools/verify_injuries.py      line-by-line diff of the TSV against the raw capture
-docs/                         markdown copies of the executive summary and methodology
-COORDINATION.md               shared task board for concurrent sessions
+index.html and other root HTML     committed static pages served by GitHub Pages
+assets/                            styles and browser-side helpers
+data/                              source registers, normalized records, and derived ledgers
+raw/                               captured source material and dated reads
+engine/                            pricing, settlement, scoring, gates, and statistical code
+scripts/                           dataset-specific builders and verifiers
+tools/                             site generation, link/row checks, and audits
+tests/                             unit and repository regression tests
+COORDINATION.md                    shared task board and integration history
+EXECUTIVE_SUMMARY.md               dated session summaries and verification records
 ```
 
-## Reproduce and verify
+## Rebuild and check locally
+
+Run from the repository root with Python 3:
 
 ```bash
-python3 tools/build.py           # regenerate data bundle + derived counts
-python3 tools/site.py            # regenerate all HTML pages
-python3 tools/checklinks.py      # fail if any internal link or anchor is broken
-python3 tools/verify_injuries.py # diff every injury row against the raw capture
-python3 scripts/promote_week10.py # Q44 week-10 closeout: acceptance checks P1-P7
-                                  # (--execute writes the dated side-reads; --promote
-                                  # is the gated canonical roll-forward)
+python3 -m unittest discover -s tests -v
+python3 tools/build.py
+python3 tools/site.py
+python3 tools/checklinks.py
+python3 tools/checkrows.py
+python3 tools/verify_drift.py
+python3 tools/verify_injuries.py
+python3 tools/verify_results.py
+python3 tools/verify_replacement.py
 ```
 
-`checklinks.py` and `verify_injuries.py` both exit non-zero on failure, so they can gate a merge.
-No third-party Python packages are required.
+These checks have different coverage. Unit tests exercise code and fixtures; builders regenerate local artifacts; link/row checks inspect the committed site; dataset verifiers check only their named datasets and invariants. A passing local check does not prove every external source is live or that every displayed claim has been independently re-verified. Consult [Verification](verification.html) and [Source audit](source-audit.html) for the published scopes and findings. Some research scripts require optional scientific Python packages; install requirements from `requirements.txt` when running those scripts.
 
-## Why there is no build step
+The root HTML is committed for static hosting. After changing data or a generator, regenerate the affected outputs, review the diff, and run the checks that cover the changed dataset before publishing.
 
-`index.html` and its siblings are committed, fully rendered HTML. GitHub Pages serves the repository
-root directly, so there is no pipeline that can fail and no possibility of the live site lagging the
-committed data. Re-run the tools when the data changes and commit the output.
+## Source and interpretation rules
 
-## Method notes
+- **No inference to fill a blank.** Missing evidence remains missing and should be flagged.
+- **Provenance is claim-specific.** Follow the source link on the row and inspect the registry status; do not assume a whole table is official because one column has an official source.
+- **Time matters.** Use dated snapshots and deltas for point-in-time analysis. A later capture must not leak into an earlier forecast.
+- **Observed and derived values are different.** A model output or join is not an official statement; review its inputs and transformation.
+- **Skill is not realized return.** Use the registered scoring rules, uncertainty, benchmark comparisons, and sample windows. Raw win rate or ROI alone is not sufficient evidence.
+- **Suggestions are review items.** They are not implementation instructions until a path is selected and its validation gates are met.
 
-- **Blanks are load-bearing.** An em dash means no official source publishes that value. A cell reading
-  *not listed* means the player does not appear on the club's injury report at all — also an official fact.
-  These are visually distinct on purpose.
-- **Provenance is per row.** Every fact carries the ID of the source record it came from.
-- **Derived arithmetic is computed, never typed.** Every count on the site comes out of `tools/build.py`.
-- **Name joins use an explicit alias table** (`data/depth-aliases.tsv`), never fuzzy matching, because two
-  different players named Marcus Harris appear in this dataset (flag F11).
+## Not betting advice
 
-## Where to start
-
-See [`REVIEW.md`](REVIEW.md) for a short reading guide, the checks to run, and the judgement calls
-worth disagreeing with.
-
-## Limitations
-
-Single season, single snapshot, no price data, no snap counts, no official league-wide depth chart.
-See `flagged.html` for all fifteen items, with links.
-
-## Not advice
-
-Nothing here is a bet, an offer to wager, betting advice, or a statement about the legality of any
-activity in any jurisdiction. No regulator or tax source was verified.
-
-
----
-
-## Session `arena/7ac4e12e-fl1` additions (2026-11-17)
-
-- **Injury hub read 3 as a delta only** (`scripts/build_injury_hub_delta.py`,
-  `data/injury_hub_delta.json`): three dated reads, one published change (NO Travis Etienne practice
-  FULL → LIMITED), canonical 345-row table untouched.
-- **Week-10 close-out** (`scripts/build_week10_extension.py`): 13 official finals + the live Monday
-  game as a status row; SNF `PIT 18, CIN 38` added under `completion` with checks C1–C5 (fresh
-  standings 32/32 W/L/T + PF/PA); F61 corrected with a dated re-read.
-- **Answers layer on every question** (`scripts/add_question_answers.py`): all 46 register rows carry
-  `answer_state` (`answered` 12 / `partial` 16 / `open` 18), a cited `answer`, and `answer_date`;
-  rendered as the dated Answer column on `questions.html`. Q45's verbatim duplication of Q35 is
-  registered as F70; new suggestions SG50 (cadence automation) and SG51 (frozen promotion rule).
-- Reconciled over parallel PRs #49 and #51–#54: session ids `S94–S96`, `F70`, `SG50–SG51`; pins and
-  drift rows updated; battery green (344 tests, 57 pages, 19/19 drift).
-
-## Session `arena/dbf11de0-fl1` additions (2026-11-16)
-
-**New pages** (all generated, all re-runnable):
-
-| Page | Contents |
-|---|---|
-| `requirements-backlog.html` | The brief line by line: 87 requirement rows, each with the gate that blocks it and the number that would clear it |
-| `team-availability.html` | Per club: starters out, the replacement the club charts, and a net injury count whose rule is printed on every row |
-| `announced-starters.html` | Starters an official NFL.com page actually announced — quoted, dated and linked. Inferred replacements are kept out of this table on purpose |
-| `availability-ledger.html` | Point-in-time snapshot ledger: every dated read of the official injury report with its sha256, plus the diff between consecutive reads |
-| `removal-of-luck.html` | How much of a result could be chance, the sample size at which it stops being chance, and the multiplicity adjustment |
-| `index.html` | Now carries the **decision-readiness table** (one row per requirement) and a **removal-of-luck** summary |
-
-**New engine and scripts** (stdlib only): `engine/luck.py` (Wilson intervals, luck bands, sample
-sizing, cluster inflation, Bonferroni, Brier skill, exact binomial) with 25 unit tests in
-`tests/test_luck_g.py`; `scripts/verify_recapture_g.py` (re-capture diff gate);
-`scripts/build_backlog_g.py`; `scripts/build_luck_g.py`; `scripts/build_availability_g.py`;
-`scripts/register_g.py`; `tools/site_g.py` (page generators).
-
-**Verification added this session:** the official Week 10 injury report was re-read on 2026-11-16
-and diffed row by row against the 2026-11-14 capture. It moved: +2 rows, 32 changed fields, 22 of
-them Chargers rows for a game not yet played at the earlier read. Both reads are kept, hash-pinned,
-and the earlier one is never overwritten (`data/raw/MANIFEST-g.json`, `data/injury_diff_g.tsv`).
-Checks recorded in `data/verification-g.tsv`.
-
-**New registers:** sources S70–S72 (all read in session, all official NFL.com), flags F43–F48,
-questions Q35–Q38, suggestions SG35–SG38.
-
-**Reproduce this session's work:**
-
-```bash
-python3 scripts/verify_recapture_g.py   # re-capture diff gate (exit 0/1)
-python3 scripts/build_backlog_g.py      # requirement backlog
-python3 scripts/build_luck_g.py         # removal-of-luck panel
-python3 scripts/build_availability_g.py # team availability + announced starters
-python3 scripts/register_g.py           # registers (append-only)
-python3 tools/site.py && python3 tools/checklinks.py && python3 tools/checkrows.py
-```
-
----
-
-## Session D additions (2026-11-14)
-
-- **`schedule.html`** — all 272 games of the 2026 regular season with results, reconciled strictly
-  (32/32 clubs' records, PF and PA) against the official standings capture and the official Week 10
-  schedule page; raw feed snapshot at `raw/games-nfldata.csv`.
-- **`prop-correlations.html`** — empirical player-level correlations (QB↔WR r≈0.79, QB↔TE r≈0.37,
-  RB rush↔receive r≈−0.07, binary lifts) computed from nflverse player_stats 1999–2024; closes
-  open question **Q-PROP-01** from the computed research layer; QA-gated and reproducible.
-- **`.github/workflows/refresh.yml`** — scheduled weekly refresh: re-fetches the games feed,
-  rebuilds and re-verifies every session-D artefact, commits only when all checks pass.
-- **Independent verification (V1–V9)** — recorded in `data/verification-d.tsv` and on the schedule
-  page: record reconciliation, deterministic rebuild of the merged computed layer, 18/18 injury
-  transcription fidelity, spread-sign convention (13/13 vs moneylines), bye-club completeness.
-
----
-
-## Price-snapshot store (2026-11-14)
-
-`engine/price_snapshots.py` provides an append-only SQLite store for point-in-time quotes attached to an originated model version. It records explicit `open`, `close`, or `intermediate` phase, market/side/line/odds, UTC capture time, source URL and vendor record ID; duplicate deliveries are idempotent. The store does not fetch quotes or manufacture missing values. Use only a licensed feed and preserve its terms. The repository contains no verified official NFL betting-price feed; therefore this is an implementation capability, not evidence that price history is currently populated. Run `python3 -m unittest tests.test_price_snapshots -v` for its checks.
-
-## Session E additions (2026-11-14) — registers, engine, and a measured result
-
-Branch `arena/c80caab4-fl1`, integrated into the published site rather than replacing it. Everything here is
-additive: `data/*.json` registers already on `main` were left byte-for-byte untouched, and this session's
-parallel registers live under `data/specs/`.
-
-- **`docs/pages/`** — 18 pages generated entirely from the registers (`site/build.py`), covering requirements
-  (R-01…R-40), questions (Q-01…Q-24), suggestions (S-01…S-24, all `decision: OPEN`), the line-origination
-  specification, validation gates G-1…G-13, the correlation register, injury/depth modelling, the leaderboard
-  design, the missing-information register (GAP-01…GAP-19), a source register with per-source verification
-  levels, the repo audit, two independent captures of the official injury report, and a flagged-for-review page.
-- **`engine/`** — stdlib-only implementation with 75 tests: pricing and staking, statistics (Wilson intervals,
-  power analysis, bootstrap, max-T multiple-testing control, deflated Sharpe), joint parlay pricing with
-  Frechet-bounded correlation, injury capture reconciliation, a fail-closed compliance gate for the league's
-  prohibited wager classes, the gate evaluator, and sealed-entry leaderboard scoring that ranks on the 95%
-  lower bound of per-unit return.
-- **`data/measured.json` + `docs/pages/measured.html`** — the brief's correlation ask, actually computed:
-  over-the-total versus home-covering has rho **+0.00696** (95% CI [-0.03324, +0.04831], n=6,813) in the
-  in-repo third-party dataset, i.e. marginal dependence indistinguishable from zero. The cost is not
-  correlation, it is price: that pair's joint hit rate is 24.35% against a 26.42% break-even implied by its own
-  legs. The peer-reviewed home-underdog hypothesis, run through the same gates, fails (45.8% over 1,302 bets,
-  ROI -11.6%). The register's `rho` cell stays blank pending one decision: whether third-party-derived values
-  may be published as sourced (flag **F-11**).
-- **Two findings worth reading before trusting any table here.** (1) The official injury report renders a
-  different number of rows per fetch: two captures an hour apart agree on every shared player but differ by 44
-  rows, four of them confirmed `Out` designations — so ingestion reconciles renders instead of trusting one.
-  (2) A plausibility check caught a contested sign convention in the third-party spread column; it was settled
-  by a sibling session's moneyline cross-check (`data/verification-d.tsv` V8), and the wrong reading is
-  published alongside the right one as the audit trail.
-- **Reproduce:** `python3 -m unittest discover -s tests -q` · `python3 engine/demo_run.py --check` ·
-  `python3 -m engine.measure` · `python3 site/build.py && python3 site/verify.py`.
-
----
-
-## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
-
-- **`model-lines.html`** — own fair lines for the 13 pending Week 10 games, in the order side → total → moneyline.
-  Fair, market and difference are separate columns. Every market and difference cell is blank: no official NFL
-  source publishes prices (F18). Source: `data/model_lines.tsv`, `engine/originate.py`.
-- **`data/price_snapshots.tsv`** — the opening/closing store, one row per game and market (39 rows), all blank.
-- **`results-feed.html`** — the 137 final 2026 results used as inputs, and a strictly out-of-sample walk-forward
-  backtest (weeks 4–10, n = 89). The side model's sign accuracy is above 50%, but its margin and total errors do
-  not beat a constant benchmark (F20). ROI is blank (no prices).
-- **`governance.html`** — signal ranks the leaderboard, staking is reported beside it (`engine/leaderboard.py`
-  `split_scores`); the G-14 demotion gate sends a live strategy back to paper (`engine/gates.py`
-  `demotion_decision`); correlation values are withheld, with n shown (F19).
-- **Verification** — `tools/verify_brief.py` writes `data/verification-brief.tsv` (10 checks, incl. the 13-game slate
-  against `raw/nfl-week10-2026-capture.md`, and a fresh re-run of every fair value). `tests/test_brief.py` holds 17
-  hand-checkable tests.
-- **Withheld on purpose (brief B6):** market columns on `schedule.html`; coefficients on `prop-correlations.html`
-  (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
-- **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
-  `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
-## Session M additions (2026-11-14)
-
-- **`results-feed.html`** — the verified results feed: all 137 played 2026 games, finals verified
-  row-by-row against official nfl.com week pages (`raw/official-finals-2026.tsv`, sources
-  S49–S67) and cross-checked three ways (`scripts/verify_feed_m.py`, 137/137 PASS).
-  `engine/results_settlement.py` settles side/total/ML and computes ROI **fail-closed** on price
-  provenance (17 unit tests); the verified-ingestion boundary is `engine/results_feed.py`.
-- **`originations.html`** — origination in the mandated order (**side → total → moneyline**), and
-  for all 272 markets of 2026 the three separate columns: model fair line | market line |
-  difference. Fair-line engine proved identical to the Computed Research Layer's engine
-  (5,336/5,336 Elo values) and reproduces its published calibration. Fair TOTAL deliberately
-  blank (S2 unfitted, flag F33).
-- **`signal-vs-staking.html`** — leaderboard split: signal (flat-stake) ranks and rewards;
-  staking is risk telemetry only. Three entries found where a positive staking run would mask a
-  non-positive signal (MASKED flag). Also the **demotion gate G-16** (live → paper: signal decay,
-  risk breach or compliance breach; automatic; staking can never promote but can demote) and
-  G-17 (signal-only promotion rule).
-- **`replacement-depth.html`** — the depth of the replacement, not just the fact: 69 Week-10
-  spots, each replacement's string and cascade count; 6 spots with no listed replacement left
-  (blank + flagged).
-- **`official-correlations.html`** — correlations computed **only** from officially sourced
-  numbers, each published **with its n** (C-O1 r=+0.076 n=137; C-O2/C-O3 |r|<0.09 n=242).
-- **`data/governance_gates.json`** — G-16/G-17 register; **`data/origination_order.json`** —
-  the order register; **`scripts/fetch_prop_mirror_m.py`** — pinned-blob fetch (sha-verified)
-  that restores session D's V9 input in a fresh workspace.
-- Sources S50–S67 (official week pages) and flags F32–F36 added to the registries.
-
-## Session F additions (2026-11-14) — the eight requirement items
-
-Branch `arena/5a8baf03-fl1`. This pass implements the brief's eight bolded requirements as tested
-code plus generated tables, and adds the row-level source audit. New engine modules are standard
-library only, per the dependency policy above:
-
-- `engine/origination.py` — the mandated origination order (side, total, moneyline) as an executable
-  queue, and fair/market/difference as three separate columns with the difference convention fixed
-  before any result.
-- `engine/settlement.py` — push-aware settlement of side/total/moneyline from verified scores and
-  per-unit PnL at American prices; missing prices are reported, never imputed.
-- `engine/demotion.py` — the live-to-paper demotion gate (D1 decay, D2 calibration drift, D3
-  concentration) plus the paper-to-live promotion check. INSUFFICIENT_DATA is a first-class outcome.
-- `engine/leaderboard.py` (extended) — signal score and staking score computed separately; overall
-  rank follows the signal, so a lucky staking run cannot mask a bad signal (unit-tested).
-- `tools/build_{results_feed,snapshots,line_board,replacement_depth,correlations_official}.py` —
-  deterministic builders for `data/settled_markets.csv` (548 settled rows), `data/price_snapshots.csv`
-  (56 rows, opens blank — F37), `data/line_board.csv` (56 rows, fair blank — F38),
-  `data/replacement_depth_out.csv` (112 affected players; 4th-string-or-deeper replacements: 26),
-  `data/correlations_official.csv` (4 measured values with n; 3 blocked rows kept blank).
-- `tools/checkrows.py` — the row-level verification gate: every data row on every page either carries
-  a source link or publishes nothing (3,724 rows audited).
-- Registers: flags F37-F42, questions Q30-Q34, suggestions SG16-SG30. Five new site pages:
-  `results-feed.html`, `price-snapshots.html`, `line-board.html`, `replacement-depth.html`,
-  `correlations-official.html`.
-
-All checks green at hand-off: 95 unit tests, `tools/{build,site,checklinks,checkrows,verify_injuries,
-verify_results}.py`, `engine/demo_run.py --check`, `python3 -m engine.measure`,
-`scripts/verify_site.py` (0 errors), `scripts/verify_d.py` (V5-V9 PASS), `site/build.py` +
-`site/verify.py`. See `COORDINATION.md` for the full sources/verification/irregularities record.
-
----
-
-## Session arena/685f958d-fl1 additions (2026-11-14) — origination, price store, results feed, signal vs staking, demotion
-
-- **`model-lines.html`** — own fair lines for the 13 pending Week 10 games, in the order side → total → moneyline.
-  Fair, market and difference are separate columns. Every market and difference cell is blank: no official NFL
-  source publishes prices (F37). Source: `data/model_lines.tsv`, `engine/originate.py`.
-- **`data/price_snapshots.tsv`** — the opening/closing store, one row per game and market (39 rows), all blank.
-- **`results-feed.html`** — the 137 final 2026 results used as inputs, and a strictly out-of-sample walk-forward
-  backtest (weeks 4–10, n = 89). The side model's sign accuracy is above 50%, but its margin and total errors do
-  not beat a constant benchmark (F39). ROI is blank (no prices).
-- **`governance.html`** — signal ranks the leaderboard, staking is reported beside it (`engine/leaderboard.py`
-  `split_scores`); the G-14 demotion gate sends a live strategy back to paper (`engine/gates.py`
-  `demotion_decision`); correlation values are withheld, with n shown (F38).
-- **Verification** — `tools/verify_brief.py` writes `data/verification-brief.tsv` (10 checks, incl. the 13-game slate
-  against `raw/nfl-week10-2026-capture.md`, and a fresh re-run of every fair value). `tests/test_brief.py` holds 17
-  hand-checkable tests.
-- **Withheld on purpose (brief B6):** market columns on `schedule.html`; coefficients on `prop-correlations.html`
-  (n kept); a withdrawal banner on the sub-site `docs/pages/measured.html`.
-- **Rebuild:** `python3 tools/brief.py && python3 tools/site.py && python3 tools/checklinks.py && python3 tools/verify_brief.py`.
-  `scripts/build_pages_d.py` regenerates `schedule.html` and `prop-correlations.html`.
-
-**Merge note (same day):** sessions `arena-685f958d-fl1` and `arena-5876146b-fl1` independently built
-parallel second-pass deliverables and both landed on `main` first. The integration keeps main's canonical
-site pages and data stores (verified results feed with row-level official game links, fair lines with
-model coefficients, replacement depth with alias rules, registers to F36/Q29/SG29) and keeps this
-session's audit layer alongside: `tools/checkrows.py` (every table row sourced or blank — now 29 pages,
-4,654 rows), `engine/settlement.py` + `tools/build_results_feed.py` + `data/settled_markets.csv` (market
-settlement audit), `engine/origination.py`, `engine/paper_gate.py` (D1–D3 + promotion check),
-`tools/build_{snapshots,line_board,correlations_official,replacement_depth}.py` and the audit CSVs they
-regenerate. This session's register entries are numbered F37–F42 / Q30–Q34 / SG30–SG34 with
-cross-references to the overlapping entries from the other sessions. Full log in `COORDINATION.md`.
-
-
----
-
-## Final integration (2026-11-16, session `arena-a4c5a1de-fl1`)
-
-- **Stale-PR takeover:** PRs #38 (market-data spine) and #39 (replacement-depth cross-check) — both
-  complete and CI-green with inactive sessions — were integrated without discarding anything.
-  Spine engine modules renamed `engine/backtest_spine.py` / `engine/originate_spine.py`; spine page
-  outputs re-issued as `price-store.html`, `origination.html`, `results-feed-market.html`,
-  `signal-vs-staking-market.html`, `replacement-depth-market.html`, `correlation-gate.html`,
-  `demotion-gate.html`, `decision-desk.html`; register ids re-issued (F43–F52, Q35–Q39, SG35–SG38,
-  S70–S76) with references retagged inside the spine's own files only.
-- **All 28 tracked requirements show `done` on `requirements.html`** — the last four partials
-  (R11 own lines, R12 fitted signals, R16 correlations, R19 replacement-depth deficiencies) were
-  closed with published, page-linked evidence; the honest negative findings (no signal beats the
-  recorded market number; 0 rewards payable; CLV unmeasurable) stay published rather than hidden.
-- **Fixed on the way:** a committed stray conflict-marker pair in this README (`=======` /
-  `>>>>>>> origin/main` around the 685f958d record) — both records preserved, markers removed.
-- **Rebuild & gates:** `python3 tools/build.py && python3 tools/site.py` (36 pages),
-  `tools/checklinks.py` OK, `tools/checkrows.py` 5,604 rows OK, 242 unit tests OK,
-  `scripts/build_market_spine.py --check` byte-identical, `scripts/verify_feed_m.py` 137/137,
-  `scripts/verify_site.py` 0 errors / 0 warnings, `site/build.py` + `site/verify.py` publishable.
-
----
-
-## Session `arena-fc0ed6e8-fl1` additions (2026-11-16)
-
-The decision layer requested by the brief and still missing after the second-pass sprints is now built.
-All of it is additive to the site described above; nothing above was rewritten.
-
-| New artefact | What it is | Where |
-|---|---|---|
-| Decision-readiness register | One row per requirement (R01–R28) with the gate that blocks it and the number that would clear it, plus a 69-row line-by-line audit of every brief bullet | `data/readiness.json`, `readiness.html`, compact table on the landing page |
-| Two-sided "what would change our mind" | Pre-registered upgrade/downgrade conditions on all 6 strategy entries | `data/strategies.json`, Leaderboard page column |
-| Signal-level removal-of-luck panel | Per-strategy p(luck alone this hot), family-wise bar (α/16), sample floors, certifiable edges, control anchor | `engine/luck_signals.py`, `data/luck_panel_signals.json`, dashboard section, `readiness.html#luck` |
-| Injury/personnel ablations | Same model with and without QB-deficiency features; train 1999–2019, validation 2020–21, holdout 2022–25 scored once; difference with paired-bootstrap CIs and fitted coefficient CIs | `engine/ablation.py` (stdlib), `data/ablations.json`, `ablations.html` |
-| Drift alarm (gate G-18) | 19 pinned datasets: shrink / missing-column / emptied-column fail the build loudly; growth warns until the pin is re-committed | `tools/verify_drift.py`, `data/verification-drift.tsv`, `validation.html` |
-| Reserve-list capture (S80) | First dated official reserve-list capture: 25 Reserve/Injured rows incl. Malik Willis 11/10 — the brief's "not listed ≠ available" row | `raw/nfl-reserve-list-2026-11.md`, `data/reserve_list_2026-11.tsv`, `readiness.html` |
-| Announced-starter evidence (S84, S85) | Dated official announcements with an explicit verified/unverified boundary: Lock announced (official), Brissett/McCord recorded as roster events with `announced_start` deliberately blank | `data/announced_starters_g.json`, `readiness.html` |
-| Venue spot-checks (S81, S82) | Official Game Center reads vs the published Stadium column: 2/272 verified matching (incl. Munich), Game Book PDF links confirmed reachable | `data/venue_spotchecks.json`, `readiness.html` |
-| Dated schedule announcement (S83) | The league's official May 8, 2026 release announcement published beside the live schedule page | `schedule.html` |
-
-Verification for this layer: 285 unit tests OK (18 new), `checklinks` 43 pages OK, `checkrows` 6,176 rows
-audited with every data row sourced, drift alarm 19/19 PASS, injuries 345/345, results 32/32,
-`verify_brief` 10/10, computed-layer rebuild byte-identical. Register IDs from this session: flags
-F61–F65, question Q44, suggestions SG43–SG45, sources S80–S85 (renumbered after merging parallel
-sessions' F43–F60 / Q35–Q43 / SG35–SG42 / S70–S79, with cross-references preserved).
+Nothing in this repository is an offer or recommendation to wager. The project does not establish the legality of betting or prizes in any jurisdiction; consult qualified legal counsel and relevant regulators before any commercial or reward program.
