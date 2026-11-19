@@ -77,3 +77,10 @@ The root HTML is committed for static hosting. After changing data or a generato
 ## Not betting advice
 
 Nothing in this repository is an offer or recommendation to wager. The project does not establish the legality of betting or prizes in any jurisdiction; consult qualified legal counsel and relevant regulators before any commercial or reward program.
+---
+
+## 2026-11-19 update — Week 11 official re-read and decision review
+
+A dated capture of the official [NFL injury hub](https://www.nfl.com/injuries/), [2026 league standings](https://www.nfl.com/standings/league/2026/REG), and [NFL schedule](https://www.nfl.com/schedules/) is retained at `raw/official-reread-2026-11-19.md` (sources S100-S102). It records 253 injury-report player rows across 24 club tables, 32 standings rows, 13 Week 11 fixtures, and six bye clubs. Earlier canonical tables are not overwritten. Blank NFL report fields are not interpreted as healthy/available.
+
+`decision-review.html` now gathers all 34 open/partial questions, existing answers and recommendations, known/unknown information, missing-data gates, context links to verified official pages, and a discovery plan. Numeric thresholds absent from the register remain explicitly unspecified. Venue-by-Game-Center fields remain blank/unverified; the official dated schedule-release announcement is linked on `schedule.html` as S103. The new page and the dated read are linked from the dashboard. See the latest addendum in `EXECUTIVE_SUMMARY.md` for test results and limitations.

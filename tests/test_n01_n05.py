@@ -300,6 +300,8 @@ class TestSourcesS70S72(unittest.TestCase):
         #   reads, 2026-11-17)
         # + S97-S99 (session arena/a502c4e0-fl1: injury-hub read 4, week-10
         #   closeout schedule, post-MNF standings closeout)
-        self.assertEqual(len(rows), 91)
+        # + S100-S103 (session arena-58ccea26-fl1: 2026-11-19 Week 11 injury,
+        #   standings/schedule reads and official schedule-release article)
+        self.assertEqual(len(rows), 95)
 if __name__ == "__main__":
     unittest.main()

@@ -86,14 +86,13 @@ def schedule_page(sources_by_id):
 <section>
 <h2>Full 2026 regular-season schedule &amp; results (272 games)</h2>
 <div class="callout">
-<p><strong>The league's dated schedule announcement</strong> (official, read 2026-11-16,
-source <a href="sources.html#S86">S86</a>):
-&ldquo;The National Football League announced that the 2026 NFL Schedule powered by AWS will be
-released on <strong>Thursday, May 14 at 8 p.m. ET</strong>&rdquo; &mdash; the announcement was
-published <a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14">on nfl.com on May 8, 2026</a>
-and set the remaining international-games reveal for May 13, 2026. It is published here beside the
-live schedule table, as the brief requires, so the live page and the announcement that produced it
-are always visible together.</p>
+<p><strong>The league's schedule-release announcement</strong> (official NFL article, re-read
+2026-11-19; source <a href="sources.html#S103">S103</a>): the NFL stated in its
+<a href="https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14" target="_blank" rel="noopener">official article</a> that the 2026 schedule would be
+released on <strong>Thursday, May 14 at 8 p.m. ET</strong>, with the remaining International Games
+announced on May 13 at 9 a.m. ET. The announcement is published beside the live schedule table, as
+requested. This citation replaces the old S86 cross-reference, which pointed to an unrelated
+third-party win-totals file.</p>
 <p><strong>Provenance.</strong> Game results come from the nflverse combined games feed
 (<a href="https://github.com/nflverse/nfldata/blob/master/data/games.csv">nflverse/nfldata data/games.csv</a>,
 auto-updated from official NFL game books; snapshot committed at

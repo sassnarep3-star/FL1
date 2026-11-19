@@ -995,3 +995,30 @@ Parallel-session note: sessions `arena/a4c5a1de-fl1` and `arena/dbf11de0-fl1` sh
 deliverables in PRs #42–#44 (their removal-of-luck panel, backlog, availability pages, snapshot
 ledger). Nothing was discarded: both builds are live and cross-linked; register IDs from this
 session were renumbered (F61–F65, Q44, SG43–SG45, S80–S85) and the collisions cross-referenced.
+
+---
+
+## Session `arena-58ccea26-fl1` — dated Week 11 re-read and decision review (2026-11-19)
+
+### New official evidence captured
+
+This session read and retained a dated capture of the official NFL injury hub, league standings and schedule. The live source pages are [NFL injury hub](https://www.nfl.com/injuries/) (S100), [2026 league standings](https://www.nfl.com/standings/league/2026/REG) (S101), and [NFL schedules](https://www.nfl.com/schedules/) (S102). Initial page reads began after 2026-11-19T05:23:12Z; the complete seven-chunk injury page was re-read after 2026-11-19T05:24:46Z and before 2026-11-19T05:30:40Z. The page-reader does not expose per-chunk fetch timestamps, so finer timestamp claims are not made.
+
+- The injury hub displayed **Week 11**: 253 player rows across 24 club tables; CIN and WAS each displayed “No Injuries Reported.” The two clubs are report facts, not a claim that all their players are healthy. Blank injury/game-status cells are retained as blanks; they do not mean available. The 6 bye clubs are not injury-report tables in this Week 11 capture.
+- The standings page displayed **32 clubs**. All 32 rows are retained in the dated source capture and the earlier canonical standings file was not replaced.
+- The schedule page displayed **13 fixtures** and six bye clubs. All 13 fixtures are retained. **Venue transcription from each official Game Center remains unverified**; those venue values have not been filled in. The official schedule-release announcement is cited beside the full schedule as S103.
+- Raw capture: `raw/official-reread-2026-11-19.md`; SHA-256 `0ec0557cef1c06e8b98b06fc8799a7d79d02d9455ef3a9328404433bf42735cf`. Verification ledger: `data/verification-2026-11-19.tsv`; source registry: S100-S103. The six tests check the pinned raw hash, official-source registration, row counts, announcement citation, and question-register coverage; they do not replace the manual official-page review.
+
+### Decision review and limits
+
+The new [Review & Choose](decision-review.html) page covers all **34 open or partial questions** in `data/questions.json`, showing known/unknown information, missing items, the existing recommended path, a clearance gate, available verified official context links, and an explicit “no numeric threshold recorded” where that is the truth. Unverified source gaps are left blank and marked. `data/discovery_plan.json` proposes how to seek the missing market-price policy, official inactive/snap data, immutable point-in-time availability history, schedule provenance, applicable terms, and pre-registered skill gates.
+
+No market prices, official snap-count source, venue transcription, or schedule-announcement artifact was established in this pass. Consequently this pass does **not** claim a new validated strategy, market edge, injury impact, replacement certainty, or passing leaderboard entry. Current Week 11 designations are a level until an earlier dated snapshot exists to calculate surprise. The recommendations and unanswered owner-policy questions remain review material, not silent implementation decisions.
+
+**Verification:** `python3 -m unittest discover -s tests -q` → 362 tests OK; `python3 tools/build.py`, `python3 tools/site.py` and `python3 scripts/build_pages_d.py` completed; `python3 tools/checklinks.py` → 59 pages reachable and internal references valid; `python3 tools/checkrows.py` → 7,060 rows pass rules 1–4; `python3 tools/verify_drift.py` → 19/19 PASS. The warnings from older tests are non-fatal `ResourceWarning`s for unclosed test file handles. External links are not fetched by `checklinks.py`; see source registry status and flagged items.
+
+### Post-rebase integration verification — 2026-11-19
+
+After reconciling with `origin/main` at `d00e89f`, all generated outputs were rebuilt from the combined tree: `tools/build.py`, `tools/site.py`, `scripts/build_pages_d.py`, and `tools/source_audit.py`. The integrated tree has 60 pages and a 7,130-row audit (7,002 citation rows in the deterministic source-row ledger). `checklinks.py` passed all internal links, anchors and source IDs; the external 263 links are not fetched by that check. `checkrows.py` passed all 7,130 rows; `verify_drift.py` passed 19/19; injury verification matched 345/345 canonical rows; results reconcile 137 games to standings for all 32 clubs; replacement-depth verification passed 71 ladders; live D5 checks passed; and `python3 -m unittest discover -s tests -q` passed 395 tests. Existing `ResourceWarning`s remain non-fatal. One inherited assertion still expected the now-corrected S86 announcement wording; it was updated to assert the current schedule-release text and S103 link. No unresolved test failures remain.
+
+No additional official pages were fetched during this integration pass. The 2026-11-19 official source captures remain the evidence boundary: Game-Center venue coverage remains incomplete, blank injury/status cells remain unknown, and this work does not establish a validated market edge or betting recommendation.

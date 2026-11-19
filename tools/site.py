@@ -33,6 +33,7 @@ TAGLINE = "Verified data, open questions, and a strategy leaderboard that refuse
 NAV = [
     ("index.html", "Dashboard"),
     ("live-captures.html", "Live Captures"),
+    ("live-reread-2026-11-19.html", "Week 11 Re-read"),
     ("live-standings.html", "Live Standings"),
     ("live-finals.html", "Week 10 Finals"),
     ("live-schedule.html", "Week 11 Schedule"),
@@ -75,6 +76,7 @@ NAV = [
     ("ablations.html", "Ablations"),
     ("removal-of-luck.html", "Removal of Luck"),
     ("questions.html", "Open Questions"),
+    ("decision-review.html", "Review & Choose"),
     ("suggestions.html", "Suggestions"),
     ("sources.html", "Sources"),
     ("source-audit.html", "Row-Level Source Audit"),
@@ -222,10 +224,11 @@ def page(filename, title, body, extra_head="", wide=False):
 </main>
 <footer class="foot">
   <p><strong>%s</strong> — %s</p>
-  <p>Data captured 2026-11-14 and 2026-11-16 (UTC) from official league and club sources. Every value links to its source.
+  <p>Source captures are dated by artifact; the latest official Week 11 reads on this site are 2026-11-19 (UTC).
+  The row-level source audit identifies rows with missing, unresolved or non-official citations; it is not a live check of external URLs.
   Values that could not be confirmed from an official source are left blank and listed on
   <a href="flagged.html">Flagged for Review</a>. Nothing on this site is a bet, an offer to wager, or advice.
-  No price, edge or expected-value figure is displayed unless an official source supports it.</p>
+  Betting prices require a licensed market feed and are not supplied by NFL league pages.</p>
 </footer>
 <script src="assets/js/site.js" defer></script>
 </body>
@@ -1621,6 +1624,7 @@ def main():
     aliases = build.load("depth-aliases.tsv")
 
     questions = build.load_json("questions.json")
+    discovery_plan = build.load_json("discovery_plan.json")
     suggestions = build.load_json("suggestions.json")
     requirements = build.load_json("requirements.json")
     strategies = build.load_json("strategies.json")
@@ -1671,6 +1675,29 @@ def main():
 
     written = []
 
+    # ------------------------------------------------------- dated Week 11 read
+    reread_rows = [
+        [cell("S100 — Injury hub"), cell("Week 11; 253 player rows across 24 club tables; CIN and WAS print “No Injuries Reported.”"),
+         cell("Blank game-status/injury cells are not availability; most Week 11 rows have no game-status value. Raw player rows remain in the dated capture."),
+         raw_src('<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">Official NFL injury hub</a> · <a href="raw/official-reread-2026-11-19.md">dated raw capture</a>')],
+        [cell("S101 — League standings"), cell("32 clubs; 2026 regular season, read 2026-11-19."),
+         cell("Retained as a dated read; not copied over the canonical standings table."),
+         raw_src('<a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">Official NFL league standings</a> · <a href="raw/official-reread-2026-11-19.md">dated raw capture</a>')],
+        [cell("S102 — Schedule"), cell("13 Week 11 fixtures; six clubs on bye."),
+         cell("Venue transcription from every official Game Center remains unverified; the official release announcement is linked beside the full schedule as S103."),
+         raw_src('<a href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">Official NFL schedule</a> · <a href="raw/official-reread-2026-11-19.md">dated raw capture</a>')],
+    ]
+    reread_body = ('<section><h1>Week 11 Dated Re-read</h1>'
+                   '<p class="lead">Official NFL pages read on 2026-11-19. This is a dated evidence snapshot, '
+                   'not a live-updated feed and not a replacement for earlier point-in-time records.</p>'
+                   '<p class="callout">No player is described as healthy or available because a cell is blank. '
+                   'Venue transcription from each game centre remains unverified; the dated release announcement is linked '
+                   'beside the full schedule. The raw capture and source URLs are linked in the table; the '
+                   '<a href="data/verification-2026-11-19.tsv">dated verification ledger</a> records the hash and checks.</p></section>'
+                   + table(["Capture", "Observed facts", "Limits / review notes", "Official source and retained capture"],
+                           reread_rows, cls="dense", caption="Rows summarize only values printed on the linked official pages; no model inference."))
+    written.append(page("live-reread-2026-11-19.html", "Week 11 Dated Re-read", reread_body, wide=True))
+
     # ------------------------------------------------------------------ index
     n_sugg = len(suggestions)
     n_q = len(questions)
@@ -1678,6 +1705,8 @@ def main():
     n_verified = sum(1 for s in sources if s["status"] == "VERIFIED")
     n_404 = sum(1 for s in sources if s["status"] != "VERIFIED")
     n_req_done = sum(1 for r in requirements if r["status"] == "done")
+    n_req_total = len(requirements)
+    n_req_partial = sum(1 for r in requirements if r["status"] == "partial")
 
     cards = """
 <section class="hero">
@@ -1695,10 +1724,13 @@ def main():
     <p>One page: what is verified, what is blocked, and the five decisions that unblock the rest.</p></a>
   <a class="card" href="#decision-readiness"><h3>Decision-Readiness Table</h3>
     <p>One row per requirement: the gate that blocks it and the number that would clear it.
-    <strong>24 of 28</strong> delivered, 4 partial with named gates.</p></a>
+    <strong>%(n_req_done)d of %(n_req_total)d</strong> delivered; <strong>%(n_req_partial)d</strong> partial with named gates.</p></a>
   <a class="card" href="#removal-of-luck"><h3>Removal of Luck</h3>
     <p>The luck-removed edge (95%% CI lower bound vs break-even) applied to all 16 computed entries:
     <strong>0 proven</strong>, including every positive-ROI entry. See why before trusting any record.</p></a>
+  <a class="card" href="live-reread-2026-11-19.html"><h3>Week 11 Dated Re-read</h3>
+    <p>Official 2026-11-19 injury hub, standings and schedule findings: 253 player rows, 32 standings rows and 13 fixtures.
+    Dated capture retained without replacing historical tables.</p></a>
   <a class="card" href="injuries.html"><h3>Injury Report</h3>
     <p><strong>%(inj_rows)d</strong> player rows across <strong>%(inj_clubs)d of %(inj_clubs_total)d</strong> clubs, straight from the official
     Week 10 report. Practice status and game status preserved exactly.</p></a>
@@ -1709,6 +1741,9 @@ def main():
   <a class="card" href="questions.html"><h3>Open Questions</h3>
     <p><strong>%(n_questions)d</strong> questions, <strong>%(n_blocking)d</strong> of them blocking, each stating what we know,
     what we do not, and what data is missing.</p></a>
+  <a class="card" href="decision-review.html"><h3>Review &amp; Choose</h3>
+    <p>Open and partial questions, the information missing, verified official references, and explicit gates.
+    No numeric clearance threshold is invented where the register has none.</p></a>
   <a class="card" href="suggestions.html"><h3>Suggestions</h3>
     <p><strong>%(n_suggestions)d</strong> proposals with options, trade-offs and one recommended path. Review before
     anything is implemented.</p></a>
@@ -1777,6 +1812,9 @@ def main():
        "n_questions": n_q,
        "n_blocking": n_block,
        "n_suggestions": n_sugg,
+       "n_req_done": n_req_done,
+       "n_req_total": n_req_total,
+       "n_req_partial": n_req_partial,
        "n_results": len(results),
        "mk_snapshots": pages_market.summary_counts()["snapshots"],
        "mk_verified": pages_market.summary_counts()["verified"],
@@ -1921,6 +1959,22 @@ pages contradict each other. It does not print a single performance number. Each
        depth_tot["starters"], depth_tot["startersWithStatus"])
     import brief as _brief  # session arena/685f958d-fl1
     es = _brief.exec_banner() + site_g.exec_section(g_ctx) + es
+    es = """
+<section>
+<h2>Latest dated official re-read — 2026-11-19</h2>
+<p>This session preserved a new Week 11 snapshot rather than overwriting the earlier Week 10 tables. The official
+<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL injury hub</a> displayed 253 player
+rows across 24 club tables; CIN and WAS each displayed “No Injuries Reported.” Blank game-status cells remain blank,
+not a claim of availability. The official <a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">league standings</a>
+read contains all 32 clubs. The official <a href="https://www.nfl.com/schedules/" target="_blank" rel="noopener">schedule page</a>
+shows 13 Week 11 games and six bye clubs. Capture details, the row/hash checks, and known gaps are on
+<a href="live-captures.html">Live Captures</a> and <a href="decision-review.html">Review &amp; Choose</a>.</p>
+<p><strong>Not established by this re-read:</strong> venue transcriptions from every Game Center, market opening/closing price
+policy, or any strategy qualification. The dated official schedule-release announcement is already linked beside the
+full schedule (S103). Venue values remain blank until the individual game centres are checked. No current injury level
+is treated as a surprise signal until a prior immutable snapshot is available for comparison.</p>
+</section>
+""" + es
     written.append(page("executive-summary.html", "Executive Summary",
                         es + sprint["exec_summary"]))
 
@@ -2898,6 +2952,72 @@ requirement exists in the verified sources. Where it does not, the gap became a 
 is dominated by data-availability questions: the analytical methods are not the bottleneck, the inputs are.</p>
 </section>""")
     written.append(page("questions.html", "Open Questions", "".join(q_html), wide=True))
+
+    # --------------------------------------------------------- Review & Choose
+    discovery_rows = []
+    for q in discovery_plan["questions"]:
+        q_anchor = '<a href="questions.html#%s"><strong>%s</strong></a>' % (
+            esc(q["id"]), esc(q["id"]))
+        official_links = []
+        for source in q.get("official_sources", []):
+            # Only Official + VERIFIED entries were admitted to this register by
+            # the data builder; link to the actual official page for review.
+            official_links.append('<a href="%s" target="_blank" rel="noopener">%s</a>' % (
+                esc(source["url"]), esc(source["id"])))
+        source_cell = ('<td>%s</td>' % "<br>".join(official_links)) if official_links else (
+            '<td class="blank" title="No official source was confirmed for this question">—</td>')
+        options = "<br>".join(
+            '<strong>%s:</strong> %s' % (esc(o["label"]), esc(o["description"]))
+            for o in q.get("options", []))
+        discovery_rows.append([
+            '<td>%s</td>' % q_anchor,
+            cell(q["question"]),
+            cell(q["known"]),
+            cell(q["unknown"]),
+            cell(q["missing_information"]),
+            cell(q["recommended_path"]),
+            cell(q["clearance_gate"]),
+            cell(q["numeric_clearance_from_register"]),
+            '<td>%s</td>' % options,
+            '<td>%s</td>' % ('<span class="pill bad">UNVERIFIED — discover source</span>'
+                              if not official_links else
+                              '<span class="pill ok">official context link — gate still open</span>'),
+            source_cell,
+        ])
+    review_html = [
+        '<section><h1>Review &amp; Choose</h1>',
+        '<p class="lead">A decision surface for every open or partial question in the register. '
+        'It states what is known, what remains unknown, the missing information, and the existing '
+        'recommended path. Review the alternatives before implementing changes.</p>',
+        '<div class="callout"><p><strong>%d unresolved questions.</strong> '
+        'A numeric clearance value is shown only if the register supplies one. “Not specified” is '
+        'deliberate: we will not invent a threshold. Empty official-source cells are explicitly '
+        'flagged UNVERIFIED. Historical backtests and leaderboard claims remain gated.</p></div></section>'
+        % len(discovery_plan["questions"]),
+        '<section><h2>Decision questions</h2>%s</section>' % table(
+            ["ID", "Question", "What we know", "What is not known", "Missing information",
+             "Recommended path", "Gate to clear", "Numeric clearance measure already documented", "Options to review",
+             "Source status", "Official source"], discovery_rows, cls="dense qtable",
+            caption="Question and answer text is carried from data/questions.json; sources link directly to verified official pages only."),
+        '<section><h2>Discovery plan for missing information</h2>',
+        '<p>These are research actions, not claims that the missing data already exists. '
+        'Record the exact official URL, timestamp, terms, raw hash and coverage before any value is used.</p>',
+        '<ol class="tight">'
+        '<li><strong>Prices:</strong> identify lawful timestamped opening/closing market data and its publication terms; '
+        'do not run a price-based backtest until both source and vintage semantics are recorded.</li>'
+        '<li><strong>Inactives and snaps:</strong> search the official NFL Game Books and NFL statistical archive for structured '
+        'inactive lists and snap counts; establish season and club coverage before claiming a replacement or snap share.</li>'
+        '<li><strong>Availability history:</strong> archive daily NFL injury-hub reads and official club depth pages with UTC time, '
+        'raw hash, schema checks and conflict flags. The current hub is linked in the dated capture record '
+        '<a href="sources.html#S100">S100</a>.</li>'
+        '<li><strong>Schedule context:</strong> the official NFL schedule-release announcement is recorded at '
+        '<a href="sources.html#S103">S103</a> beside the full schedule. Still transcribe each venue from its official game centre; '
+        'keep each venue blank until checked.</li>'
+        '<li><strong>Terms and thresholds:</strong> review official NFL/provider terms with qualified counsel; separately freeze '
+        'qualification, demotion, uncertainty, sample window and multiplicity rules in a pre-registration commit.</li>'
+        '</ol></section>',
+    ]
+    written.append(page("decision-review.html", "Review & Choose", "".join(review_html), wide=True))
 
     # ------------------------------------------------------------- suggestions
     sg_html = ['<section><h1>Suggestions</h1>',

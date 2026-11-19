@@ -5597,6 +5597,46 @@ window.DATA = {
    "checked": "2026-11-17",
    "status": "VERIFIED",
    "note": "Read 2026-11-17 between 04:39:46Z and 04:43:14Z (2 content chunks; clock-bracketed). The league-standings route of the same site still printed the PRE-GAME state at four reads after the final (04:30:44Z-~04:41Z: LAC 0-8/121/219, BAL 4-5/189/236), so this capture takes all 32 rows from the fresh division route (LAC 1-8/144/239/1W, BAL 4-6/209/259/5L); the other 30 clubs are byte-identical on both routes. Full 17-column capture: raw/standings-2026-20261117-closeout.tsv. Used by the Q44 closeout points-arithmetic gates (P4/P6: staged 150-row read reproduces all 32 clubs on W/L/T/PF/PA). Route-staleness observation published as flag F72. Does NOT replace data/standings.tsv or session e97f05c3's pre-MNF data/standings_2026-11-17.tsv."
+  },
+  {
+   "id": "S100",
+   "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/injuries/",
+   "tier": "Official (league)",
+   "checked": "2026-11-19",
+   "status": "VERIFIED",
+   "note": "Read all 7 page-reader chunks on 2026-11-19; Week 11, 253 player rows across 24 clubs and two additional clubs printing No Injuries Reported. Verbatim dated capture: raw/official-reread-2026-11-19.md. The NFL hub page is mutable; this row supports the captured page state only, not historical versions."
+  },
+  {
+   "id": "S101",
+   "title": "Official NFL League Standings — 2026 regular season (dated read 2026-11-19)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "tier": "Official (league)",
+   "checked": "2026-11-19",
+   "status": "VERIFIED",
+   "note": "Read both page-reader chunks on 2026-11-19; all 32 standings rows transcribed in raw/official-reread-2026-11-19.md. Corroborates the published post-Week-10 state; does not replace the frozen standings table."
+  },
+  {
+   "id": "S102",
+   "title": "Official NFL schedule — Week 11, 2026 season (dated read 2026-11-19)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/schedules/",
+   "tier": "Official (league)",
+   "checked": "2026-11-19",
+   "status": "VERIFIED",
+   "note": "Read all 3 page-reader chunks on 2026-11-19; transcribed the 13 Week 11 fixtures, listed byes and schedule facts in raw/official-reread-2026-11-19.md. Page links to game centres; venue is deliberately not claimed here because each game-centre venue was not yet transcribed. The schedule-release announcement is separately registered as S103 and linked beside the full schedule; this capture does not include individual game-centre venue transcriptions."
+  },
+  {
+   "id": "S103",
+   "title": "Official NFL 2026 schedule-release announcement (re-read 2026-11-19)",
+   "publisher": "NFL.com (National Football League)",
+   "url": "https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14",
+   "tier": "Official (league)",
+   "checked": "2026-11-19",
+   "status": "VERIFIED",
+   "note": "Fetched official article page on 2026-11-19. It states the NFL announced that the full 2026 schedule would release Thursday, May 14 at 8 p.m. ET, and the remaining International Games would be announced May 13 at 9 a.m. ET. The generated `schedule.html` had cited S86 (an unrelated nflverse win-totals feed); correct citation is S103. This verifies the announcement, not venue transcription for every fixture."
   }
  ],
  "schedule": [

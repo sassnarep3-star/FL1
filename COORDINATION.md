@@ -2251,126 +2251,40 @@ results, flags, sources, or site changes were discarded.
 includes the Row-Level Source Audit in the global navigation. F68 remains a visible review item; it does
 not block publication.
 
-## Current session — `arena/0dffa916-fl1` (2026-11-19 UTC)
+## Current session — `arena/58ccea26-fl1` (2026-11-19 — official re-read + Review & Choose section)
 
-| ID | Task | Status | Owner | File scope |
-|---|---|---|---|---|
-| N01 | Review the current repository/site against the requested decision-making workflow; publish a concise, evidence-bounded review of known vs missing information, decision gates, and recommended next discovery steps. Do not rewrite shared generated data or navigation. | in progress | `arena/0dffa916-fl1` | `docs/SESSION_REVIEW.md`, this section of `COORDINATION.md` |
-
-Claimed after reading this task board. Scope is additive and avoids shared site/data generators. Current checkout is the fixed Arena branch `arena/0dffa916-fl1`; no branch switch will be made.
-
-### N01 completion record — 2026-11-19 UTC
-
-Added `docs/SESSION_REVIEW.md`, an evidence-bounded decision-readiness and discovery plan. It distinguishes existing repository structures from validated facts, lists the information and gates required before betting decisions, and proposes staged singles → totals → moneyline → joint combos with prospective proper-score evaluation. No new NFL factual value was entered, and no unresolved or third-party fact was promoted to verified. Official review locations are linked; the document explicitly says they were not freshly fetched. Existing `source-audit.html` / `sources.html` are referenced for row-level provenance.
-
-Verification in this checkout: `python3 -m unittest discover -s tests -q` → 356 passed (existing ResourceWarnings); `python3 tools/checklinks.py` → 57 pages, internal link/anchor/source-ID checks pass, 263 external URLs not fetched; `python3 tools/checkrows.py` → 57 pages / 7,019 rows structurally audited. These are repository integrity checks, not external fact verification. No shared generated HTML, navigation, data registry, or model files were changed.
-
-## Session `arena/318ef582-fl1` — documentation accuracy + review entry point (2026-11-19 UTC)
-
-**Status:** in progress. The working branch is fixed by Arena as `arena/318ef582-fl1`; no branch switch or worktree was created.
-
-| ID | Task | Status | Owner | File scope |
-|---|---|---|---|---|
-| DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | done | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
-| DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | done | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
-
-**Coordination check:** read the existing board before starting. PR #57 and PR #59 are open and older than 60 minutes; this task does not touch their source/data/site-generator scopes. PR #59's coordination-only changes are historical merge bookkeeping; this claim is an additive handoff note and preserves all prior entries. No official-source facts or new numeric findings will be introduced by DOC1; the documentation will point readers to existing evidence registers and state that repository metadata checks do not independently verify live source pages.
-
-**Claimed file scope only:** `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, and this DOC1 section in `COORDINATION.md`. Any needed edits outside that list will be logged as a request rather than made.
-
-### DOC1 completion record — 2026-11-19 UTC
-
-**Delivered:** Replaced the stale top-level README status/inventory with a repository-current navigation guide; refreshed `REVIEW.md` into a decision-focused path through requirements, question answers, suggestions, evidence, gates, and flags; added `tests/test_project_docs.py` to ensure all relative links resolve and required decision surfaces remain discoverable. The docs explicitly distinguish citation metadata from verification of live external facts, note that automated refresh coverage is limited, and warn that model/market artifacts are not proof a strategy is qualified. No source values were added or promoted, and no generated page or shared data register was edited.
-
-**Verification:** `python3 -m unittest tests.test_project_docs -v` → 3/3 PASS; `python3 -m unittest discover -s tests -q` → 359 tests PASS (pre-existing ResourceWarnings from older tests, non-fatal). `python3 tools/build.py` and `python3 tools/site.py` completed without a tracked generated-file diff; site generator reported 50 pages. `python3 tools/checklinks.py` → 57 pages, all internal links/anchors and source IDs resolve; it explicitly did not fetch 263 external links. `python3 tools/checkrows.py` → 57 pages / 7,019 table rows audited. `python3 tools/verify_drift.py` → 19/19 PASS. `python3 tools/verify_injuries.py` → 345/345 exact raw-capture matches. `python3 tools/verify_results.py` → 137-game corpus reconciles 32/32 clubs; the 136-game comparison has two expected mismatches because the standings read includes Week 10 TNF. `python3 tools/verify_replacement.py` → 71 ladders, all rendered cells recompute, 4 accepted divergences.
-
-**Source-audit limitation retained:** The build's metadata audit emitted 6,891 rendered rows: 3,982 official-registered, 147 registered-not-verified, 467 nonofficial-registered, 1,340 repository-link-only, 205 with no source link, 121 direct links unregistered, and 629 mixed/unresolved. These are repository audit classes, not proof that any NFL fact is true or false; source pages/flags remain the review path. `checklinks.py` is internal-link validation only.
-
-**Status:** DOC1 done. No official external page was newly re-fetched for this documentation-only task; this limitation is stated rather than claiming fresh line-by-line source verification.
-
-**Reconciliation note (2026-11-19 UTC):** After PR #60 advanced `main` during DOC1, `git pull --rebase origin main` conflicted on the shared coordination file because this branch's original claim commit was already on its remote branch while `main` added the parallel N01 review record. Resolution preserved both N01's completed log and DOC1's full claim/completion record. A later pull of the remote branch had the same duplicate-claim conflict; it was aborted without discarding work, then both histories were retained via a merge commit. No N01 files were modified. Before publication, re-run a merge-preserving rebase against current `main`; preserve both session entries if the board conflicts again.
-## Task board — session `arena/9d880d91-fl1` (2026-11-19 — brief re-audit + executive summary + integration)
-
-**Session ID:** `arena-9d880d91-fl1` · **Branch:** `arena/9d880d91-fl1` (from `addeb0a` of `main`, PR #58 merged) ·
-**Claimed:** 2026-11-19 UTC · **Status:** active.
-**Pre-claim sweep:** `gh pr list --state open` → #57 (`arena/3f12fa46-fl1`, H2–H8 Game Books/matchup/weather) and #59 (coordination record for PR #58). PR #57 touches `tools/site.py`, `data/flags.json`, `data/sources.tsv`, `data/standings.tsv`, `data/results.tsv`, `data/model_lines.tsv`, `data/requirements_backlog.json`, `data/verification-drift.tsv`, and nearly every generated HTML page (NAV). This session will NOT edit those files except one additive `tools/site.py` change (one index card link + one new page render; NAV untouched) and will log the expected rebase conflict for PR #57 here instead of editing its files. PR #59 touches only `COORDINATION.md` + `EXECUTIVE_SUMMARY.md` (one line) — this session appends a new section to `COORDINATION.md` and a new dated block to `EXECUTIVE_SUMMARY.md`; both are append-only and merge-safe.
+**Session ID:** `arena-58ccea26-fl1` · **Branch:** `arena/58ccea26-fl1` (from `addeb0a` of `main`, PR #58 merged) ·
+**Claimed:** 2026-11-19 · **Status:** active.
+**Pre-claim sweep:** `gh pr list --state open` → PR #59 (coordination record, `arena/a502c4e0-fl1`, CLEAN) and
+PR #57 (`arena/3f12fa46-fl1`, H2–H8 Game Books/matchup/weather, **CONFLICTING/DIRTY**, last commit
+2026-11-17T03:39Z — stale >60 min, owner session inactive). PR #57's branch deletes PR #58 files
+(`raw/injuries-week10-2026-read4.md`, `scripts/promote_week10.py`, closeout TSVs) and rewrites
+`data/flags.json` wholesale; it must be rebased/reconciled by its owner before any merge — **this
+session does not merge PR #57 and does not touch its scope** (gamebooks, matchup matrix, model
+outputs, weather overlay, backlog re-audit, `tools/site_h.py`). Shared files touched here are
+append-only/additive and logged below so PR #57's owner can keep both halves at rebase.
 
 | # | Task | Status | Owner | File scope (claimed) |
 |---|------|--------|-------|----------------------|
-| J1 | Coordination claim + immediate push | in progress | `arena-9d880d91-fl1` | `COORDINATION.md` |
-| J2 | Line-by-line brief re-audit (2026-11-19): re-check every `data/requirements_backlog.json` row + every `data/readiness.json` brief_audit row against the committed files; publish corrections with file evidence (no value changes to shared data) | unclaimed | `arena-9d880d91-fl1` | `data/brief_audit_9d88.json` (new), `tools/build_brief_audit_9d88.py` (new), `brief-audit.html` (new, generated), `tools/site.py` (additive only: index card + page render), `index.html` (regenerated), `tests/test_brief_audit_9d88.py` (new) |
-| J3 | Fresh official spot-verification (2026-11-19): re-read NFL.com standings + Week 11 schedule + injury hub via fetch; verify closeout standings 32/32 and slate membership; publish dated read, never overwrite canonical tables | unclaimed | `arena-9d880d91-fl1` | `raw/live/2026-11-19-*.tsv/md` (new), `data/verification-9d88.tsv` (new), `scripts/verify_9d88.py` (new) |
-| J4 | Executive summary refresh (dated 2026-11-19 block: what is verified, what is blocked, the decisions that unblock the rest, irregularities incl. PR #57 ID collisions) | unclaimed | `arena-9d880d91-fl1` | `EXECUTIVE_SUMMARY.md` (append block only) |
-| J5 | Full battery + PR + merge + Pages confirm | unclaimed | `arena-9d880d91-fl1` | `COORDINATION.md` (record PR link + merge result) |
+| J1 | Coordination claim + immediate push | done | `arena-58ccea26-fl1` | `COORDINATION.md` |
+| J2 | Fresh dated official re-reads (2026-11-19): injury hub, standings, schedule — raw capture, source register and test | done | `arena-58ccea26-fl1` | `raw/official-reread-2026-11-19.md`, `data/verification-2026-11-19.tsv`, `data/sources.tsv` (append), `tests/test_reread_j.py`, `tests/test_n01_n05.py` (source-count pin) |
+| J3 | **Review & Choose section**: one row per open/partial question with known/unknown, missing information, existing recommended path, clearance gate, options, and official links where verified; plus discovery actions | done | `arena-58ccea26-fl1` | `data/discovery_plan.json` (new), `tools/site.py` (additive NAV/emitter + dynamic readiness count), `decision-review.html` (generated), `tests/test_reread_j.py` |
+| J4 | Rebuild, full verification battery, exec-summary addendum, PR → `main`, merge without waiting, confirm Pages, record result here | in progress | `arena-58ccea26-fl1` | `EXECUTIVE_SUMMARY.md` (append), `README.md` (append), generated HTML, PR |
+| J5 | Resolve schedule-announcement source-register mismatch found in generated Schedule page; verify official announcement and correct source linkage | done | `arena-58ccea26-fl1` | `scripts/build_pages_d.py`, `data/sources.tsv` (S103), `data/verification-2026-11-19.tsv`, `tests/test_reread_j.py`, generated `schedule.html` |
+| J6 | Take over stale D5 Q-D5-08 copy that says the announcement date is missing; update the note to cite S103 while preserving the unverified Game-Center venue caveat | done | `arena-58ccea26-fl1` (handoff from stale T4) | `tools/pages_d5.py` (one Q-D5-08 answer cell only), generated `decision-questions-d5.html`, `tests/test_reread_j.py` |
 
-**Scope rule:** no edits to `data/flags.json`, `data/sources.tsv`, `data/standings.tsv`, `data/results.tsv`, `data/model_lines.tsv`, `data/requirements_backlog.json`, `data/questions.json`, `data/suggestions.json`, `data/strategies.json`, `data/readiness.json`, `data/verification-drift.tsv`, or `tools/verify_drift.py`. If J2 finds a stale register row, the correction is published in `data/brief_audit_9d88.json` + `brief-audit.html` with the evidence, not by rewriting the register another session owns. Requests against PR #57-owned files are logged below.
+**J2 completion (2026-11-19):** S100-S102 cite the official NFL Week 11 injury hub, 2026 league standings and schedule respectively. All 7 injury-page chunks, both standings chunks and all 3 schedule chunks were read; 253 player rows/24 club tables, all 32 standings rows, 13 games/6 bye clubs are retained in `raw/official-reread-2026-11-19.md`. The injury hub prints no injury reports for CIN/WAS; it has no game-status cells for most Sunday rows, and those blanks are preserved rather than filled. Raw capture SHA-256 is `0ec0557cef1c06e8b98b06fc8799a7d79d02d9455ef3a9328404433bf42735cf`. `python3 -m unittest tests.test_reread_j -v` → 6 PASS (hash, row counts, source IDs, coverage, discovery-plan completeness, and the schedule/D5 citation corrections). This confirms capture structure and hash, not an independent external fetch in the test; the official page links are retained for review. No canonical injury, standings or schedule table was overwritten.
 
-**Request log for PR #57 owner (`arena/3f12fa46-fl1`):** (1) PR #57 reuses source IDs S89–S90 and flag IDs F67–F68, which `main` already holds (S89–S99, F67–F72 from PRs #49–#58). On rebase, re-key to the next free IDs (S100+, F73+) — do not overwrite. (2) PR #57 edits `data/standings.tsv`/`data/results.tsv` (Week 10 finals); this session's J3 verifies the closeout side-reads (`data/results_2026-11-17-closeout.tsv`, 150 rows) against the live official page but does not promote them (Q44 still open). Please do not promote either without the Q44 decision.
+**J3 completion (2026-11-19):** `decision-review.html` and `data/discovery_plan.json` now cover all 34 open/partial questions, separate known/unknown/missing information, show exact existing gates and paths, and mark absent official sources/clearance numbers explicitly. Official links are included only when their verified source record is relevant context, not as proof the gate is satisfied. The landing-page readiness card had a stale hard-coded 24/28 claim; it now renders done/total/partial counts from `data/requirements.json` (28/29/1 at this build). `tests/test_reread_j.py` covers register coverage, source status and no fabricated numbers.
 
-### J1–J5 completion record — 2026-11-19 UTC (`arena-9d880d91-fl1`)
+**J5 completion (2026-11-19):** fetched the official NFL schedule-release article at `https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14`. It states the full schedule release was set for Thursday, May 14 at 8 p.m. ET and remaining International Games for May 13 at 9 a.m. ET. Added S103; changed `scripts/build_pages_d.py` and its generated `schedule.html` to cite the direct NFL URL and S103. The erroneous S86 reference (third-party win-totals data) is removed. Test `test_schedule_announcement_uses_correct_official_source` passes. This corrects provenance; the remaining Game-Center venue gaps still do not block publication.
 
-| # | Task | Status | Evidence |
-|---|------|--------|----------|
-| J1 | Coordination claim + immediate push | done (aeca2a4) | this section |
-| J2 | Brief re-audit | done | `data/brief_audit_9d88.json` (59 rows, 6 stale-corrected), `tools/build_brief_audit_9d88.py`, `brief-audit.html` (58th page, linked from index card; NAV untouched) |
-| J3 | Fresh official spot-verification | done | `scripts/verify_9d88.py` → `data/verification-9d88.tsv` (V1–V4 PASS); `raw/injuries-week11-2026-read1.md` (253 rows, 24 clubs); `raw/live/2026-11-19-standings-league-reg.tsv` (32/32 vs closeout); `raw/live/2026-11-19-week11-slate.tsv` (13/13) |
-| J4 | Executive summary refresh | done | `EXECUTIVE_SUMMARY.md` dated 2026-11-19 block (prepended; earlier blocks preserved) |
-| J5 | Full battery + PR + merge + Pages confirm | in progress | 371 tests OK; checklinks 58 pages OK; checkrows 7,089 rows OK; verify_drift 19/19; verify_injuries 345/345; verify_results PASS |
+**J6 handoff:** D5 task T4 (`arena/d50423eb-fl1`, status `needs review`) last appears in the 2026-11-17 integrated record; the current base includes that completed work and no later owner commit is present on this branch. The stale Q-D5-08 text in `tools/pages_d5.py` says the schedule announcement date is missing, contradicting the verified S103 citation already shown on `schedule.html`. This session takes over only that one answer-cell sentence; T4's availability/depth data, matrix and other content remain untouched.
 
-**Sources and verification:** No new NFL source was registered (S100+ reserved for the sources owner to
-fix J-F1). Fresh reads used the already-registered official URLs: `nfl.com/standings/league/2026/REG`
-(S03), `nfl.com/schedules/2026/by-week/week-11` (S50 family), `nfl.com/injuries/` (S01). All values
-transcribed verbatim; blanks preserved (237 blank game statuses, 237 blank injury cells, CIN/WAS
-"No Injuries Reported"). Canonical tables (`data/results.tsv`, `data/standings.tsv`, `data/injuries.tsv`)
-untouched; Q44 promotion still open.
+**J6 completion (2026-11-19):** Updated only Q-D5-08 in `tools/pages_d5.py`: the schedule-release announcement is now cited at S103, while the incomplete all-fixture Game-Center venue check remains explicitly open. Regenerated `decision-questions-d5.html`. `python3 -m unittest tests.test_reread_j -q` → 6 PASS; `python3 tools/checklinks.py` and `python3 tools/checkrows.py` both pass after regeneration. No D5 matrix or availability data changed.
 
-**Irregularities published (J-F1–J-F5, on brief-audit.html):** S86 mis-wire on schedule.html; PR #57 ID
-collisions (S89–S90/F67–F68 already held on main — re-key to S100+/F73+ on rebase); backlog staleness
-(6 rows, corrected in audit only); Week 11 blank injury/game cells; CIN/WAS "No Injuries Reported".
-None block the merge. **Request logged for sources owner:** add a source record for the May 8, 2026
-nfl.com schedule-announcement article and re-point schedule.html's chip from S86 to it.
+**J2 irregularities / remaining evidence gaps:** venues have not been transcribed from each official Game Center and remain blank/unverified. The existing generated `schedule.html` directly linked the NFL schedule-release article but its citation pointed to S86, which is the nflverse win-totals feed, not that article. J5 verified the official article directly and corrected the generator/page to cite S103; the release announcement is now linked beside the schedule. Venue-by-Game-Center coverage remains open. The injury table's blank designation/injury cells are not interpreted as healthy/available. No numeric clearance threshold is manufactured when the register has none. `tools/site.py` and generated site outputs are shared integration surfaces; the existing PR #57 owner remains responsible for their separate claimed work and this branch does not merge or overwrite that work.
 
-**Conflict note for PR #57 rebase:** this session edited `tools/site.py` additively (one index card +
-one page render; NAV untouched) and regenerated all pages. On rebase, keep both NAV additions and
-re-run `python3 tools/site.py`; expect HTML conflicts on every page (NAV line) — resolve by keeping
-both sides' links, then re-run checklinks/checkrows.
+**First push = this claim, per the brief.** Nothing is marked verified without an official source link.
 
-### Final integration — PR #62 and Pages deployment
-
-**PR:** https://github.com/sassnarep3-star/FL1/pull/62 (`arena/9d880d91-fl1` → `main`). Merged at
-2026-11-19T05:28:21Z with merge commit `8848c6afb4c7bb0eb90366bdcb356df5e7c26595` after the
-`verify` check completed SUCCESS. GitHub Pages build for that commit reports **built**
-(`https://sassnarep3-star.github.io/FL1/`). The site includes the Brief Audit 2026-11-19 page
-(58 pages total). Flagged irregularities J-F1–J-F5 remain visible review items; they do not block
-publication.
-
-**Rebase log (main moved three times during this session — PRs #60, #61, #63):** each rebase kept
-both sides (COORDINATION.md appends; EXECUTIVE_SUMMARY.md blocks). PR #63 (`arena/bc60d3ea-fl1`)
-independently captured the same Week 11 injury read 1 (253 rows) under the same filename
-`raw/injuries-week11-2026-read1.md` (TSV shape). Resolution: main's file kept as canonical; this
-session's capture kept alongside as `raw/injuries-week11-2026-read1-9d88.md` (markdown shape);
-`scripts/verify_9d88.py` V3 now asserts the two captures parse to the identical 253-row set
-(AZ→ARI normalised) — two independent transcriptions agreeing, which is stronger evidence than either
-alone. No work from either session was discarded.
-
-## Task board — session `arena/e0af7bbd-fl1` (2026-11-19 UTC) — independent verification review
-
-**Session/branch:** `arena/e0af7bbd-fl1` (fixed Arena branch; original base `addeb0a`). This claim is being reconciled against newer `main`, which contains parallel completed N01/DOC1/J1-J5 work. Those entries and files are retained. This session's scope remains this coordination record and `docs/SESSION_REVIEW_2026-11-19.md` only.
-
-| ID | Task | Status | Owner | File scope |
-|---|---|---|---|---|
-| E01 | Independently run deterministic repository checks and publish a dated, evidence-bounded verification/audit note with limitations, without rewriting files owned by completed parallel tasks | done | `arena/e0af7bbd-fl1` | `COORDINATION.md`, `docs/SESSION_REVIEW_2026-11-19.md` |
-
-No source facts, raw captures, shared data, generated pages or navigation are changed. Official URLs cited in the note are existing source-register references, not newly fetched evidence.
-
-### E01 completion record — 2026-11-19 UTC
-
-**Delivered:** added `docs/SESSION_REVIEW_2026-11-19.md`, a dated independent audit record. During rebasing, `main` advanced with parallel N01 and DOC1 completion records and corrected `README.md`/`REVIEW.md`; those upstream documentation changes are preserved unchanged. This session did not overwrite their files. The report records what was tested, dated source limitations, the row-audit classification counts, and unresolved verification/tooling issues.
-
-**Verification performed:** after rebasing onto current `main`, `python3 -m unittest discover -s tests -q` (389 passed; non-fatal existing ResourceWarnings); `python3 tools/build.py && python3 tools/site.py` (generated outputs matched committed outputs); `python3 tools/checklinks.py` (58 pages; internal links/anchors/source IDs pass; 263 external links not fetched); `python3 tools/checkrows.py` (7,089 rows); `python3 tools/verify_drift.py` (19/19 PASS); `python3 tools/verify_injuries.py` (345/345 exact raw-capture match); `python3 tools/verify_results.py` (137-game corpus reconciles dated standings for 32/32 clubs); `python3 tools/verify_replacement.py` (71 ladder rows; recompute and source checks pass); `python3 scripts/verify_9d88.py` (4/4 PASS); `python3 scripts/build_market_spine.py --check` (byte-identical); local Markdown target/anchor check (pass). `scripts/verify_site.py` could not start because `pandas` is not installed.
-
-**Evidence boundary and irregularities:** no NFL URL was fetched in this session. S01/S03/S49/S52 in `data/sources.tsv` remain dated official source references, not new confirmations. The final row audit emitted 6,961 citation-metadata rows (3,982 official-registered; the remaining 2,979 classified as unverified, non-official, mixed/unresolved, repository-only, unregistered, or no-link). `checklinks.py` does not fetch 263 external links. Market-spine metrics are reproducible but dated 2026-11-14, use third-party odds with substantial undocumented vintage, and do not establish prospective skill. Existing test ResourceWarnings are non-fatal. Details and exact counts are in `docs/SESSION_REVIEW_2026-11-19.md`.
-
-**Rebase reconciliation:** `origin/main` advanced from `addeb0a` through `eed82f8` to `a666388` while this task ran (parallel PRs #61, #62 and #65). Its N01/DOC1/J1–J5 coordination records, README/review-guide corrections, and Week 11/brief-audit additions were retained. This session's changes are limited to the current E01 record and the independent audit note; no parallel source/data/site work was discarded. Final verification was rerun against `a666388` and the resulting 58-page tree.
-
-**PR / Pages:** PR [#66](https://github.com/sassnarep3-star/FL1/pull/66) (`arena/e0af7bbd-fl1` → `main`) passed both `verify-research-build` checks and merged at 2026-11-19T05:34:31Z as `ad917fb6e0a287d6c32db698f355034a1a608e0b`. GitHub Pages was observed `building` and then **`built`** for that exact commit (build 1383108040); published site: https://sassnarep3-star.github.io/FL1/. This completion record is being added as a follow-up coordination-only update from the same fixed branch.
+**J4 post-rebase validation (2026-11-19):** Rebasing onto current `origin/main` (`d00e89f`) retained the parallel N01/DOC1/J1–J5 and E01 work. Generated outputs were rebuilt with `tools/build.py`, `tools/site.py`, `scripts/build_pages_d.py`, and `tools/source_audit.py`. Integrated checks: 60-page internal-link audit PASS (263 external links not fetched); 7,130-row table audit PASS; source-row ledger 7,002 rows; drift 19/19 PASS; canonical injury table 345/345 exact; 137-game results reconcile all 32 clubs; replacement-depth 71 ladders PASS; live D5 checks PASS; 395 tests PASS. Existing non-fatal ResourceWarnings remain. A stale inherited regression assertion was updated from the former S86 wording to the corrected schedule-release announcement and S103 citation. Full verification is now complete; PR, merge, and Pages confirmation remain.
