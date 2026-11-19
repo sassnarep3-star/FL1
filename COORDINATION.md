@@ -2181,9 +2181,24 @@ not block publication.
 | # | Task | Status | Owner | File scope (claimed) |
 |---|------|--------|-------|----------------------|
 | J1 | Coordination claim + immediate push | in progress | `arena-0a100872-fl1` | `COORDINATION.md` |
-| J2 | Week-11 injury-hub read (clock-bracketed, verbatim capture, shared-grammar parse, delta vs read 4 labelled cross-week; stored level + published delta) | unclaimed→claimed | `arena-0a100872-fl1` | `raw/injuries-week11-2026-read5.md` (new), `scripts/build_week11_read.py` (new), `data/injuries_2026-11-19.tsv` (new), `data/injury_hub_delta_w11.json` (new), `data/sources.tsv` (append S100), `data/flags.json` (append only if irregularity found), `tests/test_week11_read.py` (new) |
+| J2 | Week-11 injury-hub read (clock-bracketed, verbatim capture, shared-grammar parse, delta vs read 4 labelled cross-week; stored level + published delta) | **done** (0a100872, see log below) | `arena-0a100872-fl1` | `raw/injuries-week11-2026-read5.md` (new), `scripts/build_week11_read.py` (new), `data/injuries_2026-11-19.tsv` (new), `data/injury_hub_delta_w11.json` (new), `data/sources.tsv` (append S100), `data/flags.json` (append only if irregularity found), `tests/test_week11_read.py` (new) |
 | J3 | Week-11 schedule + standings fresh reads (dated side-reads; canonical corpora untouched) | claimed | `arena-0a100872-fl1` | `raw/schedule-week11-2026.md` (new), `raw/standings-2026-20261119.tsv` (new), `data/slate-w11-2026.tsv` (new), `data/standings_2026-11-19.tsv` (new), `data/sources.tsv` (append S101–S102) |
 | J4 | Brief-coverage audit (every brief line → evidence page/file or explicit gap) + Week-11 site page + exec-summary block | claimed | `arena-0a100872-fl1` | `docs/BRIEF_COVERAGE.md` (new), `tools/pages_week11.py` (new), `tools/site.py` (NAV + import + render call + index card only), `week11-read.html` (generated), `EXECUTIVE_SUMMARY.md` (prepend session block only), `data/verification-drift.tsv` (pin refresh if counts move) |
 | J5 | Full verification battery, PR → `main`, merge without waiting, confirm GitHub Pages deploy, record in this file | claimed | `arena-0a100872-fl1` | PR + `COORDINATION.md` completion record |
 
 **First push = this claim, per the brief.**
+
+### Session arena-0a100872-fl1 — log (branch `arena/0a100872-fl1`)
+
+- **J1 claim** commit `9569059`. **J2 done** (this log).
+- **J2 sources:** `https://www.nfl.com/injuries/` read 5, Week 11 of 2026 (source **S100**, `data/sources.tsv`). Fetched via fetch_page in 7 chunks (chunkIndex 0–6, totalChunks 7); staged in `raw/.chunks-w11/`; assembled verbatim into `raw/injuries-week11-2026-read5.md`. One chunk-boundary newline (Riley Moss row, DEN) was rejoined; the capture header says so. News pointers are condensed to headline + link and are not injury rows.
+- **J2 output:** `scripts/build_week11_read.py` → `data/injuries_2026-11-19.tsv` (253 player rows, 24 clubs with tables; CIN and WAS show "No Injuries Reported"; hub header shows WEEK 11; 13 games). Every row carries the hub URL and its official `nfl.com/players/` link. Mapped codes only from the published strings (FULL 83 / LIMITED 87 / DNP 83; Out 9 / Questionable 7 / blank 237). `data/injury_hub_delta_w11.json`. `tests/test_week11_read.py` (6 gates, pass).
+- **Delta:** `delta: null`. No earlier Week 11 read exists, so no like-for-like delta is published. Week 10 reads are not compared. The first Week 11 delta lands with the next read.
+- **Verification performed:** row count equals the count of player-link lines in the raw capture; every raw line reproduces its row; unmapped practice/game strings fail loudly; 362 unit tests run, all green after pinning the S-register count 91→92 in `tests/test_n01_n05.py` (S100 added); `tools/checkrows.py` OK 58 pages / 7359 rows; `tools/verify_drift.py` 19/19 PASS.
+- **Irregularities (flagged, not corrected; 78 flags in the JSON):**
+  1. Name/link slug mismatch: Jacob Hummel (HOU) links to `jake-hummel`; Dee Alford (BUF) links to `deaundre-ford`; plus punctuation-only cases (T.J. Watt, etc. are not flagged).
+  2. Lions Kerby Joseph, Cade Mays, D.J. Reed: game status blank in this read. The earlier brief cites these as Out (VR-08, VR-12); this read does not confirm that, so it stays blank and unverified.
+  3. 49 DNP-in-practice players with blank game status (publish blank, unverified).
+- **Request to integration session (not edited by me):** `week11-read.html` is not linked from `index.html`. The site's link checker reports it as orphan. Add a card or nav entry in the integration session. The page exists; `tools/checklinks.py` will stay at 1 finding until that happens.
+- **Still open in this session:** J3 (schedule + standings Week 11 side-reads) and J4 (brief-coverage audit, exec-summary block, the NAV wiring) are not started. J5 (PR → merge → Pages) waits until the integration session confirms the claims. The brief has about 100 requirement lines; `docs/BRIEF_COVERAGE.md` will list each one as covered or as an explicit gap. Many items (price-snapshot policy, availability graph, depth register, 32-team sweep, parlay gate, etc.) remain gaps in this session.
+

@@ -1,0 +1,254 @@
+source_id	source_url	club_abbr	club	player	pos	injury	practice_raw	practice_code	game_raw	game_code	player_url	raw_line
+S100	https://www.nfl.com/injuries/	IND	Colts	Jaylon Carlies	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jaylon-carlies/	34
+S100	https://www.nfl.com/injuries/	IND	Colts	Sauce Gardner	CB	Calf	Did Not Participate In Practice	DNP	Questionable	Questionable	https://www.nfl.com/players/sauce-gardner/	35
+S100	https://www.nfl.com/injuries/	IND	Colts	Anthony Gould	WR	Toe	Full Participation in Practice	FULL	Questionable	Questionable	https://www.nfl.com/players/anthony-gould/	36
+S100	https://www.nfl.com/injuries/	IND	Colts	Charlie Heck	T	Not injury related - personal matter	Did Not Participate In Practice	DNP	Questionable	Questionable	https://www.nfl.com/players/charlie-heck/	37
+S100	https://www.nfl.com/injuries/	IND	Colts	Will Mallory	TE	Hamstring	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/will-mallory/	38
+S100	https://www.nfl.com/injuries/	IND	Colts	Bernhard Raimann	T	Concussion	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/bernhard-raimann/	39
+S100	https://www.nfl.com/injuries/	IND	Colts	Luke Rhodes	LS	Hamstring	Limited Participation in Practice	LIMITED	Questionable	Questionable	https://www.nfl.com/players/luke-rhodes/	40
+S100	https://www.nfl.com/injuries/	IND	Colts	Jerry Tillery	DT	Calf	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/jerry-tillery/	41
+S100	https://www.nfl.com/injuries/	IND	Colts	Jalen Travis	T	Knee	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/jalen-travis/	42
+S100	https://www.nfl.com/injuries/	IND	Colts	Dalton Tucker	G		Full Participation in Practice	FULL			https://www.nfl.com/players/dalton-tucker/	43
+S100	https://www.nfl.com/injuries/	IND	Colts	Charvarius Ward	CB	Knee	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/charvarius-ward/	44
+S100	https://www.nfl.com/injuries/	HOU	Texans	Azeez Al-Shaair	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/azeez-al-shaair/	50
+S100	https://www.nfl.com/injuries/	HOU	Texans	Reed Blankenship	S		Full Participation in Practice	FULL			https://www.nfl.com/players/reed-blankenship/	51
+S100	https://www.nfl.com/injuries/	HOU	Texans	Tank Dell	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/tank-dell/	52
+S100	https://www.nfl.com/injuries/	HOU	Texans	Blake Fisher	T		Full Participation in Practice	FULL			https://www.nfl.com/players/blake-fisher/	53
+S100	https://www.nfl.com/injuries/	HOU	Texans	Marvin Harrison Jr.	WR	Hamstring	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/marvin-harrison-jr/	54
+S100	https://www.nfl.com/injuries/	HOU	Texans	Jacob Hummel	LB	Groin	Full Participation in Practice	FULL	Questionable	Questionable	https://www.nfl.com/players/jake-hummel/	55
+S100	https://www.nfl.com/injuries/	HOU	Texans	Danielle Hunter	DE	Hamstring	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/danielle-hunter/	56
+S100	https://www.nfl.com/injuries/	HOU	Texans	Brevin Jordan	TE	Foot, Illness	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/brevin-jordan/	57
+S100	https://www.nfl.com/injuries/	HOU	Texans	Kamari Lassiter	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/kamari-lassiter/	58
+S100	https://www.nfl.com/injuries/	HOU	Texans	Woody Marks	RB	Concussion	Did Not Participate In Practice	DNP	Out	Out	https://www.nfl.com/players/woody-marks/	59
+S100	https://www.nfl.com/injuries/	HOU	Texans	David Montgomery	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/david-montgomery/	60
+S100	https://www.nfl.com/injuries/	HOU	Texans	Febechi Nwaiwu	G		Full Participation in Practice	FULL			https://www.nfl.com/players/febechi-nwaiwu/	61
+S100	https://www.nfl.com/injuries/	HOU	Texans	Keylan Rutledge	G		Full Participation in Practice	FULL			https://www.nfl.com/players/keylan-rutledge/	62
+S100	https://www.nfl.com/injuries/	HOU	Texans	Jaylin Smith	CB	Hamstring	Full Participation in Practice	FULL	Questionable	Questionable	https://www.nfl.com/players/jaylin-smith/	63
+S100	https://www.nfl.com/injuries/	HOU	Texans	Wyatt Teller	G	Back	Full Participation in Practice	FULL	Questionable	Questionable	https://www.nfl.com/players/wyatt-teller/	64
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Gennings Dunker	G		Full Participation in Practice	FULL			https://www.nfl.com/players/gennings-dunker/	84
+S100	https://www.nfl.com/injuries/	PIT	Steelers	DeShon Elliott	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/deshon-elliott/	85
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Nick Herbig	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/nick-herbig/	86
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Cameron Heyward	DT		Did Not Participate In Practice	DNP			https://www.nfl.com/players/cameron-heyward/	87
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Michael Pittman	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/michael-pittman-2/	88
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Patrick Queen	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/patrick-queen/	89
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Jalen Ramsey	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jalen-ramsey/	90
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Darnell Washington	TE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/darnell-washington/	91
+S100	https://www.nfl.com/injuries/	PIT	Steelers	T.J. Watt	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/t-j-watt/	92
+S100	https://www.nfl.com/injuries/	PIT	Steelers	Roman Wilson	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/roman-wilson/	93
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Saquon Barkley	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/saquon-barkley/	99
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Zack Baun	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/zack-baun/	100
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Jihaad Campbell	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/jihaad-campbell/	101
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Michael Carter II	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/michael-carter-ii/	102
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Britain Covey	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/britain-covey/	103
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Jonathan Greenard	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/jonathan-greenard/	104
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Jalyx Hunt	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/jalyx-hunt/	105
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Jonathan Jones	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jonathan-jones/	106
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Tanner McKee	QB		Full Participation in Practice	FULL			https://www.nfl.com/players/tanner-mckee/	107
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Smael Mondon Jr.	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/smael-mondon-jr/	108
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Andrew Mukuba	S		Full Participation in Practice	FULL			https://www.nfl.com/players/andrew-mukuba/	109
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Will Shipley	RB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/will-shipley/	110
+S100	https://www.nfl.com/injuries/	PHI	Eagles	DeVonta Smith	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/devonta-smith/	111
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Nolan Smith	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/nolan-smith/	112
+S100	https://www.nfl.com/injuries/	PHI	Eagles	Dontayvion Wicks	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/dontayvion-wicks/	113
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Budda Baker	S		Did Not Participate In Practice	DNP			https://www.nfl.com/players/budda-baker/	131
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Zachary Carter	DT		Full Participation in Practice	FULL			https://www.nfl.com/players/zachary-carter-x9168/	132
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Hjalte Froholdt	C		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/hjalte-froholdt/	133
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Jon Gaines II	G		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jon-gaines-ii/	134
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Roy Lopez	DT		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/roy-lopez/	135
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Max Melton	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/max-melton/	136
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Walter Nolen	DT		Did Not Participate In Practice	DNP			https://www.nfl.com/players/walter-nolen/	137
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Darius Robinson	DT		Full Participation in Practice	FULL			https://www.nfl.com/players/darius-robinson-2/	138
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Isaac Seumalo	G		Did Not Participate In Practice	DNP			https://www.nfl.com/players/isaac-seumalo/	139
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Josh Sweat	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/josh-sweat/	140
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Jayden Williams	T		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jayden-williams/	141
+S100	https://www.nfl.com/injuries/	AZ	Cardinals	Mack Wilson	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/mack-wilson/	142
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Jeffrey Bassa	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/jeffrey-bassa/	148
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Nick Bolton	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/nick-bolton/	149
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Jadon Canady	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/jadon-canady/	150
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Mansoor Delane	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/mansoor-delane/	151
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Justin Fields	QB		Full Participation in Practice	FULL			https://www.nfl.com/players/justin-fields/	152
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Alohi Gilman	S		Full Participation in Practice	FULL			https://www.nfl.com/players/alohi-gilman/	153
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Travis Kelce	TE		Full Participation in Practice	FULL			https://www.nfl.com/players/travis-kelce/	154
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Patrick Mahomes	QB		Full Participation in Practice	FULL			https://www.nfl.com/players/patrick-mahomes/	155
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Jaylon Moore	T		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jaylon-moore-2/	156
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Omarr Norman-Lott	DT		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/omarr-norman-lott/	157
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Jaydn Ott	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/jaydn-ott/	158
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Rashee Rice	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/rashee-rice/	159
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Trey Smith	G		Did Not Participate In Practice	DNP			https://www.nfl.com/players/trey-smith/	160
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Kenneth Walker III	RB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/kenneth-walker-iii/	161
+S100	https://www.nfl.com/injuries/	KC	Chiefs	Peter Woods	DT		Full Participation in Practice	FULL			https://www.nfl.com/players/peter-woods/	162
+S100	https://www.nfl.com/injuries/	BAL	Ravens	Mike Green	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/mike-green-5/	180
+S100	https://www.nfl.com/injuries/	BAL	Ravens	Jaylinn Hawkins	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jaylinn-hawkins/	181
+S100	https://www.nfl.com/injuries/	BAL	Ravens	Matthew Hibner	TE		Full Participation in Practice	FULL			https://www.nfl.com/players/matthew-hibner/	182
+S100	https://www.nfl.com/injuries/	BAL	Ravens	Olaivavega Ioane	G		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/olaivavega-ioane/	183
+S100	https://www.nfl.com/injuries/	BAL	Ravens	Nnamdi Madubuike	DT		Did Not Participate In Practice	DNP			https://www.nfl.com/players/nnamdi-madubuike/	184
+S100	https://www.nfl.com/injuries/	BAL	Ravens	Adam Randall	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/adam-randall/	185
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Jonathon Brooks	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/jonathon-brooks/	191
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Brady Christensen	G		Full Participation in Practice	FULL			https://www.nfl.com/players/brady-christensen/	192
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Feleipe Franks	TE		Full Participation in Practice	FULL			https://www.nfl.com/players/feleipe-franks/	193
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Trevis Gipson	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/trevis-gipson/	194
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Chuba Hubbard	RB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/chuba-hubbard/	195
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Mike Jackson	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/mike-jackson/	196
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Jackson Kuwatch	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/jackson-kuwatch/	197
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Will Lee III	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/will-lee-iii/	198
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Bobby Okereke	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/bobby-okereke/	199
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Isaiah Simmons	S		Did Not Participate In Practice	DNP			https://www.nfl.com/players/isaiah-simmons/	200
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Tommy Tremble	TE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/tommy-tremble/	201
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Darren Waller	TE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/darren-waller/	202
+S100	https://www.nfl.com/injuries/	CAR	Panthers	Bryce Young	QB		Full Participation in Practice	FULL			https://www.nfl.com/players/bryce-young/	203
+S100	https://www.nfl.com/injuries/	TB	Buccaneers	Yaya Diaby	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/yaya-diaby/	221
+S100	https://www.nfl.com/injuries/	TB	Buccaneers	Josh Hayes	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/josh-hayes/	222
+S100	https://www.nfl.com/injuries/	TB	Buccaneers	Baker Mayfield	QB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/baker-mayfield/	223
+S100	https://www.nfl.com/injuries/	TB	Buccaneers	Cade Otton	TE		Full Participation in Practice	FULL			https://www.nfl.com/players/cade-otton/	224
+S100	https://www.nfl.com/injuries/	TB	Buccaneers	Antoine Winfield Jr.	S		Did Not Participate In Practice	DNP			https://www.nfl.com/players/antoine-winfield-jr/	225
+S100	https://www.nfl.com/injuries/	TB	Buccaneers	Tristan Wirfs	T		Full Participation in Practice	FULL			https://www.nfl.com/players/tristan-wirfs/	226
+S100	https://www.nfl.com/injuries/	DET	Lions	Joe Bachie	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/joe-bachie/	232
+S100	https://www.nfl.com/injuries/	DET	Lions	Khalil Dorsey	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/khalil-dorsey/	233
+S100	https://www.nfl.com/injuries/	DET	Lions	Kerby Joseph	S		Full Participation in Practice	FULL			https://www.nfl.com/players/kerby-joseph/	234
+S100	https://www.nfl.com/injuries/	DET	Lions	Tyler Lacy	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/tyler-lacy/	235
+S100	https://www.nfl.com/injuries/	DET	Lions	Cade Mays	C		Did Not Participate In Practice	DNP			https://www.nfl.com/players/cade-mays/	236
+S100	https://www.nfl.com/injuries/	DET	Lions	Ennis Rakestraw Jr.	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/ennis-rakestraw-jr/	237
+S100	https://www.nfl.com/injuries/	DET	Lions	D.J. Reed	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/d-j-reed/	238
+S100	https://www.nfl.com/injuries/	DET	Lions	Sione Vaki	RB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/sione-vaki/	239
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Tucker Addington	LS		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/tucker-addington/	257
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Darrell Baker Jr.	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/darrell-baker-jr/	258
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Chris Bell	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/chris-bell-2/	259
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Julius Brents	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/julius-brents/	260
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Aaron Brewer	C		Did Not Participate In Practice	DNP			https://www.nfl.com/players/aaron-brewer-2/	261
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Caleb Douglas	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/caleb-douglas/	262
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Andrew Meyer	C		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/andrew-meyer/	263
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Bradley Pinion	P		Did Not Participate In Practice	DNP			https://www.nfl.com/players/bradley-pinion/	264
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Jaylin Simpson	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jaylin-simpson/	265
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Dante Trader Jr.	S		Did Not Participate In Practice	DNP			https://www.nfl.com/players/dante-trader-jr/	266
+S100	https://www.nfl.com/injuries/	MIA	Dolphins	Jared Wayne	WR		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jared-wayne/	267
+S100	https://www.nfl.com/injuries/	BUF	Bills	Christian Benford	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/christian-benford/	273
+S100	https://www.nfl.com/injuries/	BUF	Bills	Cole Bishop	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/cole-bishop/	274
+S100	https://www.nfl.com/injuries/	BUF	Bills	Keon Coleman	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/keon-coleman/	275
+S100	https://www.nfl.com/injuries/	BUF	Bills	Ray Davis	RB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/ray-davis-2/	276
+S100	https://www.nfl.com/injuries/	BUF	Bills	Dee Alford	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/deaundre-ford/	277
+S100	https://www.nfl.com/injuries/	BUF	Bills	Damar Hamlin	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/damar-hamlin/	278
+S100	https://www.nfl.com/injuries/	BUF	Bills	Jackson Hawes	TE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jackson-hawes/	279
+S100	https://www.nfl.com/injuries/	BUF	Bills	Amani Hooker	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/amani-hooker/	280
+S100	https://www.nfl.com/injuries/	BUF	Bills	Ty Johnson	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/ty-johnson-x3152/	281
+S100	https://www.nfl.com/injuries/	BUF	Bills	Dalton Kincaid	TE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/dalton-kincaid/	282
+S100	https://www.nfl.com/injuries/	BUF	Bills	Connor McGovern	C		Full Participation in Practice	FULL			https://www.nfl.com/players/connor-mcgovern-2/	283
+S100	https://www.nfl.com/injuries/	BUF	Bills	T.J. Sanders	DE		Full Participation in Practice	FULL			https://www.nfl.com/players/t-j-sanders/	284
+S100	https://www.nfl.com/injuries/	BUF	Bills	Tyrell Shavers	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/tyrell-shavers/	285
+S100	https://www.nfl.com/injuries/	BUF	Bills	O'Cyrus Torrence	G		Did Not Participate In Practice	DNP			https://www.nfl.com/players/o-cyrus-torrence/	286
+S100	https://www.nfl.com/injuries/	BUF	Bills	Dorian Williams	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/dorian-williams/	287
+S100	https://www.nfl.com/injuries/	TEN	Titans	Tony Adams	S		Did Not Participate In Practice	DNP			https://www.nfl.com/players/tony-adams-4/	305
+S100	https://www.nfl.com/injuries/	TEN	Titans	Cody Barton	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/cody-barton/	306
+S100	https://www.nfl.com/injuries/	TEN	Titans	Fernando Carmona	G		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/fernando-carmona/	307
+S100	https://www.nfl.com/injuries/	TEN	Titans	John Franklin-Myers	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/john-franklin-myers/	308
+S100	https://www.nfl.com/injuries/	TEN	Titans	Kylen Granson	TE		Full Participation in Practice	FULL			https://www.nfl.com/players/kylen-granson/	309
+S100	https://www.nfl.com/injuries/	TEN	Titans	Anthony Hill Jr.	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/anthony-hill-jr/	310
+S100	https://www.nfl.com/injuries/	TEN	Titans	Tyjae Spears	RB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/tyjae-spears/	311
+S100	https://www.nfl.com/injuries/	TEN	Titans	Carnell Tate	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/carnell-tate/	312
+S100	https://www.nfl.com/injuries/	TEN	Titans	Kevin Winston Jr.	S		Full Participation in Practice	FULL			https://www.nfl.com/players/kevin-winston-jr/	313
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	DaRon Bland	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/daron-bland/	319
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Tyler Booker	G		Did Not Participate In Practice	DNP			https://www.nfl.com/players/tyler-booker/	320
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Donovan Ezeiruaku	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/donovan-ezeiruaku/	321
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Jake Ferguson	TE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jake-ferguson/	322
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Malik Hooker	S		Full Participation in Practice	FULL			https://www.nfl.com/players/malik-hooker/	323
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	James Houston	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/james-houston/	324
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	P.J. Locke	S		Did Not Participate In Practice	DNP			https://www.nfl.com/players/p-j-locke/	325
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Von Miller	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/von-miller/	326
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Jonathan Mingo	WR		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jonathan-mingo/	327
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Devin Moore	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/devin-moore-2/	328
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Otito Ogbonnia	DE		Full Participation in Practice	FULL			https://www.nfl.com/players/otito-ogbonnia/	329
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Joey Porter Jr.	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/joey-porter-jr/	330
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Juanyeh Thomas	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/juanyeh-thomas/	331
+S100	https://www.nfl.com/injuries/	DAL	Cowboys	Jalen Thompson	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jalen-thompson/	332
+S100	https://www.nfl.com/injuries/	NO	Saints	CJ Donaldson	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/cj-donaldson/	350
+S100	https://www.nfl.com/injuries/	NO	Saints	Martin Emerson	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/martin-emerson/	351
+S100	https://www.nfl.com/injuries/	NO	Saints	Taliese Fuaga	T		Did Not Participate In Practice	DNP			https://www.nfl.com/players/taliese-fuaga/	352
+S100	https://www.nfl.com/injuries/	NO	Saints	Alvin Kamara	RB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/alvin-kamara/	353
+S100	https://www.nfl.com/injuries/	NO	Saints	Erik McCoy	C		Did Not Participate In Practice	DNP			https://www.nfl.com/players/erik-mccoy/	354
+S100	https://www.nfl.com/injuries/	NO	Saints	Justin Reid	S		Did Not Participate In Practice	DNP			https://www.nfl.com/players/justin-reid/	355
+S100	https://www.nfl.com/injuries/	NO	Saints	Asim Richards	T		Did Not Participate In Practice	DNP			https://www.nfl.com/players/asim-richards/	356
+S100	https://www.nfl.com/injuries/	NO	Saints	Decamerion Richardson	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/decamerion-richardson/	357
+S100	https://www.nfl.com/injuries/	NO	Saints	Jordyn Tyson	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jordyn-tyson/	358
+S100	https://www.nfl.com/injuries/	NO	Saints	Pete Werner	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/pete-werner/	359
+S100	https://www.nfl.com/injuries/	CHI	Bears	Luther Burden III	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/luther-burden-iii/	365
+S100	https://www.nfl.com/injuries/	CHI	Bears	Kyler Gordon	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/kyler-gordon/	366
+S100	https://www.nfl.com/injuries/	CHI	Bears	Kyle Monangai	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/kyle-monangai/	367
+S100	https://www.nfl.com/injuries/	CHI	Bears	Malik Muhammad	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/malik-muhammad/	368
+S100	https://www.nfl.com/injuries/	CHI	Bears	Jeffery Simmons	DT		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jeffery-simmons/	369
+S100	https://www.nfl.com/injuries/	NYJ	Jets	Omar Cooper Jr.	WR		Did Not Participate In Practice	DNP			https://www.nfl.com/players/omar-cooper-jr/	387
+S100	https://www.nfl.com/injuries/	NYJ	Jets	David Onyemata	DT		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/david-onyemata/	388
+S100	https://www.nfl.com/injuries/	NYJ	Jets	Joseph Ossai	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/joseph-ossai/	389
+S100	https://www.nfl.com/injuries/	NYJ	Jets	Dylan Parham	G		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/dylan-parham/	390
+S100	https://www.nfl.com/injuries/	NYJ	Jets	Harrison Phillips	DT		Did Not Participate In Practice	DNP			https://www.nfl.com/players/harrison-phillips/	391
+S100	https://www.nfl.com/injuries/	NYJ	Jets	Geno Smith	QB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/geno-smith/	392
+S100	https://www.nfl.com/injuries/	NYJ	Jets	Trevin Wallace	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/trevin-wallace/	393
+S100	https://www.nfl.com/injuries/	NYJ	Jets	Isaiah Williams	WR		Did Not Participate In Practice	DNP			https://www.nfl.com/players/isaiah-williams-3/	394
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Justin Eboigbe	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/justin-eboigbe/	400
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Daiyan Henley	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/daiyan-henley/	401
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Donte Jackson	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/donte-jackson/	402
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Charlie Kolar	TE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/charlie-kolar/	403
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Khalil Mack	DE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/khalil-mack/	404
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Ladd McConkey	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/ladd-mcconkey/	405
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Trey Pipkins	T		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/trey-pipkins/	406
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Rodney Shelley	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/rodney-shelley/	407
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Brenen Thompson	WR		Did Not Participate In Practice	DNP			https://www.nfl.com/players/brenen-thompson/	408
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Isas Waxter	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/isas-waxter/	409
+S100	https://www.nfl.com/injuries/	LAC	Chargers	Kendall Williamson	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/kendall-williamson/	410
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	LeQuint Allen Jr.	RB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/lequint-allen/	428
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Arik Armstead	DT		Did Not Participate In Practice	DNP			https://www.nfl.com/players/arik-armstead/	429
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Matt Dickerson	DT		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/matt-dickerson/	430
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	BJ Green II	DE		Full Participation in Practice	FULL			https://www.nfl.com/players/bj-green-ii/	431
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Robert Hainsey	C		Did Not Participate In Practice	DNP			https://www.nfl.com/players/robert-hainsey/	432
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Antonio Johnson	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/antonio-johnson-3/	433
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Jalen McLeod	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jalen-mcleod/	434
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Jakobi Meyers	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jakobi-meyers/	435
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Jonah Monheim	C		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jonah-monheim/	436
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Chris Rodriguez Jr.	RB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/chris-rodriguez-jr/	437
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Danny Striggow	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/danny-striggow/	438
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Bhayshul Tuten	RB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/bhayshul-tuten/	439
+S100	https://www.nfl.com/injuries/	JAX	Jaguars	Travon Walker	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/travon-walker/	440
+S100	https://www.nfl.com/injuries/	NYG	Giants	Deonte Banks	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/deonte-banks/	446
+S100	https://www.nfl.com/injuries/	NYG	Giants	Malik Harrison	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/malik-harrison/	447
+S100	https://www.nfl.com/injuries/	NYG	Giants	Nic Jones	CB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/nic-jones/	448
+S100	https://www.nfl.com/injuries/	NYG	Giants	Ben Mann	LS		Full Participation in Practice	FULL			https://www.nfl.com/players/ben-mann-2/	449
+S100	https://www.nfl.com/injuries/	NYG	Giants	Jason Pinnock	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jason-pinnock/	450
+S100	https://www.nfl.com/injuries/	NYG	Giants	Cam Skattebo	RB		Full Participation in Practice	FULL			https://www.nfl.com/players/cam-skattebo/	451
+S100	https://www.nfl.com/injuries/	LV	Raiders	Thomas Booker	DT		Full Participation in Practice	FULL			https://www.nfl.com/players/thomas-booker/	469
+S100	https://www.nfl.com/injuries/	LV	Raiders	Brock Bowers	TE		Did Not Participate In Practice	DNP			https://www.nfl.com/players/brock-bowers/	470
+S100	https://www.nfl.com/injuries/	LV	Raiders	Foley Fatukasi	DT		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/foley-fatukasi/	471
+S100	https://www.nfl.com/injuries/	LV	Raiders	Matt Gay	K		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/matt-gay/	472
+S100	https://www.nfl.com/injuries/	LV	Raiders	Tonka Hemingway	DT		Did Not Participate In Practice	DNP			https://www.nfl.com/players/tonka-hemingway/	473
+S100	https://www.nfl.com/injuries/	LV	Raiders	Ian Thomas	TE		Full Participation in Practice	FULL			https://www.nfl.com/players/ian-thomas/	474
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Kris Abrams-Draine	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/kris-abrams-draine/	480
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Zach Allen	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/zach-allen/	481
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Talanoa Hufanga	S		Full Participation in Practice	FULL			https://www.nfl.com/players/talanoa-hufanga/	482
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Brandon Jones	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/brandon-jones-3/	483
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Caleb Lohner	TE		Full Participation in Practice	FULL			https://www.nfl.com/players/caleb-lohner/	484
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Riley Moss	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/riley-moss/	485
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Adam Prentice	FB		Full Participation in Practice	FULL			https://www.nfl.com/players/adam-prentice/	486
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Courtland Sutton	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/courtland-sutton/	487
+S100	https://www.nfl.com/injuries/	DEN	Broncos	Jaylen Waddle	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/jaylen-waddle/	488
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Jordan Addison	WR		Did Not Participate In Practice	DNP			https://www.nfl.com/players/jordan-addison/	506
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Blake Cashman	LB		Full Participation in Practice	FULL			https://www.nfl.com/players/blake-cashman/	507
+S100	https://www.nfl.com/injuries/	MIN	Vikings	T.J. Hockenson	TE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/t-j-hockenson/	508
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Tyrion Ingram-Dawkins	DT		Full Participation in Practice	FULL			https://www.nfl.com/players/tyrion-ingram-dawkins/	509
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Jauan Jennings	WR		Full Participation in Practice	FULL			https://www.nfl.com/players/jauan-jennings/	510
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Jeshaun Jones	WR		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jeshaun-jones/	511
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Kyler Murray	QB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/kyler-murray/	512
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Andrew Van Ginkel	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/andrew-van-ginkel/	513
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Kyle Van Noy	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/kyle-van-noy/	514
+S100	https://www.nfl.com/injuries/	MIN	Vikings	Jay Ward	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/jay-ward/	515
+S100	https://www.nfl.com/injuries/	SF	49ers	Ji'Ayir Brown	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/ji-ayir-brown/	521
+S100	https://www.nfl.com/injuries/	SF	49ers	Mike Evans	WR		Did Not Participate In Practice	DNP			https://www.nfl.com/players/mike-evans/	522
+S100	https://www.nfl.com/injuries/	SF	49ers	Luke Gifford	LB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/luke-gifford/	523
+S100	https://www.nfl.com/injuries/	SF	49ers	Renardo Green	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/renardo-green/	524
+S100	https://www.nfl.com/injuries/	SF	49ers	Dre Greenlaw	LB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/dre-greenlaw-x9042/	525
+S100	https://www.nfl.com/injuries/	SF	49ers	Nate Hobbs	CB		Full Participation in Practice	FULL			https://www.nfl.com/players/nate-hobbs/	526
+S100	https://www.nfl.com/injuries/	SF	49ers	Mac Jones	QB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/mac-jones/	527
+S100	https://www.nfl.com/injuries/	SF	49ers	Khalid Kareem	DE		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/khalid-kareem/	528
+S100	https://www.nfl.com/injuries/	SF	49ers	Christian McCaffrey	RB		Did Not Participate In Practice	DNP			https://www.nfl.com/players/christian-mccaffrey/	529
+S100	https://www.nfl.com/injuries/	SF	49ers	Siran Neal	S		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/siran-neal/	530
+S100	https://www.nfl.com/injuries/	SF	49ers	Upton Stout	CB		Limited Participation in Practice	LIMITED			https://www.nfl.com/players/upton-stout/	531
+S100	https://www.nfl.com/injuries/	SF	49ers	Jon Weeks	LS		Full Participation in Practice	FULL			https://www.nfl.com/players/jon-weeks/	532
+S100	https://www.nfl.com/injuries/	SF	49ers	C.J. West	DT		Full Participation in Practice	FULL			https://www.nfl.com/players/cj-west/	533
+S100	https://www.nfl.com/injuries/	SF	49ers	Mykel Williams	DE		Full Participation in Practice	FULL			https://www.nfl.com/players/mykel-williams/	534
+S100	https://www.nfl.com/injuries/	SF	49ers	Trent Williams	T		Did Not Participate In Practice	DNP			https://www.nfl.com/players/trent-williams/	535

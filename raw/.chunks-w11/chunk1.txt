@@ -1,0 +1,123 @@
+sas-city-chiefs/)
+
+(7-2)
+
+Cardinals
+
+| Player | Position | Injuries | Practice Status | Game Status |
+| --- | --- | --- | --- | --- |
+| [Budda Baker](https://www.nfl.com/players/budda-baker/) | S |  | Did Not Participate In Practice |  |
+| [Zachary Carter](https://www.nfl.com/players/zachary-carter-x9168/) | DT |  | Full Participation in Practice |  |
+| [Hjalte Froholdt](https://www.nfl.com/players/hjalte-froholdt/) | C |  | Limited Participation in Practice |  |
+| [Jon Gaines II](https://www.nfl.com/players/jon-gaines-ii/) | G |  | Limited Participation in Practice |  |
+| [Roy Lopez](https://www.nfl.com/players/roy-lopez/) | DT |  | Limited Participation in Practice |  |
+| [Max Melton](https://www.nfl.com/players/max-melton/) | CB |  | Limited Participation in Practice |  |
+| [Walter Nolen](https://www.nfl.com/players/walter-nolen/) | DT |  | Did Not Participate In Practice |  |
+| [Darius Robinson](https://www.nfl.com/players/darius-robinson-2/) | DT |  | Full Participation in Practice |  |
+| [Isaac Seumalo](https://www.nfl.com/players/isaac-seumalo/) | G |  | Did Not Participate In Practice |  |
+| [Josh Sweat](https://www.nfl.com/players/josh-sweat/) | LB |  | Did Not Participate In Practice |  |
+| [Jayden Williams](https://www.nfl.com/players/jayden-williams/) | T |  | Limited Participation in Practice |  |
+| [Mack Wilson](https://www.nfl.com/players/mack-wilson/) | LB |  | Did Not Participate In Practice |  |
+
+Chiefs
+
+| Player | Position | Injuries | Practice Status | Game Status |
+| --- | --- | --- | --- | --- |
+| [Jeffrey Bassa](https://www.nfl.com/players/jeffrey-bassa/) | LB |  | Full Participation in Practice |  |
+| [Nick Bolton](https://www.nfl.com/players/nick-bolton/) | LB |  | Limited Participation in Practice |  |
+| [Jadon Canady](https://www.nfl.com/players/jadon-canady/) | CB |  | Full Participation in Practice |  |
+| [Mansoor Delane](https://www.nfl.com/players/mansoor-delane/) | CB |  | Full Participation in Practice |  |
+| [Justin Fields](https://www.nfl.com/players/justin-fields/) | QB |  | Full Participation in Practice |  |
+| [Alohi Gilman](https://www.nfl.com/players/alohi-gilman/) | S |  | Full Participation in Practice |  |
+| [Travis Kelce](https://www.nfl.com/players/travis-kelce/) | TE |  | Full Participation in Practice |  |
+| [Patrick Mahomes](https://www.nfl.com/players/patrick-mahomes/) | QB |  | Full Participation in Practice |  |
+| [Jaylon Moore](https://www.nfl.com/players/jaylon-moore-2/) | T |  | Did Not Participate In Practice |  |
+| [Omarr Norman-Lott](https://www.nfl.com/players/omarr-norman-lott/) | DT |  | Limited Participation in Practice |  |
+| [Jaydn Ott](https://www.nfl.com/players/jaydn-ott/) | RB |  | Full Participation in Practice |  |
+| [Rashee Rice](https://www.nfl.com/players/rashee-rice/) | WR |  | Full Participation in Practice |  |
+| [Trey Smith](https://www.nfl.com/players/trey-smith/) | G |  | Did Not Participate In Practice |  |
+| [Kenneth Walker III](https://www.nfl.com/players/kenneth-walker-iii/) | RB |  | Did Not Participate In Practice |  |
+| [Peter Woods](https://www.nfl.com/players/peter-woods/) | DT |  | Full Participation in Practice |  |
+
+1:00 PMEST
+
+FOX
+
+[![](https://static.www.nfl.com/t_q-best/league/api/clubs/logos/BAL)](https://www.nfl.com/teams/baltimore-ravens/) BAL [Ravens](https://www.nfl.com/teams/baltimore-ravens/)
+
+(4-6)
+
+[![](https://static.www.nfl.com/t_q-best/league/api/clubs/logos/CAR)](https://www.nfl.com/teams/carolina-panthers/) CAR [Panthers](https://www.nfl.com/teams/carolina-panthers/)
+
+(4-5)
+
+Ravens
+
+| Player | Position | Injuries | Practice Status | Game Status |
+| --- | --- | --- | --- | --- |
+| [Mike Green](https://www.nfl.com/players/mike-green-5/) | LB |  | Full Participation in Practice |  |
+| [Jaylinn Hawkins](https://www.nfl.com/players/jaylinn-hawkins/) | S |  | Limited Participation in Practice |  |
+| [Matthew Hibner](https://www.nfl.com/players/matthew-hibner/) | TE |  | Full Participation in Practice |  |
+| [Olaivavega Ioane](https://www.nfl.com/players/olaivavega-ioane/) | G |  | Limited Participation in Practice |  |
+| [Nnamdi Madubuike](https://www.nfl.com/players/nnamdi-madubuike/) | DT |  | Did Not Participate In Practice |  |
+| [Adam Randall](https://www.nfl.com/players/adam-randall/) | RB |  | Full Participation in Practice |  |
+
+Panthers
+
+| Player | Position | Injuries | Practice Status | Game Status |
+| --- | --- | --- | --- | --- |
+| [Jonathon Brooks](https://www.nfl.com/players/jonathon-brooks/) | RB |  | Full Participation in Practice |  |
+| [Brady Christensen](https://www.nfl.com/players/brady-christensen/) | G |  | Full Participation in Practice |  |
+| [Feleipe Franks](https://www.nfl.com/players/feleipe-franks/) | TE |  | Full Participation in Practice |  |
+| [Trevis Gipson](https://www.nfl.com/players/trevis-gipson/) | LB |  | Limited Participation in Practice |  |
+| [Chuba Hubbard](https://www.nfl.com/players/chuba-hubbard/) | RB |  | Did Not Participate In Practice |  |
+| [Mike Jackson](https://www.nfl.com/players/mike-jackson/) | CB |  | Full Participation in Practice |  |
+| [Jackson Kuwatch](https://www.nfl.com/players/jackson-kuwatch/) | LB |  | Full Participation in Practice |  |
+| [Will Lee III](https://www.nfl.com/players/will-lee-iii/) | CB |  | Full Participation in Practice |  |
+| [Bobby Okereke](https://www.nfl.com/players/bobby-okereke/) | LB |  | Did Not Participate In Practice |  |
+| [Isaiah Simmons](https://www.nfl.com/players/isaiah-simmons/) | S |  | Did Not Participate In Practice |  |
+| [Tommy Tremble](https://www.nfl.com/players/tommy-tremble/) | TE |  | Did Not Participate In Practice |  |
+| [Darren Waller](https://www.nfl.com/players/darren-waller/) | TE |  | Did Not Participate In Practice |  |
+| [Bryce Young](https://www.nfl.com/players/bryce-young/) | QB |  | Full Participation in Practice |  |
+
+1:00 PMEST
+
+FOX
+
+[![](https://static.www.nfl.com/t_q-best/league/api/clubs/logos/TB)](https://www.nfl.com/teams/tampa-bay-buccaneers/) TB [Buccaneers](https://www.nfl.com/teams/tampa-bay-buccaneers/)
+
+(3-6)
+
+[![](https://static.www.nfl.com/t_q-best/league/api/clubs/logos/DET)](https://www.nfl.com/teams/detroit-lions/) DET [Lions](https://www.nfl.com/teams/detroit-lions/)
+
+(7-2)
+
+Buccaneers
+
+| Player | Position | Injuries | Practice Status | Game Status |
+| --- | --- | --- | --- | --- |
+| [Yaya Diaby](https://www.nfl.com/players/yaya-diaby/) | LB |  | Limited Participation in Practice |  |
+| [Josh Hayes](https://www.nfl.com/players/josh-hayes/) | CB |  | Full Participation in Practice |  |
+| [Baker Mayfield](https://www.nfl.com/players/baker-mayfield/) | QB |  | Did Not Participate In Practice |  |
+| [Cade Otton](https://www.nfl.com/players/cade-otton/) | TE |  | Full Participation in Practice |  |
+| [Antoine Winfield Jr.](https://www.nfl.com/players/antoine-winfield-jr/) | S |  | Did Not Participate In Practice |  |
+| [Tristan Wirfs](https://www.nfl.com/players/tristan-wirfs/) | T |  | Full Participation in Practice |  |
+
+Lions
+
+| Player | Position | Injuries | Practice Status | Game Status |
+| --- | --- | --- | --- | --- |
+| [Joe Bachie](https://www.nfl.com/players/joe-bachie/) | LB |  | Limited Participation in Practice |  |
+| [Khalil Dorsey](https://www.nfl.com/players/khalil-dorsey/) | CB |  | Limited Participation in Practice |  |
+| [Kerby Joseph](https://www.nfl.com/players/kerby-joseph/) | S |  | Full Participation in Practice |  |
+| [Tyler Lacy](https://www.nfl.com/players/tyler-lacy/) | DE |  | Limited Participation in Practice |  |
+| [Cade Mays](https://www.nfl.com/players/cade-mays/) | C |  | Did Not Participate In Practice |  |
+| [Ennis Rakestraw Jr.](https://www.nfl.com/players/ennis-rakestraw-jr/) | CB |  | Limited Participation in Practice |  |
+| [D.J. Reed](https://www.nfl.com/players/d-j-reed/) | CB |  | Limited Participation in Practice |  |
+| [Sione Vaki](https://www.nfl.com/players/sione-vaki/) | RB |  | Limited Participation in Practice |  |
+
+1:00 PMEST
+
+CBS
+
+[![](https://static.www.nfl.com/t_q-b

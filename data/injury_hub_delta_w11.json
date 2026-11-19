@@ -1,0 +1,586 @@
+{
+ "id": "injury_hub_delta_w11",
+ "title": "Injury-hub read 5 (Week 11 of 2026) - clock-timed, delta published",
+ "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level.",
+ "url": "https://www.nfl.com/injuries/",
+ "source_id": "S100",
+ "week_shown": "WEEK 11",
+ "reads": [
+  {
+   "read": 5,
+   "capture": "raw/injuries-week11-2026-read5.md",
+   "chunks": "raw/.chunks-w11/chunk0-6.txt (fetch_page chunkIndex 0-6, totalChunks 7)",
+   "captured": "2026-11-19 (UTC, session 0a100872; exact per-chunk fetch clock time not recorded by the fetch tool)",
+   "rows": 253,
+   "clubs_with_table": 24,
+   "clubs_no_injuries_reported": [
+    "Bengals",
+    "Commanders"
+   ],
+   "source_id": "S100"
+  }
+ ],
+ "delta": null,
+ "delta_reason": "No earlier Week 11 read exists, so no like-for-like delta is published. Week 10 reads are not compared (different week).",
+ "counts": {
+  "practice": {
+   "DNP": 83,
+   "FULL": 83,
+   "LIMITED": 87
+  },
+  "game": {
+   "blank": 237,
+   "Questionable": 7,
+   "Out": 9
+  }
+ },
+ "flags": [
+  {
+   "line": 55,
+   "club": "HOU",
+   "player": "Jacob Hummel",
+   "issue": "first name differs from player-link slug (published as-is; review)",
+   "url": "https://www.nfl.com/players/jake-hummel/"
+  },
+  {
+   "line": 277,
+   "club": "BUF",
+   "player": "Dee Alford",
+   "issue": "surname not in player-link slug (review link)",
+   "url": "https://www.nfl.com/players/deaundre-ford/"
+  },
+  {
+   "line": 428,
+   "club": "JAX",
+   "player": "LeQuint Allen Jr.",
+   "issue": "surname not in player-link slug (review link)",
+   "url": "https://www.nfl.com/players/lequint-allen/"
+  },
+  {
+   "line": 234,
+   "club": "DET",
+   "player": "Kerby Joseph",
+   "issue": "blank game status (earlier brief lists Lions designations Out; not verifiable from this read)",
+   "url": "https://www.nfl.com/players/kerby-joseph/"
+  },
+  {
+   "line": 236,
+   "club": "DET",
+   "player": "Cade Mays",
+   "issue": "blank game status (earlier brief lists Lions designations Out; not verifiable from this read)",
+   "url": "https://www.nfl.com/players/cade-mays/"
+  },
+  {
+   "line": 238,
+   "club": "DET",
+   "player": "D.J. Reed",
+   "issue": "blank game status (earlier brief lists Lions designations Out; not verifiable from this read)",
+   "url": "https://www.nfl.com/players/d-j-reed/"
+  },
+  {
+   "line": 34,
+   "club": "IND",
+   "player": "Jaylon Carlies",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jaylon-carlies/"
+  },
+  {
+   "line": 50,
+   "club": "HOU",
+   "player": "Azeez Al-Shaair",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/azeez-al-shaair/"
+  },
+  {
+   "line": 86,
+   "club": "PIT",
+   "player": "Nick Herbig",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/nick-herbig/"
+  },
+  {
+   "line": 87,
+   "club": "PIT",
+   "player": "Cameron Heyward",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/cameron-heyward/"
+  },
+  {
+   "line": 90,
+   "club": "PIT",
+   "player": "Jalen Ramsey",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jalen-ramsey/"
+  },
+  {
+   "line": 91,
+   "club": "PIT",
+   "player": "Darnell Washington",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/darnell-washington/"
+  },
+  {
+   "line": 92,
+   "club": "PIT",
+   "player": "T.J. Watt",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/t-j-watt/"
+  },
+  {
+   "line": 100,
+   "club": "PHI",
+   "player": "Zack Baun",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/zack-baun/"
+  },
+  {
+   "line": 131,
+   "club": "AZ",
+   "player": "Budda Baker",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/budda-baker/"
+  },
+  {
+   "line": 137,
+   "club": "AZ",
+   "player": "Walter Nolen",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/walter-nolen/"
+  },
+  {
+   "line": 139,
+   "club": "AZ",
+   "player": "Isaac Seumalo",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/isaac-seumalo/"
+  },
+  {
+   "line": 140,
+   "club": "AZ",
+   "player": "Josh Sweat",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/josh-sweat/"
+  },
+  {
+   "line": 142,
+   "club": "AZ",
+   "player": "Mack Wilson",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/mack-wilson/"
+  },
+  {
+   "line": 156,
+   "club": "KC",
+   "player": "Jaylon Moore",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jaylon-moore-2/"
+  },
+  {
+   "line": 160,
+   "club": "KC",
+   "player": "Trey Smith",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/trey-smith/"
+  },
+  {
+   "line": 161,
+   "club": "KC",
+   "player": "Kenneth Walker III",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/kenneth-walker-iii/"
+  },
+  {
+   "line": 184,
+   "club": "BAL",
+   "player": "Nnamdi Madubuike",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/nnamdi-madubuike/"
+  },
+  {
+   "line": 195,
+   "club": "CAR",
+   "player": "Chuba Hubbard",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/chuba-hubbard/"
+  },
+  {
+   "line": 199,
+   "club": "CAR",
+   "player": "Bobby Okereke",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/bobby-okereke/"
+  },
+  {
+   "line": 200,
+   "club": "CAR",
+   "player": "Isaiah Simmons",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/isaiah-simmons/"
+  },
+  {
+   "line": 201,
+   "club": "CAR",
+   "player": "Tommy Tremble",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/tommy-tremble/"
+  },
+  {
+   "line": 202,
+   "club": "CAR",
+   "player": "Darren Waller",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/darren-waller/"
+  },
+  {
+   "line": 223,
+   "club": "TB",
+   "player": "Baker Mayfield",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/baker-mayfield/"
+  },
+  {
+   "line": 225,
+   "club": "TB",
+   "player": "Antoine Winfield Jr.",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/antoine-winfield-jr/"
+  },
+  {
+   "line": 236,
+   "club": "DET",
+   "player": "Cade Mays",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/cade-mays/"
+  },
+  {
+   "line": 261,
+   "club": "MIA",
+   "player": "Aaron Brewer",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/aaron-brewer-2/"
+  },
+  {
+   "line": 264,
+   "club": "MIA",
+   "player": "Bradley Pinion",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/bradley-pinion/"
+  },
+  {
+   "line": 265,
+   "club": "MIA",
+   "player": "Jaylin Simpson",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jaylin-simpson/"
+  },
+  {
+   "line": 266,
+   "club": "MIA",
+   "player": "Dante Trader Jr.",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/dante-trader-jr/"
+  },
+  {
+   "line": 267,
+   "club": "MIA",
+   "player": "Jared Wayne",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jared-wayne/"
+  },
+  {
+   "line": 273,
+   "club": "BUF",
+   "player": "Christian Benford",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/christian-benford/"
+  },
+  {
+   "line": 277,
+   "club": "BUF",
+   "player": "Dee Alford",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/deaundre-ford/"
+  },
+  {
+   "line": 282,
+   "club": "BUF",
+   "player": "Dalton Kincaid",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/dalton-kincaid/"
+  },
+  {
+   "line": 286,
+   "club": "BUF",
+   "player": "O'Cyrus Torrence",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/o-cyrus-torrence/"
+  },
+  {
+   "line": 287,
+   "club": "BUF",
+   "player": "Dorian Williams",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/dorian-williams/"
+  },
+  {
+   "line": 305,
+   "club": "TEN",
+   "player": "Tony Adams",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/tony-adams-4/"
+  },
+  {
+   "line": 311,
+   "club": "TEN",
+   "player": "Tyjae Spears",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/tyjae-spears/"
+  },
+  {
+   "line": 319,
+   "club": "DAL",
+   "player": "DaRon Bland",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/daron-bland/"
+  },
+  {
+   "line": 320,
+   "club": "DAL",
+   "player": "Tyler Booker",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/tyler-booker/"
+  },
+  {
+   "line": 321,
+   "club": "DAL",
+   "player": "Donovan Ezeiruaku",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/donovan-ezeiruaku/"
+  },
+  {
+   "line": 322,
+   "club": "DAL",
+   "player": "Jake Ferguson",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jake-ferguson/"
+  },
+  {
+   "line": 325,
+   "club": "DAL",
+   "player": "P.J. Locke",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/p-j-locke/"
+  },
+  {
+   "line": 326,
+   "club": "DAL",
+   "player": "Von Miller",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/von-miller/"
+  },
+  {
+   "line": 327,
+   "club": "DAL",
+   "player": "Jonathan Mingo",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jonathan-mingo/"
+  },
+  {
+   "line": 351,
+   "club": "NO",
+   "player": "Martin Emerson",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/martin-emerson/"
+  },
+  {
+   "line": 352,
+   "club": "NO",
+   "player": "Taliese Fuaga",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/taliese-fuaga/"
+  },
+  {
+   "line": 353,
+   "club": "NO",
+   "player": "Alvin Kamara",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/alvin-kamara/"
+  },
+  {
+   "line": 354,
+   "club": "NO",
+   "player": "Erik McCoy",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/erik-mccoy/"
+  },
+  {
+   "line": 355,
+   "club": "NO",
+   "player": "Justin Reid",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/justin-reid/"
+  },
+  {
+   "line": 356,
+   "club": "NO",
+   "player": "Asim Richards",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/asim-richards/"
+  },
+  {
+   "line": 359,
+   "club": "NO",
+   "player": "Pete Werner",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/pete-werner/"
+  },
+  {
+   "line": 366,
+   "club": "CHI",
+   "player": "Kyler Gordon",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/kyler-gordon/"
+  },
+  {
+   "line": 387,
+   "club": "NYJ",
+   "player": "Omar Cooper Jr.",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/omar-cooper-jr/"
+  },
+  {
+   "line": 391,
+   "club": "NYJ",
+   "player": "Harrison Phillips",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/harrison-phillips/"
+  },
+  {
+   "line": 394,
+   "club": "NYJ",
+   "player": "Isaiah Williams",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/isaiah-williams-3/"
+  },
+  {
+   "line": 401,
+   "club": "LAC",
+   "player": "Daiyan Henley",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/daiyan-henley/"
+  },
+  {
+   "line": 403,
+   "club": "LAC",
+   "player": "Charlie Kolar",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/charlie-kolar/"
+  },
+  {
+   "line": 404,
+   "club": "LAC",
+   "player": "Khalil Mack",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/khalil-mack/"
+  },
+  {
+   "line": 407,
+   "club": "LAC",
+   "player": "Rodney Shelley",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/rodney-shelley/"
+  },
+  {
+   "line": 408,
+   "club": "LAC",
+   "player": "Brenen Thompson",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/brenen-thompson/"
+  },
+  {
+   "line": 409,
+   "club": "LAC",
+   "player": "Isas Waxter",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/isas-waxter/"
+  },
+  {
+   "line": 429,
+   "club": "JAX",
+   "player": "Arik Armstead",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/arik-armstead/"
+  },
+  {
+   "line": 432,
+   "club": "JAX",
+   "player": "Robert Hainsey",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/robert-hainsey/"
+  },
+  {
+   "line": 448,
+   "club": "NYG",
+   "player": "Nic Jones",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/nic-jones/"
+  },
+  {
+   "line": 470,
+   "club": "LV",
+   "player": "Brock Bowers",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/brock-bowers/"
+  },
+  {
+   "line": 473,
+   "club": "LV",
+   "player": "Tonka Hemingway",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/tonka-hemingway/"
+  },
+  {
+   "line": 506,
+   "club": "MIN",
+   "player": "Jordan Addison",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/jordan-addison/"
+  },
+  {
+   "line": 512,
+   "club": "MIN",
+   "player": "Kyler Murray",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/kyler-murray/"
+  },
+  {
+   "line": 522,
+   "club": "SF",
+   "player": "Mike Evans",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/mike-evans/"
+  },
+  {
+   "line": 525,
+   "club": "SF",
+   "player": "Dre Greenlaw",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/dre-greenlaw-x9042/"
+  },
+  {
+   "line": 529,
+   "club": "SF",
+   "player": "Christian McCaffrey",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/christian-mccaffrey/"
+  },
+  {
+   "line": 535,
+   "club": "SF",
+   "player": "Trent Williams",
+   "issue": "DNP in practice with blank game status (publish blank, unverified)",
+   "url": "https://www.nfl.com/players/trent-williams/"
+  }
+ ],
+ "flag_count": 78
+}
