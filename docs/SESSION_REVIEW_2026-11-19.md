@@ -10,7 +10,7 @@ The repo already contains a broad static dashboard and substantial engines/regis
 
 ## Checks run on the resulting tree
 
-- `python3 -m unittest discover -s tests -q` — **356 tests passed**. The suite emitted pre-existing `ResourceWarning` messages for unclosed files in several tests; they did not fail the run.
+- `python3 -m unittest discover -s tests -q` — **374 tests passed on the final rebased tree** (the earlier pre-rebase tree had 356). The suite emitted pre-existing `ResourceWarning` messages for unclosed files in several tests; they did not fail the run.
 - `python3 tools/build.py && python3 tools/site.py` — completed. Core generated outputs matched the committed tree; `git status` was clean after generation. The generators report 32 teams, 345 injury rows, 91 source-register entries (82 marked `VERIFIED`), 46 questions, 51 suggestions, 29 requirements, 6 registered strategies, and 72 flags.
 - `python3 tools/checklinks.py` — **57 pages**; all internal links, anchors, reachability and source IDs resolved. It reported **263 external links**, explicitly not fetched.
 - `python3 tools/checkrows.py` — **57 pages; 7,019 rows audited** (310 register/spec rows plus 6,709 data rows satisfying the checker’s rules).
