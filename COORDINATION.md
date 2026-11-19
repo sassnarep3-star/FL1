@@ -2352,3 +2352,13 @@ session's capture kept alongside as `raw/injuries-week11-2026-read1-9d88.md` (ma
 `scripts/verify_9d88.py` V3 now asserts the two captures parse to the identical 253-row set
 (AZ→ARI normalised) — two independent transcriptions agreeing, which is stronger evidence than either
 alone. No work from either session was discarded.
+
+## Task board — session `arena/e0af7bbd-fl1` (2026-11-19 UTC) — independent verification review
+
+**Session/branch:** `arena/e0af7bbd-fl1` (fixed Arena branch; original base `addeb0a`). This claim is being reconciled against newer `main`, which contains parallel completed N01/DOC1/J1-J5 work. Those entries and files are retained. This session's scope remains this coordination record and `docs/SESSION_REVIEW_2026-11-19.md` only.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| E01 | Independently run deterministic repository checks and publish a dated, evidence-bounded verification/audit note with limitations, without rewriting files owned by completed parallel tasks | in progress | `arena/e0af7bbd-fl1` | `COORDINATION.md`, `docs/SESSION_REVIEW_2026-11-19.md` |
+
+No source facts, raw captures, shared data, generated pages or navigation are changed. Official URLs cited in the note are existing source-register references, not newly fetched evidence.
