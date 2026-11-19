@@ -1043,5 +1043,20 @@
   "reversibility": "High — rows append with dates; a bad promotion is a revert.",
   "recommendation": "Freeze the rule now, before Week 11 results arrive.",
   "evidence": "C1-C5 all green on the 2026-11-17 close-out read (13 finals, standings 32/32 W/L/T + PF/PA); F61/Q44/SG37 record the gap."
+ },
+ {
+  "id": "SG52",
+  "title": "Record each candidate's per-bet probability at registration so controls and candidates share one proper score",
+  "category": "Governance",
+  "problem": "Controls are now scored with the Brier score (K1), but no candidate strategy stores the probability it assigned to a bet, so no candidate can be placed on the same scale. Until it can, the 'must beat both controls' rule (R76) is NOT EVALUABLE for every candidate.",
+  "proposal": "Make the probability a required field of the pre-registered rule (R29/R35): each bet row carries p, the inputs used, and the model version, frozen before the games are scored. Then score candidates and both controls on the same out-of-sample games with the same Brier function (engine/controls.py).",
+  "options": "A) required per-bet p in the pre-registration (recommended). B) keep ROI-only ranking (rejected by R84/R57). C) derive p from the strategy's training hit rate (an invented model; not recommended).",
+  "impact": "Makes R76 and R57 computable for every candidate; removes the last reason the leaderboard cannot compare skill with the luck baseline.",
+  "prerequisites": "Owner decision on the pre-registration template (R29). No new data source needed.",
+  "effort": "Medium: a schema field on data/strategies.json and a re-run of the strategy engine.",
+  "risk": "Low. Candidates that cannot supply p are reported as not evaluable, not as failed.",
+  "evidence": "data/controls.json (candidates_scored = 0); engine/controls.py; data/strategies.csv (no probability column).",
+  "reversibility": "Fully reversible: nothing is changed for any candidate until the owner adopts the template.",
+  "recommendation": "Adopt option A: add the probability field to the pre-registration template before the first candidate is registered. Until then every candidate stays NOT EVALUABLE on the control comparison."
  }
 ]

@@ -232,7 +232,10 @@ pinned inputs, not from the clock, so a rebuild is byte-identical.</footer>
 def main() -> int:
     DOCS.mkdir(exist_ok=True)
 
-    strat = pd.read_csv(DATA / "strategies.csv")
+    strat_all = pd.read_csv(DATA / "strategies.csv")
+    # K1: control baselines (__CONTROL_*) are yardsticks, not variants. Counts and the best p-value use
+    # strategies only; the control lookup and the strategy table keep the controls.
+    strat = strat_all[~strat_all.strategy_id.astype(str).str.startswith("__CONTROL")].reset_index(drop=True)
     lb = pd.read_csv(DATA / "leaderboard.csv")
     lbs = pd.read_csv(DATA / "leaderboard_by_season.csv")
     corr = pd.read_csv(DATA / "correlations.csv")
@@ -252,7 +255,7 @@ def main() -> int:
 
     approved = int((strat.verdict == "APPROVED").sum())
     best = strat.iloc[0]
-    control = strat[strat.strategy_id == "__CONTROL_MARKET"].iloc[0]
+    control = strat_all[strat_all.strategy_id == "__CONTROL_MARKET"].iloc[0]
 
     # ---------------- index ----------------
     body = f"""
@@ -324,8 +327,8 @@ A blank cell means the value could not be sourced; it is listed on
     # ---------------- findings ----------------
     body = f"""
 <h2>1. The market is hard, and the test says so</h2>
-<p>Sixteen variants across six families (market-divergence, situational, weather, conjunction,
-availability, control) were run over 2006–2026 with a fixed 70/30 time split. The out-of-sample
+<p>Fifteen strategy variants across five families (market-divergence, situational, weather, conjunction,
+availability), plus three control baselines on the same window, were run over 2006–2026 with a fixed 70/30 time split. The out-of-sample
 window starts at {int(strat.oos_from.iloc[0])}. Results are in
 <a href="strategies.html">Strategies &amp; gates</a>.</p>
 <div class="cards">
@@ -464,7 +467,7 @@ badly-specified signal, not evidence about the idea. It fails G1 by construction
          "Ranked by gates passed, then out-of-sample ROI. Reward is conditional on passing every gate.")
 
     # ---------------- strategies & gates ----------------
-    sv = strat[["strategy_id", "family", "market", "settled", "hit_rate", "breakeven_hit",
+    sv = strat_all[["strategy_id", "family", "market", "settled", "hit_rate", "breakeven_hit",
                 "roi", "is_roi", "oos_roi", "p_value", "max_drawdown", "gates_passed", "verdict"]].copy()
     for c in ("hit_rate", "breakeven_hit", "roi", "is_roi", "oos_roi"):
         sv[c] = (sv[c] * 100).round(2)

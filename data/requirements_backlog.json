@@ -5,9 +5,9 @@
   "updated": "2026-11-16",
   "counts": {
     "done": 6,
-    "partial": 19,
+    "partial": 22,
     "blocked": 11,
-    "not-started": 20,
+    "not-started": 17,
     "decision-open": 1,
     "rejected": 2,
     "duplicate": 0
@@ -87,11 +87,11 @@
       "id": "R76",
       "category": "Governance",
       "requirement": "Add a control baseline (random picks; favourites only) to every leaderboard run",
-      "status": "not-started",
-      "blocking_gate": "No random-pick or favourites-only control row exists in the register",
-      "clears_when": "2 control rows in every leaderboard run, scored with the same proper score; a candidate must beat both",
-      "evidence": "data/strategies.json (6 strategies, none is a control)",
-      "sources": "S01"
+      "status": "partial",
+      "blocking_gate": "Controls are published (K1, arena/9fccbb0e-fl1), but candidates store no per-bet probability (R35), so no candidate has a Brier score to beat the controls with (SG52)",
+      "clears_when": "2 control rows in every leaderboard run, scored with the same proper score (done for the controls); every candidate scored on the same Brier and beating both controls (not yet)",
+      "evidence": "data/controls.csv, data/controls.json, controls.html, tests/test_controls_k1.py (third-party feed S47, documented by S104)",
+      "sources": "S47;S104"
     },
     {
       "id": "R81",
@@ -198,7 +198,7 @@
       "category": "Injuries",
       "requirement": "Treat the injury report as a timestamped series, not a weekly snapshot",
       "status": "partial",
-      "blocking_gate": "Only two dated reads exist (2026-11-14 and 2026-11-16); a series needs at least three points per week",
+      "blocking_gate": "Only two dated reads exist (2026-11-14 and 2026-11-16); a series needs at least three points per week. The capture job (K3) is committed but has produced no live rows yet",
       "clears_when": ">= 3 timed captures per week for >= 4 consecutive weeks (Wed, Thu, Fri plus game day) = >= 12 captures",
       "evidence": "raw/injuries-week10-2026.md, raw/injuries-week10-2026-recapture-2026-11-16.md, data/injury_diff_g.tsv",
       "sources": "S01"
@@ -207,10 +207,10 @@
       "id": "R73",
       "category": "Injuries",
       "requirement": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
-      "status": "not-started",
-      "blocking_gate": "No scheduled job captures the injury report; the only scheduler in the repo refreshes a third-party games feed",
-      "clears_when": "a scheduled append-only capture on Wed, Thu and Fri, proven over >= 1 full week, with hashes retained",
-      "evidence": ".github/workflows/refresh.yml (games feed only, Thursdays)",
+      "status": "partial",
+      "blocking_gate": "Workflow and script committed (K3, arena/9fccbb0e-fl1): Wed/Thu/Fri 14:00 UTC capture logs UTC time, HTTP status, bytes and sha256 to data/captures/injury_capture_log.tsv. Not yet proven: no live capture row, because the build sandbox cannot reach nfl.com",
+      "clears_when": "a scheduled append-only capture on Wed, Thu and Fri, proven over >= 1 full week of live rows, with hashes retained",
+      "evidence": ".github/workflows/injury-capture-k3.yml, scripts/capture_injury_meta_k3.py, data/captures/injury_capture_log.tsv, tests/test_capture_k3.py (refresh.yml is games-feed only)",
       "sources": "S01"
     },
     {
@@ -547,11 +547,11 @@
       "id": "R44",
       "category": "Origination",
       "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
-      "status": "not-started",
-      "blocking_gate": "No dated announcement document has been captured or linked",
-      "clears_when": "the official announcement URL + publication date captured and shown beside schedule.html",
-      "evidence": "\u2014",
-      "sources": "S04"
+      "status": "partial",
+      "blocking_gate": "Captured (K2, arena/9fccbb0e-fl1): official release (May 14, 2026) and advance notice (May 8, 2026) with 10 quote-checked claims. Not yet rendered beside schedule.html; the page generator is outside K2 scope and its chip still cites S86 (F76)",
+      "clears_when": "the captured announcement rendered beside schedule.html with its S105/S106 chips (rendering is the remaining step)",
+      "evidence": "data/schedule_announcement.json, raw/schedule-announcement-2026.md, scripts/build_schedule_announcement_k2.py, tests/test_schedule_announcement_k2.py",
+      "sources": "S105;S106;S04"
     },
     {
       "id": "R42",

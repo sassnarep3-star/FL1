@@ -23,7 +23,7 @@
    "delivered": "data/sources.tsv register; only VERIFIED rows are citable",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "76 of 85 source records VERIFIED (page loaded and read this session)"
+   "clears": "89 of 98 source records VERIFIED (page loaded and read this session)"
   },
   {
    "id": "R03",
@@ -43,7 +43,7 @@
    "delivered": "flagged.html — Flagged for Review",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "69 irregularities published with source links (F01..F69)"
+   "clears": "77 irregularities published with source links (F01..F77)"
   },
   {
    "id": "R05",
@@ -173,7 +173,7 @@
    "delivered": "rank by luck-removed edge (CI lower bound vs price hurdle), control baseline, multiplicity adjustment",
    "blocker": null,
    "blocker_refs": [],
-   "clears": "0 of 16 computed entries proven — the metric rejects them all; see the dashboard luck panel"
+   "clears": "0 of 15 computed strategies proven (controls excluded) — the metric rejects them all; see the dashboard luck panel"
   },
   {
    "id": "R18",

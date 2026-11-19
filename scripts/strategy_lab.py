@@ -45,6 +45,14 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 OUT = ROOT / "data"
 
+# K1 (session arena/9fccbb0e-fl1): control baselines. Stdlib-only helpers live in engine/controls.py.
+sys.path.insert(0, str(ROOT))
+from engine import controls as C  # noqa: E402
+
+CONTROL_RANDOM = "__CONTROL_RANDOM"
+CONTROL_FAVOURITE = "__CONTROL_FAVOURITE"
+CONTROL_IDS = (CONTROL_RANDOM, CONTROL_FAVOURITE)
+
 # --- tuning constants. These are FIXED before looking at results. -----------
 TRAIN_START = 2006          # first season with reliable moneylines in the source
 OOS_FRACTION = 0.30         # last 30% of seasons = strict out-of-sample
@@ -425,6 +433,23 @@ def signals(g: pd.DataFrame) -> dict[str, pd.DataFrame]:
         "family": "control",
     }
 
+    # K1 / R76: a random-pick control and a favourites-only control, in every run.
+    # Sign convention verified in engine/controls.py: spread_line > 0 means the HOME side is the favourite.
+    S[CONTROL_RANDOM] = {
+        "mask": g.spread_line.notna(),
+        "kind": "spread",
+        "side": lambda s: np.array(C.random_sides(len(s)), dtype=object),
+        "desc": "CONTROL: pick a side of every game with a fixed seed (20261119). No information used.",
+        "family": "control",
+    }
+    S[CONTROL_FAVOURITE] = {
+        "mask": g.spread_line.notna() & (g.spread_line != 0),
+        "kind": "spread",
+        "side": lambda s: np.where(s.spread_line > 0, "home", "away"),
+        "desc": "CONTROL: always back the market favourite at the close (pick'ems excluded).",
+        "family": "control",
+    }
+
     return S
 
 
@@ -489,6 +514,78 @@ def gates(all_bets: pd.DataFrame, split_season: int) -> tuple[dict, list[dict]]:
 
 
 # ---------------------------------------------------------------------------
+# Controls (K1 / R76)
+# ---------------------------------------------------------------------------
+def write_controls(bets_by_name: dict, split_season: int, seasons: list) -> None:
+    """Score the two controls with the Brier score on the out-of-sample seasons.
+
+    RANDOM forecasts p = 0.5 for the side it picked (no information, so Brier = 0.25 by construction).
+    FAVOURITE forecasts the favourite's cover rate estimated on the TRAINING seasons only.
+    Pushes are excluded from both numerator and denominator, as in every other row here.
+    No candidate strategy is scored: candidates store no per-bet probability (R35).
+    """
+    rows = []
+    for cid in CONTROL_IDS:
+        b = bets_by_name.get(cid)
+        if b is None:
+            raise RuntimeError(f"control {cid} produced no bets; refusing to publish a blank control")
+        nb = b[~b.push]
+        train = nb[nb.season < split_season]
+        oos = nb[nb.season >= split_season]
+        if cid == CONTROL_RANDOM:
+            p = 0.5
+            basis = "fixed coin-flip p = 0.5 (no information)"
+        else:
+            p = C.train_cover_rate([int(x) for x in train.win.tolist()])
+            basis = (f"favourite cover rate on training seasons {seasons[0]}-{split_season - 1} "
+                     f"(n={len(train)}), fixed before OOS scoring")
+        y = [int(x) for x in oos.win.tolist()]
+        br = C.brier([p] * len(y), y)
+        staked = float(oos.stake.sum())
+        rows.append({
+            "control_id": cid,
+            "rule": s_desc(cid),
+            "seed": C.CONTROL_SEED if cid == CONTROL_RANDOM else "",
+            "forecast_p": round(p, 6),
+            "forecast_basis": basis,
+            "train_seasons": f"{seasons[0]}-{split_season - 1}",
+            "train_settled": int(len(train)),
+            "oos_seasons": f"{split_season}-{seasons[-1]}",
+            "oos_settled": int(len(oos)),
+            "oos_hit_rate": round(float(oos.win.mean()), 4) if len(oos) else None,
+            "oos_roi": round(float(oos.profit.sum()) / staked, 4) if staked else None,
+            "brier_oos": br["brier"],
+            "brier_se": br["se"],
+            "brier_ci_low": br["ci_low"],
+            "brier_ci_high": br["ci_high"],
+            "coinflip_brier": C.COINFLIP_BRIER,
+            "brier_minus_coinflip": round(br["brier"] - C.COINFLIP_BRIER, 6) if br["brier"] is not None else None,
+        })
+    out = pd.DataFrame(rows)
+    out.to_csv(OUT / "controls.csv", index=False)
+    meta = {
+        "task": "K1 / R76 control baselines (session arena/9fccbb0e-fl1)",
+        "market": "spread (nflverse closing spread and odds, third-party: S47)",
+        "scoring": "Brier score on out-of-sample settled bets (pushes excluded); 95% interval = mean +/- 1.96 se, one bet per game",
+        "sign_convention": "spread_line > 0 means the HOME side is the favourite (engine/controls.py)",
+        "random_seed": C.CONTROL_SEED,
+        "candidates_scored": 0,
+        "candidate_status": "NOT EVALUABLE: candidate strategies store no per-bet probability (R35), so a candidate cannot be placed on the same Brier scale; the 'must beat both controls' gate is not yet computable for any candidate.",
+        "controls": rows,
+    }
+    with open(OUT / "controls.json", "w", encoding="utf-8") as fh:
+        json.dump(meta, fh, indent=2, ensure_ascii=False)
+        fh.write("\n")
+
+
+def s_desc(cid: str) -> str:
+    return {
+        CONTROL_RANDOM: "Pick a side of every game with a fixed seed (20261119); no information used.",
+        CONTROL_FAVOURITE: "Always back the market favourite at the close; pick'ems excluded.",
+    }[cid]
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 def main() -> int:
@@ -503,11 +600,13 @@ def main() -> int:
 
     sig = signals(g)
     summary, leaderboard = [], []
+    bets_by_name = {}
 
     for name, s in sig.items():
         bets = build_bets(g, s["mask"], s["kind"], s["side"])
         if bets.empty:
             continue
+        bets_by_name[name] = bets
         G, periods = gates(bets, split_season)
         full, ins, oos = periods
         row = {
@@ -546,6 +645,8 @@ def main() -> int:
                 "profit_units": round(float(r.profit), 3),
                 "roi": round(float(r.roi), 4),
             })
+
+    write_controls(bets_by_name, split_season, seasons)
 
     df = pd.DataFrame(summary)
     order = {"APPROVED": 0, "REJECTED": 1}

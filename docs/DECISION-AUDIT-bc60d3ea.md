@@ -153,9 +153,9 @@ or missing dataset, with the exact clearing item in the answer text.
 - **Snap counts (Q05):** no official snap-count source verified;
   starter/replacement logic rests on club charts + announced-starter evidence.
 
-## 4. Suggestions review table (51 rows)
+## 4. Suggestions review table (52 rows)
 
-Recomputed 2026-11-19 from `data/suggestions.json`: 51 rows, every row
+Recomputed 2026-11-19 from `data/suggestions.json`: 52 rows (SG52 appended on 2026-11-19 by session arena/9fccbb0e-fl1, task K1; no other row changed), every row
 carrying a recommendation. The live rendering with options, effort,
 risk and prerequisites is `suggestions.html`. This table is the
 review checklist: one line per suggestion, in register order.
@@ -213,6 +213,7 @@ review checklist: one line per suggestion, in register order.
 | SG49 | Keep every injury-hub read as a dated, hash-pinned immutable snapshot | Use the append-only snapshot ledger; preserve the 2026-11-14 and 2026-11-17 reads independently. |
 | SG50 | Automate the dated injury-hub reads on the brief's cadence once Q42 clears | Do it immediately after Q42 clears; pin the raw captures outside the static site at the same time (SG's durable-store item, D-38). |
 | SG51 | Promote finals into the verified feed under a frozen auto-rule (Q44) | Freeze the rule now, before Week 11 results arrive. |
+| SG52 | Record each candidate's per-bet probability at registration so controls and candidates share one proper score | A. The probability field is required in the pre-registration template before the first candidate is registered. |
 
 **How to review.** Approve/reject per row on `suggestions.html`.
 Nothing in this section is implemented by this session; the brief

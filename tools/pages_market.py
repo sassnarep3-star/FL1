@@ -649,7 +649,7 @@ def signal_staking_page():
                         cls="dense"),
                     "Its columns are all staking-side, and no sealed bet log exists in the repository for them, "
                     "so the signal block cannot be recomputed from them. Those cells are blank with the reason "
-                    "attached rather than back-filled &mdash; the 16 strategies there stay REJECTED, and the "
+                    "attached rather than back-filled &mdash; the 15 strategies and 3 controls there stay REJECTED, and the "
                     "nine rules above are measured on a log that does exist."))
 
     rows = []

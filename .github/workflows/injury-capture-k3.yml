@@ -1,0 +1,47 @@
+name: injury-capture-k3
+
+# K3 (R73/R74 partial): capture injury-hub METADATA on a schedule.
+# Records UTC time, HTTP status, byte count and SHA-256 to
+# data/captures/injury_capture_log.tsv. Raw page content is never committed.
+# Fails loudly: if nfl.com is unreachable or non-200, the run fails and the
+# failure row is still committed so the gap is visible in history.
+
+on:
+  schedule:
+    - cron: "0 14 * * 3,4,5"  # Wed/Thu/Fri 14:00 UTC (K3 claim cadence)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: injury-capture-k3
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Capture injury-hub metadata (fails loudly on error)
+        id: capture
+        run: python3 scripts/capture_injury_meta_k3.py
+
+      - name: Commit metadata log (runs even on failure)
+        if: always()
+        run: |
+          git config user.name "injury-capture-k3"
+          git config user.email "injury-capture-k3@users.noreply.github.com"
+          git add data/captures/injury_capture_log.tsv
+          if git diff --cached --quiet; then
+            echo "no change to log"
+            exit 0
+          fi
+          git commit -m "capture: injury-hub metadata row (K3)"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

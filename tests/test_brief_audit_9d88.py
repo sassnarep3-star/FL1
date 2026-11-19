@@ -82,8 +82,9 @@ class BriefAuditTest(unittest.TestCase):
     def test_r76_control_partial(self):
         with open(D("data", "leaderboard.csv"), encoding="utf-8", newline="") as fh:
             lb = list(csv.DictReader(fh))
-        self.assertEqual(sum(1 for r in lb if r["strategy_id"].startswith("__CONTROL")), 1)
-        self.assertEqual(sum(1 for r in lb if "RANDOM" in r["strategy_id"].upper()), 0)
+        # K1 (arena/9fccbb0e-fl1) added the random and favourites-only controls: 3 control rows now.
+        self.assertEqual(sum(1 for r in lb if r["strategy_id"].startswith("__CONTROL")), 3)
+        self.assertEqual(sum(1 for r in lb if "RANDOM" in r["strategy_id"].upper()), 1)
         self.assertEqual(self.rows["R76"]["audited_status"], "partial")
 
     def test_confirmed_rows_unchanged(self):
