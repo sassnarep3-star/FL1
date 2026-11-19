@@ -17,7 +17,7 @@ as requests below, never edited directly. Canonical `data/results.tsv` / `data/s
 | J2 | Fresh clock-bracketed official reads dated 2026-11-19 (injury hub, both standings routes, Week 11 schedule) captured verbatim to `raw/`; parsed with the shared grammar; published as **deltas only** beside the committed tables | done (05ede27) | `arena-bc60d3ea-fl1` | `raw/injuries-week11-2026-read1.md` (new), `raw/standings-2026-20261119*.tsv` (new), `raw/schedule-week11-2026-20261119.md` (new), `scripts/verify_bc60d3ea.py` (new), `data/verification-bc60d3ea.tsv` (new) |
 | J3 | Independent line-by-line audit of the brief against repo evidence: every brief bullet mapped to its artefact/gate/number; questions/informations/answers table; suggestions review table; stale-item list (readiness counts, backlog statuses, F59/F61 actions) published as **logged requests** for the integration session | done (cc2ddb1) | `arena-bc60d3ea-fl1` | `docs/DECISION-AUDIT-bc60d3ea.md` (new), `docs/EXECUTIVE_SUMMARY-bc60d3ea.md` (new) |
 | J4 | Tests for the J2 verifier + audit completeness (every brief bullet mapped, every Q row has an answer state, no invented values) | done (cc2ddb1, 15 tests) | `arena-bc60d3ea-fl1` | `tests/test_bc60d3ea.py` (new) |
-| J5 | Full battery, PR → `main`, merge (new-files-only PR, safe alongside PR #57/#59), confirm GitHub Pages, record result here | in progress | `arena-bc60d3ea-fl1` | `COORDINATION.md` (completion record only) |
+| J5 | Full battery, PR → `main`, merge (new-files-only PR, safe alongside PR #57/#59), confirm GitHub Pages, record result here | done (PR #63) | `arena-bc60d3ea-fl1` | `COORDINATION.md` (completion record only) |
 
 **Requests logged for the integration session (not edited here — owned by PR #57 / shared):**
 - RQ-J1: `data/readiness.json` landing counts quote stale numbers (R04 "42+ flags", R07 "34
@@ -61,7 +61,21 @@ as requests below, never edited directly. Canonical `data/results.tsv` / `data/s
 - **Irregularities:** none new from the fresh reads. Transcription risk for
   the hand-transcribed 2026-11-19 captures is stated in
   `docs/DECISION-AUDIT-bc60d3ea.md` §7 (spot-check before promotion).
-- **PR:** (filled at merge time below).
+- **PR:** https://github.com/sassnarep3-star/FL1/pull/63 (`arena/bc60d3ea-fl1` → `main`),
+  titled "J1-J5: 2026-11-19 official reads (V-J1..V-J6 PASS) + decision audit +
+  executive summary". CI `verify` check passed. Merged at 2026-11-19T05:26:21Z,
+  merge commit `d86c74110d6a8cab24b4580b90faa3af5b2ead7e` on `main`.
+- **GitHub Pages:** build for the merge commit reports **built**; live
+  verification of https://sassnarep3-star.github.io/FL1/ shows the dashboard
+  serving with 46 questions / 51 suggestions / 345 injury rows, matching the
+  committed data. This session added no HTML pages (by design — shared site
+  files are owned by PR #57), so the live site is unchanged in structure;
+  the new evidence lives in `raw/`, `data/verification-bc60d3ea.tsv` and
+  `docs/` for the integration session to publish.
+- **Still open (non-blocking):** RQ-J1…RQ-J5 (stale registers, Q44 promotion,
+  source registration of the J2 captures, exec-summary fold-in); PR #57 and
+  PR #59 remain open. Nothing was marked verified without an official
+  source link.
 
 ---
 
