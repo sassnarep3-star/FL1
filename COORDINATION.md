@@ -2359,6 +2359,18 @@ alone. No work from either session was discarded.
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| E01 | Independently run deterministic repository checks and publish a dated, evidence-bounded verification/audit note with limitations, without rewriting files owned by completed parallel tasks | in progress | `arena/e0af7bbd-fl1` | `COORDINATION.md`, `docs/SESSION_REVIEW_2026-11-19.md` |
+| E01 | Independently run deterministic repository checks and publish a dated, evidence-bounded verification/audit note with limitations, without rewriting files owned by completed parallel tasks | done | `arena/e0af7bbd-fl1` | `COORDINATION.md`, `docs/SESSION_REVIEW_2026-11-19.md` |
 
 No source facts, raw captures, shared data, generated pages or navigation are changed. Official URLs cited in the note are existing source-register references, not newly fetched evidence.
+
+### E01 completion record — 2026-11-19 UTC
+
+**Delivered:** added `docs/SESSION_REVIEW_2026-11-19.md`, a dated independent audit record. During rebasing, `main` advanced with parallel N01 and DOC1 completion records and corrected `README.md`/`REVIEW.md`; those upstream documentation changes are preserved unchanged. This session did not overwrite their files. The report records what was tested, dated source limitations, the row-audit classification counts, and unresolved verification/tooling issues.
+
+**Verification performed:** `python3 -m unittest discover -s tests -q` (356 passed; non-fatal existing ResourceWarnings); `python3 tools/build.py && python3 tools/site.py` (generated outputs matched committed outputs); `python3 tools/checklinks.py` (57 pages; internal links/anchors/source IDs pass; 263 external links not fetched); `python3 tools/checkrows.py` (7,019 rows); `python3 tools/verify_drift.py` (19/19 PASS); `python3 tools/verify_injuries.py` (345/345 exact raw-capture match); `python3 tools/verify_results.py` (137-game corpus reconciles dated standings for 32/32 clubs); `python3 scripts/build_market_spine.py --check` (byte-identical); local Markdown target/anchor check (pass). `scripts/verify_site.py` could not start because `pandas` is not installed.
+
+**Evidence boundary and irregularities:** no NFL URL was fetched in this session. S01/S03/S49/S52 in `data/sources.tsv` remain dated official source references, not new confirmations. The row audit emitted 6,891 citation-metadata rows (3,982 official-registered; the remaining 2,909 classified as unverified, non-official, mixed/unresolved, repository-only, unregistered, or no-link). `checklinks.py` does not fetch 263 external links. Market-spine metrics are reproducible but dated 2026-11-14, use third-party odds with substantial undocumented vintage, and do not establish prospective skill. Existing test ResourceWarnings are non-fatal. Details and exact counts are in `docs/SESSION_REVIEW_2026-11-19.md`.
+
+**Rebase reconciliation:** `origin/main` advanced from `addeb0a` to `eed82f8` while this task ran. Its newer coordination records and README/review-guide corrections from sessions `arena/0dffa916-fl1` and `arena/318ef582-fl1` were retained. This session's changes are limited to the current E01 record and the independent audit note; no parallel source/data/site work was discarded.
+
+**PR / Pages:** pending publication from the fixed Arena branch; record the explicit PR, merge outcome and Pages status after checks complete.
