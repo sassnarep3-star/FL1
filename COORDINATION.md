@@ -2169,3 +2169,21 @@ results, flags, sources, or site changes were discarded.
 `1376567311` reports **built** for that merge commit (`https://sassnarep3-star.github.io/FL1/`). The site
 includes the Row-Level Source Audit in the global navigation. F68 remains a visible review item; it does
 not block publication.
+
+---
+
+## Session `arena/0a100872-fl1` (2026-11-19 — Week-11 fresh reads + brief-coverage audit)
+
+**Session ID:** `arena-0a100872-fl1` · **Branch:** `arena/0a100872-fl1` (from `addeb0a` of `main`, PR #58 merged) ·
+**Claimed:** 2026-11-19T~07:00Z · **Status:** active.
+**Pre-claim sweep:** `gh pr list --state open` → #57 (`arena/3f12fa46-fl1`, CONFLICTING, another session's branch — not touched) and #59 (`arena/a502c4e0-fl1`, coordination record only, MERGEABLE — left for its owner). `origin/main` = `addeb0a` = branch base. Shared files (`tools/site.py`, `data/sources.tsv`, `data/flags.json`, `data/questions.json`, `data/suggestions.json`, `EXECUTIVE_SUMMARY.md`, `COORDINATION.md`) are touched only as logged here, per the standing additive rule. Canonical frozen corpora (`data/injuries.tsv`, `data/results.tsv`, `data/standings.tsv`, `data/injury_hub_delta.json`) are **not** modified by this session; Week-11 work lands as dated side-reads.
+
+| # | Task | Status | Owner | File scope (claimed) |
+|---|------|--------|-------|----------------------|
+| J1 | Coordination claim + immediate push | in progress | `arena-0a100872-fl1` | `COORDINATION.md` |
+| J2 | Week-11 injury-hub read (clock-bracketed, verbatim capture, shared-grammar parse, delta vs read 4 labelled cross-week; stored level + published delta) | unclaimed→claimed | `arena-0a100872-fl1` | `raw/injuries-week11-2026-read5.md` (new), `scripts/build_week11_read.py` (new), `data/injuries_2026-11-19.tsv` (new), `data/injury_hub_delta_w11.json` (new), `data/sources.tsv` (append S100), `data/flags.json` (append only if irregularity found), `tests/test_week11_read.py` (new) |
+| J3 | Week-11 schedule + standings fresh reads (dated side-reads; canonical corpora untouched) | claimed | `arena-0a100872-fl1` | `raw/schedule-week11-2026.md` (new), `raw/standings-2026-20261119.tsv` (new), `data/slate-w11-2026.tsv` (new), `data/standings_2026-11-19.tsv` (new), `data/sources.tsv` (append S101–S102) |
+| J4 | Brief-coverage audit (every brief line → evidence page/file or explicit gap) + Week-11 site page + exec-summary block | claimed | `arena-0a100872-fl1` | `docs/BRIEF_COVERAGE.md` (new), `tools/pages_week11.py` (new), `tools/site.py` (NAV + import + render call + index card only), `week11-read.html` (generated), `EXECUTIVE_SUMMARY.md` (prepend session block only), `data/verification-drift.tsv` (pin refresh if counts move) |
+| J5 | Full verification battery, PR → `main`, merge without waiting, confirm GitHub Pages deploy, record in this file | claimed | `arena-0a100872-fl1` | PR + `COORDINATION.md` completion record |
+
+**First push = this claim, per the brief.**
