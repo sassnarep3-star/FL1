@@ -2183,3 +2183,15 @@ Claimed after reading this task board. Scope is additive and avoids shared site/
 Added `docs/SESSION_REVIEW.md`, an evidence-bounded decision-readiness and discovery plan. It distinguishes existing repository structures from validated facts, lists the information and gates required before betting decisions, and proposes staged singles → totals → moneyline → joint combos with prospective proper-score evaluation. No new NFL factual value was entered, and no unresolved or third-party fact was promoted to verified. Official review locations are linked; the document explicitly says they were not freshly fetched. Existing `source-audit.html` / `sources.html` are referenced for row-level provenance.
 
 Verification in this checkout: `python3 -m unittest discover -s tests -q` → 356 passed (existing ResourceWarnings); `python3 tools/checklinks.py` → 57 pages, internal link/anchor/source-ID checks pass, 263 external URLs not fetched; `python3 tools/checkrows.py` → 57 pages / 7,019 rows structurally audited. These are repository integrity checks, not external fact verification. No shared generated HTML, navigation, data registry, or model files were changed.
+
+## Session `arena/318ef582-fl1` — documentation accuracy + review entry point (2026-11-19 UTC)
+
+**Status:** in progress. The working branch is fixed by Arena as `arena/318ef582-fl1`; no branch switch or worktree was created.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | in progress | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
+
+**Coordination check:** read the existing board before starting. PR #57 and PR #59 are open and older than 60 minutes; this task does not touch their source/data/site-generator scopes. PR #59's coordination-only changes are historical merge bookkeeping; this claim is an additive handoff note and preserves all prior entries. No official-source facts or new numeric findings will be introduced by DOC1; the documentation will point readers to existing evidence registers and state that repository metadata checks do not independently verify live source pages.
+
+**Claimed file scope only:** `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, and this DOC1 section in `COORDINATION.md`. Any needed edits outside that list will be logged as a request rather than made.
