@@ -2292,3 +2292,31 @@ Verification in this checkout: `python3 -m unittest discover -s tests -q` → 35
 **Scope rule:** no edits to `data/flags.json`, `data/sources.tsv`, `data/standings.tsv`, `data/results.tsv`, `data/model_lines.tsv`, `data/requirements_backlog.json`, `data/questions.json`, `data/suggestions.json`, `data/strategies.json`, `data/readiness.json`, `data/verification-drift.tsv`, or `tools/verify_drift.py`. If J2 finds a stale register row, the correction is published in `data/brief_audit_9d88.json` + `brief-audit.html` with the evidence, not by rewriting the register another session owns. Requests against PR #57-owned files are logged below.
 
 **Request log for PR #57 owner (`arena/3f12fa46-fl1`):** (1) PR #57 reuses source IDs S89–S90 and flag IDs F67–F68, which `main` already holds (S89–S99, F67–F72 from PRs #49–#58). On rebase, re-key to the next free IDs (S100+, F73+) — do not overwrite. (2) PR #57 edits `data/standings.tsv`/`data/results.tsv` (Week 10 finals); this session's J3 verifies the closeout side-reads (`data/results_2026-11-17-closeout.tsv`, 150 rows) against the live official page but does not promote them (Q44 still open). Please do not promote either without the Q44 decision.
+
+### J1–J5 completion record — 2026-11-19 UTC (`arena-9d880d91-fl1`)
+
+| # | Task | Status | Evidence |
+|---|------|--------|----------|
+| J1 | Coordination claim + immediate push | done (aeca2a4) | this section |
+| J2 | Brief re-audit | done | `data/brief_audit_9d88.json` (59 rows, 6 stale-corrected), `tools/build_brief_audit_9d88.py`, `brief-audit.html` (58th page, linked from index card; NAV untouched) |
+| J3 | Fresh official spot-verification | done | `scripts/verify_9d88.py` → `data/verification-9d88.tsv` (V1–V4 PASS); `raw/injuries-week11-2026-read1.md` (253 rows, 24 clubs); `raw/live/2026-11-19-standings-league-reg.tsv` (32/32 vs closeout); `raw/live/2026-11-19-week11-slate.tsv` (13/13) |
+| J4 | Executive summary refresh | done | `EXECUTIVE_SUMMARY.md` dated 2026-11-19 block (prepended; earlier blocks preserved) |
+| J5 | Full battery + PR + merge + Pages confirm | in progress | 371 tests OK; checklinks 58 pages OK; checkrows 7,089 rows OK; verify_drift 19/19; verify_injuries 345/345; verify_results PASS |
+
+**Sources and verification:** No new NFL source was registered (S100+ reserved for the sources owner to
+fix J-F1). Fresh reads used the already-registered official URLs: `nfl.com/standings/league/2026/REG`
+(S03), `nfl.com/schedules/2026/by-week/week-11` (S50 family), `nfl.com/injuries/` (S01). All values
+transcribed verbatim; blanks preserved (237 blank game statuses, 237 blank injury cells, CIN/WAS
+"No Injuries Reported"). Canonical tables (`data/results.tsv`, `data/standings.tsv`, `data/injuries.tsv`)
+untouched; Q44 promotion still open.
+
+**Irregularities published (J-F1–J-F5, on brief-audit.html):** S86 mis-wire on schedule.html; PR #57 ID
+collisions (S89–S90/F67–F68 already held on main — re-key to S100+/F73+ on rebase); backlog staleness
+(6 rows, corrected in audit only); Week 11 blank injury/game cells; CIN/WAS "No Injuries Reported".
+None block the merge. **Request logged for sources owner:** add a source record for the May 8, 2026
+nfl.com schedule-announcement article and re-point schedule.html's chip from S86 to it.
+
+**Conflict note for PR #57 rebase:** this session edited `tools/site.py` additively (one index card +
+one page render; NAV untouched) and regenerated all pages. On rebase, keep both NAV additions and
+re-run `python3 tools/site.py`; expect HTML conflicts on every page (NAV line) — resolve by keeping
+both sides' links, then re-run checklinks/checkrows.

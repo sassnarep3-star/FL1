@@ -1,0 +1,5 @@
+check_id	check	result	status
+V1	Live standings vs 2026-11-17 closeout (32 clubs, all 17 fields)	32/32 clubs, 0 differing rows	PASS
+V2	Live Week 11 slate vs 2026-11-17 slate (13 games)	13 rows, identical=True	PASS
+V3	Week 11 injury read 1 parses + two captures agree (shared grammar)	253 rows, 24 clubs, dupes=0, game-status clubs=['HOU', 'IND'], captures-agree=True	PASS
+V4	Brief audit: 59 rows, 6 stale-corrected, evidence recomputed	59 rows, 6 stale, strategies-with-change-of-mind=6	PASS
