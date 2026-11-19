@@ -13,19 +13,25 @@ Inputs (raw captures, never edited after write once assembled):
                                        read 3 (source S97, session a502c4e0)
                                        (assembled from 8 fetched chunks by
                                         scripts/assemble_read3.py)
+  raw/injuries-week11-2026-read5.md    read 5, 2026-11-19 (same official hub URL as S01)
+                                       First WEEK 11 read (7 fetched chunks). A week
+                                       rollover is NOT a same-week delta: read 4 ->
+                                       read 5 is recorded under "week_rollover",
+                                       never as the site's same-week "delta". The
+                                       dated raw capture is retained; no separate full-
+                                       level TSV is generated for publication.
 
 The parser is the same line grammar tools/verify_injuries.py uses for read 1,
-applied to all three captures so every diff is like-for-like. The script fails
-loudly on any practice/game value the grammar does not map, if read 1 no longer
-parses to data/injuries.tsv, or if read 3's header row claim disagrees with the
-parser.
+applied to all five captures. The script fails loudly on any practice/game value
+the grammar does not map, if read 1 no longer parses to data/injuries.tsv, or if
+a later capture's header row claim disagrees with the parser.
 
 Output: data/injury_hub_delta.json —
-  "delta"   the LATEST diff (read 2 -> read 3), published on the site;
-  "history" every earlier diff (read 1 -> read 2) kept verbatim in shape so no
-            published number is lost when a newer read lands.
-Changed/added/removed ROWS are published; the page renders the delta, never a
-second copy of the level.
+  "delta"   latest same-week diff (read 3 -> read 4), published on the site;
+  "history" earlier same-week diffs retained;
+  "week_rollover" read 4 -> read 5 membership/designation diff, clearly labelled
+                   as a Week 10 -> Week 11 transition, not a same-week change.
+Changed/added/removed ROWS are published; no full parsed level TSV is written.
 
 Run:  python3 scripts/build_injury_hub_delta.py
 """
@@ -42,6 +48,7 @@ READ1 = os.path.join(ROOT, "raw", "injuries-week10-2026.md")
 READ2 = os.path.join(ROOT, "raw", "injuries-week10-2026-read2.md")
 READ3 = os.path.join(ROOT, "raw", "injuries-week10-2026-read3.md")
 READ4 = os.path.join(ROOT, "raw", "injuries-week10-2026-read4.md")
+READ5 = os.path.join(ROOT, "raw", "injuries-week11-2026-read5.md")
 
 CLUBS = {
     "Commanders", "Giants", "Patriots", "Lions", "Chiefs", "Falcons", "Vikings",
@@ -183,6 +190,7 @@ def diff(old_rows, new_rows, older_label, newer_label):
 def main():
     r1, r2, r3 = parse_capture(READ1), parse_capture(READ2), parse_capture(READ3)
     r4 = parse_capture(READ4)
+    r5 = parse_capture(READ5)
 
     # like-for-like sanity: read 1 must still reproduce the canonical TSV
     tsv = []
@@ -221,16 +229,32 @@ def main():
         raise SystemExit("FAIL: read-4 header claims %s rows, parser produced %d"
                          % (m.group(1), len(r4)))
 
+    # read 5's header carries its own row claim (written after parse); the
+    # claim and the parser must agree before anything is published.
+    with open(READ5, encoding="utf-8") as fh:
+        read5_text = fh.read()
+    m = re.search(r"^[\-\s]*Rows parsed: (\d+)", read5_text, flags=re.M)
+    if not m:
+        raise SystemExit("FAIL: read-5 capture has no 'Rows parsed:' header claim")
+    if int(m.group(1)) != len(r5):
+        raise SystemExit("FAIL: read-5 header claims %s rows, parser produced %d"
+                         % (m.group(1), len(r5)))
+
     delta12 = diff(r1, r2, "read 1 (2026-11-14)", "read 2 (2026-11-16)")
     delta23 = diff(r2, r3, "read 2 (2026-11-16)", "read 3 (2026-11-17)")
     delta34 = diff(r3, r4, "read 3 (2026-11-17 02:36Z)", "read 4 (2026-11-17 02:43Z)")
+    # WEEK ROLLOVER (Week 10 -> Week 11): a different week's report, not a
+    # same-week designation change. Published under its own key so the site's
+    # "delta" (same-week) is never polluted by a week change.
+    rollover45 = diff(r4, r5, "read 4 (WEEK 10, 2026-11-17)",
+                      "read 5 (WEEK 11, 2026-11-19)")
 
     payload = {
         "id": "injury_hub_delta",
         "title": "Injury-hub reads — clock-timed, delta published",
         "requirement": "Store every injury-hub read with its clock time and publish "
                        "the delta, never the level.",
-        "updated": "2026-11-17",
+        "updated": "2026-11-19",
         "url": "https://www.nfl.com/injuries/",
         "reads": [
             {"read": 1, "capture": "raw/injuries-week10-2026.md",
@@ -249,6 +273,15 @@ def main():
         ],
         "delta": delta34,
         "history": [delta12, delta23],
+        "week_rollover_read": {
+            "read": 5, "capture": "raw/injuries-week11-2026-read5.md",
+            "read_window_utc": "2026-11-19 (7 fetched chunks; completed before "
+                               "2026-11-19T05:23:32Z; chunk-boundary seconds not "
+                               "emitted by the fetch tool)",
+            "rows": len(r5), "week_shown": "WEEK 11", "source_id": "S01",
+            "source_url": "https://www.nfl.com/injuries/",
+        },
+        "week_rollover": rollover45,
         "reserve_list_pointers": [
             {"text": "NFL news roundup: Vikings WR Jordan Addison needs thumb surgery, "
                      "could go to IR; Buccaneers add QB",
@@ -278,7 +311,10 @@ def main():
                             "the seam-crossing rows rejoin correctly; read 4's header "
                             "row claim matches the parser; each changed row of read 4 "
                             "was re-checked line-by-line against reads 2 and 3 before "
-                            "publishing.",
+                            "publishing; read 5 (WEEK 11) parsed with the same grammar, "
+                            "header claim matches the parser, and the Week 10 -> Week 11 "
+                            "transition is published only as week_rollover, never as the "
+                            "same-week delta.",
         },
     }
 
@@ -286,8 +322,11 @@ def main():
         json.dump(payload, fh, ensure_ascii=False, indent=1)
         fh.write("\n")
 
-    print("read1 rows=%d  read2 rows=%d  read3 rows=%d  read4 rows=%d"
-          % (len(r1), len(r2), len(r3), len(r4)))
+    print("read1 rows=%d  read2 rows=%d  read3 rows=%d  read4 rows=%d  read5 rows=%d"
+          % (len(r1), len(r2), len(r3), len(r4), len(r5)))
+    print("week rollover read 4 -> read 5: changed=%d added=%d removed=%d"
+          % (len(rollover45["changed"]), len(rollover45["added"]),
+             len(rollover45["removed"])))
     for d in (delta12, delta23, delta34):
         print("%s: changed=%d added=%d removed=%d" %
               (d["between"], len(d["changed"]), len(d["added"]), len(d["removed"])))
