@@ -2169,3 +2169,15 @@ results, flags, sources, or site changes were discarded.
 `1376567311` reports **built** for that merge commit (`https://sassnarep3-star.github.io/FL1/`). The site
 includes the Row-Level Source Audit in the global navigation. F68 remains a visible review item; it does
 not block publication.
+
+## Session `arena/318ef582-fl1` — documentation accuracy + review entry point (2026-11-19 UTC)
+
+**Status:** in progress. The working branch is fixed by Arena as `arena/318ef582-fl1`; no branch switch or worktree was created.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | in progress | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
+
+**Coordination check:** read the existing board before starting. PR #57 and PR #59 are open and older than 60 minutes; this task does not touch their source/data/site-generator scopes. PR #59's coordination-only changes are historical merge bookkeeping; this claim is an additive handoff note and preserves all prior entries. No official-source facts or new numeric findings will be introduced by DOC1; the documentation will point readers to existing evidence registers and state that repository metadata checks do not independently verify live source pages.
+
+**Claimed file scope only:** `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, and this DOC1 section in `COORDINATION.md`. Any needed edits outside that list will be logged as a request rather than made.
