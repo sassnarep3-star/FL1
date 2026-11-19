@@ -1763,7 +1763,9 @@ def main():
   <a class="card" href="decision-desk.html"><h3>Decision Desk</h3>
     <p>What this build opened, what it is waiting on, and the next five actions in order.</p></a>
   <a class="card" href="docs/computed/index.html"><h3>Computed Research Layer</h3>
-    <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a></section>
+    <p>Elo line engine, 16 strategies &times; 7 gates, availability model &mdash; built by the strategy-lab session at <code>docs/computed/</code>.</p></a>
+  <a class="card" href="brief-audit.html"><h3>Brief Audit 2026-11-19</h3>
+    <p>Every backlog row re-checked against the committed files: six stale rows corrected with evidence, five new irregularities, and the fresh Week 11 reads.</p></a></section>
 """ % {
        "inj_rows": lg["rows"],
        "inj_clubs": lg["clubs"],
@@ -3098,6 +3100,56 @@ verification note for each one.</p>
                  esc(f["severity"]), esc(f["detail"]), links, esc(f["action"])))
     f_html.append("</section>")
     written.append(page("flagged.html", "Flagged for Review", "".join(f_html)))
+
+    # Brief re-audit 2026-11-19 — session arena-9d880d91-fl1 (additive; NAV untouched).
+    # Renders data/brief_audit_9d88.json (built by tools/build_brief_audit_9d88.py).
+    # The backlog file itself is not rewritten; corrections are published here with evidence.
+    _audit = build.load_json("brief_audit_9d88.json")
+    _a_rows = []
+    for _r in _audit["rows"]:
+        _a_rows.append([
+            cell(_r["id"]),
+            cell(_r["requirement"]),
+            cell(_r["published_status"]),
+            '<td>%s</td>' % pill(_r["audited_status"], STATUS_KIND.get(_r["audited_status"], "")),
+            '<td>%s</td>' % pill(_r["verdict"], "warn" if _r["verdict"] == "stale-corrected" else "ok"),
+            cell(_r["evidence"]),
+            '<td><a href="requirements-backlog.html">backlog</a></td>',
+        ])
+    _a_html = [
+        '<section><h1>Brief Audit — 2026-11-19</h1>',
+        '<p class="lead">Every row of the requirement backlog (2026-11-16) re-checked against the '
+        'committed files on main. <strong>59 rows, 6 stale-corrected</strong> with file evidence. '
+        'The backlog file itself is not rewritten (owned by another session); corrections are '
+        'published here so a reviewer can check each one. Every count is computed from a committed '
+        'file at build time, never typed.</p>',
+        '<div class="callout"><p><strong>What changed.</strong> Six backlog rows contradicted the files: '
+        'R37 (change-of-mind fields exist on 6 of 6 strategies), R47 (ablations run, CIs contain zero), '
+        'R55 (joint-evidence gate implemented and enforced), R83 (reserve list captured, 25 rows), '
+        'R44 (schedule announcement published, but its source chip is mis-wired — see J-F1), '
+        'R76 (control baseline exists in the computed leaderboard, not in the plan register). '
+        'Readiness D-rows were correct in each case.</p></div></section>',
+        '<section><h2>Backlog rows, re-checked</h2>%s</section>' % table(
+            ["ID", "Requirement", "Published", "Audited", "Verdict", "Evidence (computed from committed files)", "Check"],
+            _a_rows, cls="dense", caption="Backlog status vs audited status. Stale-corrected rows are the ones where the files contradict the backlog."),
+        '<section><h2>Readiness cross-check</h2>%s</section>' % table(
+            ["Backlog", "Backlog status", "Readiness", "Readiness status", "Resolution"],
+            [[cell(c["backlog_id"]), cell(c["backlog_status"]), cell(c["readiness_id"]),
+              cell(c["readiness_status"]), cell(c["resolution"])] for c in _audit["readiness_crosscheck"]],
+            cls="dense"),
+        '<section><h2>New irregularities (2026-11-19)</h2>%s</section>' % table(
+            ["ID", "Item", "Detail", "Action"],
+            [[cell(x["id"]), cell(x["item"]), cell(x["detail"]), cell(x["action"])] for x in _audit["irregularities"]],
+            cls="dense"),
+        '<section><h2>Fresh reads (2026-11-19)</h2>'
+        '<p>Live league standings verified 32 of 32 against the 2026-11-17 closeout (0 differing rows); '
+        'Week 11 slate verified 13 of 13; Week 11 injury read 1 parsed at 253 rows across 24 clubs '
+        '(game statuses only for the Thursday clubs). Checks: <code>data/verification-9d88.tsv</code> '
+        '(V1–V4, all PASS). Captures: <code>raw/live/2026-11-19-standings-league-reg.tsv</code>, '
+        '<code>raw/live/2026-11-19-week11-slate.tsv</code>, '
+        '<code>raw/injuries-week11-2026-read1.md</code>. Dated side-reads only — no canonical table replaced.</p></section>',
+    ]
+    written.append(page("brief-audit.html", "Brief Audit 2026-11-19", "".join(_a_html), wide=True))
 
     # Requirements sprint pages (R21-R28) — session arena-360ca650-fl1
     written.append(page("line-board.html", "Line Board", sprint["line_board"], wide=True))

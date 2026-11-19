@@ -4,9 +4,78 @@
 **Site:** https://sassnarep3-star.github.io/FL1/
 
 > **Reading note.** This file carries more than one session's summary. The block immediately
-> below is the current one (2026-11-17). Earlier blocks are preserved verbatim further down
+> below is the current one (2026-11-19). Earlier blocks are preserved verbatim further down
 > because they record work that is still in the repository; where they conflict with a later
 > re-verification, the later one is marked as superseding.
+
+---
+
+## Session `arena/9d880d91-fl1` — 2026-11-19 (brief re-audit, fresh Week 11 reads, integration)
+
+### What this session set out to do
+
+Re-check the whole project brief line by line against the committed files (the backlog was last
+written 2026-11-16 and predates later sessions' work), take fresh dated reads of the official pages
+now that Week 11 is live, refresh this summary, and land it through a PR to `main` with the site
+verified end to end. No canonical table was replaced; no register owned by another session was
+rewritten.
+
+### What it found
+
+1. **Six backlog rows were stale; the files were right.** `data/requirements_backlog.json`
+   (2026-11-16) contradicts committed files on R37 (two-sided change-of-mind fields exist on 6 of 6
+   strategies), R47 (margin + total ablations run; holdout CIs contain zero), R55 (the joint-evidence
+   gate is implemented: 3 pairs published, 4 held with reasons, 0 combos ranked), R83 (reserve list
+   captured, 25 rows), R44 (dated schedule announcement published beside the live schedule), and R76
+   (a `__CONTROL_MARKET` control exists in the computed leaderboard, though not in the plan register
+   and with no random-picks control anywhere). Readiness D-rows were correct in each case. The
+   corrections are published with computed evidence on the new **Brief Audit** page
+   (`brief-audit.html`, `data/brief_audit_9d88.json`); the backlog file itself was not rewritten.
+
+2. **One provenance error found, not fixed here.** The schedule announcement block cites source S86,
+   but S86 in `data/sources.tsv` is the nflverse win-totals feed — the announcement article has no
+   source record. Published as irregularity J-F1; the register fix belongs to the sources owner
+   (logged in COORDINATION.md).
+
+3. **Week 10 is closed and verified again from the live page.** A fresh read of
+   `nfl.com/standings/league/2026/REG` (2026-11-19) matches the 2026-11-17 closeout side-read on
+   32 of 32 clubs, 0 differing rows (V1). The Week 11 slate matches the 2026-11-17 capture 13 of 13
+   (V2). The canonical `data/results.tsv` (137 rows) was deliberately not promoted — Q44 is still
+   the owner's decision.
+
+4. **First Week 11 injury read captured.** `nfl.com/injuries/` now shows WEEK 11 (Thursday game
+   IND at HOU tonight). Read 1 parses at 253 rows across 24 clubs with tables, plus CIN/WAS
+   "No Injuries Reported" (V3). Game statuses exist only for the Thursday clubs (9 Out, 7
+   Questionable); every Sunday/Monday club is a practice-only read with blank game status, and the
+   Injuries column is blank on 237 of 253 rows — both preserved as blank, never interpreted.
+
+5. **PR #57 ID collision logged.** PR #57 (`arena/3f12fa46-fl1`) reuses source IDs S89–S90 and flag
+   IDs F67–F68, which `main` already holds (S89–S99, F67–F72). It must re-key to S100+/F73+ on
+   rebase. Its Game Book / matchup-matrix / weather claims remain unmerged; on `main` those
+   requirements (R45, R64, R77) are still not-started/blocked, as the audit confirms.
+
+### What it built
+
+| Artefact | File | Re-runnable |
+|---|---|---|
+| Brief re-audit (59 rows, 6 corrections, 5 irregularities) | `data/brief_audit_9d88.json`, `brief-audit.html` | `python3 tools/build_brief_audit_9d88.py` + `python3 tools/site.py` |
+| Fresh-read verification (V1–V4, all PASS) | `scripts/verify_9d88.py`, `data/verification-9d88.tsv` | `python3 scripts/verify_9d88.py` |
+| Week 11 injury read 1 (253 rows, dated, hash-pinned in git) | `raw/injuries-week11-2026-read1.md` | page-fetch of `nfl.com/injuries/` (2026-11-19) |
+| Live standings + slate side-reads | `raw/live/2026-11-19-standings-league-reg.tsv`, `raw/live/2026-11-19-week11-slate.tsv` | page-fetch (2026-11-19) |
+| Tests (15 new) | `tests/test_brief_audit_9d88.py` | `python3 -m unittest discover -s tests` |
+
+### Verification (2026-11-19)
+
+371 unit tests OK · `tools/build.py` + `tools/site.py` (58 pages) + checklinks (all resolve) +
+checkrows (7,089 rows) · verify_drift 19/19 · verify_injuries 345/345 · verify_results PASS (32/32) ·
+verify_9d88 4/4 PASS.
+
+### Decisions left open (unchanged, by design)
+
+- **Q44** (canonical promotion of the 150-row closeout), **Q23/Q37** (price-data policy),
+  **Q21/Q30** (opening-price source), **Q40** (canonical pre-kickoff snapshot), **Q42**
+  (Wed/Thu/Fri capture cadence). The site's honest state is unchanged: fair lines are originated,
+  market cells stay blank where no official price exists, and the leaderboard has no eligible winner.
 
 ---
 
