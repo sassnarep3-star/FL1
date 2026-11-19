@@ -2191,6 +2191,7 @@ Verification in this checkout: `python3 -m unittest discover -s tests -q` → 35
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
 | DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | done | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
+| DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | done | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
 
 **Coordination check:** read the existing board before starting. PR #57 and PR #59 are open and older than 60 minutes; this task does not touch their source/data/site-generator scopes. PR #59's coordination-only changes are historical merge bookkeeping; this claim is an additive handoff note and preserves all prior entries. No official-source facts or new numeric findings will be introduced by DOC1; the documentation will point readers to existing evidence registers and state that repository metadata checks do not independently verify live source pages.
 
