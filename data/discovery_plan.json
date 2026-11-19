@@ -1,0 +1,1086 @@
+{
+  "title": "Review & Choose — unresolved decisions and missing information",
+  "as_of": "2026-11-19",
+  "source_of_questions": "data/questions.json",
+  "method": "Includes every open or partial question. Existing answer and gate language are taken from the register. Links are limited to verified Official records relevant to the question topic and are context only, not evidence that the missing gate is cleared. No numeric threshold or official source is invented.",
+  "question_count": 34,
+  "questions": [
+    {
+      "id": "Q03",
+      "category": "Data availability",
+      "priority": "Critical",
+      "blocking": "Yes",
+      "question": "What is the official source for a *market* price to measure our own line against?",
+      "known": "Official league sources publish results, stats and schedules, but not betting prices. Sportsbook prices are commercial data.",
+      "unknown": "Which price source the user will accept as the benchmark, and whether they have access to one.",
+      "missing_information": "A licensed or user-supplied odds feed. Nothing of the kind exists in this repo.",
+      "recommended_path": "Do not invent prices. Until a benchmark feed is supplied, output only a fair-value probability and a stated uncertainty, and grade strategies on calibration (predicted vs realised) rather than profit.",
+      "answer_state": "partial",
+      "current_answer": "No official league source publishes betting prices; the board records this as GAP-01 and leaves market cells blank with the reason (model_lines.tsv market_status; F18). Market values that do appear come from a third-party feed and are labelled per row (market_provenance in data/fair_lines.csv). The open half is approval of a market-price source for headline numbers (Q21, Q30, Q32; D-20).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Do not invent prices. Until a benchmark feed is supplied, output only a fair-value probability and a stated uncertainty, and grade strategies on calibration (predicted vs realised) rather than profit."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A licensed or user-supplied odds feed. Nothing of the kind exists in this repo.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q05",
+      "category": "Data availability",
+      "priority": "High",
+      "blocking": "No, but it caps the ceiling on the deficiency model",
+      "question": "Are official snap counts published, so a starter's replacement can be measured rather than guessed?",
+      "known": "The official injury report tells us who is Out/Doubtful/Questionable but not how many snaps anyone played.",
+      "unknown": "Whether snap counts are available to this project from an official or licensed source.",
+      "missing_information": "Snap-count data. Not present in this repo and not retrievable from the pages verified here.",
+      "recommended_path": "Mark the deficiency model as specification-only until snap data exists. Do not fabricate snap shares.",
+      "answer_state": "open",
+      "current_answer": "Not established: no official snap-count file exists in this repo, which is exactly why the snap-count starter proxy is blocked (D-55, D-30). Until an official snap source covering all 32 clubs is verified (or club-chart coverage reaches 32/32 from 30/32 today), starter/replacement logic rests only on club charts and dated announced-starter evidence.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Mark the deficiency model as specification-only until snap data exists. Do not fabricate snap shares."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Snap-count data. Not present in this repo and not retrievable from the pages verified here.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S01",
+          "title": "Official NFL Injury Report — Week 10, 2026 season",
+          "url": "https://www.nfl.com/injuries/"
+        },
+        {
+          "id": "S100",
+          "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/injuries/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q06",
+      "category": "Injury tracking",
+      "priority": "High",
+      "blocking": "Yes — for any injury-based signal",
+      "question": "How is the injury report snapped and versioned, given that it changes several times per week?",
+      "known": "The Week 10 report captured here (S01) is a single point-in-time snapshot taken 2026-11-14, and it is already partly final: e.g. Sam Darnold is listed Out and a same-page NFL news item confirms he was ruled out.",
+      "unknown": "The exact publication cadence per club, and whether earlier-week versions are archived anywhere official and free.",
+      "missing_information": "A time series of injury reports. This repo holds one snapshot only.",
+      "recommended_path": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now.",
+      "answer_state": "partial",
+      "current_answer": "Method settled: each read is captured verbatim under raw/ with a clock-bracketed window (three dated reads: 2026-11-14, 2026-11-16, 2026-11-17), parsed by one shared grammar, its header row-claim asserted against the parser, and published as a delta — latest diff plus the earlier one under history in data/injury_hub_delta.json (D-21). Still open: which dated read a backtest may pin (Q40) and durable hash-pinned storage (D-28).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Store every snapshot with a UTC timestamp and never overwrite. Backfill is impossible; start the series now."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A time series of injury reports. This repo holds one snapshot only.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S01",
+          "title": "Official NFL Injury Report — Week 10, 2026 season",
+          "url": "https://www.nfl.com/injuries/"
+        },
+        {
+          "id": "S100",
+          "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/injuries/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q07",
+      "category": "Injury tracking",
+      "priority": "High",
+      "blocking": "No, but it is a flagged gap",
+      "question": "What do the practice and game-status designations officially mean, and can the definitions be quoted from an official source?",
+      "known": "The verified pages show four practice states (Full Participation, Limited Participation, Did Not Participate) and four game statuses (Out, Doubtful, Questionable, blank).",
+      "unknown": "The official definition text. The 2017 policy PDF cited everywhere on the web returns 404 from operations.nfl.com (S12), and the operations injury-report landing page also 404s (S14).",
+      "missing_information": "A retrievable official definition of each designation.",
+      "recommended_path": "Record the observed categories as observed, and put the definition gap on the Flagged for Review page rather than paraphrasing a policy we could not retrieve.",
+      "answer_state": "partial",
+      "current_answer": "Official text supplies labels only — Out/Doubtful/Questionable and the three practice statuses map 1:1 in the capture grammar, and no official percentages exist. The empirical meaning (play rate per designation with confidence intervals, joined to official inactives over several seasons) has not been measured (D-43, D-52), so no outside percentage may be quoted as fact. Clears when a multi-season join of official designations to official inactives yields play rates with confidence intervals.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Record the observed categories as observed, and put the definition gap on the Flagged for Review page rather than paraphrasing a policy we could not retrieve."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A retrievable official definition of each designation.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S01",
+          "title": "Official NFL Injury Report — Week 10, 2026 season",
+          "url": "https://www.nfl.com/injuries/"
+        },
+        {
+          "id": "S100",
+          "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/injuries/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q09",
+      "category": "Methodology",
+      "priority": "Critical",
+      "blocking": "Yes — for the leaderboard",
+      "question": "What sample size would make a strategy's result distinguishable from luck, and how long is one NFL season?",
+      "known": "A 2026 regular season runs 18 weeks; Week 10 is in progress and the league calendar shows Week 18 on Jan 9-10, 2027, with Super Bowl LXI on Feb 14, 2027 (S05). Division standings confirm clubs have played 8-9 games (S02).",
+      "unknown": "The effect size any strategy will actually achieve, which is what determines the sample needed.",
+      "missing_information": "Historical graded results to estimate variance.",
+      "recommended_path": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate.",
+      "answer_state": "partial",
+      "current_answer": "Answered per strategy by the removal-of-luck panels: skill means the 95% lower bound of hit rate clears the vig-adjusted break-even hurdle after a multiplicity adjustment for every trial run (the register's best ROI entry is rejected on exactly this: 936 settled bets, 51.07% lower bound vs 52.38% hurdle — data/luck_panel_signal.json). The open half: which number becomes the leaderboard's standing qualification bar (Q43).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "State a minimum sample gate up front, pre-register it, and refuse to rank a strategy until it clears the gate. Use a binomial or bootstrap interval, not a bare win rate."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Historical graded results to estimate variance.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S05",
+          "title": "NFL Important Dates (league calendar)",
+          "url": "https://operations.nfl.com/calendar-events/nfl-important-dates"
+        },
+        {
+          "id": "S02",
+          "title": "NFL Division Standings 2026 (regular season)",
+          "url": "https://www.nfl.com/standings/"
+        },
+        {
+          "id": "S101",
+          "title": "Official NFL League Standings — 2026 regular season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/standings/league/2026/REG"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q13",
+      "category": "Rewards",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "What exactly is rewarded on the leaderboard, and is anything of value actually paid out?",
+      "known": "Rewards can be defined entirely in-repo as ranking position and a badge, with no monetary component.",
+      "unknown": "Whether the user intends real money, and if so the legal and tax position.",
+      "missing_information": "A decision from the user on any monetary component.",
+      "recommended_path": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14.",
+      "answer_state": "partial",
+      "current_answer": "What is ranked: luck-adjusted skill computed from a sealed, walk-forward bet log, gates first, with rewards conditional on passing them (data/leaderboard.json design; D-37). What is rewarded in value: nothing today — no payout, bankroll or currency mechanism exists anywhere in the repo (cf. economics OQ-02), so the reward design remains an owner decision.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Default to a non-monetary points-based leaderboard. If money is ever considered, that requires a jurisdiction-specific legal and tax review first — see Q14."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A decision from the user on any monetary component.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q14",
+      "category": "Legal and compliance",
+      "priority": "High",
+      "blocking": "Only if money or prizes are introduced",
+      "question": "Does producing lines and publishing them raise any legal issue, and does the responsible regulator need to be identified?",
+      "known": "Nothing in this repo constitutes a bet, a bookmaking service, or an offer to wager. No money changes hands.",
+      "unknown": "Whether a public leaderboard with prizes would be treated as a contest of skill or of chance in any relevant jurisdiction, and which regulator applies.",
+      "missing_information": "Legal review. Regulator sources were not verified in this session.",
+      "recommended_path": "Keep the site informational and non-monetary. Put the open legal question on the Flagged for Review page and do not assert a legal conclusion.",
+      "answer_state": "open",
+      "current_answer": "Not answerable from data or official sources: the legal/regulator question (Q14, SG11) has had no counsel input. Before any decision: the owner's jurisdiction and whether any stake is real (OQ-02). Nothing published here is legal advice or evidence of compliance.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Keep the site informational and non-monetary. Put the open legal question on the Flagged for Review page and do not assert a legal conclusion."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Legal review. Regulator sources were not verified in this session.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q17",
+      "category": "Scope",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "Which additional inputs are officially obtainable, and which require a licensed vendor?",
+      "known": "Official and free: local forecasts from the National Weather Service (S11), schedules with kickoff times (S04), and tracking-derived metrics from Next Gen Stats (S10).",
+      "unknown": "Officiating crew assignments, exact rest-day differentials, and any sourced stadium/roof database.",
+      "missing_information": "Crew assignments; a roof and surface registry.",
+      "recommended_path": "Use only the free official inputs first. Add each new input only after the base model is validated, one at a time, so its contribution can be measured.",
+      "answer_state": "partial",
+      "current_answer": "Obtained official inputs are enumerated: 88 registered sources, 79 VERIFIED, each with URL and capture date (data/sources.tsv). Licensed vendors are not among them — money/contract items sit in the missing-data register as NOT-ATTEMPTED. Which to license (opening prices above all: Q21/Q30) is an owner decision.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Use only the free official inputs first. Add each new input only after the base model is validated, one at a time, so its contribution can be measured."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Crew assignments; a roof and surface registry.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S10",
+          "title": "NFL Next Gen Stats",
+          "url": "https://nextgenstats.nfl.com/"
+        },
+        {
+          "id": "S11",
+          "title": "National Weather Service — local forecasts",
+          "url": "https://www.weather.gov/"
+        },
+        {
+          "id": "S04",
+          "title": "NFL Schedules 2026 (by week)",
+          "url": "https://www.nfl.com/schedules/"
+        },
+        {
+          "id": "S102",
+          "title": "Official NFL schedule — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/schedules/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q18",
+      "category": "Operations",
+      "priority": "Medium",
+      "blocking": "Yes — before any scheduled fetching",
+      "question": "How does an automated pipeline stay within acceptable use of official sites?",
+      "known": "All captures here were single page loads, and the data volume is small.",
+      "unknown": "The terms of use and robots policy of nfl.com and the 32 club sites, which were not reviewed in this session.",
+      "missing_information": "A terms-of-use review.",
+      "recommended_path": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached.",
+      "answer_state": "open",
+      "current_answer": "No terms review exists, so no defensible yes/no. Practice so far: a handful of clock-bracketed dated reads per page with verbatim capture (raw/ headers), not continuous scraping. Before any cadence is automated (D-53) the owner must accept an acceptable-use position or name counsel to check (pairs Q14, OQ-02).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Read the terms before automating. Until then, treat capture as manual-triggered, low-rate, and cached."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A terms-of-use review.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q19",
+      "category": "Methodology",
+      "priority": "High",
+      "blocking": "Yes — for the leaderboard",
+      "question": "How is a strategy's edge tested against a naive baseline, so that the model gets credit only for what it actually adds?",
+      "known": "Official standings give season-to-date scoring and records for all 32 clubs (S03), enough to build a simple baseline such as a points-differential rating.",
+      "unknown": "The baseline the user considers fair.",
+      "missing_information": "A stated baseline.",
+      "recommended_path": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy.",
+      "answer_state": "partial",
+      "current_answer": "Measured against vig-adjusted break-even hurdles plus a market control: betting every home team at the close runs 5,067 settled bets at -5.19% ROI — pure house margin (data/luck_panel_signal.json control_baseline). The random-picks and favourites-only controls the brief names are not yet in every run (D-56) — the open half is the owner's adoption of those two controls into every leaderboard run; the addition itself is mechanical.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Every strategy must beat a named, published baseline out of sample, or it is not ranked. Publish the baseline alongside the strategy."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A stated baseline.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S03",
+          "title": "NFL League Standings 2026 (regular season)",
+          "url": "https://www.nfl.com/standings/league/2026/REG"
+        },
+        {
+          "id": "S101",
+          "title": "Official NFL League Standings — 2026 regular season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/standings/league/2026/REG"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q21",
+      "category": "Prices",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "What approved source will supply OPENING prices for every market we originate?",
+      "known": "The store (data/price_snapshots.json) has the fields and the discipline. Closing prices come from the pinned nflverse capture (S47). No official league source prices NFL markets (F23).",
+      "unknown": "Whether a licensed line-history feed will be purchased or approved.",
+      "missing_information": "Licensed opening + closing line history (GAP-01).",
+      "recommended_path": "Option A (SG21): buy licensed history. Interim (SG20): snapshot the market's open at the moment we publish our own line, prospectively from Week 11.",
+      "answer_state": "open",
+      "current_answer": "No approved source. The price-snapshot store exists (D-01 store done) but opening values are blocked: no opening-price source has been chosen (D-01 'blocked (values)'; Q30), and the one captured opening line (2021 single-book) stays quarantined (Q37). Clearing: a named source, cadence and redistribution terms recorded in the register.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Option A (SG21): buy licensed history. Interim (SG20): snapshot the market's open at the moment we publish our own line, prospectively from Week 11."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Licensed opening + closing line history (GAP-01).",
+      "numeric_clearance_from_register": "Licensed opening + closing line history (GAP-01).",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q22",
+      "category": "Prices",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "Where will moneyline opening and closing prices come from?",
+      "known": "closing_lines.csv holds third-party moneyline prices for 2006-2025 only; the Week 10 2026 board captures spread and total but no moneyline.",
+      "unknown": "Any approved 2026 moneyline capture source.",
+      "missing_information": "2026 moneyline prices (open and close).",
+      "recommended_path": "Extend the capture pipeline to record moneyline odds alongside spread/total, or approve a feed that carries them.",
+      "answer_state": "open",
+      "current_answer": "Same gap as Q21 — no approved source for moneyline open/close. The store keeps what the labelled feed provides (close, when provided) and leaves the rest blank; blocked on the Q30 decision (source, cadence, redistribution).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Extend the capture pipeline to record moneyline odds alongside spread/total, or approve a feed that carries them."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "2026 moneyline prices (open and close).",
+      "numeric_clearance_from_register": "2026 moneyline prices (open and close).",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q23",
+      "category": "Policy",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "May third-party market prices back published difference and staking numbers, or must those cells stay blank?",
+      "known": "The computed research layer already publishes third-party-derived values with labels; the root site's footer promised no price figures without official support, amended in this sprint to describe the THIRD_PARTY badge.",
+      "unknown": "The owner's preference among the three options below.",
+      "missing_information": "None - this is a decision, not a data gap.",
+      "recommended_path": "A: publish with THIRD_PARTY badge + flag until C is affordable; B switches every market cell to blank with one edit; C needs Q21's purchase.",
+      "answer_state": "open",
+      "current_answer": "Interim rule in force, ratification open: third-party-derived cells publish only with explicit labels/flags (market_provenance 'third-party ... flagged'; THIRD_PARTY badges on the boards). Promoting them to headline difference/staking numbers is the reserved owner call (Q32; D-20).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "A: publish with THIRD_PARTY badge + flag until C is affordable; B switches every market cell to blank with one edit; C needs Q21's purchase."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "None - this is a decision, not a data gap.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q24",
+      "category": "Competition rules",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "Are the demotion-gate thresholds (100-bet window, 25-unit drawdown, p<0.10, 300-bet re-promotion) the rules to adopt?",
+      "known": "Defaults are published as constructor arguments in engine/demotion.py and rendered verbatim as G-14.",
+      "unknown": "The owner's risk appetite for false demotions vs slow demotions.",
+      "missing_information": "None - a rule choice.",
+      "recommended_path": "Adopt as written for the first season (SG22) and revisit after 300 settled bets of live history.",
+      "answer_state": "partial",
+      "current_answer": "Numbers exist and are frozen, but they are not the brief's sketch: data/market/demotion_config.json (2026-11-14) fixes a 200-bet window (min 60), D1 lower-bound fail < 0, D2 slope band 0.4-1.6, D3 caps 0.35/0.30/0.35, D4 price gap <= 5%, <= 2 demotions per season, reprobe >= 150 paper bets; G-16 demotes live -> paper automatically. Ratifying these instead of the 100-bet / 25-unit / p<0.10 sketch is the open half (Q33, SG17).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Adopt as written for the first season (SG22) and revisit after 300 settled bets of live history."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "None - a rule choice.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q25",
+      "category": "Competition rules",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "What staking plans may entries use at all, now that rank counts signal only?",
+      "known": "The leaderboard reports a staking block separately; the engine computes both from one log.",
+      "unknown": "Whether flat-only, capped fractional Kelly, or author-defined stakes will be permitted.",
+      "missing_information": "None - a rule choice.",
+      "recommended_path": "Flat 1 unit for the scored sample; optional separate staking report capped at 2 units (matches the exposure cap in GateConfig).",
+      "answer_state": "partial",
+      "current_answer": "Rank-side settled: staking can never affect a rank (signal/staking split, D-05), and each entry carries two-sided change-of-mind fields (D-17). The allowed plan list is not: Kelly-style sizing waits on bankroll, unit and jurisdiction (OQ-02), so paper entries run flat units by convention until the owner sets rules.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Flat 1 unit for the scored sample; optional separate staking report capped at 2 units (matches the exposure cap in GateConfig)."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "None - a rule choice.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q26",
+      "category": "Model",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "When do we fit the fair model's coefficients out-of-sample instead of publishing the naive baseline?",
+      "known": "models.json attaches the estimator (maximise out-of-sample log-loss, never tune PnL). Coefficients today are computed from 137 official 2026 games (F29).",
+      "unknown": "When enough official seasons will be captured to fit and validate honestly.",
+      "missing_information": "Multi-season official results feed (today: 2026 weeks 1-10 only).",
+      "recommended_path": "Keep the baseline published; schedule the first refit after two full official seasons are captured.",
+      "answer_state": "partial",
+      "current_answer": "Today no fitted coefficients populate published lines: output is the frozen pre-registered baseline fl1-elo-v1 (model_version column) with its calibration report (n=5,336 games; mean signed error -0.77 pts, MAE 2.89 pts vs close). Fitting starts only after acceptance criteria are frozen (Q31, open) and the switch itself is pre-registered (D-66, D-68).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Keep the baseline published; schedule the first refit after two full official seasons are captured."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Multi-season official results feed (today: 2026 weeks 1-10 only).",
+      "numeric_clearance_from_register": "Multi-season official results feed (today: 2026 weeks 1-10 only).",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q27",
+      "category": "Injuries and depth",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "What verified source will confirm WHO actually replaces a starter on the field?",
+      "known": "Club depth charts are self-published and labelled unofficial (S07/S08/S16-S46); the official report says who is Out. data/replacement_depth.tsv joins the two without asserting playing time.",
+      "unknown": "Any verified snap-count feed.",
+      "missing_information": "Snap counts per game (GAP-05 family).",
+      "recommended_path": "Add a snap-count source once one is verified; until then label every replacement as chart-based.",
+      "answer_state": "partial",
+      "current_answer": "Route (a) stands at 30/32 clubs: per-club chart pages registered URL-per-row (data/depth-sources.tsv) plus 11 dated, quoted announced-starter rows (data/announced_starters.csv) on a point-in-time ledger. Route (b), snap counts, is blocked — no official source (D-30, D-55). The gate (one verified route for all 32 clubs) is not cleared, so the backup-deficiency feature stays behind it (D-51).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Add a snap-count source once one is verified; until then label every replacement as chart-based."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Snap counts per game (GAP-05 family).",
+      "numeric_clearance_from_register": "Snap counts per game (GAP-05 family).",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q29",
+      "category": "Operations",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "Which of the two parallel implementations of R21-R28 becomes canonical for each requirement?",
+      "known": "Both implementations are complete, tested and cross-linked. Every divergence is enumerated in flag F31. Nothing was discarded in the merge.",
+      "unknown": "The owner's preference per requirement.",
+      "missing_information": "None - this is a decision, not a data gap.",
+      "recommended_path": "SG29 option A: review each pair (price store, results feed, line model, signal/staking, demotion), pick one per requirement, archive the other with cross-links. The Q23 and Q24 decisions settle the two substantive divergences.",
+      "answer_state": "open",
+      "current_answer": "Not decided: three sessions built overlapping readiness and luck views, all live and cross-linked (F66), with consolidation registered as SG47. The owner picks one readiness page and one luck panel (SG47 names recommendations), then the unused builders are retired.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "SG29 option A: review each pair (price store, results feed, line model, signal/staking, demotion), pick one per requirement, archive the other with cross-links. The Q23 and Q24 decisions settle the two substantive divergences."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "None - this is a decision, not a data gap.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q30",
+      "category": "Data",
+      "priority": "Critical",
+      "blocking": "Yes",
+      "question": "Which licensed source will supply OPENING prices, at what capture cadence, and under what redistribution terms?  (pairs with SG30)",
+      "known": "The append-only store records phase=open quotes with source URL, source record id, capture timestamp and model version (engine/price_snapshots.py, tested). The third-party snapshot holds closes/latest only.",
+      "unknown": "Which feed we may buy or subscribe to, its cost, and whether its terms allow display on a public site.",
+      "missing_information": "A priced feed decision and its terms of use.",
+      "recommended_path": "Choose one feed before the next slate. Capture open at market open and close at kickoff minus one minute, per market, into the existing store. If no feed is approved, say so publicly and keep the columns blank rather than backfilling from closes.",
+      "answer_state": "open",
+      "current_answer": "No source chosen: Q21/Q22 are blocked on exactly three unknowns — source name, capture cadence, redistribution terms. Classified NOT-ATTEMPTED in the missing-data register (needs a decision or money).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Choose one feed before the next slate. Capture open at market open and close at kickoff minus one minute, per market, into the existing store. If no feed is approved, say so publicly and keep the columns blank rather than backfilling from closes."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A priced feed decision and its terms of use.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q31",
+      "category": "Model",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "What acceptance criteria must a fitted fair-line model meet before its numbers populate the Origination Board?  (pairs with SG34; see flag F20)",
+      "known": "The three-column board and the difference convention are fixed and tested; the validation gates G1-G8 are defined; the naive baseline is specified (season points differential per game).",
+      "unknown": "The out-of-sample bar: log-loss versus the naive baseline, calibration tolerance, and how wide the published uncertainty band must be.",
+      "missing_information": "A pre-registered acceptance threshold set.",
+      "recommended_path": "Pre-register in one commit: the model must beat the naive margin baseline on out-of-sample log loss, publish an uncertainty band with every fair line, and be sealed (hashed) before kickoff. Reject otherwise.",
+      "answer_state": "open",
+      "current_answer": "None frozen: the repo deliberately publishes the naive pre-registered baseline instead (Q26). Criteria for admitting a fitted model (calibration bounds, holdout behaviour, drift limits) must be written and committed before any fit is evaluated — owner/quant decision still to be made.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Pre-register in one commit: the model must beat the naive margin baseline on out-of-sample log loss, publish an uncertainty band with every fair line, and be sealed (hashed) before kickoff. Reject otherwise."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A pre-registered acceptance threshold set.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S101",
+          "title": "Official NFL League Standings — 2026 regular season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/standings/league/2026/REG"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q32",
+      "category": "Trust",
+      "priority": "Critical",
+      "blocking": "Yes",
+      "question": "May third-party-derived values be published as sourced on the headline registers, or must every published value resolve to an official source?  (pairs with SG19)",
+      "known": "Current policy is official-only for registers, with clearly labelled third-party appendices (F17, F20). The research layer left the same question open as its item F-11.",
+      "unknown": "Your decision.",
+      "missing_information": "None - a policy choice.",
+      "recommended_path": "Keep headline registers official-only and keep labelled third-party appendices as they are. The cost of the strict rule is visible blank cells; the cost of the loose rule is invisible trust leakage. Revisit only with a licensed feed (Q21).",
+      "answer_state": "open",
+      "current_answer": "Open by default: today's enforced rule is third-party values publish only as labelled/flagged cells, never as unsourced headline numbers (tools/checkrows.py; market_provenance). Making them first-class is the decision the brief reserves (pairs Q23; D-20).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Keep headline registers official-only and keep labelled third-party appendices as they are. The cost of the strict rule is visible blank cells; the cost of the loose rule is invisible trust leakage. Revisit only with a licensed feed (Q21)."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "None - a policy choice.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q33",
+      "category": "Competition",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "What numeric thresholds do demotion rules D1-D3 use, and when are they frozen?  (pairs with SG17 and SG31)",
+      "known": "D1 rolling CLV lower bound, D2 calibration drift band, D3 concentration caps; promotion to live requires G1-G6 all PASS; too-small windows return INSUFFICIENT_DATA, never a pass.",
+      "unknown": "Whether the proposed defaults (window 250, band 0.05, caps 45/25 percent) are the ones you want.",
+      "missing_information": "A single pre-registration commit signed off before any live stake.",
+      "recommended_path": "Freeze the thresholds in one commit before the first live stake, review them only on the gate-review schedule, and never after a losing streak.",
+      "answer_state": "partial",
+      "current_answer": "Frozen, with a divergence to ratify: demotion_config.json (2026-11-14) fixes window=200 (min 60), D1 LB-fail < 0, D2 slope band 0.4-1.6, D3 caps 0.35/0.30/0.35, D4 price gap <= 5%, <= 2 demotions/season, reprobe >= 150 paper bets; G-16 defines live -> paper. The brief's sketch (100-bet window, 25-unit drawdown, p<0.10, 300-bet re-promotion) was not adopted verbatim — confirming the implemented numbers is the open half (pairs SG17).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Freeze the thresholds in one commit before the first live stake, review them only on the gate-review schedule, and never after a losing streak."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A single pre-registration commit signed off before any live stake.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q34",
+      "category": "Data",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "Should the verified results feed backfill 1999-2025 from third-party rows (labelled) so backtests have history?  (pairs with SG32)",
+      "known": "Verified scope is 2026 to date (reconciled 32/32 against official standings). Older official scores are not machine-retrievable from nfl.com at season grain.",
+      "unknown": "Whether backtest credibility requires official historical scores or accepts labelled third-party history.",
+      "missing_information": "A policy decision, same family as Q23.",
+      "recommended_path": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure.",
+      "answer_state": "partial",
+      "current_answer": "Labelled third-party history already powers the corpus: backtests span 2011-2026 by season with provenance per row (data/market/backtest_by_season.tsv; 13,310 graded trades), while the canonical feed stays official-only for 2026 (data/results.tsv). Extending the labelled backfill back to 1999 is the open policy half (owner; D-20).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Keep the verified feed for claims and headline numbers; run backtests on labelled third-party history with the label carried into every result row and every published backtest figure."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A policy decision, same family as Q23.",
+      "numeric_clearance_from_register": "A policy decision, same family as Q23.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q35",
+      "category": "Storage",
+      "priority": "Critical",
+      "blocking": "yes - it decides where live prices are written",
+      "question": "Should the snapshot store accept a fourth phase value for prices whose vintage the publisher never stated, or stay close-only?",
+      "known": "engine/price_snapshots.py constrains phase to open/close/intermediate with a CHECK. Re-running this session's ledger through it accepts 20,490 rows and refuses 57,920 (price-store.html, table E). The refusal is the correct behaviour given the schema.",
+      "unknown": "Whether the storage owner would rather widen the enum or keep the store narrow and treat the ledger as a separate export. Both are defensible; the choice changes the write path every future page reads.",
+      "missing_information": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+      "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows.",
+      "answer_state": "open",
+      "current_answer": "Open — whether the store's phase enum gains a value for prices whose vintage the publisher never stated is a schema/owner decision. Interim: such rows are labelled CLOSE_OR_UNDOCUMENTED in the backtest bench and the 2021 opening line stays quarantined (Q37). NOTE: Q45 duplicates this question verbatim (merge re-issue) — see F70; folding them together belongs to SG47.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+      "numeric_clearance_from_register": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q36",
+      "category": "Measurement",
+      "priority": "High",
+      "blocking": "no - the choice is presentational, the data does not change",
+      "question": "What price basis should a published ROI use when the feed carries a line but no odds?",
+      "known": "13,310 published bets; 3,423 (25.7 percent) have no posted odds. The moneyline rules are 100 percent posted. Both figures are computed per rule and published.",
+      "unknown": "Whether the site should show ROI for the unpriced subset at all, or restrict the headline ROI to posted-price rows and show the rest as points-beat only.",
+      "missing_information": "Nothing further is capturable from these feeds; the odds columns are empty upstream for those seasons.",
+      "recommended_path": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number.",
+      "answer_state": "partial",
+      "current_answer": "Interim basis implemented: ROI publishes only where a posted price exists, with basis on the row (roi_basis=POSTED, price_basis=POSTED_IN_STORE in data/market/backtest_trades.tsv) and the benchmark labelled CLOSE_OR_UNDOCUMENTED; ROI is report-only and never ranks (D-64). The final headline basis waits on the price-source decisions (Q21, Q30).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Publish both: headline ROI restricted to posted-price bets, with the full-log figure in the same table under an 'assumed price' column. Never blend them into one number."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "Nothing further is capturable from these feeds; the odds columns are empty upstream for those seasons.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q37",
+      "category": "Prices",
+      "priority": "High",
+      "blocking": "no",
+      "question": "Is the 2021 single-book opening line worth a published movement table, or should it stay quarantined?",
+      "known": "The movement statistics above, computed this session. The contradiction rate. That no other open exists for any season.",
+      "unknown": "Whether the numbers were posted at the season's start for the whole schedule (the file's git date suggests so) or updated weekly (the movement pattern suggests partly). The publisher documents neither.",
+      "missing_information": "A dated capture of the same book's line for the same games, which does not exist in any free source this environment can reach.",
+      "recommended_path": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement.",
+      "answer_state": "open",
+      "current_answer": "Open — it stays quarantined: a single 2021 single-book opening line cannot support a published movement table without a vintage/source policy (Q35) and an owner call on single-observation tables.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Publish it as 'line movement, one book, 2021, undated' in a clearly separated section, never as CLV and never as an input to a gate. Quarantine stays in force for settlement."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A dated capture of the same book's line for the same games, which does not exist in any free source this environment can reach.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q39",
+      "category": "Governance",
+      "priority": "High",
+      "blocking": "no - the standing rule answers it for now",
+      "question": "Should a D4 integrity trigger block a merge, or only block promotion?",
+      "known": "The standing rule on this project: flagged items and unverified rows publish on the Flagged for Review page and do not block the merge; a broken build or broken links do block it.",
+      "unknown": "Whether the same split should apply to D4 specifically, since D4 is a data-quality gate rather than a performance gate.",
+      "missing_information": "A decision from the owner.",
+      "recommended_path": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred.",
+      "answer_state": "open",
+      "current_answer": "Open — D4 (price-integrity quarantine: price gap > 5% or quarantine share > 0.5%, data/market/demotion_config.json) currently gates promotion and demotion decisions inside the market spine. Whether a D4 breach should also hard-fail CI and block a merge (like the sourcing rules in checkrows) or only block promotion is undecided.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Keep the standing rule: D4 demotes strategies (which is what it is for) and publishes its trigger; it does not block a site merge. Record that reading in the gate's config so the behaviour is written down rather than inferred."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A decision from the owner.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q40",
+      "category": "Data",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "Which dated read of the injury report is the canonical pre-kickoff snapshot for backtests?",
+      "known": "Two dated captures exist (2026-11-14, 345 rows; 2026-11-16, 347 rows), both hash-pinned. The Chargers played Monday night, so their game-day designations only exist in the later read.",
+      "unknown": "Which read is closest to the information available before each game kicked off, and therefore which one a backtest is allowed to use.",
+      "missing_information": "A rule, written before the backtest runs, pinning the capture per game.",
+      "recommended_path": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff.",
+      "answer_state": "open",
+      "current_answer": "Open — three dated reads now exist (2026-11-14 canonical TSV, 2026-11-16, 2026-11-17) precisely because no rule says which one a backtest may pin. The canonical injuries.tsv stays on read 1 while later reads publish as deltas. Choosing first-pre-kickoff vs latest-before-kickoff is an owner decision that sets backtest reproducibility.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Pin the last read taken strictly before that game's kickoff, per game, and record the capture hash on every backtest row. Never use a later read for an earlier kickoff."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A rule, written before the backtest runs, pinning the capture per game.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S100",
+          "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/injuries/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q41",
+      "category": "Data",
+      "priority": "Medium",
+      "blocking": "No",
+      "question": "Should designations published after the earlier read be back-filled into the published table, or kept as a separate dated snapshot?",
+      "known": "The 2026-11-14 read is the pre-kickoff snapshot for 13 of the 14 Week 10 games and predates the Chargers' designations entirely.",
+      "unknown": "Whether the site's readers need one table or the series.",
+      "missing_information": "A presentation decision, not data.",
+      "recommended_path": "Keep the snapshots separate and publish the diff, as the ledger page does now.",
+      "answer_state": "partial",
+      "current_answer": "Implemented, awaiting ratification: later designations are never back-filled into the canonical table — injuries.tsv stays pinned to its dated capture and every subsequent change ships as a delta row with old/new values (data/injury_hub_delta.json, which also keeps the earlier delta under history). Ratify that, or switch to back-filling the latest read before kickoff — owner's call.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Keep the snapshots separate and publish the diff, as the ledger page does now."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A presentation decision, not data.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S100",
+          "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/injuries/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q42",
+      "category": "Operations",
+      "priority": "Medium",
+      "blocking": "Yes",
+      "question": "May the injury report be captured at the Wednesday/Thursday/Friday cadence the brief asks for, before the terms question is answered?",
+      "known": "The page publishes a season and week selector and returns the full report; two manual reads were taken this session without incident.",
+      "unknown": "The terms of use for automated fetching, and the acceptable cadence.",
+      "missing_information": "A read of the site's terms, or a licensed alternative.",
+      "recommended_path": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear.",
+      "answer_state": "open",
+      "current_answer": "Open — three clock-bracketed reads exist (11-14, 11-16, 11-17), but the Wednesday/Thursday/Friday cadence has not started because capture cadence bumps into the terms question first (D-53; acceptable use Q18). Clearing: owner/counsel OK, then a scheduled workflow extends the repo's existing weekly refresh (SG50).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Answer Q18 first. Until then, capture manually at a low cadence and keep every read, rather than automating something whose permission is unclear."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A read of the site's terms, or a licensed alternative.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S100",
+          "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/injuries/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q43",
+      "category": "Competition",
+      "priority": "High",
+      "blocking": "Yes",
+      "question": "Should the leaderboard adopt the removal-of-luck numbers as its qualification bar?",
+      "known": "137 official results exist. A single NFL season offers roughly 270 team-game decisions, which is a third of the sample needed for a 5pp edge.",
+      "unknown": "Whether the competition accepts that no strategy can qualify inside one season, or wants a lower bar with an explicit warning.",
+      "missing_information": "A decision on the bar, frozen before any result exists (SG37).",
+      "recommended_path": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it.",
+      "answer_state": "open",
+      "current_answer": "Open — both luck panels publish exactly the numbers such a bar would use (edge lower bound vs hurdle, multiplicity-adjusted verdicts, control baselines). Adopting them as the leaderboard's standing qualification rule is an owner choice; if adopted, write it into the leaderboard register as a frozen gate (D-66, D-68).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Adopt the panel's numbers as the qualification bar, publish n on every row, and let the leaderboard stay empty until something clears it."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A decision on the bar, frozen before any result exists (SG37).",
+      "numeric_clearance_from_register": "A decision on the bar, frozen before any result exists (SG37).",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q44",
+      "category": "Data policy",
+      "priority": "High",
+      "blocking": "no",
+      "question": "When a week's games all reach FINAL, who promotes the captured finals into the canonical verified results feed (data/results.tsv) and re-captures the official standings — and what acceptance checks must pass first?",
+      "known": "The extension register and its four verification checks are re-runnable (scripts/build_week10_extension.py); the fresh standings capture (S72) is corroborating evidence, not a replacement for the canonical capture. The acceptance checks a promotion must pass first now exist and are enforced by scripts/promote_week10.py (P1 fixture membership, P2 cross-read agreement of the 12 already-recorded finals, P3 late finals carry no carried-forward score, P4 32-of-32 W/L/T/PF/PA points arithmetic against a fresh standings read, P5 the frozen corpus stays byte-identical as a prefix, P6 per-club game counts equal W+L+T, P7 no duplicate fixtures or unknown clubs). The runner is idempotent and refuses any canonical write while a check fails.",
+      "unknown": "Whether promotion should be manual (a session task), automated after the last kickoff, or gated on a fresh standings re-capture passing 32/32 - and whether the pinned reconciliation should roll forward with it.",
+      "missing_information": "DELIVERED as the acceptance run (not the promotion itself): closeout captures raw/schedule-results-2026-week10-closeout.tsv (S95, all 14 FINAL) and raw/standings-2026-20261117.tsv (S96, post-MNF, 32 clubs), gates P1-P8 all PASS (data/verification-promote.tsv), dated side-reads published (data/results_2026-11-17-closeout.tsv 150 rows, data/standings_2026-11-17-closeout.tsv) byte-chained after the 149-row SNF read. Still open for the owner: the canonical roll-forward itself — scripts/promote_week10.py --execute --promote plus the 13-step rebuild/re-verify sequence the runner prints (refit moves every published model coefficient; F59's dated-read doctrine argues for leaving the frozen corpus alone).",
+      "recommended_path": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG43 — the earlier SG35 pairing was a register cross-reference slip; see flag F71).",
+      "answer_state": "open",
+      "current_answer": "Open — today nobody promotes: the Week-10 close-out (13 finals plus the live Monday game) is published in data/week10_results_extension.json ['completion'] with checks C1-C5 while data/results.tsv stays untouched pending this policy (F61, SG37/SG45 lineage). A workable rule to ratify: auto-promote only when a fresh official read prints every game FINAL and all V-checks pass — then it can run inside the weekly refresh (SG51).",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Promote after the week's last final with 32/32 points arithmetic (pairs with suggestion SG43 — the earlier SG35 pairing was a register cross-reference slip; see flag F71)."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "DELIVERED as the acceptance run (not the promotion itself): closeout captures raw/schedule-results-2026-week10-closeout.tsv (S95, all 14 FINAL) and raw/standings-2026-20261117.tsv (S96, post-MNF, 32 clubs), gates P1-P8 all PASS (data/verification-promote.tsv), dated side-reads published (data/results_2026-11-17-closeout.tsv 150 rows, data/standings_2026-11-17-closeout.tsv) byte-chained after the 149-row SNF read. Still open for the owner: the canonical roll-forward itself — scripts/promote_week10.py --execute --promote plus the 13-step rebuild/re-verify sequence the runner prints (refit moves every published model coefficient; F59's dated-read doctrine argues for leaving the frozen corpus alone).",
+      "numeric_clearance_from_register": "DELIVERED as the acceptance run (not the promotion itself): closeout captures raw/schedule-results-2026-week10-closeout.tsv (S95, all 14 FINAL) and raw/standings-2026-20261117.tsv (S96, post-MNF, 32 clubs), gates P1-P8 all PASS (data/verification-promote.tsv), dated side-reads published (data/results_2026-11-17-closeout.tsv 150 rows, data/standings_2026-11-17-closeout.tsv) byte-chained after the 149-row SNF read. Still open for the owner: the canonical roll-forward itself — scripts/promote_week10.py --execute --promote plus the 13-step rebuild/re-verify sequence the runner prints (refit moves every published model coefficient; F59's dated-read doctrine argues for leaving the frozen corpus alone).",
+      "official_sources": [
+        {
+          "id": "S81",
+          "title": "Official 2026 Week 10 schedule page — finals read",
+          "url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+        },
+        {
+          "id": "S82",
+          "title": "Official 2026 NFL league standings — read 2 (corroborating evidence)",
+          "url": "https://www.nfl.com/standings/league/2026/REG"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    },
+    {
+      "id": "Q45",
+      "category": "Storage",
+      "priority": "Critical",
+      "blocking": "yes - it decides where live prices are written",
+      "question": "Should the snapshot store accept a fourth phase value for prices whose vintage the publisher never stated, or stay close-only?",
+      "known": "engine/price_snapshots.py constrains phase to open/close/intermediate with a CHECK. Re-running this session's ledger through it accepts 20,490 rows and refuses 57,920 (price-store.html, table E). The refusal is the correct behaviour given the schema.",
+      "unknown": "Whether the storage owner would rather widen the enum or keep the store narrow and treat the ledger as a separate export. Both are defensible; the choice changes the write path every future page reads.",
+      "missing_information": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+      "recommended_path": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows.",
+      "answer_state": "open",
+      "current_answer": "Duplicate of Q35 (verbatim — a merge re-issue collision, recorded as F70). Treat Q35 as the live question; Q45's disposition is pending SG47's consolidation so the two are answered once, not twice.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Add UNDOCUMENTED to the phase CHECK and keep the strict provenance columns (source_url, source_record_id, line_origin_version) mandatory, so widening the enum does not widen the trust boundary. Then this session's loader writes the full 78,410-row ledger instead of 20,490 rows."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+      "numeric_clearance_from_register": "A decision, not a dataset. The CHECK constraint is 3 lines; the migration is a new database, since sqlite cannot alter a constraint in place.",
+      "official_sources": [],
+      "source_review": "UNVERIFIED — no relevant official source is registered; discovery required."
+    },
+    {
+      "id": "Q46",
+      "category": "Availability snapshot",
+      "priority": "High",
+      "blocking": "yes - determines whether any historical row is replaced",
+      "question": "Should the 2026-11-17 injury-hub capture be promoted into the current table or retained only as a dated snapshot?",
+      "known": "The 2026-11-17 capture has 347 rows over 28 clubs; committed injuries.tsv has 345 rows; zero committed rows are missing; two BAL rows are new; 16 existing rows differ. The capture is hash pinned.",
+      "unknown": "Whether data/injuries.tsv is intended as latest state or a frozen historical snapshot.",
+      "missing_information": "A documented canonical-table policy and explicit mapping of dated reads to the point-in-time ledger.",
+      "recommended_path": "Keep the new capture as an immutable dated snapshot; only update the canonical table through an append-only snapshot-aware process.",
+      "answer_state": "partial",
+      "current_answer": "Implemented, awaiting ratification: the 2026-11-17 capture is retained as an immutable dated snapshot (raw/ with its manifest) and published as a delta against the committed table — data/injuries.tsv is never rewritten in place (F69; the same never-back-fill rule as Q41, published through data/injury_hub_delta.json). The open half is the formal canonical-table policy — latest-state versus frozen-history — which is the same owner decision as Q40/Q41; SG51's append-only snapshot ledger is the recommended shape.",
+      "options": [
+        {
+          "label": "Recommended path",
+          "description": "Keep the new capture as an immutable dated snapshot; only update the canonical table through an append-only snapshot-aware process."
+        },
+        {
+          "label": "Hold / do not infer",
+          "description": "Keep the value blank and the affected strategy blocked until an official source or an explicit owner rule is recorded."
+        }
+      ],
+      "clearance_gate": "A documented canonical-table policy and explicit mapping of dated reads to the point-in-time ledger.",
+      "numeric_clearance_from_register": "No numeric clearance threshold is stated in the register; this is a data or owner-decision gate.",
+      "official_sources": [
+        {
+          "id": "S01",
+          "title": "Official NFL Injury Report — Week 10, 2026 season",
+          "url": "https://www.nfl.com/injuries/"
+        },
+        {
+          "id": "S100",
+          "title": "Official NFL Injury Report — Week 11, 2026 season (dated read 2026-11-19)",
+          "url": "https://www.nfl.com/injuries/"
+        }
+      ],
+      "source_review": "Official context links only; the open gate is not resolved by these links."
+    }
+  ],
+  "discovery_suggestions": [
+    {
+      "gap": "Historical market prices and publication policy",
+      "discover_by": "Identify a lawful timestamped opening/closing market feed; document provider, timestamp meaning, coverage and terms before any backtest.",
+      "gate": "No price-based backtest before source and price-vintage policy are frozen."
+    },
+    {
+      "gap": "Official inactives and snap counts",
+      "discover_by": "Search the NFL Game Books and official NFL statistical archive for structured inactive lists, starters and snap counts; retain exact URLs and a season/club coverage matrix.",
+      "gate": "Require source coverage and official row reconciliation; do not claim a replacement snap share without it."
+    },
+    {
+      "gap": "Point-in-time availability history",
+      "discover_by": "Capture dated official injury hub and club depth pages with UTC timestamps, hashes, parser schema checks and conflict flags; retain every version.",
+      "gate": "Only pre-kickoff information may enter forecasts."
+    },
+    {
+      "gap": "Remaining official venue provenance",
+      "discover_by": "Open each official NFL Game Center and transcribe its venue exactly. The official dated schedule-release announcement is already captured and linked beside the live schedule at S103.",
+      "gate": "Leave a venue blank and flag it until its individual Game Center is checked; retain S103 for the schedule-release announcement."
+    },
+    {
+      "gap": "Legal, licensing and acceptable-use policy",
+      "discover_by": "Review official NFL and data-provider terms with qualified counsel; record the relevant text, URL and permitted storage/publication scope.",
+      "gate": "Do not automate or republish beyond verified permissions."
+    },
+    {
+      "gap": "Strategy qualification and demotion thresholds",
+      "discover_by": "Freeze proper-score metric, benchmark, uncertainty procedure, multiplicity adjustment, sample window and demotion gate in a pre-registration commit before evaluation.",
+      "gate": "No strategy ranks or earns rewards until prospective and holdout gates pass."
+    }
+  ]
+}

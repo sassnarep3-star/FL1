@@ -172,7 +172,7 @@ needed to confirm actual starters and replacements. Current chart source coverag
         ["Q-D5-05", "Can the roster/IR sweep be trusted?", "NO", "Capture the official 32-team rosters and reserve lists with hashes and point-in-time timestamps."],
         ["Q-D5-06", "Can injury labels enter model features?", "NO", "Need multi-season designation joins to official inactives and empirical play-rate confidence intervals."],
         ["Q-D5-07", "Can depth gaps quantify performance impact?", "NO", "Need official starters plus snap counts; chart position alone does not prove play or replacement."],
-        ["Q-D5-08", "Can venue/context features be published?", "PARTIAL", "Official game-centre venue evidence only exists for captured games; schedule announcement date is missing."],
+        ["Q-D5-08", "Can venue/context features be published?", "PARTIAL", "<span>Official Game Center venue evidence still covers only captured games; the schedule-release announcement is verified and linked beside the live schedule as S103. To clear the venue gate, transcribe official Game Center venues for every fixture:</span> " + _src("https://www.nfl.com/schedules/", "official schedule page (venue verification still required)") + " · " + _src("https://www.nfl.com/news/2026-nfl-schedule-powered-by-aws-to-be-released-thursday-may-14", "official release announcement (S103)")],
     ]
     qhtml = _section("Questions, known answers, and missing evidence", _table(["ID", "Decision question", "Answer now", "Information needed"], questions))
     pages.append(page("decision-questions-d5.html", "Decision Questions & Missing Evidence", qhtml + "</section>", wide=True))
