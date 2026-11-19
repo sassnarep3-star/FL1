@@ -2383,10 +2383,73 @@ No source facts, raw captures, shared data, generated pages or navigation are ch
 
 | # | Task | Status | Owner | File scope (claimed) |
 |---|------|--------|-------|----------------------|
-| I1 | Coordination claim + immediate push | in progress | `arena-d022d49b-fl1` | `COORDINATION.md` |
-| I2 | Full verification battery on the merged tree (tests, build, site, checklinks, checkrows, drift, injuries, results) + line-by-line brief→artefact traceability audit | unclaimed | `arena-d022d49b-fl1` | `data/verification-2026-11-19.tsv` (new), `tests/test_audit_i.py` (new) |
-| I3 | Fresh clock-bracketed official re-reads (nfl.com injuries hub, standings, Week 11 schedule) compared against committed captures; publish delta or confirm-no-change with source records | unclaimed | `arena-d022d49b-fl1` | `raw/*2026-11-19*` (new), `data/sources.tsv` (append only), `data/flags.json` (append only if irregularity found), generated pages via `tools/site.py` |
-| I4 | Executive-summary + decision-readiness refresh for this session; fix any drift/broken-link defects found (no new NFL facts without an official source) | unclaimed | `arena-d022d49b-fl1` | `EXECUTIVE_SUMMARY.md`, `README.md` (addendum only), `tools/site.py` (only if a defect requires it), generated HTML |
+| I1 | Coordination claim + immediate push | done (`b756d2e`) | `arena-d022d49b-fl1` | `COORDINATION.md` |
+| I2 | Full verification battery on the merged tree (tests, build, site, checklinks, checkrows, drift, injuries, results) + line-by-line brief→artefact traceability audit | in progress | `arena-d022d49b-fl1` | `data/verification-2026-11-19.tsv` (new), `tests/test_audit_i.py` (new) |
+| I3 | Fresh clock-bracketed official re-reads (NFL injuries hub, standings, Week 11 schedule/Game Centers) compared against committed captures; publish delta or confirm-no-change with source records | in progress (site/source-ID requests logged; no conflicting files edited) | `arena-d022d49b-fl1` | `raw/injuries-week11-2026-read5.md` (new), `raw/standings-2026-11-19.md` (new), `raw/schedule-week11-2026-2026-11-19.md` (new), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py`, `data/verification-2026-11-19.tsv` |
+| I4 | Executive-summary + decision-readiness refresh; fix drift/broken-link defects without unsupported facts | in progress (README addendum done; shared summary/site files requested from owners) | `arena-d022d49b-fl1` | `README.md` (addendum only), `COORDINATION.md` |
 | I5 | PR → `main`, merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | unclaimed | `arena-d022d49b-fl1` | `COORDINATION.md`, PR |
 
 **First push = this claim, per the brief.**
+
+### I3/I4 file-change requests and verified findings (2026-11-19 UTC)
+
+**File-change requests (logged instead of editing another open session's files):**
+
+- **PR #57 (`arena/3f12fa46-fl1`) changes** `tools/site.py`, generated `live-schedule.html` and
+  `injuries.html`, `data/flags.json`, `data/sources.tsv`, and `tests/test_n01_n05.py` on its branch.
+  The current live-schedule renderer is `tools/pages_d5.py`; that helper is not in the PR's file list,
+  but its generated output is, so the page change is requested for the final integration instead of being
+  edited concurrently.
+  Please integrate the following after its source/register IDs are reconciled with current `main`:
+  1. Render read 5's timestamp and parser count in the injury-delta section, and show read 4 → read 5
+     under a clearly labelled Week 10 → Week 11 rollover, not as a same-week status change. The
+     existing same-week `delta` and prior `history` remain preserved in `data/injury_hub_delta.json`.
+  2. Regenerate `live-schedule.html` with the 13 official Game Center links and exact venue labels in
+     `raw/schedule-week11-2026-2026-11-19.md`; the current page has 12 empty `href` values and 12
+     blank venue cells. A raw row-by-row audit is in `data/verification-2026-11-19.tsv`.
+  3. Add Flagged for Review entries (assign IDs only after the other branch's current F/source IDs are
+     reconciled) for the two third-party kickoff-time disagreements, the ARI@KC stadium-name difference,
+     the live-page citation/venue gaps, the fetch-reader pagination metadata change, and the pending
+     read-specific source ID. Do not silently overwrite the third-party input.
+  4. A unique S-number for the Week 11 read is not allocated in this branch: current `main` already has
+     S97–S99, while PR #57's older base appends S97–S98. To avoid an ID collision and avoid editing its
+     claimed `tests/test_n01_n05.py`, the Week 11 JSON record temporarily cites S01 for the identical
+     official hub URL and carries the distinct date/week/capture path. The dated raw capture is present;
+     assign a new source row and update the count test after the PR's source-ID reconciliation.
+- **PR #59 (`arena/a502c4e0-fl1`) owns** `EXECUTIVE_SUMMARY.md`. Please fold in the dated verification
+  results below after resolving the PR's base. This branch adds a README addendum only and does not edit
+  that shared executive-summary file.
+
+**Official re-reads and exact comparisons:**
+
+- `https://www.nfl.com/injuries/` read 5 (2026-11-19): 7 chunks, 253 rows; `scripts/build_injury_hub_delta.py`
+  parses 253 and matches the capture header. Game-status values are only in IND/HOU (IND 5 Out/4
+  Questionable; HOU 4 Out/3 Questionable). Other parsed game-status cells remain blank; blank is not
+  treated as availability. Week 10 read 4 → Week 11 read 5 is stored as a separate labelled
+  `week_rollover`; canonical `data/injuries.tsv` was not changed. Existing source URL record S01 is the
+  same official route; unique capture ID awaits the request above.
+- `https://www.nfl.com/standings/league/2026/REG` fresh read (2 chunks): all 32 clubs match
+  `data/standings_2026-11-17-closeout.tsv` on W/L/T/PCT/PF/PA exactly. The older canonical standings
+  remain unchanged under Q44.
+- `https://www.nfl.com/schedules/2026/by-week/week-11` and 13 official Game Centers: 13 matchups and
+  venues transcribed into `raw/schedule-week11-2026-2026-11-19.md`; six byes are ATL/CLE/GB/LAR/NE/SEA.
+  The page-reader reported `totalChunks: 2` on chunk 0, then `totalChunks: 3` on chunk 1; chunks 0–2
+  were fetched and chunk 2 returned `hasMore: false`.
+- **Third-party schedule irregularities, preserved:** `data/schedule2026-d.csv` lists PIT@PHI at 16:25
+  but the official page says 13:00; it lists JAX@NYG at 13:00 but the official page says 16:25.
+  The Game Center says `Arrowhead Stadium` for ARI@KC while the third-party file says `GEHA Field at
+  Arrowhead Stadium`. All official values and links are transcribed separately; no values were inferred
+  or silently written back to the third-party file.
+- **Traceability audit:** `data/verification-2026-11-19.tsv` has 134 records: 32 standings comparisons,
+  13 schedule comparisons, 13 venue comparisons, 13 live-page source/venue checks, 4 injury/pagination
+  checks, and 59 backlog trace rows. The 59 requirement rows check repository evidence-path presence and
+  source-registry tier only; old NFL facts were not newly fetched. Source URLs are blank with explicit
+  `FLAG_*` status where the registry has no official/verified supporting source. Two evidence strings
+  reference scripts that are absent (`scripts/build_announced_starters_g.py`,
+  `scripts/build_team_availability_g.py`) while the corresponding generated pages/data exist; retained
+  as an artifact-path warning, not evidence that those outputs are absent.
+
+**No conflicting shared files were edited:** this branch leaves `tools/site.py`, `tools/pages_d5.py`,
+`live-schedule.html`, `injuries.html`, `data/flags.json`, `data/sources.tsv`, `tests/test_n01_n05.py`,
+and `EXECUTIVE_SUMMARY.md` untouched. The requests above are a current integration dependency, not a
+claim that the new issue has already appeared on the Flagged for Review page.
