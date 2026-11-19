@@ -152,7 +152,7 @@ site verified end to end.
 
 ### Verification (2026-11-17, final sweep)
 
-342 unit tests OK · `tools/build.py` + `tools/site.py` + checklinks (57 pages) +
+356 unit tests OK · `tools/build.py` + `tools/site.py` + checklinks (57 pages) +
 checkrows (7,046 rows, every data row sourced) · verify_results PASS (32/32) ·
 verify_results_g PASS (G-R1–R4) · verify_results_2026_11_17 GATE PASS (their gates intact)
 · verify_injuries OK · verify_drift 19/19 · verify_brief 10/10 · verify_site (CI pandas
