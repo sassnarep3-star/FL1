@@ -1,0 +1,49 @@
+{
+  "task": "K1 / R76 control baselines (session arena/9fccbb0e-fl1)",
+  "market": "spread (nflverse closing spread and odds, third-party: S47)",
+  "scoring": "Brier score on out-of-sample settled bets (pushes excluded); 95% interval = mean +/- 1.96 se, one bet per game",
+  "sign_convention": "spread_line > 0 means the HOME side is the favourite (engine/controls.py)",
+  "random_seed": 20261119,
+  "candidates_scored": 0,
+  "candidate_status": "NOT EVALUABLE: candidate strategies store no per-bet probability (R35), so a candidate cannot be placed on the same Brier scale; the 'must beat both controls' gate is not yet computable for any candidate.",
+  "controls": [
+    {
+      "control_id": "__CONTROL_RANDOM",
+      "rule": "Pick a side of every game with a fixed seed (20261119); no information used.",
+      "seed": 20261119,
+      "forecast_p": 0.5,
+      "forecast_basis": "fixed coin-flip p = 0.5 (no information)",
+      "train_seasons": "2006-2019",
+      "train_settled": 3354,
+      "oos_seasons": "2020-2026",
+      "oos_settled": 1713,
+      "oos_hit_rate": 0.5114,
+      "oos_roi": -0.0138,
+      "brier_oos": 0.25,
+      "brier_se": 0.0,
+      "brier_ci_low": 0.25,
+      "brier_ci_high": 0.25,
+      "coinflip_brier": 0.25,
+      "brier_minus_coinflip": 0.0
+    },
+    {
+      "control_id": "__CONTROL_FAVOURITE",
+      "rule": "Always back the market favourite at the close; pick'ems excluded.",
+      "seed": "",
+      "forecast_p": 0.48806,
+      "forecast_basis": "favourite cover rate on training seasons 2006-2019 (n=3350), fixed before OOS scoring",
+      "train_seasons": "2006-2019",
+      "train_settled": 3350,
+      "oos_seasons": "2020-2026",
+      "oos_settled": 1713,
+      "oos_hit_rate": 0.4874,
+      "oos_roi": -0.0596,
+      "brier_oos": 0.249843,
+      "brier_se": 0.000288,
+      "brier_ci_low": 0.249277,
+      "brier_ci_high": 0.250408,
+      "coinflip_brier": 0.25,
+      "brier_minus_coinflip": -0.000157
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+control_id,rule,seed,forecast_p,forecast_basis,train_seasons,train_settled,oos_seasons,oos_settled,oos_hit_rate,oos_roi,brier_oos,brier_se,brier_ci_low,brier_ci_high,coinflip_brier,brier_minus_coinflip
+__CONTROL_RANDOM,Pick a side of every game with a fixed seed (20261119); no information used.,20261119,0.5,fixed coin-flip p = 0.5 (no information),2006-2019,3354,2020-2026,1713,0.5114,-0.0138,0.25,0.0,0.25,0.25,0.25,0.0
+__CONTROL_FAVOURITE,Always back the market favourite at the close; pick'ems excluded.,,0.48806,"favourite cover rate on training seasons 2006-2019 (n=3350), fixed before OOS scoring",2006-2019,3350,2020-2026,1713,0.4874,-0.0596,0.249843,0.000288,0.249277,0.250408,0.25,-0.000157

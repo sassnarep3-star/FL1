@@ -6,11 +6,11 @@
  "input_provenance": "data/leaderboard_signal_staking.json, built from the computed research layer's third-party ledger (data/leaderboard.csv) - flagged F39/F34. The panel publishes uncertainty; it ranks on nothing.",
  "hurdle_note": "Hurdle recomputed from the standard -110 break-even (0.52381); the dataset's own breakeven_hit column is circular (flag F30) and is not used.",
  "familywise": {
-  "trials": 16,
+  "trials": 15,
   "alpha": 0.05,
-  "bonferroni_p_bar": 0.00313,
-  "sidak_p_bar": 0.0032,
-  "strategies_evaluated": 16,
+  "bonferroni_p_bar": 0.00333,
+  "sidak_p_bar": 0.00341,
+  "strategies_evaluated": 15,
   "best_raw_p": 0.1236,
   "best_raw_p_strategy": "DIV_DOG_AND_ELO",
   "clears_familywise_bar": false,
@@ -130,20 +130,6 @@
    "status": "LUCK_NOT_EXCLUDED"
   },
   {
-   "strategy_id": "__CONTROL_MARKET",
-   "market": "spread",
-   "settled": 5067,
-   "hit_rate": 0.4865,
-   "reference_hurdle": 0.52381,
-   "se": 0.007,
-   "z_vs_hurdle": -5.318,
-   "p_luck_alone_this_hot": 1.0,
-   "n_to_certify_if_real": null,
-   "n_needed_vs_have": null,
-   "certifiable_edge_at_80pct": 0.5412,
-   "status": "LUCK_NOT_EXCLUDED"
-  },
-  {
    "strategy_id": "BIG_FAV_FADE",
    "market": "spread",
    "settled": 526,
@@ -244,6 +230,30 @@
  ],
  "controls": [
   {
+   "strategy_id": "__CONTROL_RANDOM",
+   "description": "CONTROL: pick a side of every game with a fixed seed (20261119). No information used.",
+   "market": "spread",
+   "settled": 5067,
+   "hit_rate": 0.5033,
+   "hit_ci_low": 0.4895,
+   "roi": -0.0186,
+   "p_value": 0.91203,
+   "note": "The control is not a strategy: it measures what the vig costs a no-information bettor. Its ROI is the house margin, its p-value is the probability a zero-edge process runs at least this well - a calibration anchor for the panel, not an entrant.",
+   "provenance": "computed research layer ledger (third-party data, flagged F39/F34)"
+  },
+  {
+   "strategy_id": "__CONTROL_FAVOURITE",
+   "description": "CONTROL: always back the market favourite at the close (pick'ems excluded).",
+   "market": "spread",
+   "settled": 5063,
+   "hit_rate": 0.4879,
+   "hit_ci_low": 0.4741,
+   "roi": -0.0478,
+   "p_value": 0.99975,
+   "note": "The control is not a strategy: it measures what the vig costs a no-information bettor. Its ROI is the house margin, its p-value is the probability a zero-edge process runs at least this well - a calibration anchor for the panel, not an entrant.",
+   "provenance": "computed research layer ledger (third-party data, flagged F39/F34)"
+  },
+  {
    "strategy_id": "__CONTROL_MARKET",
    "description": "CONTROL: bet every home team at the close. Not a strategy — it measures house vig.",
    "market": "spread",
@@ -257,7 +267,7 @@
   }
  ],
  "headline": {
-  "strategies_evaluated": 16,
+  "strategies_evaluated": 15,
   "proven": 0,
   "verdict": "NO STRATEGY CLEARING"
  }

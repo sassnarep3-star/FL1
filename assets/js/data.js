@@ -5637,6 +5637,36 @@ window.DATA = {
    "checked": "2026-11-19",
    "status": "VERIFIED",
    "note": "Fetched official article page on 2026-11-19. It states the NFL announced that the full 2026 schedule would release Thursday, May 14 at 8 p.m. ET, and the remaining International Games would be announced May 13 at 9 a.m. ET. The generated `schedule.html` had cited S86 (an unrelated nflverse win-totals feed); correct citation is S103. This verifies the announcement, not venue transcription for every fixture."
+  },
+  {
+   "id": "S104",
+   "title": "nflverse/nfldata DATASETS.md — Games data dictionary (spread_line sign; result = home minus away)",
+   "publisher": "nflverse (community; upstream data dictionary)",
+   "url": "https://github.com/nflverse/nfldata/blob/master/DATASETS.md",
+   "tier": "Third-party documentation (not an official league source)",
+   "checked": "2026-11-19",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-19 via the page reader (3 chunks). Games section, 'spread_line': 'A positive number means the home team was favored by that many points, a negative number means the away team was favored by that many points. This lines up with the result column.' 'result' = home score minus away score. Document last edited May 2020 per its own history panel. Used only to fix a sign convention; no value is taken from it."
+  },
+  {
+   "id": "S105",
+   "title": "NFL: 2026 NFL Schedule Announced (official release, dated May 14, 2026)",
+   "publisher": "NFL Football Communications (official)",
+   "url": "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced",
+   "tier": "Official (league)",
+   "checked": "2026-11-19",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-19 via the page-fetch tool (2 chunks). Dateline 'May 14, 2026'; 18-week, 272-game schedule; byes Weeks 5-14; Week 18 on Jan 9-10; nine international games; Super Bowl LXI on Sunday, February 14. Claims A1-A10 with verbatim quotes in data/schedule_announcement.json; excerpts in raw/schedule-announcement-2026.md (K2, R44)."
+  },
+  {
+   "id": "S106",
+   "title": "NFL: 2026 NFL Schedule Powered by AWS to be Released Thursday, May 14 (official advance notice, dated May 8, 2026; media.nfl.com copy of the notice that S103 cites from nfl.com/news)",
+   "publisher": "NFL Media (official)",
+   "url": "https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14",
+   "tier": "Official (league)",
+   "checked": "2026-11-19",
+   "status": "VERIFIED",
+   "note": "Read 2026-11-19 via the page-fetch tool (1 chunk). Dateline 'May 08, 2026'; states the schedule will be released 'on Thursday, May 14 at 8 p.m. ET' (claim A8 in data/schedule_announcement.json, K2, R44)."
   }
  ],
  "schedule": [
@@ -33885,6 +33915,21 @@ window.DATA = {
    "reversibility": "High — rows append with dates; a bad promotion is a revert.",
    "recommendation": "Freeze the rule now, before Week 11 results arrive.",
    "evidence": "C1-C5 all green on the 2026-11-17 close-out read (13 finals, standings 32/32 W/L/T + PF/PA); F61/Q44/SG37 record the gap."
+  },
+  {
+   "id": "SG52",
+   "title": "Record each candidate's per-bet probability at registration so controls and candidates share one proper score",
+   "category": "Governance",
+   "problem": "Controls are now scored with the Brier score (K1), but no candidate strategy stores the probability it assigned to a bet, so no candidate can be placed on the same scale. Until it can, the 'must beat both controls' rule (R76) is NOT EVALUABLE for every candidate.",
+   "proposal": "Make the probability a required field of the pre-registered rule (R29/R35): each bet row carries p, the inputs used, and the model version, frozen before the games are scored. Then score candidates and both controls on the same out-of-sample games with the same Brier function (engine/controls.py).",
+   "options": "A) required per-bet p in the pre-registration (recommended). B) keep ROI-only ranking (rejected by R84/R57). C) derive p from the strategy's training hit rate (an invented model; not recommended).",
+   "impact": "Makes R76 and R57 computable for every candidate; removes the last reason the leaderboard cannot compare skill with the luck baseline.",
+   "prerequisites": "Owner decision on the pre-registration template (R29). No new data source needed.",
+   "effort": "Medium: a schema field on data/strategies.json and a re-run of the strategy engine.",
+   "risk": "Low. Candidates that cannot supply p are reported as not evaluable, not as failed.",
+   "evidence": "data/controls.json (candidates_scored = 0); engine/controls.py; data/strategies.csv (no probability column).",
+   "reversibility": "Fully reversible: nothing is changed for any candidate until the owner adopts the template.",
+   "recommendation": "Adopt option A: add the probability field to the pre-registration template before the first candidate is registered. Until then every candidate stays NOT EVALUABLE on the control comparison."
   }
  ],
  "requirements": [
@@ -35118,6 +35163,66 @@ window.DATA = {
    ],
    "severity": "Low",
    "action": "Future post-final standings reads should check BOTH official routes (or re-read until the league route matches the game arithmetic) and record the read route and clock in the capture header; never mix a stale-route row into a points-arithmetic gate."
+  },
+  {
+   "id": "F73",
+   "kind": "Sign-convention label contradicts the upstream data dictionary and the data",
+   "item": "data/line_board.json and scripts/build_line_board.py label the spread column 'HOME-view spread (negative = home favourite)'. The upstream dictionary and the data say the reverse: a POSITIVE spread_line means the HOME team is the favourite.",
+   "detail": "Upstream dictionary (S104; third-party nflverse document, last committed 2020-05-13, so it may predate later data changes): 'A positive number means the home team was favored by that many points, a negative number means the away team was favored by that many points. This lines up with the result column.' Data check (S47, data/raw/games.csv, regular season, 5,198 games with both a spread and both moneylines): the moneyline favourite is the home team exactly when spread_line > 0 in 99.44% of games (29 disagreeing games, counted, not removed); corr(home margin, spread_line) = +0.43. The strategy engine (scripts/strategy_lab.py settle() and the favourite masks) and the new controls (engine/controls.py, tests/test_controls_k1.py) use the verified convention. Only the printed label is wrong. No official NFL source documents the nflverse column, so this rests on the upstream dictionary plus the data check.",
+   "sourceIds": [
+    "S47",
+    "S104"
+   ],
+   "severity": "High",
+   "action": "Owner: correct the 'side_perspective' label in scripts/build_line_board.py, regenerate data/line_board.json and line-board.html. No numeric value changes; the market column values are not re-signed."
+  },
+  {
+   "id": "F74",
+   "kind": "Home-cover indicator built with the wrong sign (affects published correlations)",
+   "item": "scripts/build_correlations.py defines ats = margin + spread_line and then calls ats > 0 a home cover. Under the verified convention (F73, S104) the home covers when margin > spread_line, i.e. margin - spread_line > 0. The same wrong ats_margin column is also defined in scripts/strategy_lab.py (line 76; not used by any signal there).",
+   "detail": "Measured on data/raw/games.csv (regular season with spread, pushes excluded): the two definitions classify the home cover differently in 1,895 of 6,909 non-push games (27.4%). Every correlation whose input is the home-cover indicator (the 'measured_home_cover_over' rows, e.g. on docs/computed/correlations.html) inherits this. Not corrected in this session: it changes published correlation values and needs an owner decision and a re-run of the correlation builder and its pinned checks. The leaderboard/settlement path is not affected (it uses settle(), which is correct).",
+   "sourceIds": [
+    "S47",
+    "S104"
+   ],
+   "severity": "High",
+   "action": "Owner: change ats to margin - spread_line in scripts/build_correlations.py (and the unused column in strategy_lab.py), re-run the correlation builder, publish the old and new values side by side with n, and re-verify the correlation gate. Until then the measured_home_cover_over rows should be read as unreliable."
+  },
+  {
+   "id": "F75",
+   "kind": "Luck panel counted the market control as a trial (16 vs 15)",
+   "item": "scripts/build_luck_panel.py reported 16 'trials' in data/luck_panel_signal.json, counting the __CONTROL_MARKET baseline as a 16th strategy. The G6 multiplicity gate deflates for N_TRIALS_CONSIDERED = 15 in scripts/strategy_lab.py.",
+   "detail": "Corrected in session arena/9fccbb0e-fl1 (K1): 15 strategies are the trials; the 3 controls (__CONTROL_MARKET, __CONTROL_RANDOM, __CONTROL_FAVOURITE) are listed separately and excluded from the family-wise denominator (Bonferroni bar alpha/15 = 0.00333). Drift pins were re-pinned on purpose: DR-18 (data/luck_panel_signals.json, strategy trials) 16 -> 15; DR-13 (data/leaderboard_signal_staking.json, register rows) 16 -> 18 = 15 strategies + 3 controls. tests/test_gsession.py asserts rows + controls == register rows. No strategy verdict changed: every strategy is still REJECTED and the panel verdict is NO STRATEGY CLEARING.",
+   "sourceIds": [
+    "S47"
+   ],
+   "severity": "Medium",
+   "action": "Review the corrected count on removal-of-luck.html and controls.html. No further action expected."
+  },
+  {
+   "id": "F76",
+   "kind": "Schedule-announcement provenance chip points at the wrong source",
+   "item": "schedule.html's dated-announcement block cites S86 (the nflverse win_totals feed). S86 is not the NFL announcement; the announcement has no source record until S105/S106 are registered (K2/K4, arena/9fccbb0e-fl1).",
+   "detail": "The block's content (May 8 advance notice, May 14 release) is present in schedule.html; only the provenance chip is wrong. Captured official text and quote checks now live in data/schedule_announcement.json and raw/schedule-announcement-2026.md. Also flagged as J-F1 in docs/DECISION-AUDIT-bc60d3ea.md.",
+   "sourceIds": [
+    "S86",
+    "S105",
+    "S106"
+   ],
+   "severity": "Low",
+   "action": "Owner: point the schedule.html chip at S105 (release) and S106 (advance notice) in the page generator (scripts/build_pages_d.py or tools/site.py). The page's data is correct; only the citation needs fixing."
+  },
+  {
+   "id": "F77",
+   "kind": "Conflicting spread_line sign notes in two build scripts",
+   "item": "scripts/verify_d.py (lines 20, 169, 180) and scripts/register_r21_r28.py (lines 215, 265-266) state that spread_line is the AWAY team's point spread. The verified convention (F73) is the opposite: positive spread_line means the HOME team is favored.",
+   "detail": "verify_d.py's check V8 reports 13/13 games agreeing with the away-spread reading. On the full regular-season set (5,198 games with spread and moneylines, S47), the moneyline favourite is the home team exactly when spread_line > 0 in 99.44% of games, and corr(margin, spread_line) = +0.43. The upstream dictionary (S104) states the home-favourite convention. The 13-game check is too small to overturn that, and the 'closing_spread_home' column-name complaint in register_r21_r28.py rests on the same reading. Not changed here.",
+   "sourceIds": [
+    "S47",
+    "S104"
+   ],
+   "severity": "Medium",
+   "action": "Owner: rewrite the away-spread notes in both scripts to the verified convention and re-check the affected board labels (see F73). Until then, treat the 'closing_spread_home' column-name finding as unverified."
   }
  ]
 };

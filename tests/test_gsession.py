@@ -179,7 +179,9 @@ class RegisterIntegrityTests(unittest.TestCase):
     def test_luck_panel_matches_signal_register(self):
         sig = json.load(open(ROOT / "data" / "leaderboard_signal_staking.json", encoding="utf-8"))
         panel = json.load(open(ROOT / "data" / "luck_panel_signals.json", encoding="utf-8"))
-        self.assertEqual(len(panel["rows"]), len(sig["rows"]))
+        # K1 (arena/9fccbb0e-fl1): strategies are panel rows; the controls are listed separately.
+        self.assertEqual(len(panel["rows"]) + len(panel["controls"]), len(sig["rows"]))
+        self.assertEqual(len(panel["controls"]), 3)
 
     def test_reserve_list_row_count_matches_raw_capture(self):
         tsv = list(csv.DictReader(open(ROOT / "data" / "reserve_list_2026-11.tsv",

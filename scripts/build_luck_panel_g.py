@@ -27,8 +27,13 @@ from engine.luck_signals import build_panel  # noqa: E402
 
 def main() -> None:
     sig_doc = json.load(open(ROOT / "data" / "leaderboard_signal_staking.json"))
-    signal_rows = sig_doc["rows"]
-    trials = signal_rows and len(signal_rows) or 0
+    # K1 (arena/9fccbb0e-fl1): controls are yardsticks, not trials. The family-wise bar is
+    # computed over the strategies only (N_TRIALS_CONSIDERED = 15 in scripts/strategy_lab.py);
+    # the three control rows are carried separately in the panel's "controls" list.
+    signal_rows = [r for r in sig_doc["rows"] if not r["strategy_id"].startswith("__CONTROL")]
+    trials = len(signal_rows)
+    if trials != 15:
+        raise SystemExit("FAIL: expected 15 strategy trials, got %d" % trials)
 
     controls = []
     with open(ROOT / "data" / "leaderboard.csv", encoding="utf-8") as fh:

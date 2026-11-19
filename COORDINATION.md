@@ -2290,3 +2290,77 @@ append-only/additive and logged below so PR #57's owner can keep both halves at 
 **J4 post-rebase validation (2026-11-19):** Rebasing onto current `origin/main` (`d00e89f`) retained the parallel N01/DOC1/J1–J5 and E01 work. Generated outputs were rebuilt with `tools/build.py`, `tools/site.py`, `scripts/build_pages_d.py`, and `tools/source_audit.py`. Integrated checks: 60-page internal-link audit PASS (263 external links not fetched); 7,130-row table audit PASS; source-row ledger 7,002 rows; drift 19/19 PASS; canonical injury table 345/345 exact; 137-game results reconcile all 32 clubs; replacement-depth 71 ladders PASS; live D5 checks PASS; 395 tests PASS. Existing non-fatal ResourceWarnings remain. A stale inherited regression assertion was updated from the former S86 wording to the corrected schedule-release announcement and S103 citation. Full verification is now complete; PR, merge, and Pages confirmation remain.
 
 **J4 integration complete:** PR [#68](https://github.com/sassnarep3-star/FL1/pull/68) (`arena/58ccea26-fl1` → `main`) passed `verify-research-build` and merged at 2026-11-19T05:41:33Z as `6530cae5b6a7271f9c25e5fd27be6aed8c500730`. GitHub Pages build `1383121829` completed **built** for that exact merge commit at 05:41:58Z. Published site: https://sassnarep3-star.github.io/FL1/. PR #57's gamebooks/matchup/model/weather/backlog-audit/site_h scope was not edited or merged.
+
+## Task board — session `arena/9fccbb0e-fl1` (2026-11-19) — controls, schedule announcement, injury capture metadata
+
+**Session ID:** `arena-9fccbb0e` · **Branch:** `arena/9fccbb0e-fl1` (from `addeb0a` of `main`, PR #58 merged) ·
+**Claimed:** 2026-11-19T05:30Z UTC · **Status:** active.
+**Pre-claim sweep:** `gh pr list --state open` → #57 (`arena/3f12fa46-fl1`, another session, last updated 2026-11-17T03:39Z, not touched by this session) and #59 (coordination record, `arena/a502c4e0-fl1`). Neither file scope below overlaps #57's named scope; this session does not merge or edit #57.
+
+| ID | Task (backlog ID) | Status | Owner | File scope (claimed) |
+|----|-------------------|--------|-------|----------------------|
+| K0 | Coordination claim + immediate push | done | `arena-9fccbb0e` | `COORDINATION.md` (append only) |
+| K1 | **Control baselines on every leaderboard run** (R76): seeded random picks and favourites-only, both scored with the same Brier score as a probability forecast, published as control rows with n; candidates that cannot yet be scored by the same score are marked, not compared | in progress | `arena-9fccbb0e` | `engine/controls.py` (new), `scripts/build_controls.py` (new), `tests/test_controls_k1.py` (new), `data/controls.csv` + `data/controls.json` (new), `controls.html` (new, generated) |
+| K2 | **Dated schedule announcement beside the live schedule page** (R44): capture the official announcement URL + publication date, show it beside `schedule.html` | in progress | `arena-9fccbb0e` | `data/schedule_announcement.json` (new), `raw/schedule-announcement-2026.md` (new), `scripts/build_schedule_announcement_k2.py` (new), `tests/test_schedule_announcement_k2.py` (new) |
+| K3 | **Scheduled, timestamped injury-report capture metadata** (R73/R74 partial): Wed/Thu/Fri capture job that records UTC time, HTTP status, byte count and sha256 of the nfl.com injury page, append-only, and fails loudly if the page is unreachable (no raw page is committed: see redistribution note) | in progress | `arena-9fccbb0e` | `.github/workflows/injury-capture-k3.yml` (new), `scripts/capture_injury_meta_k3.py` (new), `data/captures/injury_capture_log.tsv` (new), `tests/test_capture_k3.py` (new) |
+| K4 | Registers, backlog status for R44/R73/R74/R76, sources, flags, navigation, README/executive-summary addenda, full verification battery, PR → `main`, merge, Pages check | claimed | `arena-9fccbb0e` | `data/{sources,flags,suggestions,requirements_backlog}.*`, `tools/site.py` (NAV + index card only), `README.md` (append), `EXECUTIVE_SUMMARY.md` (append), `COORDINATION.md`, PR |
+
+**Sandbox note (recorded per the board's rule):** `curl https://www.nfl.com/...` returns exit 000 from this sandbox (TLS). Page reads for K2 use the page-fetch tool and are labelled with the fetch date; they are not reported as dead on the basis of curl.
+
+### Progress log — `arena-9fccbb0e` (appended 2026-11-19)
+
+**Status by task**
+
+| ID | Status | Evidence (workspace path) |
+|----|--------|---------------------------|
+| K0 | done | claim committed and pushed (rebased onto later `main` twice; see branch note below) |
+| K1 | done (R76 partial, per-bet probability still missing) | `engine/controls.py`, `scripts/strategy_lab.py` (`write_controls`), `data/controls.{csv,json}`, `controls.html` (generated), `tests/test_controls_k1.py` (sign convention, Brier, seed determinism, candidate guard, row-for-row agreement with leaderboard) |
+| K2 | data done; page placement pending K4 | `data/schedule_announcement.json` (10 claims, each a verbatim quote checked against the raw capture), `raw/schedule-announcement-2026.md` (fetched 2026-11-19 via page-fetch tool; sha256 in JSON), `scripts/build_schedule_announcement_k2.py`, `tests/test_schedule_announcement_k2.py` (10 tests) |
+| K3 | code done; first live run pending the workflow | `.github/workflows/injury-capture-k3.yml` (Wed/Thu/Fri 14:00 UTC), `scripts/capture_injury_meta_k3.py`, `data/captures/injury_capture_log.tsv` (header only; no sandbox-generated rows), `tests/test_capture_k3.py` (10 tests with injected fakes) |
+
+**Verification (this branch):** `python3 -m unittest discover -s tests` → 424 tests OK. `tools/verify_drift.py` 19/19 PASS. `tools/checklinks.py` OK. `tools/site.py` exit 0 (59 pages). `scripts/verify_site.py` 0 errors / 0 warnings.
+
+**Sandbox limits (recorded):** the sandbox cannot reach nfl.com (TLS failure with curl and an allowlist that excludes nfl.com). K2 used the page-fetch tool. K3 has NOT been run against nfl.com from this sandbox, so no capture row exists yet. Its first real row comes from the scheduled workflow run.
+
+**Cross-scope requests (K4 owns these; K2/K3 did not edit them):**
+- X1 (K4 → `data/sources.tsv`): register **S105** (NFL "2026 NFL Schedule Announced", release dated 2026-05-14, https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced) and **S106** (NFL advance notice dated 2026-05-08, https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14). The exact rows are in `data/schedule_announcement.json` → `source_register_request`.
+- X2 (K4 → `schedule.html` generator, `scripts/build_pages_d.py` or `tools/site.py`): render the dated announcement beside the live schedule, from `data/schedule_announcement.json`. K2 does not edit page generators.
+- X3 (K4): correct the J-F1 provenance chip on `schedule.html` from S86 (nflverse win_totals) to S105. S86 is not the NFL announcement.
+- X4 (K4 index card): the controls dashboard card on `index.html` is deferred to K4. The K1 NAV entry is already in place (see deviation D2).
+
+**Deviations and decisions (logged, not hidden):**
+- D1 Naming: the brief's K1 file list names `scripts/build_controls.py`. That file was NOT created. Control generation lives in `scripts/strategy_lab.py` (`write_controls()`), so one script produces the controls alongside the leaderboard it sits next to. The leaderboard and the controls cannot drift apart.
+- D2 Scope overlap in K1: K1 edited K4-scoped files before K4 opened. (a) `tools/site.py`: added the NAV entry "Controls" and a `render_all()` call, and changed the luck-panel caption to "7 of 15" and gate prose "α/16" → "α/15". (b) `data/flags.json`: appended F73, F74, F75. (c) `data/sources.tsv`: appended S104 (nflverse DATASETS.md, third-party, read 2026-11-19). (d) `data/suggestions.json`: appended SG52. (e) `scripts/build_backlog_g.py`: R76 set to partial. (f) `scripts/build_decision_readiness.py`: R17 clears text "0 of 15 computed strategies proven (controls excluded)". K4 should review these and keep or revert them. Nothing else in K4 scope was touched.
+- D3 Luck-panel re-pin (F75): `scripts/build_luck_panel.py` counted the market control as a trial and reported 16 trials. Controls are now excluded from the family-wise denominator (N_TRIALS_CONSIDERED = 15; Bonferroni bar α/15 = 0.00333). Re-pinned on purpose: `tools/verify_drift.py` DR-18 (`data/luck_panel_signals.json`, strategy trials) 16 → 15; DR-13 (`data/leaderboard_signal_staking.json`, register rows) 16 → 18 = 15 strategies + 3 controls; `tests/test_gsession.py` asserts rows + controls == register rows. Separately, `tests/test_n01_n05.py` S-count pin moved 91 → 92 for S104 (K1) and 92 → 94 for S105–S106 (K4); this is not a luck-panel pin.
+- D4 Other sessions' files touched by the K1 pins: `docs/DECISION-AUDIT-bc60d3ea.md` (added SG52 row; count 51 → 52 with the reason noted) and `tests/test_brief_audit_9d88.py` (R76 test updated to 3 control rows). Both changes are additive and the full suite passes.
+- D5 Known irregularities, not blocking, to be published on "Flagged for Review": F73 (spread_line sign labels in `scripts/build_line_board.py` and `data/line_board.json` say "negative = home favourite", contradicting the verified convention; not fixed in K1); F74 (`ats` computed as margin + spread_line in `scripts/build_correlations.py`; 27.4% disagreement with the verified convention; changes published correlations; owner decision needed; not fixed); F75 (above). `scripts/verify_d.py` and `scripts/register_r21_r28.py` still carry conflicting "away team's spread" notes and are not yet flagged; K4 should add that flag.
+- D6 Rebuild side effects: a full rebuild touches many generated HTML and data files. Only K1/K2/K3 source files and the explicitly named registers were committed. Generated diffs that are not K1 output were not committed.
+- D7 Branch history: `main` moved repeatedly (PRs #66, #67, #68, #69) while this branch was open. Per-commit rebases repeatedly conflicted on generated HTML and on COORDINATION.md, so the branch was rebuilt once: the source changes of this session (d00e89f..70e43a3, excluding generated outputs) were applied with a 3-way merge onto `origin/main` at e88a333, the generated outputs were regenerated from those sources, and the result was committed as one reconciled commit. Other sessions' rows were kept on the board, not dropped. The pre-rebuild remote head `a37e638` is superseded; the push uses a lease check against it.
+- D8 Workflow side effect: the K3 workflow commits its log row to the branch it runs on, including `main` after merge. That is intended for an append-only log, but it means one commit per capture run.
+- D9 Source-ID collision (found at the final rebase): `main` already holds S100–S103 (session `arena-58ccea26`, Week 11 captures and the schedule-release article at nfl.com/news). The K1/K2/K4 IDs were renumbered before registration: the nflverse DATASETS.md row (K1 'S100') is **S104**; the NFL release (K2 'S101') is **S105** (media.nfl.com); the NFL advance notice (K2 'S102') is **S106** (media.nfl.com). Every reference in this session's files (flags F73–F77, backlog R44/R76, data/schedule_announcement.json, controls, README/executive-summary appends) uses the new IDs. S103 (main) and S106 both cite the same advance-notice text at different nfl.com URLs; both are kept, not merged. Flags F73–F77 and SG52 were free on main at this point (main stops at F72 and SG51).
+
+**Next:** commit K2 and K3 files plus this record; `git pull --rebase`; push; confirm with `git ls-remote`. Then K4 integration: X1–X4, backlog status for R44/R73/R74/R76, README and executive-summary appends, full battery, PR → `main`, merge, Pages check.
+
+### K4 integration record — `arena-9fccbb0e` (2026-11-19)
+
+**Changes in this integration commit (K4 scope only):**
+- `data/sources.tsv`: S105 (NFL release, dated May 14, 2026) and S106 (NFL advance notice, dated May 8, 2026) registered as VERIFIED. Both were read on 2026-11-19 with the page-fetch tool; the rows match `data/schedule_announcement.json` (`source_register_request`).
+- `data/flags.json`: F73 detail now notes that S104 was last committed 2020-05-13. F75 corrected (file name, the true pins DR-18 16 → 15 and DR-13 16 → 18, and the S104 test attribution). New F76 (schedule-page chip cites S86; should cite S105/S106) and F77 (conflicting away-spread notes in `scripts/verify_d.py` and `scripts/register_r21_r28.py`; the 5,198-game data check and S104 point the other way).
+- `data/requirements_backlog.{csv,json}` (regenerated from `scripts/build_backlog_g.py`): R44 not-started → partial; R73 not-started → partial; R74 gate text updated; R76 stays partial.
+- `tools/site.py`: index card "Controls" added (K1 had already added the NAV entry). No other change to the site generator.
+- `tools/verify_drift.py`: DR-10 75 → 77 (F76, F77 added on purpose).
+- `tests/test_n01_n05.py`: S-count pin 92 → 94 (S105, S106 on purpose).
+- `tests/test_schedule_announcement_k2.py`: the "pending" assertion became a registration-match check (K2 test, updated to the registered state).
+- `README.md`, `EXECUTIVE_SUMMARY.md`: appended K1–K4 sections, with figures re-read from `data/controls.json` and `data/luck_panel_signals.json`.
+
+**Cross-scope requests: status at this commit.**
+- X1 (register S105/S106): **done** (above).
+- X2 (render the dated announcement beside `schedule.html`): **open.** Requires an edit to the page generator (`scripts/build_pages_d.py` or the `schedule.html` builder), which is outside K4's listed scope and outside K2's claim. R44 stays **partial** until this is done. Logged rather than edited.
+- X3 (correct the `schedule.html` provenance chip S86 → S105): **open.** Same generator. Logged as F76.
+- X4 (controls index card): **done** (above).
+
+**Verification (on this commit, before push):** `tools/site.py` exit 0 (59 pages); `tools/build.py` exit 0; `tools/checklinks.py` OK; `tools/checkrows.py` 7120 rows OK; `tools/verify_drift.py` 19/19 PASS; `scripts/verify_site.py` 0 errors / 0 warnings; `python3 -m unittest discover -s tests` 424 tests OK.
+
+**Known limits:** K3 has no live capture row yet. Its first real row comes from the scheduled workflow. The sandbox cannot reach nfl.com.
+
+**PR and merge:** *(recorded after the merge; see the line below)*

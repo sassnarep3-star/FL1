@@ -127,7 +127,7 @@ def main():
         "R17": {"delivered": "rank by luck-removed edge (CI lower bound vs price hurdle), "
                              "control baseline, multiplicity adjustment",
                 "blocker": None, "blocker_refs": [],
-                "clears": "0 of 16 computed entries proven — the metric rejects them all; "
+                "clears": "0 of 15 computed strategies proven (controls excluded) — the metric rejects them all; "
                           "see the dashboard luck panel"},
         "R18": {"delivered": "injuries.html — official Week 10 report, 345 rows + a "
                              "second dated read with published delta",

@@ -70,6 +70,7 @@ NAV = [
     ("price-snapshots.html", "Price Snapshots"),
     ("verified-results-feed.html", "Verified Results Feed"),
     ("strategies.html", "Leaderboard"),
+    ("controls.html", "Controls"),
     ("signal-vs-staking.html", "Signal vs Staking"),
     ("governance.html", "Signal & Demotion"),
     ("validation.html", "Validation Gates"),
@@ -854,7 +855,7 @@ repo's own verification counts, and proposed thresholds are marked as proposals.
               "Luck-removed edge", "ROI (report only)", "Verdict"],
              lk_rows, cls="dense searchable",
              caption="Every row from data/leaderboard_signal_staking.json, ordered by the "
-                     "luck-removed edge. ROI is shown but can never change a rank — 7 of 16 "
+                     "luck-removed edge. ROI is shown but can never change a rank — 7 of 15 "
                      "entries show a positive ROI and every one of them is rejected on signal."))
 
     # -------------------------------------------------- N03 injury-hub delta
@@ -1248,8 +1249,8 @@ The full register &mdash; including a line-by-line audit of every brief bullet &
 <section>
 <h2 id="luck">Removal of luck</h2>
 <p class="lead"><strong>%(n_eval)d</strong> strategies evaluated &middot; <strong>%(n_proven)d</strong> proven &middot;
-verdict: <strong>%(verdict)s</strong>. The family-wise bar for a 16-strategy search is a p-value below
-<strong>%(bonf)s</strong> (Bonferroni &alpha;/16); the best raw p-value is <strong>%(bestp)s</strong>
+verdict: <strong>%(verdict)s</strong>. The family-wise bar for a 15-strategy search is a p-value below
+<strong>%(bonf)s</strong> (Bonferroni &alpha;/15); the best raw p-value is <strong>%(bestp)s</strong>
 (%(bestid)s), so <em>no strategy has separated itself from luck</em>. The panel publishes the
 probability that luck ALONE would run at least this hot &mdash; a p-value, never the probability
 that a strategy has no edge.</p>
@@ -1573,7 +1574,7 @@ bootstrap); unit-tested in <code>tests/test_gsession.py</code>.</li>
 <p>The removal-of-luck tests above now have a published numeric panel on the
 <a href="index.html#luck">dashboard</a> and the full table on
 <a href="readiness.html#luck">Decision Readiness</a>: per-strategy p(luck alone this hot), the
-family-wise bar (&alpha;/16 = %(bonf)s), the sample floor to certify an observed rate at 80 percent
+family-wise bar (&alpha;/15 = %(bonf)s), the sample floor to certify an observed rate at 80 percent
 power, and the smallest edge each sample could certify. Verdict: <strong>%(verdict)s</strong> &mdash;
 the best raw p-value (%(bestp)s, %(bestid)s) is far from the bar, so nothing is promoted and the
 reward pool pays 0 units.</p>
@@ -1761,6 +1762,8 @@ def main():
     string number of the next available player at every slot missing a starter.</p></a>
   <a class="card" href="strategies.html"><h3>Leaderboard</h3>
     <p>Strategies, the gates each must clear, and a ranking that stays empty until a gate is actually passed.</p></a>
+  <a class="card" href="controls.html"><h3>Controls</h3>
+    <p>Two baselines scored with the same Brier score as the strategies: seeded random picks and favourites only, each with its n and a 95 percent interval. No candidate has a per-bet probability yet, so no candidate is compared.</p></a>
   <a class="card" href="schedule.html"><h3>Schedule &amp; Results 2026</h3>
     <p>All 272 regular-season games, %(n_results)d results in so far, reconciled 32/32 against the official standings; market lines flagged third-party.</p></a>
   <a class="card" href="prop-correlations.html"><h3>Prop Correlations</h3>
@@ -3293,6 +3296,9 @@ verification note for each one.</p>
     # They live in tools/pages_market.py so this file stays the single owner of the
     # site shell; the numbers here are counts, not new claims.
     written.extend(pages_market.render_all())
+    # K1 / R76 (session arena/9fccbb0e-fl1): control baselines page, rendered from data/controls.csv.
+    import pages_controls  # noqa: E402
+    written.extend(pages_controls.render_all())
 
     written.extend(g_pages)
     written.extend(d5_pages)

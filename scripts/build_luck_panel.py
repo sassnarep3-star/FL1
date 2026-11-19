@@ -11,9 +11,9 @@ register it summarises.
 
 What the panel shows, in one view:
 - the luck-removed ranking metric: hit-rate 95% CI lower bound minus the price hurdle;
-- that 0 of 16 entries survive it, including every positive-ROI entry;
-- the control baseline (bet every home team at the close) as the vig yardstick;
-- the multiplicity adjustment for 16 trials.
+- that 0 of 15 strategies survive it, including every positive-ROI entry;
+- the control baselines (bet every home team; random picks; favourites only) as yardsticks;
+- the multiplicity adjustment for 15 trials (controls are not trials).
 
 Run:  python3 scripts/build_luck_panel.py
 """
@@ -26,18 +26,30 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "data", "luck_panel_signal.json")  # renamed at 2nd merge: main session dbf11de0 owns data/luck_panel.json (base-rate/Brier view); this file is the signal-vs-variance view
 
 
+EXPECTED_STRATEGIES = 15   # = N_TRIALS_CONSIDERED in scripts/strategy_lab.py
+EXPECTED_CONTROLS = 3      # __CONTROL_MARKET, __CONTROL_RANDOM, __CONTROL_FAVOURITE
+EXPECTED_ROWS = EXPECTED_STRATEGIES + EXPECTED_CONTROLS
+
+
 def main():
     src = json.load(open(os.path.join(ROOT, "data", "leaderboard_signal_staking.json"),
                          encoding="utf-8"))
     rows = src["rows"]
-    if len(rows) != 16:
-        raise SystemExit("FAIL: expected 16 entries in the signal/staking register, got %d"
-                         % len(rows))
+    # K1 / R76 (session arena/9fccbb0e-fl1): the register now carries three control baselines.
+    # Controls are yardsticks, not trials: the multiplicity adjustment counts strategies only,
+    # matching N_TRIALS_CONSIDERED = 15 in scripts/strategy_lab.py (gate G6).
+    controls = [r for r in rows if r["strategy_id"].startswith("__CONTROL")]
+    strategies = [r for r in rows if not r["strategy_id"].startswith("__CONTROL")]
+    if len(rows) != EXPECTED_ROWS or len(controls) != EXPECTED_CONTROLS \
+            or len(strategies) != EXPECTED_STRATEGIES:
+        raise SystemExit("FAIL: expected %d register rows (%d strategies + %d controls), got %d rows "
+                         "(%d strategies, %d controls)" % (EXPECTED_ROWS, EXPECTED_STRATEGIES,
+                         EXPECTED_CONTROLS, len(rows), len(strategies), len(controls)))
 
-    control = [r for r in rows if r["strategy_id"] == "__CONTROL_MARKET"]
-    if len(control) != 1:
+    control_ids = {r["strategy_id"] for r in controls}
+    if "__CONTROL_MARKET" not in control_ids:
         raise SystemExit("FAIL: control baseline entry missing from the register")
-    control = control[0]
+    control = [r for r in controls if r["strategy_id"] == "__CONTROL_MARKET"][0]
 
     proven = [r for r in rows if r["signal"]["signal_verdict"] == "PROVEN"]
     pos_roi = [r for r in rows if r["staking"]["roi"] > 0]
@@ -72,7 +84,8 @@ def main():
                         "also narrows nothing: the lower bound only rises with more "
                         "settled evidence, so it cannot be gamed by variance.",
         "headlines": {
-            "entries": len(rows),
+            "entries": len(strategies),
+            "controls": len(controls),
             "proven": len(proven),
             "positive_roi_entries": len(pos_roi),
             "positive_roi_but_rejected_on_signal": len(pos_roi_rejected),
@@ -97,12 +110,19 @@ def main():
                          "settled bets — that loss is the house margin. Every strategy "
                          "is judged against this yardstick, not against zero.",
             },
+            "control_baselines": [
+                {"strategy_id": r["strategy_id"], "description": r["description"],
+                 "settled": r["signal"]["settled"], "hit_rate": r["signal"]["hit_rate"],
+                 "roi": r["staking"]["roi"]}
+                for r in controls
+            ],
             "multiplicity": {
-                "trials": len(rows),
+                "trials": len(strategies),
                 "note": "Gate G-6 deflates for the number of trials; the register "
-                        "transcribes G6_adjusted_alpha=0.00333 per row. With 16 "
-                        "strategies tried, a p-value that looks fine alone is not "
-                        "fine for the family.",
+                        "transcribes G6_adjusted_alpha=0.00333 per row. With 15 "
+                        "strategies tried (controls are not trials; the earlier panel "
+                        "counted the market control as a 16th trial, which the gate never did), "
+                        "a p-value that looks fine alone is not fine for the family.",
             },
         },
         "rows": panel_rows,

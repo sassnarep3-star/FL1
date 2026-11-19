@@ -7,7 +7,7 @@
  "ranking_rule": "signal_rank = order by (hit_ci_low - reference_hurdle) descending; ties break on larger settled sample. Profit and ROI are reported, never ranked on.",
  "demotion": "No entry is LIVE in this dataset (all verdicts REJECTED/UNRANKED pending gates), so gate G-14 (engine/demotion.py) has nothing to demote yet; it will apply the moment an entry goes live.",
  "coverage": {
-  "entries": 16,
+  "entries": 18,
   "signal_proven": 0,
   "best_signal": "DIV_DOG_AND_ELO"
  },
@@ -199,6 +199,37 @@
    "signal_rank": 6
   },
   {
+   "strategy_id": "__CONTROL_RANDOM",
+   "family": "control",
+   "market": "spread",
+   "description": "CONTROL: pick a side of every game with a fixed seed (20261119). No information used.",
+   "signal": {
+    "settled": 5067,
+    "hit_rate": 0.5033,
+    "hit_ci_low": 0.4895,
+    "hit_ci_high": 0.5171,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
+    "signal_edge_lcb": -0.03431,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.0189,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.0186,
+    "roi_se": 0.0137,
+    "profit_units": -94.08,
+    "max_drawdown": -99.617,
+    "oos_roi": -0.0138,
+    "oos_settled": 1713.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 7
+  },
+  {
    "strategy_id": "DOME_OVER",
    "family": "situational",
    "market": "total",
@@ -227,7 +258,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 1,
-   "signal_rank": 7
+   "signal_rank": 8
   },
   {
    "strategy_id": "PROB_GAP_6PT",
@@ -258,7 +289,38 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 1,
-   "signal_rank": 8
+   "signal_rank": 9
+  },
+  {
+   "strategy_id": "__CONTROL_FAVOURITE",
+   "family": "control",
+   "market": "spread",
+   "description": "CONTROL: always back the market favourite at the close (pick'ems excluded).",
+   "signal": {
+    "settled": 5063,
+    "hit_rate": 0.4879,
+    "hit_ci_low": 0.4741,
+    "hit_ci_high": 0.5017,
+    "reference_hurdle": 0.52381,
+    "reference_hurdle_note": "standard -110 two-way break-even (engine/pricing.py, SRC-015); exact per-bet price hurdle pending SG28",
+    "signal_edge_lcb": -0.04971,
+    "signal_verdict": "NOT PROVEN",
+    "dataset_breakeven_hit_transcribed": 1.0502,
+    "dataset_breakeven_warning": "circular: 1/(1+realized ROI), not a price hurdle \u2014 flag F30; not used for ranking",
+    "tier": "COMPUTED"
+   },
+   "staking": {
+    "roi": -0.0478,
+    "roi_se": 0.0137,
+    "profit_units": -241.928,
+    "max_drawdown": -262.914,
+    "oos_roi": -0.0596,
+    "oos_settled": 1713.0,
+    "tier": "COMPUTED"
+   },
+   "dataset_verdict": "REJECTED",
+   "dataset_gates_passed": 1,
+   "signal_rank": 10
   },
   {
    "strategy_id": "__CONTROL_MARKET",
@@ -289,7 +351,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 1,
-   "signal_rank": 9
+   "signal_rank": 11
   },
   {
    "strategy_id": "BIG_FAV_FADE",
@@ -320,7 +382,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 1,
-   "signal_rank": 10
+   "signal_rank": 12
   },
   {
    "strategy_id": "DOME_UNDER",
@@ -351,7 +413,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 1,
-   "signal_rank": 11
+   "signal_rank": 13
   },
   {
    "strategy_id": "DIV_HOME_DOG",
@@ -382,7 +444,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 1,
-   "signal_rank": 12
+   "signal_rank": 14
   },
   {
    "strategy_id": "REST_ADV",
@@ -413,7 +475,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 1,
-   "signal_rank": 13
+   "signal_rank": 15
   },
   {
    "strategy_id": "WIND_COLD_UNDER",
@@ -444,7 +506,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 0,
-   "signal_rank": 14
+   "signal_rank": 16
   },
   {
    "strategy_id": "REST_AND_ELO",
@@ -475,7 +537,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 0,
-   "signal_rank": 15
+   "signal_rank": 17
   },
   {
    "strategy_id": "AVAIL_EDGE_1.5",
@@ -506,7 +568,7 @@
    },
    "dataset_verdict": "REJECTED",
    "dataset_gates_passed": 0,
-   "signal_rank": 16
+   "signal_rank": 18
   }
  ]
 }

@@ -6,7 +6,8 @@
  "metric": "signal_rank = order by (hit_ci_low - reference_hurdle) descending; ties break on larger settled sample. Profit and ROI are reported, never ranked on.",
  "metric_plain": "A strategy's luck-removed edge is the 95% LOWER bound of its hit rate minus the break-even hurdle at the price paid (0.52381 at standard -110). A lucky run raises ROI but it also narrows nothing: the lower bound only rises with more settled evidence, so it cannot be gamed by variance.",
  "headlines": {
-  "entries": 16,
+  "entries": 15,
+  "controls": 3,
   "proven": 0,
   "positive_roi_entries": 7,
   "positive_roi_but_rejected_on_signal": 7,
@@ -26,9 +27,32 @@
    "roi": -0.0519,
    "point": "Betting every home team at the close loses 5.19% over 5,067 settled bets — that loss is the house margin. Every strategy is judged against this yardstick, not against zero."
   },
+  "control_baselines": [
+   {
+    "strategy_id": "__CONTROL_RANDOM",
+    "description": "CONTROL: pick a side of every game with a fixed seed (20261119). No information used.",
+    "settled": 5067,
+    "hit_rate": 0.5033,
+    "roi": -0.0186
+   },
+   {
+    "strategy_id": "__CONTROL_FAVOURITE",
+    "description": "CONTROL: always back the market favourite at the close (pick'ems excluded).",
+    "settled": 5063,
+    "hit_rate": 0.4879,
+    "roi": -0.0478
+   },
+   {
+    "strategy_id": "__CONTROL_MARKET",
+    "description": "CONTROL: bet every home team at the close. Not a strategy — it measures house vig.",
+    "settled": 5067,
+    "hit_rate": 0.4865,
+    "roi": -0.0519
+   }
+  ],
   "multiplicity": {
-   "trials": 16,
-   "note": "Gate G-6 deflates for the number of trials; the register transcribes G6_adjusted_alpha=0.00333 per row. With 16 strategies tried, a p-value that looks fine alone is not fine for the family."
+   "trials": 15,
+   "note": "Gate G-6 deflates for the number of trials; the register transcribes G6_adjusted_alpha=0.00333 per row. With 15 strategies tried (controls are not trials; the earlier panel counted the market control as a 16th trial, which the gate never did), a p-value that looks fine alone is not fine for the family."
   }
  },
  "rows": [
@@ -99,6 +123,17 @@
    "verdict": "NOT PROVEN"
   },
   {
+   "strategy_id": "__CONTROL_RANDOM",
+   "market": "spread",
+   "settled": 5067,
+   "hit_rate": 0.5033,
+   "hit_ci_low": 0.4895,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.03431,
+   "roi_report_only": -0.0186,
+   "verdict": "NOT PROVEN"
+  },
+  {
    "strategy_id": "DOME_OVER",
    "market": "total",
    "settled": 1375,
@@ -118,6 +153,17 @@
    "reference_hurdle": 0.52381,
    "edge_lcb": -0.04531,
    "roi_report_only": -0.0314,
+   "verdict": "NOT PROVEN"
+  },
+  {
+   "strategy_id": "__CONTROL_FAVOURITE",
+   "market": "spread",
+   "settled": 5063,
+   "hit_rate": 0.4879,
+   "hit_ci_low": 0.4741,
+   "reference_hurdle": 0.52381,
+   "edge_lcb": -0.04971,
+   "roi_report_only": -0.0478,
    "verdict": "NOT PROVEN"
   },
   {

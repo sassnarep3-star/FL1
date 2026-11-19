@@ -245,7 +245,8 @@ class TestN05LuckPanel(unittest.TestCase):
         self.src = load("leaderboard_signal_staking.json")
 
     def test_rows_match_register(self):
-        self.assertEqual(len(self.panel["rows"]), 16)
+        # 18 = 15 strategies + 3 controls listed in the same register (K1, F75); trials stay 15.
+        self.assertEqual(len(self.panel["rows"]), 18)
         self.assertEqual([r["strategy_id"] for r in self.panel["rows"]],
                          [r["strategy_id"] for r in
                           sorted(self.src["rows"],
@@ -302,6 +303,7 @@ class TestSourcesS70S72(unittest.TestCase):
         #   closeout schedule, post-MNF standings closeout)
         # + S100-S103 (session arena-58ccea26-fl1: 2026-11-19 Week 11 injury,
         #   standings/schedule reads and official schedule-release article)
-        self.assertEqual(len(rows), 95)
+        # + S104 (K1, nflverse DATASETS.md) + S105-S106 (K4, NFL schedule release and advance notice)
+        self.assertEqual(len(rows), 98)
 if __name__ == "__main__":
     unittest.main()

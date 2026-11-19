@@ -51,15 +51,15 @@ PINS = [
      ["game_id", "market", "outcome"], ["game_id", "market", "outcome"]),
     ("DR-08", "data/questions.json", "json-list", None, 46,
      ["id", "question"], ["id", "question"]),
-    ("DR-09", "data/suggestions.json", "json-list", None, 51,
+    ("DR-09", "data/suggestions.json", "json-list", None, 52,
      ["id", "title"], ["id", "title"]),
-    ("DR-10", "data/flags.json", "json-list", None, 72,  # F67-F70 (main) + F71 (cross-ref slip) + F72 (route staleness)
+    ("DR-10", "data/flags.json", "json-list", None, 77,  # F67-F70 (main) + F71 (cross-ref slip) + F72 (route staleness) + F73-F75 (K1) + F76-F77 (K4)
      ["id", "item"], ["id", "item"]),
     ("DR-11", "data/strategies.json", "json-list", None, 6,
      ["id", "name", "change_of_mind"], ["id", "name", "change_of_mind"]),
     ("DR-12", "data/validation_gates.json", "json-doc", None, 15,
      ["g_id"], ["g_id"]),
-    ("DR-13", "data/leaderboard_signal_staking.json", "json-doc", None, 16,
+    ("DR-13", "data/leaderboard_signal_staking.json", "json-doc", None, 18,
      ["strategy_id"], ["strategy_id"]),
     ("DR-14", "data/sources.tsv", "tsv", False, None,  # grows legitimately; pin columns only
      [0, 1, 3, 4], [0, 1, 3, 4]),
@@ -69,7 +69,7 @@ PINS = [
      ["id", "player", "club"], ["id", "player", "club"]),
     ("DR-17", "data/venue_spotchecks.json", "json-doc", None, 2,
      ["id", "game_id"], ["id", "game_id"]),
-    ("DR-18", "data/luck_panel_signals.json", "json-doc", None, 16,
+    ("DR-18", "data/luck_panel_signals.json", "json-doc", None, 15,  # K1: strategies only; controls listed separately
      ["strategy_id"], ["strategy_id"]),
     ("DR-19", "data/ablations.json", "json-doc", None, 2,
      ["target"], None),
