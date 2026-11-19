@@ -1,81 +1,60 @@
-# REVIEW — what to look at first
+# Review guide — how to make a decision from FL1
 
-A short reading guide. The live site is https://sassnarep3-star.github.io/FL1/
+**Live site:** <https://sassnarep3-star.github.io/FL1/>\
+**Dashboard:** [index.html](index.html) · **Decision summary:** [executive-summary.html](executive-summary.html)
 
----
+This guide is a route through the repository, not a substitute for the row-level evidence. The current registers and linked source pages take precedence over dated prose in historical session notes.
 
-## If you read one page
+## Read in this order
 
-**[Executive Summary](executive-summary.html)** — what is verified, what is blocked, and the five
-decisions that unblock the rest.
+1. [Executive Summary](executive-summary.html) — current project posture and named blockers.
+2. [Decision readiness](readiness.html) and [requirements backlog](requirements-backlog.html) — requirement-by-requirement gate and clearance criteria.
+3. [Questions](questions.html) — evidence-backed answers where available, and explicit open/partial states where not.
+4. [Suggestions](suggestions.html), [suggestion pipeline](suggestions-pipeline.html), and [decision desk](decision-desk.html) — options and trade-offs to review before implementation.
+5. [Flagged for Review](flagged.html) — unresolved provenance, data, or interpretation issues.
+6. [Sources](sources.html), [row-level source audit](source-audit.html), and [Verification](verification.html) — what was cited and what each check actually tested.
 
----
+## Questions that must be answered before relying on an output
 
-## If you have five minutes
-
-1. **[Flagged for Review](flagged.html)** — the 15 items where something could not be confirmed or two
-   official sources disagree. Nothing here is resolved silently; each item has its source link.
-2. **[Open Questions](questions.html)** — 20 questions, 10 of them blocking. Each states what we know,
-   what we do not know, what data is missing, and a recommended path.
-3. **[Suggestions](suggestions.html)** — 15 proposals, each with options, trade-offs and one
-   recommendation. This is the page to approve or reject paths on before anything is implemented.
-
----
-
-## What to check, and how
-
-| Question you might have | Where to look | How to check it yourself |
+| Decision question | Evidence to inspect | What is still needed if unresolved |
 |---|---|---|
-| Is the injury data real? | [Injuries](injuries.html) | Pick any row, follow `S01` to the source URL, and compare. Then run `python3 tools/verify_injuries.py` — it diffs all 345 rows against the raw capture and exits non-zero on any difference. |
-| Why is no line published? | [Line Origination](line-origination.html) | The field-by-field table shows exactly which inputs exist and which are BLOCKED. A price requires a benchmark; the league publishes none. |
-| Why is the leaderboard empty? | [Leaderboard](strategies.html) + [Validation Gates](validation.html) | No strategy has been run. The eight gates and the ranking rule are published *before* any result exists so they cannot be fitted to one. |
-| Which backups are replacing starters? | [Backup Depth](depth.html) | Read the two halves separately: *observed absence* is official; *derived depth* is from a club chart the club itself calls "Unofficial". |
-| What did you refuse to do? | [Flagged for Review](flagged.html) | F01–F03 are three official sources that 404'd. F08/F09 are the missing price feed and snap counts. F12 is the legal question, left open on purpose. |
-| How was this verified? | [Verification](verification.html) + [Method](docs/METHOD.md) | Four scripts, all re-runnable, all exit non-zero on failure. |
+| Is this input official, current, and available at the forecast cutoff? | Row citation, source registry, dated snapshot, and relevant flag | A source record with its publication/read time, captured content/hash where applicable, and a passing dataset-specific verification. |
+| Is the player's status or lineup role established rather than inferred? | [Injuries](injuries.html), [availability ledger](availability-ledger.html), [announced starters](announced-starters.html), and [depth](depth.html) | Official point-in-time inactive/starter evidence and a verified replacement/playing-time basis; a blank or absent name does not establish availability. |
+| Is there a comparable market price and a verified result? | [Price snapshots](price-snapshots.html), [price store](price-store.html), and [verified results feed](verified-results-feed.html) | Provenance, market/phase, timestamp, coverage, and independently verified settlement for the exact event/market. |
+| Has this strategy shown skill rather than variance or staking effects? | [Strategies](strategies.html), [signal vs. staking](signal-vs-staking.html), [removal of luck](removal-of-luck.html), and [validation](validation.html) | Frozen pre-registration, chronological holdout/prospective evidence, benchmark-relative proper scores, uncertainty, multiplicity handling, and a sample that clears its stated gate. |
+| Are correlation or combined-bet probabilities directly supported? | [Correlation register](correlation-register.html), [official correlations](official-correlations.html), and [prop correlations](prop-correlations.html) | Officially sourced inputs, published `n`, uncertainty, and direct joint-probability validation plus applicable settlement rules. Marginal probabilities alone are not enough. |
+| Which implementation path should be chosen? | Related question in [Questions](questions.html) and proposal in [Suggestions](suggestions.html) | Resolve the named dependency, compare costs/risks, and record an explicit decision before implementation. |
 
----
+A question marked **answered** is answered only within its stated evidence and date. **Partial** means a material gap remains; **open** means no decision should be inferred. Follow the page's source links and answer notes rather than treating a status label as universal validation.
 
-## Things worth disagreeing with
+## Review proposals before choosing a path
 
-These are judgement calls, not facts. Each is reversible and each is logged.
+The Suggestions pages are the dedicated review section. For each item, check its linked question(s), what evidence it assumes, alternatives, cost/risk, and the proposed validation gate. Do not interpret a recommendation as approval or silently implement a suggested source/model feature. Record the selected path and its reason in the project's decision register before changing the model or publishing a leaderboard result.
 
-1. **Blanks over estimates.** Every missing value is left blank. If you would rather see a modelled
-   estimate with an explicit error bar, that is a legitimate alternative — but it changes the site from
-   a record of sources into a model, and the model then needs its own validation.
-2. **Observed vs derived.** The depth layer is deliberately thin because depth is not available
-   officially. A richer depth product is possible, but it would be inference wearing a table's clothes.
-3. **Non-monetary rewards.** The leaderboard has no prize pool, because the legal question is open and
-   no regulator source was verified. If you want prizes, that needs a review first (Q14, SG11).
-4. **One season, one snapshot.** Nothing here supports a persistence claim. That is a limit of the
-   data, not of the method.
-5. **Consolidating one build at the repo root.** Two other sessions published their own sites to the
-   same paths. Their work is preserved in `archive/v1/` and `archive/v2/` rather than deleted, and the
-   reasoning is in `COORDINATION.md`. If you prefer a different consolidation, the archive makes it
-   cheap to reverse.
+## Data and scoring cautions
 
----
+- The [source audit](source-audit.html) is a metadata audit, not a live fetch of every source or a full line-by-line fact re-verification. It explicitly classifies non-official, unregistered, repository-only, and missing-citation rows.
+- The [readiness table](readiness.html) and [flagged page](flagged.html) are essential: a requirement can be represented in the site while still blocked or unverified.
+- Keep historical snapshots immutable and use only information available by the forecast timestamp. Never use post-kickoff or later status/results as pregame inputs.
+- Treat official designations, club depth labels, announced starters, actual participation, and snap share as distinct evidence. Do not convert one into another without a validated rule.
+- Evaluate models with chronological out-of-sample data and proper scores; report uncertainty and benchmark-relative skill. Keep signal quality separate from staking and realized ROI.
+- Keep singles, parlays, same-game parlays, and player-prop combinations in separate validation divisions. Do not multiply marginal probabilities and call the result a validated joint price.
+- The site and repository may contain dated examples or partially populated research outputs. Their existence does not mean a strategy is qualified, a data feed is complete, or the market price is executable.
 
-## Where the parallel-session work went
+## Reproduce the local checks
 
-| Session | Where it lives now |
-|---|---|
-| `arena/89c32e23-fl1` (PR #1) | `archive/v1/` — 6 HTML pages, stylesheet, script, with a mapping table |
-| `arena/a7c0f9c5-fl1` (PR #2) | `archive/v2/` — 2 HTML pages, 5 CSVs, stylesheet, script, with a mapping table |
-| `arena/ab4e9b05-fl1` (PRs #3, #5) | the published site at the repo root |
-
-Session C's independent injury transcription of 161 rows was used as a genuine cross-check: 156 rows
-matched this capture exactly. The 5 that differed were traced to a comma-splitting bug in their CSV, not
-a disagreement about the data. Recorded as flag **F15**.
-
----
-
-## Reproducing every check
+From the repository root:
 
 ```bash
-python3 tools/verify_injuries.py   # 345 rows vs the raw page capture
-python3 tools/build.py             # recompute every derived figure
-python3 tools/site.py              # re-render all 14 pages
-python3 tools/checklinks.py        # links, anchors, reachability, source IDs, escaped markup
+python3 -m unittest discover -s tests -v
+python3 tools/build.py
+python3 tools/site.py
+python3 tools/checklinks.py
+python3 tools/checkrows.py
+python3 tools/verify_drift.py
+python3 tools/verify_injuries.py
+python3 tools/verify_results.py
+python3 tools/verify_replacement.py
 ```
 
-No third-party packages. No network access needed.
+A successful check only supports the claims within that check's scope. The site-level link checker does not fetch or validate external facts. Review the exact verification notes and warnings before relying on any result.

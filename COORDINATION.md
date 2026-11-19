@@ -2190,8 +2190,18 @@ Verification in this checkout: `python3 -m unittest discover -s tests -q` → 35
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | in progress | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
+| DOC1 | Reconcile the top-level README and review guide with the present repository, replace stale inventory/count/limitation claims with explicitly scoped repository facts, and make the decision/suggestions/flagged-review paths discoverable | done | `arena/318ef582-fl1` | `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, this section |
 
 **Coordination check:** read the existing board before starting. PR #57 and PR #59 are open and older than 60 minutes; this task does not touch their source/data/site-generator scopes. PR #59's coordination-only changes are historical merge bookkeeping; this claim is an additive handoff note and preserves all prior entries. No official-source facts or new numeric findings will be introduced by DOC1; the documentation will point readers to existing evidence registers and state that repository metadata checks do not independently verify live source pages.
 
 **Claimed file scope only:** `README.md`, `REVIEW.md`, `tests/test_project_docs.py`, and this DOC1 section in `COORDINATION.md`. Any needed edits outside that list will be logged as a request rather than made.
+
+### DOC1 completion record — 2026-11-19 UTC
+
+**Delivered:** Replaced the stale top-level README status/inventory with a repository-current navigation guide; refreshed `REVIEW.md` into a decision-focused path through requirements, question answers, suggestions, evidence, gates, and flags; added `tests/test_project_docs.py` to ensure all relative links resolve and required decision surfaces remain discoverable. The docs explicitly distinguish citation metadata from verification of live external facts, note that automated refresh coverage is limited, and warn that model/market artifacts are not proof a strategy is qualified. No source values were added or promoted, and no generated page or shared data register was edited.
+
+**Verification:** `python3 -m unittest tests.test_project_docs -v` → 3/3 PASS; `python3 -m unittest discover -s tests -q` → 359 tests PASS (pre-existing ResourceWarnings from older tests, non-fatal). `python3 tools/build.py` and `python3 tools/site.py` completed without a tracked generated-file diff; site generator reported 50 pages. `python3 tools/checklinks.py` → 57 pages, all internal links/anchors and source IDs resolve; it explicitly did not fetch 263 external links. `python3 tools/checkrows.py` → 57 pages / 7,019 table rows audited. `python3 tools/verify_drift.py` → 19/19 PASS. `python3 tools/verify_injuries.py` → 345/345 exact raw-capture matches. `python3 tools/verify_results.py` → 137-game corpus reconciles 32/32 clubs; the 136-game comparison has two expected mismatches because the standings read includes Week 10 TNF. `python3 tools/verify_replacement.py` → 71 ladders, all rendered cells recompute, 4 accepted divergences.
+
+**Source-audit limitation retained:** The build's metadata audit emitted 6,891 rendered rows: 3,982 official-registered, 147 registered-not-verified, 467 nonofficial-registered, 1,340 repository-link-only, 205 with no source link, 121 direct links unregistered, and 629 mixed/unresolved. These are repository audit classes, not proof that any NFL fact is true or false; source pages/flags remain the review path. `checklinks.py` is internal-link validation only.
+
+**Status:** DOC1 done. No official external page was newly re-fetched for this documentation-only task; this limitation is stated rather than claiming fresh line-by-line source verification.
