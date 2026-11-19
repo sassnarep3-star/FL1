@@ -2320,3 +2320,21 @@ nfl.com schedule-announcement article and re-point schedule.html's chip from S86
 one page render; NAV untouched) and regenerated all pages. On rebase, keep both NAV additions and
 re-run `python3 tools/site.py`; expect HTML conflicts on every page (NAV line) — resolve by keeping
 both sides' links, then re-run checklinks/checkrows.
+
+### Final integration — PR #62 and Pages deployment
+
+**PR:** https://github.com/sassnarep3-star/FL1/pull/62 (`arena/9d880d91-fl1` → `main`). Merged at
+2026-11-19T05:28:21Z with merge commit `8848c6afb4c7bb0eb90366bdcb356df5e7c26595` after the
+`verify` check completed SUCCESS. GitHub Pages build for that commit reports **built**
+(`https://sassnarep3-star.github.io/FL1/`). The site includes the Brief Audit 2026-11-19 page
+(58 pages total). Flagged irregularities J-F1–J-F5 remain visible review items; they do not block
+publication.
+
+**Rebase log (main moved three times during this session — PRs #60, #61, #63):** each rebase kept
+both sides (COORDINATION.md appends; EXECUTIVE_SUMMARY.md blocks). PR #63 (`arena/bc60d3ea-fl1`)
+independently captured the same Week 11 injury read 1 (253 rows) under the same filename
+`raw/injuries-week11-2026-read1.md` (TSV shape). Resolution: main's file kept as canonical; this
+session's capture kept alongside as `raw/injuries-week11-2026-read1-9d88.md` (markdown shape);
+`scripts/verify_9d88.py` V3 now asserts the two captures parse to the identical 253-row set
+(AZ→ARI normalised) — two independent transcriptions agreeing, which is stronger evidence than either
+alone. No work from either session was discarded.
