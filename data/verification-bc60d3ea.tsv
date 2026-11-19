@@ -1,0 +1,8 @@
+check	description	result	detail	source_url
+V-J1a	League-route standings: 32 clubs, 17 cols, arithmetic	PASS	32 clubs x 17 cols; W+L+T in {9,10}, NET=PF-PA, PCT exact on all rows	https://www.nfl.com/standings/league/2026/REG
+V-J1b	Division-route standings: 32 clubs, 17 cols, arithmetic	PASS	32 clubs x 17 cols; W+L+T in {9,10}, NET=PF-PA, PCT exact on all rows	https://www.nfl.com/standings/division/2026/REG
+V-J2	League vs division route: cell-for-cell agreement	PASS	32/32 clubs identical on all 17 columns	https://www.nfl.com/standings/division/2026/REG
+V-J3	Fresh standings reproduce from 150-row closeout corpus	PASS	150 games tallied; 32/32 clubs match on W/L/T/PF/PA	https://www.nfl.com/standings/league/2026/REG
+V-J4	Week 11 injury capture: grammar + designation scope	PASS	253 rows across 24 clubs (FULL 83 / LIMITED 87 / DNP 83); designated rows 16 (Out 9 / Questionable 7) on ['HOU', 'IND'] only	https://www.nfl.com/injuries/
+V-J5	Week 11 schedule: 13 games, 26 clubs, records match	PASS	13 games, 26 distinct clubs, byes ['ATL', 'CLE', 'GB', 'LA', 'NE', 'SEA']; all printed records match fresh standings W/L/T	https://www.nfl.com/schedules/2026/by-week/week-11
+V-J6	Canonical Week 10 files untouched by this session	PASS	sha256 prefixes at verify time: injuries.tsv=bf5fe222e93e; results.tsv=f9e0498e1121; standings.tsv=a693b7a347b8. This script writes only data/verification-bc60d3ea.tsv.	https://www.nfl.com/injuries/

@@ -1,3 +1,70 @@
+## Task board — session `arena/bc60d3ea-fl1` (2026-11-19 — freshness re-reads + independent line-by-line audit, non-overlapping scope)
+
+**Session ID:** `arena-bc60d3ea-fl1` · **Branch:** `arena/bc60d3ea-fl1` (from `addeb0a` of `main`, PR #58 merged) ·
+**Claimed:** 2026-11-19T05:22Z · **Status:** active.
+**Pre-claim sweep:** `gh pr list --state open` → **PR #59** (`arena/a502c4e0-fl1`, touches only
+`COORDINATION.md` + `EXECUTIVE_SUMMARY.md`) and **PR #57** (`arena/3f12fa46-fl1`, large: touches
+`data/results.tsv`, `data/standings.tsv`, `data/sources.tsv`, `data/flags.json`,
+`data/requirements_backlog.json`, `tools/site.py`, generated HTML, tests). Per the brief's
+non-overlap rule this session edits **none** of those files. Its scope is new files only, plus
+this claim block in `COORDINATION.md` (append-only, rebase-safe). Cross-scope changes are logged
+as requests below, never edited directly. Canonical `data/results.tsv` / `data/standings.tsv` /
+`data/injuries.tsv` are **not** touched (promotion stays Q44's owner decision).
+
+| # | Task | Status | Owner | File scope (claimed) |
+|---|------|--------|-------|----------------------|
+| J1 | Coordination claim + immediate push | done (d0acb28) | `arena-bc60d3ea-fl1` | `COORDINATION.md` (this block only) |
+| J2 | Fresh clock-bracketed official reads dated 2026-11-19 (injury hub, both standings routes, Week 11 schedule) captured verbatim to `raw/`; parsed with the shared grammar; published as **deltas only** beside the committed tables | done (05ede27) | `arena-bc60d3ea-fl1` | `raw/injuries-week11-2026-read1.md` (new), `raw/standings-2026-20261119*.tsv` (new), `raw/schedule-week11-2026-20261119.md` (new), `scripts/verify_bc60d3ea.py` (new), `data/verification-bc60d3ea.tsv` (new) |
+| J3 | Independent line-by-line audit of the brief against repo evidence: every brief bullet mapped to its artefact/gate/number; questions/informations/answers table; suggestions review table; stale-item list (readiness counts, backlog statuses, F59/F61 actions) published as **logged requests** for the integration session | done (cc2ddb1) | `arena-bc60d3ea-fl1` | `docs/DECISION-AUDIT-bc60d3ea.md` (new), `docs/EXECUTIVE_SUMMARY-bc60d3ea.md` (new) |
+| J4 | Tests for the J2 verifier + audit completeness (every brief bullet mapped, every Q row has an answer state, no invented values) | done (cc2ddb1, 15 tests) | `arena-bc60d3ea-fl1` | `tests/test_bc60d3ea.py` (new) |
+| J5 | Full battery, PR → `main`, merge (new-files-only PR, safe alongside PR #57/#59), confirm GitHub Pages, record result here | in progress | `arena-bc60d3ea-fl1` | `COORDINATION.md` (completion record only) |
+
+**Requests logged for the integration session (not edited here — owned by PR #57 / shared):**
+- RQ-J1: `data/readiness.json` landing counts quote stale numbers (R04 "42+ flags", R07 "34
+  suggestions", R09 "34 questions", R05 "28 requirements", R22 "+13 Week 10 finals to capture
+  (F61)") — current verified counts are 72 flags / 51 suggestions / 46 questions / 29
+  requirements / 14 finals captured in the closeout side-reads. Refresh or re-date the cells.
+- RQ-J2: `data/requirements_backlog.json` statuses contradict `data/readiness.json` brief_audit
+  for at least R87 (train/val/holdout — done per D-69), R37 (change-of-mind — done per D-17),
+  R44 (schedule announcement — done per D-24), R82 (drift alarm — done per D-62), R83 (reserve
+  list — partial per D-63). Reconcile to one canonical status per requirement (pairs Q29/SG47).
+- RQ-J3: F59's action still names SG36 and F61's action still says "Capture the 13 finals" —
+  both superseded by the 2026-11-17 closeout (14 finals, P1–P8 PASS). Append dated corrections
+  (F71 already flags the SG36 half; the F61 half is new).
+- RQ-J4: Q44's answer text still describes "13 finals plus the live Monday game" — the closeout
+  read (S98, 14 FINAL) supersedes it. Q44 stays open (promotion decision), text needs the update.
+- RQ-J5: Register the J2 raw captures in `data/sources.tsv` (next S ids) and fold
+  `docs/EXECUTIVE_SUMMARY-bc60d3ea.md` into `EXECUTIVE_SUMMARY.md` at integration.
+
+**First push = this claim, per the brief.**
+
+### Completion record — J5 (2026-11-19, UTC)
+
+- **Battery at PR time:** 371 tests OK (356 pre-existing + 15 new) ·
+  checklinks 57 pages OK · checkrows 7,019 rows, 0 unsourced · drift 19/19 ·
+  verify_injuries 345/345 · verify_results PASS · verify_brief 10/10 ·
+  verify_bc60d3ea V-J1…V-J6 all PASS (exit 0). Working tree clean.
+- **J2 findings:** both standings routes agree cell-for-cell (F72 did not
+  recur); the 150-row closeout corpus reproduces the fresh standings 32/32
+  on W/L/T/PF/PA; Week 11 injury hub 253 rows / 24 clubs with designations
+  only on IND/HOU (9 Out, 7 Questionable); Week 11 schedule 13 games / 26
+  clubs / 6 byes with records matching the standings. Three verifier bugs
+  found and fixed in-session (games-played 9-or-10 by bye timing; AZ/LA vs
+  ARI/LAR aliasing; schedule records omit zero ties) — pre-fix FAIL output
+  preserved in commit history, each fix hand-verified against the official
+  pages first.
+- **J3 findings:** 46 questions (12 answered / 16 partial / 18 open, all
+  dated 2026-11-17), 51 suggestions (all with recommendations), 69 brief-audit
+  rows (every named artefact exists). Stale registers (readiness counts,
+  backlog-vs-audit contradictions on ≥8 requirements, F59/F61/Q44 superseded
+  texts, Q45=Q35 duplication) logged as RQ-J1…RQ-J5 above, not edited here.
+- **Irregularities:** none new from the fresh reads. Transcription risk for
+  the hand-transcribed 2026-11-19 captures is stated in
+  `docs/DECISION-AUDIT-bc60d3ea.md` §7 (spot-check before promotion).
+- **PR:** (filled at merge time below).
+
+---
+
 ## Task board — session `arena/7ac4e12e-fl1` (2026-11-17 — dated re-reads + answers layer + Week-10 close-out)
 
 **Session ID:** `arena-7ac4e12e-fl1` · **Branch:** `arena/7ac4e12e-fl1` (from `5a076a0` of `main`, PR #48 merged) ·
