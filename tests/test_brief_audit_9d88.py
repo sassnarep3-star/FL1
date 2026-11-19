@@ -71,7 +71,8 @@ class BriefAuditTest(unittest.TestCase):
 
     def test_r44_block_present_but_chip_miswired(self):
         html = open(D("schedule.html"), encoding="utf-8").read()
-        self.assertIn("dated schedule announcement", html.lower())
+        self.assertIn("league's schedule-release announcement", html.lower())
+        self.assertIn('href="sources.html#s103"', html.lower())
         self.assertEqual(self.rows["R44"]["audited_status"], "done")
         self.assertEqual(self.ev["S86_title"],
                          "nflverse/nfldata win_totals feed (season win totals, both sides)")

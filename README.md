@@ -77,11 +77,6 @@ The root HTML is committed for static hosting. After changing data or a generato
 ## Not betting advice
 
 Nothing in this repository is an offer or recommendation to wager. The project does not establish the legality of betting or prizes in any jurisdiction; consult qualified legal counsel and relevant regulators before any commercial or reward program.
-audited with every data row sourced, drift alarm 19/19 PASS, injuries 345/345, results 32/32,
-`verify_brief` 10/10, computed-layer rebuild byte-identical. Register IDs from this session: flags
-F61–F65, question Q44, suggestions SG43–SG45, sources S80–S85 (renumbered after merging parallel
-sessions' F43–F60 / Q35–Q43 / SG35–SG42 / S70–S79, with cross-references preserved).
-
 ---
 
 ## 2026-11-19 update — Week 11 official re-read and decision review
