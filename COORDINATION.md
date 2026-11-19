@@ -2169,3 +2169,11 @@ results, flags, sources, or site changes were discarded.
 `1376567311` reports **built** for that merge commit (`https://sassnarep3-star.github.io/FL1/`). The site
 includes the Row-Level Source Audit in the global navigation. F68 remains a visible review item; it does
 not block publication.
+
+## Current session — `arena/0dffa916-fl1` (2026-11-19 UTC)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| N01 | Review the current repository/site against the requested decision-making workflow; publish a concise, evidence-bounded review of known vs missing information, decision gates, and recommended next discovery steps. Do not rewrite shared generated data or navigation. | in progress | `arena/0dffa916-fl1` | `docs/SESSION_REVIEW.md`, this section of `COORDINATION.md` |
+
+Claimed after reading this task board. Scope is additive and avoids shared site/data generators. Current checkout is the fixed Arena branch `arena/0dffa916-fl1`; no branch switch will be made.
