@@ -2275,3 +2275,14 @@ Verification in this checkout: `python3 -m unittest discover -s tests -q` → 35
 **Status:** DOC1 done. No official external page was newly re-fetched for this documentation-only task; this limitation is stated rather than claiming fresh line-by-line source verification.
 
 **Reconciliation note (2026-11-19 UTC):** After PR #60 advanced `main` during DOC1, `git pull --rebase origin main` conflicted on the shared coordination file because this branch's original claim commit was already on its remote branch while `main` added the parallel N01 review record. Resolution preserved both N01's completed log and DOC1's full claim/completion record. A later pull of the remote branch had the same duplicate-claim conflict; it was aborted without discarding work, then both histories were retained via a merge commit. No N01 files were modified. Before publication, re-run a merge-preserving rebase against current `main`; preserve both session entries if the board conflicts again.
+
+
+## Session `arena/d0a059a7-fl1` — scope reconciliation (2026-11-19 UTC)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| DGR1 | Update stale reviewer documentation and register counts | superseded by PR #63 | `arena/d0a059a7-fl1` | No implementation retained; documentation scope now covered by PR #63 |
+
+After this session's initial coordination claim, main advanced through PR #60 and then PR #63. PR #60 supplied the overlapping `docs/SESSION_REVIEW.md`; PR #63 then updated `README.md` and `REVIEW.md` and added repository-doc regression checks, overlapping the narrowed DGR1 scope exactly. To avoid duplicate/conflicting documentation, this session discarded its unmerged README/REVIEW/test edits and retains the newer main versions unchanged. The newer guide is the source of truth. No NFL facts or values were added. This entry records the handoff/closure only.
+
+**Coordination conflict:** the 2026-11-19 rebase conflicted because PR #63 and this session both appended current-session records to this file. Resolution preserves the full N01 and DOC1 records from main and records DGR1 as superseded. No upstream work was removed.
