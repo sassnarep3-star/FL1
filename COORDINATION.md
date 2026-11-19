@@ -2196,9 +2196,9 @@ not block publication.
 - **Delta:** `delta: null`. No earlier Week 11 read exists, so no like-for-like delta is published. Week 10 reads are not compared. The first Week 11 delta lands with the next read.
 - **Verification performed:** row count equals the count of player-link lines in the raw capture; every raw line reproduces its row; unmapped practice/game strings fail loudly; 362 unit tests run, all green after pinning the S-register count 91→92 in `tests/test_n01_n05.py` (S100 added); `tools/checkrows.py` OK 58 pages / 7359 rows; `tools/verify_drift.py` 19/19 PASS.
 - **Irregularities (flagged, not corrected; 78 flags in the JSON):**
-  1. Name/link slug mismatch: Jacob Hummel (HOU) links to `jake-hummel`; Dee Alford (BUF) links to `deaundre-ford`; plus punctuation-only cases (T.J. Watt, etc. are not flagged).
+  1. Surname/first-name vs link slug: Jacob Hummel (HOU) links to `jake-hummel`; Dee Alford (BUF) links to `deaundre-ford` (surname not in slug); LeQuint Allen Jr. (JAX) links to `lequint-allen`.
   2. Lions Kerby Joseph, Cade Mays, D.J. Reed: game status blank in this read. The earlier brief cites these as Out (VR-08, VR-12); this read does not confirm that, so it stays blank and unverified.
-  3. 49 DNP-in-practice players with blank game status (publish blank, unverified).
+  3. 72 DNP-in-practice players with blank game status (publish blank, unverified).
 - **Request to integration session (not edited by me):** `week11-read.html` is not linked from `index.html`. The site's link checker reports it as orphan. Add a card or nav entry in the integration session. The page exists; `tools/checklinks.py` will stay at 1 finding until that happens.
 - **Still open in this session:** J3 (schedule + standings Week 11 side-reads) and J4 (brief-coverage audit, exec-summary block, the NAV wiring) are not started. J5 (PR → merge → Pages) waits until the integration session confirms the claims. The brief has about 100 requirement lines; `docs/BRIEF_COVERAGE.md` will list each one as covered or as an explicit gap. Many items (price-snapshot policy, availability graph, depth register, 32-team sweep, parlay gate, etc.) remain gaps in this session.
 
