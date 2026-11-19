@@ -139,6 +139,8 @@ class TestOfficialRereads(unittest.TestCase):
             ("ARI", "KC", "GEHA Field at Arrowhead Stadium", "Arrowhead Stadium")
         ])
         text = (ROOT / "raw/schedule-week11-2026-2026-11-19.md").read_text(encoding="utf-8")
+        self.assertIn("PIT@PHI at 4:25 PM ET, while the official schedule page lists 1:00 PM", text)
+        self.assertIn("JAX@NYG at 1:00 PM, while the official schedule page lists 4:25 PM", text)
         for bye in ("Atlanta Falcons (ATL)", "Cleveland Browns (CLE)",
                     "Green Bay Packers (GB)", "Los Angeles Rams (LAR)",
                     "New England Patriots (NE)", "Seattle Seahawks (SEA)"):
@@ -161,6 +163,12 @@ class TestOfficialRereads(unittest.TestCase):
                 urls = r["official_source_url"].split(";")
                 self.assertTrue(urls and all(u.startswith("https://") for u in urls), r["check_id"])
                 self.assertEqual(r["source_status"], "REGISTERED_OFFICIAL_HISTORICAL_NOT_FRESH", r["check_id"])
+            elif r["scope"] == "official_reverification":
+                self.assertTrue(r["official_source_url"].startswith("https://www.nfl.com/"),
+                                r["check_id"])
+                self.assertIn("FRESH_OFFICIAL", r["source_status"], r["check_id"])
+                if r["source_id"] in {"S01", "S03", "S93"}:
+                    self.assertIn("historical URL reference", r["source_status"], r["check_id"])
             else:
                 self.assertTrue(r["official_source_url"].startswith("https://www.nfl.com/"),
                                 r["check_id"])

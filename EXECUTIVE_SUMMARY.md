@@ -10,6 +10,69 @@
 
 ---
 
+## Session `arena/d022d49b-fl1` — 2026-11-19 (official re-reads, audit, integration)
+
+This block records the later 2026-11-19 reads and verification performed on the fixed branch
+`arena/d022d49b-fl1`. Earlier session records below are preserved. It supplements the separate
+brief-audit results; a repository trace or historical source-register entry is not fresh verification.
+
+### What the fresh reads established
+
+1. **Standings:** a fresh NFL.com league-standings read (2026-11-19 05:27:36–05:28:43Z)
+   matches the 2026-11-17 closeout side-read for all 32 clubs on W/L/T/PCT/PF/PA. The canonical
+   `data/standings.tsv` remains unchanged; Q44 promotion is still the owner's decision.
+
+2. **Injuries:** Week 11 read 5 parsed to 253 rows, with the header count matching the parser.
+   Game Status is blank on 237 rows, Out on 9, and Questionable on 7; nonblank statuses occur only
+   for IND and HOU. Blank is not availability. The read 3→4 same-week delta remains intact (BUF
+   Tyrell Shavers FULL→LIMITED; CIN Brian Parker II FULL→DNP); read 4 Week 10→read 5 Week 11 is a
+   separate rollover (228 changed, 120 added, 214 removed). No level TSV was emitted and canonical
+   `data/injuries.tsv` was not replaced.
+
+3. **Week 11 schedule and venues:** 13 official matchups, dates, kickoff times, networks, and 13
+   official Game Center venue labels were recorded. Matchup/date membership agrees 13/13 with the
+   third-party feed, but PIT@PHI is 16:25 in that feed vs 13:00 official, and JAX@NYG is 13:00 vs
+   16:25 official. ARI@KC is “GEHA Field at Arrowhead Stadium” in the third-party file vs
+   “Arrowhead Stadium” in the Game Center. None of these third-party values was overwritten. The
+   current `live-schedule.html` has 12 missing Game Center links and 12 blank venues; its sole
+   complete row is MIN@SF. The page fix and review flags were handed off to PR #57; its site files
+   were not edited here.
+
+4. **Freshness boundary and unresolved register IDs:** the capture-specific source IDs for the
+   2026-11-19 reads await PR #57's ID reconciliation. S01/S03/S93 in the verification table are
+   historical official-URL references, not new capture records. Each current read is instead
+   evidenced by its dated raw capture and explicit verification status. Do not treat the source
+   register or 59-row backlog trace as a fresh check of older NFL facts.
+
+### What was built and checked
+
+- `data/verification-2026-11-19.tsv` contains 134 records: 32 standings comparisons, 13 schedule
+  comparisons, 13 venue comparisons, 13 published-page checks, 4 injury/pagination checks, and 59
+  brief-to-artifact trace rows. The 59 backlog rows assess evidence-path presence and registry tier;
+  42 referenced paths exist, 15 have no explicit path, and 2 cited scripts are absent while related
+  output artifacts exist. Seven backlog rows carry nonofficial/unverified source flags.
+- Dated captures: `raw/injuries-week11-2026-read5.md`, `raw/standings-2026-11-19.md`, and
+  `raw/schedule-week11-2026-2026-11-19.md`. The injury delta builder preserves the same-week
+  history and emits read 4→5 only as `week_rollover`.
+- Verification on the rebased current tree: 394 unit tests OK (pre-existing ResourceWarnings);
+  `tools/build.py` + `tools/site.py` completed; checklinks 58 pages OK; checkrows 7,089 rows OK;
+  drift 19/19 PASS; injuries 345/345 exact; results PASS; brief 10/10; replacement-depth PASS;
+  feed-M PASS (137 games); `verify_9d88.py` 4/4 PASS; market-spine rebuild byte-identical.
+  The legacy `scripts/verify_site.py`, run with pandas installed only under `/tmp`, reports 0 errors
+  and 0 warnings. These checks validate repository/build invariants, not live external URLs or every
+  historical NFL fact.
+
+### Decisions and handoffs
+
+- Q44 remains open: no standings or results promotion was made. No injury level data was promoted.
+- Do not overwrite the third-party schedule values until their provenance/promotion decision is made.
+- Fresh-read source IDs and the schedule page/flag updates are coordinated with PR #57. This session
+  has not modified or merged that branch. The executive-summary handoff was coordinated on PR #59;
+  this dated block is additive and does not edit PR #59's branch or its prior test-count line.
+- Pages deployment for this session's eventual PR remains pending until I5 completes.
+
+---
+
 ## Session `arena/9d880d91-fl1` — 2026-11-19 (brief re-audit, fresh Week 11 reads, integration)
 
 ### What this session set out to do

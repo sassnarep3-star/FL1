@@ -2383,13 +2383,18 @@ No source facts, raw captures, shared data, generated pages or navigation are ch
 
 | # | Task | Status | Owner | File scope (claimed) |
 |---|------|--------|-------|----------------------|
-| I1 | Coordination claim + immediate push | done (`b756d2e`) | `arena-d022d49b-fl1` | `COORDINATION.md` |
-| I2 | Full verification battery on the merged tree (tests, build, site, checklinks, checkrows, drift, injuries, results) + line-by-line brief→artefact traceability audit | in progress | `arena-d022d49b-fl1` | `data/verification-2026-11-19.tsv` (new), `tests/test_audit_i.py` (new) |
-| I3 | Fresh clock-bracketed official re-reads (NFL injuries hub, standings, Week 11 schedule/Game Centers) compared against committed captures; publish delta or confirm-no-change with source records | in progress (site/source-ID requests logged; no conflicting files edited) | `arena-d022d49b-fl1` | `raw/injuries-week11-2026-read5.md` (new), `raw/standings-2026-11-19.md` (new), `raw/schedule-week11-2026-2026-11-19.md` (new), `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py`, `data/verification-2026-11-19.tsv` |
-| I4 | Executive-summary + decision-readiness refresh; fix drift/broken-link defects without unsupported facts | in progress (README addendum done; shared summary/site files requested from owners) | `arena-d022d49b-fl1` | `README.md` (addendum only), `COORDINATION.md` |
-| I5 | PR → `main`, merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | unclaimed | `arena-d022d49b-fl1` | `COORDINATION.md`, PR |
+| I1 | Coordination claim + immediate push | done (original push `b756d2e`; rebased claim `0ba4f81`) | `arena-d022d49b-fl1` | `COORDINATION.md` |
+| I2 | Full verification battery on the merged tree (tests, build, site, checklinks, checkrows, drift, injuries, results) + line-by-line brief→artefact traceability audit | done (394 tests; full battery; 59-row trace with freshness limits) | `arena-d022d49b-fl1` | `data/verification-2026-11-19.tsv`, `tests/test_audit_i.py` |
+| I3 | Fresh clock-bracketed official re-reads (NFL injuries hub, standings, Week 11 schedule/Game Centers) compared against committed captures; publish delta or confirm-no-change with source records | in progress (fresh reads/captures complete; capture IDs and live-page update handed off to PR #57) | `arena-d022d49b-fl1` | `raw/injuries-week11-2026-read5.md`, `raw/standings-2026-11-19.md`, `raw/schedule-week11-2026-2026-11-19.md`, `data/injury_hub_delta.json`, `scripts/build_injury_hub_delta.py`, `data/verification-2026-11-19.tsv` |
+| I4 | Executive-summary + decision-readiness refresh; fix drift/broken-link defects without unsupported facts | done (README + dated summary block; supported live-schedule fixes handed off to PR #57) | `arena-d022d49b-fl1` | `README.md` (dated addendum), `EXECUTIVE_SUMMARY.md` (dated block), `COORDINATION.md` |
+| I5 | PR → `main`, merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | in progress | `arena-d022d49b-fl1` | `COORDINATION.md`, PR |
 
 **First push = this claim, per the brief.**
+
+**Rebase reconciliation (2026-11-19 UTC):** `origin/main` advanced from `addeb0a` to `d00e89f`
+(PR #67) during this work. The branch was rebased onto that tree; the parallel N01/DOC1/J1–J5 and
+E01 records, updated README guide, and brief-audit files were preserved. The post-rebase full battery
+below was run against the resulting tree. PR #57/#59 branches remain unmodified and unmerged.
 
 ### I3/I4 file-change requests and verified findings (2026-11-19 UTC)
 
@@ -2416,9 +2421,9 @@ No source facts, raw captures, shared data, generated pages or navigation are ch
      claimed `tests/test_n01_n05.py`, the Week 11 JSON record temporarily cites S01 for the identical
      official hub URL and carries the distinct date/week/capture path. The dated raw capture is present;
      assign a new source row and update the count test after the PR's source-ID reconciliation.
-- **PR #59 (`arena/a502c4e0-fl1`) owns** `EXECUTIVE_SUMMARY.md`. Please fold in the dated verification
-  results below after resolving the PR's base. This branch adds a README addendum only and does not edit
-  that shared executive-summary file.
+- **PR #59 (`arena/a502c4e0-fl1`) changes** `EXECUTIVE_SUMMARY.md`'s 2026-11-17 test-count line.
+  A dated handoff was posted as a PR comment. This branch adds a separate 2026-11-19 summary block
+  without changing that older test-count line or PR #59's branch; preserve both when rebasing.
 
 **Official re-reads and exact comparisons:**
 
@@ -2449,7 +2454,9 @@ No source facts, raw captures, shared data, generated pages or navigation are ch
   `scripts/build_team_availability_g.py`) while the corresponding generated pages/data exist; retained
   as an artifact-path warning, not evidence that those outputs are absent.
 
-**No conflicting shared files were edited:** this branch leaves `tools/site.py`, `tools/pages_d5.py`,
-`live-schedule.html`, `injuries.html`, `data/flags.json`, `data/sources.tsv`, `tests/test_n01_n05.py`,
-and `EXECUTIVE_SUMMARY.md` untouched. The requests above are a current integration dependency, not a
-claim that the new issue has already appeared on the Flagged for Review page.
+**Shared-file boundary:** `tools/site.py`, `tools/pages_d5.py`, `live-schedule.html`, `injuries.html`,
+`data/flags.json`, `data/sources.tsv`, and `tests/test_n01_n05.py` remain untouched here; their fixes are
+handed off to PR #57. After an explicit PR #59 handoff comment, this branch added only the dated
+2026-11-19 block in `EXECUTIVE_SUMMARY.md` and updated this session's coordination section; it did not
+change PR #59's 2026-11-17 test-count line or either active PR branch. The review flags requested above
+are an integration dependency, not a claim that they have already appeared on the published page.
