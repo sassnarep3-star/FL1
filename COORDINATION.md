@@ -2364,4 +2364,4 @@ append-only/additive and logged below so PR #57's owner can keep both halves at 
 
 **Known limits:** K3 has no live capture row yet. Its first real row comes from the scheduled workflow. The sandbox cannot reach nfl.com.
 
-**PR and merge:** *(recorded after the merge; see the line below)*
+**PR and merge (final integration):** PR [#70](https://github.com/sassnarep3-star/FL1/pull/70) (`arena/9fccbb0e-fl1` → `main`), merged with a merge commit at 2026-11-19T05:50:42Z as `3b790d2f3fc7dd38f0b0717a9af138f18174635f`. Checks: `verify-research-build` / `verify` passed on head `9472d5a` (after the D10 fix; the first run on `5af96b3` failed on the rebuild-diff step and was fixed). GitHub Pages: build for `3b790d2` reported `built` (created and updated 05:50:43Z → 05:51:03Z). Live check (page-fetch tool, sandbox curl cannot reach github.io): `controls.html` shows "Candidates scored: 0 of 15"; `flagged.html` lists 77 items including F73–F77. Open at merge: R44 and R73/R74 partial (see the K2/K3 rows); S-IDs S104–S106 are this session's; F74 and F76 need an owner decision or generator change.
